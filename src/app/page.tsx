@@ -1,26 +1,72 @@
 export default function Home() {
   return (
-    <div className="min-h-[calc(100vh-3.5rem)] flex flex-col items-center justify-center px-6">
-      <div className="max-w-2xl text-center space-y-6">
-        <h1 className="text-5xl font-bold tracking-tight">עמית ברין</h1>
-        <p className="text-xl text-neutral-500">
-          מעצב תקשורת חזותית · מרצה AI · טכנולוגיה יצירתית
-        </p>
-        <div className="flex gap-4 justify-center pt-4">
-          <a
-            href="/translate"
-            className="px-6 py-3 bg-neutral-900 text-white rounded-lg hover:bg-neutral-700 transition-colors text-sm"
-          >
-            אפליקציית רומנית
-          </a>
-          <a
-            href="/keys"
-            className="px-6 py-3 border border-neutral-300 rounded-lg hover:bg-neutral-50 transition-colors text-sm"
-          >
-            KeyFix למק
-          </a>
-        </div>
+    <div className="max-w-[800px] mx-auto px-[clamp(20px,5vw,40px)] py-10 text-right" dir="rtl">
+
+      <p className="text-sm font-light tracking-widest border border-black inline-block px-3 py-1 mb-12">
+        {"{"}כן! זה האתר של עמית ברין – מעצב עם 23 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת Ai{"}"}
+      </p>
+
+      <p className="text-lg font-bold mb-6">שלום, ממש טוב שבאת</p>
+
+      <p className="leading-7 mb-5">
+        קוראים לי עמית ברין, וכבר 23 שנים שאני עושה כל מה שקשור בעיצוב גרפי בצורה מסחרית; במהלך השנים האלה צברתי פרסים – מקומיים וגם בינלאומיים – על הישגים תקדימיים באמת שהגעתי אליהם בעולמות השיווק, הפרסום והמיתוג, בעבודות על המותגים המובילים בעולם (<strong>וגם בארץ</strong>). אבל אפילו מעבר לפרסים ולתארים האלה: זכיתי לעבוד עם עשרות עסקים קטנים, לעזור להם להגשים חלומות – משלב היזמות ועד לשלב שבו המותג שיצרתי עבורם מבוסס, פעיל ומצליח, ומייצר עבורם ערך משמעותי.
+      </p>
+
+      <p className="leading-7 mb-5">
+        <strong>לא החליפו אותי – התווספו אלי:</strong>
+      </p>
+
+      <p className="leading-7 mb-5">
+        בשנתיים האחרונות אני מוסיף לארגז הכלים שלי לא מעט כלי בינה מלאכותית יוצרת (Generative Ai) כמעט מדי יום. אני בוחן אותם – בהתחלה במשחק והתנסות משועשעת עד למצב שאני מנסה לראות אם הם נשברים בקצה גבול היכולת שלהם – ואז אני מפנים תובנות מההתנסות ומטמיע יישומים של התוספות החדשות בעולם המקצועי שלי.
+      </p>
+
+      <p className="leading-7 mb-5">
+        כל אחד שנחשף לכלים האלו יכול להעיד שזה הולך ונהיה יותר ויותר קשה להפסיק להוסיף לארגז הכלים הזה עוד ועוד יכולות מדי יום. תבינו, אם היה באמת ארגז כלים כזה, בטח כבר הייתי צריך להחליף אותו באיזו ארונית יותר גדולה שתלך ותתמלא גם היא, אבל עם כאלה כוחות חדשים, ועם כזה שטף פנטסטי של יצירה – מי רוצה לעצור בכלל? אני הרי יותר מדי סקרן והרפתקן בשביל לעצור את השינוי הבלתי פוסק הזה, אני נהנה מתחושת אקספרימנטליות ביצירה (אבל ממש!) שומר על מחויבות לחדשנות, להתייעלות ולאפקטיביות, ותמיד מקפיד לעשות משהו <em>אחר</em> כדי להיות בטוח שהתוצר שאני מביא יהיה שונה מכל מה שהיה כבר, מכל מה שהכירו, וביחד עם השאיפה הטרחנית ממש למצוא פתרון פשוט וקל כדי לעזור לאנשים – אלה הדברים שמנחים אותי בקבלת החלטות, בלי תלות בכלים או בדרכי הביצוע.
+      </p>
+
+      <p className="leading-7 mb-5">
+        למעשה, אפשר לומר שהניסיון, הידע והתכונות האלה – אלה הם כלי העבודה האמיתיים שלי.
+      </p>
+
+      <hr className="border-t border-black my-10" />
+
+      <p className="leading-7 mb-5">
+        <strong>אה! ואני גם מרצה ומלמד את כל זה:</strong>
+      </p>
+
+      <p className="leading-7 mb-5">
+        כבר עשר שנים שאני גם מנטור ומורה לעיצוב, עם מאות רבות של בוגרות מוכשרות (<em>ובוגרים מוכשרים!</em>) שיעידו על השינוי הגדול שעזרתי להם לבצע בחייהם, בעזרת ההוראה והמנטורינג, עד להגשמה עצמית שלהן; על סמך כל הידע הזה והניסיון בהנגשה שלו לקהלים צעירים ולא מקצועיים, אני מעביר גם הרצאות, הדרכות והסמכות בנושאי חשיבה עיצובית, כלי עיצוב ובינה מלאכותית גם במגזר העסקי – לחברות ולסטודיואים לעיצוב שמבקשים להתקדם אל העולם החדש.
+      </p>
+
+      <p className="leading-7 mb-5">
+        תודה שקראת עד פה. הרי לא באת לפה בשביל לדבר עלי…
+      </p>
+
+      <hr className="border-t border-black my-10" />
+
+      <p className="leading-7 mb-5">
+        <strong>ובכל זאת, איך אני יכול לעזור לך?</strong>
+      </p>
+
+      <div className="space-y-2 my-8">
+        <p className="leading-7">הדרכות מקצועיות בנושאי בינה יצירתית וחשיבה עיצובית</p>
+        <p className="leading-7">מנטורינג למעצבים ויזמים מתחילים</p>
+        <p className="leading-7">הוראה בנושאי עיצוב ובינה מלאכותית</p>
+        <p className="leading-7">עיצוב גרפי, בדיגיטל וגם בפרינט: משלב האסטרטגיה, הרעיונאות והקונספט, ועד ליצירה והגשמת חלומות</p>
+        <p className="leading-7">(עם הפקות דפוס מורכבות וחדשניות!)</p>
       </div>
+
+      <p className="leading-7 mb-5">
+        ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית.
+      </p>
+
+      <footer className="mt-16 pt-8 border-t-2 border-black">
+        <div className="flex flex-wrap gap-x-6 gap-y-2">
+          <a href="mailto:ahoovi@gmail.com" className="text-blue-700 underline hover:no-underline text-sm">רוצה לפרט במייל על הבעיות והצורך שלך?</a>
+          <a href="https://wa.me/972549407575" target="_blank" rel="noopener" className="text-blue-700 underline hover:no-underline text-sm">או לשלוח הודעה קצרה אבל דחופה?</a>
+          <a href="https://www.behance.net/amitbrin" target="_blank" rel="noopener" className="text-blue-700 underline hover:no-underline text-sm">ארכיון עבודות מעשורים קודמים</a>
+        </div>
+      </footer>
     </div>
   );
 }

@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Amit Brin — Design & Creative Technology",
-  description: "Visual communication designer, AI educator, creative technologist",
+  title: "עמית ברין – עיצוב | מיתוג | שיווק | הדרכה",
+  description: "עמית ברין – מעצב עם 23 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת AI",
 };
 
 export default function RootLayout({
@@ -14,17 +14,14 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <body className="antialiased min-h-screen">
-        <nav className="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-sm border-b border-neutral-100">
-          <div className="max-w-5xl mx-auto px-6 h-14 flex items-center justify-between">
-            <a href="/" className="font-bold text-lg tracking-tight">amit brin</a>
-            <div className="flex gap-6 text-sm">
-              <a href="/" className="hover:text-neutral-500 transition-colors">ראשי</a>
-              <a href="/translate" className="hover:text-neutral-500 transition-colors">רומנית</a>
-              <a href="/keys" className="hover:text-neutral-500 transition-colors">KeyFix</a>
-            </div>
+        <nav className="w-full border-b-2 border-black">
+          <div className="max-w-[800px] mx-auto px-[clamp(20px,5vw,40px)] py-4 flex items-center gap-8 flex-wrap">
+            <a href="/" className="font-black text-base ml-auto">עמית ברין</a>
+            <a href="/" className="text-sm hover:border-b hover:border-black transition-all">ראשי</a>
+            <a href="mailto:ahoovi@gmail.com" className="text-sm hover:border-b hover:border-black transition-all">דברו איתי</a>
           </div>
         </nav>
-        <main className="pt-14">
+        <main>
           {children}
         </main>
       </body>
