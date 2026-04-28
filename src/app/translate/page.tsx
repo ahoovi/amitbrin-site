@@ -315,25 +315,50 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 }
 `;
 
+/* ═══════════ VOICES — 11Labs multilingual voices ═══════════ */
+const VOICE_MALE = "onwK4e9ZLuTAKqWW03F9";     // default male
+const VOICE_FEMALE = "XB0fDUnXU5powFXDhCwa";    // Charlotte — female multilingual
+const VOICE_MALE2 = "TX3LPaxmHKxFdv7VOQHJ";    // Liam — second male voice
+
+// Detect likely-female speaker from Romanian name patterns
+function pickVoice(speaker?: string): string {
+  if (!speaker) return VOICE_MALE;
+  const s = speaker.toLowerCase().trim();
+  // Common Romanian female name endings & roles
+  const femalePatterns = [
+    /ă$/, /a$/, /ea$/, /ina$/, /ela$/, /ana$/, /oar[eă]/, /toare$/,
+    /vânzătoare/, /profesoar/, /doctor(iț|it)/, /asistent/, /recepționist/,
+    /maria/, /elena/, /ioana/, /ana/, /mihaela/, /andreea/, /cristina/,
+    /dana/, /laura/, /alina/, /carmen/, /roxana/, /diana/, /gabriela/,
+    /raluca/, /simona/, /monica/, /denisa/, /bianca/, /delia/, /irina/,
+    /soția/, /mama/, /bunica/, /fata/, /fiica/, /sora/, /prietena/,
+    /clienta/, /colega/, /vecina/, /doamna/
+  ];
+  if (femalePatterns.some(p => p.test(s))) return VOICE_FEMALE;
+  return VOICE_MALE;
+}
+
 /* ═══════════ AUDIO — 11Labs TTS with browser fallback ═══════════ */
 const _audioCache: Record<string, string> = {};
 let _currentAudio: HTMLAudioElement | null = null;
 
-async function speakRo(txt: string, rate = 0.88, onEnd?: (() => void) | null) {
+async function speakRo(txt: string, rate = 0.88, onEnd?: (() => void) | null, voiceId?: string) {
   if (!txt) return;
   stopSpeech();
+  const vid = voiceId || VOICE_MALE;
+  const cacheKey = `${vid}::${txt}`;
   try {
-    let url = _audioCache[txt];
+    let url = _audioCache[cacheKey];
     if (!url) {
       const res = await fetch("/api/tts", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: txt, voice_id: "onwK4e9ZLuTAKqWW03F9" }),
+        body: JSON.stringify({ text: txt, voice_id: vid }),
       });
       if (res.ok) {
         const blob = await res.blob();
         url = URL.createObjectURL(blob);
-        _audioCache[txt] = url;
+        _audioCache[cacheKey] = url;
       }
     }
     if (url) {
@@ -498,7 +523,7 @@ function ListenModule({onProg}:{onProg:(n:number)=>void}) {
   useEffect(()=>{fetchDial();},[]);// eslint-disable-line react-hooks/exhaustive-deps
   useEffect(()=>()=>{stopSpeech();playRef.current=false;},[]);
 
-  const playDial=(spd=1)=>{if(!dial?.lines)return;if(playing){stopSpeech();setPlaying(false);setActLine(-1);playRef.current=false;return;}setPlaying(true);playRef.current=true;const next=(i:number)=>{if(!playRef.current||i>=dial.lines.length){setPlaying(false);setActLine(-1);playRef.current=false;return;}setActLine(i);speakRo(dial.lines[i].text,spd,()=>setTimeout(()=>next(i+1),350));};next(0);};
+  const playDial=(spd=1)=>{if(!dial?.lines)return;if(playing){stopSpeech();setPlaying(false);setActLine(-1);playRef.current=false;return;}setPlaying(true);playRef.current=true;const next=(i:number)=>{if(!playRef.current||i>=dial.lines.length){setPlaying(false);setActLine(-1);playRef.current=false;return;}setActLine(i);const voice=pickVoice(dial.lines[i].speaker);speakRo(dial.lines[i].text,spd,()=>setTimeout(()=>next(i+1),350),voice);};next(0);};
 
   const check=async(qi:number)=>{const ans=answers[qi];if(!ans?.trim())return;setChecking(c=>({...c,[qi]:true}));try{const q=dial.questions[qi];const raw=await callAI([{role:"user",content:`Question: "${q.q_ro}" (${q.q_he})\nExpected: "${q.ans_ro}" (${q.ans_he})\nStudent: "${ans}"`}],LEVAL_SY);const p=parseJ(raw);if(p){setFb(f=>({...f,[qi]:p}));if(p.score>=2)onProg(p.score);}}catch{setFb(f=>({...f,[qi]:{score:1,feedback_he:"שגיאה. נסה שוב."}}));}setChecking(c=>({...c,[qi]:false}));};
 
@@ -507,7 +532,7 @@ function ListenModule({onProg}:{onProg:(n:number)=>void}) {
     {!loading&&dial&&!dial.err&&(<>
       <div className="dcard">
         <div className="dhead"><span className="dtitle">{dial.title}</span><div style={{display:"flex",gap:".5rem",alignItems:"center"}}><button className={`trans-toggle${showTrans?" on":""}`} onClick={()=>setShowTrans(t=>!t)}>{showTrans?"🇮🇱 תרגום פעיל":"🇮🇱 הצג תרגום"}</button><span className="dlevel">{dial.level}</span></div></div>
-        <div className="dlines">{dial.lines.map((l:any,i:number)=>(<div key={i} className={`dline${actLine===i?" act":""}`}><div className="dspk">{l.speaker}{l.speaker_he?` — ${l.speaker_he}`:""}</div><div className="dtxt">{l.text} <button style={{background:"none",border:"none",cursor:"pointer",opacity:.45,fontSize:".75rem"}} onClick={()=>speakRo(l.text)}>🔊</button></div>{showTrans&&l.he&&<div className="dtrans">↳ {l.he}</div>}</div>))}</div>
+        <div className="dlines">{dial.lines.map((l:any,i:number)=>(<div key={i} className={`dline${actLine===i?" act":""}`}><div className="dspk">{l.speaker}{l.speaker_he?` — ${l.speaker_he}`:""}</div><div className="dtxt">{l.text} <button style={{background:"none",border:"none",cursor:"pointer",opacity:.45,fontSize:".75rem"}} onClick={()=>speakRo(l.text,0.88,null,pickVoice(l.speaker))}>🔊</button></div>{showTrans&&l.he&&<div className="dtrans">↳ {l.he}</div>}</div>))}</div>
         <div className="actrl"><button className={`playbtn${playing?" playing":""}`} onClick={()=>playDial(1)}>{playing?"⏹":"▶"}</button><div className="atrack"><div className="aprog"><div className="afill" style={{width:actLine>=0?`${((actLine+1)/dial.lines.length)*100}%`:"0%"}}/></div><div className="atime">{actLine>=0?`שורה ${actLine+1}/${dial.lines.length}`:`${dial.lines.length} שורות`}</div></div><button className="spdbtn" onClick={()=>playDial(0.65)}>איטי</button><button className="spdbtn" onClick={()=>playDial(1)}>רגיל</button></div>
       </div>
       <div className="qsec">
@@ -529,7 +554,7 @@ function SpeakModule({user,onProg}:{user:User;onProg:(n:number)=>void}) {
   useEffect(()=>{fetchQ();},[]);// eslint-disable-line react-hooks/exhaustive-deps
   useEffect(()=>()=>{recRef.current?.abort();stopSpeech();},[]);
 
-  const startRec=()=>{const SR=(window as any).SpeechRecognition||(window as any).webkitSpeechRecognition;if(!SR){setMicError("זיהוי קול אינו נתמך — הקלד בתיבה למטה.");setRecState("error");return;}try{const r=new SR();r.lang="ro-RO";r.continuous=false;r.interimResults=true;r.onstart=()=>{setRecState("listening");setMicError("");};r.onresult=(e:any)=>{let fi="",it="";for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)fi+=e.results[i][0].transcript;else it+=e.results[i][0].transcript;}if(fi)setTrans(t=>t+fi+" ");setInterim(it);};r.onend=()=>{setRecState("idle");setInterim("");};r.onerror=(e:any)=>{if(e.error==="aborted")return;setRecState("error");setMicError(e.error==="not-allowed"?"המיקרופון אינו זמין.":"שגיאה: "+e.error);};recRef.current=r;r.start();}catch{setMicError("זיהוי קול אינו זמין.");setRecState("error");}};
+  const startRec=()=>{const SR=(window as any).SpeechRecognition||(window as any).webkitSpeechRecognition;if(!SR){setMicError("זיהוי קול אינו נתמך — הקלד בתיבה למטה.");setRecState("error");return;}try{const r=new SR();r.lang="ro-RO";r.continuous=false;r.interimResults=true;r.onstart=()=>{setRecState("listening");setMicError("");};r.onresult=(e:any)=>{let fi="",it="";for(let i=e.resultIndex;i<e.results.length;i++){if(e.results[i].isFinal)fi+=e.results[i][0].transcript;else it+=e.results[i][0].transcript;}if(fi)setTrans(t=>t+fi+" ");setInterim(it);};r.onend=()=>{setRecState("idle");setInterim("");};r.onerror=(e:any)=>{if(e.error==="aborted")return;setRecState("error");const msgs:Record<string,string>={"not-allowed":"המיקרופון חסום — אנא אשר גישה למיקרופון בהגדרות הדפדפן.","network":"שגיאת רשת — ודא שאתה מחובר לאינטרנט ושהדפדפן תומך בזיהוי קולי (מומלץ Chrome).","no-speech":"לא זוהה דיבור — נסה שוב.","audio-capture":"לא נמצא מיקרופון — בדוק שמיקרופון מחובר."};setMicError(msgs[e.error]||"שגיאה: "+e.error);};recRef.current=r;r.start();}catch{setMicError("זיהוי קול אינו זמין.");setRecState("error");}};
   const stopRec=()=>{recRef.current?.stop();setRecState("idle");};
   const evaluate=async()=>{if(!trans.trim())return;setEvaling(true);try{const raw=await callAI([{role:"user",content:`Question: "${q.question_ro}"\nStudent: "${trans.trim()}"`}],SPSY);const p=parseJ(raw);if(p){setFb(p);onProg(p.score>=6?4:2);}}catch{}setEvaling(false);};
 
