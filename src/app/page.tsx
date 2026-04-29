@@ -1,6 +1,15 @@
+import Link from "next/link";
+
 export default function Home() {
   return (
-    <div className="max-w-[700px] mx-auto px-5 py-10 text-right" dir="rtl">
+    <>
+      {/* Prefetch media for /site so transition feels instant */}
+      <link rel="prefetch" href="/media/sailing4k2_1_1.mp4" as="video" />
+      <link rel="prefetch" href="/media/boxing.mp4" as="video" />
+      <link rel="preload" href="/media/keynote-section-back2800x1750w.jpg" as="image" />
+      <link rel="preload" href="/media/portrait.jpg" as="image" />
+
+      <div className="max-w-[700px] mx-auto px-5 py-10 text-right" dir="rtl">
 
       <p className="mb-8 text-sm">
         {"{"}כן! זה האתר של עמית ברין – מעצב עם 23 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת Ai{"}"}
@@ -51,7 +60,7 @@ export default function Home() {
       <p className="mb-5">📚 (עם הפקות דפוס מורכבות וחדשניות!)</p>
 
       <p className="mb-5">
-        ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><a href="/site" className="text-blue-700 underline hover:no-underline">כי האתר המלא הוא מעדן אמיתי</a>!</strong>
+        ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><Link href="/site" className="text-blue-700 underline hover:no-underline" prefetch={true}>כי האתר המלא הוא מעדן אמיתי</Link>!</strong>
       </p>
 
       <div className="mt-10 pt-5">
@@ -64,5 +73,6 @@ export default function Home() {
         </p>
       </div>
     </div>
+    </>
   );
 }
