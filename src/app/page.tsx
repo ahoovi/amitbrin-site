@@ -5,9 +5,9 @@ export default function Home() {
     <>
       {/* Prefetch media for /site so transition feels instant */}
       <link rel="prefetch" href="/media/sailing4k2_1_1.mp4" as="video" />
-      <link rel="prefetch" href="/media/boxing.mp4" as="video" />
-      <link rel="preload" href="/media/keynote-section-back2800x1750w.jpg" as="image" />
-      <link rel="preload" href="/media/portrait.jpg" as="image" />
+      <link rel="prefetch" href="/media/bot-whisperer.mp4" as="video" />
+      <link rel="preload" href="/media/echo_v_200.png" as="image" />
+      <link rel="preload" href="/media/headshot.png" as="image" />
 
       <div className="max-w-[700px] mx-auto px-5 py-10 text-right" dir="rtl">
 
