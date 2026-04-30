@@ -161,17 +161,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: relative;
   /* Holographic foil as text fill — moves with mouse + scroll */
   background-image:
-    url('/media/holographic-foil.jpg'),
     linear-gradient(
       135deg,
-      #e8b4f8 0%, #7eb8f0 12%, #a0e8d0 22%,
-      #f0d860 33%, #f0a070 42%, #e878c0 52%,
-      #80b0f8 62%, #70e0b8 72%, #f8e070 82%,
-      #f088a8 92%, #b088f8 100%
+      #c050e0 0%, #3090e8 12%, #20c8a0 22%,
+      #e8c020 33%, #e87030 42%, #d040a0 52%,
+      #4080f0 62%, #30c898 72%, #e8b830 82%,
+      #e05080 92%, #8050e8 100%
     );
   background-size: 200% 200%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
-  background-blend-mode: overlay;
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: background-position 0.3s ease-out;
