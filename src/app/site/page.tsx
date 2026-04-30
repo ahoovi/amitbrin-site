@@ -74,8 +74,13 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 
 /* ═══════════════════════════════════════════
    SEC 0: HERO — CMYK PRINT AESTHETIC (90vh)
-   Paper sheet sits on transparent bg,
-   so the sky of the sailing section peeks below.
+   Layers (bottom→top):
+   1. Paper texture (fills frame, object-cover)
+   2. Portrait (multiply, left-aligned, parallax on scroll)
+   3. Registration/print marks (multiply, pinned to corners)
+   4. Text frame (right side, vertically centered)
+   5. Holographic foil on title (moves with mouse, NOT auto)
+   6. Glass + shape (RGB channel split refraction)
 ═══════════════════════════════════════════ */
 .hero-wrapper {
   position: relative;
@@ -87,147 +92,125 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .hero-paper {
   position: relative;
   width: 100%; height: 90vh;
-  background: url('/media/paper-texture.jpg') center/cover;
   overflow: hidden;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.25), 0 4px 36px rgba(0,0,0,0.25);
 }
-/* registration marks */
-.hero-paper::before, .hero-paper::after {
-  content: '⊕'; position: absolute; font-size: 1.2rem; color: rgba(0,0,0,0.12); z-index: 5; pointer-events: none;
-}
-.hero-paper::before { top: 1.5rem; right: 1.5rem; }
-.hero-paper::after { bottom: 1.5rem; left: 1.5rem; }
-.reg-mark-bl, .reg-mark-tr {
-  position: absolute; font-size: 1.2rem; color: rgba(0,0,0,0.12); z-index: 5; pointer-events: none;
-}
-.reg-mark-bl { bottom: 1.5rem; right: 1.5rem; }
-.reg-mark-tr { top: 1.5rem; left: 1.5rem; }
-
-.hero-inner {
-  height: 100%;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  gap: var(--grid-gap);
-  max-width: var(--grid-max);
-  margin: 0 auto;
-  padding: 0 var(--grid-pad);
-  align-items: center;
-}
-
-/* CMYK portrait with glass refraction — left 6 cols */
-.hero-portrait-col {
-  grid-column: 7 / 13;
-  position: relative;
-  height: 75vh;
-  display: flex; align-items: center; justify-content: center;
-  cursor: crosshair;
-  overflow: hidden;
-}
-.cmyk-scene {
-  position: relative; width: 100%; height: 100%;
-}
-/* Portrait layers */
-.cmyk-layer {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
+/* Paper bg — fills entire frame */
+.hero-paper-bg {
+  position: absolute; inset: 0; z-index: 0;
   width: 100%; height: 100%;
   object-fit: cover;
-  transition: transform 0.12s ease-out;
-  will-change: transform;
 }
-.cmyk-layer.base { z-index: 2; filter: grayscale(100%) contrast(1.05); }
-.cmyk-layer.cyan {
-  z-index: 3; mix-blend-mode: multiply;
-  filter: sepia(1) saturate(3) hue-rotate(160deg) brightness(1.1);
-  opacity: 0.7;
-}
-.cmyk-layer.magenta {
-  z-index: 3; mix-blend-mode: multiply;
-  filter: sepia(1) saturate(3) hue-rotate(280deg) brightness(1.1);
-  opacity: 0.7;
-}
-/* Registration marks overlay */
-.cmyk-registration {
-  position: absolute; inset: 0; z-index: 4;
-  background: url('/unicorn/assets/images/registration-1440x900-w10.jpg') center/contain no-repeat;
-  mix-blend-mode: multiply; opacity: 0.25;
-  pointer-events: none;
-}
-/* Glass lens — follows mouse, refracts content beneath */
-.glass-lens {
-  position: absolute; z-index: 10;
-  width: 220px; height: 220px;
-  border-radius: 50%;
-  pointer-events: none;
-  transform: translate(-50%, -50%);
-  transition: left 0.08s ease-out, top 0.08s ease-out, opacity 0.3s;
-  opacity: 0;
-  /* Glass refraction effect */
-  background: radial-gradient(circle at 35% 35%,
-    rgba(255,255,255,0.35) 0%,
-    rgba(255,255,255,0.12) 30%,
-    rgba(200,220,255,0.08) 50%,
-    transparent 70%
-  );
-  backdrop-filter: blur(1.5px) brightness(1.15) contrast(1.05);
-  -webkit-backdrop-filter: blur(1.5px) brightness(1.15) contrast(1.05);
-  border: 1px solid rgba(255,255,255,0.18);
-  box-shadow:
-    inset 0 0 30px rgba(255,255,255,0.12),
-    0 0 40px rgba(13,239,237,0.06),
-    0 0 80px rgba(76,68,196,0.04);
-}
-.glass-lens.visible { opacity: 1; }
-/* Halftone overlay — subtle dot pattern */
-.halftone-overlay {
-  position: absolute; inset: 0; z-index: 5;
-  pointer-events: none; opacity: 0.04;
-  background-image: radial-gradient(circle, #000 0.5px, transparent 0.5px);
-  background-size: 4px 4px;
+/* Portrait — multiply, left-aligned, top+bottom pinned */
+.hero-portrait {
+  position: absolute; top: 0; bottom: 0; left: 0;
+  width: 55%; z-index: 1;
   mix-blend-mode: multiply;
+  overflow: hidden;
 }
-/* CMYK color bar */
-.cmyk-bar {
-  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  width: 10px; height: 35%; z-index: 6;
-  display: flex; flex-direction: column;
+.hero-portrait img {
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: center top;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
 }
-.cmyk-bar span { flex: 1; }
-.cmyk-bar span:nth-child(1) { background: #00AEEF; }
-.cmyk-bar span:nth-child(2) { background: #EC008C; }
-.cmyk-bar span:nth-child(3) { background: #FFF200; }
-.cmyk-bar span:nth-child(4) { background: #231F20; }
-.cmyk-bar span:nth-child(5) { background: #BABEC8; }
+/* Print marks — multiply, pinned to corners/edges */
+.print-mark {
+  position: absolute; z-index: 3;
+  mix-blend-mode: multiply; pointer-events: none;
+  opacity: 0.6;
+}
+.print-mark.corner-tl { top: 0; left: 0; width: 49px; height: 48px; }
+.print-mark.corner-tr { top: 0; right: 0; width: 49px; height: 48px; }
+.print-mark.corner-bl { bottom: 0; left: 0; width: 48px; height: 49px; }
+.print-mark.corner-br { bottom: 0; right: 0; width: 48px; height: 49px; }
+.print-mark.center-left { top: 50%; left: 0; transform: translateY(-50%); width: 34px; height: 34px; }
+.print-mark.center-top { top: 0; left: 50%; transform: translateX(-50%); width: 37px; height: 37px; }
+.print-mark.center-bottom { bottom: 0; left: 50%; transform: translateX(-50%); width: 37px; height: 37px; }
+/* CMYK test strip — right edge, vertically centered */
+.cmyk-strip {
+  position: absolute; top: 50%; right: 0; transform: translateY(-50%);
+  width: 34px; z-index: 3;
+  mix-blend-mode: multiply; pointer-events: none;
+}
+.cmyk-strip-block { display: flex; flex-direction: column; gap: 1px; margin-bottom: 8px; }
+.cmyk-strip-block span {
+  display: block; width: 15px; height: 15px;
+  margin-left: auto; margin-right: 6px;
+}
+/* CMYK colors */
+.cmyk-c { background: #00AEEF; }
+.cmyk-m { background: #EC008C; }
+.cmyk-y { background: #FFF200; }
+.cmyk-k { background: #231F20; }
 
-/* Hero text — right 5 cols (RTL = visually right) */
-.hero-text-col {
-  grid-column: 1 / 7;
-  padding-left: 1rem;
-  z-index: 5;
+/* Hero text — right side, vertically centered */
+.hero-text-frame {
+  position: absolute; top: 50%; right: 0;
+  transform: translateY(-50%);
+  width: 50%; z-index: 4;
+  padding-right: clamp(2rem, 8vw, 120px);
+  display: flex; flex-direction: column;
+  align-items: flex-end; gap: 2.5rem;
 }
 .hero-title {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.8rem, 5.5vw, 6rem);
   line-height: 92%; letter-spacing: 0.02px;
-  margin-bottom: 1.8rem;
-  background: linear-gradient(90deg, #0DEFED 0%, #ff69b4 25%, #CFBD85 50%, #4c44c4 75%, #0DEFED 100%);
-  background-size: 300% 100%;
+  text-align: right;
+  position: relative;
+  /* Holographic foil as text fill — moves with mouse */
+  background-image: url('/media/holographic-foil.jpg');
+  background-size: 200% 200%;
+  background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  animation: gradientShift 6s ease-in-out infinite;
-}
-@keyframes gradientShift {
-  0%, 100% { background-position: 0% center; }
-  50% { background-position: 100% center; }
+  transition: background-position 0.3s ease-out;
 }
 .hero-body {
-  font-family: 'Noto Sans Hebrew', sans-serif; font-size: clamp(0.85rem, 1vw, 1.05rem); font-weight: 400;
+  font-family: 'Noto Sans Hebrew', sans-serif; font-size: clamp(0.85rem, 1vw, 1.05rem); font-weight: 500;
   line-height: 1.75; letter-spacing: 0.01em;
-  color: #444; max-width: 95%;
+  color: #333; text-align: right;
+  max-width: 470px;
 }
-.hero-subtitle {
-  font-family: 'Noto Sans Hebrew', sans-serif; font-size: 0.8rem; font-weight: 500;
-  letter-spacing: 0.25em; text-transform: uppercase; color: var(--grey6);
-  margin-bottom: 0.6rem;
+
+/* Glass + shape — floats over portrait, RGB channel split */
+.glass-cross {
+  position: absolute; z-index: 5;
+  width: 200px; height: 200px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.1s ease-out, top 0.1s ease-out, opacity 0.3s;
+  opacity: 0;
+  /* + shape via clip-path */
+  clip-path: polygon(
+    35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
+    65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%
+  );
+  backdrop-filter: blur(2px) brightness(1.1) contrast(1.1) saturate(1.3);
+  -webkit-backdrop-filter: blur(2px) brightness(1.1) contrast(1.1) saturate(1.3);
+  background: radial-gradient(circle at 40% 40%,
+    rgba(255,255,255,0.25) 0%,
+    rgba(200,220,255,0.1) 40%,
+    transparent 70%
+  );
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: inset 0 0 20px rgba(255,255,255,0.1);
+}
+.glass-cross.visible { opacity: 1; }
+/* RGB channel split pseudo-elements on the glass */
+.glass-cross::before, .glass-cross::after {
+  content: ''; position: absolute; inset: -3px;
+  border-radius: inherit; clip-path: inherit;
+  pointer-events: none;
+}
+.glass-cross::before {
+  background: rgba(255,0,80,0.06);
+  transform: translate(-3px, 1px);
+}
+.glass-cross::after {
+  background: rgba(0,180,255,0.06);
+  transform: translate(3px, -1px);
 }
 
 /* ═══════════════════════════════════════════
@@ -629,13 +612,17 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   }
   .nav-toggle { display: block; }
 
-  .hero-inner { grid-template-columns: 1fr; }
-  .hero-portrait-col { grid-column: 1 / -1; height: 50vh; order: 1; }
-  .hero-text-col { grid-column: 1 / -1; order: 2; padding: 0 0 2rem; }
+  .hero-portrait { width: 100%; }
+  .hero-text-frame {
+    position: relative; top: auto; right: auto; transform: none;
+    width: 100%; padding: 2rem var(--grid-pad);
+    align-items: flex-end;
+  }
   .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
-  .hero-paper { height: auto; min-height: 100vh; padding-bottom: 2rem; }
+  .hero-paper { height: auto; min-height: 100vh; display: flex; flex-direction: column; }
   .hero-wrapper { height: auto; }
-  .cmyk-bar { display: none; }
+  .cmyk-strip { display: none; }
+  .glass-cross { display: none; }
 
   .sailing-content { grid-template-columns: 1fr; }
   .sailing-text { grid-column: 1 / -1; padding: 2rem 0; }
@@ -692,40 +679,65 @@ export default function SitePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Glass lens + CMYK layer mouse tracking
+  // Refs for hero interactions
   const sceneRef = useRef<HTMLDivElement>(null);
   const lensRef = useRef<HTMLDivElement>(null);
+  const portraitRef = useRef<HTMLImageElement>(null);
+  const titleRef = useRef<HTMLHeadingElement>(null);
 
+  // Parallax scroll on portrait
+  useEffect(() => {
+    const handleScrollParallax = () => {
+      const scene = sceneRef.current;
+      const portrait = portraitRef.current;
+      if (!scene || !portrait) return;
+      const rect = scene.getBoundingClientRect();
+      const vh = window.innerHeight;
+      // How far the section center is from viewport center (-1 to 1)
+      const centerOffset = (rect.top + rect.height / 2 - vh / 2) / vh;
+      // Scale: 1.0 at center, up to 1.08 at edges
+      const scale = 1 + Math.abs(centerOffset) * 0.08;
+      // Translate: 0 at center, up to 20px shift
+      const tx = centerOffset * 15;
+      const ty = centerOffset * 8;
+      portrait.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
+    };
+    window.addEventListener('scroll', handleScrollParallax, { passive: true });
+    handleScrollParallax();
+    return () => window.removeEventListener('scroll', handleScrollParallax);
+  }, []);
+
+  // Mouse interaction: move holographic foil + glass cross
   const handleSceneMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const scene = sceneRef.current;
     const lens = lensRef.current;
-    if (!scene || !lens) return;
+    const title = titleRef.current;
+    if (!scene) return;
     const rect = scene.getBoundingClientRect();
     const x = e.clientX - rect.left;
     const y = e.clientY - rect.top;
-    const nx = (x / rect.width - 0.5);   // -0.5 to 0.5
-    const ny = (y / rect.height - 0.5);
+    const nx = x / rect.width;   // 0 to 1
+    const ny = y / rect.height;
 
-    // Move glass lens
-    lens.style.left = x + 'px';
-    lens.style.top = y + 'px';
-    lens.classList.add('visible');
+    // Move holographic foil background on title
+    if (title) {
+      title.style.setProperty('--foil-x', `${nx * 100}%`);
+      title.style.setProperty('--foil-y', `${ny * 100}%`);
+    }
 
-    // Shift CMYK layers based on mouse position
-    const layers = scene.querySelectorAll('.cmyk-layer');
-    if (layers[1]) (layers[1] as HTMLElement).style.transform = `translate(calc(-50% + ${nx * 12}px), calc(-50% + ${ny * -6}px))`;
-    if (layers[2]) (layers[2] as HTMLElement).style.transform = `translate(calc(-50% + ${nx * -14}px), calc(-50% + ${ny * 8}px))`;
+    // Move glass cross (only over left 55% = portrait area)
+    if (lens && nx < 0.55) {
+      lens.style.left = x + 'px';
+      lens.style.top = y + 'px';
+      lens.classList.add('visible');
+    } else if (lens) {
+      lens.classList.remove('visible');
+    }
   }, []);
 
   const handleSceneMouseLeave = useCallback(() => {
-    const scene = sceneRef.current;
     const lens = lensRef.current;
     if (lens) lens.classList.remove('visible');
-    if (scene) {
-      scene.querySelectorAll('.cmyk-layer').forEach((img, i) => {
-        if (i > 0) (img as HTMLElement).style.transform = 'translate(-50%, -50%)';
-      });
-    }
   }, []);
 
   return (
@@ -747,38 +759,58 @@ export default function SitePage() {
 
       {/* ═══ SEC 0: HERO — CMYK PRINT AESTHETIC ═══ */}
       <section className="hero-wrapper">
-        <div className="hero-paper">
-          <span className="reg-mark-bl">⊕</span>
-          <span className="reg-mark-tr">⊕</span>
-          <div className="hero-inner">
-            {/* Text — right side (RTL) */}
-            <div className="hero-text-col">
-              <p className="hero-subtitle">creative director · visual design</p>
-              <h1 className="hero-title">הדפוס<br/>מחייה את<br/>הדיגיטל</h1>
-              <p className="hero-body">
-                לאנשים שנוהגים להספיד את הפרינט אני אומר: חכו, כי הפרינט עוד לא התחיל! כל זמן שאי אפשר להרגיש (ממש להרגיש בידיים, לא רק בעיניים) את מה שאתם רואים — החוויה לא תהיה שלמה: כי אפשר לקחת את המוצרים ואת המסרים שלכם למקומות פיזיים של תחושה ורגש, עם פתרונות בהפקות דפוס והשבחות מתקדמות, שמפתיעות ומניעות את כל מי שיגע בהן.
-              </p>
-            </div>
+        <div
+          className="hero-paper"
+          ref={sceneRef}
+          onMouseMove={handleSceneMouseMove}
+          onMouseLeave={handleSceneMouseLeave}
+        >
+          {/* Layer 1: Paper texture bg */}
+          <img className="hero-paper-bg" src="/media/paper-texture.jpg" alt="" aria-hidden="true" />
 
-            {/* CMYK Portrait + Glass Refraction */}
-            <div
-              className="hero-portrait-col"
-              onMouseMove={handleSceneMouseMove}
-              onMouseLeave={handleSceneMouseLeave}
-            >
-              <div className="cmyk-scene" ref={sceneRef}>
-                <img className="cmyk-layer base" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="עמית ברין" />
-                <img className="cmyk-layer cyan" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="" aria-hidden="true" />
-                <img className="cmyk-layer magenta" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="" aria-hidden="true" />
-                <div className="cmyk-registration" />
-                <div className="halftone-overlay" />
-                <div className="glass-lens" ref={lensRef} />
-              </div>
-              <div className="cmyk-bar">
-                <span /><span /><span /><span /><span />
-              </div>
+          {/* Layer 2: Portrait — multiply, left-aligned, parallax */}
+          <div className="hero-portrait">
+            <img
+              ref={portraitRef}
+              src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg"
+              alt="עמית ברין"
+            />
+          </div>
+
+          {/* Layer 3: Print marks — corners + edges */}
+          <div className="cmyk-strip">
+            <div className="cmyk-strip-block">
+              <span className="cmyk-c" /><span className="cmyk-c" style={{opacity:.95}} />
+              <span className="cmyk-c" style={{opacity:.75}} /><span className="cmyk-c" style={{opacity:.5}} />
+              <span className="cmyk-c" style={{opacity:.25}} /><span className="cmyk-c" style={{opacity:.05}} />
+            </div>
+            <div className="cmyk-strip-block">
+              <span className="cmyk-m" /><span className="cmyk-m" style={{opacity:.95}} />
+              <span className="cmyk-m" style={{opacity:.75}} /><span className="cmyk-m" style={{opacity:.5}} />
+              <span className="cmyk-m" style={{opacity:.25}} /><span className="cmyk-m" style={{opacity:.05}} />
+            </div>
+            <div className="cmyk-strip-block">
+              <span className="cmyk-y" /><span className="cmyk-y" style={{opacity:.95}} />
+              <span className="cmyk-y" style={{opacity:.75}} /><span className="cmyk-y" style={{opacity:.5}} />
+              <span className="cmyk-y" style={{opacity:.25}} /><span className="cmyk-y" style={{opacity:.05}} />
+            </div>
+            <div className="cmyk-strip-block">
+              <span className="cmyk-k" /><span className="cmyk-k" style={{opacity:.95}} />
+              <span className="cmyk-k" style={{opacity:.75}} /><span className="cmyk-k" style={{opacity:.5}} />
+              <span className="cmyk-k" style={{opacity:.25}} /><span className="cmyk-k" style={{opacity:.05}} />
             </div>
           </div>
+
+          {/* Layer 4: Text frame — right side */}
+          <div className="hero-text-frame">
+            <h1 className="hero-title" ref={titleRef}>הדפוס<br/>מחייה את<br/>הדיגיטל</h1>
+            <p className="hero-body">
+              לאנשים שנוהגים להספיד את הפרינט אני אומר: חכו, כי הפרינט עוד לא התחיל! כל זמן שאי אפשר להרגיש (ממש להרגיש בידיים, לא רק בעיניים) את מה שאתם רואים — החוויה לא תהיה שלמה: כי אפשר לקחת את המוצרים ואת המסרים שלכם למקומות פיזיים של תחושה ורגש, עם פתרונות בהפקות דפוס והשבחות מתקדמות, שמפתיעות ומניעות את כל מי שיגע בהן.
+            </p>
+          </div>
+
+          {/* Layer 5: Glass + shape — RGB channel split */}
+          <div className="glass-cross" ref={lensRef} />
         </div>
       </section>
 
