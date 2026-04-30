@@ -159,13 +159,21 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   line-height: 92%; letter-spacing: 0.02px;
   text-align: right;
   position: relative;
-  /* Holographic foil as text fill — moves with mouse */
-  background-image: url('/media/holographic-foil.jpg');
-  background-size: 150% 150%;
+  /* Holographic foil as text fill — moves with mouse + scroll */
+  background-image:
+    url('/media/holographic-foil.jpg'),
+    linear-gradient(
+      135deg,
+      #e8b4f8 0%, #7eb8f0 12%, #a0e8d0 22%,
+      #f0d860 33%, #f0a070 42%, #e878c0 52%,
+      #80b0f8 62%, #70e0b8 72%, #f8e070 82%,
+      #f088a8 92%, #b088f8 100%
+    );
+  background-size: 200% 200%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
+  background-blend-mode: overlay;
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  filter: contrast(1.6) saturate(1.8) brightness(0.85);
   transition: background-position 0.3s ease-out;
 }
 .hero-body {
@@ -687,11 +695,12 @@ export default function SitePage() {
   const portraitRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
 
-  // Parallax scroll on portrait
+  // Parallax scroll on portrait + foil scroll shift
   useEffect(() => {
     const handleScrollParallax = () => {
       const scene = sceneRef.current;
       const portrait = portraitRef.current;
+      const title = titleRef.current;
       if (!scene || !portrait) return;
       const rect = scene.getBoundingClientRect();
       const vh = window.innerHeight;
@@ -703,6 +712,11 @@ export default function SitePage() {
       const tx = centerOffset * 15;
       const ty = centerOffset * 8;
       portrait.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
+      // Shift foil on scroll (subtle vertical drift)
+      if (title) {
+        const scrollPct = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
+        title.style.setProperty('--foil-y', `${30 + scrollPct * 40}%`);
+      }
     };
     window.addEventListener('scroll', handleScrollParallax, { passive: true });
     handleScrollParallax();
