@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    AMIT BRIN — ONE-PAGER
@@ -112,20 +112,90 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   align-items: center;
 }
 
-/* Unicorn Studio 3D portrait — left 6 cols */
+/* CMYK portrait with glass refraction — left 6 cols */
 .hero-portrait-col {
   grid-column: 7 / 13;
   position: relative;
   height: 75vh;
   display: flex; align-items: center; justify-content: center;
+  cursor: crosshair;
+  overflow: hidden;
 }
-.unicorn-embed {
-  width: 100%; height: 100%;
-  position: relative;
+.cmyk-scene {
+  position: relative; width: 100%; height: 100%;
 }
-.unicorn-embed canvas {
-  width: 100% !important; height: 100% !important;
+/* Portrait layers */
+.cmyk-layer {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; height: auto; max-height: 85%;
+  object-fit: contain;
+  transition: transform 0.12s ease-out;
+  will-change: transform;
 }
+.cmyk-layer.base { z-index: 2; filter: grayscale(100%) contrast(1.05); }
+.cmyk-layer.cyan {
+  z-index: 3; mix-blend-mode: multiply;
+  filter: sepia(1) saturate(3) hue-rotate(160deg) brightness(1.1);
+  opacity: 0.7;
+}
+.cmyk-layer.magenta {
+  z-index: 3; mix-blend-mode: multiply;
+  filter: sepia(1) saturate(3) hue-rotate(280deg) brightness(1.1);
+  opacity: 0.7;
+}
+/* Registration marks overlay */
+.cmyk-registration {
+  position: absolute; inset: 0; z-index: 4;
+  background: url('/unicorn/assets/images/registration-1440x900-w10.jpg') center/contain no-repeat;
+  mix-blend-mode: multiply; opacity: 0.6;
+  pointer-events: none;
+}
+/* Glass lens — follows mouse, refracts content beneath */
+.glass-lens {
+  position: absolute; z-index: 10;
+  width: 220px; height: 220px;
+  border-radius: 50%;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  transition: left 0.08s ease-out, top 0.08s ease-out, opacity 0.3s;
+  opacity: 0;
+  /* Glass refraction effect */
+  background: radial-gradient(circle at 35% 35%,
+    rgba(255,255,255,0.35) 0%,
+    rgba(255,255,255,0.12) 30%,
+    rgba(200,220,255,0.08) 50%,
+    transparent 70%
+  );
+  backdrop-filter: blur(1.5px) brightness(1.15) contrast(1.05);
+  -webkit-backdrop-filter: blur(1.5px) brightness(1.15) contrast(1.05);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow:
+    inset 0 0 30px rgba(255,255,255,0.12),
+    0 0 40px rgba(13,239,237,0.06),
+    0 0 80px rgba(76,68,196,0.04);
+}
+.glass-lens.visible { opacity: 1; }
+/* Halftone overlay — subtle dot pattern */
+.halftone-overlay {
+  position: absolute; inset: 0; z-index: 5;
+  pointer-events: none; opacity: 0.04;
+  background-image: radial-gradient(circle, #000 0.5px, transparent 0.5px);
+  background-size: 4px 4px;
+  mix-blend-mode: multiply;
+}
+/* CMYK color bar */
+.cmyk-bar {
+  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: 10px; height: 35%; z-index: 6;
+  display: flex; flex-direction: column;
+}
+.cmyk-bar span { flex: 1; }
+.cmyk-bar span:nth-child(1) { background: #00AEEF; }
+.cmyk-bar span:nth-child(2) { background: #EC008C; }
+.cmyk-bar span:nth-child(3) { background: #FFF200; }
+.cmyk-bar span:nth-child(4) { background: #231F20; }
+.cmyk-bar span:nth-child(5) { background: #BABEC8; }
 
 /* Hero text — right 5 cols (RTL = visually right) */
 .hero-text-col {
@@ -611,24 +681,40 @@ export default function SitePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // Load Unicorn Studio SDK and init scene
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = '/unicorn/assets/unicornStudio.umd.js';
-    script.async = true;
-    script.onload = () => {
-      if ((window as any).UnicornStudio) {
-        (window as any).UnicornStudio.init();
-      }
-    };
-    document.body.appendChild(script);
-    return () => {
-      // Cleanup: destroy Unicorn instances if available
-      if ((window as any).UnicornStudio?.destroy) {
-        (window as any).UnicornStudio.destroy();
-      }
-      document.body.removeChild(script);
-    };
+  // Glass lens + CMYK layer mouse tracking
+  const sceneRef = useRef<HTMLDivElement>(null);
+  const lensRef = useRef<HTMLDivElement>(null);
+
+  const handleSceneMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const scene = sceneRef.current;
+    const lens = lensRef.current;
+    if (!scene || !lens) return;
+    const rect = scene.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const nx = (x / rect.width - 0.5);   // -0.5 to 0.5
+    const ny = (y / rect.height - 0.5);
+
+    // Move glass lens
+    lens.style.left = x + 'px';
+    lens.style.top = y + 'px';
+    lens.classList.add('visible');
+
+    // Shift CMYK layers based on mouse position
+    const layers = scene.querySelectorAll('.cmyk-layer');
+    if (layers[1]) (layers[1] as HTMLElement).style.transform = `translate(calc(-50% + ${nx * 12}px), calc(-50% + ${ny * -6}px))`;
+    if (layers[2]) (layers[2] as HTMLElement).style.transform = `translate(calc(-50% + ${nx * -14}px), calc(-50% + ${ny * 8}px))`;
+  }, []);
+
+  const handleSceneMouseLeave = useCallback(() => {
+    const scene = sceneRef.current;
+    const lens = lensRef.current;
+    if (lens) lens.classList.remove('visible');
+    if (scene) {
+      scene.querySelectorAll('.cmyk-layer').forEach((img, i) => {
+        if (i > 0) (img as HTMLElement).style.transform = 'translate(-50%, -50%)';
+      });
+    }
   }, []);
 
   return (
@@ -663,12 +749,23 @@ export default function SitePage() {
               </p>
             </div>
 
-            {/* Unicorn Studio 3D Portrait */}
-            <div className="hero-portrait-col">
-              <div
-                className="unicorn-embed"
-                data-us-project-src="/unicorn/assets/scene.json"
-              />
+            {/* CMYK Portrait + Glass Refraction */}
+            <div
+              className="hero-portrait-col"
+              onMouseMove={handleSceneMouseMove}
+              onMouseLeave={handleSceneMouseLeave}
+            >
+              <div className="cmyk-scene" ref={sceneRef}>
+                <img className="cmyk-layer base" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="עמית ברין" />
+                <img className="cmyk-layer cyan" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="" aria-hidden="true" />
+                <img className="cmyk-layer magenta" src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg" alt="" aria-hidden="true" />
+                <div className="cmyk-registration" />
+                <div className="halftone-overlay" />
+                <div className="glass-lens" ref={lensRef} />
+              </div>
+              <div className="cmyk-bar">
+                <span /><span /><span /><span /><span />
+              </div>
             </div>
           </div>
         </div>
