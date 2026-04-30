@@ -82,6 +82,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   width: 100%; height: 100vh;
   background: transparent;
   overflow: visible;
+  z-index: 2;
 }
 .hero-paper {
   position: relative;
@@ -91,12 +92,12 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 /* registration marks */
 .hero-paper::before, .hero-paper::after {
-  content: '⊕'; position: absolute; font-size: 1.6rem; color: rgba(0,0,0,0.25); z-index: 5; pointer-events: none;
+  content: '⊕'; position: absolute; font-size: 1.2rem; color: rgba(0,0,0,0.12); z-index: 5; pointer-events: none;
 }
 .hero-paper::before { top: 1.5rem; right: 1.5rem; }
 .hero-paper::after { bottom: 1.5rem; left: 1.5rem; }
 .reg-mark-bl, .reg-mark-tr {
-  position: absolute; font-size: 1.6rem; color: rgba(0,0,0,0.25); z-index: 5; pointer-events: none;
+  position: absolute; font-size: 1.2rem; color: rgba(0,0,0,0.12); z-index: 5; pointer-events: none;
 }
 .reg-mark-bl { bottom: 1.5rem; right: 1.5rem; }
 .reg-mark-tr { top: 1.5rem; left: 1.5rem; }
@@ -128,8 +129,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .cmyk-layer {
   position: absolute; top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 90%; height: auto; max-height: 85%;
-  object-fit: contain;
+  width: 100%; height: 100%;
+  object-fit: cover;
   transition: transform 0.12s ease-out;
   will-change: transform;
 }
@@ -148,7 +149,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .cmyk-registration {
   position: absolute; inset: 0; z-index: 4;
   background: url('/unicorn/assets/images/registration-1440x900-w10.jpg') center/contain no-repeat;
-  mix-blend-mode: multiply; opacity: 0.6;
+  mix-blend-mode: multiply; opacity: 0.25;
   pointer-events: none;
 }
 /* Glass lens — follows mouse, refracts content beneath */
@@ -235,6 +236,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 ═══════════════════════════════════════════ */
 .sailing-section {
   position: relative; width: 100%; height: 100vh; overflow: hidden;
+  margin-top: -10vh; z-index: 1;
 }
 .sailing-section video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
@@ -534,6 +536,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 ═══════════════════════════════════════════ */
 .closing-section {
   padding: 4rem 0 2rem;
+  background: #fff;
+  position: relative; z-index: 1;
 }
 .closing-inner {
   max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
@@ -560,11 +564,18 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 /* Wave effect — top edge */
 .footer-wave {
   position: absolute; top: -2px; left: 0; right: 0; z-index: 2;
-  height: 60px; overflow: hidden;
+  height: 80px; overflow: hidden;
 }
 .footer-wave svg {
+  position: absolute; bottom: 0; left: 0;
   width: 200%; height: 100%;
-  animation: waveShift 8s linear infinite;
+}
+.footer-wave .wave-back {
+  animation: waveShift 10s linear infinite;
+  opacity: 0.5;
+}
+.footer-wave .wave-front {
+  animation: waveShift 7s linear infinite reverse;
 }
 @keyframes waveShift {
   0% { transform: translateX(0); }
@@ -773,7 +784,7 @@ export default function SitePage() {
 
       {/* ═══ SEC 1: SAILING VIDEO ═══ */}
       <section className="sailing-section">
-        <video autoPlay muted loop playsInline poster="/media/portrait.jpg">
+        <video autoPlay muted loop playsInline>
           <source src="/media/sailing4k2_1_1.mp4" type="video/mp4" />
         </video>
         <div className="sailing-overlay" />
@@ -908,9 +919,14 @@ export default function SitePage() {
           <source src="/media/underwater.mp4" type="video/mp4" />
         </video>
         <div className="footer-wave">
-          <svg viewBox="0 0 2400 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M0,30 C200,10 400,50 600,30 C800,10 1000,50 1200,30 C1400,10 1600,50 1800,30 C2000,10 2200,50 2400,30 L2400,0 L0,0 Z"
-              fill="#E6E8EF"
+          <svg className="wave-back" viewBox="0 0 2400 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,40 C150,20 350,60 600,35 C850,10 1050,55 1200,40 C1350,25 1550,60 1800,35 C2050,10 2250,55 2400,40 L2400,0 L0,0 Z"
+              fill="#ffffff"
+            />
+          </svg>
+          <svg className="wave-front" viewBox="0 0 2400 80" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,45 C200,15 400,55 600,35 C800,15 1000,50 1200,35 C1400,20 1600,55 1800,30 C2000,10 2200,50 2400,35 L2400,0 L0,0 Z"
+              fill="#ffffff"
             />
           </svg>
         </div>
