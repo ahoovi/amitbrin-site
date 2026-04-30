@@ -38,7 +38,7 @@ const S = `
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 html { scroll-behavior: smooth; }
-body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--black); direction: rtl; overflow-x: hidden; }
+body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--black); direction: rtl; overflow-x: hidden; background: #111; }
 
 /* ── 12-COL GRID UTILITY ── */
 .grid-12 {
@@ -161,10 +161,11 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: relative;
   /* Holographic foil as text fill — moves with mouse */
   background-image: url('/media/holographic-foil.jpg');
-  background-size: 200% 200%;
+  background-size: 150% 150%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  filter: contrast(1.6) saturate(1.8) brightness(0.85);
   transition: background-position 0.3s ease-out;
 }
 .hero-body {
@@ -480,6 +481,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 /* ── CONTACT ── */
 .contact-section {
   padding: 5rem 0;
+  background: #fff;
 }
 .contact-inner {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
