@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useRef } from "react";
 
 /* ═══════════════════════════════════════════════════════════════
    AMIT BRIN — ONE-PAGER
@@ -112,50 +112,20 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   align-items: center;
 }
 
-/* CMYK Portrait — left 6 cols */
+/* Unicorn Studio 3D portrait — left 6 cols */
 .hero-portrait-col {
   grid-column: 7 / 13;
   position: relative;
   height: 75vh;
   display: flex; align-items: center; justify-content: center;
-  cursor: crosshair;
 }
-.cmyk-stack {
-  position: relative; width: 100%; height: 100%;
+.unicorn-embed {
+  width: 100%; height: 100%;
+  position: relative;
 }
-.cmyk-stack img {
-  position: absolute; top: 50%; left: 50%;
-  transform: translate(-50%, -50%);
-  max-height: 90%; max-width: 90%;
-  object-fit: contain;
-  transition: transform 0.15s ease-out;
-  will-change: transform;
+.unicorn-embed canvas {
+  width: 100% !important; height: 100% !important;
 }
-.cmyk-stack img:nth-child(1) { filter: grayscale(100%); z-index: 4; }
-.cmyk-stack img:nth-child(2) {
-  mix-blend-mode: multiply; z-index: 3;
-  filter: hue-rotate(190deg) saturate(2) brightness(1.1);
-}
-.cmyk-stack img:nth-child(3) {
-  mix-blend-mode: screen; z-index: 2;
-  filter: hue-rotate(50deg) saturate(2) brightness(1.1);
-}
-.cmyk-stack img:nth-child(4) {
-  mix-blend-mode: lighten; z-index: 1;
-  filter: hue-rotate(300deg) saturate(1.8) brightness(1.1);
-}
-/* CMYK color bar on edge */
-.cmyk-bar {
-  position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-  width: 10px; height: 35%; z-index: 5;
-  display: flex; flex-direction: column;
-}
-.cmyk-bar span { flex: 1; }
-.cmyk-bar span:nth-child(1) { background: #00AEEF; }
-.cmyk-bar span:nth-child(2) { background: #EC008C; }
-.cmyk-bar span:nth-child(3) { background: #FFF200; }
-.cmyk-bar span:nth-child(4) { background: #231F20; }
-.cmyk-bar span:nth-child(5) { background: #BABEC8; }
 
 /* Hero text — right 5 cols (RTL = visually right) */
 .hero-text-col {
@@ -621,8 +591,6 @@ export default function SitePage() {
   const [navHidden, setNavHidden] = useState(false);
   const [rotatingIndex, setRotatingIndex] = useState(0);
   const lastScrollY = useRef(0);
-  const cmykRef = useRef<HTMLDivElement>(null);
-
   // Nav: hide on scroll down, show on scroll up
   useEffect(() => {
     const handleScroll = () => {
@@ -643,26 +611,24 @@ export default function SitePage() {
     return () => clearInterval(interval);
   }, []);
 
-  // CMYK interactive mouse effect
-  const handleCmykMouse = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
-    const el = cmykRef.current;
-    if (!el) return;
-    const rect = el.getBoundingClientRect();
-    const cx = (e.clientX - rect.left) / rect.width - 0.5;  // -0.5 to 0.5
-    const cy = (e.clientY - rect.top) / rect.height - 0.5;
-    const imgs = el.querySelectorAll('img');
-    if (imgs[1]) (imgs[1] as HTMLElement).style.transform = `translate(calc(-50% + ${cx * 8}px), calc(-50% + ${cy * -4}px))`;
-    if (imgs[2]) (imgs[2] as HTMLElement).style.transform = `translate(calc(-50% + ${cx * -10}px), calc(-50% + ${cy * 6}px))`;
-    if (imgs[3]) (imgs[3] as HTMLElement).style.transform = `translate(calc(-50% + ${cx * 5}px), calc(-50% + ${cy * 8}px))`;
-  }, []);
-
-  const handleCmykLeave = useCallback(() => {
-    const el = cmykRef.current;
-    if (!el) return;
-    const imgs = el.querySelectorAll('img');
-    imgs.forEach((img, i) => {
-      if (i > 0) (img as HTMLElement).style.transform = 'translate(-50%, -50%)';
-    });
+  // Load Unicorn Studio SDK and init scene
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = '/unicorn/assets/unicornStudio.umd.js';
+    script.async = true;
+    script.onload = () => {
+      if ((window as any).UnicornStudio) {
+        (window as any).UnicornStudio.init();
+      }
+    };
+    document.body.appendChild(script);
+    return () => {
+      // Cleanup: destroy Unicorn instances if available
+      if ((window as any).UnicornStudio?.destroy) {
+        (window as any).UnicornStudio.destroy();
+      }
+      document.body.removeChild(script);
+    };
   }, []);
 
   return (
@@ -697,21 +663,12 @@ export default function SitePage() {
               </p>
             </div>
 
-            {/* CMYK Portrait — left side (RTL) */}
-            <div
-              className="hero-portrait-col"
-              onMouseMove={handleCmykMouse}
-              onMouseLeave={handleCmykLeave}
-            >
-              <div className="cmyk-stack" ref={cmykRef}>
-                <img src="/media/headshot.png" alt="עמית ברין" />
-                <img src="/media/headshot.png" alt="" aria-hidden="true" />
-                <img src="/media/headshot.png" alt="" aria-hidden="true" />
-                <img src="/media/headshot.png" alt="" aria-hidden="true" />
-              </div>
-              <div className="cmyk-bar">
-                <span /><span /><span /><span /><span />
-              </div>
+            {/* Unicorn Studio 3D Portrait */}
+            <div className="hero-portrait-col">
+              <div
+                className="unicorn-embed"
+                data-us-project-src="/unicorn/assets/scene.json"
+              />
             </div>
           </div>
         </div>
