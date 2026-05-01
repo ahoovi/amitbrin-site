@@ -1,13 +1,9 @@
-import Link from "next/link";
+// Link removed — /site under construction
 
 export default function Home() {
   return (
     <>
-      {/* Prefetch media for /site so transition feels instant */}
-      <link rel="prefetch" href="/media/sailing4k2_1_1.mp4" as="video" />
-      <link rel="prefetch" href="/media/bot-whisperer.mp4" as="video" />
-      <link rel="preload" href="/media/echo_v_200.png" as="image" />
-      <link rel="preload" href="/media/headshot.png" as="image" />
+      {/* /site is under construction — no prefetch needed */}
 
       <div className="max-w-[700px] mx-auto px-5 py-10 text-right" dir="rtl">
 
@@ -60,7 +56,7 @@ export default function Home() {
       <p className="mb-5">📚 (עם הפקות דפוס מורכבות וחדשניות!)</p>
 
       <p className="mb-5">
-        ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><Link href="/site" className="text-blue-700 underline hover:no-underline" prefetch={true}>כי האתר המלא הוא מעדן אמיתי</Link>!</strong>
+        ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><a href="mailto:ahoovi@gmail.com" className="text-blue-700 underline hover:no-underline">כי האתר המלא בשיפוצים כרגע — אבל אני אשמח לשמוע איך אפשר לעזור לך ולהציג לך פתרונות מקוריים</a>!</strong>
       </p>
 
       <div className="mt-10 pt-5">
