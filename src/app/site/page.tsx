@@ -173,7 +173,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 /* 3D Glass Cross — large mask for raw portrait, RGB channel split */
 .glass-cross-3d {
   position: absolute; z-index: 5;
-  left: 28%; top: 43%;
+  left: 33.3%; top: 46.2%;
   width: clamp(220px, 28vw, 380px); height: clamp(220px, 28vw, 380px);
   transform: translate(-50%, -50%);
   pointer-events: none;
@@ -705,61 +705,80 @@ export default function SitePage() {
   const sceneRef = useRef<HTMLDivElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
   const halftoneCanvasRef = useRef<HTMLCanvasElement>(null);
-  const cmykDotsRef = useRef<{x:number, y:number, c:number, m:number, yy:number, k:number}[]>([]);
-  const portraitWRef = useRef(0);
+  const cmykBufRef = useRef<Float32Array | null>(null);
+  const cmykDimsRef = useRef({ w: 0, h: 0, cw: 0, ch: 0, step: 4 });
   const crossRRef = useRef<HTMLDivElement>(null);
   const crossGRef = useRef<HTMLDivElement>(null);
   const crossBRef = useRef<HTMLDivElement>(null);
 
-  // ── CMYK halftone draw function ──
+  // ── CMYK halftone draw — rotated grids per channel (Unicorn-accurate) ──
   const drawHalftone = useCallback((canvas: HTMLCanvasElement, scrollFactor: number) => {
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    const buf = cmykBufRef.current;
+    if (!ctx || !buf) return;
     const dpr = window.devicePixelRatio || 1;
-    const W = canvas.width / dpr;
-    const H = canvas.height / dpr;
-    const dots = cmykDotsRef.current;
-    const pW = portraitWRef.current;
-    if (dots.length === 0 || pW === 0) return;
+    const { cw: W, ch: H, w: bufW, h: bufH, step: SS } = cmykDimsRef.current;
+    if (bufW === 0) return;
 
-    const GRID = 8;
-    // Dots GROW as user scrolls down
-    const baseR = (GRID * 0.42) * (1 + scrollFactor * 2.8);
-    // Channel offsets increase with scroll (split effect)
-    const splitPx = scrollFactor * GRID * 1.4;
+    // Cell size: starts small (many dots), GROWS on scroll (fewer, larger dots)
+    const baseCell = 8;
+    const cellSize = baseCell * (1 + scrollFactor * 3.2);
 
-    ctx.clearRect(0, 0, W * dpr, H * dpr);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
     ctx.save();
     ctx.scale(dpr, dpr);
 
+    // CMYK channels with authentic printing angles (from Unicorn shader)
     const channels = [
-      { key: 'c',  rgb: '0,174,239',  a: 0.65, ox: -splitPx * 0.7, oy: splitPx * 0.5 },
-      { key: 'm',  rgb: '236,0,140',  a: 0.6,  ox: splitPx * 0.8,  oy: -splitPx * 0.35 },
-      { key: 'yy', rgb: '255,242,0',  a: 0.5,  ox: splitPx * 0.35, oy: splitPx * 0.9 },
-      { key: 'k',  rgb: '35,31,32',   a: 0.72, ox: 0,              oy: 0 },
+      { angle: 15,  rgb: '0,174,239',  a: 0.65, idx: 0 },
+      { angle: 75,  rgb: '236,0,140',  a: 0.6,  idx: 1 },
+      { angle: 0,   rgb: '255,242,0',  a: 0.5,  idx: 2 },
+      { angle: 45,  rgb: '35,31,32',   a: 0.72, idx: 3 },
     ];
 
     for (const ch of channels) {
+      const rad = ch.angle * Math.PI / 180;
+      const cosA = Math.cos(rad);
+      const sinA = Math.sin(rad);
+
+      // Find bounds in rotated space to cover entire canvas
+      const corners = [[0,0],[W,0],[0,H],[W,H]];
+      let minRX = Infinity, maxRX = -Infinity, minRY = Infinity, maxRY = -Infinity;
+      for (const [cx, cy] of corners) {
+        const rx = cx * cosA + cy * sinA;
+        const ry = -cx * sinA + cy * cosA;
+        if (rx < minRX) minRX = rx; if (rx > maxRX) maxRX = rx;
+        if (ry < minRY) minRY = ry; if (ry > maxRY) maxRY = ry;
+      }
+
+      const iMin = Math.floor(minRX / cellSize);
+      const iMax = Math.ceil(maxRX / cellSize);
+      const jMin = Math.floor(minRY / cellSize);
+      const jMax = Math.ceil(maxRY / cellSize);
+
       ctx.beginPath();
-      for (let i = 0; i < dots.length; i++) {
-        const d = dots[i];
-        const intensity = (d as any)[ch.key] as number;
-        if (intensity < 0.03) continue;
+      for (let gi = iMin; gi <= iMax; gi++) {
+        for (let gj = jMin; gj <= jMax; gj++) {
+          // Screen position of this rotated grid point
+          const sx = gi * cellSize * cosA - gj * cellSize * sinA;
+          const sy = gi * cellSize * sinA + gj * cellSize * cosA;
+          if (sx < -cellSize || sx > W + cellSize || sy < -cellSize || sy > H + cellSize) continue;
 
-        // Fade toward right edge
-        const xRatio = d.x / pW;
-        let fade: number;
-        if (xRatio < 0.55) fade = 1;
-        else if (xRatio < 1.0) fade = 1 - (xRatio - 0.55) / 0.45;
-        else fade = 0;
+          // Look up CMYK from pre-computed buffer
+          const bx = Math.round(sx / SS);
+          const by = Math.round(sy / SS);
+          if (bx < 0 || bx >= bufW || by < 0 || by >= bufH) continue;
 
-        const r = baseR * intensity * fade;
-        if (r < 0.25) continue;
+          const intensity = buf[(by * bufW + bx) * 4 + ch.idx];
+          if (intensity < 0.03) continue;
 
-        const cx = d.x + ch.ox;
-        const cy = d.y + ch.oy;
-        ctx.moveTo(cx + r, cy);
-        ctx.arc(cx, cy, r, 0, Math.PI * 2);
+          // sqrt(intensity) for dot radius — matches Unicorn's sqrt(col) in shader
+          const r = Math.sqrt(intensity) * cellSize * 0.42;
+          if (r < 0.2) continue;
+
+          ctx.moveTo(sx + r, sy);
+          ctx.arc(sx, sy, r, 0, Math.PI * 2);
+        }
       }
       ctx.fillStyle = `rgba(${ch.rgb},${ch.a})`;
       ctx.fill();
@@ -767,7 +786,7 @@ export default function SitePage() {
     ctx.restore();
   }, []);
 
-  // ── Load portrait → decompose to CMYK → draw initial halftone ──
+  // ── Load portrait → build CMYK buffer (full canvas) → draw halftone ──
   useEffect(() => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -785,15 +804,14 @@ export default function SitePage() {
       canvas.style.width = W + 'px';
       canvas.style.height = H + 'px';
 
-      const pW = Math.round(W * 0.55);
-      portraitWRef.current = pW;
-
-      // Offscreen: draw portrait for pixel sampling
+      // Portrait covers FULL canvas (fit-to-canvas from Unicorn JSON)
       const off = document.createElement('canvas');
-      off.width = pW; off.height = H;
+      off.width = W; off.height = H;
       const octx = off.getContext('2d')!;
+      // Slight exposure + saturation boost (from Unicorn: exposure +0.05, saturation 1.09)
+      octx.filter = 'brightness(1.05) saturate(1.09)';
       const imgR = img.width / img.height;
-      const areaR = pW / H;
+      const areaR = W / H;
       let sx: number, sy: number, sw: number, sh: number;
       if (imgR > areaR) {
         sh = img.height; sw = sh * areaR;
@@ -802,48 +820,51 @@ export default function SitePage() {
         sw = img.width; sh = sw / areaR;
         sx = 0; sy = 0;
       }
-      octx.drawImage(img, sx, sy, sw, sh, 0, 0, pW, H);
-      const idata = octx.getImageData(0, 0, pW, H);
+      octx.drawImage(img, sx, sy, sw, sh, 0, 0, W, H);
+      octx.filter = 'none';
+      const idata = octx.getImageData(0, 0, W, H);
       const px = idata.data;
 
-      // Sample on grid, convert RGB→CMYK
-      const GRID = 8;
-      const dots: typeof cmykDotsRef.current = [];
-      for (let gy = 0; gy < H; gy += GRID) {
-        for (let gx = 0; gx < pW; gx += GRID) {
-          const i = (gy * pW + gx) * 4;
-          const r = px[i] / 255, g = px[i+1] / 255, b = px[i+2] / 255;
+      // Build CMYK lookup buffer at 1:4 resolution
+      const SS = 4;
+      const bufW = Math.ceil(W / SS);
+      const bufH = Math.ceil(H / SS);
+      const buf = new Float32Array(bufW * bufH * 4);
+
+      for (let by = 0; by < bufH; by++) {
+        for (let bx = 0; bx < bufW; bx++) {
+          const pi = (by * SS * W + bx * SS) * 4;
+          const r = px[pi] / 255, g = px[pi + 1] / 255, b = px[pi + 2] / 255;
           const kk = 1 - Math.max(r, g, b);
           const div = kk < 1 ? 1 / (1 - kk) : 0;
-          dots.push({
-            x: gx, y: gy,
-            c: (1 - r - kk) * div,
-            m: (1 - g - kk) * div,
-            yy: (1 - b - kk) * div,
-            k: kk,
-          });
+          const bi = (by * bufW + bx) * 4;
+          buf[bi]     = (1 - r - kk) * div; // C
+          buf[bi + 1] = (1 - g - kk) * div; // M
+          buf[bi + 2] = (1 - b - kk) * div; // Y
+          buf[bi + 3] = kk;                 // K
         }
       }
-      cmykDotsRef.current = dots;
+      cmykBufRef.current = buf;
+      cmykDimsRef.current = { w: bufW, h: bufH, cw: W, ch: H, step: SS };
       drawHalftone(canvas, 0);
 
-      // ── Position cross channels to align with portrait ──
+      // ── Position cross channels — portrait covers full canvas ──
       const crossEl = document.querySelector('.glass-cross-3d') as HTMLElement;
       if (crossEl) {
         const cW = crossEl.clientWidth;
         const cH = crossEl.clientHeight;
-        const cLeft = W * 0.28 - cW / 2;
-        const cTop = H * 0.43 - cH / 2;
-        const pad = 20; // matches CSS inset: -20px
+        // Cross position from Unicorn JSON: (0.333, 0.462)
+        const cLeft = W * 0.333 - cW / 2;
+        const cTop = H * 0.462 - cH / 2;
+        const pad = 20;
 
-        // Background must cover same area as halftone portrait
-        // Image scaled to fill pW × H with cover-fit
+        // Portrait covers full canvas — compute background to match
         let bsW: number, bsH: number, imgOffX: number;
         if (imgR > areaR) {
           bsH = H; bsW = H * imgR;
-          imgOffX = (pW - bsW) / 2;
+          imgOffX = (W - bsW) / 2;
         } else {
-          bsW = pW; bsH = pW / imgR;
+          bsW = W; bsH = W / imgR;
           imgOffX = 0;
         }
         const bgX = imgOffX - cLeft + pad;
@@ -897,7 +918,7 @@ export default function SitePage() {
 
         // Redraw halftone only when scroll changes enough
         const sf = Math.round(scrollProgress * 100) / 100;
-        if (sf !== lastSF && canvas && cmykDotsRef.current.length > 0) {
+        if (sf !== lastSF && canvas && cmykBufRef.current) {
           lastSF = sf;
           drawHalftone(canvas, scrollProgress);
         }
@@ -924,8 +945,9 @@ export default function SitePage() {
     }
 
     // Glass cross RGB split — offset channels based on mouse distance from cross center
-    const dx = (nx - 0.28) * 14;
-    const dy = (ny - 0.43) * 14;
+    // Cross center from Unicorn JSON: (0.333, 0.462), trackMouse: 0.89
+    const dx = (nx - 0.333) * 16;
+    const dy = (ny - 0.462) * 16;
     if (crossRRef.current) crossRRef.current.style.transform = `translate(${-dx}px, ${dy}px)`;
     if (crossGRef.current) crossGRef.current.style.transform = 'translate(0,0)';
     if (crossBRef.current) crossBRef.current.style.transform = `translate(${dx}px, ${-dy}px)`;
