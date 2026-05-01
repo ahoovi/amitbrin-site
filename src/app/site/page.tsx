@@ -116,31 +116,30 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 /* CMYK halftone dot overlays — scroll-driven scale */
 .halftone-dot {
-  position: absolute; top: -25%; left: -25%;
-  width: 150%; height: 150%;
+  position: absolute; inset: 0;
   mix-blend-mode: multiply; pointer-events: none;
   will-change: background-size;
   transition: background-size 0.2s ease-out;
 }
 .halftone-dot.ht-c {
-  background: radial-gradient(circle, rgba(0,174,239,0.7) 33%, transparent 33%);
-  background-size: var(--dot, 18px) var(--dot, 18px);
-  transform: rotate(15deg);
+  background: radial-gradient(circle, rgba(0,174,239,0.6) 32%, transparent 32%);
+  background-size: var(--dot, 16px) var(--dot, 16px);
+  background-position: 0 0;
 }
 .halftone-dot.ht-m {
-  background: radial-gradient(circle, rgba(236,0,140,0.7) 33%, transparent 33%);
-  background-size: var(--dot, 18px) var(--dot, 18px);
-  transform: rotate(75deg);
+  background: radial-gradient(circle, rgba(236,0,140,0.6) 32%, transparent 32%);
+  background-size: var(--dot, 16px) var(--dot, 16px);
+  background-position: 5px 3px;
 }
 .halftone-dot.ht-y {
-  background: radial-gradient(circle, rgba(255,242,0,0.5) 33%, transparent 33%);
-  background-size: var(--dot, 18px) var(--dot, 18px);
-  transform: rotate(0deg);
+  background: radial-gradient(circle, rgba(255,242,0,0.45) 32%, transparent 32%);
+  background-size: var(--dot, 16px) var(--dot, 16px);
+  background-position: 2px 7px;
 }
 .halftone-dot.ht-k {
-  background: radial-gradient(circle, rgba(35,31,32,0.75) 26%, transparent 26%);
-  background-size: var(--dot, 18px) var(--dot, 18px);
-  transform: rotate(45deg);
+  background: radial-gradient(circle, rgba(35,31,32,0.65) 26%, transparent 26%);
+  background-size: var(--dot, 16px) var(--dot, 16px);
+  background-position: 8px 4px;
 }
 /* Print marks — multiply, pinned to corners/edges */
 .print-mark {
