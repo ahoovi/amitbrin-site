@@ -101,45 +101,12 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   width: 100%; height: 100%;
   object-fit: cover;
 }
-/* Portrait — multiply, left-aligned, top+bottom pinned */
-.hero-portrait {
-  position: absolute; top: 0; bottom: 0; left: 0;
-  width: 55%; z-index: 1;
-  mix-blend-mode: multiply;
-  overflow: hidden;
-}
-.hero-portrait img {
+/* CMYK Halftone Canvas — decomposes portrait into actual CMYK dots */
+.halftone-canvas {
+  position: absolute; inset: 0; z-index: 1;
   width: 100%; height: 100%;
-  object-fit: cover; object-position: center top;
-  will-change: transform;
-  transition: transform 0.15s ease-out;
-}
-/* CMYK halftone dot overlays — scroll-driven scale */
-.halftone-dot {
-  position: absolute; inset: 0;
-  mix-blend-mode: multiply; pointer-events: none;
-  will-change: background-size;
-  transition: background-size 0.2s ease-out;
-}
-.halftone-dot.ht-c {
-  background: radial-gradient(circle, rgba(0,174,239,0.6) 32%, transparent 32%);
-  background-size: var(--dot, 16px) var(--dot, 16px);
-  background-position: 0 0;
-}
-.halftone-dot.ht-m {
-  background: radial-gradient(circle, rgba(236,0,140,0.6) 32%, transparent 32%);
-  background-size: var(--dot, 16px) var(--dot, 16px);
-  background-position: 5px 3px;
-}
-.halftone-dot.ht-y {
-  background: radial-gradient(circle, rgba(255,242,0,0.45) 32%, transparent 32%);
-  background-size: var(--dot, 16px) var(--dot, 16px);
-  background-position: 2px 7px;
-}
-.halftone-dot.ht-k {
-  background: radial-gradient(circle, rgba(35,31,32,0.65) 26%, transparent 26%);
-  background-size: var(--dot, 16px) var(--dot, 16px);
-  background-position: 8px 4px;
+  mix-blend-mode: multiply;
+  pointer-events: none;
 }
 /* Print marks — multiply, pinned to corners/edges */
 .print-mark {
@@ -186,20 +153,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   line-height: 92%; letter-spacing: 0.02px;
   text-align: right;
   position: relative;
-  /* Holographic foil as text fill — moves with mouse + scroll */
-  background-image:
-    linear-gradient(
-      135deg,
-      #c050e0 0%, #3090e8 12%, #20c8a0 22%,
-      #e8c020 33%, #e87030 42%, #d040a0 52%,
-      #4080f0 62%, #30c898 72%, #e8b830 82%,
-      #e05080 92%, #8050e8 100%
-    );
-  background-size: 200% 200%;
+  /* Holographic foil — real image, enhanced via JS canvas */
+  background-image: url('/media/holographic-foil.jpg');
+  background-size: 350% 350%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   transition: background-position 0.3s ease-out;
+  will-change: background-position, transform;
+  transform: translateZ(0);
 }
 .hero-body {
   font-family: 'Noto Sans Hebrew', sans-serif; font-size: clamp(0.85rem, 1vw, 1.05rem); font-weight: 500;
@@ -208,55 +170,68 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   max-width: 470px;
 }
 
-/* 3D Glass Cross — auto-rotates, mouse-tracked, refraction + RGB split */
+/* 3D Glass Cross — large mask for raw portrait, RGB channel split */
 .glass-cross-3d {
   position: absolute; z-index: 5;
-  left: 33%; top: 46%;
-  width: clamp(140px, 18vw, 220px); height: clamp(140px, 18vw, 220px);
+  left: 28%; top: 43%;
+  width: clamp(220px, 28vw, 380px); height: clamp(220px, 28vw, 380px);
   transform: translate(-50%, -50%);
-  perspective: 600px;
   pointer-events: none;
 }
-.cross-inner {
-  width: 100%; height: 100%;
-  transform-style: preserve-3d;
-  will-change: transform;
-  animation: crossSpin 20s linear infinite;
-}
-.cross-face {
+.cross-content {
   position: absolute; inset: 0;
   clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
     65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
-  backdrop-filter: blur(3px) brightness(1.12) contrast(1.08) saturate(1.25);
-  -webkit-backdrop-filter: blur(3px) brightness(1.12) contrast(1.08) saturate(1.25);
-  border: 1px solid rgba(255,255,255,0.12);
+  background: #000;
+  overflow: hidden;
 }
-.cross-face.front {
-  transform: translateZ(22px);
-  background: radial-gradient(circle at 38% 35%,
-    rgba(255,255,255,0.28) 0%, rgba(200,220,255,0.1) 40%, transparent 70%);
-  box-shadow: inset 0 0 24px rgba(255,255,255,0.1);
+/* RGB channels — each shows portrait through one color, screen-blended */
+.cross-channel {
+  position: absolute;
+  inset: -20px;
+  background-repeat: no-repeat;
+  mix-blend-mode: screen;
+  will-change: transform;
+  transition: transform 0.12s ease-out;
 }
-.cross-face.back {
-  transform: translateZ(-22px) rotateY(180deg);
-  background: radial-gradient(circle at 62% 65%,
-    rgba(255,255,255,0.15) 0%, transparent 50%);
+.cross-channel.ch-r {
+  background-color: #ff0000;
+  background-blend-mode: multiply;
 }
-.cross-face.front::before, .cross-face.front::after {
-  content: ''; position: absolute; inset: -3px;
-  clip-path: inherit; pointer-events: none;
+.cross-channel.ch-g {
+  background-color: #00ff00;
+  background-blend-mode: multiply;
 }
-.cross-face.front::before {
-  background: rgba(255,0,80,0.07);
-  transform: translate(-4px, 2px);
+.cross-channel.ch-b {
+  background-color: #0000ff;
+  background-blend-mode: multiply;
 }
-.cross-face.front::after {
-  background: rgba(0,180,255,0.07);
-  transform: translate(4px, -2px);
+/* Glass overlay — floating shine + reflections */
+.cross-glass-shine {
+  position: absolute; inset: 0;
+  clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
+    65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+  background: radial-gradient(ellipse at 35% 30%,
+    rgba(255,255,255,0.4) 0%,
+    rgba(255,255,255,0.08) 30%,
+    transparent 55%);
+  box-shadow: inset 0 0 40px rgba(255,255,255,0.08),
+              inset 0 1px 0 rgba(255,255,255,0.3);
+  border: 1px solid rgba(255,255,255,0.2);
+  pointer-events: none;
+  will-change: transform;
+  animation: glassFloat 18s ease-in-out infinite;
 }
-@keyframes crossSpin {
-  0%   { transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg); }
-  100% { transform: rotateX(72deg) rotateY(36deg) rotateZ(360deg); }
+@keyframes glassFloat {
+  0%, 100% { transform: perspective(600px) rotateX(0deg) rotateY(0deg); }
+  25% { transform: perspective(600px) rotateX(8deg) rotateY(-6deg); }
+  50% { transform: perspective(600px) rotateX(-4deg) rotateY(8deg); }
+  75% { transform: perspective(600px) rotateX(6deg) rotateY(-8deg); }
+}
+/* Font stability — prevent glitch on video loop */
+.sailing-text h1, .hero-title, .portrait-text-col .big-role,
+.newsletter-text h2, .ws-header h2, .footer-cta h2 {
+  backface-visibility: hidden;
 }
 
 /* ═══════════════════════════════════════════
@@ -659,7 +634,6 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   }
   .nav-toggle { display: block; }
 
-  .hero-portrait { width: 100%; }
   .hero-text-frame {
     position: relative; top: auto; right: auto; transform: none;
     width: 100%; padding: 2rem var(--grid-pad);
@@ -670,7 +644,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   .hero-wrapper { height: auto; }
   .cmyk-strip { display: none; }
   .glass-cross-3d { display: none; }
-  .halftone-dot { display: none; }
+  .halftone-canvas { display: none; }
 
   .sailing-content { grid-template-columns: 1fr; }
   .sailing-text { grid-column: 1 / -1; padding: 2rem 0; }
@@ -729,50 +703,219 @@ export default function SitePage() {
 
   // Refs for hero interactions
   const sceneRef = useRef<HTMLDivElement>(null);
-  const crossInnerRef = useRef<HTMLDivElement>(null);
-  const portraitRef = useRef<HTMLImageElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const halftoneCanvasRef = useRef<HTMLCanvasElement>(null);
+  const cmykDotsRef = useRef<{x:number, y:number, c:number, m:number, yy:number, k:number}[]>([]);
+  const portraitWRef = useRef(0);
+  const crossRRef = useRef<HTMLDivElement>(null);
+  const crossGRef = useRef<HTMLDivElement>(null);
+  const crossBRef = useRef<HTMLDivElement>(null);
 
-  // Parallax scroll on portrait + foil shift + halftone dot scale
-  useEffect(() => {
-    const handleScrollParallax = () => {
-      const scene = sceneRef.current;
-      const portrait = portraitRef.current;
-      const title = titleRef.current;
-      if (!scene || !portrait) return;
-      const rect = scene.getBoundingClientRect();
-      const vh = window.innerHeight;
-      const centerOffset = (rect.top + rect.height / 2 - vh / 2) / vh;
-      const scale = 1 + Math.abs(centerOffset) * 0.08;
-      const tx = centerOffset * 15;
-      const ty = centerOffset * 8;
-      portrait.style.transform = `scale(${scale}) translate(${tx}px, ${ty}px)`;
-      // Shift foil on scroll
-      if (title) {
-        const scrollPct = Math.min(1, Math.max(0, -rect.top / (rect.height || 1)));
-        title.style.setProperty('--foil-y', `${30 + scrollPct * 40}%`);
+  // ── CMYK halftone draw function ──
+  const drawHalftone = useCallback((canvas: HTMLCanvasElement, scrollFactor: number) => {
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+    const dpr = window.devicePixelRatio || 1;
+    const W = canvas.width / dpr;
+    const H = canvas.height / dpr;
+    const dots = cmykDotsRef.current;
+    const pW = portraitWRef.current;
+    if (dots.length === 0 || pW === 0) return;
+
+    const GRID = 8;
+    // Dots GROW as user scrolls down
+    const baseR = (GRID * 0.42) * (1 + scrollFactor * 2.8);
+    // Channel offsets increase with scroll (split effect)
+    const splitPx = scrollFactor * GRID * 1.4;
+
+    ctx.clearRect(0, 0, W * dpr, H * dpr);
+    ctx.save();
+    ctx.scale(dpr, dpr);
+
+    const channels = [
+      { key: 'c',  rgb: '0,174,239',  a: 0.65, ox: -splitPx * 0.7, oy: splitPx * 0.5 },
+      { key: 'm',  rgb: '236,0,140',  a: 0.6,  ox: splitPx * 0.8,  oy: -splitPx * 0.35 },
+      { key: 'yy', rgb: '255,242,0',  a: 0.5,  ox: splitPx * 0.35, oy: splitPx * 0.9 },
+      { key: 'k',  rgb: '35,31,32',   a: 0.72, ox: 0,              oy: 0 },
+    ];
+
+    for (const ch of channels) {
+      ctx.beginPath();
+      for (let i = 0; i < dots.length; i++) {
+        const d = dots[i];
+        const intensity = (d as any)[ch.key] as number;
+        if (intensity < 0.03) continue;
+
+        // Fade toward right edge
+        const xRatio = d.x / pW;
+        let fade: number;
+        if (xRatio < 0.55) fade = 1;
+        else if (xRatio < 1.0) fade = 1 - (xRatio - 0.55) / 0.45;
+        else fade = 0;
+
+        const r = baseR * intensity * fade;
+        if (r < 0.25) continue;
+
+        const cx = d.x + ch.ox;
+        const cy = d.y + ch.oy;
+        ctx.moveTo(cx + r, cy);
+        ctx.arc(cx, cy, r, 0, Math.PI * 2);
       }
-      // Halftone dot scale: big (18px) when hero centered, small (3px) when scrolled away
-      const absCO = Math.abs(centerOffset);
-      const dotSize = Math.max(3, Math.round(18 - absCO * 22));
-      portrait.parentElement?.style.setProperty('--dot', dotSize + 'px');
-    };
-    window.addEventListener('scroll', handleScrollParallax, { passive: true });
-    handleScrollParallax();
-    return () => window.removeEventListener('scroll', handleScrollParallax);
+      ctx.fillStyle = `rgba(${ch.rgb},${ch.a})`;
+      ctx.fill();
+    }
+    ctx.restore();
   }, []);
 
-  // Mouse interaction: holographic foil + 3D cross tilt
+  // ── Load portrait → decompose to CMYK → draw initial halftone ──
+  useEffect(() => {
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.src = '/unicorn/assets/images/portrait-NON-registration-1440x900.jpg';
+    img.onload = () => {
+      const canvas = halftoneCanvasRef.current;
+      const paper = sceneRef.current;
+      if (!canvas || !paper) return;
+
+      const dpr = window.devicePixelRatio || 1;
+      const W = paper.clientWidth;
+      const H = paper.clientHeight;
+      canvas.width = W * dpr;
+      canvas.height = H * dpr;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+
+      const pW = Math.round(W * 0.55);
+      portraitWRef.current = pW;
+
+      // Offscreen: draw portrait for pixel sampling
+      const off = document.createElement('canvas');
+      off.width = pW; off.height = H;
+      const octx = off.getContext('2d')!;
+      const imgR = img.width / img.height;
+      const areaR = pW / H;
+      let sx: number, sy: number, sw: number, sh: number;
+      if (imgR > areaR) {
+        sh = img.height; sw = sh * areaR;
+        sx = (img.width - sw) / 2; sy = 0;
+      } else {
+        sw = img.width; sh = sw / areaR;
+        sx = 0; sy = 0;
+      }
+      octx.drawImage(img, sx, sy, sw, sh, 0, 0, pW, H);
+      const idata = octx.getImageData(0, 0, pW, H);
+      const px = idata.data;
+
+      // Sample on grid, convert RGB→CMYK
+      const GRID = 8;
+      const dots: typeof cmykDotsRef.current = [];
+      for (let gy = 0; gy < H; gy += GRID) {
+        for (let gx = 0; gx < pW; gx += GRID) {
+          const i = (gy * pW + gx) * 4;
+          const r = px[i] / 255, g = px[i+1] / 255, b = px[i+2] / 255;
+          const kk = 1 - Math.max(r, g, b);
+          const div = kk < 1 ? 1 / (1 - kk) : 0;
+          dots.push({
+            x: gx, y: gy,
+            c: (1 - r - kk) * div,
+            m: (1 - g - kk) * div,
+            yy: (1 - b - kk) * div,
+            k: kk,
+          });
+        }
+      }
+      cmykDotsRef.current = dots;
+      drawHalftone(canvas, 0);
+
+      // ── Position cross channels to align with portrait ──
+      const crossEl = document.querySelector('.glass-cross-3d') as HTMLElement;
+      if (crossEl) {
+        const cW = crossEl.clientWidth;
+        const cH = crossEl.clientHeight;
+        const cLeft = W * 0.28 - cW / 2;
+        const cTop = H * 0.43 - cH / 2;
+        const pad = 20; // matches CSS inset: -20px
+
+        // Background must cover same area as halftone portrait
+        // Image scaled to fill pW × H with cover-fit
+        let bsW: number, bsH: number, imgOffX: number;
+        if (imgR > areaR) {
+          bsH = H; bsW = H * imgR;
+          imgOffX = (pW - bsW) / 2;
+        } else {
+          bsW = pW; bsH = pW / imgR;
+          imgOffX = 0;
+        }
+        const bgX = imgOffX - cLeft + pad;
+        const bgY = -cTop + pad;
+
+        for (const ref of [crossRRef, crossGRef, crossBRef]) {
+          if (!ref.current) continue;
+          ref.current.style.backgroundImage = `url('${img.src}')`;
+          ref.current.style.backgroundSize = `${bsW}px ${bsH}px`;
+          ref.current.style.backgroundPosition = `${bgX}px ${bgY}px`;
+        }
+      }
+    };
+  }, [drawHalftone]);
+
+  // ── Enhance foil image for title ──
+  useEffect(() => {
+    const foilImg = new Image();
+    foilImg.src = '/media/holographic-foil.jpg';
+    foilImg.onload = () => {
+      const c = document.createElement('canvas');
+      c.width = foilImg.width * 2;
+      c.height = foilImg.height * 2;
+      const ctx = c.getContext('2d')!;
+      ctx.filter = 'contrast(2.5) saturate(4) brightness(1.5)';
+      ctx.drawImage(foilImg, 0, 0, c.width, c.height);
+      if (titleRef.current) {
+        titleRef.current.style.backgroundImage = `url(${c.toDataURL('image/jpeg', 0.92)})`;
+      }
+    };
+  }, []);
+
+  // ── Scroll: drive halftone canvas + foil shift ──
+  useEffect(() => {
+    let rafId: number;
+    let lastSF = -1;
+    const onScroll = () => {
+      cancelAnimationFrame(rafId);
+      rafId = requestAnimationFrame(() => {
+        const scene = sceneRef.current;
+        const title = titleRef.current;
+        const canvas = halftoneCanvasRef.current;
+        if (!scene) return;
+        const rect = scene.getBoundingClientRect();
+        const scrollProgress = Math.min(1, Math.max(0, -rect.top / (rect.height * 0.8)));
+
+        // Foil Y shift
+        if (title) {
+          title.style.setProperty('--foil-y', `${30 + scrollProgress * 40}%`);
+        }
+
+        // Redraw halftone only when scroll changes enough
+        const sf = Math.round(scrollProgress * 100) / 100;
+        if (sf !== lastSF && canvas && cmykDotsRef.current.length > 0) {
+          lastSF = sf;
+          drawHalftone(canvas, scrollProgress);
+        }
+      });
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+    return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId); };
+  }, [drawHalftone]);
+
+  // ── Mouse: foil shift + cross RGB split ──
   const handleSceneMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const scene = sceneRef.current;
-    const crossEl = crossInnerRef.current;
     const title = titleRef.current;
     if (!scene) return;
     const rect = scene.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const nx = x / rect.width;
-    const ny = y / rect.height;
+    const nx = (e.clientX - rect.left) / rect.width;
+    const ny = (e.clientY - rect.top) / rect.height;
 
     // Holographic foil
     if (title) {
@@ -780,21 +923,17 @@ export default function SitePage() {
       title.style.setProperty('--foil-y', `${ny * 100}%`);
     }
 
-    // 3D cross: pause auto-spin, tilt toward mouse
-    if (crossEl) {
-      const mx = (nx - 0.33) * 60;
-      const my = (ny - 0.46) * 60;
-      crossEl.style.animationPlayState = 'paused';
-      crossEl.style.transform = `rotateX(${-my}deg) rotateY(${mx}deg) rotateZ(${mx * 0.25}deg)`;
-    }
+    // Glass cross RGB split — offset channels based on mouse distance from cross center
+    const dx = (nx - 0.28) * 14;
+    const dy = (ny - 0.43) * 14;
+    if (crossRRef.current) crossRRef.current.style.transform = `translate(${-dx}px, ${dy}px)`;
+    if (crossGRef.current) crossGRef.current.style.transform = 'translate(0,0)';
+    if (crossBRef.current) crossBRef.current.style.transform = `translate(${dx}px, ${-dy}px)`;
   }, []);
 
   const handleSceneMouseLeave = useCallback(() => {
-    const crossEl = crossInnerRef.current;
-    if (crossEl) {
-      crossEl.style.animationPlayState = 'running';
-      crossEl.style.transform = '';
-    }
+    if (crossRRef.current) crossRRef.current.style.transform = 'translate(0,0)';
+    if (crossBRef.current) crossBRef.current.style.transform = 'translate(0,0)';
   }, []);
 
   return (
@@ -825,20 +964,10 @@ export default function SitePage() {
           {/* Layer 1: Paper texture bg */}
           <img className="hero-paper-bg" src="/media/paper-texture.jpg" alt="" aria-hidden="true" />
 
-          {/* Layer 2: Portrait — multiply, parallax + CMYK halftone dots */}
-          <div className="hero-portrait">
-            <img
-              ref={portraitRef}
-              src="/unicorn/assets/images/portrait-NON-registration-1440x900.jpg"
-              alt="עמית ברין"
-            />
-            <div className="halftone-dot ht-c" />
-            <div className="halftone-dot ht-m" />
-            <div className="halftone-dot ht-y" />
-            <div className="halftone-dot ht-k" />
-          </div>
+          {/* Layer 2: Canvas CMYK halftone — decomposes portrait into dots */}
+          <canvas className="halftone-canvas" ref={halftoneCanvasRef} />
 
-          {/* Layer 3: Print marks — corners + edges */}
+          {/* Layer 3: Print marks — CMYK strip */}
           <div className="cmyk-strip">
             <div className="cmyk-strip-block">
               <span className="cmyk-c" /><span className="cmyk-c" style={{opacity:.95}} />
@@ -870,12 +999,14 @@ export default function SitePage() {
             </p>
           </div>
 
-          {/* Layer 5: 3D Glass Cross — auto-rotation + mouse tracking */}
+          {/* Layer 5: Glass Cross — mask for raw portrait, RGB split */}
           <div className="glass-cross-3d">
-            <div className="cross-inner" ref={crossInnerRef}>
-              <div className="cross-face front" />
-              <div className="cross-face back" />
+            <div className="cross-content">
+              <div className="cross-channel ch-r" ref={crossRRef} />
+              <div className="cross-channel ch-g" ref={crossGRef} />
+              <div className="cross-channel ch-b" ref={crossBRef} />
             </div>
+            <div className="cross-glass-shine" />
           </div>
         </div>
       </section>
