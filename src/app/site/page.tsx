@@ -31,7 +31,7 @@ const S = `
   --purple2: #212439;
   --black: #000000;
   --white: #ffffff;
-  --grid-max: 1200px;
+  --grid-max: 1520px;
   --grid-gap: 24px;
   --grid-pad: clamp(1.5rem, 4vw, 3rem);
 }
@@ -84,14 +84,16 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 ═══════════════════════════════════════════ */
 .hero-wrapper {
   position: relative;
-  width: 100%; height: 100vh;
+  width: 100%; min-height: 100vh;
   background: transparent;
   overflow: visible;
   z-index: 2;
+  display: flex; align-items: center; justify-content: center;
 }
 .hero-paper {
   position: relative;
-  width: 100%; height: 90vh;
+  width: 1440px; max-width: 100%;
+  aspect-ratio: 1440 / 900;
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(0,0,0,0.25), 0 4px 36px rgba(0,0,0,0.25);
 }
@@ -108,19 +110,13 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   mix-blend-mode: multiply;
   pointer-events: none;
 }
-/* Print marks — multiply, pinned to corners/edges */
-.print-mark {
-  position: absolute; z-index: 3;
+/* Registration marks overlay — uses actual registration image from Unicorn */
+.registration-marks {
+  position: absolute; inset: 0; z-index: 3;
   mix-blend-mode: multiply; pointer-events: none;
-  opacity: 0.6;
+  opacity: 0.55;
+  background: url('/unicorn/assets/images/registration-1440x900-w10.jpg') center/cover no-repeat;
 }
-.print-mark.corner-tl { top: 0; left: 0; width: 49px; height: 48px; }
-.print-mark.corner-tr { top: 0; right: 0; width: 49px; height: 48px; }
-.print-mark.corner-bl { bottom: 0; left: 0; width: 48px; height: 49px; }
-.print-mark.corner-br { bottom: 0; right: 0; width: 48px; height: 49px; }
-.print-mark.center-left { top: 50%; left: 0; transform: translateY(-50%); width: 34px; height: 34px; }
-.print-mark.center-top { top: 0; left: 50%; transform: translateX(-50%); width: 37px; height: 37px; }
-.print-mark.center-bottom { bottom: 0; left: 50%; transform: translateX(-50%); width: 37px; height: 37px; }
 /* CMYK test strip — right edge, vertically centered */
 .cmyk-strip {
   position: absolute; top: 50%; right: 0; transform: translateY(-50%);
@@ -155,11 +151,11 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: relative;
   /* Holographic foil — real image, enhanced via JS canvas */
   background-image: url('/media/holographic-foil.jpg');
-  background-size: 350% 350%;
+  background-size: 130% 130%;
   background-position: var(--foil-x, 50%) var(--foil-y, 50%);
   background-clip: text; -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  transition: background-position 0.3s ease-out;
+  transition: background-position 0.08s ease-out;
   will-change: background-position, transform;
   transform: translateZ(0);
 }
@@ -175,8 +171,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: absolute; z-index: 5;
   left: 33.3%; top: 46.2%;
   width: clamp(220px, 28vw, 380px); height: clamp(220px, 28vw, 380px);
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) perspective(800px)
+    rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg));
+  transform-style: preserve-3d;
   pointer-events: none;
+  will-change: transform;
+  transition: transform 0.15s ease-out;
+  animation: glassFloat 18s ease-in-out infinite;
+  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.3))
+          drop-shadow(0 2px 8px rgba(0,0,0,0.2));
 }
 .cross-content {
   position: absolute; inset: 0;
@@ -184,6 +187,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
     65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
   background: #000;
   overflow: hidden;
+  transform: translateZ(12px);
 }
 /* RGB channels — each shows portrait through one color, screen-blended */
 .cross-channel {
@@ -206,32 +210,73 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   background-color: #0000ff;
   background-blend-mode: multiply;
 }
-/* Glass overlay — floating shine + reflections */
+/* Glass overlay — multiple layers for depth + refraction illusion */
 .cross-glass-shine {
   position: absolute; inset: 0;
   clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
     65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
-  background: radial-gradient(ellipse at 35% 30%,
-    rgba(255,255,255,0.4) 0%,
-    rgba(255,255,255,0.08) 30%,
-    transparent 55%);
-  box-shadow: inset 0 0 40px rgba(255,255,255,0.08),
-              inset 0 1px 0 rgba(255,255,255,0.3);
-  border: 1px solid rgba(255,255,255,0.2);
+  background:
+    radial-gradient(ellipse at var(--shine-x, 35%) var(--shine-y, 30%),
+      rgba(255,255,255,0.55) 0%,
+      rgba(255,255,255,0.12) 25%,
+      transparent 50%),
+    linear-gradient(135deg,
+      rgba(255,255,255,0.15) 0%,
+      transparent 40%,
+      rgba(255,255,255,0.06) 60%,
+      transparent 100%),
+    linear-gradient(to bottom,
+      rgba(255,255,255,0.2) 0%,
+      transparent 20%,
+      transparent 80%,
+      rgba(255,255,255,0.08) 100%);
+  box-shadow: inset 0 0 60px rgba(255,255,255,0.1),
+              inset 0 1px 0 rgba(255,255,255,0.5),
+              inset 0 -1px 0 rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.3);
   pointer-events: none;
-  will-change: transform;
-  animation: glassFloat 18s ease-in-out infinite;
+  transform: translateZ(16px);
+}
+/* Back face shadow for depth */
+.cross-back-shadow {
+  position: absolute; inset: 4px;
+  clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
+    65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+  background: rgba(0,0,0,0.2);
+  transform: translateZ(-4px);
+  filter: blur(6px);
+  pointer-events: none;
+}
+/* Edge highlight for glass thickness */
+.cross-edge {
+  position: absolute; inset: -1px;
+  clip-path: polygon(35% 0%, 65% 0%, 65% 35%, 100% 35%, 100% 65%,
+    65% 65%, 65% 100%, 35% 100%, 35% 65%, 0% 65%, 0% 35%, 35% 35%);
+  border: 2px solid rgba(255,255,255,0.25);
+  transform: translateZ(6px);
+  pointer-events: none;
 }
 @keyframes glassFloat {
-  0%, 100% { transform: perspective(600px) rotateX(0deg) rotateY(0deg); }
-  25% { transform: perspective(600px) rotateX(8deg) rotateY(-6deg); }
-  50% { transform: perspective(600px) rotateX(-4deg) rotateY(8deg); }
-  75% { transform: perspective(600px) rotateX(6deg) rotateY(-8deg); }
+  0%, 100% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(0px); }
+  33% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(-8px); }
+  66% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(6px); }
 }
-/* Font stability — prevent glitch on video loop */
+/* Font stability — prevent glitch on video loop.
+   Force Leon text onto own compositing layers so video layer
+   changes don't trigger text re-rasterization */
 .sailing-text h1, .hero-title, .portrait-text-col .big-role,
-.newsletter-text h2, .ws-header h2, .footer-cta h2 {
+.portrait-text-col h2, .rotating-line, .portrait-text-col .roles-line,
+.newsletter-text h2, .ws-header h2, .footer-cta h2,
+.closing-inner h2, .contact-text h2, .ws-contact h3 {
   backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  transform: translateZ(0);
+  will-change: contents;
+}
+/* Video elements — preload + stable compositing */
+.sailing-section video, .newsletter-section video, .footer-section video {
+  will-change: transform;
+  transform: translateZ(0);
 }
 
 /* ═══════════════════════════════════════════
@@ -247,7 +292,11 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .sailing-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(0,0,0,.15) 0%, rgba(0,0,0,.4) 50%, rgba(0,0,0,.65) 100%);
+  background: linear-gradient(to right,
+    transparent 0%,
+    rgba(0,0,0,.08) 35%,
+    rgba(0,0,0,.35) 60%,
+    rgba(0,0,0,.6) 100%);
 }
 .sailing-content {
   position: relative; z-index: 2;
@@ -469,6 +518,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .ws-header {
   grid-column: 1 / 13;
+  text-align: center;
 }
 .ws-header h2 {
   font-family: 'Leon', sans-serif; font-weight: 800;
@@ -479,46 +529,48 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 400;
   font-size: clamp(0.85rem, 1vw, 1.05rem);
   line-height: 1.75; color: #555; max-width: 600px;
-  margin-bottom: 2.5rem;
+  margin: 0 auto 2.5rem;
 }
-.ws-items { grid-column: 1 / 13; }
+.ws-items {
+  grid-column: 1 / 13;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+}
 .ws-item {
-  padding: 1.5rem 0;
-  border-top: 1px solid rgba(0,0,0,.15);
+  padding: 2rem;
+  border: 1px solid rgba(0,0,0,.1);
+  border-radius: 8px;
+  background: #fff;
+  text-align: center;
 }
-.ws-item:last-child { border-bottom: 1px solid rgba(0,0,0,.15); }
 .ws-item h3 {
   font-family: 'Leon', sans-serif; font-weight: 500;
   font-size: clamp(1.1rem, 1.6vw, 1.6rem);
-  line-height: 130%; margin-bottom: .4rem;
+  line-height: 130%; margin-bottom: .6rem;
 }
 .ws-item p {
   font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 400;
   font-size: clamp(0.85rem, 1vw, 1.05rem);
   line-height: 1.7; color: #555;
 }
-
-/* ── CONTACT ── */
-.contact-section {
-  padding: 5rem 0;
-  background: #fff;
+/* Contact form merged into workshops section */
+.ws-contact {
+  grid-column: 1 / 13;
+  margin-top: 3rem; padding-top: 3rem;
+  border-top: 1px solid rgba(0,0,0,.1);
+  text-align: center;
 }
-.contact-inner {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
-  max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
-}
-.contact-text { grid-column: 1 / 7; }
-.contact-form-col { grid-column: 1 / 8; }
-.contact-text h2 {
+.ws-contact h3 {
   font-family: 'Leon', sans-serif; font-weight: 800;
-  font-size: clamp(1.6rem, 2.5vw, 2.8rem);
-  line-height: 110%; margin-bottom: .5rem;
+  font-size: clamp(1.4rem, 2.2vw, 2.2rem);
+  line-height: 110%; margin-bottom: .4rem;
 }
-.contact-text .ct-note {
+.ws-contact .ws-ct-note {
   font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 400;
   font-size: 0.95rem; font-style: italic; color: #666;
   line-height: 1.7; margin-bottom: 1.5rem;
 }
+
+/* ── CONTACT FORM (shared styles, used in workshops section) ── */
 .ct-form { display: flex; flex-direction: column; gap: .75rem; }
 .ct-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
 .ct-form input {
@@ -589,12 +641,13 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 
 .footer-inner {
   position: relative; z-index: 3;
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
-  max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
-  color: #fff; align-items: end;
+  display: flex; justify-content: flex-end; align-items: flex-end;
+  max-width: 100%; padding: 0 100px;
+  color: #fff; gap: 4rem;
+  direction: rtl;
 }
 .footer-cta {
-  grid-column: 1 / 7;
+  flex: 1;
 }
 .footer-cta h2 {
   font-family: 'Leon', sans-serif; font-weight: 800;
@@ -602,24 +655,35 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   line-height: 95%; color: #fff;
 }
 .footer-info {
-  grid-column: 7 / 13;
-  text-align: left; direction: ltr;
+  text-align: right; direction: rtl;
+  min-width: 280px;
 }
 .footer-info h6 {
-  font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 500;
-  font-size: 0.85rem; letter-spacing: 0.05em;
-  color: rgba(255,255,255,.6); margin-bottom: 0.8rem;
-  direction: rtl; text-align: right;
+  font-family: 'Leon', sans-serif; font-weight: 500;
+  font-size: 1rem; letter-spacing: 0.02em;
+  color: rgba(255,255,255,.7); margin-bottom: 1rem;
 }
-.footer-links {
-  list-style: none; display: flex; flex-direction: column; gap: .4rem;
-  direction: rtl; text-align: right;
+.footer-contact-details {
+  list-style: none; display: flex; flex-direction: column; gap: .5rem;
+  margin-bottom: 1.5rem;
 }
-.footer-links a {
-  color: rgba(255,255,255,.75); text-decoration: none; font-size: .9rem;
-  font-family: 'Noto Sans Hebrew', sans-serif; transition: color .2s;
+.footer-contact-details a {
+  color: rgba(255,255,255,.9); text-decoration: none;
+  font-family: 'Noto Sans Hebrew', sans-serif; font-size: 1.1rem; font-weight: 500;
+  transition: color .2s;
 }
-.footer-links a:hover { color: #fff; text-decoration: underline; }
+.footer-contact-details a:hover { color: #fff; }
+.footer-social {
+  list-style: none; display: flex; gap: 1rem; flex-wrap: wrap;
+}
+.footer-social a {
+  color: rgba(255,255,255,.7); text-decoration: none;
+  display: flex; align-items: center; gap: .5rem;
+  font-family: 'Noto Sans Hebrew', sans-serif; font-size: .85rem;
+  transition: color .2s;
+}
+.footer-social a:hover { color: #fff; }
+.footer-social svg { width: 20px; height: 20px; fill: currentColor; flex-shrink: 0; }
 
 /* ═══════════════════════════════════════════
    MOBILE
@@ -640,8 +704,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
     align-items: flex-end;
   }
   .hero-title { font-size: clamp(2rem, 8vw, 3rem); }
-  .hero-paper { height: auto; min-height: 100vh; display: flex; flex-direction: column; }
-  .hero-wrapper { height: auto; }
+  .hero-paper { width: 100%; aspect-ratio: auto; min-height: 100vh; display: flex; flex-direction: column; }
+  .hero-wrapper { min-height: auto; }
   .cmyk-strip { display: none; }
   .glass-cross-3d { display: none; }
   .halftone-canvas { display: none; }
@@ -662,19 +726,16 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   .newsletter-text { grid-column: 1 / -1; }
 
   .workshops-inner { grid-template-columns: 1fr; }
-  .ws-header, .ws-items { grid-column: 1 / -1; }
-
-  .contact-inner { grid-template-columns: 1fr; }
-  .contact-text, .contact-form-col { grid-column: 1 / -1; }
+  .ws-header, .ws-items, .ws-contact { grid-column: 1 / -1; }
+  .ws-items { grid-template-columns: 1fr; }
   .ct-row { grid-template-columns: 1fr; }
 
-  .footer-inner { grid-template-columns: 1fr; }
-  .footer-cta, .footer-info { grid-column: 1 / -1; }
-  .footer-info { text-align: right; }
+  .footer-inner { flex-direction: column; padding: 0 var(--grid-pad); align-items: flex-start; }
+  .footer-info { min-width: auto; width: 100%; }
 }
 `;
 
-const rotatingWords = ['מותגים', 'חוויות', 'קונספטים', 'מוצרים', 'מערכות', 'אסטרטגיות'];
+const rotatingWords = ['שינוי', 'ניראות', 'בידול', 'משמעות', 'עניין', 'ערך'];
 
 export default function SitePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -886,8 +947,8 @@ export default function SitePage() {
     foilImg.src = '/media/holographic-foil.jpg';
     foilImg.onload = () => {
       const c = document.createElement('canvas');
-      c.width = foilImg.width * 2;
-      c.height = foilImg.height * 2;
+      c.width = foilImg.width * 3;
+      c.height = foilImg.height * 3;
       const ctx = c.getContext('2d')!;
       ctx.filter = 'contrast(2.5) saturate(4) brightness(1.5)';
       ctx.drawImage(foilImg, 0, 0, c.width, c.height);
@@ -929,7 +990,7 @@ export default function SitePage() {
     return () => { window.removeEventListener('scroll', onScroll); cancelAnimationFrame(rafId); };
   }, [drawHalftone]);
 
-  // ── Mouse: foil shift + cross RGB split ──
+  // ── Mouse: foil shift + cross RGB split + cross 3D tilt ──
   const handleSceneMouseMove = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
     const scene = sceneRef.current;
     const title = titleRef.current;
@@ -944,8 +1005,22 @@ export default function SitePage() {
       title.style.setProperty('--foil-y', `${ny * 100}%`);
     }
 
+    // Glass cross 3D tilt — track mouse with perspective rotation
+    const crossEl = document.querySelector('.glass-cross-3d') as HTMLElement;
+    if (crossEl) {
+      const tiltX = (ny - 0.462) * -18; // vertical mouse → X rotation
+      const tiltY = (nx - 0.333) * 18;  // horizontal mouse → Y rotation
+      crossEl.style.setProperty('--cross-rx', `${tiltX}deg`);
+      crossEl.style.setProperty('--cross-ry', `${tiltY}deg`);
+      // Move shine highlight to follow mouse
+      const shineEl = crossEl.querySelector('.cross-glass-shine') as HTMLElement;
+      if (shineEl) {
+        shineEl.style.setProperty('--shine-x', `${nx * 100}%`);
+        shineEl.style.setProperty('--shine-y', `${ny * 100}%`);
+      }
+    }
+
     // Glass cross RGB split — offset channels based on mouse distance from cross center
-    // Cross center from Unicorn JSON: (0.333, 0.462), trackMouse: 0.89
     const dx = (nx - 0.333) * 16;
     const dy = (ny - 0.462) * 16;
     if (crossRRef.current) crossRRef.current.style.transform = `translate(${-dx}px, ${dy}px)`;
@@ -954,6 +1029,11 @@ export default function SitePage() {
   }, []);
 
   const handleSceneMouseLeave = useCallback(() => {
+    const crossEl = document.querySelector('.glass-cross-3d') as HTMLElement;
+    if (crossEl) {
+      crossEl.style.setProperty('--cross-rx', '0deg');
+      crossEl.style.setProperty('--cross-ry', '0deg');
+    }
     if (crossRRef.current) crossRRef.current.style.transform = 'translate(0,0)';
     if (crossBRef.current) crossBRef.current.style.transform = 'translate(0,0)';
   }, []);
@@ -989,7 +1069,10 @@ export default function SitePage() {
           {/* Layer 2: Canvas CMYK halftone — decomposes portrait into dots */}
           <canvas className="halftone-canvas" ref={halftoneCanvasRef} />
 
-          {/* Layer 3: Print marks — CMYK strip */}
+          {/* Layer 3: Registration/crop marks overlay */}
+          <div className="registration-marks" />
+
+          {/* Layer 3b: CMYK test strip */}
           <div className="cmyk-strip">
             <div className="cmyk-strip-block">
               <span className="cmyk-c" /><span className="cmyk-c" style={{opacity:.95}} />
@@ -1021,13 +1104,15 @@ export default function SitePage() {
             </p>
           </div>
 
-          {/* Layer 5: Glass Cross — mask for raw portrait, RGB split */}
+          {/* Layer 5: Glass Cross — 3D mask for raw portrait, RGB split */}
           <div className="glass-cross-3d">
+            <div className="cross-back-shadow" />
             <div className="cross-content">
               <div className="cross-channel ch-r" ref={crossRRef} />
               <div className="cross-channel ch-g" ref={crossGRef} />
               <div className="cross-channel ch-b" ref={crossBRef} />
             </div>
+            <div className="cross-edge" />
             <div className="cross-glass-shine" />
           </div>
         </div>
@@ -1061,7 +1146,7 @@ export default function SitePage() {
           <div className="portrait-text-col">
             <h2>עמית ברין</h2>
             <div className="rotating-line">
-              <span className="static-word">מעצב</span>
+              <span className="static-word">יוצר</span>
               <div className="rotating-word">
                 {rotatingWords.map((word, idx) => {
                   const animStyles = ['anim-fade', 'anim-slide', 'anim-clip', 'anim-type'];
@@ -1075,8 +1160,8 @@ export default function SitePage() {
                 })}
               </div>
             </div>
-            <p className="roles-line">מעצב, מרצה, מנטור, מעורר השראה</p>
-            <p className="for-whom">למותגים המובילים בארץ ובעולם<br/>ולאנשים שמחפשים שינוי אמיתי</p>
+            <p className="roles-line">אבא, מעצב, מרצה, מנטור, מעורר השראה</p>
+            <p className="for-whom">למותגים המובילים בארץ ובעולם<br/>ולאנשים מצליחים ומסופקים יותר</p>
             <div className="award-badges">
               <img src="/media/echo_v_200.png" alt="פרס Echo" />
             </div>
@@ -1132,24 +1217,16 @@ export default function SitePage() {
               <p>מאגרים של כלים חדשים (כאלה שתאהבו!) לארגז הכלים; עבודה מבוססת חשיבה עיצובית ובינה יוצרת.</p>
             </div>
           </div>
-        </div>
-      </section>
-
-      {/* ═══ SEC 5: CONTACT ═══ */}
-      <section className="contact-section" id="contact">
-        <div className="contact-inner">
-          <div className="contact-text">
-            <h2>הי, אני גם רוצה לארח אותך לכזה דבר!</h2>
-            <p className="ct-note">(אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים — אז בוא נדבר!)</p>
-          </div>
-          <div className="contact-form-col">
-            <form className="ct-form" onSubmit={e => e.preventDefault()}>
+          <div className="ws-contact" id="contact">
+            <h3>הי, אני גם רוצה לארח אותך לכזה דבר!</h3>
+            <p className="ws-ct-note">(אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים — אז בוא נדבר!)</p>
+            <form className="ct-form" style={{maxWidth: '600px', margin: '0 auto'}} onSubmit={e => e.preventDefault()}>
               <div className="ct-row">
                 <input type="text" name="name" placeholder="שם מלא" />
                 <input type="text" name="role" placeholder="תפקיד בארגון" />
               </div>
               <input type="email" name="email" placeholder="מייל בארגון" />
-              <button type="submit" className="ct-submit">שליחה</button>
+              <button type="submit" className="ct-submit" style={{alignSelf: 'center'}}>שליחה</button>
             </form>
           </div>
         </div>
@@ -1188,13 +1265,27 @@ export default function SitePage() {
           </div>
           <div className="footer-info">
             <h6>איפה בכל זאת אפשר להשיג אותי</h6>
-            <ul className="footer-links">
+            <ul className="footer-contact-details">
               <li><a href="mailto:ahoovi@gmail.com">ahoovi@gmail.com</a></li>
               <li><a href="tel:0549407575">054-9407575</a></li>
-              <li><a href="https://www.linkedin.com/in/amit-brin" target="_blank" rel="noopener">LinkedIn</a></li>
-              <li><a href="https://x.com/amit_brin" target="_blank" rel="noopener">X</a></li>
-              <li><a href="https://www.facebook.com/amitbdesign" target="_blank" rel="noopener">Facebook</a></li>
-              <li><a href="https://www.behance.net/amitbrin" target="_blank" rel="noopener">Behance</a></li>
+            </ul>
+            <ul className="footer-social">
+              <li><a href="https://www.linkedin.com/in/amit-brin" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+                amit-brin
+              </a></li>
+              <li><a href="https://x.com/amit_brin" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+                @amit_brin
+              </a></li>
+              <li><a href="https://www.facebook.com/amitbdesign" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                amitbdesign
+              </a></li>
+              <li><a href="https://www.behance.net/amitbrin" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24"><path d="M6.938 4.503c.702 0 1.34.06 1.92.188.577.13 1.07.33 1.485.61.41.28.733.65.96 1.12.225.47.34 1.05.34 1.73 0 .74-.17 1.36-.507 1.86-.338.5-.837.9-1.502 1.22.906.26 1.576.72 2.022 1.37.448.66.665 1.45.665 2.36 0 .75-.13 1.39-.41 1.93-.28.55-.67 1-1.16 1.35-.48.348-1.05.6-1.67.767-.63.166-1.27.25-1.95.25H0v-15h6.938v.252zM16.94 16.665c.44.428 1.073.643 1.894.643.59 0 1.1-.148 1.53-.447.424-.3.68-.61.78-.93h2.588c-.403 1.28-1.048 2.2-1.9 2.75-.85.56-1.884.83-3.08.83-.837 0-1.585-.13-2.272-.4-.674-.27-1.25-.65-1.72-1.14-.464-.49-.82-1.08-1.06-1.77-.24-.7-.36-1.46-.36-2.3 0-.81.13-1.56.388-2.27.26-.7.63-1.3 1.1-1.8.478-.5 1.06-.88 1.74-1.15.68-.27 1.44-.41 2.28-.41.92 0 1.73.17 2.42.51.69.34 1.26.82 1.71 1.4.45.59.78 1.28.99 2.08.21.8.28 1.68.2 2.65h-7.69c-.04.97.17 1.72.64 2.23zm3.24-8.56v1.6h-4.92v-1.6h4.92zM3.56 7.01h2.58c.18 0 .37.02.57.05.2.04.38.1.55.2.17.1.31.24.42.43.11.19.17.44.17.76 0 .53-.16.9-.48 1.14-.32.23-.73.35-1.22.35H3.56V7.01zm0 4.72h2.81c.22 0 .43.02.65.06.22.04.42.12.59.23.17.11.31.27.41.47.1.2.15.46.15.78 0 .62-.2 1.06-.58 1.31-.38.25-.84.38-1.39.38H3.56v-3.23z"/></svg>
+                amitbrin
+              </a></li>
             </ul>
           </div>
         </div>
