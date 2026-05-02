@@ -263,22 +263,25 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   33% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(-8px); }
   66% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(6px); }
 }
-/* Font stability — prevent glitch on video loop.
-   Force Leon text onto own compositing layers so video layer
-   changes don't trigger text re-rasterization */
-.sailing-text h1, .hero-title, .portrait-text-col .big-role,
-.portrait-text-col h2, .rotating-line, .portrait-text-col .roles-line,
-.newsletter-text h2, .ws-header h2, .footer-cta h2,
-.closing-inner h2, .contact-text h2, .ws-contact h3 {
-  backface-visibility: hidden;
-  -webkit-font-smoothing: antialiased;
-  transform: translateZ(0);
-  will-change: contents;
+/* Font stability — isolate video sections into their own stacking context
+   so video compositing layer resets on loop don't affect text rasterization.
+   The key is `isolation: isolate` on the section + `contain` on text containers. */
+.sailing-section, .newsletter-section, .footer-section {
+  isolation: isolate;
 }
-/* Video elements — preload + stable compositing */
+.sailing-content, .newsletter-inner, .footer-inner {
+  contain: layout style paint;
+}
+/* Force text onto GPU layers independent of video */
+.sailing-text, .newsletter-text, .footer-cta, .footer-info {
+  transform: translate3d(0, 0, 0);
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+/* Video on its own layer */
 .sailing-section video, .newsletter-section video, .footer-section video {
-  will-change: transform;
-  transform: translateZ(0);
+  will-change: contents;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
 }
 
 /* ═══════════════════════════════════════════
@@ -296,8 +299,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to right,
     transparent 0%,
-    transparent 70%,
-    rgba(0,0,0,.55) 100%);
+    transparent 65%,
+    rgba(0,0,0,.4) 100%);
 }
 .sailing-content {
   position: relative; z-index: 2;
@@ -362,30 +365,31 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .portrait-inner {
   position: relative; z-index: 3;
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
-  max-width: var(--grid-max); margin: 0 auto; padding: 5rem var(--grid-pad);
-  width: 100%; align-items: center;
+  max-width: var(--grid-max); margin: 0 auto; padding: 4rem var(--grid-pad) 0;
+  width: 100%; align-items: end;
 }
 .portrait-img-col {
   grid-column: 7 / 13;
   position: relative;
   align-self: end;
   overflow: hidden;
-  max-height: 80vh;
 }
 .portrait-img-col img {
-  width: 100%; max-width: 550px; display: block;
+  width: 100%; display: block;
   filter: grayscale(10%);
   object-fit: cover; object-position: top center;
+  height: auto; max-height: 80vh;
 }
 .portrait-text-col {
   grid-column: 1 / 7;
   color: #fff;
+  align-self: center;
 }
 .portrait-text-col h2 {
   font-family: 'Leon', sans-serif; font-weight: 800;
-  font-size: clamp(1.2rem, 1.8vw, 1.8rem);
+  font-size: clamp(1.6rem, 2.5vw, 2.8rem);
   line-height: 130%; letter-spacing: 0.04vw;
-  color: var(--gold-light); margin-bottom: 0.3rem;
+  color: var(--gold-light); margin-bottom: 0.5rem;
 }
 .portrait-text-col .big-role {
   font-family: 'Leon', sans-serif; font-weight: 800;
@@ -404,14 +408,14 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .rotating-line .static-word {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
-  line-height: 95%; color: #fff;
+  line-height: 1.15; color: #fff;
 }
 .rotating-word {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
-  line-height: 95%; color: var(--gold);
-  min-width: 280px; height: 1.1em;
-  position: relative; display: inline-block; overflow: hidden;
+  line-height: 1.15; color: var(--gold);
+  min-width: 280px; height: 1.2em;
+  position: relative; display: inline-block; overflow: visible;
 }
 .rotating-word span {
   position: absolute; right: 0; white-space: nowrap;
@@ -468,7 +472,10 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .newsletter-overlay {
   position: absolute; inset: 0; z-index: 1;
-  background: linear-gradient(180deg, rgba(0,0,0,.5) 0%, rgba(0,0,0,.65) 100%);
+  background: linear-gradient(to right,
+    transparent 0%,
+    transparent 60%,
+    rgba(0,0,0,.45) 100%);
 }
 .newsletter-inner {
   position: relative; z-index: 2; width: 100%;
