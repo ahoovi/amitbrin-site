@@ -54,23 +54,24 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 /* ── NAV ── */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-  background: rgba(0,0,0,0.15);
-  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%);
+  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
   padding: 0 var(--grid-pad); height: 80px;
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex; align-items: center; justify-content: flex-start; gap: 3rem;
+  direction: rtl;
   transition: top .4s ease-in-out;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 .site-nav.hidden { top: -100px; }
 .site-nav a {
-  color: rgba(255,255,255,.85); text-decoration: none;
+  color: var(--navy); text-decoration: none;
   font-family: 'Noto Sans Hebrew', sans-serif; font-size: 0.9rem; font-weight: 500;
   letter-spacing: 0.02em; transition: color .2s;
 }
-.site-nav a:hover { color: #fff; }
-.nav-logo { font-family: 'Leon', sans-serif; font-weight: 800; font-size: 1.1rem; color: var(--gold) !important; letter-spacing: -.01em; }
+.site-nav a:hover { color: var(--logo); }
+.nav-logo { display: flex; align-items: center; }
+.nav-logo img { height: 28px; width: auto; }
 .nav-links { display: flex; gap: 2.5rem; align-items: center; }
-.nav-toggle { display: none; background: none; border: none; color: #fff; font-size: 1.5rem; cursor: pointer; }
+.nav-toggle { display: none; background: none; border: none; color: var(--navy); font-size: 1.5rem; cursor: pointer; }
 
 /* ═══════════════════════════════════════════
    SEC 0: HERO — CMYK PRINT AESTHETIC (90vh)
@@ -135,9 +136,9 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .cmyk-y { background: #FFF200; }
 .cmyk-k { background: #231F20; }
 
-/* Hero text — right side, vertically centered */
+/* Hero text — right side, centered at 60% height (higher) */
 .hero-text-frame {
-  position: absolute; top: 50%; right: 0;
+  position: absolute; top: 30%; right: 0;
   transform: translateY(-50%);
   width: 50%; z-index: 4;
   padding-right: clamp(2rem, 8vw, 120px);
@@ -295,9 +296,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: absolute; inset: 0; z-index: 1;
   background: linear-gradient(to right,
     transparent 0%,
-    rgba(0,0,0,.08) 35%,
-    rgba(0,0,0,.35) 60%,
-    rgba(0,0,0,.6) 100%);
+    transparent 70%,
+    rgba(0,0,0,.55) 100%);
 }
 .sailing-content {
   position: relative; z-index: 2;
@@ -340,11 +340,12 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   position: relative; width: 100%; min-height: 100vh; overflow: hidden;
   display: flex; align-items: center;
 }
-/* Layer 1: repeating client logos pattern */
+/* Layer 1: repeating client logos pattern in multiply */
 .portrait-bg-pattern {
   position: absolute; inset: 0; z-index: 0;
   background: url('/media/client-logo-wall.jpg') center/600px repeat;
-  opacity: 0.08;
+  mix-blend-mode: multiply;
+  opacity: 0.12;
 }
 /* Layer 2: blue gradient overlay */
 .portrait-bg-gradient {
@@ -366,10 +367,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .portrait-img-col {
   grid-column: 7 / 13;
+  position: relative;
+  align-self: end;
+  overflow: hidden;
+  max-height: 80vh;
 }
 .portrait-img-col img {
-  width: 100%; max-width: 400px; display: block;
-  filter: grayscale(10%); border-radius: 4px;
+  width: 100%; max-width: 550px; display: block;
+  filter: grayscale(10%);
+  object-fit: cover; object-position: top center;
 }
 .portrait-text-col {
   grid-column: 1 / 7;
@@ -512,6 +518,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .workshops-section {
   background: var(--lightest);
   padding: 6rem 0;
+  position: relative;
+  overflow: hidden;
+}
+.workshops-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: url('/media/keynote-section-back2800x1750w.jpg') center/cover no-repeat;
+  opacity: 0.06;
+  pointer-events: none;
 }
 .workshops-inner {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
@@ -533,8 +548,9 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   margin: 0 auto 2.5rem;
 }
 .ws-items {
-  grid-column: 1 / 13;
+  grid-column: 3 / 11;
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
+  margin-top: 40px;
 }
 .ws-item {
   padding: 2rem;
@@ -555,9 +571,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 /* Contact form merged into workshops section */
 .ws-contact {
-  grid-column: 1 / 13;
-  margin-top: 3rem; padding-top: 3rem;
-  border-top: 1px solid rgba(0,0,0,.1);
+  grid-column: 3 / 11;
+  margin-top: 3rem;
   text-align: center;
 }
 .ws-contact h3 {
@@ -1045,15 +1060,15 @@ export default function SitePage() {
 
       {/* ── NAV ── */}
       <nav className={`site-nav${navHidden ? ' hidden' : ''}`}>
-        <a href="/" className="nav-logo">עמית ברין</a>
-        <button className="nav-toggle" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? "✕" : "☰"}
-        </button>
+        <a href="/" className="nav-logo"><img src="/media/logo.svg" alt="עמית ברין" /></a>
         <div className={`nav-links${menuOpen ? " open" : ""}`} onClick={() => setMenuOpen(false)}>
           <a href="#about">מי אני</a>
           <a href="#workshops">הרצאות</a>
           <a href="#contact">דברו איתי</a>
         </div>
+        <button className="nav-toggle" onClick={() => setMenuOpen(!menuOpen)}>
+          {menuOpen ? "✕" : "☰"}
+        </button>
       </nav>
 
       {/* ═══ SEC 0: HERO — CMYK PRINT AESTHETIC ═══ */}
@@ -1073,29 +1088,7 @@ export default function SitePage() {
           {/* Layer 3: Registration/crop marks overlay */}
           <div className="registration-marks" />
 
-          {/* Layer 3b: CMYK test strip */}
-          <div className="cmyk-strip">
-            <div className="cmyk-strip-block">
-              <span className="cmyk-c" /><span className="cmyk-c" style={{opacity:.95}} />
-              <span className="cmyk-c" style={{opacity:.75}} /><span className="cmyk-c" style={{opacity:.5}} />
-              <span className="cmyk-c" style={{opacity:.25}} /><span className="cmyk-c" style={{opacity:.05}} />
-            </div>
-            <div className="cmyk-strip-block">
-              <span className="cmyk-m" /><span className="cmyk-m" style={{opacity:.95}} />
-              <span className="cmyk-m" style={{opacity:.75}} /><span className="cmyk-m" style={{opacity:.5}} />
-              <span className="cmyk-m" style={{opacity:.25}} /><span className="cmyk-m" style={{opacity:.05}} />
-            </div>
-            <div className="cmyk-strip-block">
-              <span className="cmyk-y" /><span className="cmyk-y" style={{opacity:.95}} />
-              <span className="cmyk-y" style={{opacity:.75}} /><span className="cmyk-y" style={{opacity:.5}} />
-              <span className="cmyk-y" style={{opacity:.25}} /><span className="cmyk-y" style={{opacity:.05}} />
-            </div>
-            <div className="cmyk-strip-block">
-              <span className="cmyk-k" /><span className="cmyk-k" style={{opacity:.95}} />
-              <span className="cmyk-k" style={{opacity:.75}} /><span className="cmyk-k" style={{opacity:.5}} />
-              <span className="cmyk-k" style={{opacity:.25}} /><span className="cmyk-k" style={{opacity:.05}} />
-            </div>
-          </div>
+          {/* CMYK test strip removed — registration marks image includes strips */}
 
           {/* Layer 4: Text frame — right side */}
           <div className="hero-text-frame">
@@ -1206,28 +1199,26 @@ export default function SitePage() {
           </div>
           <div className="ws-items">
             <div className="ws-item">
-              <h3>✦ הרצאות העשרה</h3>
+              <h3>✦ הרצאות העשרה ✦</h3>
               <p>אם זה בערב חברה או במפגש חברים, כשרוצים להעניק לקבוצה חוויה של דעת וטריוויה מפתיעה — אני מגיע עם סיפור עשיר ומסחרר, רחב יריעה וסוחף.</p>
             </div>
             <div className="ws-item">
-              <h3>✦ הדרכות טכניות</h3>
+              <h3>✦ הדרכות טכניות ✦</h3>
               <p>להתעדכן בגרסאות האחרונות של התוכנות שאתן כבר עובדות עליהן — הדרכת ריענון תקופתי שהיא חובה לכל סטודיו.</p>
             </div>
             <div className="ws-item">
-              <h3>✦ סדנאות מעשיות</h3>
+              <h3>✦ סדנאות מעשיות ✦</h3>
               <p>מאגרים של כלים חדשים (כאלה שתאהבו!) לארגז הכלים; עבודה מבוססת חשיבה עיצובית ובינה יוצרת.</p>
             </div>
           </div>
           <div className="ws-contact" id="contact">
             <h3>הי, אני גם רוצה לארח אותך לכזה דבר!</h3>
             <p className="ws-ct-note">(אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים — אז בוא נדבר!)</p>
-            <form className="ct-form" style={{maxWidth: '600px', margin: '0 auto'}} onSubmit={e => e.preventDefault()}>
-              <div className="ct-row">
-                <input type="text" name="name" placeholder="שם מלא" />
-                <input type="text" name="role" placeholder="תפקיד בארגון" />
-              </div>
-              <input type="email" name="email" placeholder="מייל בארגון" />
-              <button type="submit" className="ct-submit" style={{alignSelf: 'center'}}>שליחה</button>
+            <form className="ct-form" style={{maxWidth: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}} onSubmit={e => e.preventDefault()}>
+              <input type="text" name="name" placeholder="שם מלא" />
+              <input type="text" name="role" placeholder="תפקיד בארגון" />
+              <input type="email" name="email" placeholder="מייל בארגון" style={{gridColumn: '1 / -1'}} />
+              <button type="submit" className="ct-submit" style={{gridColumn: '1 / 3', maxWidth: 'calc(50% - 0.375rem)'}}>שליחה</button>
             </form>
           </div>
         </div>
