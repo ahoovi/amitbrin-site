@@ -263,24 +263,32 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   33% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(-8px); }
   66% { transform: translate(-50%, -50%) perspective(800px) rotateX(var(--cross-rx, 0deg)) rotateY(var(--cross-ry, 0deg)) translateY(6px); }
 }
-/* Font stability — isolate video sections into their own stacking context
-   so video compositing layer resets on loop don't affect text rasterization.
-   The key is `isolation: isolate` on the section + `contain` on text containers. */
+/* Font stability — keep video and text on fully independent GPU layers
+   so video compositing/loop resets never touch text rasterization.
+   Key: will-change:transform (NOT contents!) on both video AND text. */
 .sailing-section, .newsletter-section, .footer-section {
   isolation: isolate;
+  contain: layout style;
 }
+/* Text containers: own compositing layer, shielded from video repaints */
 .sailing-content, .newsletter-inner, .footer-inner {
-  contain: layout style paint;
-}
-/* Force text onto GPU layers independent of video */
-.sailing-text, .newsletter-text, .footer-cta, .footer-info {
-  transform: translate3d(0, 0, 0);
+  position: relative;
+  z-index: 2;
+  will-change: transform;
+  transform: translateZ(0);
   -webkit-font-smoothing: subpixel-antialiased;
 }
-/* Video on its own layer */
+/* Individual text elements also promoted */
+.sailing-text, .newsletter-text, .footer-cta, .footer-info {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+/* Video on its own GPU layer — will-change:transform, NOT contents */
 .sailing-section video, .newsletter-section video, .footer-section video {
-  will-change: contents;
-  transform: translate3d(0, 0, 0);
+  will-change: transform;
+  transform: translateZ(0);
   backface-visibility: hidden;
 }
 
@@ -404,22 +412,26 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .rotating-line {
   display: flex; align-items: baseline; gap: 0.3em; margin-bottom: 1.2rem;
+  direction: rtl;
 }
 .rotating-line .static-word {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
   line-height: 1.15; color: #fff;
+  flex-shrink: 0;
 }
 .rotating-word {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
   line-height: 1.15; color: var(--gold);
-  min-width: 280px; height: 1.2em;
-  position: relative; display: inline-block; overflow: visible;
+  min-width: 280px; height: 1.15em;
+  position: relative; display: inline-block; overflow: hidden;
+  vertical-align: baseline;
 }
 .rotating-word span {
-  position: absolute; right: 0; white-space: nowrap;
+  position: absolute; right: 0; top: 0; white-space: nowrap;
   opacity: 0; transition: none;
+  line-height: inherit; font-size: inherit;
 }
 .rotating-word span.active { opacity: 1; }
 .rotating-word span.anim-fade { animation: rFade 2.5s ease-in-out forwards; }
@@ -1121,7 +1133,7 @@ export default function SitePage() {
 
       {/* ═══ SEC 1: SAILING VIDEO ═══ */}
       <section className="sailing-section">
-        <video autoPlay muted loop playsInline>
+        <video autoPlay muted loop playsInline preload="auto">
           <source src="/media/sailing4k2_1_1.mp4" type="video/mp4" />
         </video>
         <div className="sailing-overlay" />
@@ -1175,7 +1187,7 @@ export default function SitePage() {
 
       {/* ═══ SEC 3: BOT WHISPERER / NEWSLETTER ═══ */}
       <section className="newsletter-section">
-        <video autoPlay muted loop playsInline>
+        <video autoPlay muted loop playsInline preload="auto">
           <source src="/media/bot-whisperer.mp4" type="video/mp4" />
         </video>
         <div className="newsletter-overlay" />
@@ -1242,7 +1254,7 @@ export default function SitePage() {
 
       {/* ═══ SEC 7: FOOTER — UNDERWATER VIDEO ═══ */}
       <footer className="footer-section">
-        <video autoPlay muted loop playsInline>
+        <video autoPlay muted loop playsInline preload="auto">
           <source src="/media/underwater.mp4" type="video/mp4" />
         </video>
         <div className="footer-wave">
