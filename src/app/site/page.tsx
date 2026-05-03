@@ -54,22 +54,22 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 /* ── NAV ── */
 .site-nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 999;
-  background: linear-gradient(to bottom, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0.6) 60%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to bottom, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.7) 40%, rgba(255,255,255,0.3) 70%, rgba(255,255,255,0) 100%);
   backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-  padding: 0 var(--grid-pad); height: 80px;
+  padding: 0 var(--grid-pad); height: 100px;
   display: flex; align-items: center; justify-content: flex-start; gap: 3rem;
   direction: rtl;
   transition: top .4s ease-in-out;
 }
-.site-nav.hidden { top: -100px; }
+.site-nav.hidden { top: -120px; }
 .site-nav a {
   color: var(--navy); text-decoration: none;
-  font-family: 'Noto Sans Hebrew', sans-serif; font-size: 0.9rem; font-weight: 500;
+  font-family: 'Noto Sans Hebrew', sans-serif; font-size: 1.05rem; font-weight: 500;
   letter-spacing: 0.02em; transition: color .2s;
 }
 .site-nav a:hover { color: var(--logo); }
 .nav-logo { display: flex; align-items: center; }
-.nav-logo img { height: 28px; width: auto; }
+.nav-logo img { height: 38px; width: auto; }
 .nav-links { display: flex; gap: 2.5rem; align-items: center; }
 .nav-toggle { display: none; background: none; border: none; color: var(--navy); font-size: 1.5rem; cursor: pointer; }
 
@@ -96,6 +96,17 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   transform: translateZ(0);
   backface-visibility: hidden;
   -webkit-font-smoothing: subpixel-antialiased;
+}
+/* Leon font global stability — prevent reflow from video compositing */
+[class*="section"] h1, [class*="section"] h2,
+.rotating-line, .rotating-word, .footer-cta h2 {
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 /* Video on its own GPU layer — will-change:transform, NOT contents */
 .sailing-section video, .newsletter-section video, .footer-section video {
@@ -125,12 +136,12 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .sailing-content {
   position: relative; z-index: 2;
   height: 100%;
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
+  display: flex; flex-direction: column; justify-content: flex-start;
   max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
-  align-items: center;
+  padding-top: 140px;
 }
 .sailing-text {
-  grid-column: 1 / 7;
+  max-width: 55%;
   text-align: right;
 }
 .sailing-text h1 {
@@ -139,6 +150,9 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   color: #fff; line-height: 95%; letter-spacing: 0.02px;
   margin-bottom: 1.5rem;
   text-shadow: 0 2px 30px rgba(0,0,0,.35);
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
+  -webkit-font-smoothing: antialiased;
 }
 .sailing-text .sail-sub {
   font-family: 'Noto Sans Hebrew', sans-serif;
@@ -150,7 +164,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   font-family: 'Noto Sans Hebrew', sans-serif;
   font-size: clamp(0.75rem, 0.9vw, 0.9rem); font-weight: 400;
   color: rgba(255,255,255,.5); line-height: 1.6; letter-spacing: 0.02em;
-  margin-top: 1.5rem; padding-top: 1rem;
+  position: absolute; bottom: 80px; right: var(--grid-pad);
   border-right: 3px solid var(--gold); padding-right: 1rem;
   max-width: 500px;
 }
@@ -192,13 +206,14 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   grid-column: 7 / 13;
   position: relative;
   align-self: end;
-  overflow: hidden;
+  overflow: visible;
+  margin-bottom: -60px;
 }
 .portrait-img-col img {
   width: 100%; display: block;
   filter: grayscale(10%);
   object-fit: cover; object-position: top center;
-  height: auto; max-height: 80vh;
+  height: auto; max-height: 85vh;
 }
 .portrait-text-col {
   grid-column: 1 / 7;
@@ -235,9 +250,9 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 .rotating-word {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(2.5rem, 5vw, 5.5rem);
-  line-height: 1.15; color: var(--gold);
-  min-width: 280px; height: 1.15em;
-  position: relative; display: inline-block; overflow: hidden;
+  line-height: 1.3; color: var(--gold);
+  min-width: 280px; height: 1.3em;
+  position: relative; display: inline-block; overflow: visible;
   vertical-align: baseline;
 }
 .rotating-word span {
@@ -260,10 +275,10 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   line-height: 1.6; color: rgba(255,255,255,.7);
 }
 .award-badges {
-  display: flex; gap: 16px; margin-top: 24px; align-items: center;
+  display: flex; flex-direction: column; gap: 16px; margin-top: 24px; align-items: flex-start;
 }
 .award-badges img {
-  height: 55px; width: auto; opacity: 0.8;
+  height: 85px; width: auto; opacity: 0.8;
   filter: brightness(1.8) grayscale(30%);
   transition: opacity 0.3s, filter 0.3s;
 }
@@ -307,13 +322,15 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   max-width: var(--grid-max); margin: 0 auto; padding: 5rem var(--grid-pad);
 }
 .newsletter-text {
-  grid-column: 1 / 8; color: #fff;
+  grid-column: 1 / 7; color: #fff;
 }
 .newsletter-text h2 {
   font-family: 'Leon', sans-serif; font-weight: 800;
   font-size: clamp(1.8rem, 3.5vw, 3.5rem);
   line-height: 100%; letter-spacing: 0.02px;
   margin-bottom: 1.2rem;
+  font-synthesis: none;
+  text-rendering: geometricPrecision;
 }
 .newsletter-text .ns-desc {
   font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 400;
@@ -347,8 +364,8 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
    SEC 4: WORKSHOPS — בא לחדש לכם
 ═══════════════════════════════════════════ */
 .workshops-section {
-  background: var(--lightest);
-  padding: 6rem 0;
+  background: transparent;
+  padding: 5rem 0;
   position: relative;
   overflow: hidden;
 }
@@ -356,15 +373,22 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   content: '';
   position: absolute; inset: 0;
   background: url('/media/keynote-section-back2800x1750w.jpg') center/cover no-repeat;
-  opacity: 0.06;
+  opacity: 0.15;
   pointer-events: none;
 }
 .workshops-inner {
   display: grid; grid-template-columns: repeat(12, 1fr); gap: var(--grid-gap);
   max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
 }
+.ws-glass {
+  grid-column: 2 / 12;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  padding: 3rem 2.5rem;
+}
 .ws-header {
-  grid-column: 1 / 13;
   text-align: center;
 }
 .ws-header h2 {
@@ -376,18 +400,17 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 400;
   font-size: clamp(0.85rem, 1vw, 1.05rem);
   line-height: 1.75; color: #555; max-width: 600px;
-  margin: 0 auto 2.5rem;
+  margin: 0 auto 1.5rem;
 }
 .ws-items {
-  grid-column: 3 / 11;
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem;
-  margin-top: 40px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+  margin-top: 1.5rem;
 }
 .ws-item {
   padding: 2rem;
-  border: 1px solid rgba(0,0,0,.1);
+  border: 1px solid rgba(0,0,0,.06);
   border-radius: 8px;
-  background: #fff;
+  background: rgba(255,255,255,0.1);
   text-align: center;
 }
 .ws-item h3 {
@@ -402,8 +425,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 /* Contact form merged into workshops section */
 .ws-contact {
-  grid-column: 3 / 11;
-  margin-top: 3rem;
+  margin-top: 2rem;
   text-align: center;
 }
 .ws-contact h3 {
@@ -439,24 +461,32 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
    SEC 5: CLOSING + FOOTER (underwater video)
 ═══════════════════════════════════════════ */
 .closing-section {
-  padding: 4rem 0 2rem;
+  padding: 3rem 0 2rem;
   background: #fff;
   position: relative; z-index: 1;
+  min-height: 30vh;
+  display: flex; align-items: center; justify-content: center;
 }
 .closing-inner {
   max-width: var(--grid-max); margin: 0 auto; padding: 0 var(--grid-pad);
+  text-align: center;
 }
-.closing-inner h2 {
-  font-family: 'Leon', sans-serif; font-weight: 500;
-  font-size: clamp(1rem, 1.6vw, 1.6rem);
-  line-height: 150%; margin-bottom: .6rem;
+.closing-inner .closing-title {
+  font-family: 'Leon', sans-serif; font-weight: 800;
+  font-size: clamp(1.4rem, 2.5vw, 2.5rem);
+  line-height: 140%; margin-bottom: .8rem;
+}
+.closing-inner .closing-body {
+  font-family: 'Noto Sans Hebrew', sans-serif; font-weight: 700;
+  font-size: clamp(0.9rem, 1.2vw, 1.15rem);
+  line-height: 1.8; color: #333;
 }
 .closing-inner a { color: var(--gold); font-weight: 600; text-decoration: underline; }
 
 /* Footer — underwater video with wave top edge */
 .footer-section {
   position: relative; width: 100%; overflow: hidden;
-  padding: 6rem 0 3rem; min-height: 350px;
+  padding: 6rem 0 3rem; min-height: 60vh;
 }
 .footer-section video {
   position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0;
@@ -507,7 +537,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .footer-info h6 {
   font-family: 'Leon', sans-serif; font-weight: 500;
-  font-size: 1rem; letter-spacing: 0.02em;
+  font-size: 1.3rem; letter-spacing: 0.02em;
   color: rgba(255,255,255,.7); margin-bottom: 1rem;
 }
 .footer-contact-details {
@@ -521,7 +551,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
 }
 .footer-contact-details a:hover { color: #fff; }
 .footer-social {
-  list-style: none; display: flex; gap: 1rem; flex-wrap: wrap;
+  list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
 }
 .footer-social a {
   color: rgba(255,255,255,.7); text-decoration: none;
@@ -539,7 +569,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   :root { --grid-gap: 16px; }
   .nav-links { display: none; }
   .nav-links.open {
-    display: flex; position: absolute; top: 80px; right: 0; left: 0;
+    display: flex; position: absolute; top: 100px; right: 0; left: 0;
     background: rgba(0,0,0,.95); flex-direction: column;
     padding: 1.2rem 2rem; gap: 1rem;
   }
@@ -561,7 +591,7 @@ body { font-family: 'Noto Sans Hebrew', 'Leon', Arial, sans-serif; color: var(--
   .newsletter-text { grid-column: 1 / -1; }
 
   .workshops-inner { grid-template-columns: 1fr; }
-  .ws-header, .ws-items, .ws-contact { grid-column: 1 / -1; }
+  .ws-glass { grid-column: 1 / -1; padding: 2rem 1.5rem; }
   .ws-items { grid-template-columns: 1fr; }
   .ct-row { grid-template-columns: 1fr; }
 
@@ -624,7 +654,7 @@ export default function SitePage() {
         <div className="sailing-overlay" />
         <div className="sailing-content">
           <div className="sailing-text">
-            <h1>לוקח אותך למסע<br/>אל משהו שאף אחד<br/>עוד לא עשה</h1>
+            <h1>לוקח אותך למסע<br/>אל משהו שאף אחד עוד לא עשה</h1>
             <p className="sail-sub">
               בדרך אל היצירה החדשה, מצויד בטכנולוגיה פורצת דרך, אני שם רגע בצד רזומה של 23 שנים במה שקוראים ״עיצוב גרפי״ — כי בעולם החדש הזה אין סיבה להאחז בדוגמאות מהעבר כרפרנס למה שאנחנו מסוגלים להגיע אליו עכשיו.
             </p>
@@ -643,6 +673,7 @@ export default function SitePage() {
         <div className="portrait-inner">
           <div className="portrait-text-col">
             <h2>עמית ברין</h2>
+            <p className="roles-line">אבא, מעצב, מרצה, מנטור, מעורר השראה</p>
             <div className="rotating-line">
               <span className="static-word">יוצר</span>
               <div className="rotating-word">
@@ -658,10 +689,11 @@ export default function SitePage() {
                 })}
               </div>
             </div>
-            <p className="roles-line">אבא, מעצב, מרצה, מנטור, מעורר השראה</p>
             <p className="for-whom">למותגים המובילים בארץ ובעולם<br/>ולאנשים מצליחים ומסופקים יותר</p>
             <div className="award-badges">
-              <img src="/media/echo_v_200.png" alt="פרס Echo" />
+              <img src="/media/echo_v_200.png" alt="פרס Echo" style={{height: '85px'}} />
+              {/* TODO: add appie-logo.png to /public/media/ */}
+              {/* <img src="/media/appie-logo.png" alt="פרס Appie" style={{height: '85px'}} /> */}
             </div>
           </div>
           <div className="portrait-img-col">
@@ -695,35 +727,37 @@ export default function SitePage() {
       {/* ═══ SEC 4: WORKSHOPS — בא לחדש לכם ═══ */}
       <section className="workshops-section" id="workshops">
         <div className="workshops-inner">
-          <div className="ws-header">
-            <h2>בא לחדש לכם</h2>
-            <p className="ws-sub">
-              מגיע עד אליכם כדי להעשיר, ללמד ולתרגל עבודה עם כלים עדכניים, פרקטיקות מתקדמות, חשיבה עיצובית ויצירה עם בינה מלאכותית.
-            </p>
-          </div>
-          <div className="ws-items">
-            <div className="ws-item">
-              <h3>✦ הרצאות העשרה ✦</h3>
-              <p>אם זה בערב חברה או במפגש חברים, כשרוצים להעניק לקבוצה חוויה של דעת וטריוויה מפתיעה — אני מגיע עם סיפור עשיר ומסחרר, רחב יריעה וסוחף.</p>
+          <div className="ws-glass">
+            <div className="ws-header">
+              <h2>בא לחדש לכם</h2>
+              <p className="ws-sub">
+                מגיע עד אליכם כדי להעשיר, ללמד ולתרגל עבודה עם כלים עדכניים, פרקטיקות מתקדמות, חשיבה עיצובית ויצירה עם בינה מלאכותית.
+              </p>
             </div>
-            <div className="ws-item">
-              <h3>✦ הדרכות טכניות ✦</h3>
-              <p>להתעדכן בגרסאות האחרונות של התוכנות שאתן כבר עובדות עליהן — הדרכת ריענון תקופתי שהיא חובה לכל סטודיו.</p>
+            <div className="ws-items">
+              <div className="ws-item">
+                <h3>✦ הרצאות העשרה ✦</h3>
+                <p>אם זה בערב חברה או במפגש חברים, כשרוצים להעניק לקבוצה חוויה של דעת וטריוויה מפתיעה — אני מגיע עם סיפור עשיר ומסחרר, רחב יריעה וסוחף.</p>
+              </div>
+              <div className="ws-item">
+                <h3>✦ הדרכות טכניות ✦</h3>
+                <p>להתעדכן בגרסאות האחרונות של התוכנות שאתן כבר עובדות עליהן — הדרכת ריענון תקופתי שהיא חובה לכל סטודיו.</p>
+              </div>
+              <div className="ws-item">
+                <h3>✦ סדנאות מעשיות ✦</h3>
+                <p>מאגרים של כלים חדשים (כאלה שתאהבו!) לארגז הכלים; עבודה מבוססת חשיבה עיצובית ובינה יוצרת.</p>
+              </div>
             </div>
-            <div className="ws-item">
-              <h3>✦ סדנאות מעשיות ✦</h3>
-              <p>מאגרים של כלים חדשים (כאלה שתאהבו!) לארגז הכלים; עבודה מבוססת חשיבה עיצובית ובינה יוצרת.</p>
+            <div className="ws-contact" id="contact">
+              <h3>הי, אני גם רוצה לארח אותך לכזה דבר!</h3>
+              <p className="ws-ct-note">(אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים — אז בוא נדבר!)</p>
+              <form className="ct-form" style={{maxWidth: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}} onSubmit={e => e.preventDefault()}>
+                <input type="text" name="name" placeholder="שם מלא" />
+                <input type="text" name="role" placeholder="תפקיד בארגון" />
+                <input type="email" name="email" placeholder="מייל בארגון" style={{gridColumn: '1 / -1'}} />
+                <button type="submit" className="ct-submit" style={{gridColumn: '1 / 3', maxWidth: 'calc(50% - 0.375rem)'}}>שליחה</button>
+              </form>
             </div>
-          </div>
-          <div className="ws-contact" id="contact">
-            <h3>הי, אני גם רוצה לארח אותך לכזה דבר!</h3>
-            <p className="ws-ct-note">(אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים — אז בוא נדבר!)</p>
-            <form className="ct-form" style={{maxWidth: '100%', margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '0.75rem'}} onSubmit={e => e.preventDefault()}>
-              <input type="text" name="name" placeholder="שם מלא" />
-              <input type="text" name="role" placeholder="תפקיד בארגון" />
-              <input type="email" name="email" placeholder="מייל בארגון" style={{gridColumn: '1 / -1'}} />
-              <button type="submit" className="ct-submit" style={{gridColumn: '1 / 3', maxWidth: 'calc(50% - 0.375rem)'}}>שליחה</button>
-            </form>
           </div>
         </div>
       </section>
@@ -731,9 +765,10 @@ export default function SitePage() {
       {/* ═══ SEC 6: CLOSING ═══ */}
       <section className="closing-section">
         <div className="closing-inner">
-          <h2>כנראה שהעמוד הזה יהיה בבנייה לנצח</h2>
-          <h2>אבל ברצינות, תחשבו על זה רגע... להיות במצב הזה של הצורך להשתנות תמידית — זה משהו שאתם הייתם לוקחים על עצמכם?</h2>
-          <h2>(כי אני חושב שפשוט חייבים. <a href="mailto:ahoovi@gmail.com">דברו איתי</a> אם אתם צריכים שינוי.)</h2>
+          <h2 className="closing-title">כנראה שהעמוד הזה יהיה בבנייה לנצח</h2>
+          <p className="closing-body">
+            אבל ברצינות, תחשבו על זה רגע... להיות במצב הזה של הצורך להשתנות תמידית — זה משהו שאתם הייתם לוקחים על עצמכם? כי אני חושב שפשוט חייבים. <a href="mailto:ahoovi@gmail.com">דברו איתי</a> אם אתם צריכים שינוי.
+          </p>
         </div>
       </section>
 
