@@ -1,0 +1,58 @@
+{
+  "vocab": [
+    {
+      "ro": "roșu",
+      "he": "אדום",
+      "emoji": "🔴"
+    },
+    {
+      "ro": "albastru",
+      "he": "כחול",
+      "emoji": "🔵"
+    },
+    {
+      "ro": "verde",
+      "he": "ירוק",
+      "emoji": "🟢"
+    },
+    {
+      "ro": "galben",
+      "he": "צהוב",
+      "emoji": "🟡"
+    },
+    {
+      "ro": "negru",
+      "he": "שחור",
+      "emoji": "⚫"
+    },
+    {
+      "ro": "alb",
+      "he": "לבן",
+      "emoji": "⚪"
+    }
+  ],
+  "sentences": [
+    {
+      "ro": "Aceasta este o bluză roșie.",
+      "he": "זה חולצה אדומה.",
+      "note": "תיאור עצם עם צבע"
+    },
+    {
+      "ro": "Plăcuți culorile acestea?",
+      "he": "האם אתה אוהב את הצבעים האלה?",
+      "note": "שאלה בנושא העדפות"
+    },
+    {
+      "ro": "Ador culoarea albastru.",
+      "he": "אני מאוהב בצבע כחול.",
+      "note": "ביטוי של חיבה"
+    },
+    {
+      "ro": "Cerul este albastru și iarba este verde.",
+      "he": "השמיים כחולים והדשא ירוק.",
+      "note": "משפט עם שני צבעים"
+    }
+  ],
+  "mini_ro": "- Ce culoare iubești?\n- Iubesc roșu și albastru!\n- Frumos! Și iarba este verde.",
+  "mini_he": "- איזה צבע אתה אוהב?\n- אני אוהב אדום וכחול!\n- יפה! והדשא ירוק."
+}

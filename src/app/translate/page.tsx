@@ -14,6 +14,13 @@
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { DESIGN_TOKENS as T } from './design-system';
+import {
+  House, BookOpen, ChartPolar, GearSix, Star, LockKey,
+  Check, ArrowCounterClockwise, SpeakerHigh, Play, Stop,
+  HandWaving, Palette, UsersThree, Heart, Question,
+  Buildings, ShoppingCart, Stethoscope, Bus, Briefcase,
+  IdentificationCard, ForkKnife, ChatCircle, Cards,
+} from '@phosphor-icons/react';
 
 // ============= CSS (module styles — Rubik font + all className-based styles) =============
 
@@ -73,7 +80,7 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .fval-txt{font-size:13px;font-weight:600;line-height:16px;color:var(--navy);direction:ltr;white-space:nowrap}
 .flbl{font-size:12px;font-weight:400;line-height:15px;color:var(--muted);direction:rtl;white-space:nowrap}
 .exbox{display:flex;flex-direction:row;align-items:center;padding:2px;gap:8px;background:var(--blue-l);border-radius:10px;margin:0 16px 20px;width:calc(100% - 32px)}
-.exbox-icon{display:flex;justify-content:center;align-items:center;padding:7px;width:36px;height:64px;min-width:36px;background:#fff;border-radius:8px;font-size:12px;color:var(--blue);cursor:pointer}
+.exbox-icon{display:flex;justify-content:center;align-items:center;padding:7px;width:36px;min-width:36px;background:transparent;border-radius:8px;color:var(--blue);cursor:pointer;align-self:center}
 .exbox-text{display:flex;flex-direction:column;align-items:flex-start;gap:9px;flex:1}
 .exro{font-size:14px;font-weight:400;line-height:17px;color:var(--navy);direction:ltr;width:100%}
 .exhe{font-size:13px;font-weight:400;line-height:16px;color:var(--muted);direction:rtl;width:100%}
@@ -223,24 +230,36 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 
 // ============= VOICES + AUDIO =============
 
-const VOICE_MALE  = "onwK4e9ZLuTAKqWW03F9";
-const VOICE_FEMALE = "XB0fDUnXU5powFXDhCwa";  // Charlotte
-const VOICE_MALE2  = "TX3LPaxmHKxFdv7VOQHJ";  // Liam
-// const VOICE_FEMALE2 = "pFZP5JQG7iQjIQuC4Bku"; // Lily — add when ready
+const VOICE_MALE    = "onwK4e9ZLuTAKqWW03F9";  // default male
+const VOICE_FEMALE  = "XB0fDUnXU5powFXDhCwa";  // Charlotte — female multilingual
+const VOICE_MALE2   = "TX3LPaxmHKxFdv7VOQHJ";  // Liam — second male
+const VOICE_FEMALE2 = "br0MPoLVxuslVxf61qHn";  // Lizy — second female
+
+// Returns one of 4 voices. Female detected by name pattern, second voice by speaker index parity.
+const _speakerVoiceMap: Record<string, string> = {};
+let _speakerCount = 0;
 
 function pickVoice(speaker?: string): string {
   if (!speaker) return VOICE_MALE;
   const s = speaker.toLowerCase().trim();
+  if (_speakerVoiceMap[s]) return _speakerVoiceMap[s];
+
   const femalePatterns = [
     /ă$/, /a$/, /ea$/, /ina$/, /ela$/, /ana$/, /oar[eă]/, /toare$/,
     /vânzătoare/, /profesoar/, /asistent/, /recepționist/,
-    /maria/, /elena/, /ioana/, /ana/, /mihaela/, /andreea/, /cristina/,
+    /maria/, /elena/, /ioana/, /mihaela/, /andreea/, /cristina/,
     /dana/, /laura/, /alina/, /carmen/, /roxana/, /diana/, /gabriela/,
     /soția/, /mama/, /bunica/, /fata/, /fiica/, /sora/, /prietena/,
     /clienta/, /colega/, /vecina/, /doamna/,
   ];
-  if (femalePatterns.some(p => p.test(s))) return VOICE_FEMALE;
-  return VOICE_MALE;
+  const isFemale = femalePatterns.some(p => p.test(s));
+  const idx = _speakerCount++;
+  // Alternate between two voices of the correct gender
+  const voice = isFemale
+    ? (idx % 2 === 0 ? VOICE_FEMALE : VOICE_FEMALE2)
+    : (idx % 2 === 0 ? VOICE_MALE  : VOICE_MALE2);
+  _speakerVoiceMap[s] = voice;
+  return voice;
 }
 
 const _audioCache: Record<string, string> = {};
@@ -498,16 +517,9 @@ function LoginScreen({ users, onSelectUser }: { users: User[]; onSelectUser: (u:
   return (
     <div style={bgStyle}>
       <div style={{ textAlign: 'center' }}>
-        {/* Romanian flag */}
-        <div style={{ display: 'flex', width: 68, height: 46, borderRadius: 8, overflow: 'hidden', margin: '0 auto 20px', boxShadow: '0 8px 28px rgba(0,0,0,.4)' }}>
-          <div style={{ flex: 1, background: '#002B7F' }} />
-          <div style={{ flex: 1, background: '#FCD116' }} />
-          <div style={{ flex: 1, background: '#CE1126' }} />
-        </div>
-        <h1 style={{ color: '#fff', fontSize: 28, fontWeight: 700, margin: '0 0 6px', letterSpacing: '-.02em' }}>
-          Salutări bunicii!
-        </h1>
-        <p style={{ color: '#a0aec0', fontSize: 15, margin: 0 }}>?מי לומד היום</p>
+        {/* Logo */}
+        <img src="/avatar/salutari_bunicii-logo@3x.png" alt="Salutări bunicii!" width={200} style={{ display: 'block', margin: '0 auto 20px' }} />
+        <p style={{ color: '#a0aec0', fontSize: 15, margin: 0, direction: 'rtl' }}>מי לומד היום?</p>
       </div>
 
       <div style={{ display: 'flex', flexDirection: 'column', gap: 12, width: '100%', maxWidth: 320 }}>
@@ -532,7 +544,7 @@ function LoginScreen({ users, onSelectUser }: { users: User[]; onSelectUser: (u:
             }}
           >
             <span>{user.name}</span>
-            <span style={{ color: '#718096', fontSize: 13 }}>{user.totalSessions} סשנים</span>
+            <span style={{ color: '#718096', fontSize: 13 }}>{user.totalSessions} פגישות</span>
           </button>
         ))}
       </div>
@@ -626,31 +638,96 @@ function AppShell({
 
 function TabIcon({ tabId, active }: { tabId: Tab; active: boolean }) {
   const color = active ? '#1F5FBF' : '#6B7280';
+  const weight = active ? 'fill' : 'regular';
   const size = 24;
-  const icons: Record<Tab, React.ReactNode> = {
-    home: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 12L12 4l9 8" /><path d="M5 10v9h4v-5h6v5h4v-9" />
-      </svg>
-    ),
-    dictionary: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M4 19.5A2.5 2.5 0 016.5 17H20" /><path d="M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15z" />
-      </svg>
-    ),
-    progress: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
-      </svg>
-    ),
-    settings: (
-      <svg width={size} height={size} viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-        <circle cx="12" cy="12" r="3" />
-        <path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z" />
-      </svg>
-    ),
+  if (tabId === 'home')       return <House       size={size} color={color} weight={weight} />;
+  if (tabId === 'dictionary') return <BookOpen    size={size} color={color} weight={weight} />;
+  if (tabId === 'progress')   return <ChartPolar  size={size} color={color} weight={weight} />;
+  if (tabId === 'settings')   return <GearSix     size={size} color={color} weight={weight} />;
+  return null;
+}
+
+// ============= TUTOR AVATAR =============
+
+type AvatarMood = 'greeting' | 'approve' | 'cheer' | 'coaching' | 'listening' |
+                  'asking' | 'thinking' | 'neutral' | 'showing' | 'proud' | 'learning';
+
+const AVATAR_SRC: Record<AvatarMood, string> = {
+  greeting: '/avatar/tutor/avatar-tutor-greeting.png',
+  approve:  '/avatar/tutor/avatar-tutor-approve.png',
+  cheer:    '/avatar/tutor/avatar-tutor-cheering1.png',
+  coaching: '/avatar/tutor/avatar-tutor-coaching.png',
+  listening:'/avatar/tutor/avatar-tutor-listening.png',
+  asking:   '/avatar/tutor/avatar-tutor-asking.png',
+  thinking: '/avatar/tutor/avatar-tutor-thinking.png',
+  neutral:  '/avatar/tutor/avatar-tutor-neutral.png',
+  showing:  '/avatar/tutor/avatar-tutor-showing.png',
+  proud:    '/avatar/tutor/avatar-tutor-proud.png',
+  learning: '/avatar/tutor/avatar-tutor-learning.png',
+};
+
+function TutorAvatar({ mood, size = 100, style }: {
+  mood: AvatarMood;
+  size?: number;
+  style?: React.CSSProperties;
+}) {
+  return (
+    <img
+      src={AVATAR_SRC[mood]}
+      alt=""
+      width={size}
+      height={size}
+      style={{ objectFit: 'contain', display: 'block', ...style }}
+    />
+  );
+}
+
+// ============= UNIT ICON HELPER =============
+
+function UnitIcon({ emoji, size = 20, color = 'var(--blue)' }: { emoji: string; size?: number; color?: string }) {
+  const map: Record<string, React.ReactElement> = {
+    '👋': <HandWaving size={size} color={color} />,
+    '🎨': <Palette    size={size} color={color} />,
+    '👨‍👩‍👧': <UsersThree size={size} color={color} />,
+    '🫀': <Heart      size={size} color={color} />,
+    '❓': <Question   size={size} color={color} />,
+    '🏙️': <Buildings  size={size} color={color} />,
+    '🛒': <ShoppingCart size={size} color={color} />,
+    '🏥': <Stethoscope  size={size} color={color} />,
+    '🚌': <Bus          size={size} color={color} />,
+    '💼': <Briefcase    size={size} color={color} />,
+    '🗂️': <Cards        size={size} color={color} />,
+    '📝': <ForkKnife    size={size} color={color} />,
+    '💬': <ChatCircle   size={size} color={color} />,
   };
-  return <>{icons[tabId]}</>;
+  return map[emoji] ?? <span style={{ fontSize: size * 0.75 }}>{emoji}</span>;
+}
+
+// ============= TWO-VOICE AUDIO BUTTON =============
+
+function DualSpeaker({ textRo, speakFn, color = 'var(--blue)' }: {
+  textRo: string;
+  speakFn: (text: string, rate?: number, onEnd?: null, voice?: string) => void;
+  color?: string;
+}) {
+  return (
+    <div style={{ display: 'flex', gap: 4 }}>
+      <button
+        style={{ background: 'none', border: 'none', cursor: 'pointer', opacity: 0.55, padding: 2, display: 'flex', alignItems: 'center' }}
+        title="קול נשי"
+        onClick={() => speakFn(textRo, 0.88, null, VOICE_FEMALE)}
+      >
+        <SpeakerHigh size={16} color={color} weight="regular" />
+      </button>
+      <button
+        style={{ background: 'none', border: 'none', cursor: 'pointer', opacity: 0.55, padding: 2, display: 'flex', alignItems: 'center' }}
+        title="קול גברי"
+        onClick={() => speakFn(textRo, 0.88, null, VOICE_MALE)}
+      >
+        <SpeakerHigh size={16} color={color} weight="fill" />
+      </button>
+    </div>
+  );
 }
 
 // ============= LESSON MAP SCREEN (HOME TAB) =============
@@ -668,91 +745,75 @@ function LessonMapScreen({ user, onOpenLesson }: { user: User; onOpenLesson: (id
         </div>
       </div>
 
-      <div style={{ position: 'relative', paddingRight: 20 }}>
-        {/* Spine */}
-        <div style={{
-          position: 'absolute',
-          right: 39,
-          top: 20,
-          bottom: 20,
-          width: 2,
-          background: '#D5D9E2',
-          zIndex: 0,
-        }} />
-
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
         {LESSONS.map(lesson => {
           const progress   = user.lessonProgress[lesson.id];
           const sessions   = progress?.sessions ?? 0;
           const isUnlocked = lesson.id === 1 || (user.lessonProgress[lesson.id - 1]?.sessions ?? 0) >= 1;
-          const isActive   = lesson.id === user.currentLesson;
 
           return (
-            <div key={lesson.id} style={{
-              display: 'flex',
-              flexDirection: 'row-reverse',
-              alignItems: 'center',
-              marginBottom: 32,
-              position: 'relative',
-              zIndex: 1,
-              gap: 16,
-            }}>
-              <button
-                onClick={() => isUnlocked && onOpenLesson(lesson.id)}
-                disabled={!isUnlocked}
-                style={{
-                  width: 40, height: 40, borderRadius: '50%',
-                  background: isUnlocked ? lesson.color : '#D5D9E2',
-                  border: isActive ? `3px solid ${lesson.color}` : '3px solid transparent',
-                  boxShadow: isActive ? `0 0 0 4px ${lesson.color}25` : 'none',
-                  cursor: isUnlocked ? 'pointer' : 'default',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  flexShrink: 0, padding: 0,
-                }}
-              >
-                {isUnlocked
-                  ? <span style={{ color: '#fff', fontSize: 14, fontWeight: 700 }}>{lesson.id}</span>
-                  : <span style={{ fontSize: 16 }}>🔒</span>
-                }
-              </button>
-
-              <div style={{ flex: 1 }}>
-                <p style={{
-                  margin: '0 0 4px',
-                  fontSize: 15,
-                  fontWeight: isActive ? 500 : 400,
-                  color: isUnlocked ? '#1A1A1A' : '#6B7280',
-                  textAlign: 'right',
-                }}>
-                  {lesson.topic}
-                </p>
-
-                {isUnlocked && (
-                  <div style={{ display: 'flex', gap: 6, alignItems: 'center', justifyContent: 'flex-end' }}>
-                    {[1, 2, 3].map(i => (
-                      <div key={i} style={{
-                        width: 10, height: 10, borderRadius: '50%',
-                        background: i <= sessions ? lesson.color : 'transparent',
-                        border: `1.5px solid ${i <= sessions ? lesson.color : '#C8CDD8'}`,
-                      }} />
-                    ))}
-                    <button
-                      onClick={() => onOpenLesson(lesson.id)}
-                      style={{
-                        width: 20, height: 20, borderRadius: '50%',
-                        border: `1.5px solid ${lesson.color}`,
-                        background: 'transparent',
-                        color: lesson.color,
-                        cursor: 'pointer',
-                        fontSize: 14,
-                        display: 'flex', alignItems: 'center', justifyContent: 'center',
-                        padding: 0,
-                        fontWeight: 700,
-                      }}
-                    >+</button>
-                  </div>
-                )}
+            <button
+              key={lesson.id}
+              onClick={() => isUnlocked && onOpenLesson(lesson.id)}
+              disabled={!isUnlocked}
+              style={{
+                position: 'relative',
+                height: 62,
+                borderRadius: 14,
+                border: `2px solid ${lesson.color}`,
+                background: '#faf8f4',
+                overflow: 'hidden',
+                cursor: isUnlocked ? 'pointer' : 'default',
+                opacity: isUnlocked ? 1 : 0.4,
+                fontFamily: '"Rubik", system-ui',
+                width: '100%',
+                padding: 0,
+              }}
+            >
+              {/* כוכבי התקדמות — שמאל */}
+              <div style={{
+                position: 'absolute', left: 16, top: '50%',
+                transform: 'translateY(-50%)',
+                display: 'flex', gap: 2, alignItems: 'center',
+              }}>
+                {[1, 2, 3].map(i => (
+                  <Star
+                    key={i}
+                    size={28}
+                    color={lesson.color}
+                    weight={i <= sessions ? 'duotone' : 'regular'}
+                  />
+                ))}
               </div>
-            </div>
+
+              {/* שם נושא — מרכז ימין */}
+              <div style={{
+                position: 'absolute',
+                right: 74, left: 110,
+                top: '50%', transform: 'translateY(-50%)',
+                textAlign: 'right',
+                direction: 'rtl' as const,
+                fontSize: 16, fontWeight: 700,
+                color: isUnlocked ? '#1A1A1A' : '#9CA3AF',
+                whiteSpace: 'nowrap',
+              }}>
+                {lesson.topic}
+              </div>
+
+              {/* Badge — קצה ימין */}
+              <div style={{
+                position: 'absolute', right: -2, top: -2,
+                width: 62, height: 62,
+                background: lesson.color,
+                borderRadius: '0 14px 14px 0',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+              }}>
+                {isUnlocked
+                  ? <span style={{ color: '#fff', fontSize: 20, fontWeight: 600, fontFamily: '"Rubik", system-ui' }}>{lesson.id}</span>
+                  : <LockKey size={28} color="#fff" weight="regular" />
+                }
+              </div>
+            </button>
           );
         })}
       </div>
@@ -859,7 +920,10 @@ function DictionaryScreen() {
             color: view === v ? '#fff' : '#1F5FBF',
             fontFamily: '"Rubik", system-ui', fontSize: 13, fontWeight: view === v ? 700 : 400,
           }}>
-            {v === 'curriculum' ? '📚 מסלול לימוד' : '📖 דקדוק'}
+            {v === 'curriculum'
+              ? <><BookOpen size={14} style={{ marginLeft: 5 }} /> מסלול לימוד</>
+              : <><Cards    size={14} style={{ marginLeft: 5 }} /> דקדוק</>
+            }
           </button>
         ))}
       </div>
@@ -893,7 +957,7 @@ function SettingsScreen({ user, onUserChange }: { user: User; onUserChange: () =
             fontFamily: '"Rubik", system-ui', fontSize: 14, color: '#6B7280',
           }}
         >
-          🔄 החלף משתמש
+          <ArrowCounterClockwise size={14} style={{ marginLeft: 6 }} /> החלף משתמש
         </button>
       </div>
     </div>
@@ -971,6 +1035,14 @@ function LessonScreen({
 
       {/* Module content */}
       <div style={{ flex: 1, padding: 16, overflowY: 'auto' as const }}>
+        {/* Avatar strip — contextual per module */}
+        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+          {module === 'vocabulary' && <TutorAvatar mood="showing"   size={72} />}
+          {module === 'listening'  && <TutorAvatar mood="listening" size={72} />}
+          {module === 'speaking'   && <TutorAvatar mood="asking"    size={72} />}
+          {module === 'writing'    && <TutorAvatar mood="learning"  size={72} />}
+          {module === 'grammar'    && <TutorAvatar mood="thinking"  size={72} />}
+        </div>
         {module === 'vocabulary' && <VocabModule onProg={onProg} topic={lesson.topicRo} />}
         {module === 'listening'  && <ListenModule onProg={onProg} />}
         {module === 'speaking'   && <SpeakModule user={moduleUser} onProg={onProg} />}
@@ -1031,7 +1103,7 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
       {loading && <div className="ldcard"><div className="spin" /><p>טוען מילה...</p></div>}
       {!loading && card && !card.err && (
         <div className="vcardwrap"><div className="vcard">
-          {status && <div className={`vcard-status ${status === "known" ? "vs-known" : "vs-practice"}`}>{status === "known" ? "✓ ידוע!" : "🔄 לתרגול"}</div>}
+          {status && <div className={`vcard-status ${status === "known" ? "vs-known" : "vs-practice"}`} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>{status === "known" ? <><Check size={12} weight="bold" /> ידוע!</> : <><ArrowCounterClockwise size={12} /> לתרגול</>}</div>}
           <div className="vseg">
             <div className="vtrans">
               <div className="vcol-ro"><div className="vcol-lbl-ro">ROM</div><div className="wro">{card.word}</div></div>
@@ -1043,7 +1115,12 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
               <span className="wtag">{card.category}</span>
               <span className="wtag he">{card.type_he}</span>
             </div>
-            <button className="vaudio-btn" onClick={() => speakRo(card.word)}>🔊 השמע</button>
+            <button className="vaudio-btn" onClick={() => speakRo(card.word, 0.88, null, VOICE_FEMALE)}>
+              <SpeakerHigh size={22} weight="regular" style={{ marginLeft: 6 }} /> השמע — קול נשי
+            </button>
+            <button className="vaudio-btn" style={{ marginTop: 6 }} onClick={() => speakRo(card.word, 0.88, null, VOICE_MALE)}>
+              <SpeakerHigh size={22} weight="fill" style={{ marginLeft: 6 }} /> השמע — קול גברי
+            </button>
           </div>
           {card.forms?.length > 0 && (
             <div style={{ width: "100%" }}>
@@ -1051,7 +1128,7 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
               {card.forms.map((f: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
                 <div key={i} className="frow">
                   <div className="fval">
-                    <button className="snd-sm" onClick={() => speakRo(f.val)}>🔊</button>
+                    <button className="snd-sm" onClick={() => speakRo(f.val)}><SpeakerHigh size={16} /></button>
                     <span className="fval-txt">{f.val}</span>
                   </div>
                   <div className="flbl">{f.lbl}</div>
@@ -1060,7 +1137,7 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
             </div>
           )}
           <div className="exbox">
-            <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}>🔊</div>
+            <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}><SpeakerHigh size={16} /></div>
             <div className="exbox-text">
               <div className="exro">{card.example_ro}</div>
               <div className="exhe">{card.example_he}</div>
@@ -1069,8 +1146,8 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
         </div>
           {!status && (
             <div className="vnav">
-              <button className="vbtn prac" onClick={() => mark("practice")}>🔁 צריך עוד תרגול</button>
-              <button className="vbtn know" onClick={() => mark("known")}>✓ יודע!</button>
+              <button className="vbtn prac" onClick={() => mark("practice")} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}><ArrowCounterClockwise size={16} /> צריך עוד תרגול</button>
+              <button className="vbtn know" onClick={() => mark("known")} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}><Check size={16} weight="bold" /> יודע!</button>
             </div>
           )}
         </div>
@@ -1159,14 +1236,14 @@ function ListenModule({ onProg }: { onProg: (n: number) => void }) {
                 <div className="dspk">{l.speaker}{l.speaker_he ? ` — ${l.speaker_he}` : ""}</div>
                 <div className="dtxt">
                   {l.text}
-                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .45, fontSize: ".75rem" }} onClick={() => speakRo(l.text, 0.88, null, pickVoice(l.speaker))}>🔊</button>
+                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .45, padding: 2, display: 'flex', alignItems: 'center' }} onClick={() => speakRo(l.text, 0.88, null, pickVoice(l.speaker))}><SpeakerHigh size={16} /></button>
                 </div>
                 {showTrans && l.he && <div className="dtrans">↳ {l.he}</div>}
               </div>
             ))}
           </div>
           <div className="actrl">
-            <button className={`playbtn${playing ? " playing" : ""}`} onClick={() => playDial(1)}>{playing ? "⏹" : "▶"}</button>
+            <button className={`playbtn${playing ? " playing" : ""}`} onClick={() => playDial(1)} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 4 }}>{playing ? <Stop size={16} weight="fill" /> : <Play size={16} weight="fill" />}</button>
             <div className="atrack">
               <div className="aprog"><div className="afill" style={{ width: actLine >= 0 ? `${((actLine + 1) / dial.lines.length) * 100}%` : "0%" }} /></div>
               <div className="atime">{actLine >= 0 ? `שורה ${actLine + 1}/${dial.lines.length}` : `${dial.lines.length} שורות`}</div>
@@ -1182,7 +1259,7 @@ function ListenModule({ onProg }: { onProg: (n: number) => void }) {
           </div>
           {dial.questions.map((q: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
             <div key={i} className="qitem">
-              <div className="qro">{q.q_ro} <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .45, fontSize: ".75rem" }} onClick={() => speakRo(q.q_ro)}>🔊</button></div>
+              <div className="qro">{q.q_ro} <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .45, padding: 2, display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }} onClick={() => speakRo(q.q_ro)}><SpeakerHigh size={16} /></button></div>
               <div className="qhe">🇮🇱 {q.q_he}</div>
               <input className="qans" placeholder="כתוב תשובה..." value={answers[i] || ""} onChange={e => setAnswers(a => ({ ...a, [i]: e.target.value }))} onKeyDown={e => e.key === "Enter" && !checking[i] && check(i)} disabled={!!fb[i]} />
               {!fb[i] && <button className="ckbtn" onClick={() => check(i)} disabled={!answers[i]?.trim() || checking[i]}>{checking[i] ? "בודק..." : "בדוק"}</button>}
@@ -1280,7 +1357,7 @@ function SpeakModule({ user, onProg }: { user: ModuleUser; onProg: (n: number) =
             <div className="qlabel">שאלה — {q.topic || "B1"}</div>
             <div className="qtextro">{q.question_ro}</div>
             <div className="qtexthe">{q.question_he}</div>
-            <button className="sqbtn" onClick={() => speakRo(q.question_ro, 0.85)}>🔊 השמע שאלה</button>
+            <button className="sqbtn" onClick={() => speakRo(q.question_ro, 0.85)} style={{ display: 'flex', alignItems: 'center', gap: 6 }}><SpeakerHigh size={16} /> השמע שאלה</button>
           </div>
           <div className="micarea">
             <button className={`micbtn${recState === "listening" ? " rec" : ""}`} onClick={recState === "listening" ? stopRec : startRec}>
@@ -1312,7 +1389,7 @@ function SpeakModule({ user, onProg }: { user: ModuleUser; onProg: (n: number) =
                 <div style={{ fontSize: ".7rem", fontWeight: 700, color: "var(--muted)", textTransform: "uppercase" as const }}>גרסה מתוקנת</div>
                 <div style={{ fontStyle: "italic", fontSize: ".93rem", color: "var(--navy)" }}>
                   {fb.correction_ro}
-                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5 }} onClick={() => speakRo(fb.correction_ro)}>🔊</button>
+                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5, padding: 2, display: 'flex', alignItems: 'center' }} onClick={() => speakRo(fb.correction_ro)}><SpeakerHigh size={16} /></button>
                 </div>
               </div>
             )}
@@ -1375,7 +1452,7 @@ function WriteModule({ user, onProg }: { user: ModuleUser; onProg: (n: number) =
         )}
       </div>
       <div className="chatinp">
-        {msgs.length > 0 && <button className="nexbtn" onClick={() => send("התחל")} disabled={loading}>🔄</button>}
+        {msgs.length > 0 && <button className="nexbtn" onClick={() => send("התחל")} disabled={loading} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}><ArrowCounterClockwise size={16} /></button>}
         <textarea
           className="chatta"
           value={inp}
@@ -1484,9 +1561,28 @@ function CurriculumModule({ onProg }: { onProg: (n: number) => void }) {
   const [loading, setLoading] = useState(false);
   const [lessonView, setLessonView] = useState("vocab");
 
+  // Play a pre-generated static MP3; falls back to TTS API if file missing
+  const playStatic = (unitId: string, key: string, voiceSuffix: string, fallbackText: string) => {
+    const url = `/audio/${unitId}/${key}_${voiceSuffix}.mp3`;
+    const audio = new Audio(url);
+    audio.onerror = () => speakRo(fallbackText);
+    audio.play().catch(() => speakRo(fallbackText));
+  };
+
   const openUnit = async (unit: any) => { // eslint-disable-line @typescript-eslint/no-explicit-any
     if (activeUnit?.id === unit.id) { setActiveUnit(null); setLesson(null); return; }
     setActiveUnit(unit); setLesson(null); setLoading(true); setLessonView("vocab");
+    // Try static content first (pre-generated for שלב א)
+    try {
+      const res = await fetch(`/audio/${unit.id}/content.json`);
+      if (res.ok) {
+        const data = await res.json();
+        setLesson(data);
+        setLoading(false);
+        return;
+      }
+    } catch {}
+    // Fallback: generate via Claude
     try {
       const raw = await callAI([{ role: "user", content: `Mini-lesson for "${unit.name}" (${unit.sub}), category: ${unit.topic}. A1 level.` }], LESSON_SY);
       const p = parseJ(raw);
@@ -1514,7 +1610,7 @@ function CurriculumModule({ onProg }: { onProg: (n: number) => void }) {
               {stage.units.map(unit => (
                 <div key={unit.id}>
                   <div className="unit" onClick={() => openUnit(unit)}>
-                    <div className="unit-icon">{unit.icon}</div>
+                    <div className="unit-icon"><UnitIcon emoji={unit.icon} size={20} /></div>
                     <div className="unit-info"><div className="unit-name">{unit.name}</div><div className="unit-sub">{unit.sub}</div></div>
                     <span className="unit-badge new">פתח שיעור</span>
                   </div>
@@ -1544,7 +1640,10 @@ function CurriculumModule({ onProg }: { onProg: (n: number) => void }) {
                                   <div style={{ fontStyle: "italic", fontWeight: 700, color: "var(--navy)", direction: "ltr" as const }}>{w.ro}</div>
                                   <div style={{ fontSize: ".84rem", color: "var(--gold)", fontWeight: 600 }}>{w.he}</div>
                                 </div>
-                                <button style={{ background: "none", border: "none", cursor: "pointer", fontSize: "1rem", opacity: .5 }} onClick={() => speakRo(w.ro)}>🔊</button>
+                                <div style={{ display: 'flex', gap: 4 }}>
+                                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5, padding: 2, display: 'flex', alignItems: 'center' }} title="נקבה" onClick={() => playStatic(activeUnit.id, `vocab_${i}`, 'f1', w.ro)}><SpeakerHigh size={16} weight="regular" /></button>
+                                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5, padding: 2, display: 'flex', alignItems: 'center' }} title="זכר" onClick={() => playStatic(activeUnit.id, `vocab_${i}`, 'm1', w.ro)}><SpeakerHigh size={16} weight="fill" /></button>
+                                </div>
                               </div>
                             ))}
                           </div>
@@ -1554,7 +1653,9 @@ function CurriculumModule({ onProg }: { onProg: (n: number) => void }) {
                             {lesson.sentences?.map((s: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
                               <div key={i} style={{ background: "#fff", border: "1.5px solid var(--border)", borderRadius: "9px", padding: ".75rem 1rem" }}>
                                 <div style={{ fontStyle: "italic", color: "var(--navy)", direction: "ltr" as const, marginBottom: ".25rem", display: "flex", alignItems: "center", gap: ".4rem" }}>
-                                  {s.ro} <button style={{ background: "none", border: "none", cursor: "pointer", fontSize: ".8rem", opacity: .5 }} onClick={() => speakRo(s.ro)}>🔊</button>
+                                  {s.ro}
+                                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5, padding: 2, display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }} title="נקבה" onClick={() => playStatic(activeUnit.id, `sent_${i}`, 'f1', s.ro)}><SpeakerHigh size={16} weight="regular" /></button>
+                                  <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .5, padding: 2, display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }} title="זכר" onClick={() => playStatic(activeUnit.id, `sent_${i}`, 'm1', s.ro)}><SpeakerHigh size={16} weight="fill" /></button>
                                 </div>
                                 <div style={{ fontSize: ".84rem", color: "var(--muted)" }}>{s.he}</div>
                                 {s.note && <div style={{ fontSize: ".76rem", color: "var(--amber)", marginTop: ".2rem" }}>💡 {s.note}</div>}
@@ -1572,9 +1673,14 @@ function CurriculumModule({ onProg }: { onProg: (n: number) => void }) {
                               <div style={{ fontSize: ".72rem", fontWeight: 700, color: "var(--muted)", textTransform: "uppercase" as const, marginBottom: ".5rem" }}>עברית</div>
                               <div style={{ fontSize: ".9rem", whiteSpace: "pre-line", color: "var(--muted)", direction: "rtl" as const, lineHeight: 1.7 }}>{lesson.mini_he}</div>
                             </div>
-                            <button style={{ background: "var(--blue)", color: "#fff", border: "none", padding: ".6rem 1.2rem", borderRadius: "var(--r-sm)", cursor: "pointer", fontFamily: "'Rubik',sans-serif", fontSize: ".85rem", fontWeight: 700, alignSelf: "flex-start" as const }} onClick={() => speakRo(lesson.mini_ro, 0.8)}>
-                              🔊 השמע דיאלוג
-                            </button>
+                            <div style={{ display: 'flex', gap: 8 }}>
+                              <button style={{ background: "var(--blue)", color: "#fff", border: "none", padding: ".6rem 1.2rem", borderRadius: "var(--r-sm)", cursor: "pointer", fontFamily: "'Rubik',sans-serif", fontSize: ".85rem", fontWeight: 700, display: 'flex', alignItems: 'center', gap: 5 }} onClick={() => playStatic(activeUnit.id, 'dial_0', 'f1', lesson.mini_ro)}>
+                                <SpeakerHigh size={16} weight="regular" /> נקבה
+                              </button>
+                              <button style={{ background: "var(--navy)", color: "#fff", border: "none", padding: ".6rem 1.2rem", borderRadius: "var(--r-sm)", cursor: "pointer", fontFamily: "'Rubik',sans-serif", fontSize: ".85rem", fontWeight: 700, display: 'flex', alignItems: 'center', gap: 5 }} onClick={() => playStatic(activeUnit.id, 'dial_0', 'm1', lesson.mini_ro)}>
+                                <SpeakerHigh size={16} weight="fill" /> זכר
+                              </button>
+                            </div>
                           </div>
                         )}
                       </>)}

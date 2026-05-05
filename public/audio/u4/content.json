@@ -1,0 +1,58 @@
+{
+  "vocab": [
+    {
+      "ro": "mamă",
+      "he": "אמא",
+      "emoji": "👩"
+    },
+    {
+      "ro": "tată",
+      "he": "אבא",
+      "emoji": "👨"
+    },
+    {
+      "ro": "frate",
+      "he": "אח",
+      "emoji": "👦"
+    },
+    {
+      "ro": "soră",
+      "he": "אחות",
+      "emoji": "👧"
+    },
+    {
+      "ro": "familie",
+      "he": "משפחה",
+      "emoji": "👨‍👩‍👧‍👦"
+    },
+    {
+      "ro": "bunic",
+      "he": "סבא",
+      "emoji": "👴"
+    }
+  ],
+  "sentences": [
+    {
+      "ro": "Aceasta este familia mea.",
+      "he": "זו משפחתי.",
+      "note": "הצגת משפחה"
+    },
+    {
+      "ro": "Mama mea este profesor.",
+      "he": "אמא שלי היא מורה.",
+      "note": "תיאור של סוג עבודה"
+    },
+    {
+      "ro": "Fratele meu se numește Ion.",
+      "he": "האח שלי קוראים לו יוֹן.",
+      "note": "הצגת שם של בן משפחה"
+    },
+    {
+      "ro": "Eu am o soră și doi frați.",
+      "he": "יש לי אחות ושני אחים.",
+      "note": "ספירת חברי משפחה"
+    }
+  ],
+  "mini_ro": "- Cine este în familia ta?\n- Mama, tata, fratele și sora mea.\n- Și bunicii tăi?\n- Da, bunicii mei sunt acasă.",
+  "mini_he": "- מי יש לך במשפחה?\n- אמא, אבא, אח ואחות שלי.\n- וגם הסבים שלך?\n- כן, הסבים שלי בבית."
+}

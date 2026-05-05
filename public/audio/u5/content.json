@@ -1,0 +1,58 @@
+{
+  "vocab": [
+    {
+      "ro": "cap",
+      "he": "ראש",
+      "emoji": "🧠"
+    },
+    {
+      "ro": "mâini",
+      "he": "ידיים",
+      "emoji": "🙌"
+    },
+    {
+      "ro": "picioare",
+      "he": "רגליים",
+      "emoji": "🦵"
+    },
+    {
+      "ro": "ochi",
+      "he": "עיניים",
+      "emoji": "👀"
+    },
+    {
+      "ro": "nas",
+      "he": "אף",
+      "emoji": "👃"
+    },
+    {
+      "ro": "gură",
+      "he": "פה",
+      "emoji": "👄"
+    }
+  ],
+  "sentences": [
+    {
+      "ro": "Aceasta este capul meu.",
+      "he": "זה הראש שלי.",
+      "note": "prezentarea unei părți a corpului"
+    },
+    {
+      "ro": "Am două mâini și două picioare.",
+      "he": "יש לי שתי ידיים ושתי רגליים.",
+      "note": "descrierea corpului"
+    },
+    {
+      "ro": "Ochii mei sunt albaștri.",
+      "he": "העיניים שלי כחולות.",
+      "note": "descrierea trăsăturilor fizice"
+    },
+    {
+      "ro": "Unde este nasul tău?",
+      "he": "איפה האף שלך?",
+      "note": "întrebare despre corp"
+    }
+  ],
+  "mini_ro": "- Ce este asta?\n- Acesta este capul meu.\n- Și aceasta sunt mâinile mele!",
+  "mini_he": "- מה זה?\n- זה הראש שלי.\n- וזו ידיים שלי!"
+}

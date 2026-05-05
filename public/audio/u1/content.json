@@ -1,0 +1,58 @@
+{
+  "vocab": [
+    {
+      "ro": "bună ziua",
+      "he": "שלום",
+      "emoji": "👋"
+    },
+    {
+      "ro": "mulțumesc",
+      "he": "תודה",
+      "emoji": "🙏"
+    },
+    {
+      "ro": "de nada",
+      "he": "בעד הנכון",
+      "emoji": "😊"
+    },
+    {
+      "ro": "cum te numești?",
+      "he": "איך קוראים לך?",
+      "emoji": "❓"
+    },
+    {
+      "ro": "mă numesc...",
+      "he": "אני קוראים לי...",
+      "emoji": "👤"
+    },
+    {
+      "ro": "plăcut",
+      "he": "נחמד",
+      "emoji": "✨"
+    }
+  ],
+  "sentences": [
+    {
+      "ro": "Bună ziua! Mă numesc Ion.",
+      "he": "שלום! אני קוראים לי יוני.",
+      "note": "ברכה רשמית והצגה עצמית"
+    },
+    {
+      "ro": "Mulțumesc foarte mult!",
+      "he": "תודה רבה!",
+      "note": "תודה חם וכנוסה"
+    },
+    {
+      "ro": "De nada! Plăcut de cunoștință!",
+      "he": "בעד הנכון! נחמד להכיר אותך!",
+      "note": "תגובה לברכה"
+    },
+    {
+      "ro": "Cum te numești tu?",
+      "he": "איך קוראים לך אתה?",
+      "note": "שאלה על השם"
+    }
+  ],
+  "mini_ro": "- Bună ziua! Mă numesc Ion.\n- Plăcut de cunoștință!\n- Mulțumesc! Cum te numești?",
+  "mini_he": "- שלום! אני קוראים לי יוני.\n- נחמד להכיר אותך!\n- תודה! איך קוראים לך?"
+}
