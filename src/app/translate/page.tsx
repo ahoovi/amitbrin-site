@@ -474,7 +474,14 @@ export default function TranslateApp() {
     <>
       <style>{S}</style>
       {appScreen === 'login' && (
-        <LoginScreen users={users} onSelectUser={selectUser} />
+        <LoginScreen users={users} onSelectUser={selectUser} onRestoreProgress={(userId, code) => {
+          try {
+            const progress = JSON.parse(atob(code));
+            const updated = users.map(u => u.id === userId ? { ...u, lessonProgress: progress } : u);
+            saveUsers(updated);
+            return true;
+          } catch { return false; }
+        }} />
       )}
       {appScreen === 'app' && currentUser && (
         <AppShell
@@ -501,7 +508,28 @@ export default function TranslateApp() {
 
 // ============= LOGIN SCREEN =============
 
-function LoginScreen({ users, onSelectUser }: { users: User[]; onSelectUser: (u: User) => void }) {
+function LoginScreen({ users, onSelectUser, onRestoreProgress }: {
+  users: User[];
+  onSelectUser: (u: User) => void;
+  onRestoreProgress: (userId: string, code: string) => boolean;
+}) {
+  const [showRestore, setShowRestore] = useState(false);
+  const [restoreCode, setRestoreCode] = useState('');
+  const [restoreMsg, setRestoreMsg] = useState<{ok: boolean; text: string} | null>(null);
+
+  const handleRestore = () => {
+    const clean = restoreCode.trim();
+    const m = clean.match(/^RO-([a-z]+)-(.+)$/i);
+    if (!m) { setRestoreMsg({ ok: false, text: 'הקוד לא נראה תקין — ודאי שהעתקת את כולו' }); return; }
+    const ok = onRestoreProgress(m[1].toLowerCase(), m[2]);
+    if (ok) {
+      setRestoreMsg({ ok: true, text: '✅ ההתקדמות שוחזרה! עכשיו בחרי את השם שלך מעלה' });
+      setRestoreCode('');
+    } else {
+      setRestoreMsg({ ok: false, text: 'משהו לא הסתדר — נסי שוב' });
+    }
+  };
+
   const bgStyle: React.CSSProperties = {
     background: '#172A46',
     minHeight: '100vh',
@@ -547,6 +575,65 @@ function LoginScreen({ users, onSelectUser }: { users: User[]; onSelectUser: (u:
             <span style={{ color: '#718096', fontSize: 13 }}>{user.totalSessions} פגישות</span>
           </button>
         ))}
+      </div>
+
+      {/* Restore progress */}
+      <div style={{ width: '100%', maxWidth: 320 }}>
+        <button
+          onClick={() => { setShowRestore(v => !v); setRestoreMsg(null); }}
+          style={{
+            width: '100%', background: 'transparent', border: 'none', cursor: 'pointer',
+            color: '#718096', fontSize: 13, fontFamily: '"Rubik", system-ui',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+            padding: '6px 0',
+          }}
+        >
+          <ArrowCounterClockwise size={13} />
+          {showRestore ? 'סגור' : 'יש לי קוד גיבוי — שחזר התקדמות'}
+        </button>
+
+        {showRestore && (
+          <div style={{
+            background: 'rgba(255,255,255,.05)',
+            border: '1px solid rgba(255,255,255,.1)',
+            borderRadius: 12,
+            padding: 16,
+            marginTop: 8,
+            direction: 'rtl',
+          }}>
+            <p style={{ color: '#a0aec0', fontSize: 12, margin: '0 0 10px', lineHeight: 1.6 }}>
+              הדביקי כאן את הקוד שקיבלת מהגדרות ← ומאשרת:
+            </p>
+            <textarea
+              value={restoreCode}
+              onChange={e => { setRestoreCode(e.target.value); setRestoreMsg(null); }}
+              placeholder="RO-neta-eyJ..."
+              rows={3}
+              style={{
+                width: '100%', background: 'rgba(255,255,255,.08)', border: '1px solid rgba(255,255,255,.15)',
+                borderRadius: 8, padding: '8px 10px', color: '#fff', fontSize: 11,
+                fontFamily: 'monospace', resize: 'none', direction: 'ltr',
+                boxSizing: 'border-box',
+              }}
+            />
+            <button
+              onClick={handleRestore}
+              disabled={!restoreCode.trim()}
+              style={{
+                marginTop: 8, width: '100%', background: restoreCode.trim() ? '#1F5FBF' : 'rgba(255,255,255,.1)',
+                color: '#fff', border: 'none', borderRadius: 8, padding: '9px 0',
+                fontFamily: '"Rubik", system-ui', fontSize: 14, fontWeight: 600, cursor: restoreCode.trim() ? 'pointer' : 'not-allowed',
+              }}
+            >
+              שחזר
+            </button>
+            {restoreMsg && (
+              <p style={{ margin: '8px 0 0', fontSize: 12, color: restoreMsg.ok ? '#68d391' : '#fc8181', lineHeight: 1.5 }}>
+                {restoreMsg.text}
+              </p>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );
@@ -936,16 +1023,43 @@ function DictionaryScreen() {
 // ============= SETTINGS SCREEN =============
 
 function SettingsScreen({ user, onUserChange }: { user: User; onUserChange: () => void }) {
+  const [copied, setCopied] = useState(false);
+  const [showCode, setShowCode] = useState(false);
+
+  const backupCode = `RO-${user.id}-${btoa(JSON.stringify(user.lessonProgress))}`;
+
+  const copyCode = async () => {
+    try {
+      await navigator.clipboard.writeText(backupCode);
+    } catch {
+      // fallback: select text
+      const el = document.getElementById('backup-code-text');
+      if (el) {
+        const range = document.createRange();
+        range.selectNodeContents(el);
+        window.getSelection()?.removeAllRanges();
+        window.getSelection()?.addRange(range);
+      }
+    }
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2500);
+  };
+
+  const card: React.CSSProperties = {
+    background: '#fff',
+    border: '1.5px solid #E5E9F0',
+    borderRadius: 12,
+    padding: 16,
+    boxShadow: '0 1px 2px rgba(0,0,0,.05)',
+    marginBottom: 12,
+  };
+
   return (
     <div style={{ padding: 16, direction: 'rtl' as const }}>
-      <h2 style={{ fontSize: 20, fontWeight: 500, color: '#1A1A1A', margin: '0 0 24px' }}>הגדרות</h2>
-      <div style={{
-        background: '#fff',
-        border: '1px solid #E5E9F020',
-        borderRadius: 12,
-        padding: 16,
-        boxShadow: '0 1px 2px rgba(0,0,0,.05)',
-      }}>
+      <h2 style={{ fontSize: 20, fontWeight: 500, color: '#1A1A1A', margin: '0 0 20px' }}>הגדרות</h2>
+
+      {/* User card */}
+      <div style={card}>
         <p style={{ margin: '0 0 4px', fontSize: 13, color: '#6B7280' }}>משתמש נוכחי</p>
         <p style={{ margin: '0 0 16px', fontSize: 18, fontWeight: 500, color: '#1A1A1A' }}>{user.name}</p>
         <button
@@ -955,9 +1069,66 @@ function SettingsScreen({ user, onUserChange }: { user: User; onUserChange: () =
             background: 'transparent', border: '1.5px solid #E5E9F0',
             borderRadius: 8, cursor: 'pointer',
             fontFamily: '"Rubik", system-ui', fontSize: 14, color: '#6B7280',
+            display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
           }}
         >
-          <ArrowCounterClockwise size={14} style={{ marginLeft: 6 }} /> החלף משתמש
+          <ArrowCounterClockwise size={14} /> החלף משתמש
+        </button>
+      </div>
+
+      {/* Backup card */}
+      <div style={card}>
+        <p style={{ margin: '0 0 4px', fontSize: 15, fontWeight: 600, color: '#1A1A1A' }}>💾 קוד גיבוי</p>
+        <p style={{ margin: '0 0 14px', fontSize: 13, color: '#6B7280', lineHeight: 1.6 }}>
+          שמרי את הקוד הזה ← ותוכלי לשחזר את ההתקדמות שלך בכל מכשיר.
+        </p>
+
+        {/* Steps */}
+        <div style={{ background: '#F7F2EA', borderRadius: 8, padding: '10px 14px', marginBottom: 14 }}>
+          {[
+            'לחצי "העתק קוד" 👇',
+            'פתחי פתקים (Notes) ← הדביקי שם',
+            'הפתק יסתנך לכל המכשירים שלך',
+            'בכניסה הבאה: "יש לי קוד גיבוי" ← הדביקי',
+          ].map((step, i) => (
+            <div key={i} style={{ display: 'flex', gap: 8, marginBottom: i < 3 ? 6 : 0, alignItems: 'flex-start' }}>
+              <span style={{ background: '#1F5FBF', color: '#fff', borderRadius: '50%', width: 18, height: 18, fontSize: 10, fontWeight: 700, display: 'flex', alignItems: 'center', justifyContent: 'center', flexShrink: 0, marginTop: 1 }}>{i + 1}</span>
+              <span style={{ fontSize: 12, color: '#374151', lineHeight: 1.5 }}>{step}</span>
+            </div>
+          ))}
+        </div>
+
+        {/* Code preview toggle */}
+        <button
+          onClick={() => setShowCode(v => !v)}
+          style={{ background: 'none', border: 'none', color: '#6B7280', fontSize: 12, cursor: 'pointer', padding: '0 0 8px', fontFamily: '"Rubik", system-ui' }}
+        >
+          {showCode ? '▲ הסתר קוד' : '▼ הצג קוד'}
+        </button>
+        {showCode && (
+          <div
+            id="backup-code-text"
+            style={{
+              background: '#F3F4F6', borderRadius: 8, padding: '8px 10px',
+              fontSize: 10, fontFamily: 'monospace', wordBreak: 'break-all',
+              color: '#374151', direction: 'ltr', marginBottom: 10,
+              maxHeight: 60, overflow: 'auto', lineHeight: 1.4,
+            }}
+          >
+            {backupCode}
+          </div>
+        )}
+
+        <button
+          onClick={copyCode}
+          style={{
+            width: '100%', background: copied ? '#16a34a' : '#1F5FBF',
+            color: '#fff', border: 'none', borderRadius: 8, padding: '11px 0',
+            fontFamily: '"Rubik", system-ui', fontSize: 14, fontWeight: 700, cursor: 'pointer',
+            transition: 'background .2s', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6,
+          }}
+        >
+          {copied ? <><Check size={15} /> הועתק!</> : <><SpeakerHigh size={0} style={{display:'none'}} />📋 העתק קוד</>}
         </button>
       </div>
     </div>
