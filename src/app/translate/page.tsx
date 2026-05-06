@@ -52,7 +52,7 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 
 /* ── Vocab module ── */
 .vcardwrap{margin-bottom:1.1rem}
-.vcard{background:var(--surface);border-radius:20px;box-shadow:0 4px 20px rgba(21,113,239,.12);overflow:hidden;position:relative}
+.vcard{background:#fff;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,.06),0 4px 20px rgba(21,112,239,.08);overflow:hidden;position:relative}
 .vcard-status{position:absolute;top:1rem;right:1rem;padding:.28rem .8rem;border-radius:99px;font-size:.76rem;font-weight:700;transition:all .3s;z-index:2}
 .vs-known{background:#dcfce7;color:var(--green)}
 .vs-practice{background:#fff3e0;color:var(--amber)}
@@ -60,52 +60,55 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .vtrans{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 16px;width:100%;gap:8px}
 .vcol-ro{display:flex;flex-direction:column;align-items:flex-start;flex:1;min-width:0}
 .vcol-lbl-ro{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);margin-bottom:2px;width:100%}
-.wro{font-family:'Rubik',sans-serif;font-size:clamp(18px,5.5vw,28px);font-weight:700;line-height:1.2;color:var(--navy);direction:ltr;overflow-wrap:break-word;word-break:break-word;width:100%}
-.wemoji-wrap{display:flex;justify-content:center;align-items:center;flex-shrink:0;width:52px;height:52px}
+.wro{font-family:'Rubik',sans-serif;font-size:clamp(22px,7vw,40px);font-weight:700;line-height:1.2;color:#1f5fbf;direction:ltr;overflow-wrap:break-word;word-break:break-word;width:100%}
+.wemoji-wrap{display:flex;justify-content:center;align-items:center;flex-shrink:0;width:70px;height:70px}
 .vcol-he{display:flex;flex-direction:column;align-items:flex-end;flex:1;min-width:0}
 .vcol-lbl-he{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);text-align:right;margin-bottom:2px;width:100%}
-.whe{font-size:clamp(16px,5vw,24px);font-weight:700;line-height:1.2;color:var(--blue);direction:rtl;text-align:right;width:100%;overflow-wrap:break-word}
-.wtype-row{display:flex;flex-direction:row;justify-content:flex-end;align-items:center;gap:6px;width:calc(100% - 32px);flex-wrap:wrap}
-.wtag{display:flex;align-items:center;padding:5px 8px;border-radius:99px;font-size:11px;font-weight:600;line-height:13px;color:var(--muted);border:1px solid var(--border);background:transparent;white-space:nowrap;direction:ltr}
-.wtag.he{direction:rtl;color:var(--blue);border-color:rgba(21,113,239,.3)}
-.vaudio-row{display:flex;gap:8px;padding:0 16px;width:100%}
-.vaudio-pill{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border:none;border-radius:10px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:13px;font-weight:600;transition:all .2s}
-.vaudio-pill.f{background:var(--blue-l);color:var(--blue)}
-.vaudio-pill.f:hover{background:var(--blue);color:#fff}
-.vaudio-pill.m{background:var(--navy);color:#fff;opacity:.85}
-.vaudio-pill.m:hover{opacity:1}
-/* keep old .vaudio-btn for backwards compat */
+.whe{font-size:clamp(22px,7vw,40px);font-weight:700;line-height:1.2;color:#1f5fbf;direction:rtl;text-align:right;width:100%;overflow-wrap:break-word}
+.wtype-row{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:8px;width:calc(100% - 32px);flex-wrap:wrap}
+.wtag{display:flex;align-items:center;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:400;line-height:18px;color:var(--muted);border:1px solid rgba(107,115,126,0.3);background:transparent;white-space:nowrap;direction:ltr}
+.wtag.he{direction:rtl;color:#195dbb;border-color:#1f73e6;font-weight:600}
+.wtag.gender{background:#195dbb;border-color:#1f73e6;color:#195dbb;font-size:17px;padding:2px 8px}
+.vaudio-row{display:flex;gap:20px;padding:0 16px;width:100%}
+.vaudio-pill{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;border:1px solid #1f73e6;border-radius:12px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:22px;font-weight:400;transition:all .2s;background:linear-gradient(90deg,rgba(55,91,166,0.08),rgba(55,91,166,0.08)),#fff;box-shadow:0 1px 1px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.12);color:#195dbb}
+.vaudio-pill:hover{background:linear-gradient(90deg,rgba(55,91,166,0.18),rgba(55,91,166,0.18)),#fff}
+.vaudio-pill-label{font-size:20px;font-weight:400;color:#195dbb;white-space:nowrap}
+.vaudio-pill-icon{display:flex;align-items:center;justify-content:center;color:#195dbb}
 .vaudio-btn{display:none}
-.ftable-hdr{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:12px 25px 11px 26px;background:var(--blue-l);font-size:11px;font-weight:700;line-height:13px;color:var(--blue);width:100%}
-.frow{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 24px;height:36px;width:100%}
-.frow:nth-child(even){background:var(--blue-l);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.frow:nth-child(odd){background:#fff}
-.fval{display:flex;flex-direction:row;align-items:center;gap:4px}
-.snd-sm{display:flex;justify-content:center;align-items:center;padding:7px;width:22px;height:22px;border-radius:99px;border:none;cursor:pointer;background:transparent;font-size:8px;color:var(--blue);flex-shrink:0}
-.fval-txt{font-size:13px;font-weight:600;line-height:16px;color:var(--navy);direction:ltr;white-space:nowrap}
-.flbl{font-size:12px;font-weight:400;line-height:15px;color:var(--muted);direction:rtl;white-space:nowrap}
-.exbox{display:flex;flex-direction:row;align-items:center;padding:2px;gap:8px;background:var(--blue-l);border-radius:10px;margin:0 16px 20px;width:calc(100% - 32px)}
-.exbox-icon{display:flex;justify-content:center;align-items:center;padding:7px;width:36px;min-width:36px;background:transparent;border-radius:8px;color:var(--blue);cursor:pointer;align-self:center}
-.exbox-text{display:flex;flex-direction:column;align-items:flex-start;gap:9px;flex:1}
-.exro{font-size:14px;font-weight:400;line-height:17px;color:var(--navy);direction:ltr;width:100%}
-.exhe{font-size:13px;font-weight:400;line-height:16px;color:var(--muted);direction:rtl;width:100%}
+.ftable-hdr{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 20px;background:#195dbb;font-size:14px;font-weight:700;line-height:18px;color:#fff;width:100%;letter-spacing:0.02em}
+.frow{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 20px;height:44px;width:100%;border-bottom:1px solid rgba(107,115,126,0.2)}
+.frow:nth-child(even){background:#fff}
+.frow:nth-child(odd){background:#f9f3ea}
+.fval{display:flex;flex-direction:row;align-items:center;gap:6px}
+.snd-sm{display:flex;justify-content:center;align-items:center;padding:4px;width:28px;height:28px;border-radius:99px;border:none;cursor:pointer;background:transparent;color:var(--blue);flex-shrink:0}
+.fval-txt{font-size:22px;font-weight:500;line-height:24px;color:#010726;direction:ltr;white-space:nowrap}
+.flbl{font-size:22px;font-weight:500;line-height:24px;color:#010726;direction:rtl;white-space:nowrap}
+.exbox{display:flex;flex-direction:row;align-items:center;padding:14px 20px;gap:12px;background:rgba(130,180,250,0.18);border:1px solid rgba(107,115,126,0.25);border-radius:0;margin:0;width:100%}
+.exbox:first-of-type{border-radius:0}
+.exbox-icon{display:flex;justify-content:center;align-items:center;width:32px;min-width:32px;color:var(--blue);cursor:pointer;flex-shrink:0}
+.exbox-ro{flex:1;font-size:18px;font-weight:400;line-height:1.5;color:var(--navy);direction:ltr}
+.exbox-he{flex:1;font-size:18px;font-weight:400;line-height:1.5;color:var(--navy);direction:rtl;text-align:right}
+/* legacy — keep for back-compat */
+.exbox-text{display:none}
+.exro{display:none}
+.exhe{display:none}
 .vnav{display:flex;flex-direction:row;align-items:center;gap:20px;margin-top:16px}
-.vbtn{flex:1;height:72px;border-radius:12px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:14px;font-weight:700;line-height:17px;border:2px solid;transition:all .2s;display:flex;align-items:center;justify-content:center}
-.vbtn.know{background:var(--blue);color:#fff;border-color:var(--blue);box-shadow:0 4px 16px rgba(21,113,239,.3)}
+.vbtn{border-radius:12px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:20px;font-weight:600;line-height:1;border:1.5px solid;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 20px;box-shadow:0 1px 1px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.15)}
+.vbtn.know{flex:1;background:#195dbb;color:#fff;border-color:#1f73e6}
 .vbtn.know:hover{background:var(--blue-d)}
-.vbtn.prac{background:#fff;color:var(--amber);border-color:var(--amber)}
-.vbtn.prac:hover{background:#fffbf0}
-.vprow{display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem}
+.vbtn.prac{background:#fff;color:#d32732;border-color:#d32732;flex-shrink:0}
+.vbtn.prac:hover{background:#fff5f5}
+.vprow{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
 .vpbar{flex:1;background:var(--blue-l);border-radius:99px;height:8px;overflow:hidden;display:flex}
 .vpfill{background:var(--blue);height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .vpfill-review{background:var(--red);height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .vstats{font-size:12px;color:var(--muted);white-space:nowrap}
-.tutor-banner{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-height:60px}
-.tutor-bubble{border-radius:12px 12px 12px 4px;padding:9px 13px;font-size:13px;font-weight:600;direction:rtl;flex:1;line-height:1.45;transition:all .3s}
-.tutor-bubble.ok{background:#dcfce7;color:#16a34a}
-.tutor-bubble.coach{background:#fff3e0;color:#d97706}
-.tutor-bubble.info{background:var(--blue-l);color:var(--blue)}
-.tutor-bubble.proud{background:linear-gradient(135deg,#fef3c7,#dcfce7);color:#15803d;font-size:14px}
+.tutor-banner{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-height:80px}
+.tutor-bubble{border-radius:16px 16px 16px 4px;padding:12px 16px;font-size:15px;font-weight:600;direction:rtl;flex:1;line-height:1.5;transition:all .3s;position:relative}
+.tutor-bubble.ok{background:#375ba6;color:#fff}
+.tutor-bubble.coach{background:#375ba6;color:#fff}
+.tutor-bubble.info{background:#375ba6;color:#fff}
+.tutor-bubble.proud{background:linear-gradient(135deg,#1f5fbf,#375ba6);color:#fff;font-size:15px}
 
 /* ── Listening module ── */
 .dcard{background:var(--surface);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:1.1rem}
@@ -1166,7 +1169,7 @@ function LessonScreen({
 
   return (
     <div style={{
-      background: '#172A46',
+      background: '#F7F2EA',
       minHeight: '100vh',
       fontFamily: '"Rubik", system-ui',
       maxWidth: 430,
@@ -1176,11 +1179,12 @@ function LessonScreen({
     }}>
       {/* Header */}
       <div style={{
-        padding: 16,
+        padding: '12px 16px',
         display: 'flex',
         alignItems: 'center',
         gap: 12,
-        borderBottom: `1px solid ${lesson.color}30`,
+        background: '#fff',
+        borderBottom: `1px solid rgba(107,115,126,0.2)`,
         direction: 'rtl' as const,
       }}>
         <button
@@ -1188,16 +1192,19 @@ function LessonScreen({
           style={{ background: 'none', border: 'none', color: '#6B7280', cursor: 'pointer', fontSize: 20, padding: 0, lineHeight: 1 }}
         >→</button>
         <div style={{ flex: 1 }}>
-          <p style={{ margin: 0, fontSize: 11, color: lesson.color }}>שיעור {lesson.id}</p>
-          <p style={{ margin: 0, fontSize: 15, color: '#fff', fontWeight: 500 }}>{lesson.topic}</p>
+          <p style={{ margin: 0, fontSize: 11, color: lesson.color, fontStyle: 'italic', direction: 'ltr' as const }}>{lesson.topicRo}</p>
+          <p style={{ margin: 0, fontSize: 16, color: '#1f5fbf', fontWeight: 700 }}>{lesson.topic}</p>
         </div>
-        <span style={{ fontSize: 14, color: '#a0aec0', fontStyle: 'italic', direction: 'ltr' as const }}>
-          {lesson.topicRo}
-        </span>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+          <div style={{ width: 24, height: 24, borderRadius: '50%', background: '#1f5fbf', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', fontWeight: 700, fontSize: 13 }}>
+            {lesson.id}
+          </div>
+          <span style={{ fontSize: 18, color: '#6B7280' }}>→</span>
+        </div>
       </div>
 
       {/* Module tabs */}
-      <div style={{ display: 'flex', borderBottom: '1px solid rgba(255,255,255,.1)', overflowX: 'auto' as const, direction: 'rtl' as const }}>
+      <div style={{ display: 'flex', borderBottom: '1px solid rgba(107,115,126,0.2)', overflowX: 'auto' as const, direction: 'rtl' as const, background: '#fff' }}>
         {modules.map(m => {
           const active = module === m;
           return (
@@ -1410,19 +1417,19 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
   }
 
   // ── Normal card view ─────────────────────────────────────────────────────
-  const emojiSize = (card?.word?.length ?? 0) > 9 ? 32 : 44;
+  const emojiSize = (card?.word?.length ?? 0) > 9 ? 44 : 60;
 
   return (
     <div>
       {/* Avatar banner */}
       <div className="tutor-banner">
-        <TutorAvatar mood={avatarMood} size={58} />
+        <TutorAvatar mood={avatarMood} size={100} />
         {avatarMsg ? (
           <div className={`tutor-bubble ${avatarMood === 'approve' ? 'ok' : avatarMood === 'coaching' ? 'coach' : 'proud'}`}>
             {avatarMsg}
           </div>
         ) : (
-          <div className="tutor-bubble info" style={{ opacity: 0.7 }}>
+          <div className="tutor-bubble info">
             {phase === 'review'
               ? `חזרה על ${reviewCount + 1} ${reviewCount === 0 ? 'מילה' : 'מילים'}`
               : `${SESSION_TARGET - newLeft + 1}/${SESSION_TARGET} מילה`}
@@ -1432,11 +1439,16 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
 
       {/* Two-color progress bar */}
       <div className="vprow">
+        <div style={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+          {[1, 2, 3].map(i => (
+            <Star key={i} size={20} color="#1F5FBF" weight={i <= Math.floor(knownCount / (SESSION_TARGET / 3)) ? 'duotone' : 'regular'} />
+          ))}
+        </div>
+        <div className="vstats">{knownCount}/{SESSION_TARGET} ידועות</div>
         <div className="vpbar">
           <div className="vpfill"        style={{ width: `${pctKnown}%` }} />
           <div className="vpfill-review" style={{ width: `${pctReview}%` }} />
         </div>
-        <div className="vstats">{knownCount}/{SESSION_TARGET} ידועות</div>
       </div>
 
       {loading && <div className="ldcard"><div className="spin" /><p>טוען מילה...</p></div>}
@@ -1455,35 +1467,42 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
             )}
 
             <div className="vseg">
-              {/* Word + emoji + translation row — flex, no fixed widths */}
+              {/* Word + emoji + translation row — Romanian LEFT, Hebrew RIGHT */}
               <div className="vtrans">
-                <div className="vcol-he">
-                  <div className="vcol-lbl-he">עברית</div>
-                  <div className="whe">{card.translation_he}</div>
-                </div>
-                <div className="wemoji-wrap">
-                  <span style={{ fontSize: emojiSize, lineHeight: 1 }}>{card.emoji}</span>
-                </div>
                 <div className="vcol-ro">
                   <div className="vcol-lbl-ro">ROM</div>
                   <div className="wro">{card.word}</div>
                 </div>
+                <div className="wemoji-wrap">
+                  <span style={{ fontSize: emojiSize, lineHeight: 1 }}>{card.emoji}</span>
+                </div>
+                <div className="vcol-he">
+                  <div className="vcol-lbl-he">עברית</div>
+                  <div className="whe">{card.translation_he}</div>
+                </div>
               </div>
 
-              {/* Tags row — Hebrew tag RTL, Romanian tags LTR */}
+              {/* Tags row — centered */}
               <div className="wtype-row">
-                <span className="wtag he">{card.type_he}</span>
                 {card.category && <span className="wtag">{card.category}</span>}
                 <span className="wtag">{card.type_ro}</span>
+                <span className="wtag he">{card.type_he}</span>
+                <span className="wtag gender">
+                  {card.type_he?.includes('נקבה') ? '👩‍🦰' : card.type_he?.includes('פועל') ? '🧔🏻' : '✨'}
+                </span>
               </div>
 
-              {/* Compact dual audio row */}
+              {/* Audio row — large Figma-style buttons */}
               <div className="vaudio-row">
-                <button className="vaudio-pill f" onClick={() => speakRo(card.word, 0.88, null, VOICE_FEMALE)}>
-                  <SpeakerHigh size={15} weight="regular" /> קול נשי
+                <button className="vaudio-pill" onClick={() => speakRo(card.word, 0.88, null, VOICE_FEMALE)}>
+                  <span>👩‍🦰</span>
+                  <span className="vaudio-pill-label">קול נשי</span>
+                  <span className="vaudio-pill-icon"><SpeakerHigh size={28} weight="regular" /></span>
                 </button>
-                <button className="vaudio-pill m" onClick={() => speakRo(card.word, 0.88, null, VOICE_MALE)}>
-                  <SpeakerHigh size={15} weight="fill" /> קול גברי
+                <button className="vaudio-pill" onClick={() => speakRo(card.word, 0.88, null, VOICE_MALE)}>
+                  <span className="vaudio-pill-icon"><SpeakerHigh size={28} weight="regular" /></span>
+                  <span className="vaudio-pill-label">קול גברי</span>
+                  <span>🧔🏻</span>
                 </button>
               </div>
             </div>
@@ -1506,21 +1525,17 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
 
             {/* Example sentence 1 */}
             <div className="exbox">
-              <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}><SpeakerHigh size={16} /></div>
-              <div className="exbox-text">
-                <div className="exro">{card.example_ro}</div>
-                <div className="exhe">{card.example_he}</div>
-              </div>
+              <div className="exbox-ro">{card.example_ro}</div>
+              <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}><SpeakerHigh size={28} /></div>
+              <div className="exbox-he">{card.example_he}</div>
             </div>
 
             {/* Example sentence 2 */}
             {card.example2_ro && (
-              <div className="exbox" style={{ marginTop: -10 }}>
-                <div className="exbox-icon" onClick={() => speakRo(card.example2_ro)}><SpeakerHigh size={16} /></div>
-                <div className="exbox-text">
-                  <div className="exro">{card.example2_ro}</div>
-                  <div className="exhe">{sanitizeHe(card.example2_he || '')}</div>
-                </div>
+              <div className="exbox" style={{ borderTop: '1px solid rgba(107,115,126,0.15)' }}>
+                <div className="exbox-ro">{card.example2_ro}</div>
+                <div className="exbox-icon" onClick={() => speakRo(card.example2_ro)}><SpeakerHigh size={28} /></div>
+                <div className="exbox-he">{sanitizeHe(card.example2_he || '')}</div>
               </div>
             )}
           </div>
@@ -1528,13 +1543,11 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
           {/* Know / Practice buttons */}
           {!status && (
             <div className="vnav">
-              <button className="vbtn prac" onClick={() => mark('review')}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                <ArrowCounterClockwise size={16} /> צריך עוד תרגול
+              <button className="vbtn know" onClick={() => mark('known')}>
+                הבנתי! <Check size={22} weight="bold" />
               </button>
-              <button className="vbtn know" onClick={() => mark('known')}
-                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
-                <Check size={16} weight="bold" /> יודע!
+              <button className="vbtn prac" onClick={() => mark('review')}>
+                נצטרך לחזור על זה <ArrowCounterClockwise size={22} />
               </button>
             </div>
           )}
