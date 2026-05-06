@@ -57,7 +57,7 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .vs-known{background:#dcfce7;color:var(--green)}
 .vs-practice{background:#fff3e0;color:var(--amber)}
 .vseg{display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:14px;width:100%}
-.vtrans{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 16px;width:100%;gap:8px}
+.vtrans{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 16px;width:100%;gap:8px;direction:ltr}
 .vcol-ro{display:flex;flex-direction:column;align-items:flex-start;flex:1;min-width:0}
 .vcol-lbl-ro{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);margin-bottom:2px;width:100%}
 .wro{font-family:'Rubik',sans-serif;font-size:clamp(22px,7vw,40px);font-weight:700;line-height:1.2;color:#1f5fbf;direction:ltr;overflow-wrap:break-word;word-break:break-word;width:100%}
@@ -65,25 +65,25 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .vcol-he{display:flex;flex-direction:column;align-items:flex-end;flex:1;min-width:0}
 .vcol-lbl-he{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);text-align:right;margin-bottom:2px;width:100%}
 .whe{font-size:clamp(22px,7vw,40px);font-weight:700;line-height:1.2;color:#1f5fbf;direction:rtl;text-align:right;width:100%;overflow-wrap:break-word}
-.wtype-row{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:8px;width:calc(100% - 32px);flex-wrap:wrap}
-.wtag{display:flex;align-items:center;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:400;line-height:18px;color:var(--muted);border:1px solid rgba(107,115,126,0.3);background:transparent;white-space:nowrap;direction:ltr}
+.wtype-row{display:flex;flex-direction:row;justify-content:center;align-items:center;gap:6px;width:calc(100% - 32px);flex-wrap:wrap;direction:ltr}
+.wtag{display:flex;align-items:center;padding:3px 10px;border-radius:99px;font-size:12px;font-weight:400;line-height:16px;color:var(--muted);border:1px solid rgba(107,115,126,0.3);background:transparent;white-space:nowrap;direction:ltr}
 .wtag.he{direction:rtl;color:#195dbb;border-color:#1f73e6;font-weight:600}
 .wtag.gender{background:#195dbb;border-color:#1f73e6;color:#195dbb;font-size:17px;padding:2px 8px}
-.vaudio-row{display:flex;gap:20px;padding:0 16px;width:100%}
+.vaudio-row{display:flex;gap:20px;padding:0 16px;width:100%;direction:ltr}
 .vaudio-pill{flex:1;display:flex;align-items:center;justify-content:center;gap:10px;padding:14px 16px;border:1px solid #1f73e6;border-radius:12px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:22px;font-weight:400;transition:all .2s;background:linear-gradient(90deg,rgba(55,91,166,0.08),rgba(55,91,166,0.08)),#fff;box-shadow:0 1px 1px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.12);color:#195dbb}
 .vaudio-pill:hover{background:linear-gradient(90deg,rgba(55,91,166,0.18),rgba(55,91,166,0.18)),#fff}
 .vaudio-pill-label{font-size:20px;font-weight:400;color:#195dbb;white-space:nowrap}
 .vaudio-pill-icon{display:flex;align-items:center;justify-content:center;color:#195dbb}
 .vaudio-btn{display:none}
-.ftable-hdr{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 20px;background:#195dbb;font-size:14px;font-weight:700;line-height:18px;color:#fff;width:100%;letter-spacing:0.02em}
-.frow{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 20px;height:44px;width:100%;border-bottom:1px solid rgba(107,115,126,0.2)}
+.ftable-hdr{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:10px 20px;background:#195dbb;font-size:14px;font-weight:700;line-height:18px;color:#fff;width:100%;letter-spacing:0.02em;direction:ltr}
+.frow{display:flex;flex-direction:row;align-items:center;padding:0 20px;height:40px;width:100%;border-bottom:1px solid rgba(107,115,126,0.2);direction:ltr}
 .frow:nth-child(even){background:#fff}
 .frow:nth-child(odd){background:#f9f3ea}
-.fval{display:flex;flex-direction:row;align-items:center;gap:6px}
-.snd-sm{display:flex;justify-content:center;align-items:center;padding:4px;width:28px;height:28px;border-radius:99px;border:none;cursor:pointer;background:transparent;color:var(--blue);flex-shrink:0}
-.fval-txt{font-size:22px;font-weight:500;line-height:24px;color:#010726;direction:ltr;white-space:nowrap}
-.flbl{font-size:22px;font-weight:500;line-height:24px;color:#010726;direction:rtl;white-space:nowrap}
-.exbox{display:flex;flex-direction:row;align-items:center;padding:14px 20px;gap:12px;background:rgba(130,180,250,0.18);border:1px solid rgba(107,115,126,0.25);border-radius:0;margin:0;width:100%}
+.fval{flex:1;display:flex;flex-direction:row;align-items:center;gap:4px;direction:ltr}
+.snd-sm{display:flex;justify-content:center;align-items:center;padding:4px;width:28px;height:28px;border-radius:99px;border:none;cursor:pointer;background:transparent;color:var(--blue);flex-shrink:0;margin:0 8px}
+.fval-txt{font-size:15px;font-weight:500;color:#010726;direction:ltr;white-space:nowrap}
+.flbl{flex:1;font-size:15px;font-weight:500;color:#010726;direction:rtl;text-align:right;white-space:nowrap}
+.exbox{display:flex;flex-direction:row;align-items:center;padding:14px 20px;gap:12px;background:rgba(130,180,250,0.18);border:1px solid rgba(107,115,126,0.25);border-radius:0;margin:0;width:100%;direction:ltr}
 .exbox:first-of-type{border-radius:0}
 .exbox-icon{display:flex;justify-content:center;align-items:center;width:32px;min-width:32px;color:var(--blue);cursor:pointer;flex-shrink:0}
 .exbox-ro{flex:1;font-size:18px;font-weight:400;line-height:1.5;color:var(--navy);direction:ltr}
@@ -92,13 +92,13 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .exbox-text{display:none}
 .exro{display:none}
 .exhe{display:none}
-.vnav{display:flex;flex-direction:row;align-items:center;gap:20px;margin-top:16px}
+.vnav{display:flex;flex-direction:row;align-items:center;gap:12px;margin-top:16px;direction:ltr}
 .vbtn{border-radius:12px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:20px;font-weight:600;line-height:1;border:1.5px solid;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:10px;padding:15px 20px;box-shadow:0 1px 1px rgba(0,0,0,.05),0 1px 4px rgba(0,0,0,.15)}
 .vbtn.know{flex:1;background:#195dbb;color:#fff;border-color:#1f73e6}
 .vbtn.know:hover{background:var(--blue-d)}
 .vbtn.prac{background:#fff;color:#d32732;border-color:#d32732;flex-shrink:0}
 .vbtn.prac:hover{background:#fff5f5}
-.vprow{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.vprow{display:flex;align-items:center;gap:8px;margin-bottom:.75rem;background:#fff;border-radius:12px;padding:8px 10px;box-shadow:0 1px 4px rgba(0,0,0,.06);direction:ltr}
 .vpbar{flex:1;background:var(--blue-l);border-radius:99px;height:8px;overflow:hidden;display:flex}
 .vpfill{background:var(--blue);height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .vpfill-review{background:var(--red);height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
@@ -1513,11 +1513,9 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
                 <div className="ftable-hdr"><span>ברומנית</span><span>צורה דקדוקית</span></div>
                 {card.forms.slice(0, 5).map((f: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
                   <div key={i} className="frow">
-                    <div className="fval">
-                      <button className="snd-sm" onClick={() => speakRo(f.val)}><SpeakerHigh size={16} /></button>
-                      <span className="fval-txt">{f.val}</span>
-                    </div>
-                    <div className="flbl">{f.lbl}</div>
+                    <span className="fval-txt">{f.val}</span>
+                    <button className="snd-sm" onClick={() => speakRo(f.val)}><SpeakerHigh size={18} /></button>
+                    <span className="flbl">{f.lbl}</span>
                   </div>
                 ))}
               </div>
