@@ -56,21 +56,26 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .vcard-status{position:absolute;top:1rem;right:1rem;padding:.28rem .8rem;border-radius:99px;font-size:.76rem;font-weight:700;transition:all .3s;z-index:2}
 .vs-known{background:#dcfce7;color:var(--green)}
 .vs-practice{background:#fff3e0;color:var(--amber)}
-.vseg{display:flex;flex-direction:column;align-items:center;padding:20px 0;gap:20px;width:100%}
-.vtrans{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 24px;width:100%;height:88px}
-.vcol-ro{display:flex;flex-direction:column;align-items:flex-start;padding:0;width:92px}
-.vcol-lbl-ro{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);margin-bottom:-4px;width:100%}
-.wro{font-family:'Rubik',sans-serif;font-size:30px;font-weight:700;line-height:36px;color:var(--navy);direction:ltr}
-.wemoji-wrap{display:flex;justify-content:center;align-items:center;width:72px;height:88px}
-.wemoji{font-size:72px;line-height:87px;text-align:center}
-.vcol-he{display:flex;flex-direction:column;align-items:flex-end;padding:0 0 4px 0;width:104px}
-.vcol-lbl-he{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);text-align:right;margin-bottom:-4px;width:100%}
-.whe{font-size:26px;font-weight:700;line-height:31px;color:var(--blue);direction:rtl;text-align:right;width:100%}
-.wtype-row{display:flex;flex-direction:row;justify-content:space-between;align-items:center;width:298px}
-.wtag{display:flex;align-items:center;padding:6px 8px;border-radius:99px;font-size:11px;font-weight:600;line-height:13px;color:var(--muted);border:1px solid var(--border);background:transparent;white-space:nowrap;direction:ltr}
+.vseg{display:flex;flex-direction:column;align-items:center;padding:16px 0;gap:14px;width:100%}
+.vtrans{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 16px;width:100%;gap:8px}
+.vcol-ro{display:flex;flex-direction:column;align-items:flex-start;flex:1;min-width:0}
+.vcol-lbl-ro{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);margin-bottom:2px;width:100%}
+.wro{font-family:'Rubik',sans-serif;font-size:clamp(18px,5.5vw,28px);font-weight:700;line-height:1.2;color:var(--navy);direction:ltr;overflow-wrap:break-word;word-break:break-word;width:100%}
+.wemoji-wrap{display:flex;justify-content:center;align-items:center;flex-shrink:0;width:52px;height:52px}
+.vcol-he{display:flex;flex-direction:column;align-items:flex-end;flex:1;min-width:0}
+.vcol-lbl-he{font-size:10px;font-weight:300;line-height:12px;color:var(--muted);text-align:right;margin-bottom:2px;width:100%}
+.whe{font-size:clamp(16px,5vw,24px);font-weight:700;line-height:1.2;color:var(--blue);direction:rtl;text-align:right;width:100%;overflow-wrap:break-word}
+.wtype-row{display:flex;flex-direction:row;justify-content:flex-end;align-items:center;gap:6px;width:calc(100% - 32px);flex-wrap:wrap}
+.wtag{display:flex;align-items:center;padding:5px 8px;border-radius:99px;font-size:11px;font-weight:600;line-height:13px;color:var(--muted);border:1px solid var(--border);background:transparent;white-space:nowrap;direction:ltr}
 .wtag.he{direction:rtl;color:var(--blue);border-color:rgba(21,113,239,.3)}
-.vaudio-btn{display:flex;justify-content:center;align-items:center;padding:9px;width:322px;height:72px;background:var(--blue-l);border-radius:12px;border:none;cursor:pointer;font-size:16px;color:var(--blue);transition:all .2s}
-.vaudio-btn:hover{background:var(--blue);color:#fff}
+.vaudio-row{display:flex;gap:8px;padding:0 16px;width:100%}
+.vaudio-pill{flex:1;display:flex;align-items:center;justify-content:center;gap:6px;padding:10px 8px;border:none;border-radius:10px;cursor:pointer;font-family:'Rubik',sans-serif;font-size:13px;font-weight:600;transition:all .2s}
+.vaudio-pill.f{background:var(--blue-l);color:var(--blue)}
+.vaudio-pill.f:hover{background:var(--blue);color:#fff}
+.vaudio-pill.m{background:var(--navy);color:#fff;opacity:.85}
+.vaudio-pill.m:hover{opacity:1}
+/* keep old .vaudio-btn for backwards compat */
+.vaudio-btn{display:none}
 .ftable-hdr{display:flex;flex-direction:row;justify-content:space-between;align-items:flex-start;padding:12px 25px 11px 26px;background:var(--blue-l);font-size:11px;font-weight:700;line-height:13px;color:var(--blue);width:100%}
 .frow{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding:0 24px;height:36px;width:100%}
 .frow:nth-child(even){background:var(--blue-l);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
@@ -90,10 +95,17 @@ body{font-family:'Rubik',sans-serif;background:var(--bg);color:var(--text);min-h
 .vbtn.know:hover{background:var(--blue-d)}
 .vbtn.prac{background:#fff;color:var(--amber);border-color:var(--amber)}
 .vbtn.prac:hover{background:#fffbf0}
-.vprow{display:flex;align-items:center;gap:.9rem;margin-bottom:1rem}
-.vpbar{flex:1;background:var(--blue-l);border-radius:99px;height:6px;overflow:hidden}
+.vprow{display:flex;align-items:center;gap:.9rem;margin-bottom:.75rem}
+.vpbar{flex:1;background:var(--blue-l);border-radius:99px;height:8px;overflow:hidden;display:flex}
 .vpfill{background:var(--blue);height:100%;border-radius:99px;transition:width .6s cubic-bezier(.4,0,.2,1)}
+.vpfill-review{background:var(--red);height:100%;transition:width .6s cubic-bezier(.4,0,.2,1)}
 .vstats{font-size:12px;color:var(--muted);white-space:nowrap}
+.tutor-banner{display:flex;align-items:center;gap:10px;margin-bottom:10px;min-height:60px}
+.tutor-bubble{border-radius:12px 12px 12px 4px;padding:9px 13px;font-size:13px;font-weight:600;direction:rtl;flex:1;line-height:1.45;transition:all .3s}
+.tutor-bubble.ok{background:#dcfce7;color:#16a34a}
+.tutor-bubble.coach{background:#fff3e0;color:#d97706}
+.tutor-bubble.info{background:var(--blue-l);color:var(--blue)}
+.tutor-bubble.proud{background:linear-gradient(135deg,#fef3c7,#dcfce7);color:#15803d;font-size:14px}
 
 /* ── Listening module ── */
 .dcard{background:var(--surface);border-radius:var(--r);box-shadow:var(--sh);overflow:hidden;margin-bottom:1.1rem}
@@ -325,6 +337,12 @@ function parseJ(raw: string) {
   try { return JSON.parse(raw.replace(/```json|```/g, "").trim()); } catch { return null; }
 }
 
+/** Strip Arabic Unicode block chars that sometimes sneak into AI-generated Hebrew text */
+function sanitizeHe(text: string): string {
+  if (!text) return text ?? '';
+  return text.replace(/[؀-ۿݐ-ݿﭐ-﷿ﹰ-﻿]/g, '').replace(/\s+/g, ' ').trim();
+}
+
 // ============= TYPES =============
 
 type Tab = 'home' | 'dictionary' | 'progress' | 'settings';
@@ -380,21 +398,16 @@ const KNOWN_USERS: User[] = [
   {
     id: 'amit',
     name: 'Amit',
-    lessonProgress: {
-      1: { sessions: 1, skills: { vocabulary: 70, listening: 80, speaking: 55, writing: 65, grammar: 45 } },
-      2: { sessions: 2, skills: { vocabulary: 55, listening: 70, speaking: 30, writing: 40, grammar: 25 } },
-    },
-    currentLesson: 2,
-    totalSessions: 3,
+    lessonProgress: {},
+    currentLesson: 1,
+    totalSessions: 0,
   },
   {
     id: 'neta',
     name: 'Neta',
-    lessonProgress: {
-      1: { sessions: 3, skills: { vocabulary: 85, listening: 90, speaking: 75, writing: 80, grammar: 70 } },
-    },
-    currentLesson: 2,
-    totalSessions: 3,
+    lessonProgress: {},
+    currentLesson: 1,
+    totalSessions: 0,
   },
 ];
 
@@ -1206,14 +1219,15 @@ function LessonScreen({
 
       {/* Module content */}
       <div style={{ flex: 1, padding: 16, overflowY: 'auto' as const }}>
-        {/* Avatar strip — contextual per module */}
-        <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
-          {module === 'vocabulary' && <TutorAvatar mood="showing"   size={72} />}
-          {module === 'listening'  && <TutorAvatar mood="listening" size={72} />}
-          {module === 'speaking'   && <TutorAvatar mood="asking"    size={72} />}
-          {module === 'writing'    && <TutorAvatar mood="learning"  size={72} />}
-          {module === 'grammar'    && <TutorAvatar mood="thinking"  size={72} />}
-        </div>
+        {/* Avatar strip — vocabulary manages its own; show for other modules */}
+        {module !== 'vocabulary' && (
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: 8 }}>
+            {module === 'listening'  && <TutorAvatar mood="listening" size={72} />}
+            {module === 'speaking'   && <TutorAvatar mood="asking"    size={72} />}
+            {module === 'writing'    && <TutorAvatar mood="learning"  size={72} />}
+            {module === 'grammar'    && <TutorAvatar mood="thinking"  size={72} />}
+          </div>
+        )}
         {module === 'vocabulary' && <VocabModule onProg={onProg} topic={lesson.topicRo} />}
         {module === 'listening'  && <ListenModule onProg={onProg} />}
         {module === 'speaking'   && <SpeakModule user={moduleUser} onProg={onProg} />}
@@ -1227,107 +1241,425 @@ function LessonScreen({
 // ============= VOCAB MODULE =============
 
 const VSY = `You are a Romanian teacher generating vocabulary flashcards. Return ONLY valid JSON.
-NOUN: {"word":"casă","type_ro":"substantiv feminin","type_he":"שם עצם - נקבה","translation_he":"בית","emoji":"🏠","forms":[{"lbl":"יחיד לא מוגדר","val":"o casă"},{"lbl":"יחיד מוגדר","val":"casa"},{"lbl":"רבים","val":"case"}],"example_ro":"Eu am o casă mare.","example_he":"יש לי בית גדול.","category":"locuință"}
-VERB: {"word":"a merge","type_ro":"verb regulat","type_he":"פועל","translation_he":"ללכת","emoji":"🚶","forms":[{"lbl":"אני","val":"merg"},{"lbl":"אתה","val":"mergi"},{"lbl":"הוא","val":"merge"},{"lbl":"אנחנו","val":"mergem"},{"lbl":"עבר","val":"am mers"}],"example_ro":"Eu merg la piață.","example_he":"אני הולך לשוק.","category":"acțiuni"}
-Vary types and categories. Start simple A1.`;
+NOUN: {"word":"casă","type_ro":"substantiv feminin","type_he":"שם עצם - נקבה","translation_he":"בית","emoji":"🏠","forms":[{"lbl":"יחיד לא מוגדר","val":"o casă"},{"lbl":"יחיד מוגדר","val":"casa"},{"lbl":"רבים","val":"case"}],"example_ro":"Eu am o casă mare.","example_he":"יש לי בית גדול.","example2_ro":"Casa noastră este albă.","example2_he":"הבית שלנו לבן.","category":"locuință"}
+VERB: {"word":"a merge","type_ro":"verb regulat","type_he":"פועל","translation_he":"ללכת","emoji":"🚶","forms":[{"lbl":"אני","val":"merg"},{"lbl":"אתה","val":"mergi"},{"lbl":"הוא","val":"merge"},{"lbl":"אנחנו","val":"mergem"},{"lbl":"עבר","val":"am mers"}],"example_ro":"Eu merg la piață.","example_he":"אני הולך לשוק.","example2_ro":"Noi mergem la școală.","example2_he":"אנחנו הולכים לבית הספר.","category":"acțiuni"}
+IMPORTANT: Always include example2_ro and example2_he. Hebrew fields must use only Hebrew characters. emoji must be a single common emoji that clearly illustrates the word. Vary types and categories. Start simple A1.`;
+
+const SESSION_TARGET = 10;
 
 function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: string }) {
-  const [card, setCard] = useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
-  const [loading, setLoading] = useState(false);
-  const [known, setKnown] = useState(0);
-  const [total, setTotal] = useState(0);
-  const [hist, setHist] = useState<string[]>([]);
-  const [status, setStatus] = useState<string | null>(null);
+  // ── Session model ───────────────────────────────────────────────────────────
+  const [phase, setPhase]             = useState<'new' | 'review' | 'done'>('new');
+  const [newLeft, setNewLeft]         = useState(SESSION_TARGET);
+  const [knownCards, setKnownCards]   = useState<any[]>([]); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [reviewQueue, setReviewQueue] = useState<any[]>([]); // eslint-disable-line @typescript-eslint/no-explicit-any
 
-  const fetchCard = useCallback(async () => {
-    setLoading(true); setCard(null); setStatus(null);
-    try {
-      const th = topic ? ` Focus on: ${topic}.` : "";
-      const msgs = hist.length > 0
-        ? [{ role: "user", content: `New vocab card.${th} Already: ${hist.slice(-8).join(", ")}. Different word.` }]
-        : [{ role: "user", content: `First vocab card for beginner.${th} Common everyday word.` }];
-      const raw = await callAI(msgs, VSY);
-      const p = parseJ(raw);
-      if (p) { setCard(p); setTotal(t => t + 1); setHist(h => [...h, p.word]); }
-      else setCard({ err: true });
-    } catch { setCard({ err: true }); }
-    setLoading(false);
-  }, [hist, topic]);
+  // ── Current card ────────────────────────────────────────────────────────────
+  const [card, setCard]               = useState<any>(null); // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [nextCard, setNextCard]       = useState<any>(null); // prefetched // eslint-disable-line @typescript-eslint/no-explicit-any
+  const [loading, setLoading]         = useState(false);
+  const [prefetching, setPrefetching] = useState(false);
+  const [status, setStatus]           = useState<'known' | 'review' | null>(null);
 
-  useEffect(() => { fetchCard(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  // ── Avatar messaging ────────────────────────────────────────────────────────
+  const [avatarMood, setAvatarMood]   = useState<AvatarMood>('showing');
+  const [avatarMsg, setAvatarMsg]     = useState<string | null>(null);
 
-  const mark = (type: string) => {
-    setStatus(type);
+  const hist = useRef<string[]>([]);
+
+  const knownCount  = knownCards.length;
+  const reviewCount = reviewQueue.length;
+  const pctKnown    = Math.round((knownCount  / SESSION_TARGET) * 100);
+  const pctReview   = Math.round((reviewCount / SESSION_TARGET) * 100);
+
+  // ── Fetch one new card from AI ───────────────────────────────────────────────
+  const fetchCard = useCallback(async (): Promise<any> => { // eslint-disable-line @typescript-eslint/no-explicit-any
+    const th      = topic ? ` Focus on: ${topic}.` : '';
+    const recent  = hist.current.slice(-8).join(', ');
+    const prompt  = hist.current.length
+      ? `New vocab card.${th} Already shown: ${recent}. Use a different word.`
+      : `First vocab card for beginner.${th} Choose a common, everyday word.`;
+    const raw = await callAI([{ role: 'user', content: prompt }], VSY);
+    const p   = parseJ(raw);
+    if (p) {
+      p.translation_he = sanitizeHe(p.translation_he ?? '');
+      p.example_he     = sanitizeHe(p.example_he  ?? '');
+      p.example2_he    = sanitizeHe(p.example2_he ?? '');
+      hist.current.push(p.word);
+    }
+    return p || null;
+  }, [topic]);
+
+  // ── Initial load ─────────────────────────────────────────────────────────────
+  useEffect(() => {
+    (async () => {
+      setLoading(true);
+      const c = await fetchCard().catch(() => null);
+      setCard(c ?? { err: true });
+      setLoading(false);
+    })();
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  // ── Prefetch while user reads the current card ────────────────────────────
+  useEffect(() => {
+    if (!card || card.err || nextCard || prefetching || phase !== 'new' || newLeft <= 1) return;
+    setPrefetching(true);
+    fetchCard()
+      .then(c => { if (c) setNextCard(c); setPrefetching(false); })
+      .catch(() => setPrefetching(false));
+  }, [card, nextCard, prefetching, phase, newLeft, fetchCard]);
+
+  // ── Mark current card and advance ────────────────────────────────────────────
+  const mark = (verdict: 'known' | 'review') => {
+    if (!card || status) return;
+
+    // capture current state to avoid stale closures in setTimeout
+    const cur       = card;
+    const curPhase  = phase;
+    const curKnown  = knownCards;
+    const curReview = reviewQueue;
+    const curLeft   = newLeft;
+    const prefetched = nextCard;
+
+    setStatus(verdict);
+    setAvatarMood(verdict === 'known' ? 'approve' : 'coaching');
+    setAvatarMsg(verdict === 'known' ? 'מעולה! המילה שלך ✅' : 'אל דאגה — נחזור עליה 💪');
+    onProg(verdict === 'known' ? 3 : 1);
+
     setTimeout(() => {
-      onProg(type === "known" ? 3 : 1);
-      if (type === "known") setKnown(k => k + 1);
-      fetchCard();
-    }, 1100);
+      setStatus(null);
+      setAvatarMood('showing');
+      setAvatarMsg(null);
+
+      const updKnown  = verdict === 'known'  ? [...curKnown, cur]  : curKnown;
+
+      if (curPhase === 'new') {
+        const updReview  = verdict === 'review' ? [...curReview, cur] : curReview;
+        const updNewLeft = curLeft - 1;
+
+        setKnownCards(updKnown);
+        setNewLeft(updNewLeft);
+
+        if (updNewLeft > 0) {
+          setReviewQueue(updReview);
+          if (prefetched) { setCard(prefetched); setNextCard(null); }
+          else {
+            setLoading(true); setCard(null);
+            fetchCard()
+              .then(c => { setCard(c ?? { err: true }); setLoading(false); })
+              .catch(() => { setCard({ err: true }); setLoading(false); });
+          }
+        } else {
+          // all new cards shown → enter review phase
+          setPhase('review');
+          if (updReview.length > 0) {
+            setCard(updReview[0]);
+            setReviewQueue(updReview.slice(1));
+          } else {
+            // no reviews: session complete
+            setPhase('done');
+            setCard(null);
+            setAvatarMood('proud');
+            setAvatarMsg('כל המילים ידועות! 🏆');
+            onProg(15);
+          }
+        }
+      } else {
+        // phase = 'review'
+        const updReview = verdict === 'review' ? [...curReview, cur] : curReview;
+        setKnownCards(updKnown);
+        if (updReview.length > 0) {
+          setCard(updReview[0]);
+          setReviewQueue(updReview.slice(1));
+        } else {
+          setPhase('done');
+          setCard(null);
+          setAvatarMood('proud');
+          setAvatarMsg('כל המילים ידועות! 🏆');
+          onProg(15);
+        }
+      }
+    }, 1200);
   };
+
+  // ── Session complete screen ───────────────────────────────────────────────
+  if (phase === 'done') {
+    return (
+      <div style={{ textAlign: 'center', padding: '24px 16px' }}>
+        <TutorAvatar mood="proud" size={110} style={{ margin: '0 auto 16px' }} />
+        <div style={{ background: 'linear-gradient(135deg,#dcfce7,#d1fae5)', borderRadius: 16, padding: '18px 20px', marginBottom: 20, direction: 'rtl' }}>
+          <div style={{ fontSize: 32, marginBottom: 6 }}>🏆</div>
+          <div style={{ fontSize: 17, fontWeight: 700, color: '#15803d', marginBottom: 6 }}>כל המילים ידועות!</div>
+          <div style={{ fontSize: 14, color: '#16a34a', lineHeight: 1.5 }}>
+            השלמת {SESSION_TARGET} מילים — כוכב ראשון שלך הושג!
+          </div>
+        </div>
+        <button className="pbtn" onClick={() => {
+          setPhase('new'); setNewLeft(SESSION_TARGET);
+          setKnownCards([]); setReviewQueue([]);
+          setCard(null); setNextCard(null);
+          setAvatarMood('showing'); setAvatarMsg(null);
+          hist.current = [];
+          setLoading(true);
+          fetchCard().then(c => { setCard(c ?? { err: true }); setLoading(false); });
+        }}>
+          סיבוב נוסף →
+        </button>
+      </div>
+    );
+  }
+
+  // ── Normal card view ─────────────────────────────────────────────────────
+  const emojiSize = (card?.word?.length ?? 0) > 9 ? 32 : 44;
 
   return (
     <div>
-      <div className="vprow">
-        <div className="vpbar"><div className="vpfill" style={{ width: total > 0 ? `${Math.min(100, (known / Math.max(total, 1)) * 100)}%` : "0%" }} /></div>
-        <div className="vstats">{known}/{total} ידועות</div>
+      {/* Avatar banner */}
+      <div className="tutor-banner">
+        <TutorAvatar mood={avatarMood} size={58} />
+        {avatarMsg ? (
+          <div className={`tutor-bubble ${avatarMood === 'approve' ? 'ok' : avatarMood === 'coaching' ? 'coach' : 'proud'}`}>
+            {avatarMsg}
+          </div>
+        ) : (
+          <div className="tutor-bubble info" style={{ opacity: 0.7 }}>
+            {phase === 'review'
+              ? `חזרה על ${reviewCount + 1} ${reviewCount === 0 ? 'מילה' : 'מילים'}`
+              : `${SESSION_TARGET - newLeft + 1}/${SESSION_TARGET} מילה`}
+          </div>
+        )}
       </div>
-      {loading && <div className="ldcard"><div className="spin" /><p>טוען מילה...</p></div>}
-      {!loading && card && !card.err && (
-        <div className="vcardwrap"><div className="vcard">
-          {status && <div className={`vcard-status ${status === "known" ? "vs-known" : "vs-practice"}`} style={{ display: 'flex', alignItems: 'center', gap: 4 }}>{status === "known" ? <><Check size={12} weight="bold" /> ידוע!</> : <><ArrowCounterClockwise size={12} /> לתרגול</>}</div>}
-          <div className="vseg">
-            <div className="vtrans">
-              <div className="vcol-ro"><div className="vcol-lbl-ro">ROM</div><div className="wro">{card.word}</div></div>
-              <div className="wemoji-wrap"><span className="wemoji">{card.emoji}</span></div>
-              <div className="vcol-he"><div className="vcol-lbl-he">עברית</div><div className="whe">{card.translation_he}</div></div>
-            </div>
-            <div className="wtype-row">
-              <span className="wtag">{card.type_ro}</span>
-              <span className="wtag">{card.category}</span>
-              <span className="wtag he">{card.type_he}</span>
-            </div>
-            <button className="vaudio-btn" onClick={() => speakRo(card.word, 0.88, null, VOICE_FEMALE)}>
-              <SpeakerHigh size={22} weight="regular" style={{ marginLeft: 6 }} /> השמע — קול נשי
-            </button>
-            <button className="vaudio-btn" style={{ marginTop: 6 }} onClick={() => speakRo(card.word, 0.88, null, VOICE_MALE)}>
-              <SpeakerHigh size={22} weight="fill" style={{ marginLeft: 6 }} /> השמע — קול גברי
-            </button>
-          </div>
-          {card.forms?.length > 0 && (
-            <div style={{ width: "100%" }}>
-              <div className="ftable-hdr"><span>ברומנית</span><span>צורה דקדוקית</span></div>
-              {card.forms.map((f: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
-                <div key={i} className="frow">
-                  <div className="fval">
-                    <button className="snd-sm" onClick={() => speakRo(f.val)}><SpeakerHigh size={16} /></button>
-                    <span className="fval-txt">{f.val}</span>
-                  </div>
-                  <div className="flbl">{f.lbl}</div>
-                </div>
-              ))}
-            </div>
-          )}
-          <div className="exbox">
-            <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}><SpeakerHigh size={16} /></div>
-            <div className="exbox-text">
-              <div className="exro">{card.example_ro}</div>
-              <div className="exhe">{card.example_he}</div>
-            </div>
-          </div>
+
+      {/* Two-color progress bar */}
+      <div className="vprow">
+        <div className="vpbar">
+          <div className="vpfill"        style={{ width: `${pctKnown}%` }} />
+          <div className="vpfill-review" style={{ width: `${pctReview}%` }} />
         </div>
+        <div className="vstats">{knownCount}/{SESSION_TARGET} ידועות</div>
+      </div>
+
+      {loading && <div className="ldcard"><div className="spin" /><p>טוען מילה...</p></div>}
+
+      {!loading && card && !card.err && (
+        <div className="vcardwrap">
+          <div className="vcard">
+            {/* Status badge */}
+            {status && (
+              <div className={`vcard-status ${status === 'known' ? 'vs-known' : 'vs-practice'}`}
+                style={{ display: 'flex', alignItems: 'center', gap: 4 }}>
+                {status === 'known'
+                  ? <><Check size={12} weight="bold" /> ידוע!</>
+                  : <><ArrowCounterClockwise size={12} /> לתרגול</>}
+              </div>
+            )}
+
+            <div className="vseg">
+              {/* Word + emoji + translation row — flex, no fixed widths */}
+              <div className="vtrans">
+                <div className="vcol-he">
+                  <div className="vcol-lbl-he">עברית</div>
+                  <div className="whe">{card.translation_he}</div>
+                </div>
+                <div className="wemoji-wrap">
+                  <span style={{ fontSize: emojiSize, lineHeight: 1 }}>{card.emoji}</span>
+                </div>
+                <div className="vcol-ro">
+                  <div className="vcol-lbl-ro">ROM</div>
+                  <div className="wro">{card.word}</div>
+                </div>
+              </div>
+
+              {/* Tags row — Hebrew tag RTL, Romanian tags LTR */}
+              <div className="wtype-row">
+                <span className="wtag he">{card.type_he}</span>
+                {card.category && <span className="wtag">{card.category}</span>}
+                <span className="wtag">{card.type_ro}</span>
+              </div>
+
+              {/* Compact dual audio row */}
+              <div className="vaudio-row">
+                <button className="vaudio-pill f" onClick={() => speakRo(card.word, 0.88, null, VOICE_FEMALE)}>
+                  <SpeakerHigh size={15} weight="regular" /> קול נשי
+                </button>
+                <button className="vaudio-pill m" onClick={() => speakRo(card.word, 0.88, null, VOICE_MALE)}>
+                  <SpeakerHigh size={15} weight="fill" /> קול גברי
+                </button>
+              </div>
+            </div>
+
+            {/* Inflection table — max 5 rows */}
+            {card.forms?.length > 0 && (
+              <div style={{ width: '100%' }}>
+                <div className="ftable-hdr"><span>ברומנית</span><span>צורה דקדוקית</span></div>
+                {card.forms.slice(0, 5).map((f: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
+                  <div key={i} className="frow">
+                    <div className="fval">
+                      <button className="snd-sm" onClick={() => speakRo(f.val)}><SpeakerHigh size={16} /></button>
+                      <span className="fval-txt">{f.val}</span>
+                    </div>
+                    <div className="flbl">{f.lbl}</div>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Example sentence 1 */}
+            <div className="exbox">
+              <div className="exbox-icon" onClick={() => speakRo(card.example_ro)}><SpeakerHigh size={16} /></div>
+              <div className="exbox-text">
+                <div className="exro">{card.example_ro}</div>
+                <div className="exhe">{card.example_he}</div>
+              </div>
+            </div>
+
+            {/* Example sentence 2 */}
+            {card.example2_ro && (
+              <div className="exbox" style={{ marginTop: -10 }}>
+                <div className="exbox-icon" onClick={() => speakRo(card.example2_ro)}><SpeakerHigh size={16} /></div>
+                <div className="exbox-text">
+                  <div className="exro">{card.example2_ro}</div>
+                  <div className="exhe">{sanitizeHe(card.example2_he || '')}</div>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Know / Practice buttons */}
           {!status && (
             <div className="vnav">
-              <button className="vbtn prac" onClick={() => mark("practice")} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}><ArrowCounterClockwise size={16} /> צריך עוד תרגול</button>
-              <button className="vbtn know" onClick={() => mark("known")} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}><Check size={16} weight="bold" /> יודע!</button>
+              <button className="vbtn prac" onClick={() => mark('review')}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <ArrowCounterClockwise size={16} /> צריך עוד תרגול
+              </button>
+              <button className="vbtn know" onClick={() => mark('known')}
+                style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 6 }}>
+                <Check size={16} weight="bold" /> יודע!
+              </button>
             </div>
           )}
         </div>
       )}
+
       {!loading && card?.err && (
         <div className="ldcard">
-          <p>שגיאה — <button className="pbtn" style={{ display: "inline", padding: ".4rem 1rem" }} onClick={fetchCard}>נסה שוב</button></p>
+          <p>שגיאה — <button className="pbtn" style={{ display: 'inline', padding: '.4rem 1rem' }} onClick={() => {
+            setLoading(true); setCard(null);
+            fetchCard().then(c => { setCard(c ?? { err: true }); setLoading(false); })
+              .catch(() => { setCard({ err: true }); setLoading(false); });
+          }}>נסה שוב</button></p>
         </div>
       )}
+    </div>
+  );
+}
+
+// ============= LISTEN QUESTIONS COMPONENT =============
+
+function ListenQuestions({ questions, answers, fb, checking, onAnswer, onCheck, onNewDial }: {
+  questions: any[]; // eslint-disable-line @typescript-eslint/no-explicit-any
+  answers: Record<number, string>;
+  fb: Record<number, any>; // eslint-disable-line @typescript-eslint/no-explicit-any
+  checking: Record<number, boolean>;
+  onAnswer: (i: number, v: string) => void;
+  onCheck: (i: number) => void;
+  onNewDial: () => void;
+}) {
+  const [qi, setQi] = useState(0);
+  const total  = questions.length;
+  const doneCount = Object.keys(fb).length;
+  const q = questions[qi];
+
+  if (!q) return null;
+
+  const goNext = () => { if (qi < total - 1) setQi(qi + 1); };
+  const goPrev = () => { if (qi > 0) setQi(qi - 1); };
+  const allDone = doneCount === total;
+
+  return (
+    <div className="qsec">
+      {/* Header: counter + new dialog */}
+      <div className="qhdr">
+        <h3>שאלות הבנה</h3>
+        <button className="newdbtn" onClick={onNewDial}>דיאלוג חדש →</button>
+      </div>
+
+      {/* Progress dots */}
+      <div style={{ display: 'flex', gap: 6, marginBottom: 12, justifyContent: 'flex-end' }}>
+        {questions.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setQi(i)}
+            style={{
+              width: 28, height: 28, borderRadius: '50%', border: 'none', cursor: 'pointer',
+              fontFamily: '"Rubik", system-ui', fontSize: 11, fontWeight: 700,
+              background: fb[i]
+                ? (fb[i].score >= 3 ? 'var(--green)' : fb[i].score >= 2 ? 'var(--amber)' : 'var(--red)')
+                : i === qi ? 'var(--blue)' : 'var(--blue-l)',
+              color: fb[i] || i === qi ? '#fff' : 'var(--blue)',
+            }}
+          >
+            {i + 1}
+          </button>
+        ))}
+      </div>
+
+      {/* Current question */}
+      <div className="qitem">
+        <div style={{ fontSize: 11, color: 'var(--muted)', marginBottom: 6, direction: 'rtl' }}>
+          שאלה {qi + 1} מתוך {total}
+        </div>
+        <div className="qro">
+          {q.q_ro}
+          <button style={{ background: 'none', border: 'none', cursor: 'pointer', opacity: .45, padding: 2, display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }}
+            onClick={() => speakRo(q.q_ro)}><SpeakerHigh size={16} /></button>
+        </div>
+        <div className="qhe">🇮🇱 {q.q_he}</div>
+        <input
+          className="qans"
+          placeholder="כתוב תשובה..."
+          value={answers[qi] || ''}
+          onChange={e => onAnswer(qi, e.target.value)}
+          onKeyDown={e => e.key === 'Enter' && !checking[qi] && onCheck(qi)}
+          disabled={!!fb[qi]}
+        />
+        {!fb[qi] && (
+          <button className="ckbtn" onClick={() => onCheck(qi)} disabled={!answers[qi]?.trim() || checking[qi]}>
+            {checking[qi] ? 'בודק...' : 'בדוק'}
+          </button>
+        )}
+        {fb[qi] && (
+          <div className={`qfb ${fb[qi].score >= 3 ? 'ok3' : fb[qi].score >= 2 ? 'ok2' : 'no'}`}>
+            {fb[qi].score >= 3 ? '✓' : fb[qi].score >= 2 ? '~' : '✗'} {fb[qi].feedback_he}
+            {fb[qi].score < 3 && (
+              <div style={{ marginTop: '.35rem', fontStyle: 'italic', direction: 'ltr' as const }}>
+                תשובה נכונה: {q.ans_ro}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+
+      {/* Navigation row */}
+      <div style={{ display: 'flex', gap: 8, marginTop: 10 }}>
+        <button
+          onClick={goPrev} disabled={qi === 0}
+          style={{ flex: 1, padding: '9px', border: '1.5px solid var(--border)', background: '#fff', borderRadius: 10, cursor: qi > 0 ? 'pointer' : 'not-allowed', opacity: qi > 0 ? 1 : 0.4, fontFamily: '"Rubik", system-ui', fontSize: 13 }}>
+          ← הקודמת
+        </button>
+        {!allDone && qi < total - 1 && (
+          <button onClick={goNext}
+            style={{ flex: 1, padding: '9px', border: 'none', background: 'var(--blue)', color: '#fff', borderRadius: 10, cursor: 'pointer', fontFamily: '"Rubik", system-ui', fontSize: 13, fontWeight: 700 }}>
+            הבאה →
+          </button>
+        )}
+        {allDone && (
+          <button onClick={onNewDial}
+            style={{ flex: 2, padding: '9px', border: 'none', background: 'var(--green)', color: '#fff', borderRadius: 10, cursor: 'pointer', fontFamily: '"Rubik", system-ui', fontSize: 13, fontWeight: 700 }}>
+            ✓ סיימנו — דיאלוג חדש →
+          </button>
+        )}
+      </div>
     </div>
   );
 }
@@ -1423,24 +1755,15 @@ function ListenModule({ onProg }: { onProg: (n: number) => void }) {
             <button className="spdbtn" onClick={() => playDial(1)}>רגיל</button>
           </div>
         </div>
-        <div className="qsec">
-          <div className="qhdr">
-            <h3>שאלות הבנה</h3>
-            <button className="newdbtn" onClick={fetchDial}>דיאלוג חדש →</button>
-          </div>
-          {dial.questions.map((q: any, i: number) => ( // eslint-disable-line @typescript-eslint/no-explicit-any
-            <div key={i} className="qitem">
-              <div className="qro">{q.q_ro} <button style={{ background: "none", border: "none", cursor: "pointer", opacity: .45, padding: 2, display: 'inline-flex', alignItems: 'center', verticalAlign: 'middle' }} onClick={() => speakRo(q.q_ro)}><SpeakerHigh size={16} /></button></div>
-              <div className="qhe">🇮🇱 {q.q_he}</div>
-              <input className="qans" placeholder="כתוב תשובה..." value={answers[i] || ""} onChange={e => setAnswers(a => ({ ...a, [i]: e.target.value }))} onKeyDown={e => e.key === "Enter" && !checking[i] && check(i)} disabled={!!fb[i]} />
-              {!fb[i] && <button className="ckbtn" onClick={() => check(i)} disabled={!answers[i]?.trim() || checking[i]}>{checking[i] ? "בודק..." : "בדוק"}</button>}
-              {fb[i] && <div className={`qfb ${fb[i].score >= 3 ? "ok3" : fb[i].score >= 2 ? "ok2" : "no"}`}>
-                {fb[i].score >= 3 ? "✓" : fb[i].score >= 2 ? "~" : "✗"} {fb[i].feedback_he}
-                {fb[i].score < 3 && <div style={{ marginTop: ".35rem", fontStyle: "italic", direction: "ltr" as const }}>תשובה נכונה: {q.ans_ro}</div>}
-              </div>}
-            </div>
-          ))}
-        </div>
+        <ListenQuestions
+          questions={dial.questions}
+          answers={answers}
+          fb={fb}
+          checking={checking}
+          onAnswer={(i, v) => setAnswers(a => ({ ...a, [i]: v }))}
+          onCheck={check}
+          onNewDial={fetchDial}
+        />
       </>)}
       {!loading && dial?.err && <div className="ldcard"><p>שגיאה — <button className="pbtn" style={{ display: "inline", padding: ".4rem 1rem" }} onClick={fetchDial}>נסה שוב</button></p></div>}
     </div>
