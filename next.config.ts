@@ -1,24 +1,12 @@
 import type { NextConfig } from "next";
 
-const GORLIN_HOSTS = ["gorlin.help", "www.gorlin.help"];
-
 const nextConfig: NextConfig = {
   async rewrites() {
     return {
-      beforeFiles: GORLIN_HOSTS.flatMap((host) => [
-        // gorlin.help/  →  /gorlin (root rewrite, exact match)
-        {
-          source: "/",
-          has: [{ type: "host", value: host }],
-          destination: "/gorlin",
-        },
-        // gorlin.help/anything (path+ requires at least 1 char, never matches root)
-        {
-          source: "/:path+",
-          has: [{ type: "host", value: host }],
-          destination: "/gorlin/:path+",
-        },
-      ]),
+      beforeFiles: [
+        { source: "/", has: [{ type: "host", value: "gorlin.help" }], destination: "/gorlin" },
+        { source: "/", has: [{ type: "host", value: "www.gorlin.help" }], destination: "/gorlin" },
+      ],
     };
   },
 };
