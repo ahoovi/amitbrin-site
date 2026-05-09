@@ -136,7 +136,10 @@ input,button,select,textarea{font-family:inherit}
 .icon-new{color:var(--new)}
 .icon-research{color:var(--research)}
 
-/* ---------- HEADER ---------- */
+/* ---------- HEADER ----------
+   Site chrome (header + tabs) is sticky at top. Hiding on scroll-down
+   slides up via transform. Transition added via JS post-load to avoid
+   sticky/transform initial-state conflict. */
 header.site{
   position:sticky;top:0;z-index:100;background:var(--bg);
   border-bottom:2px solid var(--line-strong);padding:18px 32px;
@@ -144,6 +147,8 @@ header.site{
   padding-inline-end:max(32px,env(safe-area-inset-left));
   padding-top:max(18px,env(safe-area-inset-top));
 }
+body.nav-hidden header.site,
+body.nav-hidden nav.tabs{transform:translateY(-200px)}
 .header-row{display:flex;align-items:center;gap:24px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
 .brand{
   font-family:var(--font-headline);font-weight:700;font-size:1.4rem;color:var(--ink);
@@ -174,9 +179,9 @@ header.site{
 .header-actions{display:flex;gap:0;align-items:center;flex-wrap:wrap}
 .icon-btn{
   background:transparent;border:1px solid var(--line-strong);border-inline-end:none;padding:11px 18px;border-radius:0;
-  font-family:var(--font-label);cursor:pointer;color:var(--ink);font-size:.78rem;min-height:44px;
-  display:inline-flex;align-items:center;gap:6px;line-height:1;white-space:nowrap;
-  text-transform:uppercase;letter-spacing:.14em;font-weight:600;
+  font-family:var(--font-label);cursor:pointer;color:var(--ink);font-size:.95rem;min-height:44px;
+  display:inline-flex;align-items:center;gap:8px;line-height:1;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.04em;font-weight:600;
   transition:background .15s,color .15s;
 }
 .icon-btn:last-child{border-inline-end:1px solid var(--line-strong)}
@@ -186,7 +191,7 @@ header.site{
   header.site{padding:14px 16px}
   .brand{font-size:1.15rem}
   .brand small{display:none}
-  .icon-btn{padding:9px 13px;font-size:.7rem;min-height:40px}
+  .icon-btn{padding:9px 13px;font-size:.85rem;min-height:40px;letter-spacing:.04em}
   .icon-btn .icon-btn-text{display:none}
   #search{font-size:.95rem;padding:11px 40px 11px 12px}
 }
@@ -202,11 +207,11 @@ nav.tabs{
 nav.tabs::-webkit-scrollbar{display:none}
 .tab-btn{
   padding:18px 22px;border:none;background:none;
-  font-family:var(--font-label);font-size:.78rem;
+  font-family:var(--font-label);font-size:.98rem;
   font-weight:600;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;
   white-space:nowrap;transition:color .15s,background .15s,border-bottom-color .15s;
   scroll-snap-align:center;min-height:52px;
-  text-transform:uppercase;letter-spacing:.14em;border-radius:0;
+  text-transform:uppercase;letter-spacing:.04em;border-radius:0;
 }
 .tab-btn .tab-emoji{margin-inline-end:8px;width:1.4em;height:1.4em;line-height:1;vertical-align:-0.25em}
 .tab-btn:hover{color:var(--ink);background:transparent}
@@ -219,7 +224,7 @@ nav.tabs::-webkit-scrollbar{display:none}
 .tab-btn[data-tab="research"].active{color:var(--research);border-bottom-color:var(--research)}
 @media(max-width:560px){
   nav.tabs{padding:0 14px}
-  .tab-btn{padding:15px 14px;font-size:.7rem;letter-spacing:.1em}
+  .tab-btn{padding:15px 14px;font-size:.85rem;letter-spacing:.04em}
 }
 
 /* ---------- LAYOUT ----------
@@ -242,6 +247,78 @@ aside.toc{
   scrollbar-width:thin;
 }
 aside.toc-block{margin-bottom:32px}
+
+/* ---------- CTA BANNERS ---------- */
+.cta-stack{display:flex;flex-direction:column;gap:0;margin-bottom:24px}
+.cta-banner{
+  display:flex;align-items:center;gap:16px;padding:18px 20px;
+  background:var(--accent);color:var(--bg);text-decoration:none;
+  border:none;border-bottom:none;
+  font-family:var(--font-headline);font-weight:600;
+  font-variation-settings:"wdth" 70;
+  font-size:1.05rem;line-height:1.25;
+  transition:background .15s,padding-inline-end .15s;
+}
+.cta-banner:hover{background:var(--accent-deep);color:var(--bg);border-bottom:none;padding-inline-end:24px}
+.cta-banner .icon-svg{
+  width:1.8rem;height:1.8rem;color:#FFFFFF;flex-shrink:0;
+  background:rgba(255,255,255,.12);padding:6px;
+}
+.cta-banner .cta-text{flex:1}
+.cta-banner .cta-sub{
+  font-family:var(--font-label);font-weight:600;font-size:.72rem;
+  text-transform:uppercase;letter-spacing:.12em;opacity:.85;display:block;margin-top:4px;
+}
+.cta-banner.cta-kids{background:var(--kid)}
+.cta-banner.cta-kids:hover{background:#C71F46}
+.cta-banner.cta-kids .icon-svg{background:rgba(255,255,255,.18)}
+
+/* ---------- GLOSSARY PANEL ---------- */
+.glossary-panel{
+  background:var(--surface);border:1px solid var(--line);
+  border-inline-start:4px solid var(--accent);
+  padding:18px 20px;margin-bottom:28px;position:relative;
+}
+.glossary-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-label);font-size:.7rem;font-weight:700;
+  color:var(--bg);background:var(--accent);padding:4px 10px;
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:10px;
+}
+.glossary-label .icon-svg{width:.9rem;height:.9rem}
+.glossary-empty-text{font-size:.88rem;line-height:1.55;color:var(--ink-soft);margin:0}
+.glossary-term{
+  font-family:var(--font-headline);font-weight:700;font-variation-settings:"wdth" 70;
+  font-size:1.25rem;color:var(--accent);margin:0 0 10px 0;line-height:1.2;letter-spacing:-.005em;
+}
+.glossary-def{font-size:.95rem;line-height:1.6;color:var(--ink);margin:0 0 12px 0}
+.glossary-source{
+  display:inline-flex;align-items:center;gap:6px;font-size:.82rem;
+  color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:1px;
+  font-family:var(--font-label);font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+}
+.glossary-source .icon-svg{width:.95rem;height:.95rem}
+.glossary-source:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(--accent)}
+.glossary-close{
+  position:absolute;top:6px;inset-inline-start:6px;
+  background:transparent;border:none;font-size:1.5rem;color:var(--muted);
+  cursor:pointer;width:30px;height:30px;line-height:1;padding:0;
+}
+.glossary-close:hover{color:var(--ink);background:var(--bg)}
+
+/* ---------- INLINE GLOSSARY TRIGGERS (in body text) ---------- */
+.gloss{
+  cursor:pointer;color:var(--accent);font-weight:600;
+  background:linear-gradient(to top,var(--accent-soft) 0,var(--accent-soft) 22%,transparent 22%);
+  padding:0 2px;transition:background .15s,color .15s;
+  border:none;
+}
+.gloss:hover{
+  background:var(--accent);color:var(--bg);
+}
+.gloss.gloss-active{
+  background:var(--ink);color:var(--bg);
+}
 aside.toc h4,
 aside.toc .toc-section-label{
   font-family:var(--font-label);font-size:.72rem;font-weight:700;color:var(--ink);
@@ -777,6 +854,37 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 <div class="page">
 
 <aside class="toc" id="toc">
+
+  <!-- CTA banners -->
+  <div class="cta-stack">
+    <a href="#newly" class="cta-banner cta-primary">
+      <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg>
+      <span class="cta-text">איבחנו אצלך גורלין?<br><span class="cta-sub">מומלץ להתחיל כאן ←</span></span>
+    </a>
+    <a href="#kids" class="cta-banner cta-kids">
+      <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg>
+      <span class="cta-text">מידע מותאם לילדים<br><span class="cta-sub">גילאי 11+ ←</span></span>
+    </a>
+  </div>
+
+  <!-- Glossary panel -->
+  <div class="glossary-panel" id="glossary-panel" data-state="empty">
+    <div class="glossary-empty">
+      <span class="glossary-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>מילון מונחים</span>
+      <p class="glossary-empty-text">בגוף הטקסט מסומנים מונחים מקצועיים — לחיצה עליהם תפתח כאן הסבר קצר בעברית פשוטה.</p>
+    </div>
+    <div class="glossary-entry" hidden>
+      <button class="glossary-close" type="button" aria-label="סגירה">×</button>
+      <span class="glossary-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>מילון</span>
+      <h4 class="glossary-term"></h4>
+      <p class="glossary-def"></p>
+      <a class="glossary-source" target="_blank" rel="noopener" hidden>
+        <span class="glossary-source-text">מקור</span>
+        <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-link"/></svg>
+      </a>
+    </div>
+  </div>
+
   <details>
     <summary><span>תוכן עניינים</span></summary>
 
@@ -826,8 +934,8 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 <section class="block open">
   <h3>הגדרה ושמות נרדפים</h3>
   <div class="body">
-    <p><strong>תסמונת גורלין</strong> (Gorlin Syndrome), הידועה גם כ-<strong>NBCCS</strong> (Nevoid Basal Cell Carcinoma Syndrome) או <strong>תסמונת BCC נבוסית</strong>, היא הפרעה גנטית תורשתית הגורמת לנטייה מוגברת לפתח גידולים שונים — בעיקר סרטני עור מסוג Basal Cell Carcinoma (BCC) — לצד מאפיינים שלדיים, אודונטוגניים (פה ולסת), נוירולוגיים, וקרדיולוגיים אופייניים.</p>
-    <p>קוד ICD-10: <code>Q87.89</code> · OMIM: <code>109400</code> (PTCH1) · <code>620343</code> (SUFU).</p>
+    <p><strong>תסמונת גורלין</strong> (Gorlin Syndrome), הידועה גם כ-<strong><span class="gloss" data-gloss="nbccs">NBCCS</span></strong> (Nevoid Basal Cell Carcinoma Syndrome) או <strong>תסמונת <span class="gloss" data-gloss="bcc">BCC</span> נבוסית</strong>, היא הפרעה גנטית תורשתית הגורמת לנטייה מוגברת לפתח גידולים שונים — בעיקר סרטני עור מסוג Basal Cell Carcinoma (BCC) — לצד מאפיינים שלדיים, אודונטוגניים (פה ולסת), נוירולוגיים, וקרדיולוגיים אופייניים.</p>
+    <p>קוד ICD-10: <code>Q87.89</code> · OMIM: <code>109400</code> (<span class="gloss" data-gloss="ptch1">PTCH1</span>) · <code>620343</code> (<span class="gloss" data-gloss="sufu">SUFU</span>).</p>
   </div>
 </section>
 
@@ -837,9 +945,9 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
     <ul>
       <li><strong>גנטית:</strong> תורשה אוטוזומלית דומיננטית. סיכון של 50% להעברה לכל ילד. הגן הראשי הוא <code>PTCH1</code> (כרומוזום 9q22), פחות שכיח <code>SUFU</code> (10q24).</li>
       <li><strong>שכיחות:</strong> מוערכת בכ-1:31,000 עד 1:164,000 בעולם.</li>
-      <li><strong>חדירות (penetrance):</strong> כמעט מלאה (90%+) — כמעט כל מי שיש לו את המוטציה יפתח לפחות אחד מהביטויים. אבל הביטוי משתנה דרמטית בין אנשים, גם באותה משפחה.</li>
-      <li><strong>הביטויים העיקריים:</strong> ריבוי גידולי BCC בעור (לעיתים מאות לאורך החיים), כיסות אודונטוגניות בלסתות, גומות בכפות הידיים והרגליים, הסתיידות falx cerebri (קרום מוחי), ומאפיינים שלדיים (צלעות מפוצלות, מקרוצפליה).</li>
-      <li><strong>סיכון לגידולים נוספים:</strong> מדולובלסטומה (גידול מוח בילדות) — סיכון נמוך עם PTCH1 (~2%), גבוה משמעותית עם SUFU (~20–30%). פיברומה לבבית ושחלתית.</li>
+      <li><strong><span class="gloss" data-gloss="penetrance">חדירות</span> (penetrance):</strong> כמעט מלאה (90%+) — כמעט כל מי שיש לו את המוטציה יפתח לפחות אחד מהביטויים. אבל הביטוי משתנה דרמטית בין אנשים, גם באותה משפחה.</li>
+      <li><strong>הביטויים העיקריים:</strong> ריבוי גידולי BCC בעור (לעיתים מאות לאורך החיים), כיסות אודונטוגניות בלסתות, גומות בכפות הידיים והרגליים, הסתיידות <span class="gloss" data-gloss="falx">falx cerebri</span> (קרום מוחי), ומאפיינים שלדיים (צלעות מפוצלות, <span class="gloss" data-gloss="macrocephaly">מקרוצפליה</span>).</li>
+      <li><strong>סיכון לגידולים נוספים:</strong> <span class="gloss" data-gloss="medulloblastoma">מדולובלסטומה</span> (גידול מוח בילדות) — סיכון נמוך עם PTCH1 (~2%), גבוה משמעותית עם SUFU (~20–30%). <span class="gloss" data-gloss="fibroma">פיברומה</span> לבבית ושחלתית.</li>
       <li><strong>הצפי לחיים:</strong> כמעט תקין. עם מעקב נכון רוב הביטויים ניתנים לשליטה. הסכנה הגדולה היא חשיפה מוגברת לקרינה — שמה שמייצרת BCCs נוספים.</li>
     </ul>
   </div>
@@ -904,7 +1012,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
         <div class="pillar-num">01</div>
         <div class="pillar-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-magnifying-glass"/></svg></div>
         <h4>מעקב סדיר</h4>
-        <p>הסכנה האמיתית היא לא בגידול שמופיע — אלא בגידול שגדל בשקט. מעקב כל 3–6 חודשים אצל דרמטולוג מאפשר לתפוס BCC כשהוא 2 מ"מ במקום 2 ס"מ. ההפרש: ניתוח של 10 דקות לעומת ניתוח Mohs של 3 שעות עם הצטלקות נראית.</p>
+        <p>הסכנה האמיתית היא לא בגידול שמופיע — אלא בגידול שגדל בשקט. מעקב כל 3–6 חודשים אצל דרמטולוג מאפשר לתפוס BCC כשהוא 2 מ"מ במקום 2 ס"מ. ההפרש: ניתוח של 10 דקות לעומת ניתוח <span class="gloss" data-gloss="mohs">Mohs</span> של 3 שעות עם הצטלקות נראית.</p>
       </article>
 
       <article class="pillar">
@@ -999,7 +1107,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 
     <div class="callout tip">
       <strong><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-bookmark-simple"/></svg>טיפ ענקי לפני הביקור הראשון</strong>
-      <p>שמור את הקישור לעמוד הזה (<code>amitbrin.com/gorlin</code>) או הדפס את טאב <strong>"מידע מקצועי לרופא"</strong>. בביקור הראשון אצל רופא חדש יש לפחות 8 מונחים שאתה שומע בפעם הראשונה — PTCH1, SUFU, OKC, פנורמי, פיברומה, BCC, Mohs, HHI. אין סיכוי לזכור הכל בזמן השיחה. עדיף שיהיה לך מסמך לחזור אליו אחר כך, ושעה לקרוא בשקט בבית. אפשר גם להעביר את הקישור לרופא ביום שלפני הביקור — חלק מהרופאים מעריכים את זה.</p>
+      <p>שמור את הקישור לעמוד הזה (<code>amitbrin.com/gorlin</code>) או הדפס את טאב <strong>"מידע מקצועי לרופא"</strong>. בביקור הראשון אצל רופא חדש יש לפחות 8 מונחים שאתה שומע בפעם הראשונה — PTCH1, SUFU, <span class="gloss" data-gloss="okc">OKC</span>, פנורמי, פיברומה, BCC, Mohs, <span class="gloss" data-gloss="hhi">HHI</span>. אין סיכוי לזכור הכל בזמן השיחה. עדיף שיהיה לך מסמך לחזור אליו אחר כך, ושעה לקרוא בשקט בבית. אפשר גם להעביר את הקישור לרופא ביום שלפני הביקור — חלק מהרופאים מעריכים את זה.</p>
     </div>
 
   </div>
@@ -1010,8 +1118,8 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
   <div class="body">
 
     <details class="qa"><summary>זה תורשתי? אני עלול להעביר לילדיי?</summary>
-      <div class="answer"><p>כן. תסמונת גורלין היא אוטוזומלית דומיננטית — כל ילד שיוולד לחולה יש לו 50% סיכוי לרשת את המוטציה. אם ההורה לא חולה, הסיכוי קרוב לאפס (אלא אם כן יש מקרה דה-נובו, מוטציה חדשה — שמהווה כ-20–30% מהמקרים).</p>
-      <p>אפשרויות לתכנון משפחה כוללות אבחון טרום השרשתי (PGD/IVF), אבחון טרום לידתי (CVS או מי שפיר), או הריון רגיל עם ייעוץ גנטי.</p></div>
+      <div class="answer"><p>כן. תסמונת גורלין היא אוטוזומלית דומיננטית — כל ילד שיוולד לחולה יש לו 50% סיכוי לרשת את המוטציה. אם ההורה לא חולה, הסיכוי קרוב לאפס (אלא אם כן יש מקרה <span class="gloss" data-gloss="denovo">דה-נובו</span>, מוטציה חדשה — שמהווה כ-20–30% מהמקרים).</p>
+      <p>אפשרויות לתכנון משפחה כוללות אבחון טרום השרשתי (<span class="gloss" data-gloss="pgd">PGD</span>/IVF), אבחון טרום לידתי (CVS או מי שפיר), או הריון רגיל עם ייעוץ גנטי.</p></div>
     </details>
 
     <details class="qa"><summary>איך הסיכוי שאחלה בסרטן עור?</summary>
@@ -1061,7 +1169,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
     </details>
 
     <details class="qa"><summary>יש "תרופה"? רפא?</summary>
-      <div class="answer"><p>לא, ולא בטווח הקרוב. אבל הטיפול בביטויים השתפר משמעותית: מעכבי מסלול ה-Hedgehog (Vismodegib, Sonidegib) יכולים להקטין מאוד את כמות ה-BCCs החדשים. ניסויים פעילים (2025–2026) של פטידגיב טופיקלי, איטרקונאזול ותרופות חדשות אחרות מוסיפים אופציות. המחקר נע — ראה טאב "מחקרים וניסויים".</p></div>
+      <div class="answer"><p>לא, ולא בטווח הקרוב. אבל הטיפול בביטויים השתפר משמעותית: מעכבי מסלול ה-<span class="gloss" data-gloss="hedgehog">Hedgehog</span> (<span class="gloss" data-gloss="vismodegib">Vismodegib</span>, <span class="gloss" data-gloss="sonidegib">Sonidegib</span>) יכולים להקטין מאוד את כמות ה-BCCs החדשים. ניסויים פעילים (2025–2026) של פטידגיב טופיקלי, איטרקונאזול ותרופות חדשות אחרות מוסיפים אופציות. המחקר נע — ראה טאב "מחקרים וניסויים".</p></div>
     </details>
 
   </div>
@@ -1130,7 +1238,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
       <div class="g101-card">
         <span class="g101-tag">דרמטולוגיה</span>
         <h5>מה תראה: ריבוי BCCs בגיל צעיר</h5>
-        <p>חולי גורלין מפתחים עשרות עד מאות BCCs לאורך החיים. BCC ראשון בגיל 20–30 (לעיתים נדירות לפני 10). מעקב עור כל 3–6 חודשים. הסרה בניתוח, Mohs, PDT, או טופיקלי. <strong>קרינה לטיפול ב-BCC אסורה</strong> — מחמירה.</p>
+        <p>חולי גורלין מפתחים עשרות עד מאות BCCs לאורך החיים. BCC ראשון בגיל 20–30 (לעיתים נדירות לפני 10). מעקב עור כל 3–6 חודשים. הסרה בניתוח, Mohs, <span class="gloss" data-gloss="pdt">PDT</span>, או טופיקלי. <strong>קרינה לטיפול ב-BCC אסורה</strong> — מחמירה.</p>
         <p><strong>מה לדעת מחוץ לתחומך:</strong> לחולים יש גם OKCs בלסת (פנורמי שנתי), פיברומה לבבית (אקו בייסליין), ואם SUFU — סיכון מדולובלסטומה בילדות.</p>
       </div>
 
@@ -1239,14 +1347,14 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
     <ol>
       <li>≥2 BCCs, או BCC אחד &lt; גיל 30, או ≥10 nevi BCC.</li>
       <li>Odontogenic Keratocyst (OKC) — מאומת היסטולוגית.</li>
-      <li>≥3 גומות פלמופלנטריות (palmar/plantar pits).</li>
+      <li>≥3 <span class="gloss" data-gloss="pits">גומות פלמופלנטריות</span> (palmar/plantar pits).</li>
       <li>הסתיידות אקטופית intracranial (טיפוסית: falx cerebri, lamellar pattern) — לפני גיל 20.</li>
       <li>היסטוריה משפחתית של תסמונת גורלין.</li>
     </ol>
 
     <h4>קריטריונים מינוריים</h4>
     <ol>
-      <li>אנומליות צלעות/חוליות (bifid ribs, hemivertebra, fusion).</li>
+      <li>אנומליות צלעות/חוליות (<span class="gloss" data-gloss="bifid">bifid rib</span>s, hemivertebra, fusion).</li>
       <li>Macrocephaly יחסי.</li>
       <li>שסעי שפה/חיך.</li>
       <li>פיברומה לבבית או שחלתית.</li>
@@ -1374,7 +1482,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 
     <h5>טיפולים בפיתוח / ניסויים פעילים</h5>
     <ul>
-      <li><strong>Patidegib gel 2% טופיקלי</strong> — Phase 2 פורסם BJD אפריל 2025: 63% CR ב-lesions שטופלו <a href="https://academic.oup.com/bjd/article-abstract/192/4/611/7900902" target="_blank">[BJD 2025]</a>. Phase 3 <strong>סיים גיוס</strong> (Sol-Gel Technologies, 43 אתרים); תוצאות ראשוניות צפויות Q4 2026.</li>
+      <li><strong><span class="gloss" data-gloss="patidegib">Patidegib</span> gel 2% טופיקלי</strong> — Phase 2 פורסם BJD אפריל 2025: 63% CR ב-lesions שטופלו <a href="https://academic.oup.com/bjd/article-abstract/192/4/611/7900902" target="_blank">[BJD 2025]</a>. Phase 3 <strong>סיים גיוס</strong> (Sol-Gel Technologies, 43 אתרים); תוצאות ראשוניות צפויות Q4 2026.</li>
       <li><strong>Itraconazole / SUBA-Itraconazole</strong> (off-target HHI) — 57.7% תגובה ≥30% reduction. מחקר PK אחרון הושלם אפריל 2026; הגשת NDA ל-FDA צפויה בקרוב (505(b)(2) pathway).</li>
       <li><strong>Itraconazole + Arsenic Trioxide</strong> — קומבינציה ניסיונית, 75% Hedgehog suppression.</li>
       <li><strong>Sonidegib + PDT (NCT06623201)</strong> — מגייס.</li>
@@ -2396,14 +2504,37 @@ searchInput.addEventListener('input', ()=>{
 });
 searchInput.addEventListener('search', doSearch);
 
-// ===== BACK TO TOP =====
-window.addEventListener('scroll', ()=>{
-  if(window.pageYOffset > 600){
-    toTopBtn.classList.add('visible');
-  } else {
-    toTopBtn.classList.remove('visible');
+// ===== BACK TO TOP + SCROLL-DIRECTION HEADER =====
+let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+setTimeout(()=>{ body.classList.add('nav-ready'); }, 50);
+function getY(){ return window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop || 0; }
+function handleScroll(){
+  const y = getY();
+  const dy = y - lastScrollY;
+  if(y < 80){
+    body.classList.remove('nav-hidden');
+  } else if(dy > 4){
+    // moving down — hide
+    body.classList.add('nav-hidden');
+  } else if(dy < -4){
+    // moving up — show
+    body.classList.remove('nav-hidden');
   }
-}, {passive:true});
+  lastScrollY = y;
+  toTopBtn.classList.toggle('visible', y > 600);
+}
+// Listen on multiple sources to be robust to whatever element ends up as scroll container
+window.addEventListener('scroll', handleScroll, {passive:true});
+document.addEventListener('scroll', handleScroll, {passive:true,capture:true});
+// Polling fallback — some setups (body overflow:hidden auto) don't bubble scroll to window
+let _pollLastY = -1;
+setInterval(()=>{
+  const y = getY();
+  if(y !== _pollLastY){
+    _pollLastY = y;
+    handleScroll();
+  }
+}, 60);
 toTopBtn.addEventListener('click', ()=>{
   window.scrollTo({top:0, behavior:'smooth'});
 });
@@ -2432,6 +2563,188 @@ if(shareBtn){
     }
   });
 }
+
+// ===== GLOSSARY =====
+const GLOSSARY = {
+  bcc: {
+    term: 'BCC — קרצינומה תאית-בסיסית',
+    def: 'הסוג השכיח של סרטן עור. אצל אנשים רגילים מופיע לרוב אחרי שנים של חשיפה לשמש; חולי גורלין מפתחים הרבה ובגיל צעיר. החדשות הטובות: זה גידול מקומי שכמעט אף פעם לא שולח גרורות, ומסירים אותו בניתוח קטן.',
+    source: 'https://he.wikipedia.org/wiki/קרצינומה_תאית-בסיסית',
+    sourceLabel: 'ויקיפדיה'
+  },
+  ptch1: {
+    term: 'PTCH1',
+    def: 'הגן הראשי שאחראי לתסמונת גורלין — בערך 85% מהמקרים. תפקידו לבלום צמיחה לא מבוקרת של תאי עור. כשהוא פגום, התאים גדלים בלי לעצור.',
+    source: 'https://omim.org/entry/109400',
+    sourceLabel: 'OMIM'
+  },
+  sufu: {
+    term: 'SUFU',
+    def: 'הגן השני שגורם לגורלין — נדיר יותר (5–10%) אבל הסיכון למדולובלסטומה (גידול במוח בילדות) גבוה משמעותית. נושאי SUFU עוברים MRI מוח תכוף עד גיל 5.',
+    source: 'https://omim.org/entry/620343',
+    sourceLabel: 'OMIM'
+  },
+  okc: {
+    term: 'OKC — כיסה אודונטוגנית',
+    def: 'שק בעצם הלסת שמתמלא בנוזל. לא סרטני ולא מסוכן, אבל גדל לאט ולוחץ על שיניים ועצם. מטפלים בניתוח קטן או בניקוז (בילדים). 65-75% מחולי גורלין יפתחו אחת או יותר במהלך החיים.',
+    source: 'https://en.wikipedia.org/wiki/Odontogenic_keratocyst',
+    sourceLabel: 'Wikipedia'
+  },
+  medulloblastoma: {
+    term: 'מדולובלסטומה',
+    def: 'גידול מוח שיכול להופיע בילדות, בעיקר אצל נושאי מוטציית SUFU. אצל PTCH1 הסיכון נמוך מאוד (~2%), אצל SUFU הוא 20-30%. גילוי מוקדם דרך MRI שגרתי משנה דרסטית את הפרוגנוזה.',
+    source: 'https://he.wikipedia.org/wiki/מדולובלסטומה',
+    sourceLabel: 'ויקיפדיה'
+  },
+  vismodegib: {
+    term: 'Vismodegib',
+    def: 'תרופה פומית (כדורים) שחוסמת את מסלול ה-Hedgehog ומקטינה גידולי BCC. אושרה ב-2012. תופעות לוואי שכיחות: שינוי בטעם, נשירת שיער זמנית, התכווצויות שרירים. שם מסחרי: Erivedge.',
+    source: 'https://en.wikipedia.org/wiki/Vismodegib',
+    sourceLabel: 'Wikipedia'
+  },
+  sonidegib: {
+    term: 'Sonidegib',
+    def: 'תרופה פומית דומה ל-Vismodegib — חוסמת את מסלול Hedgehog. במחקרים השוואתיים מ-2024 מתגלה כסבילות עדיפה במינון 200mg. שם מסחרי: Odomzo.',
+    source: 'https://en.wikipedia.org/wiki/Sonidegib',
+    sourceLabel: 'Wikipedia'
+  },
+  patidegib: {
+    term: 'Patidegib',
+    def: 'מעכב Hedgehog בפיתוח כמשחה (טופיקלי) ולא ככדור — היתרון: פחות תופעות לוואי כי התרופה לא מתפזרת בכל הגוף. סיים בהצלחה Phase 3 באפריל 2026.',
+    source: 'https://en.wikipedia.org/wiki/Patidegib',
+    sourceLabel: 'Wikipedia'
+  },
+  hedgehog: {
+    term: 'מסלול Hedgehog',
+    def: 'מסלול אותות בתאים שמכוון את צמיחת רקמות. שיבוש בו (כמו בגורלין) גורם לתאים לצמוח ללא בלמים — והתוצאה היא BCCs. השם בא מתצורת זבוב הפירות שבו התגלה. תרופות "מעכבי Hedgehog" עוצרות את המסלול הזה.',
+    source: 'https://en.wikipedia.org/wiki/Hedgehog_signaling_pathway',
+    sourceLabel: 'Wikipedia'
+  },
+  hhi: {
+    term: 'HHI — מעכב Hedgehog',
+    def: 'משפחת תרופות שחוסמות את מסלול ה-Hedgehog בתאים. כוללת את Vismodegib, Sonidegib ו-Patidegib. כשהמסלול חסום, גידולי BCC מתכווצים ופחות חדשים מופיעים.',
+    source: 'https://en.wikipedia.org/wiki/Hedgehog_signaling_pathway',
+    sourceLabel: 'Wikipedia'
+  },
+  mohs: {
+    term: 'ניתוח Mohs',
+    def: 'שיטה כירורגית מדויקת להסרת סרטן עור: הרופא מסיר שכבה דקה, בודק מיד במיקרוסקופ, וממשיך רק אם נדרש. כך מורידים מינימום עור בריא — מועדף בפנים ובאזורים רגישים.',
+    source: 'https://he.wikipedia.org/wiki/מוס_(טכניקה_כירורגית)',
+    sourceLabel: 'ויקיפדיה'
+  },
+  pdt: {
+    term: 'PDT — טיפול פוטו-דינמי',
+    def: 'טיפול באור שלא חודר לעור: מורחים חומר שרגיש לאור על הגידול, ואז מאירים אותו באור צבעוני — והתאים הסרטניים נהרסים מבפנים. מתאים לגידולים שטחיים, ללא חיתוך, ללא הצטלקות משמעותית.',
+    source: 'https://en.wikipedia.org/wiki/Photodynamic_therapy',
+    sourceLabel: 'Wikipedia'
+  },
+  falx: {
+    term: 'Falx Cerebri',
+    def: 'קרום דק (לא עצם) שמפריד בין שני חצאי המוח. אצל ~90% מחולי גורלין, רואים בצילום הסתיידויות בקרום הזה — סימן אופייני שעוזר באבחון. ההסתיידויות עצמן לא מזיקות.',
+    source: 'https://en.wikipedia.org/wiki/Falx_cerebri',
+    sourceLabel: 'Wikipedia'
+  },
+  macrocephaly: {
+    term: 'מקרוצפליה',
+    def: 'היקף ראש גדול מהממוצע (מעל אחוזון 95). לא מציין שום בעיה במוח — זה רק מבנה. נפוץ בקרב חולי גורלין (30-40%) ולא דורש טיפול.',
+    source: 'https://he.wikipedia.org/wiki/מקרוצפליה',
+    sourceLabel: 'ויקיפדיה'
+  },
+  fibroma: {
+    term: 'פיברומה',
+    def: 'גידול שפיר של רקמת חיבור. בגורלין יכולה להופיע בלב (2-5%) או בשחלות (15-25% מהנשים). רוב הפיברומות לא גורמות תסמינים, ומסירים אותן רק אם הן לוחצות על משהו.',
+    source: 'https://en.wikipedia.org/wiki/Fibroma',
+    sourceLabel: 'Wikipedia'
+  },
+  bifid: {
+    term: 'צלע מפוצלת (Bifid Rib)',
+    def: 'צלע שבקצה שלה מתפצלת לשתיים — כמו אות "Y". מאפיין שלדי שכיח בגורלין (~60%). לא כואב, לא מפריע לנשימה, רואים אותו במקרה בצילום חזה. אין מה לעשות איתו.',
+    source: 'https://en.wikipedia.org/wiki/Bifid_rib',
+    sourceLabel: 'Wikipedia'
+  },
+  pits: {
+    term: 'גומות פלמופלנטריות',
+    def: 'גומות קטנות (2-3 מ"מ) שקועות בכפות הידיים והרגליים. אופייניות מאוד לגורלין — ≥3 גומות נחשבות לקריטריון אבחנתי. לא כואבות, לא מזיקות, לפעמים אנשים אפילו אוהבים אותן כסימן מזהה.',
+    source: 'https://en.wikipedia.org/wiki/Palmar_pits',
+    sourceLabel: 'Wikipedia'
+  },
+  nbccs: {
+    term: 'NBCCS',
+    def: 'Nevoid Basal Cell Carcinoma Syndrome — שם לועזי לתסמונת גורלין. שתי השמות מתייחסים בדיוק לאותה תסמונת. בספרות הרפואית מעדיפים NBCCS, בקליניקה ובציבור — "גורלין".',
+    source: 'https://www.ncbi.nlm.nih.gov/books/NBK1151/',
+    sourceLabel: 'GeneReviews'
+  },
+  pgd: {
+    term: 'PGD — אבחון טרום השרשתי',
+    def: 'בדיקה גנטית של עוברים שנוצרו בהפריה חוץ-גופית (IVF), לפני ההשרשה ברחם. מאפשרת לזוג עם מוטציית גורלין לבחור עוברים בריאים מהמוטציה — ולמנוע העברה לדור הבא.',
+    source: 'https://he.wikipedia.org/wiki/אבחון_טרום_השרשתי',
+    sourceLabel: 'ויקיפדיה'
+  },
+  penetrance: {
+    term: 'חדירות (Penetrance)',
+    def: 'אחוז האנשים שיש להם מוטציה גנטית מסוימת ובאמת מפתחים ביטוי קליני. בגורלין החדירות גבוהה — מעל 90% עד גיל 30. כלומר כמעט כל מי שנושא את המוטציה יראה ביטוי כלשהו.',
+    source: 'https://he.wikipedia.org/wiki/חדירות_(גנטיקה)',
+    sourceLabel: 'ויקיפדיה'
+  },
+  denovo: {
+    term: 'מוטציה דה-נובו',
+    def: 'מוטציה חדשה שלא הייתה אצל אף אחד מההורים, אלא הופיעה לראשונה אצל הילד. מסבירה מקרים שבהם אין היסטוריה משפחתית של גורלין. ~20-30% מהמקרים של גורלין הם דה-נובו.',
+    source: 'https://he.wikipedia.org/wiki/דה_נובו',
+    sourceLabel: 'ויקיפדיה'
+  }
+};
+
+const glossPanel = document.getElementById('glossary-panel');
+const glossEmpty = glossPanel?.querySelector('.glossary-empty');
+const glossEntry = glossPanel?.querySelector('.glossary-entry');
+const glossTerm = glossPanel?.querySelector('.glossary-term');
+const glossDef = glossPanel?.querySelector('.glossary-def');
+const glossSource = glossPanel?.querySelector('.glossary-source');
+const glossSourceText = glossPanel?.querySelector('.glossary-source-text');
+const glossClose = glossPanel?.querySelector('.glossary-close');
+let activeGloss = null;
+
+function showGlossary(key, triggerEl){
+  const entry = GLOSSARY[key];
+  if(!entry || !glossPanel) return;
+  glossTerm.textContent = entry.term;
+  glossDef.textContent = entry.def;
+  if(entry.source){
+    glossSource.href = entry.source;
+    glossSourceText.textContent = `מקור: ${entry.sourceLabel || 'מידע נוסף'}`;
+    glossSource.hidden = false;
+  } else {
+    glossSource.hidden = true;
+  }
+  glossEmpty.hidden = true;
+  glossEntry.hidden = false;
+  glossPanel.dataset.state = 'filled';
+  if(activeGloss) activeGloss.classList.remove('gloss-active');
+  if(triggerEl){
+    triggerEl.classList.add('gloss-active');
+    activeGloss = triggerEl;
+  }
+  // Mobile: scroll the panel into view
+  if(window.matchMedia('(max-width:900px)').matches){
+    glossPanel.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+function clearGlossary(){
+  if(!glossPanel) return;
+  glossEmpty.hidden = false;
+  glossEntry.hidden = true;
+  glossPanel.dataset.state = 'empty';
+  if(activeGloss){activeGloss.classList.remove('gloss-active');activeGloss=null}
+}
+if(glossClose) glossClose.addEventListener('click', clearGlossary);
+document.addEventListener('click', e=>{
+  const trigger = e.target.closest('.gloss');
+  if(trigger){
+    e.preventDefault();
+    const key = trigger.dataset.gloss;
+    if(key) showGlossary(key, trigger);
+  }
+});
 
 // ===== HASH ROUTING =====
 function applyHash(opts){
