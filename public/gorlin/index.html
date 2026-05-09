@@ -1,0 +1,2502 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" class="no-js">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#134E4A">
+<meta name="format-detection" content="telephone=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="גורלין · מאגר">
+
+<title>תסמונת גורלין — מאגר מידע מקיף | עדכון מאי 2026</title>
+<meta name="description" content="מאגר מידע אינטראקטיבי בעברית על תסמונת גורלין (NBCCS) — לחולים, למשפחות, לרופאים ולילדים. סקירה מקיפה, פרוטוקולי מעקב, חידושים טיפוליים, ושאלות נפוצות. מעודכן מאי 2026.">
+<meta name="keywords" content="תסמונת גורלין, Gorlin Syndrome, NBCCS, BCC, PTCH1, SUFU, מדולובלסטומה, OKC, Vismodegib, Sonidegib, Patidegib">
+<meta name="author" content="Amit Brin">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://amitbrin.com/gorlin">
+
+<!-- Open Graph -->
+<meta property="og:type" content="article">
+<meta property="og:locale" content="he_IL">
+<meta property="og:url" content="https://amitbrin.com/gorlin">
+<meta property="og:title" content="תסמונת גורלין — מאגר מידע מקיף בעברית">
+<meta property="og:description" content="מאגר מידע אינטראקטיבי על תסמונת גורלין: לחולים, למשפחות, לרופאים ולילדים. מעודכן מאי 2026.">
+<meta property="og:site_name" content="amitbrin.com">
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="תסמונת גורלין — מאגר מידע מקיף">
+<meta name="twitter:description" content="מאגר מידע אינטראקטיבי בעברית. עדכון מאי 2026.">
+
+<!-- Favicon (DNA helix icon, inline SVG) -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 256 256'%3E%3Crect width='256' height='256' fill='%23134E4A'/%3E%3Cg fill='none' stroke='%23FDF2E9' stroke-width='14' stroke-linecap='round'%3E%3Cpath d='M80 40c0 32 96 32 96 64s-96 32-96 64 96 32 96 64'/%3E%3Cpath d='M176 40c0 32-96 32-96 64s96 32 96 64-96 32-96 64'/%3E%3Cline x1='90' y1='62' x2='166' y2='62'/%3E%3Cline x1='100' y1='86' x2='156' y2='86'/%3E%3Cline x1='100' y1='170' x2='156' y2='170'/%3E%3Cline x1='90' y1='194' x2='166' y2='194'/%3E%3C/g%3E%3C/svg%3E">
+
+<!-- Google Fonts: Noto Sans Hebrew (headlines), Assistant (body), Dosis (Latin labels) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Assistant:wght@200..800&family=Dosis:wght@200..800&family=Noto+Sans+Hebrew:wght@100..900&display=swap" rel="stylesheet">
+
+<!-- Phosphor icons inlined as SVG sprite (see body) -->
+
+<style>
+:root{
+  /* MagSpread palette */
+  --bg:#FDF2E9;            /* warm cream surface */
+  --surface:#FFFFFF;       /* card / paper */
+  --ink:#1C1917;           /* near-black ink */
+  --ink-soft:#44403C;      /* secondary ink */
+  --muted:#78716C;         /* tertiary / labels */
+  --line:#E7E5E4;           /* hairline */
+  --line-strong:#1C1917;   /* heavy editorial rule */
+
+  --accent:#134E4A;        /* deep teal — primary */
+  --accent-deep:#0F3D3A;   /* hover state */
+  --accent-soft:#134E4A14; /* 8% teal tint */
+  --rose:#E11D48;          /* secondary accent */
+  --rose-soft:#FEE2E5;
+  --warn:#D97706; --warn-soft:#FEF3C7;
+  --info:#2563EB; --info-soft:#DBEAFE;
+  --success:#16A34A; --success-soft:#DCFCE7;
+  --error:#DC2626; --error-soft:#FEE2E2;
+
+  /* Semantic per-tab accents — stay within MagSpread family */
+  --kid:#E11D48; --kid-soft:#FEE2E5;          /* rose for kids */
+  --doc:#134E4A; --doc-soft:#134E4A12;        /* teal for doctor */
+  --new:#0F3D3A; --new-soft:#134E4A0F;        /* deeper teal for newly */
+  --research:#92400E; --research-soft:#FEF3C7; /* amber for research */
+
+  --shadow:none;
+  --radius:0;
+
+  /* Typography stacks */
+  --font-headline:"Noto Sans Hebrew","Assistant","Heebo","Arial Hebrew",sans-serif;
+  --font-body:"Assistant","Noto Sans Hebrew","Heebo","Arial Hebrew",sans-serif;
+  --font-label:"Dosis","Assistant",sans-serif;
+  --font-mono:"Source Code Pro","SF Mono","Menlo",monospace;
+  --font: var(--font-body);  /* legacy alias */
+
+  /* Spacing — 12px base, magazine rhythm */
+  --sp-xs:6px; --sp-sm:12px; --sp-md:24px; --sp-lg:36px; --sp-xl:48px; --sp-2xl:72px; --sp-3xl:96px;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%;scroll-behavior:smooth}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font-body);line-height:1.75;font-size:18px;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}
+body{direction:rtl;text-align:right;padding-bottom:env(safe-area-inset-bottom);overflow-x:hidden;min-height:100vh;min-height:100dvh;font-weight:400}
+button,summary,a,.tab-btn,section.block > h3{-webkit-tap-highlight-color:rgba(19,78,74,.18);touch-action:manipulation}
+::selection{background:var(--accent);color:#FDF2E9}
+
+/* Headlines — Noto Sans Hebrew, weight 500, condensed width 70 */
+h1,h2,h3,h4,h5,h6,.headline{
+  font-family:var(--font-headline);
+  font-weight:500;
+  font-variation-settings:"wdth" 70;
+  font-optical-sizing:auto;
+  color:var(--accent);
+  letter-spacing:-.005em;
+  line-height:1.2;
+  margin:0;
+}
+h1{font-size:clamp(2.4rem,5.5vw,3.5rem);line-height:1.1;font-weight:700}
+h2{font-size:clamp(1.75rem,3.6vw,2.5rem);line-height:1.15;font-weight:600}
+h3{font-size:clamp(1.3rem,2.4vw,1.75rem);line-height:1.25;font-weight:600}
+h4{font-size:1.25rem;line-height:1.3;font-weight:600;color:var(--ink)}
+h5{font-size:1.05rem;line-height:1.4;font-weight:600;color:var(--ink-soft);font-variation-settings:"wdth" 85}
+
+/* Body text */
+p{font-family:var(--font-body);font-size:1rem;line-height:1.75;font-weight:400;margin:.6em 0}
+
+a{color:var(--accent);text-decoration:none;border-bottom:1px solid var(--accent);transition:color .15s,background .15s,border-color .15s;word-break:break-word;padding-bottom:1px}
+a:hover{background:var(--accent-soft);color:var(--accent-deep)}
+a:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+code{background:#FFFFFF;padding:2px 8px;border:1px solid var(--line);font-size:.88em;font-family:var(--font-mono);direction:ltr;display:inline-block;font-weight:500}
+strong,b{font-weight:700;color:var(--ink)}
+em,i{font-style:italic}
+
+img,svg{max-width:100%;height:auto}
+input,button,select,textarea{font-family:inherit}
+
+/* Magazine rule — replacement for shadows/borders */
+.rule-strong{height:2px;background:var(--line-strong);width:100%;margin:var(--sp-lg) 0;border:0}
+
+/* Phosphor icons rendered as inline SVG sprite (see <symbol> defs at top of body).
+   Each icon inherits text color via currentColor and sizes by 1em. The duotone
+   effect comes from a secondary path baked into each <symbol> with opacity:0.2. */
+.icon-svg{
+  width:1em;height:1em;display:inline-block;flex-shrink:0;line-height:1;
+  fill:currentColor;color:inherit;vertical-align:-0.15em;
+}
+/* Legacy webfont fallback class (in case any class survives) */
+.ph-duotone{font-size:1.1em;line-height:1;display:inline-flex;align-items:center}
+.icon-inline{font-size:1em;display:inline-flex;align-items:center;gap:6px}
+.icon-strong{color:var(--accent)}
+.icon-rose{color:var(--rose)}
+.icon-doc{color:var(--doc)}
+.icon-kid{color:var(--kid)}
+.icon-new{color:var(--new)}
+.icon-research{color:var(--research)}
+
+/* ---------- HEADER ---------- */
+header.site{
+  position:sticky;top:0;z-index:100;background:var(--bg);
+  border-bottom:2px solid var(--line-strong);padding:18px 32px;
+  padding-inline-start:max(32px,env(safe-area-inset-right));
+  padding-inline-end:max(32px,env(safe-area-inset-left));
+  padding-top:max(18px,env(safe-area-inset-top));
+}
+.header-row{display:flex;align-items:center;gap:24px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
+.brand{
+  font-family:var(--font-headline);font-weight:700;font-size:1.4rem;color:var(--ink);
+  display:flex;align-items:center;gap:12px;font-variation-settings:"wdth" 70;line-height:1;
+}
+.brand-icon{
+  color:var(--accent);display:inline-flex;align-items:center;
+}
+.brand-icon .icon-svg{width:1.6rem;height:1.6rem}
+.brand small{
+  font-family:var(--font-label);font-weight:500;color:var(--muted);font-size:.7rem;
+  margin-inline-start:6px;text-transform:uppercase;letter-spacing:.18em;
+}
+.brand-link{display:flex;align-items:baseline;gap:10px;color:inherit;border-bottom:none;padding:0}
+.brand-link:hover{border-bottom:none;background:transparent;color:var(--accent)}
+.search-wrap{flex:1;min-width:240px;position:relative}
+#search{
+  width:100%;padding:12px 44px 12px 14px;border:1px solid var(--line-strong);border-radius:0;
+  font-size:1rem;font-family:var(--font-body);background:#FFFFFF;direction:rtl;color:var(--ink);
+  -webkit-appearance:none;appearance:none;
+}
+#search:focus{outline:none;border:2px solid var(--accent);padding:11px 43px 11px 13px}
+.search-icon{position:absolute;inset-inline-end:14px;top:50%;transform:translateY(-50%);color:var(--ink);pointer-events:none;font-size:1.1rem}
+.search-results-count{
+  font-family:var(--font-label);font-size:.72rem;color:var(--muted);min-width:60px;
+  text-transform:uppercase;letter-spacing:.12em;font-weight:600;
+}
+.header-actions{display:flex;gap:0;align-items:center;flex-wrap:wrap}
+.icon-btn{
+  background:transparent;border:1px solid var(--line-strong);border-inline-end:none;padding:11px 18px;border-radius:0;
+  font-family:var(--font-label);cursor:pointer;color:var(--ink);font-size:.78rem;min-height:44px;
+  display:inline-flex;align-items:center;gap:6px;line-height:1;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.14em;font-weight:600;
+  transition:background .15s,color .15s;
+}
+.icon-btn:last-child{border-inline-end:1px solid var(--line-strong)}
+.icon-btn:hover,.icon-btn:focus-visible{background:var(--accent);color:var(--bg);outline:none}
+.icon-btn .icon-btn-text{display:inline}
+@media(max-width:560px){
+  header.site{padding:14px 16px}
+  .brand{font-size:1.15rem}
+  .brand small{display:none}
+  .icon-btn{padding:9px 13px;font-size:.7rem;min-height:40px}
+  .icon-btn .icon-btn-text{display:none}
+  #search{font-size:.95rem;padding:11px 40px 11px 12px}
+}
+
+/* ---------- TABS ---------- */
+nav.tabs{
+  display:flex;gap:0;max-width:1400px;margin:0 auto;padding:0 32px;
+  border-bottom:2px solid var(--line-strong);background:var(--bg);overflow-x:auto;overflow-y:hidden;
+  scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;-ms-overflow-style:none;
+  position:sticky;top:0;z-index:90;
+}
+nav.tabs::-webkit-scrollbar{display:none}
+.tab-btn{
+  padding:18px 22px;border:none;background:none;
+  font-family:var(--font-label);font-size:.78rem;
+  font-weight:600;color:var(--ink-soft);cursor:pointer;border-bottom:3px solid transparent;
+  white-space:nowrap;transition:color .15s,background .15s,border-bottom-color .15s;
+  scroll-snap-align:center;min-height:52px;
+  text-transform:uppercase;letter-spacing:.14em;border-radius:0;
+}
+.tab-btn .tab-emoji{margin-inline-end:8px;width:1.4em;height:1.4em;line-height:1;vertical-align:-0.25em}
+.tab-btn:hover{color:var(--ink);background:transparent}
+.tab-btn:hover .tab-emoji{transform:translateY(-1px)}
+.tab-btn:focus-visible{outline:2px solid var(--accent);outline-offset:-4px}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.tab-btn[data-tab="kids"].active{color:var(--kid);border-bottom-color:var(--kid)}
+.tab-btn[data-tab="newly"].active{color:var(--new);border-bottom-color:var(--new)}
+.tab-btn[data-tab="doctor"].active{color:var(--doc);border-bottom-color:var(--doc)}
+.tab-btn[data-tab="research"].active{color:var(--research);border-bottom-color:var(--research)}
+@media(max-width:560px){
+  nav.tabs{padding:0 14px}
+  .tab-btn{padding:15px 14px;font-size:.7rem;letter-spacing:.1em}
+}
+
+/* ---------- LAYOUT ----------
+   Content sits on the visual RIGHT (Hebrew start side).
+   Sidebar (TOC + related links) sits on the visual LEFT (end side).
+   In RTL grid, the FIRST column appears at the start (right) — so 1fr first, 280px second. */
+.page{
+  max-width:1400px;margin:0 auto;padding:48px 32px;display:grid;grid-template-columns:1fr 280px;gap:56px;
+  padding-inline-start:max(32px,env(safe-area-inset-right));
+  padding-inline-end:max(32px,env(safe-area-inset-left));
+}
+.page main{order:1}
+.page aside.toc{order:2}
+@media(max-width:900px){.page{grid-template-columns:1fr;padding:24px 16px;gap:12px}.page aside.toc{order:0}.page main{order:1}}
+@media(max-width:560px){.page{padding:16px 12px}}
+
+aside.toc{
+  position:sticky;top:140px;align-self:start;max-height:calc(100vh - 160px);overflow-y:auto;
+  padding-inline-start:24px;border-inline-start:2px solid var(--line-strong);font-size:.95rem;
+  scrollbar-width:thin;
+}
+aside.toc-block{margin-bottom:32px}
+aside.toc h4,
+aside.toc .toc-section-label{
+  font-family:var(--font-label);font-size:.72rem;font-weight:700;color:var(--ink);
+  text-transform:uppercase;letter-spacing:.18em;margin:0 0 14px 0;
+  padding-bottom:8px;border-bottom:2px solid var(--line-strong);display:flex;align-items:center;gap:8px;
+}
+aside.toc .toc-section-label .icon-svg{color:var(--accent);width:1.05em;height:1.05em}
+aside.toc ul{list-style:none;padding:0;margin:0}
+aside.toc li{margin:0}
+aside.toc a{
+  color:var(--ink-soft);display:block;padding:9px 12px;border:none;line-height:1.4;
+  font-family:var(--font-body);font-size:.92rem;font-weight:400;
+  border-inline-start:3px solid transparent;transition:background .15s,color .15s,border-color .15s;
+}
+aside.toc a:hover{background:var(--accent-soft);color:var(--accent);border-inline-start-color:var(--accent)}
+aside.toc a.active{background:var(--accent);color:var(--bg);font-weight:600;border-inline-start-color:var(--ink)}
+aside.toc .toc-cross{list-style:none;padding:0;margin:0}
+aside.toc .toc-cross li{margin:0}
+aside.toc .toc-cross a{
+  display:flex;align-items:center;gap:10px;padding:8px 12px;font-size:.88rem;
+  color:var(--ink-soft);border-inline-start:3px solid transparent;
+}
+aside.toc .toc-cross a .icon-svg{width:1.05em;height:1.05em;color:var(--accent);flex-shrink:0}
+aside.toc .toc-cross a:hover{background:var(--accent-soft);color:var(--accent);border-inline-start-color:var(--accent)}
+aside.toc .toc-cross a:hover .icon-svg{color:var(--accent)}
+@media(max-width:900px){
+  aside.toc{
+    position:sticky;top:54px;z-index:80;background:var(--bg);
+    height:auto;max-height:none;border-inline-end:none;border-bottom:2px solid var(--line-strong);
+    padding:10px 14px;margin-bottom:12px;
+  }
+  aside.toc h4{display:none}
+  aside.toc details summary{
+    list-style:none;cursor:pointer;font-family:var(--font-label);font-size:.78rem;
+    font-weight:700;color:var(--ink);
+    padding:10px 4px;display:flex;align-items:center;gap:10px;
+    text-transform:uppercase;letter-spacing:.16em;
+  }
+  aside.toc details summary::-webkit-details-marker{display:none}
+  aside.toc details summary::before{content:"▸";display:inline-block;transition:transform .2s;font-size:.85em;color:var(--accent)}
+  aside.toc details[open] summary::before{transform:rotate(-90deg)}
+  aside.toc details summary::after{content:"תוכן עניינים";color:var(--accent)}
+  aside.toc details summary > span{display:none}
+  aside.toc ul{margin-top:8px;padding-bottom:8px}
+}
+@media(min-width:901px){aside.toc details > summary{display:none}aside.toc details > ul,aside.toc details > .toc-mobile-only{display:block !important}}
+/* (legacy .toc rules removed — aside.toc rules above govern) */
+
+main{min-width:0}
+
+/* ---------- TAB CONTENT ---------- */
+.tab-panel{display:none;animation:fade .25s}
+.tab-panel.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.tab-intro{
+  padding:8px 0 28px 0;border-radius:0;margin-bottom:32px;
+  border:none;background:transparent;
+}
+.tab-intro h2{
+  margin:0 0 18px 0;font-size:clamp(2rem,4vw,2.75rem);
+  font-family:var(--font-headline);font-weight:700;
+  font-variation-settings:"wdth" 70;line-height:1.05;letter-spacing:-.015em;
+  color:var(--accent);display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+}
+.tab-intro h2 .icon-svg{width:.9em;height:.9em;color:var(--accent);opacity:.9;flex-shrink:0}
+.tab-panel[data-panel="kids"] .tab-intro h2,
+.tab-panel[data-panel="kids"] .tab-intro h2 .icon-svg{color:var(--kid)}
+.tab-panel[data-panel="newly"] .tab-intro h2,
+.tab-panel[data-panel="newly"] .tab-intro h2 .icon-svg{color:var(--new)}
+.tab-panel[data-panel="doctor"] .tab-intro h2,
+.tab-panel[data-panel="doctor"] .tab-intro h2 .icon-svg{color:var(--doc)}
+.tab-panel[data-panel="research"] .tab-intro h2,
+.tab-panel[data-panel="research"] .tab-intro h2 .icon-svg{color:var(--research)}
+.tab-intro p{
+  margin:0;font-family:var(--font-headline);font-weight:500;
+  font-variation-settings:"wdth" 70;
+  font-size:clamp(1.15rem,1.8vw,1.4rem);line-height:1.4;
+  color:var(--accent);max-width:62ch;
+}
+.tab-panel[data-panel="kids"] .tab-intro p{color:var(--kid)}
+.tab-panel[data-panel="newly"] .tab-intro p{color:var(--new)}
+.tab-panel[data-panel="doctor"] .tab-intro p{color:var(--doc)}
+.tab-panel[data-panel="research"] .tab-intro p{color:var(--research)}
+@media(max-width:560px){.tab-intro{padding:4px 0 20px 0;margin-bottom:24px}}
+
+/* ---------- SECTIONS ---------- */
+section.block{
+  background:var(--surface);border:1px solid var(--line);border-radius:0;
+  margin-bottom:0;overflow:hidden;
+}
+section.block + section.block{border-top:0}
+section.block > h3{
+  margin:0;padding:22px 28px;cursor:pointer;
+  font-family:var(--font-headline);font-weight:500;font-size:1.4rem;
+  font-variation-settings:"wdth" 70;color:var(--ink);
+  display:flex;align-items:center;gap:14px;user-select:none;line-height:1.3;
+  background:transparent;transition:background .15s,color .15s;
+}
+section.block > h3:hover{background:var(--accent-soft);color:var(--accent)}
+section.block > h3::before{
+  content:"";display:inline-block;width:8px;height:8px;background:var(--accent);
+  flex-shrink:0;transition:transform .2s;
+}
+section.block.open > h3::before{transform:rotate(45deg)}
+section.block .body{
+  padding:0 28px 28px 28px;border-top:1px solid var(--line);display:none;
+}
+section.block.open .body{display:block;padding-top:22px}
+section.block .body > *:first-child{margin-top:0}
+
+@media(max-width:560px){
+  section.block > h3{padding:18px 20px;font-size:1.2rem}
+  section.block .body{padding:0 20px 22px 20px}
+  section.block.open .body{padding-top:18px}
+}
+
+h4{margin:26px 0 10px 0;font-size:1.15rem}
+h5{margin:18px 0 8px 0}
+p{margin:10px 0}
+ul,ol{padding-inline-start:24px;margin:10px 0}
+li{margin:6px 0;line-height:1.7}
+
+/* ---------- CALLOUTS ---------- */
+.callout{
+  padding:20px 24px;border-radius:0;margin:20px 0;border-inline-start:4px solid var(--accent);
+  background:var(--accent-soft);
+}
+.callout.warn{border-inline-start-color:var(--warn);background:var(--warn-soft)}
+.callout.info{border-inline-start-color:var(--info);background:var(--info-soft)}
+.callout.tip{border-inline-start-color:var(--rose);background:var(--rose-soft)}
+.callout strong{
+  display:block;margin-bottom:6px;
+  font-family:var(--font-label);font-size:.78rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--accent);
+}
+.callout.warn strong{color:var(--warn)}
+.callout.info strong{color:var(--info)}
+.callout.tip strong{color:var(--rose)}
+
+/* ---------- TABLES ---------- */
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;border-radius:0;border:2px solid var(--line-strong)}
+.table-wrap table{margin:0;border-radius:0;border:none;min-width:520px}
+table{width:100%;border-collapse:collapse;margin:20px 0;font-size:.95rem;background:var(--surface)}
+th,td{padding:14px 16px;border-bottom:1px solid var(--line);border-inline-start:1px solid var(--line);text-align:right;vertical-align:top;line-height:1.55}
+th:first-child,td:first-child{border-inline-start:none}
+tr:last-child td{border-bottom:none}
+th{
+  background:var(--ink);color:var(--bg);font-weight:600;
+  font-family:var(--font-label);font-size:.75rem;text-transform:uppercase;letter-spacing:.12em;
+  border-bottom:none;
+}
+tr:nth-child(even) td{background:var(--bg)}
+@media(max-width:560px){
+  table{font-size:.88rem}
+  th,td{padding:10px 12px}
+}
+
+/* ---------- BADGES / CHIPS ---------- */
+.badge{
+  display:inline-block;padding:3px 10px;border-radius:0;font-size:.7rem;
+  background:var(--accent);color:var(--bg);font-weight:700;margin-inline-start:8px;
+  font-family:var(--font-label);text-transform:uppercase;letter-spacing:.12em;
+}
+.badge.warn{background:var(--warn-soft);color:var(--warn)}
+.badge.new{background:var(--info-soft);color:var(--info)}
+
+/* ---------- KIDS TAB ---------- */
+.tab-panel[data-panel="kids"] section.block > h3{color:var(--ink)}
+.tab-panel[data-panel="kids"] section.block > h3:hover{color:var(--kid);background:var(--kid-soft)}
+.tab-panel[data-panel="kids"] section.block.open > h3::before{background:var(--kid)}
+.tab-panel[data-panel="kids"] section.block > h3::before{background:var(--kid)}
+.tab-panel[data-panel="kids"] .callout{border-inline-start-color:var(--kid);background:var(--kid-soft)}
+.tab-panel[data-panel="kids"] .callout strong{color:var(--kid)}
+.kids-card{
+  background:transparent;border:none;border-inline-start:4px solid var(--kid);border-radius:0;
+  padding:6px 22px;margin:18px 0;
+}
+.kids-card h4{color:var(--kid);margin-top:0;font-weight:600}
+
+/* ---------- DOCTOR TAB ---------- */
+.tab-panel[data-panel="doctor"] section.block > h3::before{background:var(--doc)}
+.tab-panel[data-panel="doctor"] .callout{border-inline-start-color:var(--doc);background:var(--doc-soft)}
+.tab-panel[data-panel="doctor"] .callout strong{color:var(--doc)}
+.spec-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:0;margin:20px 0;border:2px solid var(--line-strong)}
+.spec-card{
+  background:var(--surface);border:none;border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);
+  border-radius:0;padding:22px 24px;
+}
+.spec-card h5{
+  margin:0 0 10px 0;color:var(--doc);font-family:var(--font-label);font-size:.8rem;
+  text-transform:uppercase;letter-spacing:.14em;font-weight:700;
+}
+
+/* ---------- QA / FAQ ---------- */
+details.qa{
+  background:var(--surface);border:1px solid var(--line);border-radius:0;
+  padding:0;margin:0;border-bottom:none;
+}
+details.qa:last-of-type{border-bottom:1px solid var(--line)}
+details.qa[open]{border-color:var(--accent);position:relative;z-index:1}
+details.qa summary{
+  padding:18px 22px;cursor:pointer;
+  font-family:var(--font-headline);font-weight:500;font-variation-settings:"wdth" 70;
+  font-size:1.1rem;color:var(--ink);
+  list-style:none;display:flex;align-items:center;gap:14px;line-height:1.4;
+  transition:color .15s,background .15s;
+}
+details.qa summary:hover{color:var(--accent);background:var(--accent-soft)}
+details.qa summary::before{
+  content:"+";flex-shrink:0;color:var(--accent);font-weight:400;
+  font-family:var(--font-body);font-size:1.5rem;line-height:1;
+  width:20px;display:inline-block;text-align:center;transition:transform .2s;
+}
+details.qa summary::-webkit-details-marker{display:none}
+details.qa[open] summary{border-bottom:1px solid var(--line);background:var(--accent-soft)}
+details.qa[open] summary::before{content:"−"}
+details.qa .answer{padding:18px 22px}
+details.qa .answer > *:first-child{margin-top:0}
+details.qa .answer > *:last-child{margin-bottom:0}
+
+/* ---------- KIDS DEEP-DIVE ACCORDIONS ---------- */
+details.kids-deep{
+  background:var(--surface);border:1px solid var(--line);border-inline-start:4px solid var(--kid);
+  border-radius:0;padding:0;margin:0;border-bottom:none;
+}
+details.kids-deep:last-of-type{border-bottom:1px solid var(--line)}
+details.kids-deep[open]{border-color:var(--kid)}
+details.kids-deep[open]{border-inline-start-width:6px}
+details.kids-deep summary{
+  padding:18px 24px;cursor:pointer;
+  font-family:var(--font-headline);font-weight:600;color:var(--kid);
+  font-variation-settings:"wdth" 70;
+  list-style:none;display:flex;align-items:center;gap:14px;font-size:1.15rem;line-height:1.35;
+}
+details.kids-deep summary:hover{background:var(--kid-soft)}
+details.kids-deep summary::before{
+  content:"+";flex-shrink:0;color:var(--kid);font-weight:400;
+  font-family:var(--font-body);font-size:1.6rem;line-height:1;width:20px;text-align:center;
+}
+details.kids-deep summary::-webkit-details-marker{display:none}
+details.kids-deep[open] summary{border-bottom:1px solid var(--line);background:var(--kid-soft)}
+details.kids-deep[open] summary::before{content:"−"}
+details.kids-deep .deep-body{padding:20px 24px}
+details.kids-deep .deep-body > *:first-child{margin-top:0}
+details.kids-deep .deep-body > *:last-child{margin-bottom:0}
+details.kids-deep .deep-body h5{color:var(--kid);margin:18px 0 8px 0}
+
+/* ---------- TIMELINE / CHRONOLOGICAL UPDATES ---------- */
+.timeline{margin:24px 0;padding:0;list-style:none;border-inline-start:2px solid var(--ink)}
+.timeline li{padding:18px 24px 18px 0;margin-inline-start:24px;position:relative;border-bottom:1px dashed var(--line)}
+.timeline li:last-child{border-bottom:none}
+.timeline li::before{
+  content:"";width:14px;height:14px;border-radius:0;background:var(--accent);
+  position:absolute;inset-inline-start:-32px;top:22px;border:3px solid var(--bg);
+}
+.timeline .tl-date{
+  display:inline-block;
+  font-family:var(--font-label);font-size:.7rem;font-weight:700;color:var(--bg);background:var(--ink);
+  padding:4px 12px;border-radius:0;margin-bottom:10px;
+  text-transform:uppercase;letter-spacing:.14em;
+}
+.timeline .tl-title{
+  font-family:var(--font-headline);font-weight:600;font-variation-settings:"wdth" 70;
+  font-size:1.15rem;color:var(--ink);display:block;margin-bottom:6px;line-height:1.3;
+}
+.timeline .tl-body{color:var(--ink-soft);font-size:1rem;line-height:1.6}
+.timeline .tl-source{font-family:var(--font-label);font-size:.72rem;color:var(--muted);margin-top:8px;text-transform:uppercase;letter-spacing:.1em}
+.timeline .tl-source a{color:var(--accent);border-bottom:1px solid var(--accent)}
+
+/* ---------- GORLIN 101 SPECIALTY CARDS ---------- */
+.g101-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:0;margin:20px 0;border:2px solid var(--line-strong)}
+.g101-card{
+  background:var(--surface);border:none;border-radius:0;padding:24px 28px;
+  border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);
+}
+.g101-card h5{margin:0 0 12px 0;color:var(--doc);font-size:1.1rem;font-weight:600}
+.g101-card .g101-tag{
+  display:inline-block;font-family:var(--font-label);font-size:.72rem;
+  background:var(--doc);color:var(--bg);padding:3px 10px;border-radius:0;margin-bottom:10px;
+  font-weight:700;text-transform:uppercase;letter-spacing:.14em;
+}
+
+/* ---------- CHECKLIST ---------- */
+.checklist{list-style:none;padding:0;margin:18px 0}
+.checklist li{
+  padding:14px 18px;background:var(--surface);border:1px solid var(--line);border-radius:0;
+  margin:0;display:flex;align-items:flex-start;gap:14px;border-bottom:none;
+}
+.checklist li:last-child{border-bottom:1px solid var(--line)}
+.checklist li::before{
+  content:"";flex-shrink:0;display:inline-block;width:16px;height:16px;
+  border:2px solid var(--accent);background:transparent;margin-top:5px;
+}
+
+/* ---------- SEARCH HIGHLIGHT ---------- */
+mark.search-hit{background:var(--rose);color:#FFFFFF;padding:1px 4px;border-radius:0;font-weight:600}
+.search-hidden{display:none !important}
+.search-section-empty{opacity:.32}
+
+/* ---------- GENDER TOGGLE (kids tab) ---------- */
+.gender-switch{
+  background:transparent;border:2px solid var(--kid);border-radius:0;padding:18px 24px;margin:0 0 28px 0;
+  display:flex;flex-wrap:wrap;align-items:center;gap:18px;justify-content:space-between;
+}
+.gender-switch-label{
+  font-family:var(--font-label);font-weight:700;color:var(--kid);font-size:.78rem;
+  display:flex;align-items:center;gap:10px;text-transform:uppercase;letter-spacing:.14em;
+}
+.gender-switch-label .icon-svg{width:1.15em;height:1.15em}
+.gender-switch-controls{display:inline-flex;background:transparent;border:1px solid var(--kid);border-radius:0;padding:0;gap:0}
+.gender-switch-controls button{
+  border:none;background:transparent;font-family:var(--font-label);font-size:.78rem;
+  padding:10px 22px;border-radius:0;cursor:pointer;color:var(--kid);
+  font-weight:700;transition:background .15s,color .15s;min-height:40px;
+  text-transform:uppercase;letter-spacing:.14em;
+  display:inline-flex;align-items:center;gap:8px;
+}
+.gender-switch-controls button .icon-svg{width:1.05em;height:1.05em}
+.gender-switch-controls button + button{border-inline-start:1px solid var(--kid)}
+.gender-switch-controls button.active{background:var(--kid);color:#FFFFFF}
+.gender-switch-controls button:focus-visible{outline:2px solid var(--kid);outline-offset:2px}
+body[data-gender="m"] .g-female{display:none}
+body[data-gender="f"] .g-male{display:none}
+@media(max-width:560px){
+  .gender-switch{padding:14px 16px;gap:12px}
+  .gender-switch-controls button{padding:9px 16px}
+}
+
+/* ---------- LEDE / HERO ---------- */
+.lede{
+  font-family:var(--font-headline);font-weight:500;font-variation-settings:"wdth" 70;
+  font-size:1.2rem;line-height:1.5;color:var(--ink);margin:0 0 24px 0;max-width:62ch;
+}
+.hero-lede{
+  border-top:3px solid var(--ink);border-bottom:1px solid var(--line);
+  padding:24px 0 22px 0;margin:0 0 36px 0;
+}
+.hero-lede-line{
+  font-family:var(--font-headline);font-weight:600;font-variation-settings:"wdth" 70;
+  font-size:clamp(1.4rem,2.4vw,1.85rem);line-height:1.25;color:var(--accent);
+  margin:0 0 14px 0;letter-spacing:-.005em;
+}
+.tab-panel[data-panel="newly"] .hero-lede-line{color:var(--new)}
+.hero-lede p:not(.hero-lede-line){
+  margin:0;font-size:1.05rem;line-height:1.65;color:var(--ink-soft);max-width:62ch;
+}
+
+/* ---------- 4-PILLAR GRID (newly tab) ---------- */
+.pillar-grid{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0;margin:0;
+  border:2px solid var(--line-strong);
+}
+.pillar{
+  background:var(--surface);padding:28px 28px 24px;
+  border-inline-end:1px solid var(--line);border-bottom:1px solid var(--line);
+  position:relative;
+}
+.pillar:nth-child(2n){border-inline-end:none}
+.pillar:nth-last-child(-n+2){border-bottom:none}
+.pillar-num{
+  font-family:var(--font-label);font-weight:700;font-size:.7rem;color:var(--muted);
+  letter-spacing:.16em;margin-bottom:14px;
+}
+.pillar-icon{
+  font-size:2rem;color:var(--new);margin-bottom:12px;line-height:1;
+}
+.pillar-icon .icon-svg{width:1.6em;height:1.6em}
+.pillar h4{
+  font-family:var(--font-headline);font-weight:600;font-variation-settings:"wdth" 70;
+  font-size:1.3rem;color:var(--ink);margin:0 0 10px 0;line-height:1.25;
+}
+.pillar p{margin:0;font-size:.98rem;line-height:1.65;color:var(--ink-soft)}
+@media(max-width:760px){
+  .pillar-grid{grid-template-columns:1fr}
+  .pillar:nth-child(2n){border-inline-end:none}
+  .pillar{border-inline-end:none;border-bottom:1px solid var(--line)}
+  .pillar:last-child{border-bottom:none}
+}
+
+/* ---------- ACTION STEPS (newly tab roadmap) ---------- */
+.action-steps{
+  list-style:none;padding:0;margin:24px 0 0 0;
+  border-top:2px solid var(--line-strong);
+}
+.action-steps > li{
+  display:grid;grid-template-columns:80px 1fr;gap:24px;align-items:start;
+  padding:28px 0;border-bottom:1px solid var(--line);margin:0;
+}
+.action-steps > li:last-child{border-bottom:2px solid var(--line-strong)}
+.action-num{
+  font-family:var(--font-headline);font-weight:700;font-variation-settings:"wdth" 70;
+  font-size:3.4rem;line-height:1;color:var(--new);
+  border-inline-start:3px solid var(--new);padding-inline-start:14px;
+}
+.action-body h4{
+  font-family:var(--font-headline);font-weight:600;font-variation-settings:"wdth" 70;
+  font-size:1.4rem;color:var(--ink);margin:0 0 10px 0;line-height:1.25;
+  display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.action-body h4 .icon-svg{width:1.4em;height:1.4em;color:var(--new);flex-shrink:0}
+.action-body p{margin:8px 0;line-height:1.65}
+.action-body .action-why{color:var(--ink-soft)}
+.action-body .action-how{
+  background:var(--bg);border-inline-start:3px solid var(--new);padding:10px 14px;
+  font-size:.95rem;
+}
+.action-body .action-how strong{color:var(--new)}
+@media(max-width:760px){
+  .action-steps > li{grid-template-columns:60px 1fr;gap:18px;padding:22px 0}
+  .action-num{font-size:2.5rem;padding-inline-start:10px}
+  .action-body h4{font-size:1.2rem}
+}
+
+/* Section h3 icon helper */
+section.block > h3 > .icon-svg{
+  width:1.1em;height:1.1em;color:var(--accent);flex-shrink:0;
+}
+.tab-panel[data-panel="kids"] section.block > h3 > .icon-svg{color:var(--kid)}
+.tab-panel[data-panel="newly"] section.block > h3 > .icon-svg{color:var(--new)}
+.tab-panel[data-panel="doctor"] section.block > h3 > .icon-svg{color:var(--doc)}
+.tab-panel[data-panel="research"] section.block > h3 > .icon-svg{color:var(--research)}
+
+/* Callout strong with icon */
+.callout strong .icon-svg{width:1.15em;height:1.15em;margin-inline-end:6px;vertical-align:-0.2em}
+
+/* ---------- BACK-TO-TOP ---------- */
+.to-top{
+  position:fixed;bottom:max(24px,calc(env(safe-area-inset-bottom) + 16px));
+  inset-inline-end:max(24px,env(safe-area-inset-right));
+  width:48px;height:48px;border-radius:0;background:var(--accent);color:var(--bg);border:2px solid var(--accent);
+  font-size:1.3rem;cursor:pointer;
+  display:none;align-items:center;justify-content:center;z-index:99;
+  transition:background .2s,color .2s,transform .2s;
+}
+.to-top.visible{display:flex}
+.to-top:hover{background:var(--bg);color:var(--accent);transform:translateY(-3px)}
+.to-top:focus-visible{outline:3px solid var(--rose);outline-offset:3px}
+@media print{.to-top{display:none !important}}
+
+/* ---------- NO-JS FALLBACK ---------- */
+.noscript-banner{
+  background:var(--warn-soft);border:2px solid var(--warn);border-radius:0;
+  padding:18px 24px;margin:0 auto;max-width:1400px;text-align:center;font-weight:600;
+  color:var(--warn);font-size:1rem;line-height:1.6;
+}
+.noscript-banner a{color:var(--warn);text-decoration:underline}
+/* When JS is off: show all tabs, open all collapsibles, hide interactive-only UI */
+.no-js nav.tabs{display:none}
+.no-js .search-wrap{display:none}
+.no-js .print-btn{display:none}
+.no-js aside.toc{display:none}
+.no-js .page{grid-template-columns:1fr}
+.no-js .tab-panel{display:block !important;margin-bottom:32px;border-bottom:3px solid var(--line);padding-bottom:24px}
+.no-js section.block .body{display:block;padding-top:18px;border-top:1px solid var(--line)}
+.no-js section.block > h3::before{content:"" !important}
+.no-js section.block > h3{cursor:default}
+.no-js details.qa,.no-js details.kids-deep{pointer-events:auto}
+.no-js .tab-panel .tab-intro h2::before{
+  display:block;font-size:.75rem;color:var(--muted);font-weight:400;margin-bottom:4px;letter-spacing:.5px;
+}
+.no-js .tab-panel[data-panel="overview"] .tab-intro h2::before{content:"— סקירה כללית —"}
+.no-js .tab-panel[data-panel="newly"] .tab-intro h2::before{content:"— מאובחנים חדשים —"}
+.no-js .tab-panel[data-panel="doctor"] .tab-intro h2::before{content:"— מידע מקצועי לרופא —"}
+.no-js .tab-panel[data-panel="kids"] .tab-intro h2::before{content:"— לילדים (11+) —"}
+.no-js .tab-panel[data-panel="research"] .tab-intro h2::before{content:"— מחקרים וניסויים —"}
+.no-js .tab-panel[data-panel="resources"] .tab-intro h2::before{content:"— מקורות וקישורים —"}
+
+/* ---------- FOOTER ---------- */
+footer{
+  max-width:1400px;margin:72px auto 0;padding:36px 32px 44px;border-top:2px solid var(--line-strong);
+  color:var(--muted);font-size:.9rem;text-align:center;line-height:1.65;
+  font-family:var(--font-body);
+}
+footer .footer-line{margin:0 0 8px 0}
+footer .footer-line:last-child{margin-bottom:0}
+footer .footer-credit{font-size:.85rem;margin-bottom:14px}
+footer .footer-disclaimer{font-size:.82rem;color:var(--muted)}
+footer strong{color:var(--ink)}
+footer a{color:var(--ink);border-bottom:1px solid var(--ink)}
+footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(--accent)}
+
+/* ---------- PRINT ---------- */
+@media print{
+  header.site,nav.tabs,aside.toc,.print-btn,.search-wrap{display:none !important}
+  .page{display:block;padding:0;max-width:none}
+  .tab-panel{display:block !important;page-break-before:always}
+  .tab-panel:first-child{page-break-before:auto}
+  section.block{break-inside:avoid;border:1px solid #000;margin-bottom:8px}
+  section.block .body{display:block !important}
+  section.block > h3::before{display:none}
+  body{font-size:11pt;line-height:1.5}
+  .callout{break-inside:avoid}
+  a{color:#000;border-bottom:none}
+  a[href]:after{content:" (" attr(href) ")";font-size:.75em;color:#666}
+}
+</style>
+</head>
+<body data-gender="m">
+<svg xmlns="http://www.w3.org/2000/svg" style="display:none" aria-hidden="true"><symbol id="ph-arrows-out-cardinal" viewBox="0 0 256 256"><rect x="54.46" y="54.46" width="147.08" height="147.08" transform="translate(-53.02 128) rotate(-45)" opacity="0.2"/><line x1="128" y1="160" x2="128" y2="232" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="96" x2="128" y2="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="96 56 128 24 160 56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="96 200 128 232 160 200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="96" y1="128" x2="24" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="160" y1="128" x2="232" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="200 96 232 128 200 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="56 96 24 128 56 160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-baby" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" opacity="0.2"/><circle cx="92" cy="128" r="12"/><circle cx="164" cy="128" r="12"/><path d="M156,168a53,53,0,0,1-56,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M128,32c-16,20-16,40-16,40a16,16,0,0,0,32,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-bone" viewBox="0 0 256 256"><path d="M56.32,199.68a28,28,0,1,1,10.51-51.42,8,8,0,0,0,10-1.07l70.38-70.38a8,8,0,0,0,1.07-10,28,28,0,1,1,51.42-10.51,28,28,0,1,1-10.51,51.42,8,8,0,0,0-10,1.07l-70.38,70.38a8,8,0,0,0-1.07,10,28,28,0,1,1-51.42,10.51Z" opacity="0.2"/><path d="M56.32,199.68a28,28,0,1,1,10.51-51.42,8,8,0,0,0,10-1.07l70.38-70.38a8,8,0,0,0,1.07-10,28,28,0,1,1,51.42-10.51,28,28,0,1,1-10.51,51.42,8,8,0,0,0-10,1.07l-70.38,70.38a8,8,0,0,0-1.07,10,28,28,0,1,1-51.42,10.51Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-book-open" viewBox="0 0 256 256"><path d="M160,56a32,32,0,0,0-32,32A32,32,0,0,0,96,56H24V200H96a32,32,0,0,1,32,32,32,32,0,0,1,32-32h72V56Z" opacity="0.2"/><path d="M128,88a32,32,0,0,1,32-32h72V200H160a32,32,0,0,0-32,32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M24,200H96a32,32,0,0,1,32,32V88A32,32,0,0,0,96,56H24Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-bookmark-simple" viewBox="0 0 256 256"><path d="M192,224l-64-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" opacity="0.2"/><path d="M192,224l-64-40L64,224V48a8,8,0,0,1,8-8H184a8,8,0,0,1,8,8Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-books" viewBox="0 0 256 256"><rect x="48" y="72" width="64" height="112" opacity="0.2"/><rect x="48" y="40" width="64" height="176" rx="8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M217.67,205.77l-46.81,10a8,8,0,0,1-9.5-6.21L128.18,51.8a8.07,8.07,0,0,1,6.15-9.57l46.81-10a8,8,0,0,1,9.5,6.21L223.82,196.2A8.07,8.07,0,0,1,217.67,205.77Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="48" y1="72" x2="112" y2="72" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="48" y1="184" x2="112" y2="184" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="133.16" y1="75.48" x2="195.61" y2="62.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="139.79" y1="107.04" x2="202.25" y2="93.62" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="156.39" y1="185.94" x2="218.84" y2="172.52" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M139.79,107l62.46-13.42L190.64,38.39a8,8,0,0,0-9.5-6.21l-46.81,10a8.07,8.07,0,0,0-6.15,9.57Z" opacity="0.2"/></symbol><symbol id="ph-brain" viewBox="0 0 256 256"><path d="M208,78.73V72a40,40,0,0,0-80,0,40,40,0,0,0-80,0v6.73a48,48,0,0,0,0,90.54h0V176a40,40,0,0,0,80,0,40,40,0,0,0,80,0v-6.73h0a48,48,0,0,0,0-90.54Z" opacity="0.2"/><path d="M88,136a40,40,0,1,1-40,40v-6.73" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M168,136a40,40,0,1,0,40,40v-6.73" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M72,172H64A48,48,0,0,1,48,78.73V72a40,40,0,0,1,80,0V176" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M184,172h8a48,48,0,0,0,16-93.27V72a40,40,0,0,0-80,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M200,112h-4a28,28,0,0,1-28-28V80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M56,112h4A28,28,0,0,0,88,84V80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-compass-tool" viewBox="0 0 256 256"><circle cx="128" cy="80" r="32" opacity="0.2"/><circle cx="128" cy="80" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="48" x2="128" y2="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="141" y1="109.25" x2="192" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="64" y1="224" x2="115" y2="109.25" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M208,120c-14.57,28.49-45.8,48-80,48a87.71,87.71,0,0,1-35.75-7.56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-compass" viewBox="0 0 256 256"><path d="M128,32a96,96,0,1,0,96,96A96,96,0,0,0,128,32Zm16,112L80,176l32-64,64-32Z" opacity="0.2"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polygon points="176 80 112 112 80 176 144 144 176 80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-dna" viewBox="0 0 256 256"><path d="M64,208v-3.5a72,72,0,0,1,39.8-64.4l48.4-24.2A72,72,0,0,0,192,51.5V48H64v3.5a72,72,0,0,0,39.8,64.4l48.4,24.2A72,72,0,0,1,192,204.5V208Z" opacity="0.2"/><line x1="96" y1="48" x2="192" y2="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M64,24V51.5a72,72,0,0,0,39.8,64.4l48.4,24.2A72,72,0,0,1,192,204.5V232" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="64" y1="208" x2="160" y2="208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="107.89" y1="80" x2="186.12" y2="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="69.88" y1="176" x2="148.11" y2="176" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M93.38,146.47A72,72,0,0,0,64,204.5V232" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M192,24V51.5a72,72,0,0,1-29.38,58" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-eye" viewBox="0 0 256 256"><path d="M128,56C48,56,16,128,16,128s32,72,112,72,112-72,112-72S208,56,128,56Zm0,112a40,40,0,1,1,40-40A40,40,0,0,1,128,168Z" opacity="0.2"/><path d="M128,56C48,56,16,128,16,128s32,72,112,72,112-72,112-72S208,56,128,56Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-flask" viewBox="0 0 256 256"><path d="M71.63,153.08c13.23-2.48,32-1.41,56.37,10.92,32.25,16.33,54.75,12.91,67.5,7.65h0l19.34,32.23A8,8,0,0,1,208,216H48a8,8,0,0,1-6.86-12.12l30.48-50.8Z" opacity="0.2"/><line x1="88" y1="32" x2="168" y2="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M152,32V99.14l62.85,104.74A8,8,0,0,1,208,216H48a8,8,0,0,1-6.86-12.12L104,99.14V32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M71.63,153.08c13.23-2.48,32-1.41,56.37,10.92,32.25,16.33,54.75,12.91,67.5,7.65" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-globe" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" opacity="0.2"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M168,128c0,64-40,96-40,96s-40-32-40-96,40-96,40-96S168,64,168,128Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="37.46" y1="96" x2="218.54" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="37.46" y1="160" x2="218.54" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-hand-heart" viewBox="0 0 256 256"><path d="M48,208H16a8,8,0,0,1-8-8V160a8,8,0,0,1,8-8H48Z" opacity="0.2"/><path d="M140,120a20,20,0,0,1,20,20h0a20,20,0,0,1-20,20h4l37.78-8.68C203.82,135.07,232,109.23,232,80c0-21.69-17.67-40-39.46-40A39.12,39.12,0,0,0,156,64a39.12,39.12,0,0,0-36.54-24C97.67,40,80,58.31,80,80c0,14.56,7,27.71,16.73,40Z" opacity="0.2"/><path d="M48,208H16a8,8,0,0,1-8-8V160a8,8,0,0,1,8-8H48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M112,160h32l67-15.41a16.61,16.61,0,0,1,21,16h0a16.59,16.59,0,0,1-9.18,14.85L184,192l-64,16H48V152l25-25a24,24,0,0,1,17-7H140a20,20,0,0,1,20,20h0a20,20,0,0,1-20,20Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M96.73,120C87,107.72,80,94.56,80,80c0-21.69,17.67-40,39.46-40A39.12,39.12,0,0,1,156,64a39.12,39.12,0,0,1,36.54-24C214.33,40,232,58.31,232,80c0,29.23-28.18,55.07-50.22,71.32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-hand" viewBox="0 0 256 256"><path d="M188,56a20,20,0,0,0-20,20V44a20,20,0,0,0-40,0V60a20,20,0,0,0-40,0v92L69.32,122a20,20,0,0,0-34.64,20c32.57,68.72,49.14,90,93.32,90a80,80,0,0,0,80-80V76A20,20,0,0,0,188,56Z" opacity="0.2"/><path d="M168,76a20,20,0,0,1,40,0v76a80,80,0,0,1-80,80c-44.18,0-60.75-21.28-93.32-90a20,20,0,0,1,34.64-20L88,152V60a20,20,0,0,1,40,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M128,120V44a20,20,0,0,1,40,0v76" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-heart-straight" viewBox="0 0 256 256"><path d="M128,224l89.36-90.64a50,50,0,1,0-70.72-70.72L128,80,109.36,62.64a50,50,0,0,0-70.72,70.72Z" opacity="0.2"/><path d="M128,224l89.36-90.64a50,50,0,1,0-70.72-70.72L128,80,109.36,62.64a50,50,0,0,0-70.72,70.72Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-link" viewBox="0 0 256 256"><path d="M218.34,53.66h0a46.62,46.62,0,0,0-65.94,0L117.66,88.4c-.33.33-.64.66-1,1A46.6,46.6,0,0,0,72.4,101.66L37.66,136.4a46.63,46.63,0,0,0-.06,65.89h0a46.63,46.63,0,0,0,66,.05l34.74-34.74c.33-.33.64-.66.95-1a46.58,46.58,0,0,0,44.31-12.26l34.74-34.74A46.62,46.62,0,0,0,218.34,53.66Z" opacity="0.2"/><path d="M141.38,64.68l11-11a46.62,46.62,0,0,1,65.94,0h0a46.62,46.62,0,0,1,0,65.94L193.94,144,183.6,154.34a46.63,46.63,0,0,1-66-.05h0A46.48,46.48,0,0,1,104,120.06" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M114.62,191.32l-11,11a46.63,46.63,0,0,1-66-.05h0a46.63,46.63,0,0,1,.06-65.89L72.4,101.66a46.62,46.62,0,0,1,65.94,0h0A46.45,46.45,0,0,1,152,135.94" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-list-checks" viewBox="0 0 256 256"><rect x="128" y="64" width="88" height="128" opacity="0.2"/><line x1="128" y1="128" x2="216" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="192" x2="216" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="40 64 56 80 88 48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="40 128 56 144 88 112" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="40 192 56 208 88 176" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-list-magnifying-glass" viewBox="0 0 256 256"><circle cx="184" cy="144" r="32" opacity="0.2"/><line x1="40" y1="64" x2="216" y2="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="128" x2="112" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="192" x2="128" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="184" cy="144" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="206.63" y1="166.63" x2="232" y2="192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-magnifying-glass" viewBox="0 0 256 256"><circle cx="112" cy="112" r="80" opacity="0.2"/><circle cx="112" cy="112" r="80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="168.57" y1="168.57" x2="224" y2="224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-microscope" viewBox="0 0 256 256"><rect x="72" y="24" width="64" height="120" rx="8" opacity="0.2"/><line x1="32" y1="216" x2="224" y2="216" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="72" y1="176" x2="136" y2="176" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><rect x="72" y="24" width="64" height="120" rx="8" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M136,72a80,80,0,0,1,48,144" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-person-simple-run" viewBox="0 0 256 256"><circle cx="152" cy="56" r="24" opacity="0.2"/><circle cx="152" cy="56" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M56,105.6s32-25.67,80,7c50.47,34.3,80,20.85,80,20.85" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M110.64,161.16C128.47,165,176,180,176,232" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M134.44,111.51C128.37,135.24,98.81,206.68,32,200" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-person-simple" viewBox="0 0 256 256"><circle cx="128" cy="48" r="24" opacity="0.2"/><circle cx="128" cy="48" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="104" x2="128" y2="152" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="64 224 128 152 192 224" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M32,128s40-24,96-24,96,24,96,24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-person" viewBox="0 0 256 256"><circle cx="128" cy="40" r="24" opacity="0.2"/><path d="M149.17,80a24,24,0,0,1,18,8.13l45.32,51.38a12,12,0,0,1-17,17L160,128l22.87,86.93a12,12,0,0,1-21.75,10.14L128,168,94.88,225.07a12,12,0,0,1-21.75-10.14L96,128,60.49,156.49a12,12,0,0,1-17-17L88.83,88.13a24,24,0,0,1,18-8.13Z" opacity="0.2"/><circle cx="128" cy="40" r="24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M149.17,80a24,24,0,0,1,18,8.13l45.32,51.38a12,12,0,0,1-17,17L160,128l22.87,86.93a12,12,0,0,1-21.75,10.14L128,168,94.88,225.07a12,12,0,0,1-21.75-10.14L96,128,60.49,156.49a12,12,0,0,1-17-17L88.83,88.13a24,24,0,0,1,18-8.13Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-pill" viewBox="0 0 256 256"><path d="M109.25,210.75a45.26,45.26,0,0,1-64,0h0a45.26,45.26,0,0,1,0-64L96,96l64,64Z" opacity="0.2"/><rect x="10.98" y="82.75" width="234.04" height="90.51" rx="45.25" transform="translate(-53.02 128) rotate(-45)" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="96" y1="96" x2="160" y2="160" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="160" y1="112" x2="184" y2="88" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-printer" viewBox="0 0 256 256"><path d="M64,176H24V96c0-8.84,7.76-16,17.33-16H214.67C224.24,80,232,87.16,232,96v80H192V152H64Z" opacity="0.2"/><polyline points="64 80 64 40 192 40 192 80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><rect x="64" y="152" width="128" height="64" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M64,176H24V96c0-8.84,7.76-16,17.33-16H214.67C224.24,80,232,87.16,232,96v80H192" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="188" cy="116" r="12"/></symbol><symbol id="ph-radioactive" viewBox="0 0 256 256"><circle cx="128" cy="128" r="12"/><path d="M92,128a36,36,0,0,1,17.77-31L83.82,52a8,8,0,0,0-11.55-2.54A95.94,95.94,0,0,0,32,119.14,8.1,8.1,0,0,0,40,128Z" opacity="0.2"/><path d="M110,159.18a36,36,0,0,0,36,0l25.83,44.73a8,8,0,0,1-3.56,11.26,96.24,96.24,0,0,1-80.54,0,8,8,0,0,1-3.56-11.26Z" opacity="0.2"/><path d="M164,128c0-.62,0-1.23-.05-1.85A36,36,0,0,0,146.23,97l26-44.94a8,8,0,0,1,11.55-2.54A95.94,95.94,0,0,1,224,119.14a8.1,8.1,0,0,1-8,8.86Z" opacity="0.2"/><path d="M109.77,97,83.82,52a8,8,0,0,0-11.55-2.54A95.94,95.94,0,0,0,32,119.14,8.1,8.1,0,0,0,40,128H92" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M146.23,97l26-44.94a8,8,0,0,1,11.55-2.54A95.94,95.94,0,0,1,224,119.14a8.1,8.1,0,0,1-8,8.86H164" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M146,159.18l25.83,44.73a8,8,0,0,1-3.56,11.26,96.24,96.24,0,0,1-80.54,0,8,8,0,0,1-3.56-11.26L110,159.18" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-share-network" viewBox="0 0 256 256"><circle cx="176" cy="200" r="32" opacity="0.2"/><circle cx="176" cy="56" r="32" opacity="0.2"/><line x1="149.09" y1="73.3" x2="90.91" y2="110.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="90.91" y1="145.3" x2="149.09" y2="182.7" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="64" cy="128" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="176" cy="200" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="176" cy="56" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-smiley" viewBox="0 0 256 256"><circle cx="128" cy="128" r="96" opacity="0.2"/><circle cx="128" cy="128" r="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="92" cy="108" r="12"/><circle cx="164" cy="108" r="12"/><path d="M168,152c-8.3,14.35-22.23,24-40,24s-31.7-9.65-40-24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-spray-bottle" viewBox="0 0 256 256"><path d="M160,72h0a263.14,263.14,0,0,1,40,139.47V224a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V167.38a32,32,0,0,1,12-25l16-12.78a32,32,0,0,0,12-25V72Z" opacity="0.2"/><path d="M72,72H200a48,48,0,0,0-48-48H80a8,8,0,0,0-8,8V80a32,32,0,0,1-32,32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M160,72h0a263.14,263.14,0,0,1,40,139.47V224a8,8,0,0,1-8,8H88a8,8,0,0,1-8-8V167.38a32,32,0,0,1,12-25l16-12.78a32,32,0,0,0,12-25V72" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-stethoscope" viewBox="0 0 256 256"><circle cx="208" cy="160" r="32" opacity="0.2"/><circle cx="208" cy="160" r="12"/><circle cx="208" cy="160" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M104,144v48a40,40,0,0,0,40,40h24a40,40,0,0,0,40-40h0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M136,40h24V87.17c0,30.77-24.48,56.43-55.26,56.83A56,56,0,0,1,48,88V40H72" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-sun" viewBox="0 0 256 256"><circle cx="128" cy="128" r="56" opacity="0.2"/><line x1="128" y1="40" x2="128" y2="16" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="128" r="56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="64" y1="64" x2="48" y2="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="64" y1="192" x2="48" y2="208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="192" y1="64" x2="208" y2="48" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="192" y1="192" x2="208" y2="208" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="40" y1="128" x2="16" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="128" y1="216" x2="128" y2="240" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="216" y1="128" x2="240" y2="128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-tooth" viewBox="0 0 256 256"><path d="M40,79.76C39.93,151.18,63.48,208,84,222.54a8,8,0,0,0,12.52-6C98,196.31,104,160,128,160s30,36.31,31.51,56.53a8,8,0,0,0,12.52,6c20.49-14.55,44-71.36,44-142.78A47.94,47.94,0,0,0,168,32H88A47.94,47.94,0,0,0,40,79.76Z" opacity="0.2"/><line x1="88" y1="64" x2="168" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><line x1="168" y1="64" x2="88" y2="96" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M40,79.76C39.93,151.18,63.48,208,84,222.54a8,8,0,0,0,12.52-6C98,196.31,104,160,128,160s30,36.31,31.51,56.53a8,8,0,0,0,12.52,6c20.49-14.55,44-71.36,44-142.78A47.94,47.94,0,0,0,168,32H88A47.94,47.94,0,0,0,40,79.76Z" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-user-switch" viewBox="0 0 256 256"><path d="M128,32A96,96,0,0,0,63.8,199.38h0A72,72,0,0,1,128,160a40,40,0,1,1,40-40,40,40,0,0,1-40,40,72,72,0,0,1,64.2,39.37A96,96,0,0,0,128,32Z" opacity="0.2"/><circle cx="128" cy="120" r="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M63.8,199.37a72,72,0,0,1,128.4,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="200 128 224 152 248 128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><polyline points="8 128 32 104 56 128" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M32,104v24a96,96,0,0,0,174,56" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M224,152V128A96,96,0,0,0,50,72" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-users-four" viewBox="0 0 256 256"><circle cx="80" cy="168" r="32" opacity="0.2"/><circle cx="80" cy="64" r="32" opacity="0.2"/><circle cx="176" cy="168" r="32" opacity="0.2"/><circle cx="176" cy="64" r="32" opacity="0.2"/><path d="M32,224a60,60,0,0,1,96,0,60,60,0,0,1,96,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M32,120a60,60,0,0,1,96,0h0a60,60,0,0,1,96,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="80" cy="168" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="80" cy="64" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="176" cy="168" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="176" cy="64" r="32" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol><symbol id="ph-users-three" viewBox="0 0 256 256"><circle cx="128" cy="144" r="40" opacity="0.2"/><circle cx="64" cy="88" r="32" opacity="0.2"/><circle cx="192" cy="88" r="32" opacity="0.2"/><path d="M192,120a59.91,59.91,0,0,1,48,24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M16,144a59.91,59.91,0,0,1,48-24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><circle cx="128" cy="144" r="40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M72,216a65,65,0,0,1,112,0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M161,80a32,32,0,1,1,31,40" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/><path d="M64,120A32,32,0,1,1,95,80" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="16"/></symbol></svg>
+
+<noscript>
+<div class="noscript-banner">
+  המסמך אינטראקטיבי ודורש JavaScript. כל הסקשנים מוצגים כעת פתוחים — אפשר לקרוא ברצף.
+</div>
+</noscript>
+
+<header class="site">
+  <div class="header-row">
+    <div class="brand"><span class="brand-icon" aria-hidden="true"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-dna"/></svg></span><span>תסמונת גורלין — מאגר מידע</span> <small>עדכון מאי 2026</small></div>
+    <div class="search-wrap">
+      <label for="search" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">חיפוש במסמך</label>
+      <input type="search" id="search" placeholder="חיפוש במסמך... (לדוגמה: vismodegib, גנטיקה)" autocomplete="off" enterkeyhint="search" inputmode="search">
+      <span class="search-icon" aria-hidden="true">⌕</span>
+    </div>
+    <span class="search-results-count" id="search-count" aria-live="polite"></span>
+    <div class="header-actions">
+      <button class="icon-btn" id="share-btn" type="button" aria-label="שיתוף"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-share-network"/></svg><span class="icon-btn-text">שיתוף</span></button>
+      <button class="icon-btn" type="button" onclick="window.print()" aria-label="הדפסה או PDF"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-printer"/></svg><span class="icon-btn-text">הדפסה / PDF</span></button>
+    </div>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist">
+  <button class="tab-btn active" data-tab="overview" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-compass"/></svg>סקירה</button>
+  <button class="tab-btn" data-tab="newly" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg>מאובחנים חדשים ובני משפחה</button>
+  <button class="tab-btn" data-tab="doctor" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg>מידע מקצועי לרופא</button>
+  <button class="tab-btn" data-tab="kids" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg>לילדים (11+)</button>
+  <button class="tab-btn" data-tab="research" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>מחקרים וניסויים</button>
+  <button class="tab-btn" data-tab="resources" role="tab"><svg class="icon-svg tab-emoji" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg>מקורות וקישורים</button>
+</nav>
+
+<div class="page">
+
+<aside class="toc" id="toc">
+  <details>
+    <summary><span>תוכן עניינים</span></summary>
+
+    <div class="toc-block">
+      <h4 class="toc-section-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-list-magnifying-glass"/></svg>תוכן עניינים</h4>
+      <ul id="toc-list"></ul>
+    </div>
+
+    <div class="toc-block toc-related">
+      <h4 class="toc-section-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-arrows-out-cardinal"/></svg>קפצו לסעיפים אחרים</h4>
+      <ul class="toc-cross">
+        <li><a href="#overview"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-compass"/></svg>סקירה כללית</a></li>
+        <li><a href="#newly"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg>מאובחנים חדשים</a></li>
+        <li><a href="#doctor"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg>מידע לרופא</a></li>
+        <li><a href="#kids"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg>לילדים</a></li>
+        <li><a href="#research"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>מחקרים וניסויים</a></li>
+        <li><a href="#resources"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg>מקורות וקישורים</a></li>
+      </ul>
+    </div>
+
+    <div class="toc-block toc-external">
+      <h4 class="toc-section-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-link"/></svg>קישורים מהירים</h4>
+      <ul class="toc-cross">
+        <li><a href="https://www.facebook.com/GorlinSyndromeAssociationIsrael/" target="_blank" rel="noopener"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-users-three"/></svg>עמותת גורלין ישראל</a></li>
+        <li><a href="https://gorlingroup.org/" target="_blank" rel="noopener"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-globe"/></svg>Gorlin Group (UK)</a></li>
+        <li><a href="https://gorlinsyndrome.org/" target="_blank" rel="noopener"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-globe"/></svg>Gorlin Alliance (US)</a></li>
+        <li><a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank" rel="noopener"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>GeneReviews — NBCCS</a></li>
+        <li><a href="https://clinicaltrials.gov/search?cond=Gorlin%20Syndrome&aggFilters=status:rec" target="_blank" rel="noopener"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>ClinicalTrials.gov</a></li>
+      </ul>
+    </div>
+
+  </details>
+</aside>
+
+<main>
+
+<!-- ============================================================ -->
+<!-- TAB: OVERVIEW                                                 -->
+<!-- ============================================================ -->
+<section class="tab-panel active" data-panel="overview">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-compass"/></svg>סקירה כללית — מה זאת תסמונת גורלין?</h2>
+  <p>נקודת התחלה למסמך כולו: הגדרה, שכיחות, מהות התסמונת, ולמה צריך מעקב. מתאים לכל קהל יעד כקריאה ראשונית.</p>
+</div>
+
+<section class="block open">
+  <h3>הגדרה ושמות נרדפים</h3>
+  <div class="body">
+    <p><strong>תסמונת גורלין</strong> (Gorlin Syndrome), הידועה גם כ-<strong>NBCCS</strong> (Nevoid Basal Cell Carcinoma Syndrome) או <strong>תסמונת BCC נבוסית</strong>, היא הפרעה גנטית תורשתית הגורמת לנטייה מוגברת לפתח גידולים שונים — בעיקר סרטני עור מסוג Basal Cell Carcinoma (BCC) — לצד מאפיינים שלדיים, אודונטוגניים (פה ולסת), נוירולוגיים, וקרדיולוגיים אופייניים.</p>
+    <p>קוד ICD-10: <code>Q87.89</code> · OMIM: <code>109400</code> (PTCH1) · <code>620343</code> (SUFU).</p>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>הסיפור בקצרה</h3>
+  <div class="body">
+    <ul>
+      <li><strong>גנטית:</strong> תורשה אוטוזומלית דומיננטית. סיכון של 50% להעברה לכל ילד. הגן הראשי הוא <code>PTCH1</code> (כרומוזום 9q22), פחות שכיח <code>SUFU</code> (10q24).</li>
+      <li><strong>שכיחות:</strong> מוערכת בכ-1:31,000 עד 1:164,000 בעולם.</li>
+      <li><strong>חדירות (penetrance):</strong> כמעט מלאה (90%+) — כמעט כל מי שיש לו את המוטציה יפתח לפחות אחד מהביטויים. אבל הביטוי משתנה דרמטית בין אנשים, גם באותה משפחה.</li>
+      <li><strong>הביטויים העיקריים:</strong> ריבוי גידולי BCC בעור (לעיתים מאות לאורך החיים), כיסות אודונטוגניות בלסתות, גומות בכפות הידיים והרגליים, הסתיידות falx cerebri (קרום מוחי), ומאפיינים שלדיים (צלעות מפוצלות, מקרוצפליה).</li>
+      <li><strong>סיכון לגידולים נוספים:</strong> מדולובלסטומה (גידול מוח בילדות) — סיכון נמוך עם PTCH1 (~2%), גבוה משמעותית עם SUFU (~20–30%). פיברומה לבבית ושחלתית.</li>
+      <li><strong>הצפי לחיים:</strong> כמעט תקין. עם מעקב נכון רוב הביטויים ניתנים לשליטה. הסכנה הגדולה היא חשיפה מוגברת לקרינה — שמה שמייצרת BCCs נוספים.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>מה המסמך הזה מכיל</h3>
+  <div class="body">
+    <p>המסמך בנוי בחמש שכבות, לפי קהל היעד שלך באותו רגע:</p>
+    <div class="table-wrap">
+
+      <table>
+      <thead><tr><th>טאב</th><th>למי מיועד</th><th>מה תמצא</th></tr></thead>
+      <tbody>
+        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg> <strong>מאובחנים חדשים</strong></td><td>אתה או בן משפחה שזה עתה אובחנו</td><td>הסבר ברור ללא ז'רגון, מה לעשות בשבועות הקרובים, שאלות נפוצות, מי מטפל במה</td></tr>
+        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg> <strong>מידע לרופא</strong></td><td>לקראת ביקור אצל רופא — להדפיס ולהביא</td><td>קריטריונים אבחוניים, פרוטוקולי מעקב, טיפולים עדכניים, רשימת שאלות לרופא</td></tr>
+        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg> <strong>לילדים (11+)</strong></td><td>מתבגרים ובני משפחה צעירים</td><td>הסבר ידידותי, שאלות נפוצות של ילדים, מה זה אומר עליי</td></tr>
+        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg> <strong>מחקרים וניסויים</strong></td><td>חולה שרוצה להיות מעודכן</td><td>חידושים 2024–2026, ניסויים קליניים פעילים, איך להירשם</td></tr>
+        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg> <strong>מקורות וקישורים</strong></td><td>למי שרוצה להעמיק או לעקוב</td><td>אתרים מומלצים, עמותות, כתבי עת, איך לחפש מחקרים בעצמך</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+    <div class="callout tip">
+      <strong>טיפ:</strong> תיבת החיפוש למעלה מחפשת בכל המסמך — בכל הטאבים. מילים שתמצא יסומנו בצהוב.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>הסתייגות חשובה</h3>
+  <div class="body">
+    <p>המסמך הזה הוא <strong>חומר מידע ולא ייעוץ רפואי</strong>. כל החלטה טיפולית חייבת להתקבל עם הרופא המטפל. המידע מעודכן למאי 2026 ויתיישן — בדוק תאריך עדכון אחרון בפוטר.</p>
+    <p>הסטטיסטיקות והפרוטוקולים נשאבו ממקורות מקצועיים מעודכנים (GeneReviews, NCCN, JCO, BJD, מחקרים שפורסמו 2023–2025). באזורים שבהם הראיות חלקיות או סותרות — זה צוין במפורש.</p>
+  </div>
+</section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB: NEWLY DIAGNOSED                                          -->
+<!-- ============================================================ -->
+<section class="tab-panel" data-panel="newly">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg>אובחנת? קבל קצת אוויר.</h2>
+  <p>הטאב הזה בשבילך אם אתה (או הילד/בן המשפחה שלך) אובחנת לאחרונה. הקצב כאן רגוע — אנחנו עוברים על מה זה אומר, מה צריך לעשות בחודשים הקרובים, ומה <em>לא</em> צריך לעשות.</p>
+</div>
+
+<section class="block open hero-section">
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-compass-tool"/></svg>הדבר הכי חשוב לדעת קודם</h3>
+  <div class="body">
+
+    <div class="hero-lede">
+      <p class="hero-lede-line">תסמונת גורלין היא <strong>מצב כרוני שמלווים</strong> — לא מחלה שמטפלים בה ונגמרת.</p>
+      <p>רוב האנשים עם התסמונת חיים חיים מלאים, עם תוחלת חיים קרובה לרגילה. ארבעה עקרונות יקבעו עד כמה הדרך תהיה חלקה:</p>
+    </div>
+
+    <div class="pillar-grid">
+
+      <article class="pillar">
+        <div class="pillar-num">01</div>
+        <div class="pillar-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-magnifying-glass"/></svg></div>
+        <h4>מעקב סדיר</h4>
+        <p>הסכנה האמיתית היא לא בגידול שמופיע — אלא בגידול שגדל בשקט. מעקב כל 3–6 חודשים אצל דרמטולוג מאפשר לתפוס BCC כשהוא 2 מ"מ במקום 2 ס"מ. ההפרש: ניתוח של 10 דקות לעומת ניתוח Mohs של 3 שעות עם הצטלקות נראית.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-num">02</div>
+        <div class="pillar-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-sun"/></svg></div>
+        <h4>הגנה מהשמש</h4>
+        <p>קרינת UV היא הטריגר מספר 1 לגידולי BCC חדשים. כל שעת חשיפה ללא הגנה היא חוב מצטבר שתשלם 10–15 שנה אחר כך. SPF 50, כובע רחב, חולצה ארוכה בקיץ — לא חוויית פנאי, מקצוע יומיומי שצריך לאמץ.</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-num">03</div>
+        <div class="pillar-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-radioactive"/></svg></div>
+        <h4>פחות קרינה רפואית</h4>
+        <p>צילומי X, CT וסריקות חוזרות הם קרינה מייננת. הגוף של חולה גורלין רגיש אליה יותר מהממוצע, וכל חשיפה מצטברת מעלה סיכון לגידולים משניים. הכלל: לפני כל בדיקה לשאול "אפשר MRI או אולטרסאונד במקום?".</p>
+      </article>
+
+      <article class="pillar">
+        <div class="pillar-num">04</div>
+        <div class="pillar-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-users-three"/></svg></div>
+        <h4>קהילה ותמיכה רגשית</h4>
+        <p>אבחון של מחלה גנטית מטלטל. אנשים שעוברים את אותה דרך — בעמותת גורלין ישראל, בקבוצות פייסבוק בעולם — מקלים על העומס באופן שאף רופא לא יכול. התמיכה הזו עוזרת להישאר שפויים גם כשהכל תחת שליטה רפואית.</p>
+      </article>
+
+    </div>
+
+  </div>
+</section>
+
+<section class="block open action-section">
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-list-checks"/></svg>מה לעשות בשבועות הראשונים — מפת דרכים</h3>
+  <div class="body">
+
+    <p class="lede">אבחון של גורלין פותח שש דלתות שצריך להיכנס לכל אחת בשלושת החודשים הראשונים. לא הכל באותו שבוע — אבל הכל צריך להיות מתוזמן. רוב האנשים בנקודה הזו עדיין לא יודעים שהם עומדים מול כמה תחנות רפואיות, התמחויות שונות, וכמה שלבי בירוקרטיה. זו מפת הדרכים המעשית:</p>
+
+    <ol class="action-steps">
+
+      <li>
+        <div class="action-num">1</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-microscope"/></svg>קביעת ביקור אצל דרמטולוג שמכיר את התסמונת</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> זה הצוות הקבוע שילווה אותך כל החיים. דרמטולוג שיודע איך גורלין נראה — ולא רק BCC ספורדי — יזהה גידולים מוקדם, יחליט נכון מתי לחתוך ומתי לעקוב, וידע מתי לעבור לטיפול מערכתי.</p>
+          <p class="action-how"><strong>איך:</strong> הפניה מרופא משפחה למרפאת עור באיכילוב, שיבא, הדסה או רמב"ם. ציין מראש "תסמונת גורלין" כדי שיתאם פגישה עם רופא שמכיר. <strong>זמני המתנה:</strong> בקופ"ח רגילה 2–4 שבועות; בייחוס "חשד גידול עור" אפשר 1–2.</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="action-num">2</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-dna"/></svg>ייעוץ גנטי + בדיקה מולקולרית</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> יש שני גנים אפשריים — PTCH1 (~85% מהמקרים) ו-SUFU (~5–10%). זה לא דקדוק: עם SUFU הסיכון למדולובלסטומה (גידול מוח בילדות) גבוה פי 10–20, ובהתאם פרוטוקול המעקב בילדים הוא MRI מוח כל 4 חודשים עד גיל 3. בלי לדעת איזה גן יש לך, אי אפשר לתכנן את המעקב נכון.</p>
+          <p class="action-how"><strong>איך:</strong> הפניה ליועץ גנטי במכון גנטיקה (כל בית חולים אקדמי). הפגישה הראשונה ~45 דקות, מסבירים תורשה ומשפחה. בדיקת דם נשלחת למעבדה — תוצאות 4–10 שבועות. <strong>חשוב:</strong> הבדיקה מכוסה בסל אם יש קריטריונים אבחוניים — כדאי לוודא לפני.</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="action-num">3</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-tooth"/></svg>צילום פנורמי של הלסת</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> 65–75% מחולי גורלין מפתחים כיסות אודונטוגניות (OKCs) בלסת. הן לא מסוכנות — אבל אם גדלות בלי שיתפסו אותן, הן יכולות להזיק לעצם הלסת ולשיניים. בילדים מטפלים אחרת מאשר במבוגרים (marsupialization במקום ניתוח), אז זמן זיהוי משנה את אופן הטיפול.</p>
+          <p class="action-how"><strong>איך:</strong> הפניה לכירורג פה ולסת בבית הספר לרפואת שיניים בהדסה או באוניברסיטת תל אביב. הצילום עצמו לוקח 5 דקות, פענוח באותו ביקור. <strong>תדירות מומלצת מכאן והלאה:</strong> כל 12–18 חודש.</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="action-num">4</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-heart-straight"/></svg>אקו לב בסיסי</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> בכ-2–5% מהחולים יש פיברומה לבבית — גידול שפיר שלרוב אסימפטומטי, אך לעיתים נדירות גורם לאריתמיה או חסימה המודינמית. בדיקה אחת בייסליין שוללת את הסיכון; אם תקין, מעקב עדין כל 2–3 שנים.</p>
+          <p class="action-how"><strong>איך:</strong> הפניה לקרדיולוג בקופ"ח. אקו לב טראנס-תוראקלי — 30 דקות, ללא קרינה, ללא חודר. תוצאה לרוב באותו יום.</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="action-num">5</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-baby"/></svg>אם יש ילדים מתחת לגיל 5 + מוטציית SUFU: MRI מוח</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> מדולובלסטומה היא הסיכון הגדול בגורלין-SUFU בילדות, וגיל ההופעה החציוני הוא 16.5 חודשים. גילוי מוקדם משנה דרסטית את הפרוגנוזה — מתפיסה בשלב פסילי לטיפול מהיר וחיסכון בקרינה לראש (שאצל חולי גורלין מסוכנת בפני עצמה).</p>
+          <p class="action-how"><strong>איך:</strong> הפניה לנוירו-אונקולוגיית ילדים — שניידר, הדסה או שיבא. ה-MRI ייעשה בהרדמה קצרה (כי ילדים קטנים לא נשארים שקטים 30 דקות). <strong>תדירות מומלצת:</strong> כל 4 חודשים מלידה עד גיל 3, אחר כך כל 6 חודשים עד גיל 5.</p>
+        </div>
+      </li>
+
+      <li>
+        <div class="action-num">6</div>
+        <div class="action-body">
+          <h4><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-users-four"/></svg>יצירת קשר עם עמותת גורלין ישראל</h4>
+          <p class="action-why"><strong>למה זה משנה:</strong> זו לא נחמדות — זו תשתית. העמותה מחברת בין חולים, יודעת אילו רופאים מכירים את התסמונת בפועל (ולא רק על הנייר), ועוזרת בליווי מול קופ"ח וביטוח לאומי כשמתחילים בירוקרטיה. גם פסיכולוגית: שיחה אחת עם מישהו שעבר את אותה דרך מקצרת חודשים של חיפוש לבד.</p>
+          <p class="action-how"><strong>איך:</strong> דף הפייסבוק של <a href="https://www.facebook.com/GorlinSyndromeAssociationIsrael/" target="_blank" rel="noopener">עמותת גורלין ישראל</a> — שולחים הודעה פרטית, מקבלים תשובה תוך ימים. עמותה רשומה (מס׳ 580691756), חינמית, ללא התחייבות.</p>
+        </div>
+      </li>
+
+    </ol>
+
+    <div class="callout tip">
+      <strong><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-bookmark-simple"/></svg>טיפ ענקי לפני הביקור הראשון</strong>
+      <p>שמור את הקישור לעמוד הזה (<code>amitbrin.com/gorlin</code>) או הדפס את טאב <strong>"מידע מקצועי לרופא"</strong>. בביקור הראשון אצל רופא חדש יש לפחות 8 מונחים שאתה שומע בפעם הראשונה — PTCH1, SUFU, OKC, פנורמי, פיברומה, BCC, Mohs, HHI. אין סיכוי לזכור הכל בזמן השיחה. עדיף שיהיה לך מסמך לחזור אליו אחר כך, ושעה לקרוא בשקט בבית. אפשר גם להעביר את הקישור לרופא ביום שלפני הביקור — חלק מהרופאים מעריכים את זה.</p>
+    </div>
+
+  </div>
+</section>
+
+<section class="block open">
+  <h3>שאלות נפוצות (FAQ)</h3>
+  <div class="body">
+
+    <details class="qa"><summary>זה תורשתי? אני עלול להעביר לילדיי?</summary>
+      <div class="answer"><p>כן. תסמונת גורלין היא אוטוזומלית דומיננטית — כל ילד שיוולד לחולה יש לו 50% סיכוי לרשת את המוטציה. אם ההורה לא חולה, הסיכוי קרוב לאפס (אלא אם כן יש מקרה דה-נובו, מוטציה חדשה — שמהווה כ-20–30% מהמקרים).</p>
+      <p>אפשרויות לתכנון משפחה כוללות אבחון טרום השרשתי (PGD/IVF), אבחון טרום לידתי (CVS או מי שפיר), או הריון רגיל עם ייעוץ גנטי.</p></div>
+    </details>
+
+    <details class="qa"><summary>איך הסיכוי שאחלה בסרטן עור?</summary>
+      <div class="answer"><p>גבוה — אבל לא מסוכן ככל שזה נשמע. הגידולים מסוג BCC הם <strong>סרטני עור מקומיים שכמעט אף פעם לא שולחים גרורות</strong>. הסכנה האמיתית היא היקף הטיפולים והנזק המקומי לעור. עם מעקב של פעם ב-3–6 חודשים אצל דרמטולוג, גידולים נתפסים קטנים וקלים להסיר.</p>
+      <p>גיל ממוצע להופעת ה-BCC הראשון: 20–30. עד גיל 40 — לכ-80% מהחולים יש לפחות אחד.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני חייב להפסיק לצאת לשמש?</summary>
+      <div class="answer"><p>לא להפסיק, אבל להגן. הקרינה האולטרה-סגולה היא הטריגר העיקרי. אסטרטגיה מעשית:</p>
+      <ul>
+        <li>קרם הגנה SPF 50+ ספקטרום רחב, כל בוקר, גם ביום מעונן.</li>
+        <li>בגדים עם הגנה (UPF), כובע רחב שוליים, משקפי שמש.</li>
+        <li>להימנע מחשיפה ישירה בין 10:00 ל-16:00.</li>
+        <li>פעילות חוץ — בצל, או בשעות מוקדמות/מאוחרות.</li>
+      </ul>
+      <p>הים, הספורט, החיים — לא מתבטלים. רק עם מודעות.</p></div>
+    </details>
+
+    <details class="qa"><summary>אסור לי לעשות צילום רנטגן או CT?</summary>
+      <div class="answer"><p>לא "אסור", אבל יש להפחית למינימום ההכרחי הרפואי. גוף של חולה גורלין רגיש לקרינה מייננת ועלול לפתח גידולי BCC במקום שעבר חשיפה. כללי אצבע:</p>
+      <ul>
+        <li>כשאפשר — להעדיף MRI או אולטרסאונד על פני CT.</li>
+        <li>צילומי שיניים שגרתיים — כל 12–18 חודש (לא יותר), עם הגנת עופרת.</li>
+        <li>צילום חזה / CT — רק אם יש סיבה רפואית מובהקת.</li>
+        <li>לעדכן כל רופא/טכנאי ש"יש לי תסמונת גורלין, אנא העדפת אלטרנטיבה לא-קרינתית אם אפשר".</li>
+      </ul></div>
+    </details>
+
+    <details class="qa"><summary>איפה מטפלים בזה בארץ?</summary>
+      <div class="answer"><p>הטיפול הוא רב-תחומי. בישראל יש מומחים במרכזים האקדמיים הגדולים:</p>
+      <ul>
+        <li><strong>דרמטולוגיה:</strong> מרפאות עור באיכילוב, שיבא, הדסה, רמב"ם.</li>
+        <li><strong>פה ולסת:</strong> בתי הספר לרפואת שיניים בהדסה ובאוניברסיטת תל אביב.</li>
+        <li><strong>גנטיקה:</strong> מכוני גנטיקה בכל בית חולים אקדמי.</li>
+        <li><strong>אונקולוגיה ילדים (לחשד מדולובלסטומה):</strong> שניידר, הדסה, שיבא.</li>
+      </ul>
+      <p>עמותת גורלין ישראל יכולה לסייע במיפוי רופאים שמכירים את התסמונת.</p></div>
+    </details>
+
+    <details class="qa"><summary>הילד שלי צריך לדעת? איך אני אסביר?</summary>
+      <div class="answer"><p>כן — בגיל ובאופן מתאימים. ילד שיודע מה קורה לגוף שלו פחות חרד, לא יותר. עיין בטאב <strong>"לילדים (11+)"</strong> במסמך — נכתב במיוחד עבורם. למתחת לגיל 11, התאם את ההסבר לרמה (משפטים פשוטים: "יש לי משהו מיוחד בגוף, לכן אני הולך לרופא יותר מאחרים").</p>
+      <p>עיקרון: לא להסתיר, לא להפחיד. נורמליזציה של המעקב כחלק מהחיים.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני בדיכאון/חרדה מאז האבחון. זה נורמלי?</summary>
+      <div class="answer"><p>נורמלי לחלוטין. אבחון של מחלה כרונית גנטית הוא טריגר רגשי מוכר. מחקרים מראים שיעור גבוה של חרדה ודיכאון בקרב חולי גורלין, במיוחד סביב תקופות של גילוי גידול חדש או ניתוח. אם ההרגשה מפריעה לתפקוד היומיומי, פנה לפסיכולוג או פסיכיאטר. CBT וטיפולים מבוססי-קבלה (ACT) הוכחו יעילים. גם קבוצות תמיכה — דרך עמותת גורלין או ב-Facebook (UK group: Gorlin Syndrome Group) — עוזרות מאוד.</p></div>
+    </details>
+
+    <details class="qa"><summary>יש "תרופה"? רפא?</summary>
+      <div class="answer"><p>לא, ולא בטווח הקרוב. אבל הטיפול בביטויים השתפר משמעותית: מעכבי מסלול ה-Hedgehog (Vismodegib, Sonidegib) יכולים להקטין מאוד את כמות ה-BCCs החדשים. ניסויים פעילים (2025–2026) של פטידגיב טופיקלי, איטרקונאזול ותרופות חדשות אחרות מוסיפים אופציות. המחקר נע — ראה טאב "מחקרים וניסויים".</p></div>
+    </details>
+
+  </div>
+</section>
+
+<section class="block">
+  <h3>מי הצוות הרפואי שלך</h3>
+  <div class="body">
+    <p>תסמונת גורלין דורשת צוות רב-תחומי. זה מי שכדאי שיהיה לך בקשרים:</p>
+    <div class="table-wrap">
+
+      <table>
+      <thead><tr><th>מומחה</th><th>למה</th><th>תדירות</th></tr></thead>
+      <tbody>
+        <tr><td><strong>דרמטולוג</strong> (רופא עור)</td><td>בדיקות עור מלאות, הסרת BCCs, ניהול טיפול מערכתי</td><td>כל 3–6 חודשים</td></tr>
+        <tr><td><strong>גנטיקאי / יועץ גנטי</strong></td><td>אישוש המוטציה, ייעוץ לקרובים ולגבי הריון</td><td>פגישה ראשונית + לפי צורך</td></tr>
+        <tr><td><strong>רופא פה ולסת</strong></td><td>מעקב כיסות אודונטוגניות, ניתוחים</td><td>צילום פנורמי כל 12–24 חודש</td></tr>
+        <tr><td><strong>קרדיולוג</strong></td><td>אקו לב לזיהוי פיברומה לבבית</td><td>בסיס + כל 2–3 שנים אם תקין</td></tr>
+        <tr><td><strong>גינקולוג</strong> (לנשים)</td><td>אולטרסאונד אגן לפיברומות שחלה</td><td>כל 2–3 שנים</td></tr>
+        <tr><td><strong>נוירולוג / נוירו-אונקולוג</strong></td><td>בעיקר אם SUFU או חשד למדולובלסטומה</td><td>תלוי במוטציה ובגיל</td></tr>
+        <tr><td><strong>פסיכולוג</strong></td><td>התמודדות, חרדה, גוף-דימוי</td><td>לפי צורך</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>חיסיון ותעסוקה — מה לחשוב על</h3>
+  <div class="body">
+    <p>אבחון של מחלה גנטית עשוי להעלות שאלות פרקטיות:</p>
+    <ul>
+      <li><strong>ביטוח חיים/בריאות פרטי:</strong> בארץ, חוק שוויון זכויות לאנשים עם מוגבלות מספק הגנה מסוימת. עם זאת, חברות ביטוח רשאיות לדרוש שאלון בריאות. כדאי להתייעץ עם מומחה ביטוח לפני חתימה.</li>
+      <li><strong>תעסוקה בשמש:</strong> מקצועות הדורשים חשיפה מתמשכת לשמש (חקלאות, בנייה, לייפגארד) דורשים שיקול נוסף. לא חסם מוחלט — אבל הגנה אקטיבית כל הזמן.</li>
+      <li><strong>ביטוח לאומי:</strong> תלוי בחומרת הביטוי הקליני. אם יש פגיעה תפקודית משמעותית — אפשר להגיש בקשה לקצבת נכות. עמותת גורלין יכולה לסייע בליווי.</li>
+    </ul>
+  </div>
+</section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB: DOCTOR                                                   -->
+<!-- ============================================================ -->
+<section class="tab-panel" data-panel="doctor">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg>תקציר רפואי לרופא המטפל</h2>
+  <p>החומר בטאב הזה מתומצת ומעודכן (2024–2026). מיועד להדפסה והגשה לרופא בביקור. כולל קריטריונים אבחוניים, פרוטוקולי מעקב לפי NCCN/Consensus, אופציות טיפוליות עדכניות, ורשימת שאלות מומלצות שהחולה יכול לשאול.</p>
+</div>
+
+<section class="block open">
+  <h3>גורלין 101 — לרופא שנחשף לראשונה</h3>
+  <div class="body">
+    <div class="callout info">
+      <strong>למי הסעיף הזה?</strong> לרופא מכל התמחות שפוגש חולה גורלין לראשונה, או שמכיר את התסמונת מהיבט ההתמחות שלו ורוצה להבין את הספקטרום המלא. סקירה מהירה — 5 דקות קריאה.
+    </div>
+
+    <h4>תמצית התסמונת</h4>
+    <p>תסמונת גורלין (NBCCS) היא הפרעה אוטוזומלית דומיננטית הנגרמת ממוטציה ב-<code>PTCH1</code> (85%) או <code>SUFU</code> (5–10%). שכיחות 1:31,000–1:164,000. חדירות כמעט מלאה — אבל הביטוי הקליני משתנה דרמטית, גם בתוך אותה משפחה. חולה עלול להגיע עם ביטוי מפתח <strong>בתחום שלך</strong> מבלי שהאבחנה הגנטית ידועה עדיין.</p>
+
+    <h4>מה כל מומחה צריך לדעת — לפי תחום</h4>
+    <div class="g101-grid">
+
+      <div class="g101-card">
+        <span class="g101-tag">דרמטולוגיה</span>
+        <h5>מה תראה: ריבוי BCCs בגיל צעיר</h5>
+        <p>חולי גורלין מפתחים עשרות עד מאות BCCs לאורך החיים. BCC ראשון בגיל 20–30 (לעיתים נדירות לפני 10). מעקב עור כל 3–6 חודשים. הסרה בניתוח, Mohs, PDT, או טופיקלי. <strong>קרינה לטיפול ב-BCC אסורה</strong> — מחמירה.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> לחולים יש גם OKCs בלסת (פנורמי שנתי), פיברומה לבבית (אקו בייסליין), ואם SUFU — סיכון מדולובלסטומה בילדות.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">כירורגיית פה ולסת</span>
+        <h5>מה תראה: OKCs מולטיפלים / רקורנטיים</h5>
+        <p>65–75% מהחולים. הישנות 30–40% עם enucleation לבדה — לשקול peripheral ostectomy ו/או Carnoy's. בילדים — marsupialization ראשונית. <strong>לצמצם צילומים:</strong> פנורמי כל 12–18 חודש, לא יותר.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> חולים אלו רגישים לקרינה מייננת; לצמצם CT לסת. הם צריכים גם מעקב עור צמוד (BCCs), ובדיקה קרדיולוגית.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">קרדיולוגיה</span>
+        <h5>מה תראה: פיברומה לבבית</h5>
+        <p>שכיחות 2–5%. מתגלה לעיתים פרה-נטלית. רוב — אסימפטומטיות. ניתוח רק בחסימה המודינמית, אריתמיה, או גידול מהיר. אקו בייסליין, מעקב כל 2–3 שנים.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> החולה שיושב מולך סביר עם BCCs בעור ו-OKCs בלסת. אם מצאת פיברומה בתינוק — שלח לגנטיקה לשלילת/אישוש גורלין.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">נוירולוגיה / נוירו-אונקולוגיה</span>
+        <h5>מה תראה: מדולובלסטומה בילדות</h5>
+        <p>סיכון 1.7% ב-PTCH1, 20–30% ב-SUFU. תת-סוג: SHH-activated, Desmoplastic/Nodular. גיל חציוני 16.5 חודשים ב-SUFU. פרוטוקול: MRI מוח כל 4 חודשים עד גיל 3, כל 6 חודשים עד גיל 5 ב-SUFU. <strong>להימנע מקרינה ככל האפשר</strong> — chemo-only protocols בדיון.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> החולה יצטרך מעקב עור (BCCs) וצילומי לסת (OKCs) כל חייו.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">גנטיקה</span>
+        <h5>מה תראה: הפניה לייעוץ לאחר אבחון קליני</h5>
+        <p>סטרטיפיקציה PTCH1 vs SUFU קריטית: קובעת עוצמת מעקב מוח, סיכון למדולובלסטומה. 20–30% דה-נובו. 15–20% ללא מוטציה בגנים ידועים — שקול NGS/WES. ייעוץ לקרובי משפחה ולתכנון משפחה (PGD, CVS).</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> ביטוי קליני מגוון — הפנה לדרמטולוג, פה-ולסת, קרדיולוג. החולה צריך צוות רב-תחומי.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">גינקולוגיה</span>
+        <h5>מה תראה: פיברומות שחלה</h5>
+        <p>15–25% מהנשים עם גורלין, 75% דו-צדדיות. רוב — אסימפטומטיות, אולטרסאונד כל 2–3 שנים. <strong>גישה שמרנית:</strong> להימנע מ-oophorectomy אם אין הכרח.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> חולות גורלין בגיל פוריות צריכות ייעוץ גנטי (PGD/IVF). יש גם מעקב עור ולסת מקביל.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">אופטלמולוגיה</span>
+        <h5>מה תראה: אנומליות עיניים מולדות</h5>
+        <p>סטרביזמוס (63%), היפרטלוריזם (45%), קטרקט מולד (18%), קולובומה (9%). הפניה מוקדמת לתינוקות/ילדים.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> אנומליות עיניים הן קריטריון מינורי לאבחון. אם הילד שמולך יש לו גם מצח בולט וראש גדול — שקול הפניה לגנטיקה.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">רדיולוגיה</span>
+        <h5>מה לדעת: חולים אלו רגישים לקרינה</h5>
+        <p>קרינה מייננת (CT, רנטגן) מגבירה BCCs משניים. <strong>עיקרון:</strong> MRI/US ראשון, CT רק אם אין חלופה רפואית. פנורמי שיניים לא יותר מ-12–18 חודש. מאמוגרפיה — שקול MRI שד חלופי ב-high-risk. תיעוד חשיפה קרינתית מצטברת.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> יידע את הצוות המזמין. דאג להגנת עופרת מקסימלית אם חייבים CT.</p>
+      </div>
+
+      <div class="g101-card">
+        <span class="g101-tag">פסיכולוגיה / פסיכיאטריה</span>
+        <h5>מה תראה: עומס רגשי כרוני</h5>
+        <p>שיעור גבוה של חרדה ודיכאון, במיוחד סביב ניתוחים חוזרים, גילוי גידולים חדשים, ופגיעה בדימוי גוף. CBT ו-ACT יעילים. גורמי סיכון: בידוד, היעדר קהילה, גילוי BCCs ראשון. חולים צעירים זקוקים לנורמליזציה.</p>
+        <p><strong>מה לדעת מחוץ לתחומך:</strong> זו מחלה כרונית גנטית עם ניתוחים חוזרים. העומס מצטבר. הפניה לקבוצות תמיכה (עמותת גורלין) היא חלק מהטיפול.</p>
+      </div>
+
+    </div>
+
+    <div class="callout">
+      <strong>עיקרון מנחה לכל מומחה:</strong> חולה גורלין דורש צוות רב-תחומי. גם אם הוא מגיע אליך עם בעיה ממוקדת — הביטויים חוצים מערכות. ודא שיש לו גם דרמטולוג, רופא פה-ולסת, וגנטיקאי. אם אין — הפנה.
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>גנטיקה ומולקולרית</h3>
+  <div class="body">
+    <h4>גנים</h4>
+    <ul>
+      <li><strong>PTCH1</strong> (9q22.3) — ~50–85% מהמקרים. tumor suppressor במסלול Hedgehog/Patched-Smoothened.</li>
+      <li><strong>SUFU</strong> (10q24.32) — אחוזים בודדים, אך משמעות קלינית קריטית: סיכון מדולובלסטומה גבוה פי 10–20.</li>
+      <li><strong>PTCH2</strong> — דווח במקרים נדירים; משמעות קלינית טרם מבוססת.</li>
+      <li>~15–20% מקרים ללא מוטציה מזוהה ב-PTCH1/SUFU בבדיקה סטנדרטית; שקול NGS/WES.</li>
+    </ul>
+    <h4>תורשה</h4>
+    <ul>
+      <li>אוטוזומלית דומיננטית, חדירות ~90% עד גיל 30.</li>
+      <li>ביטוי משתנה גם בתוך אותה משפחה.</li>
+      <li>~20–30% דה-נובו.</li>
+    </ul>
+    <div class="callout warn">
+      <strong>קליני קריטי — סטרטיפיקציה לפי גן:</strong>
+      <ul style="margin-top:6px;margin-bottom:0">
+        <li><strong>PTCH1:</strong> סיכון מדולובלסטומה ~1.7%.</li>
+        <li><strong>SUFU:</strong> סיכון ~20–30%, גיל הופעה חציוני 16.5 חודשים, תת-סוג Desmoplastic/Nodular SHH-activated. דורש <strong>MRI מוח כל 4 חודשים מלידה עד גיל 3, ואחר כך כל 6 חודשים עד גיל 5</strong>.</li>
+      </ul>
+    </div>
+    <h4>אופציות לאבחון טרום הריוני</h4>
+    <ul>
+      <li>PGD (אבחון טרום השרשתי) — דורש זיהוי מוטציה משפחתית מראש.</li>
+      <li>CVS / אמניוצנטזה — בהריון מבוסס.</li>
+      <li>ייעוץ גנטי לפני הריון מומלץ אצל כל החולים בגיל הפוריות.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>קריטריונים אבחוניים (Kimonis 1997, עודכן Bree 2011)</h3>
+  <div class="body">
+    <p>אבחון: <strong>2 קריטריונים מאז'וריים</strong> או <strong>1 מאז'ורי + 2 מינוריים</strong>.</p>
+
+    <h4>קריטריונים מאז'וריים</h4>
+    <ol>
+      <li>≥2 BCCs, או BCC אחד &lt; גיל 30, או ≥10 nevi BCC.</li>
+      <li>Odontogenic Keratocyst (OKC) — מאומת היסטולוגית.</li>
+      <li>≥3 גומות פלמופלנטריות (palmar/plantar pits).</li>
+      <li>הסתיידות אקטופית intracranial (טיפוסית: falx cerebri, lamellar pattern) — לפני גיל 20.</li>
+      <li>היסטוריה משפחתית של תסמונת גורלין.</li>
+    </ol>
+
+    <h4>קריטריונים מינוריים</h4>
+    <ol>
+      <li>אנומליות צלעות/חוליות (bifid ribs, hemivertebra, fusion).</li>
+      <li>Macrocephaly יחסי.</li>
+      <li>שסעי שפה/חיך.</li>
+      <li>פיברומה לבבית או שחלתית.</li>
+      <li>מדולובלסטומה (במיוחד &lt; גיל 5).</li>
+      <li>Lymphomesenteric cysts.</li>
+      <li>אנומליות עיניות מולדות (קולובומה, סטרביזמוס, קטרקט).</li>
+    </ol>
+
+    <h4>אינדיקציות לבדיקה גנטית</h4>
+    <ul>
+      <li>אבחון קליני לא חד-משמעי.</li>
+      <li>סטרטיפיקציה PTCH1 vs SUFU.</li>
+      <li>סקרינינג קרובים בסיכון.</li>
+      <li>BCC מוקדם מאוד או מדולובלסטומה לפני גיל 5.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>ביטויים קליניים — פירוט לפי מערכת</h3>
+  <div class="body">
+
+    <div class="spec-grid">
+      <div class="spec-card">
+        <h5>דרמטולוגיה</h5>
+        <p>BCC ראשון בגיל 20–30 (נדיר &lt;10). עד גיל 40 — 80% חולים. שיעור ממוצע 10–40+ במהלך החיים, חלק עם 100+. אתרים: פנים (&gt;90%), צוואר, גוף. סוגים: Nodular (80%), Superficial (15%), Infiltrative/Morpheaform, Basosquamous (5%, אגרסיבי).</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>פה ולסת — OKCs</h5>
+        <p>65–75% חולים. 50% מקרים מולטיפלים/דו-צדדיים. גיל אבחון: 10–30. שיעור הישנות: enucleation לבדה 30–40%; +peripheral ostectomy 10–20%; marsupialization → enucleation 0–15%; +Carnoy's solution ~5%. מומלץ: גישה משולבת בילדים.</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>שלד</h5>
+        <p>60–75% עם אנומליה אחת לפחות: Bifid ribs (60%), אנומליות חוליות (50%), Frontal bossing (50–70%), Macrocephaly (30–40%), שסעי שפה/חיך (5%), polydactyly (5–10%).</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>גומות פלמופלנטריות</h5>
+        <p>≥85% עד גיל 20–40. 2–3mm קוטר, 1–3mm עומק. סימטריה משתנה. ≥3 — קריטריון מאז'ורי, ספציפיות &gt;95%.</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>נוירולוגיה</h5>
+        <p>הסתיידות falx cerebri ב-90% עד גיל 30, lamellar pattern על CT. תוכנת פגיעה קוגניטיבית קלה ב-5–10%. מדולובלסטומה — ראה לעיל.</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>קרדיולוגיה</h5>
+        <p>פיברומה לבבית 2–5%. לעיתים מתגלה פרה-נטלית. רוב — אסימפטומטית. אינדיקציות לניתוח: חסימה המודינמית, אריתמיה, גידול.</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>אופטלמולוגיה</h5>
+        <p>אנומליות מולדות ב-8–45%: סטרביזמוס 63%, קטרקט מולד 18%, קולובומה 9%, היפרטלוריזם 45%. הפניה מוקדמת.</p>
+      </div>
+
+      <div class="spec-card">
+        <h5>גינקולוגיה</h5>
+        <p>פיברומות שחלה 15–25% נשים, 75% דו-צדדיות. בדרך כלל אסימפטומטיות. שמרני — להימנע מ-oophorectomy אם אפשר.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>פרוטוקולי מעקב — קונצנזוס 2024–2025</h3>
+  <div class="body">
+    <div class="table-wrap">
+
+      <table>
+      <thead><tr><th>מערכת</th><th>תדירות</th><th>הדמיה/בדיקה</th></tr></thead>
+      <tbody>
+        <tr><td>עור</td><td>פדיאטרי שנתי, מתבגרים כל 6–12 ח', מבוגרים כל 3–6 ח'</td><td>בדיקת עור מלאה, דרמוסקופיה, צילום בייסליין</td></tr>
+        <tr><td>שיניים/פה</td><td>פדיאטרי כל 12–18 ח', מבוגרים כל 2–3 שנים אם תקין</td><td>פנורמי, בדיקה קלינית</td></tr>
+        <tr><td>מוח (SUFU)</td><td>כל 4 ח' גיל 0–3, כל 6 ח' גיל 3–5</td><td>MRI מוח high-res, ללא הרדמה אם אפשר</td></tr>
+        <tr><td>מוח (PTCH1)</td><td>קליני בלבד; הדמיה לפי תסמינים</td><td>—</td></tr>
+        <tr><td>לב</td><td>בייסליין בינקות, אחר כך כל 2–3 שנים אם תקין</td><td>אקו, MRI לב לאיפיון</td></tr>
+        <tr><td>אגן (נשים)</td><td>כל 2–3 שנים</td><td>אולטרסאונד אגן</td></tr>
+        <tr><td>עיניים</td><td>פדיאטרי מוקדם אם אנומליה קונגניטלית</td><td>בדיקה אופטלמולוגית</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+    <div class="callout warn">
+      <strong>הימנעות קרינה — קריטי:</strong> חולי גורלין רגישים יתר לקרינה מייננת. להעדיף MRI/US על CT, להגביל פנורמיים לשגרה (לא מעבר ל-12–18 ח'), להימנע ממאמוגרפיה שגרתית — שקול MRI שד ב-high-risk.
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>טיפול ב-BCC — אופציות מעודכנות</h3>
+  <div class="body">
+
+    <h4>טיפול מקומי</h4>
+    <ul>
+      <li><strong>כריתה ניתוחית עם 4–5 mm margins</strong> — סטנדרט.</li>
+      <li><strong>ניתוח Mohs</strong> — מועדף בפנים, באתרים בסיכון גבוה, או מורפיאופורם/אינפילטרטיבי.</li>
+      <li><strong>PDT (Photodynamic Therapy)</strong> — לסופרפיציאלי. ALA/MAL + אור כחול.</li>
+      <li><strong>5-FU טופיקלי / Imiquimod 5%</strong> — לסופרפיציאלי, יעילות 50–80%.</li>
+      <li><strong>קריותרפיה</strong> — ל-superficial דק.</li>
+      <li><strong>קרינה — אסור!</strong> מגביר BCC משני.</li>
+    </ul>
+
+    <h4>טיפול מערכתי — מעכבי Hedgehog (HHI)</h4>
+
+    <h5>Vismodegib (Erivedge)</h5>
+    <ul>
+      <li>150 mg PO/יום. FDA approved 2012.</li>
+      <li>תגובה: ORR 50–65%, CR 25–35%.</li>
+      <li>תופעות לוואי: דיסגאוזיה 44–58%, התקרחות 49–66%, התכווצויות שריר 54–71%, ירידה במשקל 44–56%, עייפות 32–39%.</li>
+      <li>Pregnancy Cat X — אמצעי מניעה אבסולוטיים.</li>
+    </ul>
+
+    <h5>Sonidegib (Odomzo)</h5>
+    <ul>
+      <li>200 mg PO/יום (preferred over 400 mg, סבילות עדיפה).</li>
+      <li><strong>נתונים רטרוספקטיביים 2024:</strong> Sonidegib 200 עדיף על Vismodegib 150 — ORR 61.8% (CR 45.4%, PR 16.3%) <a href="https://www.mdpi.com/2072-6694/16/12/2166" target="_blank">[MDPI Cancers 2024]</a>.</li>
+      <li><strong>עדכון 2026:</strong> סקירה שיטתית (Doyle et al., Head &amp; Neck 2026) וניתוח פרמקו-וויג'ילנס FAERS (Jedlowski et al., AJD 2026) מאשרים: Vismodegib — שכיחות גבוהה יותר של דיסגאוזיה ואלופציה; Sonidegib — נויטרופניה ועליית CPK. הבחירה תלויה בפרופיל תופעות הלוואי שהחולה רגיש אליו.</li>
+    </ul>
+
+    <h5>Drug Holiday / Intermittent Dosing</h5>
+    <p>פרקטיקה מתפתחת 2023–2025: מחזורים של week-on/week-off או month-on/month-off. שמירה על יעילות עם ירידה בתופעות לוואי. רצוי לאינדיבידואליזציה.</p>
+
+    <h5>טיפולים בפיתוח / ניסויים פעילים</h5>
+    <ul>
+      <li><strong>Patidegib gel 2% טופיקלי</strong> — Phase 2 פורסם BJD אפריל 2025: 63% CR ב-lesions שטופלו <a href="https://academic.oup.com/bjd/article-abstract/192/4/611/7900902" target="_blank">[BJD 2025]</a>. Phase 3 <strong>סיים גיוס</strong> (Sol-Gel Technologies, 43 אתרים); תוצאות ראשוניות צפויות Q4 2026.</li>
+      <li><strong>Itraconazole / SUBA-Itraconazole</strong> (off-target HHI) — 57.7% תגובה ≥30% reduction. מחקר PK אחרון הושלם אפריל 2026; הגשת NDA ל-FDA צפויה בקרוב (505(b)(2) pathway).</li>
+      <li><strong>Itraconazole + Arsenic Trioxide</strong> — קומבינציה ניסיונית, 75% Hedgehog suppression.</li>
+      <li><strong>Sonidegib + PDT (NCT06623201)</strong> — מגייס.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>טיפול ב-OKC ובמדולובלסטומה</h3>
+  <div class="body">
+    <h4>OKC</h4>
+    <ol>
+      <li><strong>קו ראשון, במיוחד בילדים:</strong> Marsupialization/decompression 8–10 חודשים → enucleation עם peripheral ostectomy.</li>
+      <li><strong>אדג'ובנט:</strong> Carnoy's solution (אם זמין; כלורופורם הוצא במדינות מסוימות — modified Carnoy's). מוריד הישנות ל-~5%.</li>
+      <li><strong>קריותרפיה</strong> — אלטרנטיבה ל-Carnoy's.</li>
+      <li><strong>מעקב פוסט-אופ:</strong> פנורמי שנתי 5 שנים, אחר כך כל 2–3.</li>
+      <li><strong>חדש 2025:</strong> דיווח מקרה — piezotome-assisted peripheral ostectomy + PRF (Platelet-Rich Fibrin) הראה remodeling עצם מלא לאחר 36 חודשים. גישה מבטיחה לשימור רקמה.</li>
+    </ol>
+
+    <h4>מדולובלסטומה (SHH-activated, Desmoplastic/MBEN)</h4>
+    <ul>
+      <li>עיקרון: <strong>חיסכון בקרינה</strong> כל פעם שאפשר — למניעת BCCs משניים.</li>
+      <li>פרוטוקולי chemo-only במחקר עבור favorable-risk SHH-MB.</li>
+      <li>SMO inhibitors בתפקיד פוטנציאלי כקו טיפול ממוקד; דיון מולטי-דיסציפלינרי.</li>
+      <li>פרוגנוזה: גרועה יותר מ-SHH-MB ספורדית, ~60–70% הישרדות 5 שנים.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>עדכונים קליניים אחרונים — ציר זמן 2024–2026</h3>
+  <div class="body">
+    <div class="callout info">
+      <strong>הסעיף הזה מאורגן כרונולוגית.</strong> כל פריט מתוארך ומסומן. הממצאים מהתקופה האחרונה מוצגים ראשונים. מתעדכן עם כל גרסה של המסמך.
+    </div>
+
+    <ul class="timeline">
+
+      <li>
+        <span class="tl-date">מאי 2026</span>
+        <span class="tl-title">Sonidegib vs Vismodegib — שני פרסומים השוואתיים חדשים</span>
+        <span class="tl-body">סקירה שיטתית (Doyle et al., Head &amp; Neck) וניתוח FAERS (Jedlowski et al., AJD) מחדדים את ההבדלים: Vismodegib — דיסגאוזיה ואלופציה שכיחות יותר; Sonidegib — נויטרופניה ועליית CPK. שתי התרופות יעילות, הבחירה מותאמת לפרופיל החולה.</span>
+        <span class="tl-source">Head &amp; Neck 2026 (systematic review) · AJD 2026 (FAERS analysis)</span>
+      </li>
+
+      <li>
+        <span class="tl-date">אפריל 2026</span>
+        <span class="tl-title">Itraconazole — מחקר PK אחרון הושלם, NDA בקרוב</span>
+        <span class="tl-body">Inhibitor Therapeutics (INTI) השלימה מחקר PK במלזיה (מחקר קליני אחרון לפני הגשה). הגשת NDA ל-FDA דרך 505(b)(2) pathway צפויה בהמשך 2026. תוצאות PK צפויות אמצע מאי 2026.</span>
+        <span class="tl-source">INTI press release, March 31, 2026</span>
+      </li>
+
+      <li>
+        <span class="tl-date">אפריל 2026</span>
+        <span class="tl-title">Patidegib gel 2% — Phase 3 סיים גיוס</span>
+        <span class="tl-body">ניסוי שלב 3 של Patidegib טופיקלי (Sol-Gel Technologies) סיים גיוס ב-43 אתרים בעולם. קריטריון: ≥10 BCCs בפנים, הפסקת HHI מערכתי ≥3 חודשים. תוצאות ראשוניות צפויות Q4 2026. Sol-Gel מעריכה peak revenue של $300M+.</span>
+        <span class="tl-source">Sol-Gel Technologies · ClinicalTrials.gov</span>
+      </li>
+
+      <li>
+        <span class="tl-date">2025</span>
+        <span class="tl-title">OKC — Piezotome + PRF: remodeling עצם מלא ב-36 חודשים</span>
+        <span class="tl-body">דיווח מקרה על piezotome-assisted peripheral ostectomy עם Platelet-Rich Fibrin (PRF) ל-OKC בגורלין. remodeling עצם מלא לאחר 36 חודשים מעקב. גישה מבטיחה לשימור רקמה מקסימלי, בייחוד בילדים.</span>
+        <span class="tl-source">2025 case report</span>
+      </li>
+
+      <li>
+        <span class="tl-date">אפריל 2025</span>
+        <span class="tl-title">Patidegib Phase 2 — פרסום תוצאות ב-BJD</span>
+        <span class="tl-body">תוצאות Phase 2 ב-British Journal of Dermatology: 63% תגובה מלאה (CR) ב-lesions שטופלו, עם פרופיל תופעות לוואי מקומי בלבד. ללא דיסגאוזיה או אלופציה מערכתית.</span>
+        <span class="tl-source"><a href="https://academic.oup.com/bjd/article-abstract/192/4/611/7900902" target="_blank">BJD 192(4):611, April 2025</a></span>
+      </li>
+
+      <li>
+        <span class="tl-date">Q1 2025</span>
+        <span class="tl-title">Itraconazole — בקשת IND ל-FDA</span>
+        <span class="tl-body">לאחר נתונים רטרוספקטיביים על 477 BCCs (57.7% הפחתה ≥30%), הוגשה בקשת IND ל-FDA עבור Itraconazole כטיפול ב-BCC בתסמונת גורלין. SUBA-Itraconazole (ספיגה משופרת) בפיתוח מקביל.</span>
+        <span class="tl-source">FDA IND filing · GeneReviews update</span>
+      </li>
+
+      <li>
+        <span class="tl-date">2025</span>
+        <span class="tl-title">Sonidegib + PDT — ניסוי קומבינציה NCT06623201</span>
+        <span class="tl-body">ניסוי פעיל המשלב Sonidegib מערכתי עם PDT מקומי. רציונל: סינרגיה המאפשרת הורדת מינון מערכתי, עם שיפור בתגובה מקומית. מגייס.</span>
+        <span class="tl-source"><a href="https://clinicaltrials.gov/" target="_blank">NCT06623201</a></span>
+      </li>
+
+      <li>
+        <span class="tl-date">2024</span>
+        <span class="tl-title">Sonidegib 200mg עדיף על Vismodegib 150mg — נתונים רטרוספקטיביים</span>
+        <span class="tl-body">מחקר רטרוספקטיבי ב-MDPI Cancers: Sonidegib 200mg הראה ORR 61.8% (CR 45.4%, PR 16.3%) לעומת Vismodegib. סבילות עדיפה במינון הנמוך. טרם אושר head-to-head RCT.</span>
+        <span class="tl-source"><a href="https://www.mdpi.com/2072-6694/16/12/2166" target="_blank">MDPI Cancers 16(12):2166, 2024</a></span>
+      </li>
+
+      <li>
+        <span class="tl-date">2024</span>
+        <span class="tl-title">AI-assisted dermoscopic BCC detection — פרסום ראשון</span>
+        <span class="tl-body">מודל AI לזיהוי BCCs בדרמוסקופיה פורסם. רלוונטי במיוחד לחולי גורלין עם עשרות נגעים — סריקה אוטומטית מהירה. טרם בשימוש קליני שגרתי.</span>
+        <span class="tl-source">2024 publication</span>
+      </li>
+
+      <li>
+        <span class="tl-date">2024</span>
+        <span class="tl-title">Drug Holiday Protocols — כניסה לפרוטוקולים קליניים</span>
+        <span class="tl-body">פרוטוקולי intermittent dosing (Vismodegib/Sonidegib week-on/off, month-on/off) נכנסו לשגרה בכמה מרכזים גדולים בארה"ב ובאירופה. שמירה על יעילות, ירידה משמעותית בתופעות לוואי (במיוחד דיסגאוזיה ואלופציה).</span>
+        <span class="tl-source">NCCN guidelines update · Consensus practice</span>
+      </li>
+
+      <li>
+        <span class="tl-date">2024</span>
+        <span class="tl-title">Itraconazole + Arsenic Trioxide — קומבינציה ניסיונית (Stanford)</span>
+        <span class="tl-body">75% Hedgehog pathway suppression בקומבינציה, לעומת 65% עם Itraconazole בלבד. פאזה מוקדמת, דורש ניטור צמוד לרעילות ארסן. מעניין מנגנונית אך רחוק מפרקטיקה.</span>
+        <span class="tl-source">Stanford preclinical / early-phase data</span>
+      </li>
+
+      <li>
+        <span class="tl-date">2024</span>
+        <span class="tl-title">AlphaFold SUFU variant analysis — preprint</span>
+        <span class="tl-body">ניתוח מבני של וריאנטים ב-SUFU באמצעות AlphaFold2/3. תרומה עתידית לסיווג VUS (Variants of Uncertain Significance). טרם יישום קליני.</span>
+        <span class="tl-source">2024 preprint (bioRxiv)</span>
+      </li>
+
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>שאלות מומלצות שהחולה יכול לשאול</h3>
+  <div class="body">
+    <p>לתת לחולה לפני הביקור — או להדפיס ולהביא:</p>
+    <ul class="checklist">
+      <li>איזו מוטציה אובחנה לי (PTCH1, SUFU, אחר)? איך זה משנה את המעקב שלי?</li>
+      <li>מה תדירות המעקב המומלצת אצלך, על סמך הביטוי הקליני שלי?</li>
+      <li>האם יש BCCs חדשים שמצדיקים מעבר לטיפול מערכתי (HHI)?</li>
+      <li>האם אני מועמד/ת לניסוי קליני (Patidegib, Itraconazole)?</li>
+      <li>אם מקבל/ת HHI: האם נשקול drug holiday?</li>
+      <li>מה התדירות המומלצת לפנורמי? אקו לב? אולטרסאונד אגן?</li>
+      <li>איזה הדמיות כדאי להעדיף על פני CT/X-ray?</li>
+      <li>ייעוץ גנטי לבני משפחה — איך מתחילים?</li>
+      <li>אם יש לי ילד עם SUFU — מי הנוירו-אונקולוג שינהל את ה-MRI?</li>
+      <li>הפנייה לפסיכולוג/קבוצת תמיכה — מי מומלץ?</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>פערי ידע / אזורים שצריך לעקוב אחריהם</h3>
+  <div class="body">
+    <ol>
+      <li>תדירות אקו לב במבוגרים אסימפטומטיים — ללא קונצנזוס.</li>
+      <li>סקרינינג מדולובלסטומה ב-PTCH1 — NCCN לא ממליץ, חלק מהמרכזים כן עושים בייסליין.</li>
+      <li>Itraconazole long-term — חסר מעל שנתיים מעקב (NDA צפוי 2026 — ייתכנו נתונים חדשים).</li>
+      <li>Patidegib Phase 3 — תוצאות ראשוניות צפויות Q4 2026.</li>
+      <li>Vismodegib vs Sonidegib head-to-head — חסר RCT prospective (סקירות 2026 מחדדות הבדלי פרופיל תופעות לוואי).</li>
+      <li>חיזוי הישנות OKC — אין scoring system מתוקף.</li>
+      <li>פרוגנוזה SUFU-related medulloblastoma — קוהורטים קטנים.</li>
+      <li>RCTs של פסיכותרפיה ספציפית לגורלין — חסרים.</li>
+    </ol>
+  </div>
+</section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB: KIDS                                                     -->
+<!-- ============================================================ -->
+<section class="tab-panel" data-panel="kids">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg>היי. אז יש לך תסמונת גורלין. מה זה אומר?</h2>
+  <p class="g-male">הטאב הזה כתוב במיוחד בשבילך — מתבגרים מגיל 11 ומעלה. בלי מילים מסובכות, בלי לטיני, בלי לדבר אליך כמו שמדברים לחולה. רק האמת, פשוט.</p>
+  <p class="g-female">הטאב הזה כתוב במיוחד בשבילך — מתבגרות מגיל 11 ומעלה. בלי מילים מסובכות, בלי לטיני, בלי לדבר אלייך כמו שמדברים לחולה. רק האמת, פשוט.</p>
+</div>
+
+<div class="gender-switch" role="group" aria-label="בחירת נוסח">
+  <span class="gender-switch-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-user-switch"/></svg>בחירת נוסח לפנייה:</span>
+  <div class="gender-switch-controls">
+    <button type="button" data-gender="m" class="active" aria-pressed="true"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-person"/></svg>לבנים</button>
+    <button type="button" data-gender="f" aria-pressed="false"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-person-simple"/></svg>לבנות</button>
+  </div>
+</div>
+
+<div class="g-male">
+<section class="block open">
+  <h3>מה זאת בכלל "תסמונת גורלין"?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <h4>בקצרה</h4>
+      <p>תסמונת גורלין היא משהו שנולדת איתו. זה לא מחלה שתפסת מאחר ולא משהו שגרמת לעצמך. זה כתוב בגנים שלך — בקוד שיוצר אותך — מאז לפני שנולדת.</p>
+      <p>בני אדם שיש להם את התסמונת חיים חיים רגילים לחלוטין: לומדים, חברים, ספורט, חופשות, עבודה, משפחה. אבל הגוף שלהם זקוק לקצת יותר תשומת לב במקומות מסוימים — בעיקר בעור, בפה, ובלסת.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>למה השם "גורלין"?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>ד"ר רוברט גורלין היה רופא אמריקאי שתיאר את התסמונת לראשונה ב-1960. השם פשוט נשאר. לפעמים קוראים לזה גם NBCCS — אלה ראשי תיבות באנגלית של "תסמונת ריבוי קרצינומה תאית-בסיסית". מסובך? כן. בדרך כלל פשוט אומרים "גורלין".</p>
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>מה זה אומר עליי?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>זה אומר שלוש דברים עיקריים:</p>
+      <ol>
+        <li><strong>אתה תלך לרופאים יותר מחברים שלך.</strong> זה לא כי אתה חולה. זה כי הרופאים בודקים שהכל בסדר — ואם משהו צץ, תופסים אותו מוקדם וזה קל לטפל.</li>
+        <li><strong>השמש קצת יותר חזקה לעור שלך.</strong> זה לא אומר לא לצאת. זה אומר להגן: קרם הגנה, כובע, חולצה. כמו ספורטאי שעובד את הציוד שלו לפני משחק.</li>
+        <li><strong>אתה לא לבד.</strong> יש בעולם הרבה מאות אלפי אנשים עם גורלין. בארץ יש עמותה. בפייסבוק יש קבוצות. אתה יכול לדבר עם אחרים בני גילך.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>שאלות שאולי יש לך</h3>
+  <div class="body">
+
+    <details class="qa"><summary>אני אמות מזה?</summary>
+      <div class="answer"><p>לא. אנשים עם גורלין חיים בערך כמו כולם. הסיכון הגדול ביותר — סרטני עור שנקראים BCC — הם <strong>מקומיים</strong>: הם לא זזים מהמקום שלהם בגוף. מסירים אותם, וזהו. עם מעקב טוב אצל רופא עור, מטפלים בהם כשהם קטנים מאוד.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני יכול לשחק כדורגל בחוץ?</summary>
+      <div class="answer"><p>בטח. אתה רק רוצה לשים קרם הגנה לפני, להעדיף משחק כשהשמש פחות קשה (לא בצהריים בקיץ), ולהשתמש בכובע אם אפשר. ספורט הוא אדיר לבריאות שלך — נפשית וגופנית.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני צריך לספר לחברים בכיתה?</summary>
+      <div class="answer"><p>אתה לא חייב כלום. זה הסיפור שלך, אתה מחליט עם מי לחלוק. חלק מהאנשים מספרים לחבר אחד טוב כדי שיהיה מי שיודע. אחרים שומרים את זה לעצמם. שתי האפשרויות בסדר. אם ילד מציק לך בגלל זה — זה <em>לא</em> בסדר, ויש על מי לסמוך: הורה, יועצת, מורה.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה אני צריך ללכת לכל כך הרבה רופאים?</summary>
+      <div class="answer"><p>כי מה שעושים זה <strong>מעקב</strong>, לא טיפול. כשרופא בודק עור או צילום שיניים, הוא רוצה לוודא שהכל בסדר. אם משהו קטן מתחיל — תופסים אותו לפני שהוא הופך לבעיה גדולה. זה כמו שמכונאי בודק את האוטו שלך פעם בשנה — לא כי הוא תקול, אלא כדי שלא יתקלקל.</p></div>
+    </details>
+
+    <details class="qa"><summary>גם הילדים שלי בעתיד יקבלו את זה?</summary>
+      <div class="answer"><p>זו שאלה חשובה ותגלה אותה כשתחליט שאתה רוצה לדעת. הסיכוי הוא 50% לכל ילד. אבל יש דרכים מודרניות לבחור — קיימות בדיקות שעושים עוד לפני ההריון. כשתגיע הזמן, תקבל ייעוץ. עכשיו — לא צריך לדאוג. אתה בן 11–17, יש לך הרבה זמן.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה אסור לי לעשות צילומים?</summary>
+      <div class="answer"><p>זה לא אסור — זה פשוט לא רצוי לעשות יותר ממה שצריך. צילומי רנטגן הם קרינה, ולעור שלך זה לא הכי טוב. אז כשאפשר, רופאים יבחרו בדיקה אחרת (אולטרסאונד, MRI). כשבאמת צריך — עושים. זה לא דרמה, רק זהירות.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה לי קרה דבר כזה?</summary>
+      <div class="answer"><p>לא בגלל משהו שעשית, שאמא או אבא עשו, או שהמשפחה עשתה. זה פשוט גנטיקה — כמו שאחד נולד עם עיניים כחולות ואחד עם חומות. הגן הזה נמצא במשפחה, או שהופיע אצלך לראשונה. אין סיבה לחפש "אשם". זה פשוט חלק ממי שאתה.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני אצטרך לקחת תרופות כל החיים?</summary>
+      <div class="answer"><p>לא בהכרח. רוב האנשים עם גורלין לא לוקחים תרופות יומיות. כשמתחיל להיות הרבה גידולי BCC על העור, יש תרופות מיוחדות שעוזרות להאט אותם — אבל זה לא תמיד צריך. כל חולה הוא מקרה משלו.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני יכול לדבר עם ילדים אחרים שיש להם את זה?</summary>
+      <div class="answer"><p>כן! עמותת גורלין בישראל מקשרת בין משפחות וילדים. בקבוצות בפייסבוק יש גם נוער מהעולם. תבקש מההורה שלך לעזור לך להתחבר — זה מקל מאוד לדעת שיש עוד אנשים שמבינים בדיוק מה אתה עובר.</p></div>
+    </details>
+
+  </div>
+</section>
+
+<section class="block">
+  <h3>5 דברים שכדאי לדעת לחיים</h3>
+  <div class="body">
+    <div class="kids-card">
+      <ol>
+        <li><strong>גוף שלך הוא לא אויב שלך.</strong> הוא פשוט גוף. כל אחד נולד עם משהו אחר. שלך כולל גורלין.</li>
+        <li><strong>שמש זה כיף, אבל קרם הגנה זה כלל.</strong> SPF 50, כל בוקר. נכנס לשגרה כמו צחצוח שיניים.</li>
+        <li><strong>שאל את הרופא הכל.</strong> אין שאלה טיפשית. רופא טוב יסביר לך כל דבר ברמה שלך, לא של הוריך.</li>
+        <li><strong>אתה לא חייב לספר לכל אחד.</strong> זו פרטיות שלך. בחר עם מי תחלוק.</li>
+        <li><strong>אם אתה מרגיש עצוב או מפחד הרבה — תדבר.</strong> עם הורה, חבר, יועצת, פסיכולוג. רגשות הם חלק מזה — וזה בסדר לבקש עזרה.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>מה הרופאים באמת עושים — ברמה שלך</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>עד עכשיו דיברנו על מעקב, שמש, ורגשות. אבל אולי אתה כבר יודע שחלק מהמעקב כולל גם <strong>טיפולים</strong> — ניתוחים קטנים, בדיקות, דברים שנשמעים מפחידים אבל ממש לא חייבים להיות. הסעיפים כאן מסבירים מה באמת קורה, בלי להסתיר — אבל גם בלי להפחיד.</p>
+      <p>כל סעיף סגור, ואתה פותח רק את מה שמעניין אותך </p>
+    </div>
+
+    <details class="kids-deep">
+      <summary>ניתוחים בעור — הסרת גידולי BCC</summary>
+      <div class="deep-body">
+        <p>גידולי BCC הם הדבר הכי שכיח בתסמונת גורלין. הם גידולים <strong>שלא מסוכנים</strong> ברוב המקרים — הם לא מתפשטים לאיברים אחרים בגוף. אבל צריך להסיר אותם כי הם גדלים לאט במקום.</p>
+        <h5>מה קורה בפועל?</h5>
+        <p>רופא עור (דרמטולוג) מזהה גידול בבדיקה שגרתית. לפעמים זה נקודה קטנה שאפילו לא הרגשת בה. ואז:</p>
+        <ul>
+          <li><strong>הרדמה מקומית</strong> — זריקה קטנה שמרדימה רק את המקום. לא מרגישים כלום.</li>
+          <li><strong>כריתה</strong> — הרופא חותך את הגידול ושוליים קטנים סביבו. לוקח 10–20 דקות.</li>
+          <li><strong>תפרים</strong> — לפעמים כמה תפירות, לפעמים רק פלסטר מיוחד.</li>
+          <li><strong>החלמה</strong> — שבוע-שבועיים, עם פלסטר. חוזרים לשגרה מהר.</li>
+        </ul>
+        <h5>ויש גם ניתוח מיוחד בשם "Mohs"</h5>
+        <p>בגידולים שנמצאים בפנים או במקומות רגישים, יש שיטה שנקראת Mohs — הרופא מסיר שכבה אחת, בודק במיקרוסקופ, ורק אם צריך — ממשיך. ככה מורידים כמה שפחות עור בריא. זה לוקח יותר זמן אבל שווה.</p>
+        <h5>ויש גם טיפולים בלי ניתוח</h5>
+        <p>לגידולים שטחיים וקטנים, לפעמים מורחים משחה מיוחדת (Imiquimod) או עושים טיפול באור (PDT) — בלי חיתוך בכלל. הרופא יחליט מה הכי מתאים.</p>
+        <h5>כמה פעמים זה יקרה לי?</h5>
+        <p>זה משתנה מאוד. יש אנשים עם גורלין שמסירים גידול אחד כל כמה שנים. יש כאלה שצריכים יותר. לא ניתן לדעת מראש — ולכן המעקב אצל רופא העור חשוב: כשתופסים מוקדם, הניתוח קטן ופשוט.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>ניתוחים בפה ובלסת — כיסות (ציסטות)</summary>
+      <div class="deep-body">
+        <p>בגורלין, לפעמים נוצרות בלסת <strong>כיסות</strong> — שקים קטנים מלאים בנוזל שגדלים לאט בתוך עצם הלסת. הם לא סרטניים ולא מסוכנים, אבל צריך לטפל בהם כדי שלא ילחצו על שיניים או עצם.</p>
+        <h5>איך מגלים אותם?</h5>
+        <p>בדרך כלל בצילום פנורמי של השיניים — צילום רחב שרואים בו את כל הלסת. הכיסה נראית כמו כתם כהה עגלגל. לפעמים מגלים במקרה, ולפעמים מרגישים נפיחות או לחץ.</p>
+        <h5>מה עושים?</h5>
+        <ul>
+          <li><strong>אפשרות 1 — "ניקוז" (מרסופיאליזציה):</strong> הרופא עושה חור קטן בכיסה כדי שהנוזל ייצא לאט. הכיסה מתכווצת במשך חודשים. זה פחות אגרסיבי, ומועדף בילדים.</li>
+          <li><strong>אפשרות 2 — הוצאה מלאה:</strong> אחרי שהכיסה הצטמקה, או אם היא קטנה מלכתחילה, הרופא מוציא אותה בניתוח. זה נעשה תחת הרדמה (מקומית או כללית, תלוי בגודל).</li>
+          <li><strong>מעקב אחרי:</strong> צילום פנורמי פעם בשנה כמה שנים, כדי לוודא שלא חוזרת.</li>
+        </ul>
+        <h5>זה כואב?</h5>
+        <p>בזמן הניתוח — לא, כי אתה מורדם. אחרי — יש נפיחות ואי-נוחות כמה ימים, שמטפלים בהם עם משככי כאבים רגילים. רוב הילדים חוזרים לשגרה תוך שבוע.</p>
+        <h5>ולגבי שיניים?</h5>
+        <p>לפעמים כיסה גדלה ליד שן או דוחפת שיניים. הרופא ישתדל לשמור את השיניים, אבל לפעמים שן אחת צריכה לצאת. זה מצב שרופא הפה-ולסת מתכנן מראש.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>הגוף שלי — דברים שאולי שמת לב אליהם</summary>
+      <div class="deep-body">
+        <p>תסמונת גורלין לא משפיעה רק על עור ושיניים. היא גם גורמת לכמה מאפיינים בגוף שאולי כבר הבחנת בהם. <strong>הם לא מפריעים לתפקוד</strong> ברוב המקרים — אבל טוב שתדע מה הם.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-brain"/></svg> ראש גדול יותר (מקרוצפליה)</h5>
+        <p>הרבה אנשים עם גורלין יש להם ראש שגדול קצת מהממוצע. זה לא אומר שום דבר על מה שיש בפנים — זה פשוט מבנה. אם מדדו לך היקף ראש שעל הצד הגדול — זה חלק מהתסמונת ולא סיבה לדאגה.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-bone"/></svg> מצח בולט (Frontal Bossing)</h5>
+        <p>אצל חלק מהילדים עם גורלין, המצח קצת יותר בולט מהרגיל. גם זה מאפיין מבני — קוסמטי בלבד, לא רפואי.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-bone"/></svg> צלעות שונות</h5>
+        <p>בצילום חזה לפעמים רואים צלע "מפוצלת" (bifid rib) — צלע שבקצה שלה מתפצלת לשתיים. זה לא כואב, לא מפריע לנשימה, ואתה בכלל לא מרגיש את זה. הרופא אולי יציין את זה, אבל אין מה לעשות — וגם לא צריך.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-hand"/></svg> גומות קטנות בכפות הידיים</h5>
+        <p>זה אחד הסימנים הכי אופייניים: נקודות קטנטנות שקועות בכפות הידיים או הרגליים. הן בגודל של 2–3 מ"מ ולא כואבות. לא כולם רואים אותן — לפעמים צריך להסתכל מקרוב. הן לא מזיקות ולא צריך לטפל בהן.</p>
+        <p><strong>טיפ:</strong> אם תרטיב את כפות הידיים ותסתכל באור חזק, תוכל לראות אותן בקלות. חלק מהאנשים חושבים שזה דווקא מגניב — סימן ייחודי שרק לך יש.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-tooth"/></svg> עיכוב בשיניים / שיניים במקום לא רגיל</h5>
+        <p>בגלל הכיסות בלסת, לפעמים שיניים קבועות מתעכבות לצוץ, או שהן צצות במקום שונה. רופא השיניים עוקב אחרי זה ומתכנן מראש.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-eye"/></svg> עיניים</h5>
+        <p>אצל חלק קטן מהילדים יש הפרש קל בין העיניים (היפרטלוריזם) או פזילה קלה. אם יש — רופא עיניים עוקב ומטפל. אם אין — מעולה.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-person-simple-run"/></svg> האם אני יכול לעשות ספורט?</h5>
+        <p>כן! המאפיינים השלדיים של גורלין <strong>לא מגבילים פעילות גופנית</strong>. אתה יכול לרוץ, לשחות, לשחק כדורגל, לרכב על אופניים — כמו כולם. רק תזכור הגנה מהשמש בפעילות חוץ.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>תרופות — מתי נותנים ומה הן עושות</summary>
+      <div class="deep-body">
+        <p>רוב הילדים עם גורלין <strong>לא צריכים תרופות יומיות</strong>. אבל כשמגיעים לגיל מבוגר יותר ומתחילים להופיע הרבה גידולי BCC, יש תרופות שיכולות לעזור.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-pill"/></svg> תרופות שמאטות גידולים</h5>
+        <p>קוראים להן "מעכבי הדג'הוג" (Hedgehog Inhibitors). הדג'הוג הוא שם של מסלול בתאים — לא הקיפוד מהמשחק . התרופות חוסמות את המסלול הזה, וגידולים מתכווצים או מפסיקים לגדול.</p>
+        <ul>
+          <li><strong>Vismodegib</strong> ו-<strong>Sonidegib</strong> — כדורים שלוקחים כל יום.</li>
+          <li>יש להן תופעות לוואי: שינוי בטעם (אוכל טעם אחר), נשירת שיער (חוזר כשמפסיקים), התכווצויות שרירים.</li>
+          <li>לפעמים לוקחים אותן "מחזורים" — חודש כן, חודש לא — כדי להקל.</li>
+        </ul>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-spray-bottle"/></svg> משחות חדשות</h5>
+        <p>יש תרופה חדשה בניסויים בשם <strong>Patidegib</strong> — משחה שמורחים על העור ישירות. היתרון: פחות תופעות לוואי כי התרופה לא נכנסת לכל הגוף. עדיין בבדיקה, אבל זה כיוון מבטיח.</p>
+
+        <h5>מתי זה רלוונטי?</h5>
+        <p>בדרך כלל לא בגיל שלך. רוב הטיפול התרופתי מתחיל בגיל 20–30+, כשמתחילים להופיע הרבה BCCs. בגיל שלך, הטיפול העיקרי הוא <strong>מעקב + הגנה מהשמש</strong>. אבל טוב לדעת מה מחכה — כדי שלא תופתע.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>בדיקת מוח (MRI) — למי שצריך</summary>
+      <div class="deep-body">
+        <p>לא כל הילדים עם גורלין צריכים בדיקת MRI מוח — אבל חלק כן, במיוחד אם יש לך מוטציה שנקראת SUFU (ההורים שלך יכולים לספר לך). אם כבר עברת MRI — אתה יודע מה זה.</p>
+        <h5>מה זה MRI?</h5>
+        <p>מכשיר שמצלם את פנים הגוף בעזרת מגנט — <strong>בלי קרינה</strong> (וזה חשוב בשבילנו!). אתה שוכב בתוך מנהרה שעושה רעש חזק, עם אוזניות. זה לוקח 20–40 דקות. לא כואב בכלל.</p>
+        <h5>למה זה?</h5>
+        <p>בילדים עם מוטציית SUFU, יש סיכוי קטן לגידול במוח שנקרא מדולובלסטומה. ה-MRI בודק שהכל בסדר. ברוב הגדול של המקרים — הכל בסדר. וגם אם מוצאים משהו, תופסים את זה מוקדם מאוד וזה הרבה יותר קל לטפל.</p>
+        <h5>עד מתי?</h5>
+        <p>בדרך כלל את המעקב הזה עושים עד גיל 5, ואחרי זה הסיכון יורד מאוד. אם אתה מעל גיל 5 וכבר לא עושים לך MRI — סימן שהכל בסדר.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+</div>
+
+<div class="g-female">
+<section class="block open">
+  <h3>מה זאת בכלל "תסמונת גורלין"?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <h4>בקצרה</h4>
+      <p>תסמונת גורלין היא משהו שנולדת איתו. זאת לא מחלה שתפסת מאחר ולא משהו שגרמת לעצמך. זה כתוב בגנים שלך — בקוד שיוצר אותך — מאז לפני שנולדת.</p>
+      <p>אנשים שיש להם את התסמונת חיים חיים רגילים לחלוטין: לומדים, חברות, ספורט, חופשות, עבודה, משפחה. אבל הגוף שלהם זקוק לקצת יותר תשומת לב במקומות מסוימים — בעיקר בעור, בפה, ובלסת.</p>
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>למה השם "גורלין"?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>ד"ר רוברט גורלין היה רופא אמריקאי שתיאר את התסמונת לראשונה ב-1960. השם פשוט נשאר. לפעמים קוראים לזה גם NBCCS — אלה ראשי תיבות באנגלית של "תסמונת ריבוי קרצינומה תאית-בסיסית". מסובך? כן. בדרך כלל פשוט אומרים "גורלין".</p>
+    </div>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>מה זה אומר עליי?</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>זה אומר שלושה דברים עיקריים:</p>
+      <ol>
+        <li><strong>את תלכי לרופאים יותר מחברות שלך.</strong> זה לא כי את חולה. זה כי הרופאים בודקים שהכל בסדר — ואם משהו צץ, תופסים אותו מוקדם וזה קל לטפל.</li>
+        <li><strong>השמש קצת יותר חזקה לעור שלך.</strong> זה לא אומר לא לצאת. זה אומר להגן: קרם הגנה, כובע, חולצה. כמו ספורטאית שמכינה את הציוד שלה לפני משחק.</li>
+        <li><strong>את לא לבד.</strong> יש בעולם הרבה מאות אלפי אנשים עם גורלין. בארץ יש עמותה. בפייסבוק יש קבוצות. את יכולה לדבר עם אחרות בנות גילך.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>שאלות שאולי יש לך</h3>
+  <div class="body">
+
+    <details class="qa"><summary>אני אמות מזה?</summary>
+      <div class="answer"><p>לא. אנשים עם גורלין חיים בערך כמו כולם. הסיכון הגדול ביותר — סרטני עור שנקראים BCC — הם <strong>מקומיים</strong>: הם לא זזים מהמקום שלהם בגוף. מסירים אותם, וזהו. עם מעקב טוב אצל רופא עור, מטפלים בהם כשהם קטנים מאוד.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני יכולה לעשות ספורט בחוץ?</summary>
+      <div class="answer"><p>בטח. את רק רוצה לשים קרם הגנה לפני, להעדיף פעילות כשהשמש פחות קשה (לא בצהריים בקיץ), ולהשתמש בכובע אם אפשר. ספורט הוא אדיר לבריאות שלך — נפשית וגופנית.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני צריכה לספר לחברות בכיתה?</summary>
+      <div class="answer"><p>את לא חייבת כלום. זה הסיפור שלך, את מחליטה עם מי לחלוק. חלק מהאנשים מספרים לחברה אחת טובה כדי שיהיה מי שיודע. אחרות שומרות את זה לעצמן. שתי האפשרויות בסדר. אם מישהי מציקה לך בגלל זה — זה <em>לא</em> בסדר, ויש על מי לסמוך: הורה, יועצת, מורה.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה אני צריכה ללכת לכל כך הרבה רופאים?</summary>
+      <div class="answer"><p>כי מה שעושים זה <strong>מעקב</strong>, לא טיפול. כשרופא בודק עור או צילום שיניים, הוא רוצה לוודא שהכל בסדר. אם משהו קטן מתחיל — תופסים אותו לפני שהוא הופך לבעיה גדולה. זה כמו שמכונאי בודק את האוטו שלך פעם בשנה — לא כי הוא תקול, אלא כדי שלא יתקלקל.</p></div>
+    </details>
+
+    <details class="qa"><summary>גם הילדים שלי בעתיד יקבלו את זה?</summary>
+      <div class="answer"><p>זו שאלה חשובה ותגלי אותה כשתחליטי שאת רוצה לדעת. הסיכוי הוא 50% לכל ילד. אבל יש דרכים מודרניות לבחור — קיימות בדיקות שעושים עוד לפני ההריון. כשיגיע הזמן, תקבלי ייעוץ. עכשיו — לא צריך לדאוג. את בת 11–17, יש לך הרבה זמן.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה אסור לי לעשות צילומים?</summary>
+      <div class="answer"><p>זה לא אסור — זה פשוט לא רצוי לעשות יותר ממה שצריך. צילומי רנטגן הם קרינה, ולעור שלך זה לא הכי טוב. אז כשאפשר, רופאים יבחרו בדיקה אחרת (אולטרסאונד, MRI). כשבאמת צריך — עושים. זה לא דרמה, רק זהירות.</p></div>
+    </details>
+
+    <details class="qa"><summary>למה לי קרה דבר כזה?</summary>
+      <div class="answer"><p>לא בגלל משהו שעשית, שאמא או אבא עשו, או שהמשפחה עשתה. זה פשוט גנטיקה — כמו שאחת נולדת עם עיניים כחולות ואחת עם חומות. הגן הזה נמצא במשפחה, או שהופיע אצלך לראשונה. אין סיבה לחפש "אשמים". זה פשוט חלק ממי שאת.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני אצטרך לקחת תרופות כל החיים?</summary>
+      <div class="answer"><p>לא בהכרח. רוב האנשים עם גורלין לא לוקחים תרופות יומיות. כשמתחיל להיות הרבה גידולי BCC על העור, יש תרופות מיוחדות שעוזרות להאט אותם — אבל זה לא תמיד צריך. כל חולה היא מקרה לעצמה.</p></div>
+    </details>
+
+    <details class="qa"><summary>אני יכולה לדבר עם ילדות אחרות שיש להן את זה?</summary>
+      <div class="answer"><p>כן! עמותת גורלין בישראל מקשרת בין משפחות וילדים. בקבוצות בפייסבוק יש גם נוער מהעולם. תבקשי מההורה שלך לעזור לך להתחבר — זה מקל מאוד לדעת שיש עוד אנשים שמבינים בדיוק מה את עוברת.</p></div>
+    </details>
+
+  </div>
+</section>
+
+<section class="block">
+  <h3>5 דברים שכדאי לדעת לחיים</h3>
+  <div class="body">
+    <div class="kids-card">
+      <ol>
+        <li><strong>גוף שלך הוא לא אויב שלך.</strong> הוא פשוט גוף. כל אחת נולדת עם משהו אחר. שלך כולל גורלין.</li>
+        <li><strong>שמש זה כיף, אבל קרם הגנה זה כלל.</strong> SPF 50, כל בוקר. נכנס לשגרה כמו צחצוח שיניים.</li>
+        <li><strong>שאלי את הרופא הכל.</strong> אין שאלה טיפשית. רופא טוב יסביר לך כל דבר ברמה שלך, לא של הוריך.</li>
+        <li><strong>את לא חייבת לספר לכל אחד.</strong> זו פרטיות שלך. בחרי עם מי לחלוק.</li>
+        <li><strong>אם את מרגישה עצובה או מפחדת הרבה — תדברי.</strong> עם הורה, חברה, יועצת, פסיכולוג. רגשות הם חלק מזה — וזה בסדר לבקש עזרה.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>מה הרופאים באמת עושים — ברמה שלך</h3>
+  <div class="body">
+    <div class="kids-card">
+      <p>עד עכשיו דיברנו על מעקב, שמש, ורגשות. אבל אולי את כבר יודעת שחלק מהמעקב כולל גם <strong>טיפולים</strong> — ניתוחים קטנים, בדיקות, דברים שנשמעים מפחידים אבל ממש לא חייבים להיות. הסעיפים כאן מסבירים מה באמת קורה, בלי להסתיר — אבל גם בלי להפחיד.</p>
+      <p>כל סעיף סגור, ואת פותחת רק את מה שמעניין אותך </p>
+    </div>
+
+    <details class="kids-deep">
+      <summary>ניתוחים בעור — הסרת גידולי BCC</summary>
+      <div class="deep-body">
+        <p>גידולי BCC הם הדבר הכי שכיח בתסמונת גורלין. הם גידולים <strong>שלא מסוכנים</strong> ברוב המקרים — הם לא מתפשטים לאיברים אחרים בגוף. אבל צריך להסיר אותם כי הם גדלים לאט במקום.</p>
+        <h5>מה קורה בפועל?</h5>
+        <p>רופא עור (דרמטולוג) מזהה גידול בבדיקה שגרתית. לפעמים זה נקודה קטנה שאפילו לא הרגשת בה. ואז:</p>
+        <ul>
+          <li><strong>הרדמה מקומית</strong> — זריקה קטנה שמרדימה רק את המקום. לא מרגישים כלום.</li>
+          <li><strong>כריתה</strong> — הרופא חותך את הגידול ושוליים קטנים סביבו. לוקח 10–20 דקות.</li>
+          <li><strong>תפרים</strong> — לפעמים כמה תפירות, לפעמים רק פלסטר מיוחד.</li>
+          <li><strong>החלמה</strong> — שבוע-שבועיים, עם פלסטר. חוזרים לשגרה מהר.</li>
+        </ul>
+        <h5>ויש גם ניתוח מיוחד בשם "Mohs"</h5>
+        <p>בגידולים שנמצאים בפנים או במקומות רגישים, יש שיטה שנקראת Mohs — הרופא מסיר שכבה אחת, בודק במיקרוסקופ, ורק אם צריך — ממשיך. ככה מורידים כמה שפחות עור בריא. זה לוקח יותר זמן אבל שווה.</p>
+        <h5>ויש גם טיפולים בלי ניתוח</h5>
+        <p>לגידולים שטחיים וקטנים, לפעמים מורחים משחה מיוחדת (Imiquimod) או עושים טיפול באור (PDT) — בלי חיתוך בכלל. הרופא יחליט מה הכי מתאים.</p>
+        <h5>כמה פעמים זה יקרה לי?</h5>
+        <p>זה משתנה מאוד. יש אנשים עם גורלין שמסירים גידול אחד כל כמה שנים. יש כאלה שצריכים יותר. לא ניתן לדעת מראש — ולכן המעקב אצל רופא העור חשוב: כשתופסים מוקדם, הניתוח קטן ופשוט.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>ניתוחים בפה ובלסת — כיסות (ציסטות)</summary>
+      <div class="deep-body">
+        <p>בגורלין, לפעמים נוצרות בלסת <strong>כיסות</strong> — שקים קטנים מלאים בנוזל שגדלים לאט בתוך עצם הלסת. הם לא סרטניים ולא מסוכנים, אבל צריך לטפל בהם כדי שלא ילחצו על שיניים או עצם.</p>
+        <h5>איך מגלים אותם?</h5>
+        <p>בדרך כלל בצילום פנורמי של השיניים — צילום רחב שרואים בו את כל הלסת. הכיסה נראית כמו כתם כהה עגלגל. לפעמים מגלים במקרה, ולפעמים מרגישים נפיחות או לחץ.</p>
+        <h5>מה עושים?</h5>
+        <ul>
+          <li><strong>אפשרות 1 — "ניקוז" (מרסופיאליזציה):</strong> הרופא עושה חור קטן בכיסה כדי שהנוזל ייצא לאט. הכיסה מתכווצת במשך חודשים. זה פחות אגרסיבי, ומועדף בילדים.</li>
+          <li><strong>אפשרות 2 — הוצאה מלאה:</strong> אחרי שהכיסה הצטמקה, או אם היא קטנה מלכתחילה, הרופא מוציא אותה בניתוח. זה נעשה תחת הרדמה (מקומית או כללית, תלוי בגודל).</li>
+          <li><strong>מעקב אחרי:</strong> צילום פנורמי פעם בשנה כמה שנים, כדי לוודא שלא חוזרת.</li>
+        </ul>
+        <h5>זה כואב?</h5>
+        <p>בזמן הניתוח — לא, כי את מורדמת. אחרי — יש נפיחות ואי-נוחות כמה ימים, שמטפלים בהם עם משככי כאבים רגילים. רוב הילדות חוזרות לשגרה תוך שבוע.</p>
+        <h5>ולגבי שיניים?</h5>
+        <p>לפעמים כיסה גדלה ליד שן או דוחפת שיניים. הרופא ישתדל לשמור את השיניים, אבל לפעמים שן אחת צריכה לצאת. זה מצב שרופא הפה-ולסת מתכנן מראש.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>הגוף שלי — דברים שאולי שמת לב אליהם</summary>
+      <div class="deep-body">
+        <p>תסמונת גורלין לא משפיעה רק על עור ושיניים. היא גם גורמת לכמה מאפיינים בגוף שאולי כבר הבחנת בהם. <strong>הם לא מפריעים לתפקוד</strong> ברוב המקרים — אבל טוב שתדעי מה הם.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-brain"/></svg> ראש גדול יותר (מקרוצפליה)</h5>
+        <p>הרבה אנשים עם גורלין יש להם ראש שגדול קצת מהממוצע. זה לא אומר שום דבר על מה שיש בפנים — זה פשוט מבנה. אם מדדו לך היקף ראש שעל הצד הגדול — זה חלק מהתסמונת ולא סיבה לדאגה.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-bone"/></svg> מצח בולט (Frontal Bossing)</h5>
+        <p>אצל חלק מהילדים עם גורלין, המצח קצת יותר בולט מהרגיל. גם זה מאפיין מבני — קוסמטי בלבד, לא רפואי.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-bone"/></svg> צלעות שונות</h5>
+        <p>בצילום חזה לפעמים רואים צלע "מפוצלת" (bifid rib) — צלע שבקצה שלה מתפצלת לשתיים. זה לא כואב, לא מפריע לנשימה, ואת בכלל לא מרגישה את זה. הרופא אולי יציין את זה, אבל אין מה לעשות — וגם לא צריך.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-hand"/></svg> גומות קטנות בכפות הידיים</h5>
+        <p>זה אחד הסימנים הכי אופייניים: נקודות קטנטנות שקועות בכפות הידיים או הרגליים. הן בגודל של 2–3 מ"מ ולא כואבות. לא כולם רואים אותן — לפעמים צריך להסתכל מקרוב. הן לא מזיקות ולא צריך לטפל בהן.</p>
+        <p><strong>טיפ:</strong> אם תרטיבי את כפות הידיים ותסתכלי באור חזק, תוכלי לראות אותן בקלות. חלק מהאנשים חושבים שזה דווקא מגניב — סימן ייחודי שרק לך יש.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-tooth"/></svg> עיכוב בשיניים / שיניים במקום לא רגיל</h5>
+        <p>בגלל הכיסות בלסת, לפעמים שיניים קבועות מתעכבות לצוץ, או שהן צצות במקום שונה. רופא השיניים עוקב אחרי זה ומתכנן מראש.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-eye"/></svg> עיניים</h5>
+        <p>אצל חלק קטן מהילדים יש הפרש קל בין העיניים (היפרטלוריזם) או פזילה קלה. אם יש — רופא עיניים עוקב ומטפל. אם אין — מעולה.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-person-simple-run"/></svg> האם אני יכולה לעשות ספורט?</h5>
+        <p>כן! המאפיינים השלדיים של גורלין <strong>לא מגבילים פעילות גופנית</strong>. את יכולה לרוץ, לשחות, לשחק כדורסל, לרכב על אופניים — כמו כולן. רק תזכרי הגנה מהשמש בפעילות חוץ.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>תרופות — מתי נותנים ומה הן עושות</summary>
+      <div class="deep-body">
+        <p>רוב הילדים עם גורלין <strong>לא צריכים תרופות יומיות</strong>. אבל כשמגיעים לגיל מבוגר יותר ומתחילים להופיע הרבה גידולי BCC, יש תרופות שיכולות לעזור.</p>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-pill"/></svg> תרופות שמאטות גידולים</h5>
+        <p>קוראים להן "מעכבי הדג'הוג" (Hedgehog Inhibitors). הדג'הוג הוא שם של מסלול בתאים — לא הקיפוד מהמשחק . התרופות חוסמות את המסלול הזה, וגידולים מתכווצים או מפסיקים לגדול.</p>
+        <ul>
+          <li><strong>Vismodegib</strong> ו-<strong>Sonidegib</strong> — כדורים שלוקחים כל יום.</li>
+          <li>יש להן תופעות לוואי: שינוי בטעם (אוכל טעם אחר), נשירת שיער (חוזר כשמפסיקים), התכווצויות שרירים.</li>
+          <li>לפעמים לוקחים אותן "מחזורים" — חודש כן, חודש לא — כדי להקל.</li>
+        </ul>
+
+        <h5><svg class="icon-svg icon-kid" aria-hidden="true" focusable="false"><use href="#ph-spray-bottle"/></svg> משחות חדשות</h5>
+        <p>יש תרופה חדשה בניסויים בשם <strong>Patidegib</strong> — משחה שמורחים על העור ישירות. היתרון: פחות תופעות לוואי כי התרופה לא נכנסת לכל הגוף. עדיין בבדיקה, אבל זה כיוון מבטיח.</p>
+
+        <h5>מתי זה רלוונטי?</h5>
+        <p>בדרך כלל לא בגיל שלך. רוב הטיפול התרופתי מתחיל בגיל 20–30+, כשמתחילים להופיע הרבה BCCs. בגיל שלך, הטיפול העיקרי הוא <strong>מעקב + הגנה מהשמש</strong>. אבל טוב לדעת מה מחכה — כדי שלא תופתעי.</p>
+      </div>
+    </details>
+
+    <details class="kids-deep">
+      <summary>בדיקת מוח (MRI) — למי שצריך</summary>
+      <div class="deep-body">
+        <p>לא כל הילדות עם גורלין צריכות בדיקת MRI מוח — אבל חלק כן, במיוחד אם יש לך מוטציה שנקראת SUFU (ההורים שלך יכולים לספר לך). אם כבר עברת MRI — את יודעת מה זה.</p>
+        <h5>מה זה MRI?</h5>
+        <p>מכשיר שמצלם את פנים הגוף בעזרת מגנט — <strong>בלי קרינה</strong> (וזה חשוב בשבילנו!). את שוכבת בתוך מנהרה שעושה רעש חזק, עם אוזניות. זה לוקח 20–40 דקות. לא כואב בכלל.</p>
+        <h5>למה זה?</h5>
+        <p>בילדים עם מוטציית SUFU, יש סיכוי קטן לגידול במוח שנקרא מדולובלסטומה. ה-MRI בודק שהכל בסדר. ברוב הגדול של המקרים — הכל בסדר. וגם אם מוצאים משהו, תופסים את זה מוקדם מאוד וזה הרבה יותר קל לטפל.</p>
+        <h5>עד מתי?</h5>
+        <p>בדרך כלל את המעקב הזה עושים עד גיל 5, ואחרי זה הסיכון יורד מאוד. אם את מעל גיל 5 וכבר לא עושים לך MRI — סימן שהכל בסדר.</p>
+      </div>
+    </details>
+
+  </div>
+</section>
+</div>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB: RESEARCH                                                 -->
+<!-- ============================================================ -->
+<section class="tab-panel" data-panel="research">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>מחקרים, ניסויים וחידושים — 2024–2026 (עדכון מאי 2026)</h2>
+  <p>הסעיף הזה מתעדכן הכי מהר. המטרה: לתת לחולה כלי לעקוב, להבין מה זמין, ומתי שווה לבדוק אם הוא מתאים לניסוי קליני. מומלץ לבדוק כל 3–6 חודשים לעדכונים.</p>
+</div>
+
+<section class="block open">
+  <h3>חידושים טיפוליים — מה חדש 2024–2026</h3>
+  <div class="body">
+
+    <h4>1. Patidegib gel 2% — טופיקלי</h4>
+    <p>מעכב Hedgehog במשחה — מינימיזציה של ספיגה מערכתית, וכלומר פחות תופעות לוואי כמו דיסגאוזיה והתקרחות. תוצאות Phase 2 פורסמו ב-British Journal of Dermatology באפריל 2025 (63% תגובה מלאה ב-lesions שטופלו). <strong>Phase 3 פעיל ומגייס</strong> ב-43 אתרים בעולם. דורש: ≥10 BCCs בפנים, הפסקת HHI מערכתי 3 חודשים לפני.</p>
+    <p>קישור: <a href="https://academic.oup.com/bjd/article-abstract/192/4/611/7900902" target="_blank">BJD Phase 2 paper</a> · <a href="https://www.gorlinsyndrome.org/" target="_blank">Gorlin Syndrome Alliance</a> (clinicaltrials@gorlinsyndrome.org)</p>
+
+    <h4>2. Itraconazole — תרופה ישנה, שימוש חדש</h4>
+    <p>תרופה אנטי-פטרייתית ותיקה ויחסית זולה שהתגלתה כמעכבת Hedgehog בעקיפין. נתונים: 57.7% מ-477 BCCs הראו הפחתה של ≥30% בגודל. SUBA-Itraconazole (פורמולה משופרת) בפיתוח. בקשת IND ל-FDA צפויה Q1 2025. יתרון פוטנציאלי: פחות תופעות לוואי קלאסיות של HHI.</p>
+
+    <h4>3. Sonidegib + PDT — קומבינציה</h4>
+    <p>NCT06623201 — ניסוי משלב מעכב Hedgehog (Sonidegib) עם photodynamic therapy. פעיל, מגייס. רעיון: סינרגיה — פחות תרופה מערכתית, פחות תופעות לוואי, יעילות מוגברת.</p>
+
+    <h4>4. Itraconazole + Arsenic Trioxide</h4>
+    <p>קומבינציה ניסיונית (Stanford). 75% Hedgehog suppression לעומת 65% עם Itraconazole בלבד. עדיין פאזה מוקדמת — דורש ניטור צמוד לרעילות ארסן.</p>
+
+    <h4>5. Drug Holiday Protocols</h4>
+    <p>פרקטיקה מתפתחת: Vismodegib/Sonidegib במחזורים (week-on/off, או חודש על/חודש off) במקום נטילה רציפה. שמירה על יעילות, ירידה משמעותית בתופעות לוואי. נכנס לפרוטוקולים קליניים בארה"ב ובאירופה.</p>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>איך לחפש ניסויים פעילים בעצמך</h3>
+  <div class="body">
+
+    <h4>1. TrialFinder</h4>
+    <p>הכלי שציינת — <a href="https://trialfinder.care/?q=Gorlin&recruiting=0" target="_blank">trialfinder.care</a>. מציג ניסויים פעילים, אפשר לסנן לפי מיקום ולפי קריטריונים.</p>
+
+    <h4>2. ClinicalTrials.gov</h4>
+    <p>המסד המלא והמוסמך. <a href="https://clinicaltrials.gov/search?cond=Gorlin%20Syndrome&aggFilters=status:rec" target="_blank">חיפוש "Gorlin Syndrome" עם סינון "Recruiting"</a>. מציג סטטוס, אתרים, קריטריוני הכללה/הוצאה, פרטי קשר.</p>
+
+    <h4>3. מערך ה-EU Clinical Trials</h4>
+    <p>ל-ניסויים אירופאים: <a href="https://euclinicaltrials.eu/" target="_blank">euclinicaltrials.eu</a>.</p>
+
+    <h4>4. עמותות מתעדכנות</h4>
+    <ul>
+      <li><strong>Gorlin Syndrome Alliance (US):</strong> <a href="https://gorlinsyndrome.org/" target="_blank">gorlinsyndrome.org</a> — מצנן ניסויים, מסייע בגיוס.</li>
+      <li><strong>Gorlin Syndrome Group (UK):</strong> <a href="https://gorlingroup.org/" target="_blank">gorlingroup.org</a> — חדשות מחקריות, news letters.</li>
+    </ul>
+
+    <h4>5. PubMed Alerts</h4>
+    <p>אפשר להגדיר התראת אימייל אוטומטית לכל מאמר חדש: <a href="https://pubmed.ncbi.nlm.nih.gov/?term=Gorlin+Syndrome" target="_blank">PubMed Gorlin search</a> → "Create alert".</p>
+  </div>
+</section>
+
+<section class="block">
+  <h3>תחומי מחקר חמים — לעקוב אחריהם</h3>
+  <div class="body">
+    <div class="table-wrap">
+
+      <table>
+      <thead><tr><th>תחום</th><th>מצב 2026</th><th>צפי</th></tr></thead>
+      <tbody>
+        <tr><td>Patidegib topical Phase 3</td><td>מגייס</td><td>תוצאות 2026–2027</td></tr>
+        <tr><td>Itraconazole IND</td><td>בקשה צפויה Q1/2025</td><td>אישור FDA פוטנציאלי 2026–2027</td></tr>
+        <tr><td>SUBA-Itraconazole formulation</td><td>אופטימיזציה</td><td>בלתי ידוע</td></tr>
+        <tr><td>AlphaFold-driven SUFU variant analysis</td><td>preprint 2026</td><td>מחקר בסיסי, יישום קליני בעוד שנים</td></tr>
+        <tr><td>AI-assisted dermoscopic BCC detection</td><td>פרסום 2024</td><td>טרם בשגרה קלינית</td></tr>
+        <tr><td>Gene therapy</td><td>ניסויים בעלי חיים</td><td>תרגום לאדם — שנים רבות</td></tr>
+        <tr><td>SHH-MB chemo-only protocols</td><td>פרוטוקולים פתוחים COG</td><td>נתונים שמתבגרים 2026+</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</section>
+
+<section class="block">
+  <h3>איך מצטרפים לניסוי קליני</h3>
+  <div class="body">
+    <ol>
+      <li><strong>אתר ניסוי שמתאים</strong> — TrialFinder, ClinicalTrials.gov, או דרך עמותה.</li>
+      <li><strong>בדוק קריטריוני הכללה/הוצאה</strong> בעיון. רוב הניסויים דורשים: גיל מסוים, מספר מינימלי של BCCs, תקופה ללא טיפול אחר.</li>
+      <li><strong>פנה לצוות הניסוי</strong> דרך פרטי הקשר באתר. רובם עונים תוך ימים.</li>
+      <li><strong>אם הניסוי לא בארץ</strong> — בדוק אם יש כיסוי טיסות/לינה (חלק מהניסויים מציעים).</li>
+      <li><strong>היוועץ ברופא המטפל שלך</strong> לפני שמחליט. דברים לבדוק: התאמה לפרופיל הקליני, היכרות עם הצוות החוקר, הסיכון מול התועלת.</li>
+      <li><strong>הסכמה מדעת</strong> — תקרא בעיון. שאל כל מה שלא ברור. אתה רשאי לפרוש מהניסוי בכל שלב.</li>
+    </ol>
+  </div>
+</section>
+
+</section>
+
+<!-- ============================================================ -->
+<!-- TAB: RESOURCES                                                -->
+<!-- ============================================================ -->
+<section class="tab-panel" data-panel="resources">
+
+<div class="tab-intro">
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg>מקורות, קישורים וקהילות</h2>
+  <p>מצא מידע נוסף, התחבר לקהילה, או עקוב אחר עדכונים מקצועיים בעצמך.</p>
+</div>
+
+<section class="block open">
+  <h3>בישראל</h3>
+  <div class="body">
+    <ul>
+      <li><strong>עמותת גורלין ישראל</strong> — <a href="https://www.facebook.com/GorlinSyndromeAssociationIsrael/" target="_blank">דף פייסבוק</a> · <a href="https://www.guidestar.org.il/organization/580691756" target="_blank">רשם העמותות (מס׳ 580691756)</a>. תמיכה, קהילה, חיבור בין משפחות, ליווי מול מערכת הבריאות.</li>
+      <li><strong>מאמר רקע בעברית (Infomed):</strong> <a href="https://www.infomed.co.il/articles/5957/" target="_blank">infomed.co.il/articles/5957</a> — ישן יותר אך עדיין נקודת התחלה טובה.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3>עמותות בינלאומיות</h3>
+  <div class="body">
+    <ul>
+      <li><strong>Gorlin Syndrome Group (UK)</strong> — <a href="https://gorlingroup.org/" target="_blank">gorlingroup.org</a>. פעיל, עדכני, עם מידע גנטי, חוברות, יום קהילה שנתי.</li>
+      <li><strong>Gorlin Syndrome Group (UK) Facebook</strong> — <a href="https://www.facebook.com/groups/12723259010" target="_blank">קבוצת תמיכה פעילה</a> בפייסבוק.</li>
+      <li><strong>Gorlin Syndrome Alliance (US)</strong> — <a href="https://gorlinsyndrome.org/" target="_blank">gorlinsyndrome.org</a>. מנהלת ניסויים, מקור מידע מרכזי בארה"ב.</li>
+      <li><strong>BCC Nevus Syndrome Life Support Network</strong> — <a href="https://bccns.org/" target="_blank">bccns.org</a>. תמיכה, retreats, קו טלפוני.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>מאגרי מידע מקצועיים</h3>
+  <div class="body">
+    <ul>
+      <li><strong>GeneReviews — NBCCS (NBK1151)</strong>: <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank">ncbi.nlm.nih.gov/books/NBK1151</a>. הסקירה המוסמכת ביותר, מעודכנת.</li>
+      <li><strong>OMIM:</strong> <a href="https://omim.org/entry/109400" target="_blank">109400 (PTCH1)</a> · <a href="https://omim.org/entry/620343" target="_blank">620343 (SUFU)</a>.</li>
+      <li><strong>Orphanet:</strong> <a href="https://www.orpha.net/en/disease/detail/377" target="_blank">orpha.net Gorlin syndrome</a>. עם תרגומים לשפות אירופה.</li>
+      <li><strong>NORD:</strong> <a href="https://rarediseases.org/" target="_blank">rarediseases.org</a>. סקירה ידידותית למשתמש.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>חיפוש ניסויים</h3>
+  <div class="body">
+    <ul>
+      <li><strong>TrialFinder:</strong> <a href="https://trialfinder.care/?q=Gorlin&recruiting=0" target="_blank">trialfinder.care</a></li>
+      <li><strong>ClinicalTrials.gov:</strong> <a href="https://clinicaltrials.gov/search?cond=Gorlin%20Syndrome" target="_blank">חיפוש Gorlin Syndrome</a></li>
+      <li><strong>EU Clinical Trials:</strong> <a href="https://euclinicaltrials.eu/" target="_blank">euclinicaltrials.eu</a></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>כתבי עת מקצועיים — לעקוב</h3>
+  <div class="body">
+    <ul>
+      <li><em>British Journal of Dermatology</em> — חשוב במיוחד לטיפולי BCC ו-HHI.</li>
+      <li><em>JAMA Dermatology</em></li>
+      <li><em>Journal of Clinical Oncology</em> (JCO) — לרילוונטיות אונקולוגית.</li>
+      <li><em>Neuro-Oncology</em> — לעדכוני מדולובלסטומה.</li>
+      <li><em>Pediatric Blood & Cancer</em> — אונקולוגיה ילדים.</li>
+      <li><em>Clinical Cancer Research</em></li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3>איך לבנות התראה אוטומטית מ-PubMed</h3>
+  <div class="body">
+    <ol>
+      <li>היכנס/הרשם ל-NCBI: <a href="https://www.ncbi.nlm.nih.gov/" target="_blank">ncbi.nlm.nih.gov</a>.</li>
+      <li>בצע חיפוש: <code>Gorlin Syndrome[Title/Abstract] OR NBCCS[Title/Abstract]</code>.</li>
+      <li>סנן לפי תאריך: 1 שנה אחרונה.</li>
+      <li>לחץ "Create alert" מעל תוצאות החיפוש.</li>
+      <li>הגדר: שלח אימייל שבועי.</li>
+    </ol>
+    <p>תקבל מאמרים חדשים אוטומטית, ללא צורך לחפש שוב.</p>
+  </div>
+</section>
+
+<section class="block">
+  <h3>מילון מונחים</h3>
+  <div class="body">
+    <div class="table-wrap">
+
+      <table>
+      <thead><tr><th>מונח</th><th>משמעות</th></tr></thead>
+      <tbody>
+        <tr><td>BCC (Basal Cell Carcinoma)</td><td>קרצינומה תאית-בסיסית. סוג שכיח של סרטן עור, מקומי, כמעט לא שולח גרורות.</td></tr>
+        <tr><td>NBCCS</td><td>Nevoid Basal Cell Carcinoma Syndrome — שם נוסף לתסמונת גורלין.</td></tr>
+        <tr><td>OKC / KCOT</td><td>Odontogenic Keratocyst / Keratocystic Odontogenic Tumor — כיסה אודונטוגנית בלסת.</td></tr>
+        <tr><td>PTCH1, SUFU</td><td>שמות הגנים הקשורים לתסמונת.</td></tr>
+        <tr><td>Hedgehog Pathway</td><td>מסלול אותות בתאים שאחראי על התפתחות; שיבוש בו גורם לגידולי BCC.</td></tr>
+        <tr><td>HHI (Hedgehog Inhibitor)</td><td>תרופה החוסמת את מסלול ה-Hedgehog. דוגמאות: Vismodegib, Sonidegib.</td></tr>
+        <tr><td>Vismodegib (Erivedge)</td><td>תרופה פומית, מעכבת Hedgehog, מקטינה ומונעת BCCs.</td></tr>
+        <tr><td>Sonidegib (Odomzo)</td><td>תרופה פומית דומה ל-Vismodegib, סבילות יחסית עדיפה ב-200mg.</td></tr>
+        <tr><td>Patidegib</td><td>מעכב Hedgehog בפיתוח, גרסה טופיקלית (משחה).</td></tr>
+        <tr><td>Mohs Surgery</td><td>טכניקה ניתוחית מדויקת להסרת סרטן עור עם מינימום פגיעה ברקמה הסביבה.</td></tr>
+        <tr><td>PDT (Photodynamic Therapy)</td><td>טיפול באור — מורחים חומר רגיש לאור, ואז מאירים אותו כדי להרוג תאי גידול.</td></tr>
+        <tr><td>Falx Cerebri</td><td>קרום מוחי בין שני חצאי המוח. הסתיידות שלו אופיינית לגורלין.</td></tr>
+        <tr><td>Medulloblastoma</td><td>גידול מוח שיכול לקרות בילדות, במיוחד עם מוטציית SUFU.</td></tr>
+        <tr><td>Macrocephaly</td><td>היקף ראש גדול מהממוצע (מעל 95% האחוזון).</td></tr>
+        <tr><td>Bifid Rib</td><td>צלע מפוצלת — מאפיין שלדי שכיח בגורלין.</td></tr>
+        <tr><td>Palmoplantar Pits</td><td>גומות קטנות בכפות הידיים והרגליים — סימן אבחנתי קלאסי.</td></tr>
+        <tr><td>Fibroma</td><td>גידול שפיר של רקמת חיבור. שכיח בלב ובשחלות בחולי גורלין.</td></tr>
+        <tr><td>Penetrance</td><td>אחוז האנשים עם המוטציה שמפתחים ביטוי קליני.</td></tr>
+        <tr><td>De Novo</td><td>מוטציה חדשה, שלא הייתה בהורים.</td></tr>
+        <tr><td>PGD</td><td>Pre-implantation Genetic Diagnosis — בדיקה גנטית לעוברים בהפריה חוץ-גופית.</td></tr>
+      </tbody>
+    </table>
+
+    </div>
+  </div>
+</section>
+
+</section>
+
+</main>
+</div>
+
+<footer>
+  <p class="footer-line footer-main"><strong>מאגר מידע חי</strong> בנושא תסמונת גורלין — מתעדכן באופן שוטף עם פרסומים, ניסויים קליניים וקווים מנחים חדשים · עדכון אחרון: <strong>מאי 2026</strong></p>
+  <p class="footer-line footer-credit">נבנה ונערך על ידי עמית ברין · <a href="https://amitbrin.com" target="_blank" rel="noopener">amitbrin.com</a> · <a href="mailto:ahoovi@gmail.com">ahoovi@gmail.com</a></p>
+  <p class="footer-line footer-disclaimer">המסמך מיועד לחומר רקע בלבד ולא מחליף ייעוץ רפואי. למקור מקצועי מעודכן ראה <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank" rel="noopener">GeneReviews NBK1151</a> ועמותות גורלין השונות.</p>
+</footer>
+
+<button class="to-top" id="to-top" type="button" aria-label="חזרה למעלה" title="חזרה למעלה">↑</button>
+
+<script>
+(function(){
+'use strict';
+// ===== REMOVE NO-JS CLASS =====
+document.documentElement.classList.remove('no-js');
+
+const body = document.body;
+const tabs = document.querySelectorAll('.tab-btn');
+const panels = document.querySelectorAll('.tab-panel');
+const tocList = document.getElementById('toc-list');
+const tocAside = document.getElementById('toc');
+const searchInput = document.getElementById('search');
+const searchCount = document.getElementById('search-count');
+const toTopBtn = document.getElementById('to-top');
+const shareBtn = document.getElementById('share-btn');
+
+// ===== GENDER TOGGLE =====
+function setGender(g){
+  if(g !== 'm' && g !== 'f') g = 'm';
+  body.dataset.gender = g;
+  document.querySelectorAll('.gender-switch-controls button').forEach(b=>{
+    const isActive = b.dataset.gender === g;
+    b.classList.toggle('active', isActive);
+    b.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+  });
+  try{ localStorage.setItem('gorlin-gender', g); }catch(_){}
+}
+try{
+  const saved = localStorage.getItem('gorlin-gender');
+  if(saved) setGender(saved);
+}catch(_){}
+document.querySelectorAll('.gender-switch-controls button').forEach(btn=>{
+  btn.addEventListener('click', ()=> setGender(btn.dataset.gender));
+});
+
+// ===== TOC BUILDER =====
+function slugify(panel, idx){ return 'sec-' + panel.dataset.panel + '-' + idx; }
+
+function buildTOC(panel){
+  if(!tocList) return;
+  tocList.innerHTML = '';
+  const sections = panel.querySelectorAll('section.block > h3');
+  // Skip duplicate sections that exist in both g-male/g-female (kids tab)
+  const seenTitles = new Set();
+  let idx = 0;
+  sections.forEach((h3)=>{
+    // If this h3 is inside a hidden gender wrapper, skip
+    const hiddenWrapper = h3.closest('.g-male, .g-female');
+    if(hiddenWrapper){
+      const wrapperGender = hiddenWrapper.classList.contains('g-male') ? 'm' : 'f';
+      if(wrapperGender !== body.dataset.gender) return;
+    }
+    const title = h3.textContent.trim();
+    if(seenTitles.has(title)) return;
+    seenTitles.add(title);
+    const id = slugify(panel, idx++);
+    h3.parentElement.id = id;
+    const li = document.createElement('li');
+    const a = document.createElement('a');
+    a.href = '#' + id;
+    a.textContent = title;
+    a.addEventListener('click', e=>{
+      e.preventDefault();
+      h3.parentElement.classList.add('open');
+      // Close mobile TOC drawer
+      const tocDetails = tocAside && tocAside.querySelector('details');
+      if(tocDetails && window.matchMedia('(max-width:900px)').matches){
+        tocDetails.open = false;
+      }
+      const headerH = (document.querySelector('header.site')?.offsetHeight || 0) + (document.querySelector('nav.tabs')?.offsetHeight || 0) + 12;
+      const top = h3.parentElement.getBoundingClientRect().top + window.pageYOffset - headerH;
+      window.scrollTo({top, behavior:'smooth'});
+      document.querySelectorAll('.toc a').forEach(x=>x.classList.remove('active'));
+      a.classList.add('active');
+    });
+    li.appendChild(a);
+    tocList.appendChild(li);
+  });
+}
+
+// ===== TAB SWITCHING =====
+function activateTab(tabName, opts){
+  opts = opts || {};
+  const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
+  const panel = document.querySelector(`.tab-panel[data-panel="${tabName}"]`);
+  if(!btn || !panel) return;
+  tabs.forEach(b=>b.classList.remove('active'));
+  panels.forEach(p=>p.classList.remove('active'));
+  btn.classList.add('active');
+  panel.classList.add('active');
+  buildTOC(panel);
+  if(opts.scroll !== false){
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+  // Center the active tab in the scrollable nav (mobile)
+  if(btn.scrollIntoView){
+    try{ btn.scrollIntoView({behavior:'smooth', inline:'center', block:'nearest'}); }catch(_){}
+  }
+  // Update URL hash without jumping
+  if(opts.updateHash !== false){
+    history.replaceState(null, '', '#' + tabName);
+  }
+  if(searchInput.value) doSearch();
+}
+tabs.forEach(btn=>{
+  btn.addEventListener('click', ()=> activateTab(btn.dataset.tab));
+});
+
+// ===== COLLAPSIBLE SECTIONS =====
+document.addEventListener('click', e=>{
+  const h3 = e.target.closest('section.block > h3');
+  if(h3 && h3.parentElement.classList.contains('block')){
+    h3.parentElement.classList.toggle('open');
+  }
+});
+// Keyboard: Enter/Space on h3
+document.querySelectorAll('section.block > h3').forEach(h3=>{
+  h3.setAttribute('role','button');
+  h3.setAttribute('tabindex','0');
+  h3.addEventListener('keydown', e=>{
+    if(e.key === 'Enter' || e.key === ' '){
+      e.preventDefault();
+      h3.parentElement.classList.toggle('open');
+    }
+  });
+});
+
+// ===== SEARCH =====
+function clearHighlights(root){
+  root.querySelectorAll('mark.search-hit').forEach(m=>{
+    const txt = document.createTextNode(m.textContent);
+    m.parentNode.replaceChild(txt, m);
+    // Normalize adjacent text nodes
+  });
+  root.querySelectorAll('.search-section-empty').forEach(el=>el.classList.remove('search-section-empty'));
+  // Normalize text nodes in root after unwrapping
+  root.normalize();
+}
+
+function highlightInNode(node, regex){
+  if(node.nodeType === 3){
+    const text = node.nodeValue;
+    if(regex.test(text)){
+      const span = document.createElement('span');
+      span.innerHTML = text.replace(regex, m=>`<mark class="search-hit">${escapeHTML(m)}</mark>`);
+      while(span.firstChild) node.parentNode.insertBefore(span.firstChild, node);
+      node.parentNode.removeChild(node);
+      return true;
+    }
+    return false;
+  }
+  if(node.nodeType === 1 && !['SCRIPT','STYLE','MARK','INPUT','BUTTON','TEXTAREA'].includes(node.tagName)){
+    // Skip nodes that are hidden by the gender selector
+    if(node.classList && (node.classList.contains('g-male') || node.classList.contains('g-female'))){
+      const wrapperGender = node.classList.contains('g-male') ? 'm' : 'f';
+      if(wrapperGender !== body.dataset.gender) return false;
+    }
+    let found = false;
+    Array.from(node.childNodes).forEach(c=>{ if(highlightInNode(c, regex)) found = true; });
+    return found;
+  }
+  return false;
+}
+function escapeHTML(s){return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+
+function doSearch(){
+  const q = searchInput.value.trim();
+  panels.forEach(p=>clearHighlights(p));
+  if(!q){
+    searchCount.textContent = '';
+    return;
+  }
+  const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const regex = new RegExp(escaped, 'gi');
+  panels.forEach(panel=>{
+    panel.querySelectorAll('section.block').forEach(section=>{
+      const hadHits = highlightInNode(section, regex);
+      if(hadHits){
+        section.classList.add('open');
+      } else {
+        section.classList.add('search-section-empty');
+      }
+    });
+  });
+  const active = document.querySelector('.tab-panel.active');
+  const hits = active.querySelectorAll('mark.search-hit').length;
+  searchCount.textContent = hits ? `${hits} תוצאות בטאב הנוכחי` : 'אין תוצאות בטאב הנוכחי';
+}
+
+let searchTimer;
+searchInput.addEventListener('input', ()=>{
+  clearTimeout(searchTimer);
+  searchTimer = setTimeout(doSearch, 220);
+});
+searchInput.addEventListener('search', doSearch);
+
+// ===== BACK TO TOP =====
+window.addEventListener('scroll', ()=>{
+  if(window.pageYOffset > 600){
+    toTopBtn.classList.add('visible');
+  } else {
+    toTopBtn.classList.remove('visible');
+  }
+}, {passive:true});
+toTopBtn.addEventListener('click', ()=>{
+  window.scrollTo({top:0, behavior:'smooth'});
+});
+
+// ===== SHARE =====
+if(shareBtn){
+  shareBtn.addEventListener('click', async ()=>{
+    const shareData = {
+      title: document.title,
+      text: 'תסמונת גורלין — מאגר מידע מקיף בעברית',
+      url: window.location.href
+    };
+    try{
+      if(navigator.share){
+        await navigator.share(shareData);
+      } else if(navigator.clipboard){
+        await navigator.clipboard.writeText(window.location.href);
+        const orig = shareBtn.querySelector('.icon-btn-text')?.textContent;
+        const tEl = shareBtn.querySelector('.icon-btn-text');
+        if(tEl){ tEl.textContent = 'הקישור הועתק'; setTimeout(()=>{ tEl.textContent = orig || 'שיתוף'; }, 2000); }
+      } else {
+        prompt('העתק את הקישור:', window.location.href);
+      }
+    }catch(err){
+      // User cancelled — silent
+    }
+  });
+}
+
+// ===== HASH ROUTING =====
+function applyHash(opts){
+  opts = opts || {};
+  const hash = (window.location.hash || '').replace(/^#/,'');
+  if(!hash){ return; }
+  // Hash can be a tab name, or a section id like sec-doctor-3
+  if(document.querySelector(`.tab-btn[data-tab="${hash}"]`)){
+    activateTab(hash, {scroll:opts.fromInit?false:true, updateHash:false});
+    // Close mobile TOC drawer when cross-tab nav fires from sidebar
+    const tocDetails = tocAside && tocAside.querySelector('details');
+    if(tocDetails && window.matchMedia('(max-width:900px)').matches){
+      tocDetails.open = false;
+    }
+    return;
+  }
+  // Match sec-<tab>-<idx>
+  const m = hash.match(/^sec-([a-z]+)-/);
+  if(m){
+    activateTab(m[1], {scroll:false, updateHash:false});
+    setTimeout(()=>{
+      const el = document.getElementById(hash);
+      if(el){
+        el.classList.add('open');
+        const headerH = (document.querySelector('header.site')?.offsetHeight || 0) + (document.querySelector('nav.tabs')?.offsetHeight || 0) + 12;
+        const top = el.getBoundingClientRect().top + window.pageYOffset - headerH;
+        window.scrollTo({top, behavior:'smooth'});
+      }
+    }, 80);
+  }
+}
+window.addEventListener('hashchange', ()=>applyHash());
+
+// ===== INIT =====
+buildTOC(document.querySelector('.tab-panel.active'));
+applyHash({fromInit:true});
+
+// Rebuild TOC when gender changes (kids tab might be active)
+const observer = new MutationObserver((muts)=>{
+  for(const m of muts){
+    if(m.attributeName === 'data-gender'){
+      const active = document.querySelector('.tab-panel.active');
+      if(active && active.dataset.panel === 'kids') buildTOC(active);
+    }
+  }
+});
+observer.observe(body, {attributes:true});
+
+// Keyboard: / focuses search; Escape clears
+document.addEventListener('keydown', e=>{
+  if(e.key === '/' && document.activeElement !== searchInput){
+    e.preventDefault();
+    searchInput.focus();
+  } else if(e.key === 'Escape' && document.activeElement === searchInput){
+    searchInput.value = '';
+    doSearch();
+    searchInput.blur();
+  }
+});
+
+// Improve iOS Safari: blur search on submit to dismiss keyboard
+searchInput.addEventListener('keydown', e=>{
+  if(e.key === 'Enter') searchInput.blur();
+});
+})();
+</script>
+</body>
+</html>
