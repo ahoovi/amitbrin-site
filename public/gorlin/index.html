@@ -147,7 +147,6 @@ header.site{
   padding-inline-end:max(32px,env(safe-area-inset-left));
   padding-top:max(18px,env(safe-area-inset-top));
 }
-body.nav-hidden header.site,
 body.nav-hidden nav.tabs{transform:translateY(-200px)}
 .header-row{display:flex;align-items:center;gap:24px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
 .brand{
@@ -248,30 +247,46 @@ aside.toc{
 }
 aside.toc-block{margin-bottom:32px}
 
-/* ---------- CTA BANNERS ---------- */
-.cta-stack{display:flex;flex-direction:column;gap:0;margin-bottom:24px}
-.cta-banner{
-  display:flex;align-items:center;gap:16px;padding:18px 20px;
-  background:var(--accent);color:var(--bg);text-decoration:none;
-  border:none;border-bottom:none;
-  font-family:var(--font-headline);font-weight:600;
-  font-variation-settings:"wdth" 70;
-  font-size:1.05rem;line-height:1.25;
-  transition:background .15s,padding-inline-end .15s;
+/* ---------- CTA BANNERS ----------
+   Two stacked cards in the sidebar. Solid teal/rose fill, white text,
+   icon spans both lines on the start side, hover slightly darkens fill.
+   Selectors are scoped via aside.toc to outweigh the generic `aside.toc a` rule. */
+aside.toc .cta-stack{display:flex;flex-direction:column;gap:14px;margin-bottom:28px}
+aside.toc .cta-banner{
+  display:flex;align-items:stretch;border-radius:4px;overflow:hidden;
+  background:var(--accent);color:#FFFFFF;text-decoration:none;border:none;border-inline-start:none;
+  padding:0;line-height:1.2;
+  transition:background .18s,transform .18s;
 }
-.cta-banner:hover{background:var(--accent-deep);color:var(--bg);border-bottom:none;padding-inline-end:24px}
-.cta-banner .icon-svg{
-  width:1.8rem;height:1.8rem;color:#FFFFFF;flex-shrink:0;
-  background:rgba(255,255,255,.12);padding:6px;
+aside.toc .cta-banner:hover{background:var(--accent-deep);color:#FFFFFF;border:none;border-inline-start:none;transform:translateY(-1px)}
+aside.toc .cta-banner:focus-visible{outline:3px solid var(--ink);outline-offset:2px}
+aside.toc .cta-banner-icon{
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;padding:0 18px;background:transparent;
 }
-.cta-banner .cta-text{flex:1}
-.cta-banner .cta-sub{
-  font-family:var(--font-label);font-weight:600;font-size:.72rem;
-  text-transform:uppercase;letter-spacing:.12em;opacity:.85;display:block;margin-top:4px;
+aside.toc .cta-banner-icon .icon-svg{
+  width:2.6rem;height:2.6rem;color:#FFFFFF;
 }
-.cta-banner.cta-kids{background:var(--kid)}
-.cta-banner.cta-kids:hover{background:#C71F46}
-.cta-banner.cta-kids .icon-svg{background:rgba(255,255,255,.18)}
+aside.toc .cta-banner-body{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:18px 18px 18px 8px;flex:1;gap:6px;text-align:start;
+}
+aside.toc .cta-banner-title{
+  font-family:var(--font-headline);font-weight:700;font-variation-settings:"wdth" 70;
+  font-size:1.15rem;line-height:1.2;color:#FFFFFF;letter-spacing:-.005em;
+}
+aside.toc .cta-banner-sub{
+  font-family:var(--font-label);font-weight:600;font-size:.74rem;
+  text-transform:uppercase;letter-spacing:.12em;color:rgba(255,255,255,.88);
+}
+aside.toc .cta-banner.cta-kids{background:var(--kid)}
+aside.toc .cta-banner.cta-kids:hover{background:#B91C42}
+@media(max-width:560px){
+  aside.toc .cta-banner-icon{padding:0 14px}
+  aside.toc .cta-banner-icon .icon-svg{width:2.2rem;height:2.2rem}
+  aside.toc .cta-banner-body{padding:14px 14px 14px 8px}
+  aside.toc .cta-banner-title{font-size:1.05rem}
+}
 
 /* ---------- GLOSSARY PANEL ---------- */
 .glossary-panel{
@@ -858,12 +873,18 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
   <!-- CTA banners -->
   <div class="cta-stack">
     <a href="#newly" class="cta-banner cta-primary">
-      <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg>
-      <span class="cta-text">איבחנו אצלך גורלין?<br><span class="cta-sub">מומלץ להתחיל כאן ←</span></span>
+      <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg></span>
+      <span class="cta-banner-body">
+        <span class="cta-banner-title">איבחנו אצלך גורלין?</span>
+        <span class="cta-banner-sub">מומלץ להתחיל כאן ←</span>
+      </span>
     </a>
     <a href="#kids" class="cta-banner cta-kids">
-      <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg>
-      <span class="cta-text">מידע מותאם לילדים<br><span class="cta-sub">גילאי 11+ ←</span></span>
+      <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg></span>
+      <span class="cta-banner-body">
+        <span class="cta-banner-title">מידע מותאם לילדים</span>
+        <span class="cta-banner-sub">גילאי 11+ ←</span>
+      </span>
     </a>
   </div>
 
