@@ -6,17 +6,17 @@ const nextConfig: NextConfig = {
   async rewrites() {
     return {
       beforeFiles: GORLIN_HOSTS.flatMap((host) => [
-        // gorlin.help/  →  /gorlin (Next serves public/gorlin/index.html)
+        // gorlin.help/  →  /gorlin (root rewrite, exact match)
         {
           source: "/",
           has: [{ type: "host", value: host }],
           destination: "/gorlin",
         },
-        // gorlin.help/anything  →  /gorlin/anything
+        // gorlin.help/anything (path+ requires at least 1 char, never matches root)
         {
-          source: "/:path*",
+          source: "/:path+",
           has: [{ type: "host", value: host }],
-          destination: "/gorlin/:path*",
+          destination: "/gorlin/:path+",
         },
       ]),
     };
