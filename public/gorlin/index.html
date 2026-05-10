@@ -147,7 +147,8 @@ header.site{
   padding-inline-end:max(32px,env(safe-area-inset-left));
   padding-top:max(18px,env(safe-area-inset-top));
 }
-body.nav-hidden nav.tabs{transform:translateY(-200px)}
+/* Tabs nav stays sticky always — never minimizes on any viewport.
+   Only the header.site collapses on scroll-down (mobile) — see media query below. */
 .header-row{display:flex;align-items:center;gap:24px;max-width:1400px;margin:0 auto;flex-wrap:wrap}
 .brand{
   font-family:var(--font-headline);font-weight:700;font-size:1.4rem;color:var(--ink);
@@ -760,6 +761,107 @@ section.block > h3 > .icon-svg{
 /* Callout strong with icon */
 .callout strong .icon-svg{width:1.15em;height:1.15em;margin-inline-end:6px;vertical-align:-0.2em}
 
+/* ===== SEARCH RESULTS — desktop dropdown + mobile lightbox =====
+   Same content shape (summary + result list), two presentations. */
+
+/* Desktop: dropdown floats below the header search input */
+.search-dropdown{
+  position:absolute;top:calc(100% + 6px);
+  inset-inline-start:0;inset-inline-end:0;
+  background:var(--surface);border:2px solid var(--line-strong);
+  max-height:60vh;overflow-y:auto;z-index:95;
+}
+.search-dropdown[hidden]{display:none}
+@media(max-width:700px){
+  .search-dropdown{display:none !important}
+}
+
+/* Mobile: full-screen lightbox with white background */
+.search-lightbox{
+  display:none;position:fixed;inset:0;
+  background:#FFFFFF;z-index:300;flex-direction:column;
+  padding-top:env(safe-area-inset-top);
+}
+.search-lightbox.visible{display:flex}
+.search-lightbox-header{
+  display:flex;align-items:stretch;gap:8px;
+  padding:14px 14px 12px;
+  border-bottom:2px solid var(--line-strong);
+  background:#FFFFFF;
+  position:relative;
+}
+.search-lightbox-icon{
+  position:absolute;inset-inline-end:24px;top:50%;transform:translateY(-50%);
+  color:var(--ink);pointer-events:none;font-size:1.15rem;z-index:1;
+}
+.search-lightbox-header input[type=search]{
+  flex:1;min-width:0;
+  padding:14px 44px 14px 16px;
+  border:2px solid var(--accent);border-radius:0;
+  font-size:1rem;font-family:var(--font-body);
+  background:#FFFFFF;direction:rtl;color:var(--ink);
+  -webkit-appearance:none;appearance:none;
+  outline:none;
+}
+.search-lightbox-header input[type=search]:focus{border-color:var(--accent-deep)}
+.search-lightbox-close{
+  flex-shrink:0;width:50px;
+  background:transparent;border:2px solid var(--ink);
+  font-size:1.7rem;cursor:pointer;color:var(--ink);
+  padding:0;font-family:var(--font-body);line-height:1;
+  transition:background .15s,color .15s;
+}
+.search-lightbox-close:hover,.search-lightbox-close:focus-visible{background:var(--ink);color:#FFFFFF;outline:none}
+.search-lightbox-body{
+  flex:1;overflow-y:auto;
+  padding:0;background:#FFFFFF;
+}
+
+/* ===== Shared results list ===== */
+.search-results-summary{
+  font-family:var(--font-label);font-size:.7rem;font-weight:700;
+  color:var(--muted);text-transform:uppercase;letter-spacing:.14em;
+  padding:14px 18px;border-bottom:1px solid var(--line);
+  display:flex;justify-content:space-between;align-items:center;
+}
+.search-results-summary:empty{display:none}
+.search-results-list{list-style:none;padding:0;margin:0}
+.search-result-item{
+  padding:14px 18px;border-bottom:1px solid var(--line);
+  cursor:pointer;transition:background .15s;
+}
+.search-result-item:last-child{border-bottom:none}
+.search-result-item:hover,.search-result-item:focus-visible{background:var(--accent-soft);outline:none}
+.search-result-tab{
+  font-family:var(--font-label);font-size:.68rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:.14em;color:var(--accent);
+  margin-bottom:6px;display:inline-flex;align-items:center;gap:6px;
+}
+.search-result-tab .icon-svg{width:.95rem;height:.95rem}
+.search-result-snippet{
+  font-size:.92rem;color:var(--ink);line-height:1.55;
+  font-family:var(--font-body);
+}
+.search-result-snippet mark{
+  background:var(--rose);color:#FFFFFF;padding:0 3px;font-weight:600;border-radius:0;
+}
+.search-results-empty{
+  padding:32px 18px;text-align:center;color:var(--muted);
+  font-size:.95rem;line-height:1.5;
+}
+@media print{.search-lightbox,.search-dropdown{display:none !important}}
+
+/* Tab navigation links inside tables / inline content */
+.tab-link{
+  display:inline-flex;align-items:center;gap:8px;
+  color:var(--accent);text-decoration:none;
+  border-bottom:1px solid var(--accent);
+  padding:2px 0;
+}
+.tab-link:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(--accent);padding:2px 4px}
+.tab-link strong{color:inherit}
+.tab-link .icon-svg{width:1.1em;height:1.1em}
+
 /* Video embed (16:9 responsive) */
 .video-embed{
   position:relative;width:100%;aspect-ratio:16/9;
@@ -779,8 +881,7 @@ section.block > h3 > .icon-svg{
    - Glossary clicks open as floating tooltip instead of sidebar panel
    ========================================================== */
 @media(max-width:700px){
-  /* Tabs nav: always visible on mobile, override desktop hide-on-scroll */
-  body.nav-hidden nav.tabs{transform:none}
+  /* (Tabs nav is always sticky on all viewports — see global rule above.) */
 
   /* Header: single row, no wrap; tighter spacing */
   .header-row{flex-wrap:nowrap;gap:8px}
@@ -950,6 +1051,11 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
       <label for="search" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">חיפוש במסמך</label>
       <input type="search" id="search" placeholder="חיפוש במסמך... (לדוגמה: vismodegib, גנטיקה)" autocomplete="off" enterkeyhint="search" inputmode="search">
       <span class="search-icon" aria-hidden="true">⌕</span>
+      <!-- Desktop: results dropdown that floats under the search field -->
+      <div class="search-dropdown" id="search-dropdown" hidden>
+        <div class="search-results-summary"></div>
+        <ul class="search-results-list"></ul>
+      </div>
     </div>
     <span class="search-results-count" id="search-count" aria-live="polite"></span>
     <div class="header-actions">
@@ -1085,11 +1191,11 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
       <table>
       <thead><tr><th>טאב</th><th>למי מיועד</th><th>מה תמצא</th></tr></thead>
       <tbody>
-        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg> <strong>מאובחנים חדשים</strong></td><td>אתה או בן משפחה שזה עתה אובחנו</td><td>הסבר ברור ללא ז'רגון, מה לעשות בשבועות הקרובים, שאלות נפוצות, מי מטפל במה</td></tr>
-        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg> <strong>מידע לרופא</strong></td><td>לקראת ביקור אצל רופא — להדפיס ולהביא</td><td>קריטריונים אבחוניים, פרוטוקולי מעקב, טיפולים עדכניים, רשימת שאלות לרופא</td></tr>
-        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg> <strong>לילדים (11+)</strong></td><td>מתבגרים ובני משפחה צעירים</td><td>הסבר ידידותי, שאלות נפוצות של ילדים, מה זה אומר עליי</td></tr>
-        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg> <strong>מחקרים וניסויים</strong></td><td>חולה שרוצה להיות מעודכן</td><td>חידושים 2024–2026, ניסויים קליניים פעילים, איך להירשם</td></tr>
-        <tr><td><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg> <strong>מקורות וקישורים</strong></td><td>למי שרוצה להעמיק או לעקוב</td><td>אתרים מומלצים, עמותות, כתבי עת, איך לחפש מחקרים בעצמך</td></tr>
+        <tr><td><a href="#newly" class="tab-link"><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg> <strong>מאובחנים חדשים</strong></a></td><td>אתה או בן משפחה שזה עתה אובחנו</td><td>הסבר ברור ללא ז'רגון, מה לעשות בשבועות הקרובים, שאלות נפוצות, מי מטפל במה</td></tr>
+        <tr><td><a href="#doctor" class="tab-link"><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-stethoscope"/></svg> <strong>מידע לרופא</strong></a></td><td>לקראת ביקור אצל רופא — להדפיס ולהביא</td><td>קריטריונים אבחוניים, פרוטוקולי מעקב, טיפולים עדכניים, רשימת שאלות לרופא</td></tr>
+        <tr><td><a href="#kids" class="tab-link"><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg> <strong>לילדים (11+)</strong></a></td><td>מתבגרים ובני משפחה צעירים</td><td>הסבר ידידותי, שאלות נפוצות של ילדים, מה זה אומר עליי</td></tr>
+        <tr><td><a href="#research" class="tab-link"><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg> <strong>מחקרים וניסויים</strong></a></td><td>חולה שרוצה להיות מעודכן</td><td>חידושים 2024–2026, ניסויים קליניים פעילים, איך להירשם</td></tr>
+        <tr><td><a href="#resources" class="tab-link"><svg class="icon-svg icon-strong" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg> <strong>מקורות וקישורים</strong></a></td><td>למי שרוצה להעמיק או לעקוב</td><td>אתרים מומלצים, עמותות, כתבי עת, איך לחפש מחקרים בעצמך</td></tr>
       </tbody>
     </table>
 
@@ -2492,6 +2598,19 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
   </a>
 </div>
 
+<!-- Search lightbox (mobile fullscreen) — opens when user taps header search field on small screens -->
+<div class="search-lightbox" id="search-lightbox" role="dialog" aria-label="חיפוש במסמך">
+  <div class="search-lightbox-header">
+    <span class="search-lightbox-icon" aria-hidden="true">⌕</span>
+    <input type="search" id="search-mobile" placeholder="חיפוש במסמך..." autocomplete="off" enterkeyhint="search" inputmode="search">
+    <button class="search-lightbox-close" type="button" aria-label="סגירה">×</button>
+  </div>
+  <div class="search-lightbox-body">
+    <div class="search-results-summary"></div>
+    <ul class="search-results-list"></ul>
+  </div>
+</div>
+
 <script>
 (function(){
 'use strict';
@@ -2657,11 +2776,128 @@ function highlightInNode(node, regex){
 }
 function escapeHTML(s){return s.replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
 
+// Search lightbox + dropdown elements
+const searchLightbox = document.getElementById('search-lightbox');
+const searchMobile = document.getElementById('search-mobile');
+const searchLightboxClose = searchLightbox?.querySelector('.search-lightbox-close');
+const searchDropdown = document.getElementById('search-dropdown');
+const TAB_LABELS = {
+  overview:'סקירה כללית', newly:'מאובחנים חדשים', doctor:'מידע לרופא',
+  kids:'לילדים', research:'מחקרים', resources:'מקורות'
+};
+const TAB_ICONS = {
+  overview:'ph-compass', newly:'ph-hand-heart', doctor:'ph-stethoscope',
+  kids:'ph-smiley', research:'ph-flask', resources:'ph-books'
+};
+const MAX_RESULTS = 60;
+
+function buildResultsList(query){
+  // Populate BOTH the desktop dropdown and the mobile lightbox results list
+  const containers = [searchDropdown, searchLightbox?.querySelector('.search-lightbox-body')].filter(Boolean);
+  containers.forEach(c=>{
+    const list = c.querySelector('.search-results-list');
+    const summary = c.querySelector('.search-results-summary');
+    if(list) list.innerHTML = '';
+    if(summary) summary.textContent = '';
+  });
+  if(!query){
+    if(searchDropdown) searchDropdown.hidden = true;
+    return 0;
+  }
+  const escaped = query.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  const regex = new RegExp(escaped, 'gi');
+  const results = [];
+  panels.forEach(panel=>{
+    const tabName = panel.dataset.panel;
+    panel.querySelectorAll('section.block').forEach(section=>{
+      // Walk text inside the section, skip hidden gender wrappers
+      const walker = document.createTreeWalker(section, NodeFilter.SHOW_TEXT, {
+        acceptNode(n){
+          if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+          const wrapper = n.parentElement && n.parentElement.closest('.g-male, .g-female');
+          if(wrapper){
+            const wg = wrapper.classList.contains('g-male') ? 'm' : 'f';
+            if(wg !== body.dataset.gender) return NodeFilter.FILTER_REJECT;
+          }
+          if(n.parentElement && ['SCRIPT','STYLE'].includes(n.parentElement.tagName)) return NodeFilter.FILTER_REJECT;
+          return regex.test(n.nodeValue) ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+        }
+      });
+      let node;
+      const seen = new Set();
+      while((node = walker.nextNode())){
+        if(results.length >= MAX_RESULTS) return;
+        regex.lastIndex = 0;
+        const text = node.nodeValue;
+        let m;
+        while((m = regex.exec(text))){
+          const start = Math.max(0, m.index - 40);
+          const end = Math.min(text.length, m.index + m[0].length + 80);
+          let snippet = text.slice(start, end).trim().replace(/\s+/g,' ');
+          if(!snippet || seen.has(snippet)) continue;
+          seen.add(snippet);
+          // Re-highlight inside snippet (regex.lastIndex was updated; use a fresh one)
+          const snippetHTML = escapeHTML(snippet).replace(new RegExp(escaped,'gi'), m=>`<mark>${escapeHTML(m)}</mark>`);
+          results.push({
+            tab: tabName, section, snippetHTML
+          });
+          if(results.length >= MAX_RESULTS) break;
+        }
+      }
+    });
+  });
+  // Render to all containers
+  containers.forEach(c=>{
+    const list = c.querySelector('.search-results-list');
+    const summary = c.querySelector('.search-results-summary');
+    if(!list || !summary) return;
+    if(results.length === 0){
+      summary.innerHTML = `<span>אין תוצאות בכל המסמך עבור "${escapeHTML(query)}"</span>`;
+    } else {
+      summary.innerHTML = `<span>${results.length}${results.length>=MAX_RESULTS?'+':''} תוצאות בכל המסמך</span><span style="opacity:.7">לחיצה ⇽ קופצת לסעיף</span>`;
+    }
+    results.forEach((r, idx)=>{
+      const li = document.createElement('li');
+      li.className = 'search-result-item';
+      li.tabIndex = 0;
+      li.innerHTML = `<div class="search-result-tab"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#${TAB_ICONS[r.tab]}"/></svg>${TAB_LABELS[r.tab]||r.tab}</div><div class="search-result-snippet">${r.snippetHTML}</div>`;
+      const goToResult = ()=>{
+        activateTab(r.tab);
+        if(r.section){
+          r.section.classList.add('open');
+          setTimeout(()=>{
+            const headerH = (document.querySelector('header.site')?.offsetHeight || 0) + (document.querySelector('nav.tabs')?.offsetHeight || 0) + 16;
+            const top = r.section.getBoundingClientRect().top + window.pageYOffset - headerH;
+            window.scrollTo({top, behavior:'smooth'});
+          }, 120);
+        }
+        closeSearchLightbox();
+        if(searchDropdown) searchDropdown.hidden = true;
+      };
+      li.addEventListener('click', goToResult);
+      li.addEventListener('keydown', e=>{ if(e.key==='Enter'||e.key===' '){e.preventDefault();goToResult();} });
+      list.appendChild(li);
+    });
+  });
+  // Show dropdown on desktop only
+  if(searchDropdown && !window.matchMedia('(max-width:700px)').matches){
+    searchDropdown.hidden = false;
+  }
+  return results.length;
+}
+
 function doSearch(){
-  const q = searchInput.value.trim();
+  const q = (searchInput.value || '').trim();
   panels.forEach(p=>clearHighlights(p));
   if(!q){
     searchCount.textContent = '';
+    if(searchDropdown) searchDropdown.hidden = true;
+    if(searchLightbox){
+      const list = searchLightbox.querySelector('.search-results-list');
+      const summary = searchLightbox.querySelector('.search-results-summary');
+      if(list) list.innerHTML = '';
+      if(summary) summary.textContent = '';
+    }
     return;
   }
   const escaped = q.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
@@ -2678,15 +2914,70 @@ function doSearch(){
   });
   const active = document.querySelector('.tab-panel.active');
   const hits = active.querySelectorAll('mark.search-hit').length;
-  searchCount.textContent = hits ? `${hits} תוצאות בטאב הנוכחי` : 'אין תוצאות בטאב הנוכחי';
+  searchCount.textContent = hits ? `${hits} בטאב` : '0';
+  buildResultsList(q);
 }
 
 let searchTimer;
+function syncSearchInputs(source){
+  if(source === 'mobile' && searchMobile){
+    searchInput.value = searchMobile.value;
+  } else if(searchMobile){
+    searchMobile.value = searchInput.value;
+  }
+}
 searchInput.addEventListener('input', ()=>{
   clearTimeout(searchTimer);
+  syncSearchInputs('desktop');
   searchTimer = setTimeout(doSearch, 220);
 });
 searchInput.addEventListener('search', doSearch);
+if(searchMobile){
+  searchMobile.addEventListener('input', ()=>{
+    clearTimeout(searchTimer);
+    syncSearchInputs('mobile');
+    searchTimer = setTimeout(doSearch, 220);
+  });
+  searchMobile.addEventListener('search', doSearch);
+}
+
+// ===== SEARCH LIGHTBOX (mobile) =====
+function openSearchLightbox(){
+  if(!searchLightbox) return;
+  searchLightbox.classList.add('visible');
+  if(searchMobile){
+    searchMobile.value = searchInput.value;
+    setTimeout(()=>{ try{searchMobile.focus()}catch(_){} }, 60);
+    if(searchMobile.value.trim()){ doSearch(); }
+  }
+}
+function closeSearchLightbox(){
+  if(!searchLightbox) return;
+  searchLightbox.classList.remove('visible');
+}
+// On mobile, intercept focus on the header search and open the lightbox instead
+function handleSearchInteract(e){
+  if(!window.matchMedia('(max-width:700px)').matches) return;
+  e.preventDefault();
+  if(searchInput) searchInput.blur();
+  openSearchLightbox();
+}
+searchInput.addEventListener('focus', handleSearchInteract);
+searchInput.addEventListener('mousedown', handleSearchInteract);
+searchInput.addEventListener('touchstart', handleSearchInteract, {passive:false});
+if(searchLightboxClose) searchLightboxClose.addEventListener('click', closeSearchLightbox);
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape'){
+    if(searchLightbox && searchLightbox.classList.contains('visible')) closeSearchLightbox();
+    if(searchDropdown && !searchDropdown.hidden) searchDropdown.hidden = true;
+  }
+});
+// Click outside dropdown closes it
+document.addEventListener('click', e=>{
+  if(searchDropdown && !searchDropdown.hidden && !e.target.closest('.search-wrap')){
+    searchDropdown.hidden = true;
+  }
+});
 
 // ===== BACK TO TOP + SCROLL-DIRECTION HEADER =====
 let lastScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
