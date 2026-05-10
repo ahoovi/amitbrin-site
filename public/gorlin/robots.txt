@@ -1,0 +1,24 @@
+User-agent: *
+Allow: /
+
+# Crawlers we explicitly welcome
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: DuckDuckBot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+# Sitemaps
+Sitemap: https://gorlin.help/sitemap.xml
