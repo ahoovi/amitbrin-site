@@ -760,6 +760,98 @@ section.block > h3 > .icon-svg{
 /* Callout strong with icon */
 .callout strong .icon-svg{width:1.15em;height:1.15em;margin-inline-end:6px;vertical-align:-0.2em}
 
+/* ==========================================================
+   MOBILE LAYOUT — viewport ≤ 700px
+   - Tabs nav stays visible always (never hides)
+   - Header collapses on scroll-down to logo only; expands on scroll-up
+   - Search, share, print all stay on the same single row when expanded
+   - Sidebar (CTAs + glossary) becomes inline content at top, non-sticky
+   - Glossary clicks open as floating tooltip instead of sidebar panel
+   ========================================================== */
+@media(max-width:700px){
+  /* Tabs nav: always visible on mobile, override desktop hide-on-scroll */
+  body.nav-hidden nav.tabs{transform:none}
+
+  /* Header: single row, no wrap; tighter spacing */
+  .header-row{flex-wrap:nowrap;gap:8px}
+  .brand{flex:0 0 auto;font-size:1rem;gap:8px}
+  .brand small{display:none}
+  .search-wrap{flex:1;min-width:0}
+  #search{padding:9px 36px 9px 10px;font-size:.92rem}
+  .search-icon{font-size:1rem;inset-inline-end:10px}
+  .search-results-count{display:none}
+  .header-actions{flex:0 0 auto;gap:0}
+  .icon-btn{padding:9px 11px;min-height:38px;letter-spacing:0;border-inline-end:1px solid var(--line-strong)}
+  .icon-btn:not(:last-child){border-inline-end:none}
+  .icon-btn .icon-btn-text{display:none}
+  .brand-icon .icon-svg{width:1.4rem;height:1.4rem}
+
+  /* Header collapses to logo only when scrolling down */
+  body.nav-hidden header.site .search-wrap,
+  body.nav-hidden header.site .header-actions{display:none}
+  body.nav-hidden header.site{padding:8px 14px}
+
+  /* Sidebar: not sticky, inline at top of content flow */
+  aside.toc{
+    position:static;border-inline-start:none;
+    padding:0;max-height:none;margin-bottom:14px;
+    background:transparent;
+  }
+  aside.toc > details{display:none}
+  aside.toc .glossary-panel{display:none}
+  aside.toc .cta-stack{margin-bottom:14px;gap:10px}
+
+  /* Page grid: single column, sidebar before main (CTA banners at top) */
+  .page{grid-template-columns:1fr;padding:14px 12px;gap:0}
+  .page aside.toc{order:0}
+  .page main{order:1}
+
+  /* Tab content tightening */
+  .tab-intro{padding:0 0 18px 0;margin-bottom:20px}
+  section.block > h3{padding:14px 16px;font-size:1.08rem}
+  section.block .body{padding:0 16px 16px 16px}
+  section.block.open .body{padding-top:14px}
+}
+
+/* ---------- GLOSSARY TOOLTIP (mobile) — floating popover ---------- */
+.gloss-tooltip{
+  display:none;position:fixed;
+  inset-inline:14px;bottom:max(14px,calc(env(safe-area-inset-bottom) + 12px));
+  z-index:200;background:var(--surface);
+  border:2px solid var(--accent);border-inline-start-width:6px;
+  padding:18px 22px 18px 18px;
+  box-shadow:0 8px 28px rgba(0,0,0,.18);
+  max-width:560px;margin-inline:auto;
+  animation:tooltip-in .22s ease-out;
+}
+@keyframes tooltip-in{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+.gloss-tooltip.visible{display:block}
+.gloss-tooltip-close{
+  position:absolute;top:6px;inset-inline-start:6px;
+  background:transparent;border:none;font-size:1.6rem;color:var(--muted);
+  cursor:pointer;width:34px;height:34px;line-height:1;padding:0;
+}
+.gloss-tooltip-close:hover{color:var(--ink)}
+.gloss-tooltip-label{
+  display:inline-flex;align-items:center;gap:6px;
+  font-family:var(--font-label);font-size:.7rem;font-weight:700;
+  color:var(--bg);background:var(--accent);padding:4px 10px;
+  text-transform:uppercase;letter-spacing:.14em;margin-bottom:10px;
+}
+.gloss-tooltip-label .icon-svg{width:.9rem;height:.9rem}
+.gloss-tooltip-term{
+  font-family:var(--font-headline);font-weight:700;font-variation-settings:"wdth" 70;
+  font-size:1.2rem;color:var(--accent);margin:0 0 8px 0;line-height:1.2;
+}
+.gloss-tooltip-def{font-size:.95rem;line-height:1.55;color:var(--ink);margin:0 0 12px 0}
+.gloss-tooltip-source{
+  display:inline-flex;align-items:center;gap:6px;font-size:.78rem;
+  color:var(--accent);border-bottom:1px solid var(--accent);padding-bottom:1px;
+  font-family:var(--font-label);font-weight:600;text-transform:uppercase;letter-spacing:.08em;
+}
+.gloss-tooltip-source .icon-svg{width:.9rem;height:.9rem}
+@media print{.gloss-tooltip{display:none !important}}
+
 /* ---------- BACK-TO-TOP ---------- */
 .to-top{
   position:fixed;bottom:max(24px,calc(env(safe-area-inset-bottom) + 16px));
@@ -2330,6 +2422,18 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 
 <button class="to-top" id="to-top" type="button" aria-label="חזרה למעלה" title="חזרה למעלה">↑</button>
 
+<!-- Glossary tooltip (mobile) — appears when a glossary term is clicked on small screens -->
+<div class="gloss-tooltip" id="gloss-tooltip" role="dialog" aria-live="polite" aria-labelledby="gloss-tooltip-term">
+  <button class="gloss-tooltip-close" type="button" aria-label="סגירה">×</button>
+  <span class="gloss-tooltip-label"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>מילון</span>
+  <h4 class="gloss-tooltip-term" id="gloss-tooltip-term"></h4>
+  <p class="gloss-tooltip-def"></p>
+  <a class="gloss-tooltip-source" target="_blank" rel="noopener" hidden>
+    <span class="gloss-tooltip-source-text">מקור</span>
+    <svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-link"/></svg>
+  </a>
+</div>
+
 <script>
 (function(){
 'use strict';
@@ -2724,11 +2828,35 @@ const glossDef = glossPanel?.querySelector('.glossary-def');
 const glossSource = glossPanel?.querySelector('.glossary-source');
 const glossSourceText = glossPanel?.querySelector('.glossary-source-text');
 const glossClose = glossPanel?.querySelector('.glossary-close');
-let activeGloss = null;
 
-function showGlossary(key, triggerEl){
-  const entry = GLOSSARY[key];
-  if(!entry || !glossPanel) return;
+// Mobile tooltip references
+const glossTooltip = document.getElementById('gloss-tooltip');
+const glossTooltipTerm = glossTooltip?.querySelector('.gloss-tooltip-term');
+const glossTooltipDef = glossTooltip?.querySelector('.gloss-tooltip-def');
+const glossTooltipSource = glossTooltip?.querySelector('.gloss-tooltip-source');
+const glossTooltipSourceText = glossTooltip?.querySelector('.gloss-tooltip-source-text');
+const glossTooltipClose = glossTooltip?.querySelector('.gloss-tooltip-close');
+
+let activeGloss = null;
+function isMobileGloss(){ return window.matchMedia('(max-width:700px)').matches; }
+
+function showGlossaryTooltip(entry, triggerEl){
+  if(!glossTooltip) return;
+  glossTooltipTerm.textContent = entry.term;
+  glossTooltipDef.textContent = entry.def;
+  if(entry.source){
+    glossTooltipSource.href = entry.source;
+    glossTooltipSourceText.textContent = `מקור: ${entry.sourceLabel || 'מידע נוסף'}`;
+    glossTooltipSource.hidden = false;
+  } else {
+    glossTooltipSource.hidden = true;
+  }
+  glossTooltip.classList.add('visible');
+  if(activeGloss) activeGloss.classList.remove('gloss-active');
+  if(triggerEl){ triggerEl.classList.add('gloss-active'); activeGloss = triggerEl; }
+}
+function showGlossaryPanel(entry, triggerEl){
+  if(!glossPanel) return;
   glossTerm.textContent = entry.term;
   glossDef.textContent = entry.def;
   if(entry.source){
@@ -2742,29 +2870,48 @@ function showGlossary(key, triggerEl){
   glossEntry.hidden = false;
   glossPanel.dataset.state = 'filled';
   if(activeGloss) activeGloss.classList.remove('gloss-active');
-  if(triggerEl){
-    triggerEl.classList.add('gloss-active');
-    activeGloss = triggerEl;
-  }
-  // Mobile: scroll the panel into view
-  if(window.matchMedia('(max-width:900px)').matches){
-    glossPanel.scrollIntoView({behavior:'smooth', block:'center'});
+  if(triggerEl){ triggerEl.classList.add('gloss-active'); activeGloss = triggerEl; }
+}
+function showGlossary(key, triggerEl){
+  const entry = GLOSSARY[key];
+  if(!entry) return;
+  if(isMobileGloss()){
+    showGlossaryTooltip(entry, triggerEl);
+  } else {
+    showGlossaryPanel(entry, triggerEl);
   }
 }
 function clearGlossary(){
-  if(!glossPanel) return;
-  glossEmpty.hidden = false;
-  glossEntry.hidden = true;
-  glossPanel.dataset.state = 'empty';
+  if(glossPanel){
+    glossEmpty.hidden = false;
+    glossEntry.hidden = true;
+    glossPanel.dataset.state = 'empty';
+  }
+  if(glossTooltip){
+    glossTooltip.classList.remove('visible');
+  }
   if(activeGloss){activeGloss.classList.remove('gloss-active');activeGloss=null}
 }
 if(glossClose) glossClose.addEventListener('click', clearGlossary);
+if(glossTooltipClose) glossTooltipClose.addEventListener('click', clearGlossary);
+// Click outside the tooltip to dismiss it (mobile)
 document.addEventListener('click', e=>{
   const trigger = e.target.closest('.gloss');
   if(trigger){
     e.preventDefault();
     const key = trigger.dataset.gloss;
     if(key) showGlossary(key, trigger);
+    return;
+  }
+  // If tooltip is visible and click is outside it, dismiss
+  if(glossTooltip && glossTooltip.classList.contains('visible') && !e.target.closest('.gloss-tooltip')){
+    clearGlossary();
+  }
+});
+// ESC closes tooltip
+document.addEventListener('keydown', e=>{
+  if(e.key === 'Escape' && glossTooltip && glossTooltip.classList.contains('visible')){
+    clearGlossary();
   }
 });
 
