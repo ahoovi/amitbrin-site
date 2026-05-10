@@ -760,6 +760,16 @@ section.block > h3 > .icon-svg{
 /* Callout strong with icon */
 .callout strong .icon-svg{width:1.15em;height:1.15em;margin-inline-end:6px;vertical-align:-0.2em}
 
+/* Video embed (16:9 responsive) */
+.video-embed{
+  position:relative;width:100%;aspect-ratio:16/9;
+  background:var(--ink);border:2px solid var(--line-strong);
+  margin:18px 0;overflow:hidden;
+}
+.video-embed iframe{
+  position:absolute;inset:0;width:100%;height:100%;border:0;display:block;
+}
+
 /* ==========================================================
    MOBILE LAYOUT — viewport ≤ 700px
    - Tabs nav stays visible always (never hides)
@@ -1670,6 +1680,13 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
       </li>
 
       <li>
+        <span class="tl-date">אוקטובר 2025</span>
+        <span class="tl-title">JAAD — Clinical Practice Guidelines למעקב וטיפול ב-BCC בגורלין</span>
+        <span class="tl-body">Hu et al. פרסמו ב-J Am Acad Dermatol קווים מנחים מקיפים: סטרטיפיקציה לפי מוטציה, בחירת טיפול לפי מספר ומיקום נגעים, מתי לעבור מטיפול ניתוחי למערכתי, פרוטוקולי drug-holiday, ושילוב מודאליות. **המסמך החשוב ביותר לרופא המטפל מאז BJD 2022.** פרינט פברואר 2026 (94:485–494).</span>
+        <span class="tl-source"><a href="https://www.jaad.org/article/S0190-9622(25)03071-3/fulltext" target="_blank" rel="noopener">JAAD fulltext</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/41396574/" target="_blank" rel="noopener">PubMed 41396574</a></span>
+      </li>
+
+      <li>
         <span class="tl-date">אפריל 2025</span>
         <span class="tl-title">Patidegib Phase 2 — פרסום תוצאות ב-BJD</span>
         <span class="tl-body">תוצאות Phase 2 ב-British Journal of Dermatology: 63% תגובה מלאה (CR) ב-lesions שטופלו, עם פרופיל תופעות לוואי מקומי בלבד. ללא דיסגאוזיה או אלופציה מערכתית.</span>
@@ -2302,35 +2319,58 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 </div>
 
 <section class="block open">
-  <h3>בישראל</h3>
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-users-three"/></svg>בישראל</h3>
   <div class="body">
     <ul>
-      <li><strong>עמותת גורלין ישראל</strong> — <a href="https://www.facebook.com/GorlinSyndromeAssociationIsrael/" target="_blank">דף פייסבוק</a> · <a href="https://www.guidestar.org.il/organization/580691756" target="_blank">רשם העמותות (מס׳ 580691756)</a>. תמיכה, קהילה, חיבור בין משפחות, ליווי מול מערכת הבריאות.</li>
-      <li><strong>מאמר רקע בעברית (Infomed):</strong> <a href="https://www.infomed.co.il/articles/5957/" target="_blank">infomed.co.il/articles/5957</a> — ישן יותר אך עדיין נקודת התחלה טובה.</li>
+      <li><strong>עמותת גורלין ישראל</strong> — <a href="https://www.facebook.com/GorlinSyndromeAssociationIsrael/" target="_blank" rel="noopener">דף פייסבוק</a> · <a href="https://www.guidestar.org.il/organization/580691756" target="_blank" rel="noopener">רשם העמותות (מס׳ 580691756)</a>. תמיכה, קהילה, חיבור בין משפחות, ליווי מול מערכת הבריאות.</li>
+      <li><strong>מאמר רקע בעברית (Infomed):</strong> <a href="https://www.infomed.co.il/articles/5957/" target="_blank" rel="noopener">infomed.co.il/articles/5957</a> — ישן יותר אך עדיין נקודת התחלה טובה.</li>
     </ul>
   </div>
 </section>
 
 <section class="block open">
-  <h3>עמותות בינלאומיות</h3>
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-globe"/></svg>עמותות בינלאומיות</h3>
   <div class="body">
     <ul>
-      <li><strong>Gorlin Syndrome Group (UK)</strong> — <a href="https://gorlingroup.org/" target="_blank">gorlingroup.org</a>. פעיל, עדכני, עם מידע גנטי, חוברות, יום קהילה שנתי.</li>
-      <li><strong>Gorlin Syndrome Group (UK) Facebook</strong> — <a href="https://www.facebook.com/groups/12723259010" target="_blank">קבוצת תמיכה פעילה</a> בפייסבוק.</li>
-      <li><strong>Gorlin Syndrome Alliance (US)</strong> — <a href="https://gorlinsyndrome.org/" target="_blank">gorlinsyndrome.org</a>. מנהלת ניסויים, מקור מידע מרכזי בארה"ב.</li>
-      <li><strong>BCC Nevus Syndrome Life Support Network</strong> — <a href="https://bccns.org/" target="_blank">bccns.org</a>. תמיכה, retreats, קו טלפוני.</li>
+      <li><strong>Gorlin Syndrome Group (UK)</strong> — <a href="https://gorlingroup.org/" target="_blank" rel="noopener">gorlingroup.org</a>. פעיל, עדכני, עם מידע גנטי, חוברות, יום קהילה שנתי.</li>
+      <li><strong>Gorlin Syndrome Group (UK) Facebook</strong> — <a href="https://www.facebook.com/groups/12723259010" target="_blank" rel="noopener">קבוצת תמיכה פעילה</a> בפייסבוק.</li>
+      <li><strong>Gorlin Syndrome Alliance (US)</strong> — <a href="https://gorlinsyndrome.org/" target="_blank" rel="noopener">gorlinsyndrome.org</a>. מנהלת ניסויים, מקור מידע מרכזי בארה"ב. כולל <a href="https://46744199.hs-sites.com/hubfs/GSA%20New%20Patient%20Checklist.docx.pdf" target="_blank" rel="noopener">New Patient Checklist (PDF)</a> — רשימת בדיקה לפי גילאים, מסביר כל ביטוי בשפה ידידותית, איך מאבחנים, ולמי לפנות.</li>
+      <li><strong>BCC Nevus Syndrome Life Support Network</strong> — <a href="https://bccns.org/" target="_blank" rel="noopener">bccns.org</a>. תמיכה, retreats, קו טלפוני.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block open">
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-list-checks"/></svg>קווים מנחים קליניים — Clinical Practice Guidelines</h3>
+  <div class="body">
+    <p>מסמכי קונצנזוס לרופאים, ערוכים ע"י קבוצות בינלאומיות. אלה ה-Gold Standard לפרוטוקולי מעקב וטיפול.</p>
+    <ul>
+      <li><strong>JAAD 2025 — Clinical Practice Guidelines for the Management of BCC in Gorlin Syndrome</strong> (Hu et al., אוקטובר 2025, פרינט פברואר 2026 ב-J Am Acad Dermatol 94:485–494). <a href="https://www.jaad.org/article/S0190-9622(25)03071-3/fulltext" target="_blank" rel="noopener">JAAD fulltext</a> · <a href="https://pubmed.ncbi.nlm.nih.gov/41396574/" target="_blank" rel="noopener">PubMed</a> · <a href="https://www.guidelinecentral.com/guideline/4969339/" target="_blank" rel="noopener">Guideline Central summary</a>. הקווים המנחים העדכניים והמפורטים ביותר נכון להיום.</li>
+      <li><strong>BJD 2022 — Guideline for the Clinical Management of BCNS</strong> (Pellegrini et al., Br J Dermatol 186:215–226). <a href="https://academic.oup.com/bjd/article/186/2/215/6599271" target="_blank" rel="noopener">BJD fulltext</a> · <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9298899/" target="_blank" rel="noopener">PMC9298899 free</a>. סקירה שיטתית של מאות מאמרים, המלצות לפי רמות ראיות.</li>
+      <li><strong>EJHG 2011 — Consensus Statement on Diagnosis &amp; Management</strong> (Foulkes et al., Eur J Hum Genet). <a href="https://www.nature.com/articles/ejhg2011269" target="_blank" rel="noopener">Nature EJHG fulltext</a>. הקריטריונים האבחנתיים המקובלים (Kimonis-עדכון), שאחר כך עודכנו ב-2011 הזה ב-Bree et al.</li>
     </ul>
   </div>
 </section>
 
 <section class="block">
-  <h3>מאגרי מידע מקצועיים</h3>
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-book-open"/></svg>מאגרי מידע מקצועיים</h3>
   <div class="body">
     <ul>
-      <li><strong>GeneReviews — NBCCS (NBK1151)</strong>: <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank">ncbi.nlm.nih.gov/books/NBK1151</a>. הסקירה המוסמכת ביותר, מעודכנת.</li>
-      <li><strong>OMIM:</strong> <a href="https://omim.org/entry/109400" target="_blank">109400 (PTCH1)</a> · <a href="https://omim.org/entry/620343" target="_blank">620343 (SUFU)</a>.</li>
-      <li><strong>Orphanet:</strong> <a href="https://www.orpha.net/en/disease/detail/377" target="_blank">orpha.net Gorlin syndrome</a>. עם תרגומים לשפות אירופה.</li>
-      <li><strong>NORD:</strong> <a href="https://rarediseases.org/" target="_blank">rarediseases.org</a>. סקירה ידידותית למשתמש.</li>
+      <li><strong>GeneReviews — NBCCS (NBK1151)</strong>: <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank" rel="noopener">ncbi.nlm.nih.gov/books/NBK1151</a>. הסקירה המוסמכת ביותר, מעודכנת.</li>
+      <li><strong>Cleveland Clinic — Gorlin Syndrome (NBCCS)</strong>: <a href="https://my.clevelandclinic.org/health/diseases/22730-gorlin-syndrome" target="_blank" rel="noopener">my.clevelandclinic.org</a>. סקירה לציבור באנגלית — תיאורים ברורים, תמונות, FAQ. עודכן 2025.</li>
+      <li><strong>OMIM:</strong> <a href="https://omim.org/entry/109400" target="_blank" rel="noopener">109400 (PTCH1)</a> · <a href="https://omim.org/entry/620343" target="_blank" rel="noopener">620343 (SUFU)</a>.</li>
+      <li><strong>Orphanet:</strong> <a href="https://www.orpha.net/en/disease/detail/377" target="_blank" rel="noopener">orpha.net Gorlin syndrome</a>. עם תרגומים לשפות אירופה.</li>
+      <li><strong>NORD:</strong> <a href="https://rarediseases.org/rare-diseases/nevoid-basal-cell-carcinoma-syndrome/" target="_blank" rel="noopener">rarediseases.org</a>. סקירה ידידותית למשתמש.</li>
+      <li><strong>MedlinePlus Genetics:</strong> <a href="https://medlineplus.gov/genetics/condition/gorlin-syndrome/" target="_blank" rel="noopener">medlineplus.gov</a>. סקירה ידידותית של ה-NIH.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="block">
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg>ספרים</h3>
+  <div class="body">
+    <ul>
+      <li><strong>Gorlin's Syndromes of the Head and Neck</strong> (Hennekam, Krantz, Allanson; Oxford University Press, 2010, מהדורה 5). הספר המוסמך ביותר על תסמונות שתיאר Robert Gorlin — כולל NBCCS וגם ~100 תסמונות נוספות. <a href="https://www.amazon.com/Gorlins-Syndromes-Monographs-Medical-Genetics/dp/0195307909" target="_blank" rel="noopener">Amazon</a> · <a href="https://academic.oup.com/book/24766" target="_blank" rel="noopener">Oxford Academic</a> (גישה דרך ספרייה אקדמית).</li>
     </ul>
   </div>
 </section>
@@ -2375,7 +2415,25 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 </section>
 
 <section class="block">
-  <h3>מילון מונחים</h3>
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>וידאו: סקירה כללית של תסמונת גורלין</h3>
+  <div class="body">
+    <p>סקירה כללית באנגלית על התסמונת — היסטוריה, גנטיקה, ביטויים, פרוטוקולי מעקב. כתוביות אנגלית זמינות. כשייווצר תוכן וידאו עברי מקביל, הוא יחליף את זה.</p>
+    <div class="video-embed">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/kxUC62LkJQ0?cc_load_policy=1&hl=en"
+        title="Gorlin Syndrome — Overview Video"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen
+        loading="lazy"></iframe>
+    </div>
+    <p style="font-size:.88rem;color:var(--muted);margin-top:8px">מקור: <a href="https://www.youtube.com/watch?v=kxUC62LkJQ0" target="_blank" rel="noopener">YouTube — Gorlin Syndrome</a></p>
+  </div>
+</section>
+
+<section class="block">
+  <h3><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-list-magnifying-glass"/></svg>מילון מונחים</h3>
   <div class="body">
     <div class="table-wrap">
 
