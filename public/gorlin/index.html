@@ -407,6 +407,10 @@ aside.toc .cta-banner-sub{
 }
 aside.toc .cta-banner.cta-kids{background:var(--kid)}
 aside.toc .cta-banner.cta-kids:hover{background:#B91C42}
+aside.toc .cta-banner.cta-research{background:var(--research)}
+aside.toc .cta-banner.cta-research:hover{background:#78350F}
+aside.toc .cta-banner.cta-sources{background:var(--info)}
+aside.toc .cta-banner.cta-sources:hover{background:#1D4ED8}
 @media(max-width:560px){
   aside.toc .cta-banner-icon{padding:0 14px}
   aside.toc .cta-banner-icon .icon-svg{width:2.2rem;height:2.2rem}
@@ -1145,6 +1149,59 @@ footer strong{color:var(--ink)}
 footer a{color:var(--ink);border-bottom:1px solid var(--ink)}
 footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(--accent)}
 
+/* Contribute CTA — two variants:
+   • Full block (.footer-contribute) on doctor / research / resources — addresses the
+     reader as "שלום דוקטור" and asks for help completing the medical content.
+   • Compact one-liner (.footer-contribute-compact) on overview / newly — same intent,
+     softer wording, less visual weight. Hidden on kids by design. */
+footer .footer-contribute,
+footer .footer-contribute-compact{display:none}
+
+body[data-active-tab="doctor"] footer .footer-contribute,
+body[data-active-tab="research"] footer .footer-contribute,
+body[data-active-tab="resources"] footer .footer-contribute{
+  display:flex;flex-direction:column;align-items:center;gap:14px;
+  max-width:760px;margin:0 auto 28px;padding:22px 28px;
+  background:var(--accent-soft);border-inline-start:4px solid var(--accent);
+  text-align:start;
+}
+footer .footer-contribute-text{
+  margin:0;color:var(--ink);font-size:1rem;line-height:1.55;font-weight:500;
+}
+footer .footer-contribute-btn{
+  display:inline-flex;align-items:center;gap:8px;
+  background:var(--accent);color:#FFFFFF;border:none;border-bottom:none;
+  padding:12px 22px;font-family:var(--font-label);font-weight:700;
+  font-size:.95rem;letter-spacing:.02em;text-decoration:none;
+  transition:background .18s,transform .18s;
+}
+footer .footer-contribute-btn:hover{
+  background:var(--accent-deep);color:#FFFFFF;border-bottom:none;transform:translateY(-1px);
+}
+
+body[data-active-tab="overview"] footer .footer-contribute-compact,
+body[data-active-tab="newly"] footer .footer-contribute-compact{
+  display:block;margin:0 auto 22px;max-width:680px;
+  padding:10px 18px;text-align:center;
+  font-size:.92rem;line-height:1.5;color:var(--ink);
+  border-block-start:1px solid var(--line);
+  border-block-end:1px solid var(--line);
+}
+footer .footer-contribute-compact a{
+  color:var(--accent);border-bottom:1px solid var(--accent);font-weight:600;
+}
+footer .footer-contribute-compact a:hover{
+  background:var(--accent);color:#FFFFFF;border-bottom-color:var(--accent);
+}
+
+@media(max-width:560px){
+  body[data-active-tab="doctor"] footer .footer-contribute,
+  body[data-active-tab="research"] footer .footer-contribute,
+  body[data-active-tab="resources"] footer .footer-contribute{
+    padding:18px 18px;
+  }
+}
+
 /* ---------- PRINT ---------- */
 @media print{
   header.site,nav.tabs,aside.toc,.print-btn,.search-wrap{display:none !important}
@@ -1206,20 +1263,38 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 
 <aside class="toc" id="toc">
 
-  <!-- CTA banners -->
+  <!-- CTA banners
+       Each banner has data-show-on listing the tabs on which it should appear.
+       The two consumer-facing banners hide on their own target tab (newly hides on
+       newly, kids hides on kids) and on the doctor tab — where they're replaced by
+       the two professional cross-link banners below. -->
   <div class="cta-stack">
-    <a href="#newly" class="cta-banner cta-primary">
+    <a href="#newly" class="cta-banner cta-primary" data-show-on="overview research resources">
       <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-hand-heart"/></svg></span>
       <span class="cta-banner-body">
         <span class="cta-banner-title">איבחנו אצלך גורלין?</span>
         <span class="cta-banner-sub">מומלץ להתחיל כאן ←</span>
       </span>
     </a>
-    <a href="#kids" class="cta-banner cta-kids">
+    <a href="#kids" class="cta-banner cta-kids" data-show-on="overview newly research resources">
       <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-smiley"/></svg></span>
       <span class="cta-banner-body">
         <span class="cta-banner-title">מידע מותאם לילדים</span>
         <span class="cta-banner-sub">גילאי 11+ ←</span>
+      </span>
+    </a>
+    <a href="#research" class="cta-banner cta-research" data-show-on="doctor">
+      <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg></span>
+      <span class="cta-banner-body">
+        <span class="cta-banner-title">מחקרים וניסויים קליניים</span>
+        <span class="cta-banner-sub">סקירה עדכנית של ניסויים פעילים ←</span>
+      </span>
+    </a>
+    <a href="#resources" class="cta-banner cta-sources" data-show-on="doctor">
+      <span class="cta-banner-icon"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-books"/></svg></span>
+      <span class="cta-banner-body">
+        <span class="cta-banner-title">מקורות וקישורים</span>
+        <span class="cta-banner-sub">ספרות, גופי תמיכה וקווים מנחים ←</span>
       </span>
     </a>
   </div>
@@ -1464,7 +1539,7 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 
     <div class="callout tip">
       <strong><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-bookmark-simple"/></svg>טיפ ענקי לפני הביקור הראשון</strong>
-      <p>שמור את הקישור לעמוד הזה (<code>amitbrin.com/gorlin</code>) או הדפס את טאב <strong>"מידע מקצועי לרופא"</strong>. בביקור הראשון אצל רופא חדש יש לפחות 8 מונחים שאתה שומע בפעם הראשונה — PTCH1, SUFU, <span class="gloss" data-gloss="okc">OKC</span>, פנורמי, פיברומה, BCC, Mohs, <span class="gloss" data-gloss="hhi">HHI</span>. אין סיכוי לזכור הכל בזמן השיחה. עדיף שיהיה לך מסמך לחזור אליו אחר כך, ושעה לקרוא בשקט בבית. אפשר גם להעביר את הקישור לרופא ביום שלפני הביקור — חלק מהרופאים מעריכים את זה.</p>
+      <p>שמור את הקישור לעמוד הזה (<code>gorlin.help</code>) או הדפס את טאב <strong>"מידע מקצועי לרופא"</strong>. בביקור הראשון אצל רופא חדש יש לפחות 8 מונחים שאתה שומע בפעם הראשונה — PTCH1, SUFU, <span class="gloss" data-gloss="okc">OKC</span>, פנורמי, פיברומה, BCC, Mohs, <span class="gloss" data-gloss="hhi">HHI</span>. אין סיכוי לזכור הכל בזמן השיחה. עדיף שיהיה לך מסמך לחזור אליו אחר כך, ושעה לקרוא בשקט בבית. אפשר גם להעביר את הקישור לרופא ביום שלפני הביקור — חלק מהרופאים מעריכים את זה.</p>
     </div>
 
   </div>
@@ -2707,6 +2782,16 @@ footer a:hover{background:var(--accent);color:var(--bg);border-bottom-color:var(
 </div>
 
 <footer>
+  <!-- Contribute CTA — two flavors selected via body[data-active-tab] in CSS:
+       • Full block: doctor / research / resources (medical reference areas) —
+         "שלום דוקטור" prefix, gender-neutral wording.
+       • Compact one-liner: overview / newly — same purpose, softer presence.
+       Hidden entirely on kids. -->
+  <aside class="footer-contribute" aria-label="עזרה בעדכון התוכן">
+    <p class="footer-contribute-text">שלום דוקטור, נתקלת בטעות או שיש לך מה להוסיף? נודה לך על עזרה בהשלמת המידע הנכון והעדכני.</p>
+    <a class="footer-contribute-btn" href="mailto:ahoovi@gmail.com?subject=%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%AA%D7%95%D7%9B%D7%9F%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%92%D7%95%D7%A8%D7%9C%D7%99%D7%9F">פנה אלינו ←</a>
+  </aside>
+  <p class="footer-contribute-compact">מצאת טעות באתר או שיש מה להוסיף? <a href="mailto:ahoovi@gmail.com?subject=%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%AA%D7%95%D7%9B%D7%9F%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%92%D7%95%D7%A8%D7%9C%D7%99%D7%9F">כתבו לנו ←</a></p>
   <p class="footer-line footer-main"><strong>מאגר מידע חי</strong> בנושא תסמונת גורלין — מתעדכן באופן שוטף עם פרסומים, ניסויים קליניים וקווים מנחים חדשים · עדכון אחרון: <strong>מאי 2026</strong></p>
   <p class="footer-line footer-credit">נבנה ונערך על ידי עמית ברין · <a href="https://amitbrin.com" target="_blank" rel="noopener">amitbrin.com</a> · <a href="mailto:ahoovi@gmail.com">ahoovi@gmail.com</a></p>
   <p class="footer-line footer-disclaimer">המסמך מיועד לחומר רקע בלבד ולא מחליף ייעוץ רפואי. למקור מקצועי מעודכן ראה <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank" rel="noopener">GeneReviews NBK1151</a> ועמותות גורלין השונות.</p>
@@ -2821,6 +2906,17 @@ function buildTOC(panel){
 }
 
 // ===== TAB SWITCHING =====
+// Per-banner visibility: each .cta-banner has data-show-on="tab1 tab2..." listing the
+// tabs on which it should appear. Consumer-facing banners are hidden on their own
+// target tab (no point linking to a tab you're already on) and on the doctor tab,
+// where two professional banners take their place.
+function updateBannerVisibility(tabName){
+  document.querySelectorAll('.cta-stack .cta-banner').forEach(b=>{
+    const list = (b.dataset.showOn || '').trim().split(/\s+/).filter(Boolean);
+    const show = list.length === 0 || list.includes(tabName);
+    b.style.display = show ? '' : 'none';
+  });
+}
 function activateTab(tabName, opts){
   opts = opts || {};
   const btn = document.querySelector(`.tab-btn[data-tab="${tabName}"]`);
@@ -2830,6 +2926,9 @@ function activateTab(tabName, opts){
   panels.forEach(p=>p.classList.remove('active'));
   btn.classList.add('active');
   panel.classList.add('active');
+  // Mark active tab on body so CSS can target it (used by footer contribute CTA, etc.)
+  document.body.dataset.activeTab = tabName;
+  updateBannerVisibility(tabName);
   buildTOC(panel);
   if(opts.scroll !== false){
     window.scrollTo({top:0, behavior:'smooth'});
@@ -3393,6 +3492,114 @@ document.addEventListener('keydown', e=>{
   }
 });
 
+// ===== AUTO-MARK ALL OCCURRENCES OF GLOSSARY TERMS =====
+// Markup only wraps the first occurrence of each term per section. This pass walks
+// the article text after the click handler is wired up and wraps every remaining
+// occurrence in <span class="gloss" data-gloss="..."> — the delegated click handler
+// above already covers any element with class .gloss, so newly-wrapped spans just work.
+//
+// Safety: we only auto-mark text variants that already appear at least once as a
+// manual wrap, so we never invent a new (term-text → key) mapping.
+(function autoMarkGlossaryTerms(){
+  // glossKey → Set<string> of textual variants found in manual wraps
+  const variants = new Map();
+  document.querySelectorAll('span.gloss[data-gloss]').forEach(el=>{
+    const key = el.dataset.gloss;
+    const txt = el.textContent.replace(/\s+/g,' ').trim();
+    if(!key || !txt) return;
+    if(!variants.has(key)) variants.set(key, new Set());
+    variants.get(key).add(txt);
+  });
+  if(variants.size === 0) return;
+
+  const entries = [];
+  variants.forEach((set, key)=> set.forEach(t=> entries.push({key, text:t})));
+  // Longest-first so multi-word variants beat sub-words at the same start position.
+  entries.sort((a,b)=> b.text.length - a.text.length);
+
+  const escape = s => s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const LATIN_ONLY = /^[A-Za-z0-9 ()._\-\/]+$/;
+  const LATIN_BOUNDARY = /[A-Za-z0-9_]/;
+  // ֐-׿ covers the Hebrew Unicode block — letters, niqqud, cantillation marks.
+  const MIXED_BOUNDARY = new RegExp('[\\u0590-\\u05FFA-Za-z0-9_]');
+
+  // Tags we never descend into. Headings, tables (incl. the glossary table itself),
+  // nav/header/footer/aside, and code/script are all off-limits.
+  const SKIP_TAGS = new Set([
+    'SCRIPT','STYLE','CODE','PRE','TEXTAREA','INPUT','BUTTON','SELECT','OPTION',
+    'H1','H2','H3','H4','H5','H6',
+    'TABLE','THEAD','TBODY','TR','TH','TD',
+    'NAV','HEADER','FOOTER','ASIDE'
+  ]);
+  function shouldSkip(node){
+    let n = node.parentNode;
+    while(n && n.nodeType === 1 && n !== document.body){
+      if(n.classList && n.classList.contains('gloss')) return true;
+      if(n.tagName && SKIP_TAGS.has(n.tagName)) return true;
+      n = n.parentNode;
+    }
+    return false;
+  }
+
+  function findMatches(text){
+    const hits = [];
+    for(const entry of entries){
+      const isLatin = LATIN_ONLY.test(entry.text);
+      const re = new RegExp(escape(entry.text), 'g');
+      let m;
+      while((m = re.exec(text)) !== null){
+        const start = m.index, end = start + m[0].length;
+        const before = start > 0 ? text.charAt(start - 1) : '';
+        const after  = end < text.length ? text.charAt(end) : '';
+        const boundary = isLatin ? LATIN_BOUNDARY : MIXED_BOUNDARY;
+        if(before && boundary.test(before)) { if(re.lastIndex === m.index) re.lastIndex++; continue; }
+        if(after  && boundary.test(after))  { if(re.lastIndex === m.index) re.lastIndex++; continue; }
+        hits.push({start, end, key: entry.key, len: end - start});
+        if(re.lastIndex === m.index) re.lastIndex++;
+      }
+    }
+    if(hits.length === 0) return hits;
+    hits.sort((a,b)=> a.start - b.start || b.len - a.len);
+    const out = [];
+    let cursor = -1;
+    for(const h of hits){
+      if(h.start >= cursor){ out.push(h); cursor = h.end; }
+    }
+    return out;
+  }
+
+  // Snapshot text nodes first; mutating during traversal would invalidate the walker.
+  const root = document.querySelector('main') || document.body;
+  const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+    acceptNode(n){
+      if(!n.nodeValue || !n.nodeValue.trim()) return NodeFilter.FILTER_REJECT;
+      if(shouldSkip(n)) return NodeFilter.FILTER_REJECT;
+      return NodeFilter.FILTER_ACCEPT;
+    }
+  });
+  const textNodes = [];
+  for(let n = walker.nextNode(); n; n = walker.nextNode()) textNodes.push(n);
+
+  for(const node of textNodes){
+    const text = node.nodeValue;
+    const hits = findMatches(text);
+    if(hits.length === 0) continue;
+    const frag = document.createDocumentFragment();
+    let cursor = 0;
+    for(const h of hits){
+      if(h.start > cursor) frag.appendChild(document.createTextNode(text.slice(cursor, h.start)));
+      const span = document.createElement('span');
+      span.className = 'gloss';
+      span.dataset.gloss = h.key;
+      span.textContent = text.slice(h.start, h.end);
+      frag.appendChild(span);
+      cursor = h.end;
+    }
+    if(cursor < text.length) frag.appendChild(document.createTextNode(text.slice(cursor)));
+    node.parentNode.replaceChild(frag, node);
+  }
+})();
+
 // ===== HASH ROUTING =====
 function applyHash(opts){
   opts = opts || {};
@@ -3427,6 +3634,14 @@ window.addEventListener('hashchange', ()=>applyHash());
 
 // ===== INIT =====
 buildTOC(document.querySelector('.tab-panel.active'));
+// Seed body[data-active-tab] and banner visibility from the tab that's active in markup.
+// applyHash() will overwrite both if the URL carries a hash.
+{
+  const initialBtn = document.querySelector('.tab-btn.active');
+  const initialTab = initialBtn ? initialBtn.dataset.tab : 'overview';
+  document.body.dataset.activeTab = initialTab;
+  updateBannerVisibility(initialTab);
+}
 applyHash({fromInit:true});
 
 // Rebuild TOC when gender changes (kids tab might be active)
