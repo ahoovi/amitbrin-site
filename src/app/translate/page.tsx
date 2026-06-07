@@ -21,6 +21,16 @@ import {
   Buildings, ShoppingCart, Stethoscope, Bus, Briefcase,
   IdentificationCard, ForkKnife, ChatCircle, Cards,
 } from '@phosphor-icons/react';
+import ReinforcementScreen, {
+  type ReinforcementContent,
+} from './components/ReinforcementScreen';
+import {
+  decideTier,
+  getTier1Content,
+  generateTier3Content,
+  getTier3Fallback,
+  type SessionSignals,
+} from './lib/reinforcement-content';
 
 // ============= CSS (module styles — Rubik font + all className-based styles) =============
 
@@ -1235,7 +1245,7 @@ function LessonScreen({
             {module === 'grammar'    && <TutorAvatar mood="thinking"  size={72} />}
           </div>
         )}
-        {module === 'vocabulary' && <VocabModule onProg={onProg} topic={lesson.topicRo} />}
+        {module === 'vocabulary' && <VocabModule onProg={onProg} topic={lesson.topicRo} userName={user.name} />}
         {module === 'listening'  && <ListenModule onProg={onProg} />}
         {module === 'speaking'   && <SpeakModule user={moduleUser} onProg={onProg} />}
         {module === 'writing'    && <WriteModule user={moduleUser} onProg={onProg} />}
@@ -1254,7 +1264,7 @@ IMPORTANT: Always include example2_ro and example2_he. Hebrew fields must use on
 
 const SESSION_TARGET = 10;
 
-function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: string }) {
+function VocabModule({ onProg, topic, userName }: { onProg: (n: number) => void; topic?: string; userName: string }) {
   // ── Session model ───────────────────────────────────────────────────────────
   const [phase, setPhase]             = useState<'new' | 'review' | 'done'>('new');
   const [newLeft, setNewLeft]         = useState(SESSION_TARGET);
@@ -1271,6 +1281,13 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
   // ── Avatar messaging ────────────────────────────────────────────────────────
   const [avatarMood, setAvatarMood]   = useState<AvatarMood>('showing');
   const [avatarMsg, setAvatarMsg]     = useState<string | null>(null);
+
+  // ── Reinforcement tracking ──────────────────────────────────────────────
+  const [wordsMarkedForReinforcement, setWordsMarkedForReinforcement] =
+    useState<string[]>([]);
+  const [reinforcementContent, setReinforcementContent] =
+    useState<ReinforcementContent | null>(null);
+  const [reinforcementLoading, setReinforcementLoading] = useState(false);
 
   const hist = useRef<string[]>([]);
 
@@ -1316,6 +1333,54 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
       .catch(() => setPrefetching(false));
   }, [card, nextCard, prefetching, phase, newLeft, fetchCard]);
 
+  // ── Pre-generate reinforcement content before user reaches the end ─────
+  useEffect(() => {
+    // Only trigger once, when we're near the end of the session
+    const isNearEnd = phase === 'review' && reviewQueue.length <= 1;
+    if (!isNearEnd) return;
+    if (reinforcementContent || reinforcementLoading) return;
+
+    const signals: SessionSignals = {
+      userName,
+      topicHe: topic || '',
+      topicRo: topic, // adjust if you have separate Ro/He topic fields
+      wordsLearned: [
+        ...knownCards.map((c) => c.word),
+        ...reviewQueue.map((c) => c.word),
+      ],
+      wordsMarkedForReinforcement,
+    };
+
+    const tier = decideTier(signals);
+
+    if (tier === 'advanced') {
+      // Synchronous — no API call needed
+      setReinforcementContent(getTier1Content(signals));
+    } else {
+      // Tier 3 — call the LLM in the background
+      setReinforcementLoading(true);
+      generateTier3Content(signals, callAI)
+        .then((content) => {
+          setReinforcementContent(content || getTier3Fallback(signals));
+          setReinforcementLoading(false);
+        })
+        .catch(() => {
+          setReinforcementContent(getTier3Fallback(signals));
+          setReinforcementLoading(false);
+        });
+    }
+  }, [
+    phase,
+    reviewQueue.length,
+    reinforcementContent,
+    reinforcementLoading,
+    knownCards,
+    reviewQueue,
+    wordsMarkedForReinforcement,
+    topic,
+    userName,
+  ]);
+
   // ── Mark current card and advance ────────────────────────────────────────────
   const mark = (verdict: 'known' | 'review') => {
     if (!card || status) return;
@@ -1329,6 +1394,16 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
     const prefetched = nextCard;
 
     setStatus(verdict);
+
+    // Track words the user explicitly flagged as needing more practice.
+    // This list persists for the whole session — used by the grandmother
+    // reinforcement screen to know what to address.
+    if (verdict === 'review') {
+      setWordsMarkedForReinforcement((prev) =>
+        prev.includes(cur.word) ? prev : [...prev, cur.word]
+      );
+    }
+
     setAvatarMood(verdict === 'known' ? 'approve' : 'coaching');
     setAvatarMsg(verdict === 'known' ? 'מעולה! המילה שלך ✅' : 'אל דאגה — נחזור עליה 💪');
     onProg(verdict === 'known' ? 3 : 1);
@@ -1389,30 +1464,45 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
     }, 1200);
   };
 
-  // ── Session complete screen ───────────────────────────────────────────────
+  // ── Session complete: show grandmother reinforcement screen ────────────
   if (phase === 'done') {
+    const signals: SessionSignals = {
+      userName,
+      topicHe: topic || '',
+      topicRo: topic,
+      wordsLearned: knownCards.map((c) => c.word),
+      wordsMarkedForReinforcement,
+    };
+    const tier = decideTier(signals);
+
+    const handleContinue = () => {
+      // Reset for next session
+      setPhase('new');
+      setNewLeft(SESSION_TARGET);
+      setKnownCards([]);
+      setReviewQueue([]);
+      setCard(null);
+      setNextCard(null);
+      setAvatarMood('showing');
+      setAvatarMsg(null);
+      setWordsMarkedForReinforcement([]);
+      setReinforcementContent(null);
+      hist.current = [];
+      setLoading(true);
+      fetchCard().then((c) => {
+        setCard(c ?? { err: true });
+        setLoading(false);
+      });
+    };
+
     return (
-      <div style={{ textAlign: 'center', padding: '24px 16px' }}>
-        <TutorAvatar mood="proud" size={110} style={{ margin: '0 auto 16px' }} />
-        <div style={{ background: 'linear-gradient(135deg,#dcfce7,#d1fae5)', borderRadius: 16, padding: '18px 20px', marginBottom: 20, direction: 'rtl' }}>
-          <div style={{ fontSize: 32, marginBottom: 6 }}>🏆</div>
-          <div style={{ fontSize: 17, fontWeight: 700, color: '#15803d', marginBottom: 6 }}>כל המילים ידועות!</div>
-          <div style={{ fontSize: 14, color: '#16a34a', lineHeight: 1.5 }}>
-            השלמת {SESSION_TARGET} מילים — כוכב ראשון שלך הושג!
-          </div>
-        </div>
-        <button className="pbtn" onClick={() => {
-          setPhase('new'); setNewLeft(SESSION_TARGET);
-          setKnownCards([]); setReviewQueue([]);
-          setCard(null); setNextCard(null);
-          setAvatarMood('showing'); setAvatarMsg(null);
-          hist.current = [];
-          setLoading(true);
-          fetchCard().then(c => { setCard(c ?? { err: true }); setLoading(false); });
-        }}>
-          סיבוב נוסף →
-        </button>
-      </div>
+      <ReinforcementScreen
+        userName={signals.userName}
+        content={reinforcementContent}
+        isLoading={reinforcementLoading}
+        onContinue={handleContinue}
+        mode={tier}
+      />
     );
   }
 
