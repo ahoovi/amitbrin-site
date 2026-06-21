@@ -324,6 +324,33 @@ function stopSpeech() {
   if (typeof window !== "undefined") window.speechSynthesis?.cancel();
 }
 
+/** Pre-fetch TTS audio into _audioCache WITHOUT playing it (no gap on first play). Same cache+key as speakRo(). */
+async function prefetchRo(txt: string, voiceId?: string) {
+  if (!txt) return;
+  const vid = voiceId || VOICE_MALE;
+  const cacheKey = vid + "::" + txt;
+  if (_audioCache[cacheKey]) return;
+  try {
+    const res = await fetch("/api/tts", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: txt, voice_id: vid }),
+    });
+    if (res.ok) {
+      const blob = await res.blob();
+      _audioCache[cacheKey] = URL.createObjectURL(blob);
+    }
+  } catch {}
+}
+
+/** Warm a vocab card audio so play has no gap (word: female+male; examples: male). */
+function prewarmCardAudio(c: { word?: string; example_ro?: string; example2_ro?: string } | null) {
+  if (!c) return;
+  if (c.word) { prefetchRo(c.word, VOICE_FEMALE); prefetchRo(c.word, VOICE_MALE); }
+  if (c.example_ro) prefetchRo(c.example_ro, VOICE_MALE);
+  if (c.example2_ro) prefetchRo(c.example2_ro, VOICE_MALE);
+}
+
 // ============= AI =============
 
 async function callAI(messages: { role: string; content: string }[], sys: string) {
@@ -1293,6 +1320,7 @@ function VocabModule({ onProg, topic }: { onProg: (n: number) => void; topic?: s
       p.example_he     = sanitizeHe(p.example_he  ?? '');
       p.example2_he    = sanitizeHe(p.example2_he ?? '');
       hist.current.push(p.word);
+      prewarmCardAudio(p);
     }
     return p || null;
   }, [topic]);
