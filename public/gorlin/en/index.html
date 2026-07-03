@@ -3774,8 +3774,24 @@ searchInput.addEventListener('keydown', e=>{
 })();
 </script>
 
-<!-- Disclaimer kiosk: reveal on first visit, remember dismissal -->
+<!-- Language switch target + disclaimer kiosk reveal -->
 <script>
+(function(){
+  // Language switch: compute the correct target for the current domain/path.
+  // Works whether the URL keeps a trailing slash or not, on gorlin.help (/ , /en)
+  // and on amitbrin.com (/gorlin , /gorlin/en).
+  var sw = document.querySelector('.lang-switch');
+  if(sw){
+    var p = location.pathname;
+    if(document.documentElement.lang === 'en'){
+      var t = p.replace(/\/en\/?$/i, '/');
+      if(t === p){ t = '/'; }
+      sw.setAttribute('href', t || '/');
+    } else {
+      sw.setAttribute('href', p.replace(/\/$/, '') + '/en/');
+    }
+  }
+})();
 (function(){
   var el = document.getElementById('ai-disclaimer');
   if(!el) return;
