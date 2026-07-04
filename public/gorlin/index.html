@@ -10,12 +10,15 @@
 <meta name="apple-mobile-web-app-title" content="גורלין · מאגר">
 
 <title>תסמונת גורלין — מאגר מידע מקיף בעברית | NBCCS · גורלין-גולץ</title>
-<meta name="description" content="המידע המקיף ביותר בעברית על תסמונת גורלין (NBCCS · Gorlin-Goltz): מה היא, מי מאובחן, איך מטפלים, ומה צופן העתיד. מסמך אינטראקטיבי לחולים, משפחות, רופאים וילדים. מעודכן מאי 2026 לפי קווים מנחים של JAAD 2025 ו-BJD 2022.">
+<meta name="description" content="המידע המקיף ביותר בעברית על תסמונת גורלין (NBCCS · Gorlin-Goltz): מה היא, מי מאובחן, איך מטפלים, ומה צופן העתיד. מסמך אינטראקטיבי לחולים, משפחות, רופאים וילדים. מעודכן יולי 2026 לפי קווים מנחים של JAAD 2025 ו-BJD 2022.">
 <meta name="keywords" content="תסמונת גורלין, גורלין גולץ, Gorlin syndrome, NBCCS, BCC משפחתי, סרטן עור משפחתי, PTCH1, SUFU, מדולובלסטומה, OKC, כיסה אודונטוגנית, Vismodegib, Sonidegib, Patidegib">
 <meta name="author" content="Amit Brin">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <meta name="googlebot" content="index, follow">
 <link rel="canonical" href="https://gorlin.help/">
+<link rel="alternate" hreflang="he" href="https://gorlin.help/">
+<link rel="alternate" hreflang="en" href="https://gorlin.help/en/">
+<link rel="alternate" hreflang="x-default" href="https://gorlin.help/">
 
 <!-- Open Graph -->
 <meta property="og:type" content="article">
@@ -32,7 +35,7 @@
 <meta property="og:image:alt" content="תסמונת גורלין — מאגר מידע מקיף בעברית · gorlin.help">
 <meta property="article:author" content="Amit Brin">
 <meta property="article:published_time" content="2026-04-16">
-<meta property="article:modified_time" content="2026-05-10">
+<meta property="article:modified_time" content="2026-07-04">
 <meta property="article:section" content="Health">
 
 <!-- Twitter -->
@@ -111,8 +114,8 @@
       ],
       "about": {"@id": "https://gorlin.help/#condition"},
       "datePublished": "2026-04-16",
-      "dateModified": "2026-05-10",
-      "lastReviewed": "2026-05-10",
+      "dateModified": "2026-07-04",
+      "lastReviewed": "2026-07-04",
       "primaryImageOfPage": {
         "@type": "ImageObject",
         "url": "https://gorlin.help/og-image.jpg",
@@ -241,6 +244,71 @@ em,i{font-style:italic}
 
 img,svg{max-width:100%;height:auto}
 input,button,select,textarea{font-family:inherit}
+
+/* ---------- LANGUAGE SWITCH (top bar) ---------- */
+.lang-switch{
+  background:var(--accent);border:1px solid var(--accent);padding:11px 16px;border-radius:0;margin-inline-end:10px;
+  font-family:var(--font-label);cursor:pointer;color:var(--bg);font-size:.9rem;min-height:44px;
+  display:inline-flex;align-items:center;gap:7px;line-height:1;white-space:nowrap;
+  text-transform:uppercase;letter-spacing:.06em;font-weight:700;text-decoration:none;
+  transition:background .15s,color .15s;
+}
+.lang-switch:hover,.lang-switch:focus-visible{background:var(--accent-deep);color:var(--bg);outline:none}
+.lang-switch .icon-svg{width:1.05em;height:1.05em}
+@media(max-width:560px){
+  .lang-switch{padding:9px 12px;font-size:.82rem;min-height:40px}
+  .lang-switch .lang-switch-text-long{display:none}
+}
+
+/* ---------- "NEW INFO" BADGE ---------- */
+.badge-new{
+  display:inline-flex;align-items:center;gap:4px;vertical-align:middle;
+  background:var(--rose);color:#fff;font-family:var(--font-label);font-weight:700;
+  font-size:.62rem;line-height:1;letter-spacing:.06em;text-transform:uppercase;
+  padding:4px 8px;border-radius:0;margin-inline-start:8px;white-space:nowrap;
+}
+.badge-new::before{content:"";width:5px;height:5px;background:#fff;border-radius:50%;display:inline-block}
+.tl-title .badge-new,h4 .badge-new,h5 .badge-new{transform:translateY(-1px)}
+
+/* ---------- DISCLAIMER — slim note (HE) + full kiosk (EN) ---------- */
+.disclaimer-kiosk{
+  position:fixed;inset-inline:0;bottom:0;z-index:1200;
+  background:var(--surface);border-top:3px solid var(--accent);
+  box-shadow:0 -8px 30px rgba(28,25,23,.14);
+  transform:translateY(110%);transition:transform .45s cubic-bezier(.16,.84,.44,1);
+  padding:20px 24px calc(20px + env(safe-area-inset-bottom));
+}
+.disclaimer-kiosk.is-visible{transform:translateY(0)}
+.disclaimer-kiosk-inner{max-width:1100px;margin:0 auto;display:flex;gap:22px;align-items:flex-start;flex-wrap:wrap}
+.disclaimer-kiosk-icon{color:var(--accent);flex-shrink:0;font-size:1.7rem;line-height:1;display:inline-flex}
+.disclaimer-kiosk-icon .icon-svg{width:1.7rem;height:1.7rem}
+.disclaimer-kiosk-body{flex:1;min-width:260px}
+.disclaimer-kiosk-title{
+  font-family:var(--font-headline);font-weight:700;font-variation-settings:"wdth" 80;
+  color:var(--accent);font-size:1.15rem;line-height:1.2;margin:0 0 6px;
+}
+.disclaimer-kiosk-text{font-size:.92rem;line-height:1.6;color:var(--ink-soft);margin:0}
+.disclaimer-kiosk-text strong{color:var(--ink)}
+.disclaimer-kiosk-text + .disclaimer-kiosk-text{margin-top:8px}
+.disclaimer-kiosk-actions{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:4px;flex-shrink:0}
+.disclaimer-kiosk-dismiss{
+  background:var(--accent);color:var(--bg);border:1px solid var(--accent);
+  font-family:var(--font-label);font-weight:700;text-transform:uppercase;letter-spacing:.05em;
+  font-size:.85rem;padding:11px 22px;min-height:44px;cursor:pointer;border-radius:0;
+  transition:background .15s;
+}
+.disclaimer-kiosk-dismiss:hover,.disclaimer-kiosk-dismiss:focus-visible{background:var(--accent-deep);outline:none}
+.disclaimer-kiosk.is-slim{padding:14px 20px calc(14px + env(safe-area-inset-bottom))}
+.disclaimer-kiosk.is-slim .disclaimer-kiosk-title{font-size:1rem;margin-bottom:3px}
+.disclaimer-kiosk.is-slim .disclaimer-kiosk-text{font-size:.86rem}
+.disclaimer-kiosk.is-slim .disclaimer-kiosk-icon .icon-svg{width:1.3rem;height:1.3rem}
+@media(max-width:640px){
+  .disclaimer-kiosk{padding:16px 16px calc(16px + env(safe-area-inset-bottom))}
+  .disclaimer-kiosk-inner{gap:14px}
+  .disclaimer-kiosk-actions{width:100%}
+  .disclaimer-kiosk-dismiss{flex:1}
+}
+@media print{.disclaimer-kiosk,.lang-switch{display:none!important}}
 
 /* Magazine rule — replacement for shadows/borders */
 .rule-strong{height:2px;background:var(--line-strong);width:100%;margin:var(--sp-lg) 0;border:0}
@@ -1230,7 +1298,7 @@ footer .footer-contribute-compact a:hover{
 <div class="site-chrome">
 <header class="site">
   <div class="header-row">
-    <div class="brand"><span class="brand-icon" aria-hidden="true"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-dna"/></svg></span><span>תסמונת גורלין — מאגר מידע</span> <small>עדכון מאי 2026</small></div>
+    <div class="brand"><span class="brand-icon" aria-hidden="true"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-dna"/></svg></span><span>תסמונת גורלין — מאגר מידע</span> <small>עדכון יולי 2026</small></div>
     <div class="search-wrap">
       <label for="search" class="visually-hidden" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">חיפוש במסמך</label>
       <input type="search" id="search" placeholder="חיפוש במסמך... (לדוגמה: vismodegib, גנטיקה)" autocomplete="off" enterkeyhint="search" inputmode="search">
@@ -1243,6 +1311,7 @@ footer .footer-contribute-compact a:hover{
     </div>
     <span class="search-results-count" id="search-count" aria-live="polite"></span>
     <div class="header-actions">
+      <a class="lang-switch" href="en/" hreflang="en" lang="en" aria-label="Switch to English — עבור לאנגלית"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-globe"/></svg><span>EN</span><span class="lang-switch-text-long">&nbsp;English</span></a>
       <button class="icon-btn" id="share-btn" type="button" aria-label="שיתוף"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-share-network"/></svg><span class="icon-btn-text">שיתוף</span></button>
       <button class="icon-btn" type="button" onclick="window.print()" aria-label="הדפסה או PDF"><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-printer"/></svg><span class="icon-btn-text">הדפסה / PDF</span></button>
     </div>
@@ -1412,7 +1481,7 @@ footer .footer-contribute-compact a:hover{
 <section class="block">
   <h3>הסתייגות חשובה</h3>
   <div class="body">
-    <p>המסמך הזה הוא <strong>חומר מידע ולא ייעוץ רפואי</strong>. כל החלטה טיפולית חייבת להתקבל עם הרופא המטפל. המידע מעודכן למאי 2026 ויתיישן — בדוק תאריך עדכון אחרון בפוטר.</p>
+    <p>המסמך הזה הוא <strong>חומר מידע ולא ייעוץ רפואי</strong>. כל החלטה טיפולית חייבת להתקבל עם הרופא המטפל. המידע מעודכן ליולי 2026 ויתיישן — בדוק תאריך עדכון אחרון בפוטר.</p>
     <p>הסטטיסטיקות והפרוטוקולים נשאבו ממקורות מקצועיים מעודכנים (GeneReviews, NCCN, JCO, BJD, מחקרים שפורסמו 2023–2025). באזורים שבהם הראיות חלקיות או סותרות — זה צוין במפורש.</p>
   </div>
 </section>
@@ -1918,6 +1987,7 @@ footer .footer-contribute-compact a:hover{
       <li><strong>Itraconazole / SUBA-Itraconazole</strong> (off-target HHI) — 57.7% תגובה ≥30% reduction (Phase IIb HP2001, n=38, 477 lesions). מחקר PK השוואתי במלזיה בעיצומו, דגימה סופית מאי 2026, ביו-אנליזה ~4 שבועות. NDA דרך 505(b)(2) צפוי בהמשך 2026 <a href="https://www.globenewswire.com/news-release/2026/03/31/3265972/0/en/Inhibitor-Therapeutics-Provides-Clinical-Formulation-and-IP-Update-on-Itraconazole-Program-for-Gorlin-Syndrome.html" target="_blank" rel="noopener">[INTI 03/2026]</a>.</li>
       <li><strong>Itraconazole + Arsenic Trioxide</strong> — קומבינציה ניסיונית, 75% Hedgehog suppression.</li>
       <li><strong>Sonidegib + PDT (NCT06623201)</strong> — מגייס.</li>
+      <li><strong>SkinJect (D-MNA) — Doxorubicin microneedle array</strong> <span class="badge-new">מידע חדש (יולי 26)</span> — מדבקת מיקרו-מחטים מתמוססת להזרקה intradermalית מקומית לתוך נגעי BCC. גישה לא-ניתוחית הניתנת לחזרה. Medicus Pharma: ODD ל-FDA (04/2026), RPDD (06/2026); Phase 2b רגיסטרציוני מתוכנן בחולי גורלין (SKNJCT-004, עד 50 חולים, 200µg). מסלול Expanded Access IND בשיתוף GSA. Investigational.</li>
     </ul>
   </div>
 </section>
@@ -1952,6 +2022,13 @@ footer .footer-contribute-compact a:hover{
     </div>
 
     <ul class="timeline">
+
+      <li>
+        <span class="tl-date">יוני 2026</span>
+        <span class="tl-title">SkinJect (D-MNA) — גישה מקומית לא-ניתוחית ל-BCC נכנסת למסלול רגולטורי<span class="badge-new">מידע חדש (יולי 26)</span></span>
+        <span class="tl-body">Medicus Pharma מקדמת את <strong>SkinJect (D-MNA)</strong> — מדבקת מיקרו-מחטים מתמוססות עם <strong>Doxorubicin</strong>, המוחדרת intradermally ישירות לתוך נגע ה-BCC. הרעיון: טיפול <strong>מקומי, ניתן לחזרה, לא-ניתוחי</strong> — ריכוז תרופה גבוה בנגע עם חשיפה מערכתית מזערית, מנגנון של ציטוטוקסיות ישירה + immunogenic cell death. ב-<strong>17 באפריל 2026</strong> הוגשה בקשת Orphan Drug Designation (ODD) ל-FDA עבור BCC בגורלין, וב-<strong>15 ביוני 2026</strong> הוגשה בקשת Rare Pediatric Disease Designation (RPDD). מתוכנן ניסוי רגיסטרציוני Phase 2b (SKNJCT-004): עד 50 חולי גורלין, מינון 200µg, נקודת קצה ראשית — היעלמות ויזואלית מלאה ב-≥50% מנגעי המטרה בשבוע 10, עם אפשרות לטפל בכמה נגעים במקביל. נתוני Phase 2 מוקדמים (SKNJCT-003, ב-BCC ספורדי): 73% clinical clearance ו-40% histologic CR ביום 57 בקוהורט ה-200µg, תופעות לוואי מוגבלות לאתר היישום, ללא SAEs. בשיתוף עמותת גורלין (GSA) מקודם מסלול <strong>Expanded Access IND</strong> לגישה מתוך חמלה לחולי גורלין עם BCCs מרובים או בלתי-נתיחים. <strong>עדיין בגדר investigational</strong> — אין כיום תרופה מאושרת FDA ייעודית ל-BCC בגורלין.</span>
+        <span class="tl-source"><a href="https://www.globenewswire.com/news-release/2026/06/15/3311700/0/en/Medicus-Pharma-Announces-U-S-Food-and-Drug-Administration-FDA-Submission-of-Rare-Pediatric-Disease-Designation-Request-for-SkinJect-in-Gorlin-Syndrome.html" target="_blank" rel="noopener">RPDD — Medicus Pharma, 15 Jun 2026</a> · <a href="https://www.biospace.com/press-releases/medicus-pharma-submits-orphan-drug-designation-application-to-u-s-fda-for-skinject-in-gorlin-syndrome" target="_blank" rel="noopener">ODD — BioSpace, 17 Apr 2026</a> · <a href="https://medicuspharma.com/medicus-pharma-reports-positive-phase-2-sknjct-003-topline-data-observing-73-clinical-clearance-and-40-histological-clearance-cr-at-day-57-in-200g-cohort/" target="_blank" rel="noopener">SKNJCT-003 topline</a></span>
+      </li>
 
       <li>
         <span class="tl-date">מאי 2026</span>
@@ -2528,7 +2605,7 @@ footer .footer-contribute-compact a:hover{
 <section class="tab-panel" data-panel="research">
 
 <div class="tab-intro">
-  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>מחקרים, ניסויים וחידושים — 2024–2026 (עדכון מאי 2026)</h2>
+  <h2><svg class="icon-svg" aria-hidden="true" focusable="false"><use href="#ph-flask"/></svg>מחקרים, ניסויים וחידושים — 2024–2026 (עדכון יולי 2026)</h2>
   <p>הסעיף הזה מתעדכן הכי מהר. המטרה: לתת לחולה כלי לעקוב, להבין מה זמין, ומתי שווה לבדוק אם הוא מתאים לניסוי קליני. מומלץ לבדוק כל 3–6 חודשים לעדכונים.</p>
 </div>
 
@@ -2552,6 +2629,10 @@ footer .footer-contribute-compact a:hover{
 
     <h4>5. Drug Holiday Protocols</h4>
     <p>מחקר MIKIE (Lancet Oncology 2017) ביסס שני רגימנים אינטרמיטנטיים של Vismodegib (12 שבועות on / 8 שבועות off, ו-24/8). מחקרים מאוחרים (2023–2025) הוסיפו רגימנים זריזים יותר (week-on/off, חודש-on/off). שמירה על יעילות עם ירידה משמעותית בתופעות לוואי. מומלץ במיוחד ב-BCNS עקב טיפול ארוך-טווח. <a href="https://www.thelancet.com/journals/lanonc/article/PIIS1470-2045(17)30079-7/abstract" target="_blank" rel="noopener">Lancet Oncology MIKIE</a> · <a href="https://link.springer.com/article/10.1007/s11864-025-01332-6" target="_blank" rel="noopener">Curr Treat Options Oncol 2025 review</a></p>
+
+    <h4>6. SkinJect (D-MNA) — מדבקת מיקרו-מחטים עם Doxorubicin <span class="badge-new">מידע חדש (יולי 26)</span></h4>
+    <p>גישה חדשה ולא-ניתוחית: מדבקה עם מיקרו-מחטים מתמוססות שמשחררות <strong>Doxorubicin</strong> ישירות בתוך נגע ה-BCC (intradermal), עם ריכוז מקומי גבוה וחשיפה מערכתית מזערית. היתרון לחולה גורלין — טיפול שאפשר לחזור עליו על פני נגעים מרובים, כחלופה לניתוחים חוזרים. Medicus Pharma הגישה ל-FDA בקשות <strong>Orphan Drug Designation</strong> (אפריל 2026) ו-<strong>Rare Pediatric Disease Designation</strong> (יוני 2026), ומתכננת ניסוי רגיסטרציוני Phase 2b בחולי גורלין (SKNJCT-004, עד 50 חולים, מינון 200µg, נקודת קצה — היעלמות מלאה ב-≥50% מהנגעים בשבוע 10). בשיתוף עמותת גורלין (GSA) מקודם מסלול <strong>Expanded Access IND</strong> לגישה מתוך חמלה. עדיין בגדר investigational, טרם אושר.</p>
+    <p>מקורות: <a href="https://www.globenewswire.com/news-release/2026/06/15/3311700/0/en/Medicus-Pharma-Announces-U-S-Food-and-Drug-Administration-FDA-Submission-of-Rare-Pediatric-Disease-Designation-Request-for-SkinJect-in-Gorlin-Syndrome.html" target="_blank" rel="noopener">Medicus Pharma RPDD, June 2026</a> · <a href="https://www.biospace.com/press-releases/medicus-pharma-submits-orphan-drug-designation-application-to-u-s-fda-for-skinject-in-gorlin-syndrome" target="_blank" rel="noopener">ODD, April 2026</a></p>
   </div>
 </section>
 
@@ -2585,9 +2666,10 @@ footer .footer-contribute-compact a:hover{
     <div class="table-wrap">
 
       <table>
-      <thead><tr><th>תחום</th><th>מצב מאי 2026</th><th>צפי</th></tr></thead>
+      <thead><tr><th>תחום</th><th>מצב יולי 2026</th><th>צפי</th></tr></thead>
       <tbody>
         <tr><td>Patidegib topical Phase 3 (SGT-610)</td><td>גיוס הושלם 08/2025</td><td>Top-line Q4 2026</td></tr>
+        <tr><td>SkinJect (D-MNA) — Doxorubicin microneedle</td><td>ODD 04/2026, RPDD 06/2026</td><td>Phase 2b רגיסטרציוני בגורלין</td></tr>
         <tr><td>Itraconazole — מסלול NDA</td><td>PK ongoing, FDA Type C 05/2026</td><td>NDA דרך 505(b)(2) ב-2026</td></tr>
         <tr><td>SUBA-Itraconazole formulation</td><td>פורמולציה אמורפית קניינית</td><td>בלתי ידוע, חלק ממסלול NDA</td></tr>
         <tr><td>AlphaFold3 SUFU variant analysis</td><td>preprint 01/2026 (Bardwell)</td><td>מחקר בסיסי, יישום קליני בעוד שנים</td></tr>
@@ -2792,11 +2874,25 @@ footer .footer-contribute-compact a:hover{
     <a class="footer-contribute-btn" href="mailto:ahoovi@gmail.com?subject=%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%AA%D7%95%D7%9B%D7%9F%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%92%D7%95%D7%A8%D7%9C%D7%99%D7%9F">פנה אלינו ←</a>
   </aside>
   <p class="footer-contribute-compact">מצאת טעות באתר או שיש מה להוסיף? <a href="mailto:ahoovi@gmail.com?subject=%D7%91%D7%A0%D7%95%D7%92%D7%A2%20%D7%9C%D7%AA%D7%95%D7%9B%D7%9F%20%D7%91%D7%90%D7%AA%D7%A8%20%D7%92%D7%95%D7%A8%D7%9C%D7%99%D7%9F">כתבו לנו ←</a></p>
-  <p class="footer-line footer-main"><strong>מאגר מידע חי</strong> בנושא תסמונת גורלין — מתעדכן באופן שוטף עם פרסומים, ניסויים קליניים וקווים מנחים חדשים · עדכון אחרון: <strong>מאי 2026</strong></p>
+  <p class="footer-line footer-main"><strong>מאגר מידע חי</strong> בנושא תסמונת גורלין — מתעדכן באופן שוטף עם פרסומים, ניסויים קליניים וקווים מנחים חדשים · עדכון אחרון: <strong>יולי 2026</strong></p>
   <p class="footer-line footer-credit">נבנה ונערך על ידי עמית ברין · <a href="https://amitbrin.com" target="_blank" rel="noopener">amitbrin.com</a> · <a href="mailto:ahoovi@gmail.com">ahoovi@gmail.com</a></p>
   <p class="footer-line footer-disclaimer">המסמך מיועד לחומר רקע בלבד ולא מחליף ייעוץ רפואי. למקור מקצועי מעודכן ראה <a href="https://www.ncbi.nlm.nih.gov/books/NBK1151/" target="_blank" rel="noopener">GeneReviews NBK1151</a> ועמותות גורלין השונות.</p>
   <p class="footer-line footer-privacy">פרטיות: אנו משתמשים ב-<a href="https://www.cloudflare.com/web-analytics/" target="_blank" rel="noopener">Cloudflare Web Analytics</a> לאיסוף נתונים אגרגטיביים אנונימיים בלבד (מספר ביקורים, מקור הפניה, מערכת הפעלה). ללא cookies, ללא שמירת כתובת IP, ללא זיהוי אישי. ראה <a href="https://www.cloudflare.com/privacy/" target="_blank" rel="noopener">מדיניות הפרטיות של Cloudflare</a>.</p>
 </footer>
+
+<!-- AI-editing note (Hebrew, slim, first-visit only) -->
+<div class="disclaimer-kiosk is-slim" id="ai-disclaimer" data-storage-key="gorlin-ai-note-he" role="region" aria-label="הבהרה על עריכה בסיוע AI" hidden>
+  <div class="disclaimer-kiosk-inner">
+    <span class="disclaimer-kiosk-icon" aria-hidden="true"><svg class="icon-svg" focusable="false"><use href="#ph-book-open"/></svg></span>
+    <div class="disclaimer-kiosk-body">
+      <p class="disclaimer-kiosk-title">הבהרה קצרה לפני שמתחילים</p>
+      <p class="disclaimer-kiosk-text">חלקים מהאתר נכתבו ונערכו <strong>בסיוע בינה מלאכותית (AI)</strong>. התוכן נבדק בקפידה, אך <strong>אינו תחליף לייעוץ רפואי אנושי</strong> — אין לראות במידע מקוון הנחיה רפואית. מטרת האתר היא לעזור לכם להבין את התסמונת, כדי לדעת <strong>לאיזה סיוע רפואי חשוב לפנות</strong>.</p>
+    </div>
+    <div class="disclaimer-kiosk-actions">
+      <button class="disclaimer-kiosk-dismiss" type="button" data-dismiss>הבנתי</button>
+    </div>
+  </div>
+</div>
 
 <button class="to-top" id="to-top" type="button" aria-label="חזרה למעלה" title="חזרה למעלה">↑</button>
 
@@ -3671,6 +3767,46 @@ document.addEventListener('keydown', e=>{
 searchInput.addEventListener('keydown', e=>{
   if(e.key === 'Enter') searchInput.blur();
 });
+})();
+</script>
+
+<!-- Language switch target + disclaimer kiosk reveal -->
+<script>
+(function(){
+  // Language switch: compute the correct target for the current domain/path.
+  // Works whether the URL keeps a trailing slash or not, on gorlin.help (/ , /en)
+  // and on amitbrin.com (/gorlin , /gorlin/en).
+  var sw = document.querySelector('.lang-switch');
+  if(sw){
+    var p = location.pathname;
+    if(document.documentElement.lang === 'en'){
+      var t = p.replace(/\/en\/?$/i, '/');
+      if(t === p){ t = '/'; }
+      sw.setAttribute('href', t || '/');
+    } else {
+      sw.setAttribute('href', p.replace(/\/$/, '') + '/en/');
+    }
+  }
+})();
+(function(){
+  var el = document.getElementById('ai-disclaimer');
+  if(!el) return;
+  var key = el.getAttribute('data-storage-key') || 'gorlin-disclaimer';
+  var seen = false;
+  try { seen = localStorage.getItem(key) === '1'; } catch(e){}
+  function dismiss(){
+    el.classList.remove('is-visible');
+    try { localStorage.setItem(key, '1'); } catch(e){}
+    window.setTimeout(function(){ el.setAttribute('hidden',''); }, 500);
+  }
+  if(!seen){
+    el.removeAttribute('hidden');
+    // next frame so the CSS transition runs
+    window.requestAnimationFrame(function(){
+      window.requestAnimationFrame(function(){ el.classList.add('is-visible'); });
+    });
+    el.querySelectorAll('[data-dismiss]').forEach(function(b){ b.addEventListener('click', dismiss); });
+  }
 })();
 </script>
 </body>
