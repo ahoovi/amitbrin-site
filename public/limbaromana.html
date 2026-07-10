@@ -163,6 +163,20 @@ th.f{background:var(--fem)!important;color:#fff}
 
 footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line)}
 
+/* ============ v2: fixes & audio CTA ============ */
+body{overflow-x:hidden}
+@media (max-width:640px){table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch}}
+nav.toc{display:block;padding:14px 20px}
+nav.toc .unit{display:block;margin:12px 0 4px;font-size:1rem}
+nav.toc a{display:block;padding:6px 10px;border-bottom:1px dashed var(--line)}
+nav.toc a:last-child{border-bottom:none}
+.lg.c-m{border-color:var(--masc);background:var(--masc-bg);color:var(--masc);font-weight:600}
+.lg.c-f{border-color:var(--fem);background:var(--fem-bg);color:var(--fem);font-weight:600}
+.lg.c-s{border-color:var(--sound);background:var(--sound-bg);color:var(--sound);font-weight:600}
+.lg.c-g{border-color:var(--gold);background:var(--gold-bg);color:var(--gold);font-weight:600}
+.lg.c-p{border-color:var(--formal);background:var(--formal-bg);color:var(--formal);font-weight:600}
+.audio-cta{display:inline-flex;align-items:center;gap:10px;margin-top:20px;background:#e3c565;color:#1c2b4a;font-weight:600;padding:10px 22px;border-radius:999px;text-decoration:none;font-size:.95rem}
+.audio-cta:hover{background:#f0d47e}
 @media print{
   header.top{padding:30px 22px}
   nav.toc{display:none}
@@ -181,6 +195,7 @@ footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);fo
     <h1>רומנית מהיסוד · שיעורים 1-2</h1>
     <span class="ro-title">Limba română · Unitatea 1-2</span>
     <p>עריכה מחודשת ושיטתית של חומרי השיעורים בזום - מסודר לפי נושאים, עם קוד צבעים קבוע שילווה אותנו לכל אורך הקורס עד רמת B1.</p>
+    <a class="audio-cta" href="/limbaromana-audio.html">🔊 טען את העמוד עם סאונד לתרגול שמיעה</a>
   </div>
 </header>
 
@@ -191,11 +206,11 @@ footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);fo
   <h2 class="sec">איך לקרוא את המסמך הזה</h2>
   <p class="sec-sub">קוד הצבעים והסימונים קבוע וישמש בכל חומרי הקורס - כך העין תלמד לזהות סוגי מידע באופן אוטומטי.</p>
   <div class="legend">
-    <span class="lg"><span class="dot" style="background:var(--masc)"></span> כחול = זכר (masculin)</span>
-    <span class="lg"><span class="dot" style="background:var(--fem)"></span> ורוד = נקבה (feminin)</span>
-    <span class="lg"><span class="dot" style="background:var(--sound)"></span> ירוק = הגייה בתעתיק עברי</span>
-    <span class="lg"><span class="dot" style="background:var(--gold)"></span> זהב = חוק / כלל לזכור</span>
-    <span class="lg"><span class="dot" style="background:var(--formal)"></span> סגול = פנייה מנומסת (dumneavoastră)</span>
+    <span class="lg c-m"><span class="dot" style="background:var(--masc)"></span> כחול = זכר (masculin)</span>
+    <span class="lg c-f"><span class="dot" style="background:var(--fem)"></span> ורוד = נקבה (feminin)</span>
+    <span class="lg c-s"><span class="dot" style="background:var(--sound)"></span> ירוק = הגייה בתעתיק עברי</span>
+    <span class="lg c-g"><span class="dot" style="background:var(--gold)"></span> זהב = חוק / כלל לזכור</span>
+    <span class="lg c-p"><span class="dot" style="background:var(--formal)"></span> סגול = פנייה מנומסת (dumneavoastră)</span>
   </div>
   <div class="note">
     התעתיק העברי הוא קירוב בלבד - שתי תנועות ברומנית לא קיימות בעברית:
@@ -831,5 +846,12 @@ footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);fo
 </section>
 
 </main>
+<script id="l1preload">
+addEventListener('load',function(){setTimeout(async function(){try{
+var r=await fetch('/limbaromana-audio/manifest.json');if(!r.ok)return;
+var m=await r.json();var l1={sounds:1,cg:1,'plural-soft':1,greet:1,intro:1,smalltalk:1};
+m.items.filter(function(i){return l1[i.s]}).forEach(function(i){fetch('/limbaromana-audio/'+i.h+'.mp3').catch(function(){})});
+}catch(e){}},2500)});
+</script>
 </body>
 </html>
