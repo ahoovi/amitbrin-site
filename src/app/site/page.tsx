@@ -768,7 +768,7 @@ export default function SitePage() {
             <FxTitle
               className="sailing-title fx-skew"
               palette="rgb"
-              lines={["לוקח אותך למסע", "אל משהו שאף אחד", "עוד לא עשה"]}
+              lines={["לוקח אותך למסע אל משהו שאף אחד עוד לא עשה"]}
             />
             <p className="sailing-body">
               בדרך אל היצירה החדשה, מצויד בטכנולוגיה פורצת דרך, אני שם רגע בצד רזומה של
@@ -798,7 +798,7 @@ export default function SitePage() {
               className="blog-tarhiv"
             />
             <FxTitle
-              className="blog-title fx-skew"
+              className="blog-title"
               palette="cmyk"
               lines={["מחשבות על עיצוב", "ועל חוויית שימוש"]}
             />
@@ -1152,14 +1152,14 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   background-size:28px 28px, 28px 28px, 28px 28px;
 }
 .blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw 11vh; display:flex; flex-direction:column; gap:6vh; }
-.blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; }
-.blog-tarhiv { width:100%; height:auto; display:block; }
+.blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; aspect-ratio:1900 / 292; }
+.blog-tarhiv { position:absolute; inset:0; width:100%; height:100%; display:block; }
 .blog-title {
   color:var(--navy); font-weight:700;
-  font-size:clamp(1.9rem, 3.4vw, 3.6rem); line-height:1.12;
+  font-size:clamp(1.4rem, 3vw, 3.4rem); line-height:1.1;
   position:absolute; z-index:2;
-  left:50%; top:52%; transform:translate(-50%,-50%);
-  width:min(46vw,640px);
+  left:50%; top:50%; transform:translate(-50%,-50%);
+  width:min(52%, 640px);
 }
 .blog-title .fxl { text-align:center; }
 .blog-rail {
@@ -1422,7 +1422,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
   .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
-  .blog-title { width:74vw; font-size:clamp(1.3rem,5vw,2rem); }
+  .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; }
   .footer-content { flex-direction:column; align-items:flex-start; gap:3rem; padding-top:13vh; }
