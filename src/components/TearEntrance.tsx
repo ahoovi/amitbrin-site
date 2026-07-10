@@ -79,20 +79,20 @@ const STAGE_CSS = `
 .tear-canvas { position:absolute; z-index:3; touch-action:none; cursor:grab; }
 .tear-canvas.dragging { cursor:grabbing; }
 
-.tear-dogear { position:absolute; bottom:0; inset-inline-end:0; width:90px; height:90px;
-  cursor:grab; z-index:4; background:transparent; border:none; padding:0; }
+.tear-dogear { position:fixed; bottom:0; inset-inline-end:0; width:clamp(190px, 26vw, 340px); height:clamp(190px, 26vw, 340px);
+  cursor:grab; z-index:6; background:transparent; border:none; padding:0; will-change:transform; }
 .tear-dogear svg { width:100%; height:100%; display:block; }
-.tear-dogear .flapG { transform-origin:6% 94%; animation:tearPeel 2.6s ease-in-out infinite alternate; }
+.tear-dogear .flapG { transform-origin:2% 98%; animation:tearPeel 2.4s ease-in-out infinite alternate; }
 .tear-dogear .flapShadow { animation:tearPeelShadow 2.6s ease-in-out infinite alternate; }
-@keyframes tearPeel { from { transform:rotate(0deg); } to { transform:rotate(-5deg); } }
+@keyframes tearPeel { 0% { transform:rotate(-3deg) translate(0,0); } 50% { transform:rotate(-15deg) translate(5px,-6px); } 100% { transform:rotate(-7deg) translate(2px,-2px); } }
 @keyframes tearPeelShadow { from { opacity:.14; } to { opacity:.26; } }
 .tear-dogear .tp-label { position:absolute; bottom:62%; inset-inline-end:58%;
-  font-size:.72rem; font-weight:700; letter-spacing:.05em; color:#000; opacity:.75;
+  font-size:1rem; font-weight:700; letter-spacing:.05em; color:#000; opacity:.8;
   transition:opacity .2s; pointer-events:none; font-family:system-ui, Arial, sans-serif; }
 .tear-dogear:hover .tp-label, .tear-dogear:focus-visible .tp-label { opacity:1; }
 .tear-dogear:active { cursor:grabbing; }
 .tear-stage.tearing .tear-dogear { display:none; }
-@media (max-width:560px){ .tear-dogear { width:64px; height:64px; } .tear-dogear .tp-label { font-size:.62rem; } }
+@media (max-width:560px){ .tear-dogear { width:38vw; height:38vw; } .tear-dogear .tp-label { font-size:.82rem; } }
 `;
 
 /* ─── the paper physics, verbatim from the calibrated build,
@@ -631,8 +631,8 @@ export default function TearEntrance() {
       if (canvas) { canvas.remove(); canvas = null; }
       stage!.classList.remove("tearing");
       under!.toggleAttribute("inert", false);
-      setRevealed(true);
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      window.scrollTo({ top: 0, behavior: "auto" });
+      requestAnimationFrame(() => setRevealed(true));
     }
 
     /* wire the affordances */

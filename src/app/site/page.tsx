@@ -303,33 +303,38 @@ void main(){
   float wl = 0.105 + shl*0.5 + 0.006*sin(s.x*9.0 + uT*0.30) + 0.004*sin(s.x*21.0 - uT*0.22);
   float t = clamp((s.y - wl)/max(1.0 - wl, 0.001), 0.0, 1.0);
   vec3 col = waterMid;
-  /* ---- 1 · the surface seen from below: low band, deep tilt ----
-     world axis shared with the floor: d = 0.15 (far) .. 0.95 (near) */
+  /* ---- 1 · the surface seen from below: smooth wind-blown water ----
+     long directional crests (not cells), perspective-compressed, plus a
+     whisper of the live sim so pointer waves still read up top. */
   float surfEnd = wl + 0.21;
   if (s.y < surfEnd){
     float st = clamp((s.y - wl)/(surfEnd - wl), 0.0, 1.0);
     float d = mix(0.15, 0.95, st);
-    float z = mix(3.4, 1.0, st);          /* far at the waterline, near overhead */
-    vec2 sp = vec2((s.x - 0.5)*z*aspect*0.30 + 0.5 + uT*0.010, d);
-    float e = 2.0/256.0;
-    float hC = hgt(sp)*12.0 + swell(sp*3.0)*0.022;
-    float hX = hgt(sp + vec2(e,0.))*12.0 + swell(sp*3.0 + vec2(0.16,0.))*0.022;
-    float hY = hgt(sp + vec2(0.,e))*12.0 + swell(sp*3.0 + vec2(0.,0.16))*0.022;
-    /* squash the pattern vertically for a grazing, tilted-away look */
-    vec2 n = vec2(hX - hC, (hY - hC)*0.45)*220.0;
-    float glint = pow(clamp(0.5 + n.x*0.9 - n.y*1.3, 0.0, 1.0), 3.0);
+    float persp = mix(7.0, 1.0, st);           /* crests bunch up in the distance */
+    float u = (s.x - 0.5)*aspect;
+    /* layered travelling swells -> a smooth height field */
+    float h = sin((u*2.1 + d*persp*2.2) + uT*0.55);
+    h += 0.6*sin((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3);
+    h += 0.35*sin((u*6.3 + d*persp*3.1) + uT*0.31 + 2.6);
+    h *= 0.5;
+    float slope = cos((u*2.1 + d*persp*2.2) + uT*0.55)*2.1
+                + 0.6*cos((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3)*3.7;
+    /* live ripples from the pointer, gently added */
+    float rip = hgt(vec2(s.x + uT*0.010, d))*40.0;
+    slope += rip;
+    float glint = pow(clamp(0.5 + slope*0.09, 0.0, 1.0), 1.6);
     vec3 sc = mix(surfBase, surfHi, glint);
-    col = mix(sc, waterMid, smoothstep(0.28, 0.75, st));  /* haze rises higher */
+    col = mix(sc, waterMid, smoothstep(0.30, 0.80, st));
   }
   col = mix(col, waterDeep, smoothstep(0.35, 0.85, t));
-  /* ---- 2 · ray fan from the sun, fed by real ripples ---- */
-  vec2 rd = s - vec2(0.5, wl - 0.08); rd.x *= aspect;
+  /* ---- 2 · god-rays: wide, soft, slowly swaying like sun through water ---- */
+  vec2 rd = s - vec2(0.5, wl - 0.10); rd.x *= aspect;
   float rr = length(rd);
   float ang = atan(rd.x, rd.y);
-  float act = hgt(vec2(0.5 + ang*0.25, 0.10));
-  float fan = pow(max(sin(ang*34.0 + uT*0.05), 0.0), 24.0)*0.6
-            + pow(max(sin(ang*21.0 - uT*0.035 + 1.7), 0.0), 30.0)*0.5;
-  float rays = fan * exp(-rr*2.4) * smoothstep(0.0, 0.12, s.y - wl) * (0.35 + act*6.0) * 0.28;
+  float sway = sin(uT*0.055)*0.14;                 /* the whole fan drifts slowly */
+  float fan = pow(max(sin(ang*3.4 + sway + uT*0.02), 0.0), 1.7)*0.55
+            + pow(max(sin(ang*2.2 - sway - uT*0.015 + 1.7), 0.0), 1.4)*0.4;
+  float rays = fan * exp(-rr*1.35) * smoothstep(0.0, 0.22, s.y - wl) * 0.16;
   /* ---- 3 · sandy seabed (real texture, perspective, caustics) ---- */
   float floorStart = 0.56;
   float fedge = smoothstep(floorStart, floorStart + 0.09, s.y);
@@ -342,14 +347,13 @@ void main(){
     float e2 = 2.0/256.0;
     float hc = hgt(wp);
     float lap = hgt(wp+vec2(e2,0.)) + hgt(wp-vec2(e2,0.)) + hgt(wp+vec2(0.,e2)) + hgt(wp-vec2(0.,e2)) - 4.0*hc;
-    float caust = pow(max(-lap*2600.0 + 0.25, 0.0), 2.0);
-    float pc = pow(clamp(swell(wp*2.3)*0.5 + 0.55, 0.0, 1.0), 7.0);
-    float nearGlow = smoothstep(0.12, 0.85, ft);   /* vivid close, gone far */
-    sand += vec3(0.75,0.95,1.0) * (caust*0.24 + pc*0.13) * nearGlow;
+    float caust = pow(max(-lap*1700.0 + 0.18, 0.0), 1.35);
+    float nearGlow = smoothstep(0.10, 0.80, ft);   /* vivid close, gone far */
+    sand += vec3(0.70,0.90,1.0) * caust*0.22 * nearGlow;
     sand = mix(waterMid*1.15, sand, smoothstep(0.0, 0.45, ft));  /* distance haze */
     col = mix(col, sand, fedge);
   }
-  col += vec3(0.62,0.86,0.98) * rays * (1.0 - fedge*0.75);
+  col += vec3(0.66,0.88,1.0) * rays * (1.0 - fedge*0.7);
   /* ---- 4 · transparent above the waterline (the paper section shows
           through) + bright seam just under the surface ---- */
   col += vec3(0.88,0.97,1.0) * smoothstep(0.014, 0.0, s.y - wl) * 0.5;
@@ -597,8 +601,8 @@ function FxTitle({
         const g = hovering ? Math.exp(-(d * d) / SIG2) : 0;
         let tx = 0, ty = 0;
         if (palette === "water") {
-          /* whisper of refraction near the pointer */
-          ty = Math.sin(t * 1.6 + cs[i].x * 0.045) * 1.25 * g;
+          /* pointer creates a ripple distortion over the letters (no glow) */
+          ty = Math.sin(t * 3.0 + cs[i].x * 0.06) * 3.2 * g;
         } else {
           /* misregistered print plates: barely-there radial push */
           const push = 3.5 * g;
@@ -615,11 +619,11 @@ function FxTitle({
         l.style.setProperty("--cx", (curX[i] * 1.5).toFixed(1) + "px");
         l.style.setProperty("--cy", (curY[i] * 1.5).toFixed(1) + "px");
         if (palette === "water") {
-          const w1 = Math.sin(t * 1.3 + cs[i].x * 0.06) * kk[i];
-          const w2 = Math.cos(t * 1.7 + cs[i].x * 0.04) * kk[i];
+          const w1 = Math.sin(t * 2.6 + cs[i].x * 0.08) * kk[i];
+          const w2 = Math.cos(t * 3.1 + cs[i].x * 0.05) * kk[i];
           l.style.transform = still
             ? ""
-            : `translate(${curX[i].toFixed(1)}px, ${curY[i].toFixed(1)}px) skewX(${(w1 * 2.4).toFixed(2)}deg) scaleY(${(1 + w2 * 0.035).toFixed(3)})`;
+            : `translate(${curX[i].toFixed(1)}px, ${(curY[i]).toFixed(1)}px) skewX(${(w1 * 6.0).toFixed(2)}deg) scale(${(1 + w2 * 0.05).toFixed(3)}, ${(1 - w2 * 0.06).toFixed(3)})`;
         } else {
           l.style.transform = still ? "" : `translate(${curX[i].toFixed(1)}px, ${curY[i].toFixed(1)}px)`;
         }
@@ -753,7 +757,7 @@ export default function SitePage() {
           <source src="/media/sailing4k2_1_1.mp4" type="video/mp4" />
         </video>
         <div className="sailing-content">
-          <div data-reveal>
+          <div data-reveal className="sailing-scroll">
             <FxTitle
               className="sailing-title fx-skew"
               palette="rgb"
@@ -1111,8 +1115,9 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   width:min(44rem, 50vw);
   min-height:100vh;
   display:flex; flex-direction:column;
-  padding:16vh 5vw 7vh;
+  padding:16vh 5vw 5vh;
 }
+.sailing-scroll { flex:1 1 auto; }
 .sailing-title {
   color:var(--navy); font-weight:700;
   font-size:clamp(2rem, 3.3vw, 3.8rem); line-height:1.08;
@@ -1124,7 +1129,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   text-shadow:0 1px 15px #fff; mix-blend-mode:luminosity;
 }
 .sailing-fineprint {
-  color:var(--offwhite); margin-top:auto; padding-top:2rem;
+  color:var(--offwhite); margin-top:auto; padding-top:3vh;
   font-size:.85rem; line-height:1.6; font-weight:500;
   text-shadow:0 1px 2px rgba(2,13,44,.65), 0 0 16px rgba(2,13,44,.35);
 }
@@ -1140,13 +1145,16 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   background-size:28px 28px, 28px 28px, 28px 28px;
 }
 .blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw 11vh; display:flex; flex-direction:column; gap:6vh; }
-.blog-head { width:min(1100px, 100%); margin-inline:auto; text-align:center; }
+.blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; }
 .blog-tarhiv { width:100%; height:auto; display:block; }
 .blog-title {
   color:var(--navy); font-weight:700;
   font-size:clamp(1.9rem, 3.4vw, 3.6rem); line-height:1.12;
-  margin-top:4vh;
+  position:absolute; z-index:2;
+  left:50%; top:52%; transform:translate(-50%,-50%);
+  width:min(46vw,640px);
 }
+.blog-title .fxl { text-align:center; }
 .blog-rail {
   display:flex; gap:1.8rem;
   overflow-x:auto; scroll-snap-type:x mandatory;
@@ -1284,15 +1292,11 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .sec-close {
   position:relative; color:var(--navy); text-align:center;
   padding:18vh 6vw;
-  background-color:#EDEBE4;
+  background-color:#EDEBE4; background-position:top center;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.015' numOctaves='4' seed='7'/><feDiffuseLighting lighting-color='%23f2f0ea' surfaceScale='2.6'><feDistantLight azimuth='235' elevation='56'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
   background-size:900px 900px;
 }
-.sec-close::before {
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(180deg, rgba(230,232,239,.35), rgba(255,255,255,.15) 60%, rgba(230,232,239,.4));
-  pointer-events:none;
-}
+.sec-close::before { content:none; }
 .close-inner { position:relative; }
 .close-title, .sec-close h2 { font-weight:600; font-size:clamp(1.5rem, 2.4vw, 2.5rem); color:var(--navy); text-shadow:0 1px 0 rgba(255,255,255,.6); }
 .sec-close p {
@@ -1303,7 +1307,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 /* ---------- 7 · FOOTER — water simulation canvas ---------- */
 .sec-footer {
   min-height:96vh; display:flex; overflow:hidden;
-  background-color:#EDEBE4;
+  background-color:#EDEBE4; background-position:top center;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.011 0.015' numOctaves='4' seed='7'/><feDiffuseLighting lighting-color='%23f2f0ea' surfaceScale='2.6'><feDistantLight azimuth='235' elevation='56'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>");
   background-size:900px 900px;
 }
@@ -1354,14 +1358,16 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   padding:16vh 5vw 9vh;
   display:flex; align-items:flex-end; justify-content:space-between; gap:3rem;
 }
-.footer-title { color:#fff; font-weight:800; font-size:clamp(3.2rem, 9vw, 10rem); line-height:.98; text-shadow:0 2px 22px rgba(2,13,44,.6); }
+.footer-title { color:#fff; font-weight:800; font-size:clamp(3.2rem, 9vw, 10rem); line-height:.72; text-shadow:0 2px 22px rgba(2,13,44,.6); }
 .footer-title .fxl { display:block; }
-.footer-contact h3 { color:var(--gold); font-weight:500; font-size:clamp(1.05rem, 1.6vw, 1.5rem); margin-bottom:1.2rem; }
-.footer-contact ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.7rem; }
+.footer-contact h3 { color:var(--gold); font-weight:600; font-size:clamp(1.05rem, 1.6vw, 1.5rem); margin-bottom:1.2rem; text-shadow:0 1px 8px rgba(2,13,44,.7); }
+.footer-contact { position:relative; }
+.footer-contact ul { list-style:none; margin:0; padding:1.1rem 1.3rem; display:flex; flex-direction:column; gap:.7rem; background:linear-gradient(180deg, rgba(2,13,44,.32), rgba(2,13,44,.16)); border-radius:14px; backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
 .footer-contact a {
   display:inline-flex; align-items:center; gap:.65em;
-  color:var(--offwhite); text-decoration:none;
-  font-family:'Noto Sans Hebrew',sans-serif; font-size:1rem;
+  color:#fff; text-decoration:none;
+  font-family:'Noto Sans Hebrew',sans-serif; font-size:1.05rem; font-weight:600;
+  text-shadow:0 1px 8px rgba(2,13,44,.75), 0 0 2px rgba(2,13,44,.6);
   transition:color .4s var(--ease);
 }
 .footer-contact a:hover { color:var(--cream); }
@@ -1386,13 +1392,9 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fxt-cmyk .fl::before { color:#00C4DB; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
 .fxt-cmyk .fl::after  { color:#E5289E; mix-blend-mode:multiply; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
 .fxt-cmyk .fl { text-shadow:calc(var(--cx) * -.6) calc(var(--cy) * .6) 0 rgba(250,220,0,calc(var(--k) * .9)); }
-/* underwater refraction — footer title */
+/* underwater refraction — footer title (ripple distortion only, no glow) */
 .fxt-water .fl::before, .fxt-water .fl::after { content:none; }
-.fxt-water .fl {
-  text-shadow:
-    0 0 calc(var(--k) * 16px) rgba(140,225,255, calc(var(--k) * .95)),
-    calc(var(--k) * 3px) calc(var(--k) * 2px) calc(var(--k) * 2px) rgba(80,180,230, calc(var(--k) * .6));
-}
+.fxt-water .fl { text-shadow:0 2px 22px rgba(2,13,44,.6); }
 
 /* ---------- Mobile ---------- */
 @media (max-width:768px){
@@ -1414,7 +1416,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
   .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
-  .blog-title { margin-top:3vh; }
+  .blog-title { width:74vw; font-size:clamp(1.3rem,5vw,2rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; }
   .footer-content { flex-direction:column; align-items:flex-start; gap:3rem; padding-top:13vh; }
