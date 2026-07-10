@@ -317,11 +317,14 @@ void main(){
     h += 0.6*sin((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3);
     h += 0.35*sin((u*6.3 + d*persp*3.1) + uT*0.31 + 2.6);
     h *= 0.5;
+    /* live sim: pointer + ambient waves travelling across the surface */
+    float e = 3.0/256.0;
+    float hs  = hgt(vec2(s.x + uT*0.006, d));
+    float hsx = hgt(vec2(s.x + uT*0.006 + e, d));
+    h += hs*22.0;
     float slope = cos((u*2.1 + d*persp*2.2) + uT*0.55)*2.1
-                + 0.6*cos((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3)*3.7;
-    /* live ripples from the pointer, gently added */
-    float rip = hgt(vec2(s.x + uT*0.010, d))*40.0;
-    slope += rip;
+                + 0.6*cos((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3)*3.7
+                + (hsx - hs)*900.0;   /* live ripple tilts the surface */
     float glint = pow(clamp(0.5 + slope*0.09, 0.0, 1.0), 1.6);
     vec3 sc = mix(surfBase, surfHi, glint);
     col = mix(sc, waterMid, smoothstep(0.30, 0.80, st));
@@ -423,7 +426,7 @@ function FooterWater() {
     const uDrawT = gl.getUniformLocation(drawP, "uT");
 
     const drops: number[][] = [];
-    const addDrop = (x: number, y: number, r: number, s: number) => { if (drops.length < 8) drops.push([x, y, r, s]); };
+    const addDrop = (x: number, y: number, r: number, s: number) => { if (drops.length < 16) drops.push([x, y, r, s]); };
 
     const step = () => {
       const d = drops.shift() || [0, 0, 1, 0];
@@ -467,12 +470,16 @@ function FooterWater() {
       const rc = canvas.getBoundingClientRect();
       const x = (e.clientX - rc.left) / rc.width, y = (e.clientY - rc.top) / rc.height;
       if (x < 0 || x > 1 || y < 0 || y > 1) return;
-      if (Math.hypot(x - lastX, y - lastY) > 0.02) {
+      if (Math.hypot(x - lastX, y - lastY) > 0.014) {
         const d = 0.15 + 0.8 * Math.min(1, Math.max(0, (y - 0.28) / 0.7));
+        // floor/depth drop (perspective-projected x) — casts caustics below
         const z = 3.4 - 2.4 * ((d - 0.15) / 0.8);
         const aspect = rc.width / rc.height;
         const wx = (x - 0.5) * z * aspect * 0.3 + 0.5;
-        addDrop(wx, d, 0.05, 0.007);
+        addDrop(wx, d, 0.05, 0.010);
+        // surface drop (plain screen x) — the crests read the sim at s.x, so
+        // this makes the wave visibly move right under the pointer up top
+        addDrop(x, d, 0.045, 0.012);
         lastX = x; lastY = y;
       }
     };
@@ -1361,8 +1368,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .footer-title { color:#fff; font-weight:800; font-size:clamp(3.2rem, 9vw, 10rem); line-height:.72; text-shadow:0 2px 22px rgba(2,13,44,.6); }
 .footer-title .fxl { display:block; }
 .footer-contact h3 { color:var(--gold); font-weight:600; font-size:clamp(1.05rem, 1.6vw, 1.5rem); margin-bottom:1.2rem; text-shadow:0 1px 8px rgba(2,13,44,.7); }
-.footer-contact { position:relative; }
-.footer-contact ul { list-style:none; margin:0; padding:1.1rem 1.3rem; display:flex; flex-direction:column; gap:.7rem; background:linear-gradient(180deg, rgba(2,13,44,.32), rgba(2,13,44,.16)); border-radius:14px; backdrop-filter:blur(3px); -webkit-backdrop-filter:blur(3px); }
+.footer-contact ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.7rem; }
 .footer-contact a {
   display:inline-flex; align-items:center; gap:.65em;
   color:#fff; text-decoration:none;
