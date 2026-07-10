@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>רומנית · שיעורים 1-2 · מדריך מסודר</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;800&family=Literata:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============ DESIGN TOKENS ============ */
+:root{
+  --navy:#1c2b4a;        /* טקסט ראשי וכותרות */
+  --ink:#2b3550;
+  --paper:#faf7f0;       /* רקע נייר חם */
+  --card:#ffffff;
+  --line:#e6e0d2;
+  --gold:#b8860b;        /* חוקים ותשומת לב */
+  --gold-bg:#fdf6e3;
+  --masc:#1d5fbf;        /* זכר - כחול */
+  --masc-bg:#eaf1fb;
+  --fem:#c2455f;         /* נקבה - ורוד/אדום */
+  --fem-bg:#fbeef1;
+  --sound:#177245;       /* הגייה - ירוק */
+  --sound-bg:#edf7f0;
+  --formal:#5b4a9e;      /* פנייה מנומסת - סגול */
+  --formal-bg:#f1eefb;
+  --soft:#6b7280;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:'Rubik',Arial,sans-serif; font-size:17px; line-height:1.65;
+  direction:rtl; text-align:right;
+}
+main{max-width:960px;margin:0 auto;padding:0 22px 90px}
+
+/* רומנית - תמיד LTR ומבודדת, פונט סריפי משלה */
+.ro{direction:ltr;unicode-bidi:isolate;font-family:'Literata',Georgia,serif;color:var(--navy);font-weight:600}
+.ro.big{font-size:1.35em}
+/* תעתיק הגייה - תמיד ירוק */
+.tl{color:var(--sound);font-weight:500;font-size:.92em;unicode-bidi:isolate}
+/* תרגום עברי */
+.he{color:var(--soft);font-size:.95em}
+
+/* ============ HEADER ============ */
+header.top{
+  background:var(--navy);color:#f5efdf;padding:52px 22px 44px;margin-bottom:36px;
+}
+header.top .inner{max-width:960px;margin:0 auto}
+header.top h1{font-size:2.1rem;font-weight:800;margin:0 0 6px;color:#fff}
+header.top .ro-title{font-family:'Literata',serif;color:#e3c565;font-size:1.15rem;direction:ltr;display:inline-block}
+header.top p{max-width:640px;color:#cfd6e6;margin:14px 0 0;font-size:.98rem}
+
+/* ============ NAV ============ */
+nav.toc{
+  background:var(--card);border:1px solid var(--line);border-radius:14px;
+  padding:18px 22px;margin-bottom:40px;display:flex;flex-wrap:wrap;gap:10px 22px;
+}
+nav.toc a{color:var(--navy);text-decoration:none;font-weight:500;font-size:.95rem}
+nav.toc a:hover{color:var(--gold)}
+nav.toc .unit{font-weight:800;color:var(--gold)}
+
+/* ============ SECTIONS ============ */
+section{margin-bottom:56px}
+h2.sec{
+  font-size:1.5rem;font-weight:800;color:var(--navy);
+  border-bottom:3px solid var(--gold);padding-bottom:8px;margin:0 0 6px;
+  display:flex;align-items:baseline;gap:12px;
+}
+h2.sec .num{
+  background:var(--navy);color:#f3e9c9;border-radius:8px;font-size:.85rem;
+  padding:2px 10px;font-weight:600;white-space:nowrap;
+}
+p.sec-sub{margin:4px 0 22px;color:var(--soft);font-size:.95rem}
+h3{font-size:1.12rem;color:var(--navy);margin:30px 0 12px;font-weight:600}
+
+/* ============ CARDS & BOXES ============ */
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin-bottom:18px}
+.rule{
+  background:var(--gold-bg);border-right:5px solid var(--gold);border-radius:10px;
+  padding:14px 18px;margin:16px 0;
+}
+.rule .ttl{font-weight:800;color:var(--gold);font-size:.85rem;letter-spacing:.05em;margin-bottom:4px}
+.note{background:var(--sound-bg);border-right:5px solid var(--sound);border-radius:10px;padding:12px 16px;margin:14px 0;font-size:.95rem}
+
+/* ============ TABLES ============ */
+table{width:100%;border-collapse:collapse;direction:rtl;background:var(--card);border-radius:12px;overflow:hidden;border:1px solid var(--line);margin:14px 0}
+th{background:var(--navy);color:#fff;font-weight:600;padding:10px 14px;text-align:right;font-size:.92rem}
+td{padding:10px 14px;border-top:1px solid var(--line);vertical-align:top;text-align:right}
+tr:nth-child(even) td{background:#fcfaf5}
+td .ro{font-size:1.05em}
+
+/* עמודות זכר/נקבה */
+th.m,td.m{background:var(--masc-bg)!important;border-top:1px solid #d7e4f7}
+th.m{background:var(--masc)!important;color:#fff}
+th.f,td.f{background:var(--fem-bg)!important;border-top:1px solid #f3d9e0}
+th.f{background:var(--fem)!important;color:#fff}
+.tag-m{color:var(--masc);font-weight:700}
+.tag-f{color:var(--fem);font-weight:700}
+.tag-formal{color:var(--formal);font-weight:700}
+
+/* ============ SOUND GRID (פונטיקה) ============ */
+.sound-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:14px;margin:14px 0}
+.sound-card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px}
+.sound-card .combo{
+  font-family:'Literata',serif;direction:ltr;text-align:left;font-weight:700;font-size:1.5rem;color:var(--navy);
+  display:flex;align-items:center;gap:10px;margin-bottom:2px;
+}
+.sound-card .combo .say{
+  background:var(--sound-bg);color:var(--sound);border-radius:8px;padding:1px 10px;font-size:1.05rem;font-family:'Rubik';direction:rtl;
+}
+.sound-card ul{margin:8px 0 0;padding:0;list-style:none}
+.sound-card li{padding:3px 0;border-top:1px dashed var(--line)}
+.sound-card li:first-child{border-top:none}
+.hard{outline:3px solid var(--gold);outline-offset:-3px}
+
+/* ============ מילים / vocab ============ */
+.vocab{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:8px 26px;margin:10px 0}
+.vitem{display:flex;justify-content:space-between;gap:14px;padding:7px 4px;border-bottom:1px dashed var(--line)}
+.vitem .ro{font-weight:600}
+
+/* ============ ניגודים ============ */
+.pairs{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.pair{
+  background:var(--card);border:1px solid var(--line);border-radius:999px;
+  padding:6px 16px;display:flex;align-items:center;gap:10px;font-size:.98rem;
+}
+.pair .vs{color:var(--gold);font-weight:800}
+
+/* ============ דיאלוג ============ */
+.dialog{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 0;margin:14px 0}
+.dline{display:grid;grid-template-columns:110px 1fr;gap:14px;padding:9px 20px;border-top:1px dashed var(--line);align-items:start}
+.dline:first-child{border-top:none}
+.dline .who{font-weight:700;font-size:.85rem;padding-top:3px}
+.dline.a .who{color:var(--fem)}
+.dline.b .who{color:var(--masc)}
+.dline .txt .ro{display:block;font-weight:600;font-size:1.02rem;text-align:left}
+.dline .txt .he{display:block;margin-top:1px}
+
+/* ============ מספרים ============ */
+.numgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;margin:12px 0}
+.numcell{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:8px 12px;display:flex;align-items:baseline;gap:10px}
+.numcell .n{font-weight:800;color:var(--gold);font-size:1.15rem;min-width:26px;text-align:center}
+.numcell .street{color:var(--sound);font-size:.85rem;direction:ltr;unicode-bidi:isolate;font-family:'Literata'}
+
+/* ============ ברכות לפי שעה ============ */
+.daytimes{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:12px 0;direction:rtl}
+.daycard{border-radius:14px;padding:16px;color:#fff;text-align:center}
+.daycard .ro{color:#fff;display:block;font-size:1.2rem}
+.daycard .tl{color:rgba(255,255,255,.92);display:block}
+.daycard .he{color:rgba(255,255,255,.85);display:block;font-size:.85rem;margin-top:2px}
+.d-morning{background:linear-gradient(160deg,#3f9d5a,#2c7a44)}
+.d-day{background:linear-gradient(160deg,#d9903a,#c07322)}
+.d-evening{background:linear-gradient(160deg,#a45330,#7e3c22)}
+.d-night{background:linear-gradient(160deg,#2c3e66,#1c2b4a)}
+
+/* ============ legend ============ */
+.legend{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 8px}
+.lg{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:.88rem}
+.dot{width:12px;height:12px;border-radius:50%;flex:none}
+
+footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line)}
+
+@media print{
+  header.top{padding:30px 22px}
+  nav.toc{display:none}
+  section{page-break-inside:avoid}
+}
+@media (max-width:560px){
+  .dline{grid-template-columns:1fr}
+  .dline .who{padding-top:0}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="inner">
+    <h1>רומנית מהיסוד · שיעורים 1-2</h1>
+    <span class="ro-title">Limba română · Unitatea 1-2</span>
+    <p>עריכה מחודשת ושיטתית של חומרי השיעורים בזום - מסודר לפי נושאים, עם קוד צבעים קבוע שילווה אותנו לכל אורך הקורס עד רמת B1.</p>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ מקרא ============ -->
+<section id="legend">
+  <h2 class="sec">איך לקרוא את המסמך הזה</h2>
+  <p class="sec-sub">קוד הצבעים והסימונים קבוע וישמש בכל חומרי הקורס - כך העין תלמד לזהות סוגי מידע באופן אוטומטי.</p>
+  <div class="legend">
+    <span class="lg"><span class="dot" style="background:var(--masc)"></span> כחול = זכר (masculin)</span>
+    <span class="lg"><span class="dot" style="background:var(--fem)"></span> ורוד = נקבה (feminin)</span>
+    <span class="lg"><span class="dot" style="background:var(--sound)"></span> ירוק = הגייה בתעתיק עברי</span>
+    <span class="lg"><span class="dot" style="background:var(--gold)"></span> זהב = חוק / כלל לזכור</span>
+    <span class="lg"><span class="dot" style="background:var(--formal)"></span> סגול = פנייה מנומסת (dumneavoastră)</span>
+  </div>
+  <div class="note">
+    התעתיק העברי הוא קירוב בלבד - שתי תנועות ברומנית לא קיימות בעברית:
+    <b>ă</b> (תנועה חטופה, כמו e בלועה - "אֶ" חלשה) מסומנת בתעתיק <b>אֳ</b>,
+    ו-<b>â / î</b> (צליל בין אִי לאוּ, נהגה עמוק בגרון) מסומן <b>ְא</b> עם קו תחתון: <span class="tl">אְ</span>.
+  </div>
+</section>
+
+<nav class="toc">
+  <span class="unit">שיעור 1:</span>
+  <a href="#sounds">צלילים ואותיות</a>
+  <a href="#cg">החוק הגדול של C ו-G</a>
+  <a href="#plural-soft">ריכוך עיצורים ברבים</a>
+  <a href="#greet">ברכות לפי שעות היום</a>
+  <a href="#intro">היכרות</a>
+  <a href="#smalltalk">נימוסים ושיחת חולין</a>
+  <span class="unit">שיעור 2:</span>
+  <a href="#pronouns">כינויי גוף</a>
+  <a href="#afi">הפועל a fi</a>
+  <a href="#place">מקום וזמן</a>
+  <a href="#gender">זכר ונקבה, יחיד ורבים</a>
+  <a href="#questions">מילות שאלה</a>
+  <a href="#numbers">מספרים 0-19</a>
+  <a href="#dialog">הדיאלוג המלא</a>
+  <a href="#vocab2">אוצר מילים</a>
+</nav>
+
+<!-- ============================================================
+     שיעור 1
+============================================================ -->
+
+<section id="sounds">
+  <h2 class="sec"><span class="num">שיעור 1</span> צלילים ואותיות שצריך להכיר מחדש</h2>
+  <p class="sec-sub">רוב האותיות נשמעות כמו שמצפים - אלה החריגות שחייבים לשלוט בהן לפני הכול.</p>
+
+  <div class="sound-grid">
+    <div class="sound-card">
+      <div class="combo">ă <span class="say">אֶ חטופה</span></div>
+      <ul>
+        <li><span class="ro">casă</span> · <span class="tl">קַאסֶה</span> · <span class="he">בית</span></li>
+        <li><span class="ro">seară</span> · <span class="tl">סֵיאַרֶה</span> · <span class="he">ערב</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">â / î <span class="say">בין אִי לאוּ</span></div>
+      <ul>
+        <li><span class="ro">câine</span> · <span class="tl">קְאִינֶה</span> · <span class="he">כלב</span></li>
+        <li><span class="ro">învăț</span> · <span class="tl">אְנְוַוץ</span> · <span class="he">אני לומד</span></li>
+        <li><span class="he">אותו צליל בדיוק: î בתחילת מילה, â באמצע</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">ș <span class="say">שׁ</span></div>
+      <ul>
+        <li><span class="ro">școală</span> · <span class="tl">שְקוֹאַלֶה</span> · <span class="he">בית ספר</span></li>
+        <li><span class="ro">șapte</span> · <span class="tl">שַאפְּטֶה</span> · <span class="he">שבע</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">ț <span class="say">צ</span></div>
+      <ul>
+        <li><span class="ro">țigară</span> · <span class="tl">צִיגַארֶה</span> · <span class="he">סיגריה</span></li>
+        <li><span class="ro">țară</span> · <span class="tl">צַארֶה</span> · <span class="he">מדינה</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">e בתחילת מילה <span class="say">יֶה</span></div>
+      <ul>
+        <li><span class="he">רק בכינויי גוף ובפועל "להיות":</span></li>
+        <li><span class="ro">eu, el, ea, ei, ele</span> · <span class="tl">יֶאוּ, יֶל, יַה, יֵיי, יֶלֶה</span></li>
+        <li><span class="he">בכל שאר המילים - e רגילה:</span> <span class="ro">Europa, Elena, mare</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">i בסוף מילה <span class="say">חצי-נשמעת</span></div>
+      <ul>
+        <li><span class="he">i קצרה בסוף מילה כמעט לא נשמעת - רק "מרככת" את העיצור:</span></li>
+        <li><span class="ro">flori</span> · <span class="tl">פְלוֹרְי</span> · <span class="he">פרחים</span></li>
+        <li><span class="ro">cărți</span> · <span class="tl">קֶרְץ'</span> · <span class="he">ספרים</span></li>
+        <li><span class="he">אבל ii כפולה נשמעת במלואה:</span> <span class="ro">copii</span> · <span class="tl">קוֹפִּי</span></li>
+      </ul>
+    </div>
+    <div class="sound-card">
+      <div class="combo">x <span class="say">קְס / גְז</span></div>
+      <ul>
+        <li><span class="tl">[קְס]</span> <span class="ro">taxi, pix, xerox</span></li>
+        <li><span class="tl">[גְז]</span> <span class="ro">examen, exemplu</span> · <span class="he">מבחן, דוגמה</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="cg">
+  <h2 class="sec"><span class="num">שיעור 1</span> החוק הגדול: C ו-G משנות צליל לפני E ו-I</h2>
+  <p class="sec-sub">זה החוק הפונטי החשוב ביותר ברומנית. שש משבצות - והוא סגור. בדיוק כמו באיטלקית.</p>
+
+  <div class="rule">
+    <div class="ttl">REGULA · הכלל</div>
+    לפני <b>e / i</b> האותיות c ו-g מתרככות (צ' / ג'). האות <b>h</b> באמצע "מגינה" עליהן ומחזירה את הצליל הקשה (ק / ג).
+  </div>
+
+  <table>
+    <tr>
+      <th>הצירוף</th><th>הצליל</th><th>דוגמאות</th>
+    </tr>
+    <tr>
+      <td><span class="ro big">c + a/ă/â/o/u</span></td>
+      <td><span class="tl">ק [k]</span></td>
+      <td><span class="ro">casă</span> בית · <span class="ro">cămașă</span> חולצה · <span class="ro">câine</span> כלב</td>
+    </tr>
+    <tr>
+      <td><span class="ro big">ce / ci</span></td>
+      <td><span class="tl">צֶ'ה / צִ'י [ʧ]</span></td>
+      <td><span class="ro">ceas</span> שעון · <span class="ro">ceai</span> תה · <span class="ro">cinema</span> קולנוע · <span class="ro">ciocolată</span> שוקולד</td>
+    </tr>
+    <tr>
+      <td><span class="ro big">che / chi</span></td>
+      <td><span class="tl">קֶה / קִי [k]</span></td>
+      <td><span class="ro">cheie</span> מפתח · <span class="ro">chelner</span> מלצר · <span class="ro">chibrit</span> גפרור · <span class="ro">rochie</span> שמלה</td>
+    </tr>
+    <tr>
+      <td><span class="ro big">g + a/ă/â/o/u</span></td>
+      <td><span class="tl">ג [g]</span></td>
+      <td><span class="ro">gară</span> תחנת רכבת · <span class="ro">a găti</span> לבשל · <span class="ro">gât</span> צוואר</td>
+    </tr>
+    <tr>
+      <td><span class="ro big">ge / gi</span></td>
+      <td><span class="tl">גֶ'ה / גִ'י [ʤ]</span></td>
+      <td><span class="ro">geantă</span> תיק · <span class="ro">minge</span> כדור · <span class="ro">agendă</span> יומן · <span class="ro">frigider</span> מקרר · <span class="ro">pagină</span> עמוד</td>
+    </tr>
+    <tr>
+      <td><span class="ro big">ghe / ghi</span></td>
+      <td><span class="tl">גֶה / גִי [g]</span></td>
+      <td><span class="ro">înghețată</span> גלידה · <span class="ro">gheață</span> קרח · <span class="ro">ghid</span> מדריך · <span class="ro">ghimbir</span> ג'ינג'ר</td>
+    </tr>
+  </table>
+
+  <div class="note">
+    דרך זכירה: <b>ce-ci / ge-gi = רך</b> (צ' / ג'), מוסיפים <b>h = קשה</b> (ק / ג). ה-h היא "שומר הראש" של הצליל הקשה.
+  </div>
+</section>
+
+<section id="plural-soft">
+  <h2 class="sec"><span class="num">שיעור 1</span> ריכוך עיצורים לפני i של הרבים</h2>
+  <p class="sec-sub">כשמוסיפים i בסוף מילה (בדרך כלל ברבים), העיצור שלפניה משתנה. ארבעה דפוסים קבועים:</p>
+  <table>
+    <tr><th>הכלל</th><th>יחיד ← רבים</th><th>הגייה</th></tr>
+    <tr><td><span class="ro">t + i = ți</span></td><td><span class="ro">student → studenți</span> <span class="he">סטודנט(ים)</span></td><td><span class="tl">סטוּדֶנְץ'</span></td></tr>
+    <tr><td><span class="ro">s + i = și</span></td><td><span class="ro">pas → pași</span> <span class="he">צעד(ים)</span></td><td><span class="tl">פַּאשְ</span></td></tr>
+    <tr><td><span class="ro">d + i = zi</span></td><td><span class="ro">brad → brazi</span> <span class="he">אשוח(ים)</span></td><td><span class="tl">בְּרַאזְ</span></td></tr>
+    <tr><td><span class="ro">st + i = ști</span></td><td><span class="ro">turist → turiști</span> <span class="he">תייר(ים)</span></td><td><span class="tl">טוּרִישְטְ</span></td></tr>
+  </table>
+
+  <h3>תרגול קריאה - זוגות מינימליים מהשיעור</h3>
+  <div class="pairs">
+    <span class="pair"><span class="ro">nas</span><span class="vs">/</span><span class="ro">pas</span></span>
+    <span class="pair"><span class="ro">pune</span><span class="vs">/</span><span class="ro">bune</span></span>
+    <span class="pair"><span class="ro">pere</span><span class="vs">/</span><span class="ro">bere</span></span>
+    <span class="pair"><span class="ro">sare</span><span class="vs">/</span><span class="ro">zare</span></span>
+    <span class="pair"><span class="ro">doi</span><span class="vs">/</span><span class="ro">voi</span></span>
+    <span class="pair"><span class="ro">rău</span><span class="vs">/</span><span class="ro">râu</span></span>
+    <span class="pair"><span class="ro">când</span><span class="vs">/</span><span class="ro">gând</span></span>
+    <span class="pair"><span class="ro">tată</span><span class="vs">/</span><span class="ro">dată</span></span>
+    <span class="pair"><span class="ro">fată</span><span class="vs">/</span><span class="ro">vată</span></span>
+    <span class="pair"><span class="ro">țară</span><span class="vs">/</span><span class="ro">vară</span></span>
+    <span class="pair"><span class="ro">peste</span><span class="vs">/</span><span class="ro">veste</span></span>
+    <span class="pair"><span class="ro">lungă</span><span class="vs">/</span><span class="ro">lângă</span></span>
+  </div>
+
+  <div class="card">
+    <b>מילות ההכתבה מהשיעור</b> (טוב לתרגול קריאה בקול):<br>
+    <span class="ro" style="font-weight:400">clasă, dimineață, facultate, universitate, student, medici, colegi, băiat, România, cal, mână, floare, Cristina, hartă, joc, Laura, leu, Constanța, exercițiu, secretariat, doamnă, școală, înghețată, limba română, cheie, cinci, geantă, pași, chitară, lângă, bancă, doi</span>
+  </div>
+</section>
+
+<section id="greet">
+  <h2 class="sec"><span class="num">שיעור 1</span> ברכות לפי שעות היום</h2>
+  <div class="daytimes">
+    <div class="daycard d-morning">
+      <span class="ro">Bună dimineața!</span>
+      <span class="tl">בּוּנֶה דִימִינְיַאצַה</span>
+      <span class="he">בוקר טוב</span>
+    </div>
+    <div class="daycard d-day">
+      <span class="ro">Bună ziua!</span>
+      <span class="tl">בּוּנֶה זִיוּאַה</span>
+      <span class="he">יום טוב / שלום (ביום)</span>
+    </div>
+    <div class="daycard d-evening">
+      <span class="ro">Bună seara!</span>
+      <span class="tl">בּוּנֶה סֵיאַרַה</span>
+      <span class="he">ערב טוב</span>
+    </div>
+    <div class="daycard d-night">
+      <span class="ro">Noapte bună!</span>
+      <span class="tl">נוֹאַפְּטֶה בּוּנֶה</span>
+      <span class="he">לילה טוב</span>
+    </div>
+  </div>
+
+  <h3>שלום ולהתראות</h3>
+  <table>
+    <tr><th>מתי</th><th>מה אומרים</th><th>פירוש</th></tr>
+    <tr><td>שלום לא-רשמי</td><td><span class="ro">Bună! / Salut!</span> <span class="tl">בּוּנֶה / סַלוּט</span></td><td>היי / אהלן</td></tr>
+    <tr><td>פרידה</td><td><span class="ro">La revedere! / Pa!</span> <span class="tl">לַה רֶוֶודֶרֶה / פַּה</span></td><td>להתראות / ביי</td></tr>
+    <tr><td>נתראה מחר</td><td><span class="ro">Pe mâine (dimineață / seară)!</span> <span class="tl">פֶּה מְאִינֶה</span></td><td>עד מחר (בבוקר / בערב)</td></tr>
+    <tr><td>נתראה הערב</td><td><span class="ro">Pe diseară!</span> <span class="tl">פֶּה דִיסֵיאַרֶה</span></td><td>עד הערב (גם: deseară)</td></tr>
+    <tr><td>איחול יום</td><td><span class="ro">O zi bună! / O seară bună!</span></td><td>יום טוב / ערב נעים</td></tr>
+    <tr><td>לפני שינה</td><td><span class="ro">Somn ușor! / Vise plăcute!</span> <span class="tl">סוֹמְן אוּשׁוֹר / וִיסֶה פְּלֶקוּטֶה</span></td><td>שינה קלה / חלומות נעימים</td></tr>
+    <tr><td>חיבה</td><td><span class="ro">Te pup!</span> <span class="tl">טֶה פּוּפּ</span></td><td>נשיקות (בסיום שיחה קרובה)</td></tr>
+    <tr><td class="tag-formal">כבוד מסורתי</td><td><span class="ro">Sărut mâna!</span> <span class="tl">סֶרוּט מְאְנַה</span></td><td>"נשיקת יד" - ברכת כבוד לנשים ולמבוגרים. שימושי מול סבתא!</td></tr>
+  </table>
+  <div class="note">
+    אגב דקדוק קטן שהמורה שרבטה בצד: <span class="ro">un vis - două vise / două visuri</span> · חלום אחד, שני חלומות (שתי צורות רבים תקינות).
+  </div>
+</section>
+
+<section id="intro">
+  <h2 class="sec"><span class="num">שיעור 1</span> להכיר מישהו · A face cunoștință</h2>
+  <p class="sec-sub">ברומנית יש הפרדה חדה בין פנייה מנומסת (סגול) לפנייה חברית - כמו בצרפתית. זו הבחנה שתחזור בכל הקורס.</p>
+
+  <table>
+    <tr>
+      <th style="width:34%">השאלה</th>
+      <th class="tag-formal">מנומס · dumneavoastră</th>
+      <th>חברי · tu</th>
+    </tr>
+    <tr>
+      <td>איך קוראים לך?</td>
+      <td><span class="ro">Cum vă cheamă?</span><br><span class="tl">קוּם וֶה קְיַאמֶה</span></td>
+      <td><span class="ro">Cum te cheamă?</span><br><span class="tl">קוּם טֶה קְיַאמֶה</span></td>
+    </tr>
+    <tr>
+      <td>איך את/ה נקרא/ת?</td>
+      <td><span class="ro">Cum vă numiți?</span></td>
+      <td><span class="ro">Cum te numești?</span></td>
+    </tr>
+    <tr>
+      <td>מה שמך?</td>
+      <td><span class="ro">Care este numele dumneavoastră (dvs.)?</span></td>
+      <td><span class="ro">Care este numele tău?</span></td>
+    </tr>
+  </table>
+
+  <div class="card">
+    <b>ארבע דרכים לענות</b> - כולן נכונות:<br>
+    <span class="ro">Sunt ...</span> <span class="he">(אני...)</span> ·
+    <span class="ro">Numele meu este ...</span> <span class="he">(שמי הוא...)</span> ·
+    <span class="ro">Mă numesc ...</span> <span class="he">(אני נקרא/ת...)</span> ·
+    <span class="ro">Mă cheamă ...</span> <span class="he">(קוראים לי...)</span>
+  </div>
+
+  <div class="dialog">
+    <div class="dline b"><span class="who">אורח</span><span class="txt"><span class="ro">- Bună ziua! Numele meu este Alzir Oliveira.</span><span class="he">שלום! שמי אלזיר אוליביירה.</span></span></div>
+    <div class="dline a"><span class="who">מריה</span><span class="txt"><span class="ro">- Bună ziua! Mă numesc Maria Popescu.</span><span class="he">שלום! אני נקראת מריה פופסקו.</span></span></div>
+    <div class="dline b"><span class="who">אורח</span><span class="txt"><span class="ro">- Îmi pare bine (de cunoștință)!</span><span class="he">נעים מאוד (להכיר)! · <span class="tl">אְים פַּארֶה בִּינֶה</span> · אפשר גם: Mă bucur! / Noroc!</span></span></div>
+    <div class="dline a"><span class="who">מריה</span><span class="txt"><span class="ro">- Și mie!</span><span class="he">גם לי! · <span class="tl">שִׁי מִיֶה</span></span></span></div>
+  </div>
+</section>
+
+<section id="smalltalk">
+  <h2 class="sec"><span class="num">שיעור 1</span> מה שלומך, תודה וסליחה</h2>
+
+  <h3>מה שלומך? - שתי גרסאות מקבילות</h3>
+  <table>
+    <tr><th class="tag-formal">מנומס</th><th>חברי</th></tr>
+    <tr>
+      <td>
+        <span class="ro">- Ce mai faceți?</span> <span class="he">מה שלומכם/ך?</span><br>
+        <span class="ro">- Excelent, mulțumesc!</span> <span class="he">מצוין, תודה!</span><br>
+        <span class="ro">- Dumneavoastră?</span> <span class="he">ואתם/ה?</span><br>
+        <span class="ro">- Așa și așa.</span> <span class="he">ככה-ככה.</span>
+      </td>
+      <td>
+        <span class="ro">- Ce mai faci?</span> <span class="he">מה נשמע? · <span class="tl">צֶ'ה מַיי פַאץ'</span></span><br>
+        <span class="ro">- Foarte bine, mulțumesc! Tu?</span> <span class="he">מצוין, תודה! ואתה?</span><br>
+        <span class="ro">- Nu prea bine.</span> <span class="he">לא משהו.</span>
+      </td>
+    </tr>
+  </table>
+
+  <h3>מה אתה עושה עכשיו?</h3>
+  <div class="card">
+    <span class="ro">- Ce faci (tu) acum? / Ce faceți (voi) acum?</span> <span class="he">מה אתה עושה / אתם עושים עכשיו?</span><br>
+    <span class="ro">- Eu studiez limba română. / Noi studiem limba engleză.</span> <span class="he">אני לומד רומנית. / אנחנו לומדים אנגלית.</span><br>
+    <span class="he">שני פעלים ל"ללמוד": <span class="ro">a studia</span> (ללמוד/לחקור) · <span class="ro">a învăța</span> (ללמוד/לשנן)</span>
+  </div>
+
+  <h3>סליחה ותודה</h3>
+  <table>
+    <tr><th>מצב</th><th class="tag-formal">מנומס</th><th>חברי</th></tr>
+    <tr>
+      <td>להתנצל</td>
+      <td><span class="ro">Îmi pare rău! Vă rog să mă scuzați!</span><br><span class="he">אני מצטער! סלחו לי בבקשה!</span></td>
+      <td><span class="ro">Îmi pare rău! Te rog să mă scuzi!</span><br><span class="he">מצטער! סלח לי בבקשה!</span></td>
+    </tr>
+    <tr>
+      <td>לענות להתנצלות</td>
+      <td colspan="2"><span class="ro">Nu face nimic! / Nicio problemă!</span> <span class="he">זה כלום! / אין בעיה!</span></td>
+    </tr>
+    <tr>
+      <td>להודות</td>
+      <td colspan="2"><span class="ro">Mulțumesc! / Mulțumesc pentru ajutor!</span> <span class="tl">מוּלְצוּמֶסְק</span> <span class="he">תודה / תודה על העזרה</span></td>
+    </tr>
+    <tr>
+      <td>לענות לתודה</td>
+      <td colspan="2"><span class="ro">Cu plăcere!</span> <span class="tl">קוּ פְּלֶצֶ'רֶה</span> <span class="he">בשמחה / על לא דבר</span></td>
+    </tr>
+  </table>
+  <div class="note">
+    שימו לב לניגוד: <span class="ro">Îmi pare bine</span> (נעים לי) ↔ <span class="ro">Îmi pare rău</span> (צר לי). אותו תבנית, מילה אחת מתחלפת.
+    ולנטילת פועל: <span class="ro">a mulțumi → eu mulțumesc, tu mulțumești</span>.
+  </div>
+</section>
+
+<!-- ============================================================
+     שיעור 2
+============================================================ -->
+
+<section id="pronouns">
+  <h2 class="sec"><span class="num">שיעור 2</span> כינויי גוף · Pronumele personal</h2>
+  <p class="sec-sub">ברומנית, בניגוד לעברית, כינוי הגוף לרוב מושמט - הפועל כבר "מכיל" אותו. הסוגריים בטבלאות הבאות מסמנים בדיוק את זה.</p>
+  <table>
+    <tr><th></th><th>יחיד</th><th>רבים</th></tr>
+    <tr><td>גוף ראשון</td><td><span class="ro">eu</span> <span class="tl">[יֶאוּ]</span> אני</td><td><span class="ro">noi</span> <span class="tl">[נוֹי]</span> אנחנו</td></tr>
+    <tr><td>גוף שני</td><td><span class="ro">tu</span> אתה/את</td><td><span class="ro">voi</span> אתם/אתן</td></tr>
+    <tr><td>גוף שלישי <span class="tag-m">זכר</span></td><td class="m"><span class="ro">el</span> <span class="tl">[יֶל]</span> הוא</td><td class="m"><span class="ro">ei</span> <span class="tl">[יֵיי]</span> הם</td></tr>
+    <tr><td>גוף שלישי <span class="tag-f">נקבה</span></td><td class="f"><span class="ro">ea</span> <span class="tl">[יַה]</span> היא</td><td class="f"><span class="ro">ele</span> <span class="tl">[יֶלֶה]</span> הן</td></tr>
+  </table>
+  <div class="note">כל הכינויים שמתחילים ב-e נהגים עם י' בהתחלה - זה בדיוק הכלל של "e בתחילת מילה" משיעור 1.</div>
+</section>
+
+<section id="afi">
+  <h2 class="sec"><span class="num">שיעור 2</span> הפועל להיות · A fi בהווה</h2>
+  <p class="sec-sub">הפועל החשוב ביותר בשפה. בניגוד לעברית - ברומנית "להיות" קיים גם בהווה (אני *הוא* סטודנט = Eu sunt student).</p>
+
+  <table>
+    <tr><th></th><th>חיובי</th><th>שלילי</th></tr>
+    <tr>
+      <td><span class="ro">(eu)</span> אני</td>
+      <td><span class="ro big">sunt</span> <span class="tl">[סוּנְט]</span></td>
+      <td><span class="ro">nu sunt / nu-s</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro">(tu)</span> אתה/את</td>
+      <td><span class="ro big">ești</span> <span class="tl">[יֶשְׁטְ]</span></td>
+      <td><span class="ro">nu ești</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro">(el/ea)</span> הוא/היא</td>
+      <td><span class="ro big">este / e</span> <span class="tl">[יֶסְטֶה / יֶה]</span></td>
+      <td><span class="ro">nu este / nu-i</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro">(noi)</span> אנחנו</td>
+      <td><span class="ro big">suntem</span> <span class="tl">[סוּנְטֶם]</span></td>
+      <td><span class="ro">nu suntem</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro">(voi)</span> אתם/ן</td>
+      <td><span class="ro big">sunteți</span> <span class="tl">[סוּנְטֶץ']</span></td>
+      <td><span class="ro">nu sunteți</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro">(ei/ele)</span> הם/הן</td>
+      <td><span class="ro big">sunt</span> <span class="tl">[סוּנְט]</span></td>
+      <td><span class="ro">nu sunt / nu-s</span></td>
+    </tr>
+  </table>
+
+  <div class="rule">
+    <div class="ttl">שימו לב</div>
+    <b>sunt</b> משרת גם "אני" וגם "הם/הן" - את ההבדל מבינים מההקשר או מכינוי הגוף.
+    השלילה תמיד פשוטה: <b>nu</b> לפני הפועל. הצורות המקוצרות (nu-s, nu-i, e) שכיחות מאוד בדיבור.
+  </div>
+</section>
+
+<section id="place">
+  <h2 class="sec"><span class="num">שיעור 2</span> מקום וזמן · שאלות עם "de"</h2>
+  <p class="sec-sub">תוספת de קטנה הופכת את השאלה: איפה ← מאיפה, מתי ← ממתי. תבנית שחוזרת בכל השפה.</p>
+
+  <table>
+    <tr><th style="width:22%">השאלה</th><th>דוגמה</th><th>תשובה</th></tr>
+    <tr>
+      <td><span class="ro big">Unde?</span><br><span class="he">איפה?</span></td>
+      <td><span class="ro">Unde este el?</span><br><span class="ro">Unde este Maria?</span></td>
+      <td><span class="ro">El este la facultate.</span> <span class="he">הוא בפקולטה</span><br><span class="ro">Maria este în România.</span> <span class="he">מריה ברומניה</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro big">De unde?</span><br><span class="he">מאיפה?</span></td>
+      <td><span class="ro">De unde este el?</span><br><span class="ro">Din ce țară / oraș este?</span> <span class="he">מאיזו מדינה / עיר?</span></td>
+      <td><span class="ro">El este din România.</span><br><span class="ro">Este din Constanța.</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro big">Când?</span><br><span class="he">מתי?</span></td>
+      <td><span class="ro">Când ești la facultate?</span></td>
+      <td><span class="ro">Mâine dimineață.</span> <span class="he">מחר בבוקר</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro big">De când?</span><br><span class="he">ממתי? / כמה זמן כבר?</span></td>
+      <td><span class="ro">De când ești în România?</span></td>
+      <td><span class="ro">De două zile.</span> <span class="he">כבר יומיים</span></td>
+    </tr>
+  </table>
+
+  <div class="rule">
+    <div class="ttl">מילות היחס של מקום</div>
+    <span class="ro">în</span> = בתוך ↔ <span class="ro">din</span> = מתוך · <span class="ro">la</span> = ב/אצל (מוסד, מקום) ·
+    דוגמה מהשיעור: <span class="ro">în geantă / din geantă</span> - בתיק / מהתיק.
+  </div>
+</section>
+
+<section id="gender">
+  <h2 class="sec"><span class="num">שיעור 2</span> שם העצם: זכר ונקבה, יחיד ורבים</h2>
+  <p class="sec-sub">כאן קוד הצבעים עושה את העבודה: כחול = זכר, ורוד = נקבה. שימו לב - גם למספרים 1 ו-2 יש מין!</p>
+
+  <table>
+    <tr>
+      <th></th>
+      <th class="m">זכר · יחיד</th>
+      <th class="m">זכר · רבים</th>
+      <th class="f">נקבה · יחיד</th>
+      <th class="f">נקבה · רבים</th>
+    </tr>
+    <tr>
+      <td><b>"אחד/שניים"</b></td>
+      <td class="m"><span class="ro big">UN</span></td>
+      <td class="m"><span class="ro big">DOI</span></td>
+      <td class="f"><span class="ro big">O</span></td>
+      <td class="f"><span class="ro big">DOUĂ</span></td>
+    </tr>
+    <tr>
+      <td>עמית/ה</td>
+      <td class="m"><span class="ro">coleg</span></td>
+      <td class="m"><span class="ro">colegi</span></td>
+      <td class="f"><span class="ro">colegă</span></td>
+      <td class="f"><span class="ro">colege</span></td>
+    </tr>
+    <tr>
+      <td>מורה</td>
+      <td class="m"><span class="ro">profesor</span></td>
+      <td class="m"><span class="ro">profesori</span></td>
+      <td class="f"><span class="ro">profesoară</span></td>
+      <td class="f"><span class="ro">profesoare</span></td>
+    </tr>
+    <tr>
+      <td>סטודנט/ית</td>
+      <td class="m"><span class="ro">student</span></td>
+      <td class="m"><span class="ro">studenți</span></td>
+      <td class="f"><span class="ro">studentă</span></td>
+      <td class="f"><span class="ro">studente</span></td>
+    </tr>
+    <tr>
+      <td><b>הסיומת</b></td>
+      <td class="m"><b>- Ø</b> (בלי סיומת)</td>
+      <td class="m"><b>-i</b></td>
+      <td class="f"><b>-ă</b></td>
+      <td class="f"><b>-e</b></td>
+    </tr>
+  </table>
+
+  <div class="rule">
+    <div class="ttl">ATENȚIE · ההיפוך מהעברית</div>
+    בעברית: סטודנט ← סטודנט<b>ית</b> (מוסיפים לנקבה). ברומנית התבנית דומה (מוסיפים ă לנקבה), <b>אבל</b> המספרים מתחלפים לגמרי:
+    <span class="tag-m">doi studenți</span> / <span class="tag-f">două studente</span> ·
+    וגם בעשרות: <span class="tag-m">doisprezece</span> (12 זכר) / <span class="tag-f">douăsprezece</span> (12 נקבה).
+  </div>
+
+  <div class="card">
+    <b>מקצוע וקורס - תמיד עם DE ובלי יידוע:</b><br>
+    <span class="ro">profesor de matematică / de chimie / de biologie</span> · <span class="he">מורה למתמטיקה / כימיה / ביולוגיה</span><br>
+    <span class="ro">curs de limba română</span> · <span class="he">קורס לשפה הרומנית</span>
+  </div>
+
+  <div class="card">
+    <b>עוד רבים שהופיעו בשיעור:</b>
+    <span class="ro">o casă - două case</span> בית ·
+    <span class="ro">o fată - două fete</span> ילדה ·
+    <span class="ro">un câine - doi câini</span> כלב ·
+    <span class="ro">un băiat - doi băieți</span> ילד ·
+    <span class="ro">un telefon - două telefoane</span> טלפון ·
+    <span class="ro">o țară - două țări</span> מדינה ·
+    <span class="ro">un oraș - două orașe</span> עיר ·
+    <span class="ro">o carte - cărți</span> ספר<br>
+    <span class="he">ו-<span class="ro">niște</span> = "כמה / איזה" (כמות לא מוגדרת): <span class="ro">niște flori, niște cărți, niște copii, niște lămâi</span></span>
+  </div>
+</section>
+
+<section id="questions">
+  <h2 class="sec"><span class="num">שיעור 2</span> מילות שאלה · Cine? Ce? Câți? Câte?</h2>
+
+  <table>
+    <tr><th style="width:26%">מילת השאלה</th><th>שאלה</th><th>תשובה</th></tr>
+    <tr>
+      <td><span class="ro big">Cine?</span> <span class="he">מי?</span></td>
+      <td><span class="ro">Cine este el? / Cine este ea?</span></td>
+      <td><span class="ro">El este Mihai. / Ea este Mihaela.</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro big">Ce?</span> <span class="he">מה?</span></td>
+      <td><span class="ro">Ce este el? / Ce ești tu?</span> <span class="he">(במה הוא עוסק?)</span></td>
+      <td><span class="ro">El este profesor de limba română.</span><br><span class="ro">Eu sunt student la medicină.</span></td>
+    </tr>
+    <tr>
+      <td class="m"><span class="ro big">Câți?</span> <span class="he">כמה?</span> <span class="tag-m">+ זכר רבים</span></td>
+      <td class="m"><span class="ro">Câți profesori sunt în clasă?</span><br><span class="ro">Câți studenți sunt din China?</span></td>
+      <td class="m"><span class="ro">În clasă este un profesor.</span><br><span class="ro">Doi (studenți sunt din China).</span></td>
+    </tr>
+    <tr>
+      <td class="f"><span class="ro big">Câte?</span> <span class="he">כמה?</span> <span class="tag-f">+ נקבה רבים</span></td>
+      <td class="f"><span class="ro">Câte profesoare sunt în clasă?</span><br><span class="ro">Câte cărți sunt aici?</span></td>
+      <td class="f"><span class="ro">În clasă este o profesoară.</span><br><span class="ro">Aici sunt 12 (douăsprezece).</span></td>
+    </tr>
+    <tr>
+      <td><span class="ro big">Cât?</span> <span class="he">כמה? (כמות/מידה)</span></td>
+      <td><span class="ro">Cât este ceasul? / Ce oră este?</span></td>
+      <td><span class="he">מה השעה? - נלמד בהמשך</span></td>
+    </tr>
+  </table>
+  <div class="note">
+    בעברית "כמה" אחת מספיקה. ברומנית - מילת השאלה עצמה מוטה לפי המין. עוד ביטוי לעיקרון שהמין מחלחל לכל חלקי המשפט.
+  </div>
+</section>
+
+<section id="numbers">
+  <h2 class="sec"><span class="num">שיעור 2</span> המספרים 0-19</h2>
+  <p class="sec-sub">בירוק, בסוגריים - צורת הרחוב המקוצרת שנשמעת בדיבור יומיומי (familiar/popular, pe stradă).</p>
+
+  <h3>0-10</h3>
+  <div class="numgrid">
+    <div class="numcell"><span class="n">0</span><span class="ro">zero</span></div>
+    <div class="numcell"><span class="n">1</span><span class="ro">unu</span></div>
+    <div class="numcell"><span class="n">2</span><span class="ro">doi</span></div>
+    <div class="numcell"><span class="n">3</span><span class="ro">trei</span></div>
+    <div class="numcell"><span class="n">4</span><span class="ro">patru</span></div>
+    <div class="numcell"><span class="n">5</span><span class="ro">cinci</span> <span class="tl">[צִ'ינְץ']</span></div>
+    <div class="numcell"><span class="n">6</span><span class="ro">șase</span> <span class="tl">[שַאסֶה]</span></div>
+    <div class="numcell"><span class="n">7</span><span class="ro">șapte</span></div>
+    <div class="numcell"><span class="n">8</span><span class="ro">opt</span></div>
+    <div class="numcell"><span class="n">9</span><span class="ro">nouă</span></div>
+    <div class="numcell"><span class="n">10</span><span class="ro">zece</span> <span class="tl">[זֶצֶ'ה]</span></div>
+  </div>
+
+  <div class="rule">
+    <div class="ttl">REGULA · 11-19</div>
+    <span class="ro" style="font-size:1.2em">X + SPRE + ZECE</span> · מילולית: "X לעבר עשר". כמו "אחד-עשרה" בעברית, רק עם מילת קישור באמצע.
+  </div>
+
+  <div class="numgrid">
+    <div class="numcell"><span class="n">11</span><span class="ro">unsprezece</span> <span class="street">[unșpe]</span></div>
+    <div class="numcell"><span class="n">12</span><span class="ro">doisprezece</span> <span class="street">[doișpe]</span></div>
+    <div class="numcell"><span class="n">13</span><span class="ro">treisprezece</span> <span class="street">[treișpe]</span></div>
+    <div class="numcell"><span class="n">14</span><span class="ro">paisprezece</span> <span class="street">[paișpe]</span></div>
+    <div class="numcell"><span class="n">15</span><span class="ro">cincisprezece</span> <span class="street">[cinșpe]</span></div>
+    <div class="numcell"><span class="n">16</span><span class="ro">șaisprezece</span> <span class="street">[șaișpe]</span></div>
+    <div class="numcell"><span class="n">17</span><span class="ro">șaptesprezece</span> <span class="street">[șaptișpe]</span></div>
+    <div class="numcell"><span class="n">18</span><span class="ro">optsprezece</span> <span class="street">[optișpe]</span></div>
+    <div class="numcell"><span class="n">19</span><span class="ro">nouăsprezece</span> <span class="street">[nouășpe]</span></div>
+  </div>
+
+  <div class="note">
+    יוצאי דופן קלים: 14 = <b>pai</b>sprezece (לא patrusprezece), 16 = <b>șai</b>sprezece (לא șasesprezece).
+  </div>
+
+  <div class="card">
+    <b>שימוש במספרים - שני דברים שהמורה הוסיפה:</b><br>
+    1. מ-20 ומעלה מוסיפים <span class="ro">de</span> לפני שם העצם: <span class="ro">20 de copii, 21 de copii</span> (אבל: <span class="ro">12 copii</span> בלי de).<br>
+    2. גיל: <span class="ro">- Câți ani ai? - Eu am 45 de ani.</span> <span class="he">בן כמה אתה? - אני בן 45. מילולית: "יש לי 45 שנים" - כמו בעברית "בן", לא כמו באנגלית I am.</span>
+  </div>
+</section>
+
+<section id="dialog">
+  <h2 class="sec"><span class="num">שיעור 2</span> הדיאלוג המלא · Cine este ea?</h2>
+  <p class="sec-sub">הטקסט המרכזי של יחידה 2 - כיתת סטודנטים זרים בקונסטנצה. כל מה שלמדנו מופיע כאן בפעולה: a fi, de unde, de când, מספרים ומינים.</p>
+
+  <div class="dialog">
+    <div class="dline a"><span class="who">Irina Popescu</span><span class="txt"><span class="ro">- Bună dimineața!</span><span class="he">בוקר טוב!</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Bună dimineața!</span><span class="he">בוקר טוב!</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Eu sunt Irina Popescu. Sunt profesoară de limba română. Voi cine sunteți?</span><span class="he">אני אירינה פופסקו. אני מורה לרומנית. מי אתם?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Eu sunt Nikos. El este Mihalis, iar acolo este Elefteria.</span><span class="he">אני ניקוס. הוא מיכאליס, ושם - אלפתריה.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- De unde sunteți voi? Din Grecia sau din Cipru?</span><span class="he">מאיפה אתם? מיוון או מקפריסין?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Noi trei suntem din Grecia, eu din Atena, iar Mihalis și Elefteria sunt din Salonic.</span><span class="he">שלושתנו מיוון - אני מאתונה, ומיכאליס ואלפתריה מסלוניקי.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Ei cine sunt?</span><span class="he">מי הם?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Sunt doisprezece studenți străini ca și noi.</span><span class="he">הם שנים-עשר סטודנטים זרים, כמונו.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- De unde sunt ei?</span><span class="he">מאיפה הם?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Doi sunt din China, două studente sunt din Bulgaria, trei studenți sunt din Maroc, iar cinci sunt din Turcia. Toți suntem în anul pregătitor la Facultatea de Litere.</span><span class="he">שניים מסין, שתי סטודנטיות מבולגריה, שלושה סטודנטים ממרוקו, וחמישה מטורקיה. כולנו בשנת ההכנה בפקולטה למדעי הרוח.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Deci sunteți doi chinezi, două bulgăroaice, trei marocani, cinci turci și trei greci. Tu, Nikos, de când ești în România?</span><span class="he">אז אתם שני סינים, שתי בולגריות, שלושה מרוקאים, חמישה טורקים ושלושה יוונים. ואתה, ניקוס - ממתי אתה ברומניה?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Eu sunt în România de două săptămâni.</span><span class="he">אני ברומניה כבר שבועיים.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Dar Mihalis și Elefteria de când sunt în Constanța?</span><span class="he">ומיכאליס ואלפתריה - ממתי הם בקונסטנצה?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Ei, numai de trei zile.</span><span class="he">הם? רק שלושה ימים.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Dar acolo cine este?</span><span class="he">ומי שם?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Acolo, lângă fereastră? Este doamna Tania Rusevska.</span><span class="he">שם, ליד החלון? זו גברת טניה רוסבסקה.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Din ce țară este ea?</span><span class="he">מאיזו מדינה היא?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- E din Rusia.</span><span class="he">היא מרוסיה.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Din ce oraș, din Moscova?</span><span class="he">מאיזו עיר, ממוסקבה?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Nu, nu este din Moscova, este din Sankt Petersburg.</span><span class="he">לא, היא לא ממוסקבה - היא מסנקט פטרבורג.</span></span></div>
+    <div class="dline a"><span class="who">Irina</span><span class="txt"><span class="ro">- Unde sunteți voi acum?</span><span class="he">איפה אתם עכשיו?</span></span></div>
+    <div class="dline b"><span class="who">Nikos</span><span class="txt"><span class="ro">- Suntem la un curs de limba română pentru studenți străini.</span><span class="he">אנחנו בקורס רומנית לסטודנטים זרים.</span></span></div>
+  </div>
+
+  <div class="note">
+    שימו לב לזוג <span class="ro">iar / dar</span>: שניהם מתורגמים "אבל/ואילו", אבל <span class="ro">iar</span> מנגיד בעדינות (ואילו),
+    בעוד <span class="ro">dar</span> הוא "אבל" חד יותר.
+  </div>
+</section>
+
+<section id="vocab2">
+  <h2 class="sec"><span class="num">שיעור 2</span> אוצר המילים של היחידה</h2>
+  <div class="vocab">
+    <div class="vitem"><span class="ro">student</span><span class="he">סטודנט</span></div>
+    <div class="vitem"><span class="ro">iar / dar</span><span class="he">ואילו / אבל</span></div>
+    <div class="vitem"><span class="ro">săptămână</span><span class="he">שבוע</span></div>
+    <div class="vitem"><span class="ro">limba română</span><span class="he">השפה הרומנית</span></div>
+    <div class="vitem"><span class="ro">curs</span><span class="he">קורס</span></div>
+    <div class="vitem"><span class="ro">străin, străină</span><span class="he">זר, זרה (רבים: străini, străine)</span></div>
+    <div class="vitem"><span class="ro">anul pregătitor</span><span class="he">שנת ההכנה</span></div>
+    <div class="vitem"><span class="ro">aici ≠ acolo</span><span class="he">כאן ≠ שם</span></div>
+    <div class="vitem"><span class="ro">pentru</span><span class="he">בשביל, עבור</span></div>
+    <div class="vitem"><span class="ro">în ≠ din</span><span class="he">בתוך ≠ מתוך</span></div>
+    <div class="vitem"><span class="ro">ca și noi = la fel ca noi</span><span class="he">כמונו</span></div>
+    <div class="vitem"><span class="ro">Facultatea de Litere</span><span class="he">הפקולטה למדעי הרוח</span></div>
+    <div class="vitem"><span class="ro">acum ≠ atunci</span><span class="he">עכשיו ≠ אז</span></div>
+    <div class="vitem"><span class="ro">sau = ori</span><span class="he">או</span></div>
+    <div class="vitem"><span class="ro">lângă</span><span class="he">ליד</span></div>
+    <div class="vitem"><span class="ro">fereastră</span><span class="he">חלון</span></div>
+    <div class="vitem"><span class="ro">zi / ziuă</span><span class="he">יום</span></div>
+    <div class="vitem"><span class="ro">lună</span><span class="he">חודש (וגם: ירח)</span></div>
+    <div class="vitem"><span class="ro">an</span><span class="he">שנה · Un an bun! - שנה טובה!</span></div>
+    <div class="vitem"><span class="ro">o dată / de două ori / de trei ori</span><span class="he">פעם אחת / פעמיים / שלוש פעמים</span></div>
+    <div class="vitem"><span class="ro">a pregăti · Eu pregătesc masa</span><span class="he">להכין · אני מכין את הארוחה</span></div>
+    <div class="vitem"><span class="ro">mare ≠ mic</span><span class="he">גדול ≠ קטן · Itay este mare, iar Ronen e mic</span></div>
+  </div>
+</section>
+
+</main>
+</body>
+</html>
