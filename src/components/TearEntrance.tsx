@@ -19,13 +19,13 @@
    The plain link is always visible (easter egg, never a gate);
    no JS / no WebGL → a perfectly normal text page.
 
-   NOTE: currently imports the TEST one-pager from app/site2/page
+   NOTE: imports the production one-pager from app/site/page
    (the restructured order). When /site is promoted to the new
    order, change the import back to "../app/site/page".
 ═══════════════════════════════════════════════════════════════ */
 
 import { useEffect, useRef, useState } from "react";
-import SitePage from "../app/site2/page";
+import SitePage from "../app/site/page";
 
 /* ─── Amit's final physics calibration ─── */
 const TUNING = {
@@ -717,7 +717,7 @@ export default function TearEntrance() {
                 <p className="last">📚 (עם הפקות דפוס מורכבות וחדשניות!)</p>
               </div>
 
-              <p>ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><a href="/site2" className="tear-skip">כי האתר המלא הוא מעדן אמיתי</a>!</strong></p>
+              <p>ואם כבר הגעת עד לאזור הכיפי שפה למטה, אני יכול רק להתוודות שבשעות הפנאי אני נהנה לקרוא, להתאמן בנגינה (רק על דברים עם ארבעה מיתרים), להתאמן גופנית (פה זה כבר בלי המיתרים), ולהשתכלל בלי סוף באפייה ובאכילה של פיצה נאפוליטנית 🍕. הופה… קיבלת תיאבון? <strong><a href="/site" className="tear-skip">כי האתר המלא הוא מעדן אמיתי</a>!</strong></p>
 
               <div className="tp-footer">
                 <p>
