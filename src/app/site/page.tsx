@@ -681,8 +681,66 @@ function FxTitle({
   );
 }
 
+/* =====================================================================
+   ContactForm — posts to Formspree and swaps to a styled confirmation.
+   Each instance carries a distinct endpoint + hidden _subject and source
+   fields so the two forms are distinguishable in the inbox.
+   ===================================================================== */
+function ContactForm({
+  endpoint,
+  source,
+  subject,
+  className,
+  children,
+  submitLabel,
+}: {
+  endpoint: string;
+  source: string;
+  subject: string;
+  className: string;
+  children: React.ReactNode;
+  submitLabel: string;
+}) {
+  const [state, setState] = useState<"idle" | "sending" | "done" | "error">("idle");
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const res = await fetch(endpoint, {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      setState(res.ok ? "done" : "error");
+    } catch {
+      setState("error");
+    }
+  };
+  if (state === "done")
+    return (
+      <div className="form-thanks">
+        <h3>איזה כיף לשמוע ממך!</h3>
+        <h4>אני מעריך מאוד את זה שפנית אלי,<br />אחזור אליך בהקדם עם תגובה, אל פרטי הקשר שמילאת פה.</h4>
+        <h4>המשך גלישה מהנה!<br />עמית.</h4>
+      </div>
+    );
+  return (
+    <form className={className} onSubmit={onSubmit}>
+      <input type="hidden" name="source" value={source} />
+      <input type="hidden" name="_subject" value={subject} />
+      {children}
+      <button type="submit" disabled={state === "sending"}>
+        {state === "sending" ? "שולח…" : submitLabel}
+      </button>
+      {state === "error" && (
+        <p className="form-error">משהו השתבש בשליחה. אפשר לנסות שוב, או לכתוב לי ישירות ל‑ahoovi@gmail.com</p>
+      )}
+    </form>
+  );
+}
+
 export default function SitePage() {
-  const stop = (e: React.FormEvent) => e.preventDefault();
   useReveal();
   useScrollSkew();
 
@@ -845,20 +903,25 @@ export default function SitePage() {
             <h3 className="news-card-title">
               לשלוח גם לך עדכונים, מדריכים וטיפים ברגע שאני מסכם אותם?
             </h3>
-            <form className="op-form news-form" onSubmit={stop}>
+            <ContactForm
+              endpoint="https://formspree.io/f/xpqvaarr"
+              source="נשלח מטופס פרומפטים"
+              subject="פנייה חדשה מטופס פרומפטים — amitbrin.com"
+              className="op-form news-form"
+              submitLabel="תרשום אותי לעדכונים חינם!"
+            >
               <label>
                 איך לקרוא לך?
-                <input type="text" name="name" autoComplete="name" />
+                <input type="text" name="name" autoComplete="name" required />
               </label>
               <label>
                 לאיזה מייל לשלוח?
-                <input type="email" name="email" autoComplete="email" />
+                <input type="email" name="email" autoComplete="email" required />
               </label>
               <label className="check">
                 <input type="checkbox" name="consent" /> אשמח לקבל עדכונים למייל
               </label>
-              <button type="submit">תרשום אותי לעדכונים חינם!</button>
-            </form>
+            </ContactForm>
           </div>
         </div>
       </section>
@@ -902,10 +965,16 @@ export default function SitePage() {
             <p className="work-card-sub">
               (אבל הארגון שלי שונה ומיוחד, הוא מצריך תוכן ועריכה ייעודים – אז בוא נדבר!)
             </p>
-            <form className="op-form work-form" onSubmit={stop}>
+            <ContactForm
+              endpoint="https://formspree.io/f/xvzepprb"
+              source="נשלח מטופס הרצאות"
+              subject="פנייה חדשה מטופס הרצאות — amitbrin.com"
+              className="op-form work-form"
+              submitLabel="שליחה"
+            >
               <label>
                 שם מלא
-                <input type="text" name="fullname" autoComplete="name" />
+                <input type="text" name="fullname" autoComplete="name" required />
               </label>
               <label>
                 תפקיד בארגון
@@ -913,10 +982,9 @@ export default function SitePage() {
               </label>
               <label>
                 מייל בארגון
-                <input type="email" name="workemail" autoComplete="email" />
+                <input type="email" name="workemail" autoComplete="email" required />
               </label>
-              <button type="submit">שליחה</button>
-            </form>
+            </ContactForm>
           </div>
         </div>
       </section>
@@ -1294,6 +1362,15 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .news-form button:hover { background:var(--cream); }
 .work-form button { background:var(--gold); color:var(--navy); }
 .work-form button:hover { background:var(--cream); }
+.form-thanks { text-align:center; padding:1rem .5rem; }
+.form-thanks h3 { font-family:'Leon',sans-serif; font-weight:700; font-size:clamp(1.4rem,2.4vw,2rem); color:var(--gold); margin-bottom:1rem; }
+.form-thanks h4 { font-family:'Leon',sans-serif; font-weight:400; font-size:clamp(1rem,1.4vw,1.25rem); line-height:1.6; color:var(--offwhite); margin-bottom:.9rem; }
+.form-thanks h4:last-child { margin-bottom:0; color:var(--cream); }
+.form-error { margin-top:.9rem; font-size:.9rem; color:#ffd9d0; line-height:1.5; }
+.op-form button:disabled { opacity:.6; cursor:default; }
+.news-card .form-thanks h4 { color:var(--navy); }
+.news-card .form-thanks h4:last-child { color:var(--navy); }
+.news-card .form-thanks h3 { color:var(--navy); }
 
 /* ---------- 6 · CLOSING — crumpled paper ---------- */
 .sec-close {
