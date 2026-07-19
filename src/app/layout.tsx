@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "עמית ברין – עיצוב | מיתוג | שיווק | הדרכה",
-  description: "עמית ברין – מעצב עם 23 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת AI",
+  description: "עמית ברין – מעצב עם 24 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת AI",
 };
 
 export default function RootLayout({
