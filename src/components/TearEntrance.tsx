@@ -457,7 +457,7 @@ export default function TearEntrance() {
     let snapshotImg: HTMLImageElement | null = null;
     let snapScale = 1;
     let clothActive = false, revealTriggered = false, done = false, tearT0 = 0;
-    const IS_COARSE = typeof window !== "undefined" && window.matchMedia && matchMedia("(pointer:coarse)").matches;
+    const IS_COARSE = typeof window !== "undefined" && matchMedia("(pointer:coarse)").matches;
     let worker: Worker | null = null;
     let canvas: HTMLCanvasElement | null = null;
     let gl: WebGLRenderingContext | null = null;
