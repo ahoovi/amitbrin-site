@@ -687,7 +687,7 @@ export default function TearEntrance() {
           <div className="tear-paper-root" ref={paperRef}>
             <div className="tear-paper-inner" ref={contentRef}>
 
-              <p className="tp-tagline">{"{"}כן! זה האתר של עמית ברין – מעצב עם 23 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת Ai{"}"}</p>
+              <p className="tp-tagline">{"{"}כן! זה האתר של עמית ברין – מעצב עם 24 שנות ניסיון במיתוג, שיווק ודיגיטל, ומומחה UX/UI ופתרונות יצירתיים בעזרת Ai{"}"}</p>
 
               <p>👋🏼 <strong>שלום, ממש טוב שבאת</strong></p>
 
