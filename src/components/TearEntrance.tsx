@@ -48,6 +48,8 @@ const TUNING = {
   FLATNESS: 0.08,
   LIGHTING: 0.2,
   DROP_AT: 0.65,
+  RIP_SPEED: 2.2,     /* auto-completing rip speed (lab-approved) */
+  RIP_MIN_SPAN: 0.22, /* stroke span that arms an auto-rip */
 };
 
 /* ─── entrance-page CSS ───
@@ -76,6 +78,7 @@ const STAGE_CSS = `
 .tear-stage.revealed .tear-under { position:static; overflow:visible; filter:none; }
 .tear-paper-root { position:relative; z-index:2; min-height:100vh; padding-bottom:110px; }
 .tear-stage.tearing .tear-paper-root { visibility:hidden; }
+html, body { overscroll-behavior:none; } /* blocks pull-to-refresh / swipe-nav hijacking the tear */
 .tear-canvas { position:absolute; z-index:3; touch-action:none; cursor:grab; }
 .tear-canvas.dragging { cursor:grabbing; }
 
@@ -91,7 +94,7 @@ const STAGE_CSS = `
   transition:opacity .2s; pointer-events:none; font-family:system-ui, Arial, sans-serif; }
 .tear-dogear:hover .tp-label, .tear-dogear:focus-visible .tp-label { opacity:1; }
 .tear-dogear:active { cursor:grabbing; }
-.tear-stage.tearing .tear-dogear { display:none; }
+.tear-stage.tearing .tear-dogear { opacity:0; pointer-events:none; } /* stays in DOM: iOS keeps the touch stream alive */
 @media (max-width:560px){ .tear-dogear { width:38vw; height:38vw; } .tear-dogear .tp-label { font-size:.82rem; } }
 `;
 
@@ -108,6 +111,7 @@ let hover={x:-1e9,y:-1e9,vx:0,vy:0};
 let pDown=false, pX=0, pY=0;
 let cutX=0, cutY=0;
 let lastLoad=0;
+let autoRips=[],strokeSX=0,strokeSY=0,strokeLen=0,strokes=0;
 const pool=[];
 function computeMaxLen(){ maxLen=Math.max(cellW,cellH)*CFG.TEAR_THRESHOLD; maxLenSq=maxLen*maxLen; }
 function init(cfg){
@@ -309,6 +313,14 @@ function sweepFragments(){
 }
 function frame(){
   step();
+  for(let q=autoRips.length-1;q>=0;q--){
+    const rp=autoRips[q];
+    const rs=Math.max(cellW,cellH)*(CFG.RIP_SPEED||2.2);
+    const nx=rp.x+rp.dx*rs, ny=rp.y+rp.dy*rs;
+    cutAlong(rp.x,rp.y,nx,ny); rp.x=nx; rp.y=ny;
+    if(++rp.life>110 || nx<PADX-cellW*2 || nx>PADX+W+cellW*2 || ny<PADY-cellH*2 || ny>PADY+H+cellH*2)
+      autoRips.splice(q,1);
+  }
   if(++sweepT>=24){sweepT=0;sweepFragments();}
   if(pool.length===0)return;
   const buf=pool.pop();
@@ -329,7 +341,7 @@ function frame(){
   const tearPercent=Math.max(brokenCount/CN,
     Math.min(1,holeFrac+fallen/N+0.5*displaced/N));
   self.postMessage({type:"mesh",pos:buf.pos.buffer,nor:buf.nor.buffer,idx:buf.idx.buffer,
-    dam:buf.dam.buffer,drawCount,tearPercent,awake},
+    dam:buf.dam.buffer,drawCount,tearPercent,awake,strokes},
     [buf.pos.buffer,buf.nor.buffer,buf.idx.buffer,buf.dam.buffer]);
 }
 let loop=null;
@@ -338,7 +350,7 @@ self.onmessage=(e)=>{
   switch(m.type){
     case "init": init(m.cfg); if(!loop)loop=setInterval(frame,16); break;
     case "grab":{
-      awake=true;pDown=true;pX=m.x;pY=m.y;cutX=m.x;cutY=m.y;
+      awake=true;pDown=true;pX=m.x;pY=m.y;cutX=m.x;cutY=m.y;strokeSX=m.x;strokeSY=m.y;strokeLen=0;
       const R2=CFG.MOUSE_RADIUS*CFG.MOUSE_RADIUS,g=[],gx=[],gy=[];
       GRABF.fill(0);
       for(let i=0;i<N;i++){
@@ -354,11 +366,24 @@ self.onmessage=(e)=>{
         const cx=m.x-cutX,cy=m.y-cutY;
         const minSeg=Math.max(cellW,cellH)*1.2;
         if(cx*cx+cy*cy>=minSeg*minSeg){
+          if(strokeLen===0)strokes++;
           cutAlong(cutX,cutY,m.x,m.y);
-          cutX=m.x;cutY=m.y;}}
+          cutX=m.x;cutY=m.y;
+          const _rx=m.x-strokeSX,_ry=m.y-strokeSY;
+          strokeLen=Math.sqrt(_rx*_rx+_ry*_ry);}}
       hover.x=m.x;hover.y=m.y;pX=m.x;pY=m.y;
       break;
-    case "release": pDown=false;grabbed=null;GRABF.fill(0); break;
+    case "release":{
+      if(CFG.RIP_SPEED>0 && strokeLen > (CFG.RIP_MIN_SPAN||0.22)*Math.min(W,H)){
+        const _dl=Math.sqrt((cutX-strokeSX)*(cutX-strokeSX)+(cutY-strokeSY)*(cutY-strokeSY))||1;
+        const _dx=(cutX-strokeSX)/_dl,_dy=(cutY-strokeSY)/_dl;
+        autoRips.push({x:cutX,y:cutY,dx:_dx,dy:_dy,life:0},
+                      {x:strokeSX,y:strokeSY,dx:-_dx,dy:-_dy,life:0});
+      }
+      strokeLen=0;
+      pDown=false;grabbed=null;GRABF.fill(0); break;}
+    case "starter":{ awake=true; const L=Math.max(cellW,cellH)*6.0;
+      cutAlong(m.x,m.y,m.x+L*0.707,m.y-L*0.707); break;}
     case "drop": awake=true;dropped=true;for(let i=0;i<N;i++)PIN[i]=0; break;
     case "buffers":
       pool.push({pos:new Float32Array(m.pos),nor:new Float32Array(m.nor),
@@ -431,7 +456,8 @@ export default function TearEntrance() {
 
     let snapshotImg: HTMLImageElement | null = null;
     let snapScale = 1;
-    let clothActive = false, revealTriggered = false, done = false;
+    let clothActive = false, revealTriggered = false, done = false, tearT0 = 0;
+    const IS_COARSE = typeof window !== "undefined" && window.matchMedia && matchMedia("(pointer:coarse)").matches;
     let worker: Worker | null = null;
     let canvas: HTMLCanvasElement | null = null;
     let gl: WebGLRenderingContext | null = null;
@@ -557,7 +583,9 @@ export default function TearEntrance() {
       render();
       worker.postMessage({ type: "buffers", pos: m.pos, nor: m.nor, idx: m.idx, dam: m.dam },
                          [m.pos, m.nor, m.idx, m.dam]);
-      if (!revealTriggered && m.tearPercent >= TUNING.DROP_AT) {
+      const autoDue = IS_COARSE && (m.strokes || 0) >= 2 && tearT0 > 0 &&
+        performance.now() - tearT0 >= 5000;  /* mobile safety net: 5s + two real cuts */
+      if (!revealTriggered && (m.tearPercent >= TUNING.DROP_AT || autoDue)) {
         revealTriggered = true;
         worker.postMessage({ type: "drop" });
         setTimeout(finishReveal, 1900);
@@ -613,6 +641,8 @@ export default function TearEntrance() {
         GRAB_LIFT: TUNING.GRAB_LIFT, HOVER_PUSH: TUNING.HOVER_PUSH,
         PRESS_DEPTH: TUNING.PRESS_DEPTH, CUT_RADIUS: TUNING.CUT_RADIUS,
         FLATNESS: TUNING.FLATNESS,
+        RIP_SPEED: TUNING.RIP_SPEED * (IS_COARSE ? 1.25 : 1),
+        RIP_MIN_SPAN: TUNING.RIP_MIN_SPAN * (IS_COARSE ? 0.55 : 1),
       }});
       buildUVs(COLS, ROWS);
       canvas!.addEventListener("pointerdown", onDown);
@@ -621,6 +651,8 @@ export default function TearEntrance() {
       document.addEventListener("visibilitychange", onVis);
       const c0 = canvas!.getBoundingClientRect();
       worker.postMessage({ type: "grab", x: startX - c0.left, y: startY - c0.top });
+      worker.postMessage({ type: "starter", x: startX - c0.left, y: startY - c0.top });
+      tearT0 = performance.now();
       canvas!.classList.add("dragging");
     }
 
@@ -637,8 +669,21 @@ export default function TearEntrance() {
 
     /* wire the affordances */
     const dogear = stage.querySelector<HTMLButtonElement>(".tear-dogear");
-    const onDogear = (e: PointerEvent) => { e.preventDefault(); activateTear(e.clientX, e.clientY); };
+    const onDogear = (e: PointerEvent) => {
+      if (e.pointerType === "touch") return;               /* touchstart already handled it */
+      e.preventDefault(); activateTear(e.clientX, e.clientY);
+    };
     dogear?.addEventListener("pointerdown", onDogear);
+    /* earliest possible capture on touch: claim the gesture before the browser's swipe/pan does */
+    const onDogearTouch = (e: TouchEvent) => {
+      e.preventDefault();
+      const t = e.changedTouches && e.changedTouches[0];
+      if (t) activateTear(t.clientX, t.clientY);
+    };
+    dogear?.addEventListener("touchstart", onDogearTouch, { passive: false });
+    /* while tearing, the page must not scroll under the finger */
+    const onDocTouchMove = (e: TouchEvent) => { if (clothActive && !done) e.preventDefault(); };
+    document.addEventListener("touchmove", onDocTouchMove, { passive: false });
 
     const skip = stage.querySelector<HTMLAnchorElement>(".tear-skip");
     const onSkip = (e: Event) => { e.preventDefault(); finishReveal(); };
@@ -655,6 +700,8 @@ export default function TearEntrance() {
       worker?.terminate();
       canvas?.remove();
       dogear?.removeEventListener("pointerdown", onDogear);
+      dogear?.removeEventListener("touchstart", onDogearTouch);
+      document.removeEventListener("touchmove", onDocTouchMove);
       skip?.removeEventListener("click", onSkip);
       window.removeEventListener("load", onLoadSnap);
       window.removeEventListener("resize", onResize);
