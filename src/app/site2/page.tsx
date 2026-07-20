@@ -1432,7 +1432,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-name, .anim-title { font-size:clamp(2.6rem, 11vw, 4rem); }
   .identity-roles { font-size:clamp(1rem, 4vw, 1.3rem); }
   .identity-for { font-size:clamp(1rem, 4.5vw, 1.4rem); }
-  .identity-photo { position:static; height:auto; min-height:50vh; width:100%; pointer-events:auto; }  /* mobile keeps the stacked flow */
+  .identity-photo { position:relative; height:auto; min-height:50vh; width:100%; pointer-events:auto; }  /* mobile keeps the stacked flow */
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
   .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
