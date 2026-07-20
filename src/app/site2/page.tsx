@@ -1068,10 +1068,10 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .identity-inner {
   position:relative; z-index:2;
   width:100%; min-height:100svh;
-  display:flex; align-items:center; justify-content:space-between;
+  display:flex; align-items:center; justify-content:flex-start;
   gap:clamp(2rem, 5vw, 6rem); padding-inline:5vw 0;
 }
-.identity-text { flex:1 1 56%; display:flex; flex-direction:row; align-items:center; gap:clamp(1.4rem, 3vw, 3rem); }
+.identity-text { flex:1 1 56%; display:flex; flex-direction:row; align-items:center; gap:clamp(1.4rem, 3vw, 3rem); position:relative; z-index:3; }
 .identity-logos { display:flex; flex-direction:column; align-items:center; gap:1.6rem; flex:0 0 auto; }
 .logo-echo  { width:clamp(64px, 6.5vw, 100px); height:auto; }
 .logo-effie { width:clamp(38px, 3.6vw, 56px); height:auto; }
@@ -1113,8 +1113,9 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   margin-top:.6em;
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
-/* portrait: 90% of section height, pulled toward center, safe gap kept by flex gap */
-.identity-photo { flex:0 0 clamp(300px, 40vw, 640px); align-self:stretch; position:relative; min-height:60vh; }
+/* portrait: ANCHORED — absolutely pinned to the section floor; the animated title
+   above changes width freely and can never push the photo again (approved 07-19) */
+.identity-photo { position:absolute; left:0; bottom:0; height:100svh; width:clamp(300px, 40vw, 640px); z-index:1; pointer-events:none; }
 .identity-photo img { position:absolute; bottom:0; right:0; height:90%; width:auto; max-width:none; }
 
 /* ---------- 2 · SAILING ---------- */
@@ -1378,7 +1379,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .footer-contact a {
   display:inline-flex; align-items:center; gap:.65em;
   color:var(--offwhite); text-decoration:none;
-  font-family:'Noto Sans Hebrew',sans-serif; font-size:1rem;
+  font-family:'Noto Sans Hebrew',sans-serif; font-size:1rem; line-height:1.55;
   transition:color .4s var(--ease);
 }
 .footer-contact a:hover { color:var(--cream); }
@@ -1431,12 +1432,14 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-name, .anim-title { font-size:clamp(2.6rem, 11vw, 4rem); }
   .identity-roles { font-size:clamp(1rem, 4vw, 1.3rem); }
   .identity-for { font-size:clamp(1rem, 4.5vw, 1.4rem); }
-  .identity-photo { flex:0 0 auto; align-self:flex-end; min-height:50vh; width:100%; }
+  .identity-photo { position:static; height:auto; min-height:50vh; width:100%; pointer-events:auto; }  /* mobile keeps the stacked flow */
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
   .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; }
+  .op-form.work-form label { flex:0 0 auto; }  /* the 12rem basis turned into 192px-tall labels — the broken form */
+  .footer-contact ul { gap:.95rem; }
   .footer-content { flex-direction:column; align-items:flex-start; gap:3rem; padding-top:13vh; }
   .footer-title { font-size:clamp(3rem, 16vw, 5rem); }
   .to-top { bottom:1rem; right:1rem; width:42px; height:42px; }
