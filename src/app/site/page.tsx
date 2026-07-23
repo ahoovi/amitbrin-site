@@ -223,7 +223,7 @@ const POSTS = [
     title: "סליחה ששלחתי וואטסאפ",
     excerpt:
       "וואטסאפ היא אפליקציה תקשורת שמשבשת את התקשורת האנושית. לא פחות. היא גם משנה את ההתנהגות האישית שלנו לרעה. ממש ככה. רוב האנשים לא עסוקים בשאלה ״האם היא משרתת אותנו, או שאנחנו משרתים אותה?״, הם גם לא מודעים לכך שהיא כבר מזמן לא משמשת לצרכים שעבורם היא נבנתה – הם כבר שברו את התיקרה שלה והיא מצידה שברה את הגבולות שלהם.",
-    href: "#",
+    href: "/blog/whatsapp",
     placeholder: false,
   },
   {
@@ -866,7 +866,7 @@ export default function SitePage() {
               <article className={"post-card" + (p.placeholder ? " placeholder" : "")} key={idx}>
                 <h3 className="post-title">{p.title}</h3>
                 <p className="post-excerpt">{p.excerpt}</p>
-                <a href={p.href} className="post-btn" onClick={(e) => e.preventDefault()}>
+                <a href={p.href} className="post-btn" onClick={(e) => { if (p.placeholder) e.preventDefault(); }}>
                   לפוסט המלא <span aria-hidden>←</span>
                 </a>
               </article>
