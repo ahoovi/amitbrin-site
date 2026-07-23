@@ -11,6 +11,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import KssemacCase from "../../components/KssemacCase";
 
 const ROTATING_WORDS = ["שינוי", "ניראות", "בידול", "משמעות", "עניין", "ערך"];
 const ROTATE_MS = 2600;
@@ -82,6 +83,7 @@ function useReveal() {
 const SECTIONS = [
   { id: "top", label: "ראשי" },
   { id: "sailing", label: "המסע" },
+  { id: "works", label: "עבודות" },
   { id: "blog", label: "תרחיב — הבלוג" },
   { id: "news", label: "ניוזלטר" },
   { id: "work", label: "הרצאות וסדנאות" },
@@ -846,6 +848,19 @@ export default function SitePage() {
         </div>
       </section>
 
+      {/* ============ 2.5 · WORKS — mini case studies (01: KsseMac) ============ */}
+      <section className="sec-works" id="works">
+        <div className="works-head" data-reveal>
+          <FxTitle
+            className="works-title fx-skew"
+            palette="rgb"
+            lines={["דברים שנהניתי ליצור בזמן האחרון"]}
+          />
+          <p className="works-label">עבודה 01 · KSSEMAC · אפליקציית MENU BAR ל-MACOS</p>
+        </div>
+        <KssemacCase />
+      </section>
+
       {/* ============ 3 · BLOG — sketch paper, ink cards, 1.3 carousel ============ */}
       <section className="sec-blog" id="blog">
         <div className="blog-content">
@@ -1209,6 +1224,19 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   text-shadow:0 1px 2px rgba(2,13,44,.65), 0 0 16px rgba(2,13,44,.35);
 }
 
+/* ---------- 2.5 · WORKS — mini case studies ---------- */
+.sec-works { background:var(--navy-dark); padding:13vh 0 11vh; }
+.works-head { max-width:1200px; margin:0 auto; padding:0 5vw 3rem; }
+.works-title {
+  color:var(--offwhite); font-weight:700;
+  font-size:clamp(2rem, 3.3vw, 3.8rem); line-height:1.1;
+}
+.works-label {
+  display:flex; align-items:center; gap:14px; margin-top:1.3rem;
+  font-size:.78rem; letter-spacing:.12em; color:rgba(230,232,239,.45);
+}
+.works-label::after { content:''; flex:1; height:1px; background:rgba(230,232,239,.14); }
+
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {
   min-height:100vh; display:flex;
@@ -1498,7 +1526,12 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo { flex:0 0 auto; align-self:flex-end; min-height:50vh; width:100%; }
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
-  .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
+  /* pin title+body to the section top; cap widths so the video portrait stays visible */
+  .sailing-content { padding:9vh 5vw 4vh; }
+  .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); max-width:80vw; }
+  .sailing-body { max-width:70vw; }
+  .works-head { padding-bottom:2.2rem; }
+  .works-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
   .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; }
