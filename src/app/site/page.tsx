@@ -319,10 +319,11 @@ void main(){
     h += 0.6*sin((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3);
     h += 0.35*sin((u*6.3 + d*persp*3.1) + uT*0.31 + 2.6);
     h *= 0.5;
-    /* live sim: pointer + ambient waves travelling across the surface */
+    /* live sim: pointer + ambient waves, sampled on the shared screen-x axis
+       (no time drift — the wave stays exactly under the pointer) */
     float e = 3.0/256.0;
-    float hs  = hgt(vec2(s.x + uT*0.006, d));
-    float hsx = hgt(vec2(s.x + uT*0.006 + e, d));
+    float hs  = hgt(vec2(s.x, d));
+    float hsx = hgt(vec2(s.x + e, d));
     h += hs*22.0;
     float slope = cos((u*2.1 + d*persp*2.2) + uT*0.55)*2.1
                 + 0.6*cos((u*3.7 - d*persp*1.4) - uT*0.42 + 1.3)*3.7
@@ -349,9 +350,12 @@ void main(){
     vec2 wp = vec2((s.x - 0.5)*z*aspect*0.30 + 0.5, mix(0.15, 0.95, ft));
     vec3 sand = texture(uSand, wp*vec2(1.0, 1.35)).rgb;
     sand *= vec3(0.62,0.86,0.95);                       /* underwater tint */
+    /* caustics on the SAME screen-x axis as the surface: a wave at screen x
+       casts its light directly beneath it, spreading with the ripples */
+    vec2 cw = vec2(s.x, mix(0.15, 0.95, ft));
     float e2 = 2.0/256.0;
-    float hc = hgt(wp);
-    float lap = hgt(wp+vec2(e2,0.)) + hgt(wp-vec2(e2,0.)) + hgt(wp+vec2(0.,e2)) + hgt(wp-vec2(0.,e2)) - 4.0*hc;
+    float hc = hgt(cw);
+    float lap = hgt(cw+vec2(e2,0.)) + hgt(cw-vec2(e2,0.)) + hgt(cw+vec2(0.,e2)) + hgt(cw-vec2(0.,e2)) - 4.0*hc;
     float caust = pow(max(-lap*1700.0 + 0.18, 0.0), 1.35);
     float nearGlow = smoothstep(0.10, 0.80, ft);   /* vivid close, gone far */
     sand += vec3(0.70,0.90,1.0) * caust*0.22 * nearGlow;
@@ -474,14 +478,10 @@ function FooterWater() {
       if (x < 0 || x > 1 || y < 0 || y > 1) return;
       if (Math.hypot(x - lastX, y - lastY) > 0.014) {
         const d = 0.15 + 0.8 * Math.min(1, Math.max(0, (y - 0.28) / 0.7));
-        // floor/depth drop (perspective-projected x) — casts caustics below
-        const z = 3.4 - 2.4 * ((d - 0.15) / 0.8);
-        const aspect = rc.width / rc.height;
-        const wx = (x - 0.5) * z * aspect * 0.3 + 0.5;
-        addDrop(wx, d, 0.05, 0.010);
-        // surface drop (plain screen x) — the crests read the sim at s.x, so
-        // this makes the wave visibly move right under the pointer up top
-        addDrop(x, d, 0.045, 0.012);
+        // one drop on the shared (screen-x, depth) axis: the crest rises at
+        // the pointer's x up top, and its caustic light lands directly below,
+        // spreading outward with the ripples from that same side
+        addDrop(x, d, 0.05, 0.014);
         lastX = x; lastY = y;
       }
     };
@@ -1140,7 +1140,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .to-top:hover { background:rgba(207,189,133,.45); }
 
 /* ---------- 1 · IDENTITY ---------- */
-.sec-identity { min-height:100vh; min-height:100svh; display:flex; align-items:stretch; }
+.sec-identity { min-height:100vh; min-height:100svh; display:flex; align-items:stretch; overflow:hidden; }
 .sec-identity::before {
   content:''; position:absolute; inset:0;
   background:linear-gradient(180deg, var(--navy-mid) 15%, var(--navy-dark) 50%);
@@ -1197,12 +1197,13 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   margin-top:.6em;
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
-.identity-photo {
-  flex:1 1 auto; position:relative; z-index:1;
-  align-self:center; width:min(92vw, 760px);
-  margin-top:clamp(-16vh, -10vw, -4vh); min-height:52vh;
+.identity-photo { flex:1 1 auto; min-height:30svh; }
+/* the portrait is ALWAYS glued to the section base: anchored to the inner's
+   bottom edge, dipping slightly below it, trimmed by the section overflow */
+.identity-photo img {
+  position:absolute; bottom:-3svh; left:50%; transform:translateX(-50%);
+  height:74svh; width:auto; max-width:none; z-index:1;
 }
-.identity-photo img { position:absolute; bottom:0; left:50%; transform:translateX(-50%); height:100%; width:auto; max-width:none; }
 
 /* ---------- 2 · SAILING ---------- */
 .sec-sailing { min-height:100vh; background:var(--navy-deep); display:flex; }
@@ -1549,8 +1550,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-name, .anim-title { font-size:clamp(2.6rem, 11vw, 4rem); }
   .identity-roles { font-size:clamp(1rem, 4vw, 1.3rem); }
   .identity-for { font-size:clamp(1rem, 4.5vw, 1.4rem); }
-  .identity-photo { flex:0 0 auto; min-height:48vh; width:100%; margin-top:-2vh; }
-  .identity-photo img { height:100%; }
+  .identity-photo { flex:1 1 auto; min-height:26svh; }
+  .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
   .works-head { padding-bottom:2.2rem; }
   .works-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
