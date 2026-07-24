@@ -11,6 +11,7 @@
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import { PaperTexture } from "@paper-design/shaders-react";
 
 /* ---------- BleedTitle: static letters, persistent CMY ink bleed ---------- */
 function BleedTitle({
@@ -50,7 +51,7 @@ function BleedTitle({
           amp[i] += (g - amp[i]) * 0.18;
           dx_[i] += ((ddx / d) - dx_[i]) * 0.3;
           dy_[i] += ((ddy / d) - dy_[i]) * 0.3;
-          const off = amp[i] * 7; /* px */
+          const off = amp[i] * 3.5; /* px (softened 50%) */
           l.style.setProperty("--k", amp[i].toFixed(3));
           l.style.setProperty("--cx", (dx_[i] * off).toFixed(1) + "px");
           l.style.setProperty("--cy", (dy_[i] * off).toFixed(1) + "px");
@@ -258,6 +259,26 @@ export default function WhatsappPost() {
 
       <ReadProgress />
 
+      {/* full-page crumpled paper shader background */}
+      <PaperTexture
+        colorBack="#f6f3e9"
+        colorFront="#c5ccd3"
+        contrast={0.36}
+        roughness={1}
+        fiber={0.27}
+        fiberSize={0.27}
+        crumples={0.51}
+        crumpleSize={0.33}
+        folds={0.57}
+        foldCount={8}
+        drops={0.13}
+        fade={0}
+        seed={546.8}
+        scale={0.5}
+        fit="cover"
+        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0, pointerEvents: "none" }}
+      />
+
       {/* progressive blur veil + site nav (same language as the one-pager) */}
       <div className="nav-veil" aria-hidden>
         <i /><i /><i />
@@ -282,10 +303,12 @@ export default function WhatsappPost() {
             className="hero-img"
             fetchPriority="high"
           />
-          <a href="/site#blog" className="hero-corner corner-right">→ חזרה לעמוד הראשי</a>
-          <span className="hero-corner corner-left">תרחיב · הבלוג של עמית ברין</span>
         </figure>
         <div className="hero-card" data-reveal>
+          <i className="tape tape-a" aria-hidden />
+          <i className="tape tape-b" aria-hidden />
+          <i className="spiral" aria-hidden />
+          <i className="margin-line" aria-hidden />
           <BleedTitle as="h1" className="hero-title" lines={["סליחה ששלחתי", "וואטסאפ"]} />
           <p className="hero-sub">
             וואטסאפ: לא אפליקציה גרועה. אפליקציה שעובדת מצוין - לא בשבילכם.
@@ -314,7 +337,7 @@ export default function WhatsappPost() {
           <BleedTitle
             as="blockquote"
             className="pull-title"
-            lines={["היא לא שירתה צורך קיים - היא ייצרה התנהגות,", "ואז הפכה אותה לנורמה, ואז הפכה", "את הנורמה לתנאי סף לחיים חברתיים."]}
+            lines={["היא לא שירתה צורך קיים - היא ייצרה התנהגות, ואז הפכה אותה לנורמה, ואז הפכה את הנורמה לתנאי סף לחיים חברתיים."]}
           />
         </aside>
 
@@ -456,18 +479,15 @@ const CSS = `
 
 .bp-root {
   --navy-deep:#020D2C; --navy:#081845; --gold:#CFBD85; --cream:#EADEB7;
-  --paper:#EFF1F5; --ease:cubic-bezier(.22,.9,.24,1);
+  --paper:#f6f3e9; --ease:cubic-bezier(.22,.9,.24,1);
   font-family:'Noto Sans Hebrew', Arial, sans-serif;
   color:var(--navy-deep);
   background-color:var(--paper);
-  background-image:
-    radial-gradient(circle, rgba(8,24,69,.22) 1px, transparent 1.4px),
-    linear-gradient(rgba(8,24,69,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8,24,69,.05) 1px, transparent 1px);
-  background-size:28px 28px, 28px 28px, 28px 28px;
   min-height:100vh;
   overflow-x:hidden;
+  position:relative;
 }
+.bp-root > *:not(style) { position:relative; z-index:1; }
 .bp-root h1,.bp-root h2,.bp-root h3,.bp-root blockquote { font-family:'Leon','Noto Sans Hebrew',sans-serif; margin:0; }
 
 [data-reveal] { opacity:0; transform:translateY(26px); transition:opacity 1s var(--ease), transform 1s var(--ease); }
@@ -503,40 +523,67 @@ const CSS = `
 .hero-figure { margin:0; height:80vh; overflow:hidden; position:relative; }
 .hero-img { width:100%; height:100%; object-fit:cover; display:block; }
 
-/* corner labels in negative over the dark image, sitting under the nav */
-.hero-corner {
-  position:absolute; top:76px; z-index:6;
-  color:#fff; font-family:'Leon',sans-serif; font-weight:500; font-size:.95rem;
-  letter-spacing:.02em; text-decoration:none;
-  text-shadow:0 1px 10px rgba(0,0,0,.35);
-}
-.corner-right { right:2.2rem; }
-.corner-right:hover { opacity:.75; }
-.corner-left { left:2.2rem; }
-
-/* frosted, grainy, milky glass — the image glows through */
+/* ---------- hero card: a page torn out of a spiral notebook ---------- */
 .hero-card {
   position:relative; z-index:3;
   width:min(880px, 92vw); margin:-11rem auto 0;
-  padding:2.8rem clamp(1.6rem, 4vw, 3.4rem) 2.4rem;
-  border-radius:20px;
-  background:rgba(255,255,255,.26);
-  backdrop-filter:blur(16px) saturate(140%);
-  -webkit-backdrop-filter:blur(16px) saturate(140%);
-  box-shadow:inset 0 1px 1px rgba(255,255,255,.5), 0 24px 60px rgba(2,13,44,.18);
+  padding:3.6rem clamp(1.6rem, 4vw, 3.2rem) 2.4rem 4.2rem;
+  background:
+    linear-gradient(180deg, rgba(2,13,44,.03), transparent 8%),
+    #fdfcf6;
+  transform:rotate(-.6deg);
+  clip-path:polygon(
+    0 1.2%, 3% 0, 97% .6%, 100% 2%,
+    99.4% 20%, 100% 34%, 99.2% 47%, 100% 61%, 99.5% 74%, 100% 88%, 99.3% 98%,
+    96% 100%, 78% 99%, 55% 100%, 32% 99.2%, 12% 100%, 2% 99%, 0 96%
+  );
+  filter:drop-shadow(0 24px 30px rgba(2,13,44,.25)) drop-shadow(0 4px 8px rgba(2,13,44,.12));
 }
-.hero-card::after {
-  /* grain */
-  content:''; position:absolute; inset:0; border-radius:inherit; pointer-events:none;
-  opacity:.5; mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E");
-}
+.hero-card[data-reveal] { transform:rotate(-.6deg) translateY(26px); }
+.hero-card[data-reveal].in { transform:rotate(-.6deg); }
+
+/* paper folds + creases */
 .hero-card::before {
-  content:''; position:absolute; inset:2px; pointer-events:none; z-index:1;
-  border:1.8px solid rgba(8,24,69,.85);
-  border-radius:16px 22px 14px 24px / 22px 15px 24px 16px;
+  content:''; position:absolute; inset:0; pointer-events:none; z-index:1;
+  background:
+    linear-gradient(112deg, transparent 42%, rgba(2,13,44,.055) 42.5%, rgba(255,255,255,.5) 43.1%, transparent 44%),
+    linear-gradient(248deg, transparent 63%, rgba(2,13,44,.05) 63.4%, rgba(255,255,255,.45) 64%, transparent 64.9%),
+    linear-gradient(180deg, transparent 30%, rgba(2,13,44,.02) 50%, transparent 70%);
+}
+/* paper grain texture */
+.hero-card::after {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  opacity:.4; mix-blend-mode:multiply;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
+}
+/* spiral binding: torn punched holes along the right edge */
+.spiral {
+  position:absolute; top:1.2rem; bottom:1.2rem; right:.85rem; width:1.5rem; z-index:2;
+  background-image:radial-gradient(circle at 50% 50%,
+    #efeadb 0 4.5px,
+    rgba(2,13,44,.28) 5px 5.8px,
+    rgba(255,255,255,.7) 6.2px 6.8px,
+    transparent 7.4px);
+  background-size:100% 30px;
+  background-repeat:repeat-y;
   filter:url(#inkline-bp);
 }
+/* notebook top margin rule */
+.margin-line {
+  position:absolute; left:1.2rem; right:2.8rem; top:2.6rem; height:1.5px; z-index:2;
+  background:rgba(198,74,74,.4);
+  filter:url(#inkline-bp);
+}
+/* translucent tape strips */
+.tape {
+  position:absolute; width:110px; height:34px; z-index:4;
+  background:rgba(255,250,225,.55);
+  box-shadow:0 2px 6px rgba(2,13,44,.15);
+  border-left:1px dashed rgba(2,13,44,.08);
+  border-right:1px dashed rgba(2,13,44,.08);
+}
+.tape-a { top:-14px; right:14%; transform:rotate(-5deg); }
+.tape-b { top:-12px; left:12%; transform:rotate(4deg); }
 .hero-title {
   color:var(--navy); font-weight:800;
   font-size:clamp(2.6rem, 7vw, 5.4rem); line-height:.95;
@@ -576,10 +623,11 @@ const CSS = `
 .pull {
   clear:both;
   margin:3.6rem 0;
-  margin-right:min(-250px, calc((min(680px,92vw) - 100vw) / 2 * .5));
+  /* overhang = exactly 50% of the free area to the right of the text column */
+  margin-right:calc((100vw - min(680px, 92vw)) / -4);
   position:relative; padding:.4rem 0;
 }
-.pull-left { text-align:left; margin-right:0; margin-left:min(-250px, calc((min(680px,92vw) - 100vw) / 2 * .5)); }
+.pull-left { text-align:left; margin-right:0; margin-left:calc((100vw - min(680px, 92vw)) / -4); }
 .pull-title {
   color:var(--navy); font-weight:800;
   font-size:clamp(1.7rem, 4vw, 3.1rem); line-height:1.18;
@@ -592,7 +640,7 @@ const CSS = `
 
 /* ---------- inline floating screenshots ---------- */
 .shot-inline {
-  float:left;
+  float:left; clear:left;
   width:min(300px, 70vw);
   margin:.5rem 2.2rem 1.6rem calc(min(300px, 70vw) / -2);
   position:relative;
@@ -681,23 +729,21 @@ const CSS = `
 .blt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; }
 .blt .fl::before, .blt .fl::after {
   content:attr(data-ch); position:absolute; inset:0; z-index:-1;
-  pointer-events:none; opacity:calc(var(--k) * .8);
-  filter:blur(calc(1px + var(--k) * 2.2px));
+  pointer-events:none; opacity:calc(var(--k) * .4);
+  filter:blur(calc(1px + var(--k) * 1.4px));
 }
 .blt .fl::before { color:#00C4DB; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
 .blt .fl::after  { color:#E5289E; mix-blend-mode:multiply; transform:translate(calc(var(--cx) * -.8), calc(var(--cy) * -.8)); }
 .blt .fl {
   text-shadow:
-    calc(var(--cx) * -.6) calc(var(--cy) * .7) calc(2px + var(--k) * 4px) rgba(250,220,0, calc(var(--k) * .85));
+    calc(var(--cx) * -.6) calc(var(--cy) * .7) calc(2px + var(--k) * 3px) rgba(250,220,0, calc(var(--k) * .45));
 }
 
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
   .hero-figure { height:62vh; }
-  .hero-card { margin-top:-6rem; padding:2rem 1.3rem 1.7rem; }
-  .hero-corner { top:64px; font-size:.85rem; }
-  .corner-right { right:1.1rem; }
-  .corner-left { left:1.1rem; }
+  .hero-card { margin-top:-6rem; padding:3rem 1.3rem 1.7rem 3.4rem; }
+  .tape { width:80px; height:26px; }
   .op-nav { padding:.9rem 1.1rem; gap:1.2rem; }
   .pull, .pull-left { margin-right:0; margin-left:0; }
   .shot-inline { float:none; width:100%; margin:2rem 0; }
