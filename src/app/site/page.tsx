@@ -554,9 +554,9 @@ function useScrollSkew() {
       const y = window.scrollY;
       vel += (y - lastY - vel) * 0.12;
       lastY = y;
-      const s = Math.max(-6, Math.min(6, vel * 0.055));
+      const s = Math.max(-8, Math.min(8, vel * 0.085));
       skewEls.forEach((el) => {
-        el.style.transform = Math.abs(s) < 0.02 ? "" : `skewY(${s}deg) scaleY(${1 + Math.abs(s) * 0.008})`;
+        el.style.transform = Math.abs(s) < 0.02 ? "" : `skewY(${s}deg) scaleY(${1 + Math.abs(s) * 0.012})`;
       });
       raf = requestAnimationFrame(loop);
     };
@@ -613,8 +613,8 @@ function FxTitle({
           /* pointer creates a ripple distortion over the letters (no glow) */
           ty = Math.sin(t * 3.0 + cs[i].x * 0.06) * 3.2 * g;
         } else {
-          /* misregistered print plates: barely-there radial push */
-          const push = 3.5 * g;
+          /* misregistered print plates: gentler radial push, refraction-like */
+          const push = 2.4 * g;
           tx = (dx / d) * push;
           ty = (dy / d) * push;
         }
@@ -625,8 +625,9 @@ function FxTitle({
         if (!still) live++;
         l.style.setProperty("--k", kk[i].toFixed(3));
         /* aberration splits along the push direction */
-        l.style.setProperty("--cx", (curX[i] * 1.5).toFixed(1) + "px");
-        l.style.setProperty("--cy", (curY[i] * 1.5).toFixed(1) + "px");
+        l.style.setProperty("--cx", (curX[i] * 1.1).toFixed(1) + "px");
+        l.style.setProperty("--cy", (curY[i] * 1.1).toFixed(1) + "px");
+        l.style.setProperty("--bl", Math.min(3.5, (Math.abs(curX[i]) + Math.abs(curY[i])) * 0.9 + kk[i] * 1.2).toFixed(2) + "px");
         if (palette === "water") {
           const w1 = Math.sin(t * 2.6 + cs[i].x * 0.08) * kk[i];
           const w2 = Math.cos(t * 3.1 + cs[i].x * 0.05) * kk[i];
@@ -645,6 +646,7 @@ function FxTitle({
           l.style.setProperty("--k", "0");
           l.style.setProperty("--cx", "0px");
           l.style.setProperty("--cy", "0px");
+          l.style.setProperty("--bl", "0px");
         });
       }
     };
@@ -1153,10 +1155,10 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .identity-inner {
   position:relative; z-index:2;
   width:100%; min-height:100svh;
-  display:flex; align-items:center; justify-content:space-between;
-  gap:clamp(2rem, 5vw, 6rem); padding-inline:5vw 0;
+  display:flex; flex-direction:column; align-items:stretch;
+  gap:0; padding:12vh 5vw 0;
 }
-.identity-text { flex:1 1 56%; display:flex; flex-direction:row; align-items:center; gap:clamp(1.4rem, 3vw, 3rem); }
+.identity-text { flex:0 0 auto; position:relative; z-index:2; display:flex; flex-direction:row; align-items:flex-start; gap:clamp(1.4rem, 3vw, 3rem); }
 .identity-logos { display:flex; flex-direction:column; align-items:center; gap:1.6rem; flex:0 0 auto; }
 .logo-echo  { width:clamp(64px, 6.5vw, 100px); height:auto; }
 .logo-effie { width:clamp(38px, 3.6vw, 56px); height:auto; }
@@ -1195,17 +1197,21 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   margin-top:.6em;
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
-.identity-photo { flex:0 0 clamp(300px, 40vw, 640px); align-self:stretch; position:relative; min-height:60vh; }
-.identity-photo img { position:absolute; bottom:0; right:0; height:90%; width:auto; max-width:none; }
+.identity-photo {
+  flex:1 1 auto; position:relative; z-index:1;
+  align-self:center; width:min(92vw, 760px);
+  margin-top:clamp(-16vh, -10vw, -4vh); min-height:52vh;
+}
+.identity-photo img { position:absolute; bottom:0; left:50%; transform:translateX(-50%); height:100%; width:auto; max-width:none; }
 
 /* ---------- 2 · SAILING ---------- */
 .sec-sailing { min-height:100vh; background:var(--navy-deep); display:flex; }
 .sailing-content {
   position:relative; z-index:2;
-  width:min(44rem, 50vw);
+  width:min(60vw, 60rem);
   min-height:100vh;
   display:flex; flex-direction:column;
-  padding:16vh 5vw 5vh;
+  padding:80px 5vw 5vh;
 }
 .sailing-scroll { flex:1 1 auto; }
 .sailing-title {
@@ -1240,12 +1246,32 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {
   min-height:100vh; display:flex;
+  /* drafting-paper grid: minor+major lines with crosses at major intersections */
+  --gg:12px;
+  --grid-minor:hsla(223, 60%, 20%, .045);
+  --grid-major:hsla(223, 60%, 20%, .12);
+  --grid-cross:hsla(223, 60%, 20%, .35);
   background-color:#EFF1F5;
   background-image:
-    radial-gradient(circle, rgba(8,24,69,.22) 1px, transparent 1.4px),
-    linear-gradient(rgba(8,24,69,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8,24,69,.05) 1px, transparent 1px);
-  background-size:28px 28px, 28px 28px, 28px 28px;
+    linear-gradient(var(--grid-minor) 0 1px, transparent 1px var(--gg)),
+    linear-gradient(to right, var(--grid-minor) 0 1px, transparent 1px var(--gg)),
+    linear-gradient(var(--grid-major) 0 1px, transparent 1px calc(var(--gg) * 5)),
+    linear-gradient(to right, var(--grid-major) 0 1px, transparent 1px calc(var(--gg) * 5)),
+    radial-gradient(circle at center, transparent calc(var(--gg) / 2), #EFF1F5 calc(var(--gg) / 2) 100%),
+    linear-gradient(var(--grid-cross) 0 1px, transparent 1px calc(var(--gg) * 5)),
+    linear-gradient(to right, var(--grid-cross) 0 1px, transparent 1px calc(var(--gg) * 5));
+  background-size:
+    var(--gg) var(--gg),
+    var(--gg) var(--gg),
+    calc(var(--gg) * 5) calc(var(--gg) * 5),
+    calc(var(--gg) * 5) calc(var(--gg) * 5),
+    calc(var(--gg) * 5) calc(var(--gg) * 5),
+    calc(var(--gg) * 5) calc(var(--gg) * 5),
+    calc(var(--gg) * 5) calc(var(--gg) * 5);
+  background-position:
+    0 0, 0 0, 0 0, 0 0,
+    calc(var(--gg) * -2.5) calc(var(--gg) * -2.5),
+    0 0, 0 0;
 }
 .blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw 11vh; display:flex; flex-direction:column; gap:6vh; }
 .blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; aspect-ratio:1900 / 292; }
@@ -1489,15 +1515,15 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fx-skew { will-change:transform; }
 .fxt .fxl { display:block; }
 .fxt .fw { display:inline-block; white-space:pre; }
-.fxt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; will-change:transform; }
+.fxt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; --bl:0px; will-change:transform; }
 .fxt .fl::before, .fxt .fl::after {
   content:attr(data-ch);
   position:absolute; inset:0; pointer-events:none;
   text-shadow:none; opacity:calc(var(--k) * .85);
 }
-/* RGB split — ghosts offset along the local push direction */
-.fxt-rgb .fl::before { color:#FF2A2A; transform:translate(var(--cx), var(--cy)); }
-.fxt-rgb .fl::after  { color:#2A6BFF; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
+/* RGB split — light-refraction: small offset, blur grows along the motion */
+.fxt-rgb .fl::before { color:#FF2A2A; transform:translate(var(--cx), var(--cy)); filter:blur(var(--bl, 0px)); }
+.fxt-rgb .fl::after  { color:#2A6BFF; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); filter:blur(var(--bl, 0px)); }
 .fxt-rgb .fl { text-shadow:calc(var(--cx) * -.6) calc(var(--cy) * .6) 0 rgba(0,230,80,calc(var(--k) * .8)); }
 /* CMYK split — print inks on the paper sections */
 .fxt-cmyk .fl::before { color:#00C4DB; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
@@ -1516,28 +1542,33 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .ruler { left:.55rem; gap:11px; }
   .ruler .tick { width:12px; }
   .ruler .tick.on { width:24px; }
-  .identity-inner { flex-direction:column; align-items:stretch; padding:13vh 5vw 0; gap:1rem; }
+  .identity-inner { padding:13vh 5vw 0; gap:1rem; }
   .identity-text { flex-direction:column; align-items:flex-start; gap:1.6rem; }
   .identity-logos { order:2; flex-direction:row; align-items:flex-end; gap:1.4rem; }
   .identity-titles { order:1; }
   .identity-name, .anim-title { font-size:clamp(2.6rem, 11vw, 4rem); }
   .identity-roles { font-size:clamp(1rem, 4vw, 1.3rem); }
   .identity-for { font-size:clamp(1rem, 4.5vw, 1.4rem); }
-  .identity-photo { flex:0 0 auto; align-self:flex-end; min-height:50vh; width:100%; }
-  .identity-photo img { height:100%; right:0; }
-  .sailing-content, .news-content { width:auto; }
-  /* pin title+body to the section top; cap widths so the video portrait stays visible */
-  .sailing-content { padding:9vh 5vw 4vh; }
-  .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); max-width:80vw; }
-  .sailing-body { max-width:70vw; }
+  .identity-photo { flex:0 0 auto; min-height:48vh; width:100%; margin-top:-2vh; }
+  .identity-photo img { height:100%; }
+  .news-content { width:auto; }
   .works-head { padding-bottom:2.2rem; }
   .works-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
   .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
-  .op-form.work-form { flex-direction:column; align-items:stretch; }
+  .op-form.work-form { flex-direction:column; align-items:stretch; gap:1rem; }
+  .op-form.work-form label { flex:0 0 auto; }
   .footer-content { flex-direction:column; align-items:flex-start; gap:3rem; padding-top:13vh; }
   .footer-title { font-size:clamp(3rem, 16vw, 5rem); }
   .to-top { bottom:1rem; right:1rem; width:42px; height:42px; }
+}
+
+@media (max-width:640px){
+  /* sailing on phones: half-step smaller title, tighter leading, column ≤60vw
+     so the text stays in the upper-right sky and off the figure */
+  .sailing-content { width:auto; padding:80px 5vw 4vh; }
+  .sailing-title { font-size:clamp(1.5rem, 5.4vw, 2.1rem); line-height:1.12; max-width:60vw; }
+  .sailing-body { max-width:60vw; margin-top:1rem; font-size:.92rem; line-height:1.6; }
 }
 
 @media (prefers-reduced-motion: reduce){
