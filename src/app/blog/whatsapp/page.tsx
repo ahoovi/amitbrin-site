@@ -305,8 +305,6 @@ export default function WhatsappPost() {
           />
         </figure>
         <div className="hero-card" data-reveal>
-          <i className="tape tape-a" aria-hidden />
-          <i className="tape tape-b" aria-hidden />
           <i className="spiral" aria-hidden />
           <i className="margin-line" aria-hidden />
           <BleedTitle as="h1" className="hero-title" lines={["סליחה ששלחתי", "וואטסאפ"]} />
@@ -317,6 +315,8 @@ export default function WhatsappPost() {
             מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 5 דקות קריאה
           </p>
         </div>
+        <i className="tape tape-a" aria-hidden />
+        <i className="tape tape-b" aria-hidden />
       </header>
 
       {/* ---------- BODY ---------- */}
@@ -340,8 +340,6 @@ export default function WhatsappPost() {
             lines={["היא לא שירתה צורך קיים - היא ייצרה התנהגות, ואז הפכה אותה לנורמה, ואז הפכה את הנורמה לתנאי סף לחיים חברתיים."]}
           />
         </aside>
-
-        <hr className="ink-rule" data-reveal />
 
         <Shot
           src="/media/blog/whatsapp/shot-typing-preview.jpg"
@@ -487,7 +485,7 @@ const CSS = `
   overflow-x:hidden;
   position:relative;
 }
-.bp-root > *:not(style) { position:relative; z-index:1; }
+.bp-root .hero, .bp-root .body { position:relative; z-index:1; }
 .bp-root h1,.bp-root h2,.bp-root h3,.bp-root blockquote { font-family:'Leon','Noto Sans Hebrew',sans-serif; margin:0; }
 
 [data-reveal] { opacity:0; transform:translateY(26px); transition:opacity 1s var(--ease), transform 1s var(--ease); }
@@ -537,7 +535,14 @@ const CSS = `
     99.4% 20%, 100% 34%, 99.2% 47%, 100% 61%, 99.5% 74%, 100% 88%, 99.3% 98%,
     96% 100%, 78% 99%, 55% 100%, 32% 99.2%, 12% 100%, 2% 99%, 0 96%
   );
-  filter:drop-shadow(0 24px 30px rgba(2,13,44,.25)) drop-shadow(0 4px 8px rgba(2,13,44,.12));
+  filter:drop-shadow(0 24px 30px rgba(2,13,44,.25)) drop-shadow(0 4px 8px rgba(2,13,44,.12)) drop-shadow(0 46px 60px rgba(2,13,44,.14));
+  /* real punched holes along the spiral edge */
+  -webkit-mask-image:radial-gradient(circle at calc(100% - 1.55rem) 50%, transparent 0 5.5px, #000 6px);
+  -webkit-mask-size:100% 30px;
+  -webkit-mask-repeat:repeat-y;
+  mask-image:radial-gradient(circle at calc(100% - 1.55rem) 50%, transparent 0 5.5px, #000 6px);
+  mask-size:100% 30px;
+  mask-repeat:repeat-y;
 }
 .hero-card[data-reveal] { transform:rotate(-.6deg) translateY(26px); }
 .hero-card[data-reveal].in { transform:rotate(-.6deg); }
@@ -556,14 +561,14 @@ const CSS = `
   opacity:.4; mix-blend-mode:multiply;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.28'/%3E%3C/svg%3E");
 }
-/* spiral binding: torn punched holes along the right edge */
+/* spiral binding: torn rims around the real punched holes */
 .spiral {
-  position:absolute; top:1.2rem; bottom:1.2rem; right:.85rem; width:1.5rem; z-index:2;
-  background-image:radial-gradient(circle at 50% 50%,
-    #efeadb 0 4.5px,
-    rgba(2,13,44,.28) 5px 5.8px,
-    rgba(255,255,255,.7) 6.2px 6.8px,
-    transparent 7.4px);
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background-image:radial-gradient(circle at calc(100% - 1.55rem) 50%,
+    transparent 0 5.4px,
+    rgba(2,13,44,.32) 5.9px 6.6px,
+    rgba(255,255,255,.65) 7px 7.5px,
+    transparent 8.2px);
   background-size:100% 30px;
   background-repeat:repeat-y;
   filter:url(#inkline-bp);
@@ -574,16 +579,17 @@ const CSS = `
   background:rgba(198,74,74,.4);
   filter:url(#inkline-bp);
 }
-/* translucent tape strips */
+/* masking-tape strips straddling the cover image and the note */
 .tape {
-  position:absolute; width:110px; height:34px; z-index:4;
-  background:rgba(255,250,225,.55);
-  box-shadow:0 2px 6px rgba(2,13,44,.15);
-  border-left:1px dashed rgba(2,13,44,.08);
-  border-right:1px dashed rgba(2,13,44,.08);
+  position:absolute; width:120px; height:36px; z-index:5;
+  top:calc(80vh - 11rem - 17px);
+  background:rgba(250,243,212,.8);
+  box-shadow:0 3px 8px rgba(2,13,44,.22);
+  border-left:1px dashed rgba(2,13,44,.1);
+  border-right:1px dashed rgba(2,13,44,.1);
 }
-.tape-a { top:-14px; right:14%; transform:rotate(-5deg); }
-.tape-b { top:-12px; left:12%; transform:rotate(4deg); }
+.tape-a { right:calc((100% - min(880px, 92vw)) / 2 + min(880px, 92vw) * .12); transform:rotate(-5deg); }
+.tape-b { left:calc((100% - min(880px, 92vw)) / 2 + min(880px, 92vw) * .1); transform:rotate(4deg); }
 .hero-title {
   color:var(--navy); font-weight:800;
   font-size:clamp(2.6rem, 7vw, 5.4rem); line-height:.95;
@@ -605,12 +611,11 @@ const CSS = `
 }
 .body > p { margin:0 0 1.7em; }
 .lede, .section-lede { font-size:clamp(1.18rem, 1.5vw, 1.36rem); font-weight:500; line-height:1.85; }
-.section-lede { clear:both; font-weight:600; color:var(--navy); }
+.section-lede { font-weight:600; color:var(--navy); }
 .closer { font-weight:700; clear:both; }
 .bp-root strong { font-weight:700; }
 
 .ink-rule {
-  clear:both;
   border:none; height:0; margin:3.4rem auto;
   width:min(280px, 60%);
   border-top:2px solid var(--navy);
@@ -627,7 +632,7 @@ const CSS = `
   margin-right:calc((100vw - min(680px, 92vw)) / -4);
   position:relative; padding:.4rem 0;
 }
-.pull-left { text-align:left; margin-right:0; margin-left:calc((100vw - min(680px, 92vw)) / -4); }
+.pull-left { text-align:left; margin-right:0; margin-left:calc((100vw - min(680px, 92vw)) / -8); }
 .pull-title {
   color:var(--navy); font-weight:800;
   font-size:clamp(1.7rem, 4vw, 3.1rem); line-height:1.18;
@@ -743,7 +748,7 @@ const CSS = `
 @media (max-width: 720px) {
   .hero-figure { height:62vh; }
   .hero-card { margin-top:-6rem; padding:3rem 1.3rem 1.7rem 3.4rem; }
-  .tape { width:80px; height:26px; }
+  .tape { width:84px; height:28px; top:calc(62vh - 6rem - 14px); }
   .op-nav { padding:.9rem 1.1rem; gap:1.2rem; }
   .pull, .pull-left { margin-right:0; margin-left:0; }
   .shot-inline { float:none; width:100%; margin:2rem 0; }
