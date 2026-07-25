@@ -245,10 +245,11 @@ const POSTS = [
     placeholder: false,
   },
   {
-    title: "פוסט שלישי — בקרוב",
-    excerpt: "וכאן עוד אחד. גלילה הצידה חושפת את הבאים בתור.",
-    href: "#",
-    placeholder: true,
+    title: "פרי עץ הדעת",
+    excerpt:
+      "לקוח סרב לקבל עבודה ששלחתי לו כי היה משוכנע שהאיור מג׳ונרט ב-AI. ״בחיים לא ראיתי איור כזה״, הוא אמר לי בטלפון. על קוסמים, על מזכירות שהתפטרו בגלל מעבד התמלילים - ועל המוח שכבר החליט שמה שהוא רואה לא אמיתי.",
+    href: "/blog/pri-etz-hadaat",
+    placeholder: false,
   },
 ];
 
@@ -1146,15 +1147,15 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {
-  min-height:100vh; display:flex;
+  display:flex;
   background-color:#EFF1F5;
   background-image:
-    radial-gradient(circle, rgba(8,24,69,.22) 1px, transparent 1.4px),
-    linear-gradient(rgba(8,24,69,.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(8,24,69,.05) 1px, transparent 1px);
+    radial-gradient(circle, rgba(8,24,69,.176) 1px, transparent 1.4px),
+    linear-gradient(rgba(8,24,69,.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(8,24,69,.04) 1px, transparent 1px);
   background-size:28px 28px, 28px 28px, 28px 28px;
 }
-.blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw 11vh; display:flex; flex-direction:column; gap:6vh; }
+.blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw min(11vh, 200px); display:flex; flex-direction:column; gap:6vh; }
 .blog-head { width:min(1100px, 100%); margin-inline:auto; text-align:center; }
 .blog-tarhiv { width:100%; height:auto; display:block; }
 .blog-title {

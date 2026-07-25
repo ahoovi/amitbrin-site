@@ -1,13 +1,13 @@
 "use client";
 
 /* =====================================================================
- *  BLOG POST — "Mother Load" (רייצ׳ל מאני)  ·  v2 (per Amit's revisions)
+ *  BLOG POST — "פרי עץ הדעת"  ·  v2 (per Amit's revisions)
  *  · Site nav + blur veil on top; hero corner labels in negative
  *  · 80vh cover, frosted-grain glass title card
  *  · Persistent CMY ink-bleed title effect (front letters static)
  *  · Inline floating screenshots breaking left out of the column
  *  · Facebook + icons in share, sketchy multi-stroke send button
- *  Route: /blog/motherload · Assets: /public/media/blog/motherload/
+ *  Route: /blog/pri-etz-hadaat · Assets: /public/media/blog/pri-etz-hadaat/
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
@@ -133,8 +133,8 @@ function ReadProgress() {
 }
 
 /* ---------- share ---------- */
-const POST_URL = "https://amitbrin.com/blog/motherload";
-const POST_TITLE = "Mother Load - עמית ברין";
+const POST_URL = "https://amitbrin.com/blog/pri-etz-hadaat";
+const POST_TITLE = "פרי עץ הדעת - עמית ברין";
 
 const Ic = {
   wa: (
@@ -208,8 +208,8 @@ function Comments() {
         <p className="comments-ok">תודה! התגובה נשלחה.</p>
       ) : (
         <form className="comments-form" onSubmit={submit}>
-          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג: Mother Load" />
-          <input type="hidden" name="post" value="motherload" />
+          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג: פרי עץ הדעת" />
+          <input type="hidden" name="post" value="pri-etz-hadaat" />
           <div className="comments-grid">
             <input className="c-in" type="text" name="name" placeholder="שם" required />
             <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
@@ -345,8 +345,8 @@ export default function WhatsappPost() {
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/motherload/cover.jpg"
-            alt="פוסטרים של פרויקט Mother Load מודבקים על קיר רחוב"
+            src="/media/blog/pri-etz-hadaat/snakes-cover.jpg"
+            alt="מסך אילוסטרייטור: מברשת פאטרן של נחשים מציירת אותיות עבריות"
             className="hero-img"
             fetchPriority="high"
           />
@@ -354,10 +354,10 @@ export default function WhatsappPost() {
         <div className="hero-card" data-reveal>
           <i className="spiral" aria-hidden />
           <i className="margin-line" aria-hidden />
-          <BleedTitle as="h1" className="hero-title" lines={["Mother Load"]} />
+          <BleedTitle as="h1" className="hero-title" lines={["פרי עץ הדעת"]} />
           <p className="hero-sub">
-            רייצ'ל מאני מדפיסה את הגיליון שאף רואה חשבון לא יחתום עליו - החשבון הפתוח של אימהות
-            יוצרות.
+            על הלקוח שסירב לשלם על עבודת יד, על קוסמים - ועל המוח שכבר החליט שמה שהוא רואה לא
+            אמיתי.
           </p>
           <p className="hero-meta">
             מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 4 דקות קריאה
@@ -369,37 +369,21 @@ export default function WhatsappPost() {
 
       {/* ---------- BODY ---------- */}
       <article className="body">
-        <Shot
-          src="/media/blog/motherload/poster-price-tags.jpg"
-          alt="פוסטר Mother Load: פנים של אישה מכוסות בתוויות מחיר"
-          cap="מתוך Mother Load: הפנים כמוצר בסוף עונה - 74 סנט, מוזל, הצעה מיוחדת. לחיצה מגדילה."
-        />
-
         <p className="lede" data-reveal>
-          יש מסמך חשבונאי אחד שאף מחלקת כספים לא תדרוש ואף רואה חשבון לא יחתום עליו, והוא נפתח כל
-          ערב ב־23:00 בראש של כל אמא יוצרת: כמה שעות עבדתי באמת היום, כמה מהן הופרעו באמצע, כמה
-          אחוזי מעבד היו שמורים לאיסוף מבית הספר, לגרב שנעלמה, לאשמה… גיליון שלא מתאזן אף פעם, ולא
-          מופיע בשום תלוש.
+          לפני כמה ימים לקוח סרב לקבל עבודה ששלחתי לו כי הוא היה משוכנע שאיור הלוגו שיצרתי עבורו
+          מג׳ונרט ב-AI. הוא ממש התעצבן שאני מצפה ממנו לשלם על עבודה כזו, שלא לדבר על הסכום שסיכמנו
+          עבור מה שהצעת המחיר שלי הגדירה כ"איור בעבודת יד". כשאמרתי לו שזה בדיוק מה שהוא קיבל,
+          שהעבודה צוירה ביד על הטאבלט שלי, בקווים של עט אלקטרוני, הוא כבר היה עמוק בתוך התובנות
+          שלו: "בחיים לא ראיתי איור כזה", הוא אמר לי בטלפון, "אתה חושב שאני לא מזהה AI כשאני רואה
+          אותו?"
         </p>
 
         <p data-reveal>
-          רייצ'ל מאני, מעצבת מלוס אנג'לס, החליטה לעצב ולהדפיס אותו – פרויקט בשם Mother Load:
-          פוסטרים שבהם פנים של אישה מכוסות בתוויות מחיר כמו מוצר בסוף עונה, קבלת סופרמרקט עם שורות
-          כמו "מס חופשת לידה" ו"עבודה בלתי נראית" – ולצידם מסה שמצחיקה וכועסת באותה נשימה, וכל
-          שורה בה נשענת על מחקר.
-        </p>
-
-        <p className="section-lede" data-reveal>
-          המחקרים, למי שעוד צריך אותם: 74.3 סנט לכל דולר שאבות מרוויחים; קנס של 5–7% על כל ילד; ופי
-          שניים שיחות חזרה לנשים בלי ילדים – על קורות חיים זהים – בזמן שאבות באותם נתונים בדיוק
-          מקבלים דווקא תוספת ("בונוס האבהות", ככה זה נקרא בספרות המחקרית, בלי מרכאות אירוניות
-          אפילו).
-        </p>
-
-        <p data-reveal>
-          כל זה הזכיר לי את מחברת ההקפות של המכולת השכונתית – זו שנרשמו בה חובות בעיפרון, מתוך הנחה
-          שביום מן הימים מישהו יבוא לסגור את החשבון. ההבדל היחיד: במכולת לפחות כולם ידעו שיש מחברת.
-          כאן ההקפות נרשמות בדיו בלתי נראית, ומי שמגיעה לשלם בסוף כל חודש היא דווקא זו שרשומה בה.
+          זה גרם לי לחשוב על מופע קוסמות במועדון קטן: כשהקוסם מרים את הקלף שבחרת מתוך החפיסה, הוא
+          לא באמת מצפה שתאמין שקרה כאן קסם. הוא מצפה שתעריך את המיומנות. שתדע שאין כוחות על-טבעיים
+          ועדיין תמחא כפיים, כי משהו בביצוע היה מושלם עד כדי כך שהמוח שלך לא הצליח לתפוס אותו. אבל
+          מה קורה כשזה מתהפך? כשמישהו מסתכל על עבודת יד אמיתית ומחליט שהיא תרמית? הרי ברגע שמישהו
+          מסמן לעצמו בראש "זה לא אמיתי" יהיה קשה עד בלתי אפשרי לשכנע אותו שזה כן.
         </p>
 
         {/* pull quote — breaks into the right margin, wide rule beneath */}
@@ -407,65 +391,75 @@ export default function WhatsappPost() {
           <BleedTitle
             as="blockquote"
             className="pull-title"
-            lines={["במכולת לפחות כולם ידעו שיש מחברת. כאן ההקפות נרשמות בדיו בלתי נראית."]}
+            lines={["ברגע שמישהו מסמן לעצמו בראש \"זה לא אמיתי\" יהיה קשה עד בלתי אפשרי לשכנע אותו שזה כן."]}
           />
         </aside>
 
-        <figure className="shot-full" data-reveal>
-          <img src="/media/blog/motherload/poster-receipt.jpg" alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות" loading="lazy" />
-          <figcaption>הקבלה: "מס חופשת לידה", "עבודה בלתי נראית", סה"כ - יותר מדי. כל המכירות סופיות.</figcaption>
+        <p className="section-lede" data-reveal>
+          זה יהיה אנדרסטייטמנט להגיד שהמושג אמת עבר טלטלה בשנים האחרונות. אנחנו מתקדמים במהירות
+          לעולם שבו אמת ובדיה לא ניתנות להבחנה, וכשזה קורה - שתיהן בצרות.
+        </p>
+
+        <p data-reveal>
+          הדיסוננס הקוגניטיבי של להביט באומנות אמיתית ולפטור אותה כזיוף היה פעם נחלתם של מבקרי
+          אומנות עצלנים בלבד. עכשיו זו ברירת המחדל של כולנו: החשדנות הפכה למנגנון הגנה, והמחיר שלה
+          הוא שגם הדבר האמיתי כבר לא מקבל קרדיט. פגשתי את זה אצל הלקוח שלי בדיוק כמו שרופא פוגש
+          הורים שמאבחנים בגוגל לפני שהגיעו לתפרים בחדר המיון.
+        </p>
+
+        <figure className="video-full" data-reveal>
+          <video
+            src="/media/blog/pri-etz-hadaat/snake-brush.mp4"
+            controls
+            playsInline
+            preload="metadata"
+            poster="/media/blog/pri-etz-hadaat/snakes-cover.jpg"
+          />
+          <figcaption>
+            בסרטון האילוסטרציה: את מברשת הנחש הזה יצרתי באילוסטרייטור לפני שנים רבות, לצורך עבודה
+            שנשענה על סמל הרפואה. כל קו שאני מושך איתה מתעקל בגוף נחש מפותל, עד הראש המצויר בקצה.
+            עבודת יד שמצוירת באמצעות כלי ממוחשב שיצרתי בעבודת יד. שכבות של אמת ובדיה, תלוי את מי
+            שואלים ובאיזו שנה.
+          </figcaption>
         </figure>
 
-        <p className="section-lede" data-reveal>
-          עכשיו ההקשר, כי בלעדיו זה עוד פרויקט אמנותי יפה:
-        </p>
-
         <p data-reveal>
-          2025 הייתה שנת קונסולידציה אכזרית – Omnicom פיטרה מעל 4,000 עובדים, WPP איחדה את Ogilvy,
-          VML ו־AKQA, וכ־10,000 משרות נעלמו מהתעשייה. פחות אנשים עושים יותר עבודה, עם דרישה חדשה
-          שאף אחד לא טרח לכתוב במודעת הדרושים: שליטה ב־AI, וזמינות שאין לה שעות סגירה. ובדיוק כאן
-          נמצא המשפט שמאני מניחה על השולחן ושווה לקרוא אותו פעמיים: הכישורים שההנהלות מצהירות שהן
-          מחפשות עכשיו – תיעדוף תחת מחסור, ניהול משאבים מוגבלים, שקט תחת לחץ – הם ליטרלי האימון
-          היומי של אימהות. אבל הפילטר שממיין את המועמדים לא בודק כישורים; הוא בודק זמינות.
+          כמה שלא ננסה להשתכנע אחרת - איננו מסוגלים באמת להבחין בין תוכן אנושי לתוכן מיוצר. עשרות
+          פעמים ביום אנחנו נדרשים להעריך מחדש דברים שפעם היו מובנים מאליהם: הצילום הזה אמיתי?
+          הביקורת הזאת נכתבה על ידי אדם? הקול בטלפון הוא באמת של הבן שלי? ובתוך כל זה, הכישרון
+          והמיומנות - שני דברים שתמיד ידענו למדוד לפי התוצאה - איבדו את סרגל המדידה שלהם.
         </p>
-
-        <figure className="shot-full" data-reveal>
-          <img src="/media/blog/motherload/poster-portfolio.jpg" alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים" loading="lazy" />
-          <figcaption>"Portfolio Review" - התיק שמגיע לראיון אחרי שהילדים סיימו איתו.</figcaption>
-        </figure>
 
         <p className="section-lede" data-reveal>
-          וגילוי נאות, כי אי אפשר בלי:
+          אבל בדיוק כמו שקרה כשהתגלתה האש, הומצא הדפוס, או כשהאוטומוביל החליף את הסוסים{" "}
+          <em>
+            (המילה אוטומוביל שרדה בעברית בזכות ראשי התיבות רכב פרטי - רכב שנוסע מעצמו, בלי סוס)
+          </em>{" "}
+          - אנחנו נסתגל. נלמד לחיות גם עם זה.
         </p>
 
         <p data-reveal>
-          אני מלמד את הדרישה הסמויה הזאת. סדנאות AI, כלים, טכניקות, אינטגרציות – אני חוליה בשרשרת
-          האספקה של המשוואה שמאני מפרקת. הנחמה שאני מוכר לעצמי היא שאני מתעקש להגיד, בכל סדנה,
-          שהכלי טוב בדיוק כמו האדם שמחזיק בו – כלומר שהערך נשאר אצל מי שצבר ניסיון וכישרון, ולא אצל
-          מי שפשוט זמין יותר שעות מול המסך. יש שיאמרו שזו בדיוק הנחמה שכל ספק נשק מוכר לעצמו…
+          לפני 45 שנים, כשמעבד התמלילים הראשון נכנס למשרדים, מזכירות בכירות התפטרו במחאה: הן טענו
+          שכתיבה במכונה שמאפשרת למחוק בלי להשאיר סימן היא רמאות, שכתיבה אמיתית חייבת לשאת את מחיר
+          הטעויות שלה. היום אף אחד לא זוכר בכלל שהיה שם ויכוח.
         </p>
 
         <p data-reveal>
-          כי בסופו של דבר הטיעון של מאני הוא לא "נגד קדמה", וזה מה שעושה אותו קשה לעיכול. קדמה שכל
-          המדדים שלה הם מהירות וזמינות היא פילטר – שקט, יעיל, בלי אף החלטה מפלה אחת שאפשר להצביע
-          עליה בישיבת דירקטוריון – שמסנן החוצה בדיוק את הכישרון המנוסה ביותר. שבמקרה גמור הוא נשי
-          באופן לא פרופורציונלי. ובמקרה קצת פחות גמור – הוא גם כל מי שכבר עבר את תקרת הזכוכית של
-          ממוצע אורך החיים במקצוע הזה; כל מי שיש לו, איך לנסח את זה, חיים שמפריעים באמצע.
+          כשהתחלתי לצייר במחשב, ציירתי בעכבר. לקח לי שנים להתרגל לצייר בעט על משטח אלקטרוני, ועוד
+          שנים ללמוד להרים את היד מול מסך במחוות ציור אוויריות. הכלים מתחלפים כל הזמן; היד, הראש
+          והעין - הם העניין. תמיד היו.
         </p>
 
-        <div className="shot-row" data-reveal>
-          <Cell src="/media/blog/motherload/poster-out-of-order.jpg" alt="פוסטר Out of Order: ידיים של ילדים מכסות פנים של אמא" />
-          <Cell src="/media/blog/motherload/poster-torn-face.jpg" alt="פוסטר Mother Load: פנים מכוסות בציור ילדים קרוע" />
-          <Cell src="/media/blog/motherload/street-mockup.jpg" alt="פוסטרים של Mother Load ו-Out of Order על חזית בניין ברחוב" />
-        </div>
-
-        <p className="closer link-line" data-reveal>
-          המסה המלאה אצלה באתר:{" "}
-          <a className="ink-btn btn-inline" href="https://rachelmany.com/creativemotherhood" target="_blank" rel="noopener noreferrer">
-            rachelmany.com/creativemotherhood ←
-          </a>{" "}
-          שווה את הזמן. ואת החשבון שייפתח בראש אחר כך. גם בשבילך, גבר.
+        <p data-reveal>
+          אני לא יודע באיזה כלים אשתמש בעוד חמש שנים. אני כן יודע שאשתמש בהם באותה יד, באותו ראש
+          ובאותה עין. ושכמו תמיד, יהיה מי שיסתכל על התוצאה ויחליט שזה קסם, ומי שיחליט שזו תרמית.
+          אני עדיין לא קוסם ומקפיד לא להיות שרלטן.
         </p>
+
+        {/* pull quote 2 */}
+        <aside className="pull pull-left" data-reveal>
+          <BleedTitle as="blockquote" className="pull-title" lines={["אני עדיין לא קוסם", "ומקפיד לא להיות שרלטן."]} />
+        </aside>
 
         <hr className="ink-rule thick" data-reveal />
 
@@ -826,6 +820,20 @@ const CSS = `
 /* inline link button inside a running line */
 .ink-btn.btn-inline { padding:.25em .9em; font-size:.95em; vertical-align:middle; }
 .link-line { line-height:2.3; }
+
+/* full-column video block */
+.video-full {
+  clear:both; margin:2.6rem 0; width:100%;
+  position:relative; background:#fff; padding:.9rem; border-radius:18px; box-sizing:border-box;
+}
+.video-full::before {
+  content:''; position:absolute; inset:2px; pointer-events:none; z-index:2;
+  border:1.8px solid var(--navy);
+  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
+  filter:url(#inkline-bp);
+}
+.video-full video { width:100%; height:auto; display:block; border-radius:10px; position:relative; z-index:1; }
+.video-full figcaption { margin-top:.7rem; font-size:.9rem; line-height:1.7; color:rgba(8,24,69,.8); position:relative; z-index:3; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {

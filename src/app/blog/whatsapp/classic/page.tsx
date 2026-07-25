@@ -448,6 +448,8 @@ export default function WhatsappPost() {
           והנה החלק שכן מצחיק: את הטקסט הזה, ברוב המקרים, תעבירו הלאה בקבוצה.
         </p>
 
+        <hr className="ink-rule thick" data-reveal />
+
         <div data-reveal>
           <ShareRow punchline />
         </div>

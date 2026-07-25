@@ -236,10 +236,11 @@ const POSTS = [
     placeholder: false,
   },
   {
-    title: "פוסט שלישי — בקרוב",
-    excerpt: "וכאן עוד אחד. גלילה הצידה חושפת את הבאים בתור.",
-    href: "#",
-    placeholder: true,
+    title: "פרי עץ הדעת",
+    excerpt:
+      "לקוח סרב לקבל עבודה ששלחתי לו כי היה משוכנע שהאיור מג׳ונרט ב-AI. ״בחיים לא ראיתי איור כזה״, הוא אמר לי בטלפון. על קוסמים, על מזכירות שהתפטרו בגלל מעבד התמלילים - ועל המוח שכבר החליט שמה שהוא רואה לא אמיתי.",
+    href: "/blog/pri-etz-hadaat",
+    placeholder: false,
   },
 ];
 
@@ -1247,12 +1248,12 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {
-  min-height:100vh; display:flex;
+  display:flex;
   /* drafting-paper grid: minor+major lines with crosses at major intersections */
   --gg:12px;
-  --grid-minor:hsla(223, 60%, 20%, .045);
-  --grid-major:hsla(223, 60%, 20%, .12);
-  --grid-cross:hsla(223, 60%, 20%, .35);
+  --grid-minor:hsla(223, 60%, 20%, .036);
+  --grid-major:hsla(223, 60%, 20%, .096);
+  --grid-cross:hsla(223, 60%, 20%, .28);
   background-color:#EFF1F5;
   background-image:
     linear-gradient(var(--grid-minor) 0 1px, transparent 1px var(--gg)),
@@ -1275,7 +1276,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
     calc(var(--gg) * -2.5) calc(var(--gg) * -2.5),
     0 0, 0 0;
 }
-.blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw 11vh; display:flex; flex-direction:column; gap:6vh; }
+.blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw min(11vh, 200px); display:flex; flex-direction:column; gap:6vh; }
 .blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; aspect-ratio:1900 / 292; }
 .blog-tarhiv { position:absolute; inset:0; width:100%; height:100%; display:block; }
 .blog-title {
