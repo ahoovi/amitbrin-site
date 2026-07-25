@@ -7,7 +7,7 @@
  *  · Persistent CMY ink-bleed title effect (front letters static)
  *  · Inline floating screenshots breaking left out of the column
  *  · Facebook + icons in share, sketchy multi-stroke send button
- *  Route: /blog/whatsapp · Assets: /public/media/blog/whatsapp/
+ *  Route: /blog/motherload · Assets: /public/media/blog/motherload/
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
