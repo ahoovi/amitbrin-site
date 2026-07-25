@@ -33,11 +33,15 @@ function useScrollTyping() {
 function useBubble(incoming: boolean) {
   const ref = useRef<HTMLDivElement>(null);
   const [state, setState] = useState<"hidden" | "typing" | "shown">("hidden");
+  const [time, setTime] = useState("");
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
+    const stamp = () =>
+      setTime(new Date().toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" }));
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setState("shown");
+      stamp();
       return;
     }
     const io = new IntersectionObserver(
@@ -47,9 +51,10 @@ function useBubble(incoming: boolean) {
           io.disconnect();
           if (incoming) {
             setState("typing");
-            setTimeout(() => setState("shown"), 750);
+            setTimeout(() => { setState("shown"); stamp(); }, 750);
           } else {
             setState("shown");
+            stamp();
           }
         });
       },
@@ -58,7 +63,7 @@ function useBubble(incoming: boolean) {
     io.observe(el);
     return () => io.disconnect();
   }, [incoming]);
-  return { ref, state };
+  return { ref, state, time };
 }
 
 function TypingDots() {
@@ -69,26 +74,17 @@ function TypingDots() {
   );
 }
 
-/* ---------- message bubbles ---------- */
-let CLOCK = 0;
-const T0 = 12 * 60 + 1;
-function tick() {
-  const m = T0 + Math.floor(CLOCK++ / 3);
-  return `${Math.floor(m / 60)}:${String(m % 60).padStart(2, "0")}`;
-}
-
+/* ---------- message bubbles: live timestamps at reveal ---------- */
 function Msg({
   side,
   children,
   big = false,
-  time,
 }: {
   side: "out" | "in";
   children: React.ReactNode;
   big?: boolean;
-  time: string;
 }) {
-  const { ref, state } = useBubble(side === "in");
+  const { ref, state, time } = useBubble(side === "in");
   return (
     <div ref={ref} className={`row row-${side} st-${state}`}>
       <div className={`bubble b-${side}${big ? " b-big" : ""}`}>
@@ -108,8 +104,8 @@ function Msg({
   );
 }
 
-function ImgMsg({ src, alt, cap, time }: { src: string; alt: string; cap: string; time: string }) {
-  const { ref, state } = useBubble(false);
+function ImgMsg({ src, alt, cap }: { src: string; alt: string; cap: string }) {
+  const { ref, state, time } = useBubble(false);
   return (
     <div ref={ref} className={`row row-out st-${state}`}>
       <div className="bubble b-out b-img">
@@ -194,8 +190,6 @@ function Comments() {
  * ===================================================================== */
 export default function WhatsappChatPost() {
   const typing = useScrollTyping();
-  CLOCK = 0;
-  const t = () => tick();
   return (
     <div className="wa-root" dir="rtl" lang="he">
       <style>{CSS}</style>
@@ -211,6 +205,7 @@ export default function WhatsappChatPost() {
             <a href="/site#blog">כתיבה ועשייה</a>
             <a href="/site#footer">דברו איתי</a>
           </div>
+          <a className="hd-alt" href="/blog/whatsapp/classic">לגרסת הקריאה</a>
         </nav>
         <div className="wa-chatbar">
           <button className="hd-back" type="button" onClick={() => history.back()} aria-label="חזרה">
@@ -223,30 +218,32 @@ export default function WhatsappChatPost() {
               {typing ? "מקליד…" : "מחובר"}
             </span>
           </div>
-          <a className="hd-alt" href="/blog/whatsapp/classic">לגרסת הקריאה</a>
+          <a className="hd-call" href="tel:+972549407575" aria-label="התקשרו אליי">
+            <svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" aria-hidden><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+          </a>
         </div>
       </header>
 
       <main className="chat">
         <DateChip>היום</DateChip>
 
-        <Msg side="in" big time={t()}>סליחה ששלחתי וואטסאפ 🙃</Msg>
-        <Msg side="out" time={t()}>
+        <Msg side="in" big>סליחה ששלחתי וואטסאפ 🙃</Msg>
+        <Msg side="out">
           <strong>וואטסאפ: לא אפליקציה גרועה. אפליקציה שעובדת מצוין - לא בשבילכם.</strong>
         </Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           יותר מדי אחוזים מהתקשורת האלקטרונית שלי מתנהלת בוואטסאפ, וזה לא מרצוני החופשי. גם לא
           משלכם, אם כבר. בישראל מדובר בכ־97% אימוץ (אנחנו במקום הראשון בעולם, איזו גאווה) – מה
           שאומר שאין באמת אופציה לצאת, יש רק אופציה להיעלב מהיציאה של אחרים.
         </Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           אז תראו, אני לא חושב שוואטסאפ היא אפליקציה עם עיצוב לקוי. אני חושב שהיא אפליקציה שעיצבה
           מחדש את הדרך שבה אנשים מדברים זה עם זה, וזה שני דברים שונים לגמרי.
         </Msg>
 
-        <Msg side="in" big time={t()}>
+        <Msg side="in" big>
           היא לא שירתה צורך קיים - היא ייצרה התנהגות, ואז הפכה אותה לנורמה, ואז הפכה את הנורמה
           לתנאי סף לחיים חברתיים.
         </Msg>
@@ -255,10 +252,10 @@ export default function WhatsappChatPost() {
           src="/media/blog/whatsapp/shot-typing-preview.jpg"
           alt="צילום מסך: תצוגה מקדימה של הודעה בזמן הקלדה"
           cap="למה שלא נדע כמה זמן אנחנו עוד אמורים לחכות פה? אפילו אם זה ברמה של רמז לאיזה שלב של הסיפור מי שכותב לנו נמצא כרגע."
-          time={t()}
+         
         />
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           הטריק המרכזי הוא היברידי ומכוער: וואטסאפ היא <strong>מדיום אסינכרוני שמתחפש
           לסינכרוני</strong>. טכנית מותר לך לא לענות. מעשית, ה"נראה לאחרונה", שני הסימונים הכחולים
           ושלוש הנקודות המרצדות מייצרים שקיפות חד־כיוונית שמבטלת את הזכות הזו. תקשורת אסינכרונית
@@ -269,10 +266,10 @@ export default function WhatsappChatPost() {
           src="/media/blog/whatsapp/shot-voice-failed.jpg"
           alt="צילום מסך: הודעה קולית שלא עברה"
           cap="למה בעצם אי אפשר לחסום הודעות קוליות?"
-          time={t()}
+         
         />
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           ומי שמנסה לצאת מהמשחק מקבל עונש סימטרי: כיביתם אישורי קריאה? יופי, עכשיו גם אתם לא רואים.
           זו לא פשרה, זה קנס. מערכת שמתמחרת פרטיות בכך שהיא מחזירה אותך לחוסר הוודאות שהיא עצמה
           נועדה לפתור.
@@ -282,10 +279,10 @@ export default function WhatsappChatPost() {
           src="/media/blog/whatsapp/shot-chat-list.jpg"
           alt="צילום מסך: רשימת הצ׳אטים והארכיון"
           cap="יש דברים שמקומם בארכיון ועדיין הם יותר חשובים מכל שאר ההודעות שם - היררכיה של חשיבות בארכיון לא תזיק."
-          time={t()}
+         
         />
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           הקבוצות הן פרק בפני עצמו. אין מנגנון אישור הצטרפות – כל אחד יכול לצרף אותך לכל דבר, בכל
           שעה, ואתה תגלה את זה מהתראה. ואם תרצה לצאת, האפליקציה תודיע על כך לכולם בשורה יבשה שנקראת
           כמו הצהרה פוליטית ("X עזב את הקבוצה"). כלומר: <strong>הכניסה בלי הסכמה, היציאה עם קנס
@@ -294,7 +291,7 @@ export default function WhatsappChatPost() {
 
         <DateChip>מה שמעניין הוא איפה העיצוב נכשל בצורה כל כך יסודית שהוא מתהפך</DateChip>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           מחקר מאוניברסיטת Loughborough בדק את תוויות ה"הועבר" וה"הועבר פעמים רבות" – אותן תוויות
           שנועדו לבלום הפצת שקרים – ומצא שחלק מהמשתמשים פירשו אותן כסימן לחשיבות. כלומר העבירו
           יותר. רק מיעוט הבין שמדובר באזהרה. פיצ'ר שנועד להאט הפצת מידע מוטעה ושימש בפועל כתו תקן.
@@ -306,10 +303,10 @@ export default function WhatsappChatPost() {
           src="/media/blog/whatsapp/shot-voice-flood.jpg"
           alt="צילום מסך: צרור הודעות קוליות"
           cap="אם כבר שולחים אליכם צרור של הודעות, צריך להיות מסוגלים לעצור אותו מתישהו."
-          time={t()}
+         
         />
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           ובמקביל, תגובות האימוג'י: מנגנון שהוזלה של תגובה אנושית לכדי לחיצה אחת, בדיוק במקום שבו
           היה נדרש משפט. משתמשים מדווחים שהם לוחצים על זה בטעות. מבחינת המערכת זו לא תקלה – זו
           אינטראקציה. ספירת אינטראקציות זו המטריקה, לא איכותן.
@@ -319,15 +316,15 @@ export default function WhatsappChatPost() {
           src="/media/blog/whatsapp/shot-auto-reply.jpg"
           alt="צילום מסך: מענה אוטומטי בצ׳אט עם אמא"
           cap="סליחה אמא, אבל לא בכל זמן אני פנוי לכל דבר."
-          time={t()}
+         
         />
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           ה"מחק לכולם" השלים את התמונה: פיצ'ר תיקון שמותיר במקום ההודעה שלט ניאון שאומר "כאן היה
           משהו שהתחרטתי עליו". הסתרה שהיא בעצם הצבעה.
         </Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           ועכשיו החלק שקצת פחות מצחיק. מחקר על עובדי בריאות בסעודיה מצא ש־63% מהם הציגו רמות מתח
           חריגות, 55.8% חרדה ו־48.6% דיכאון – בקורלציה לשימוש בוואטסאפ בעבודה. יש בספרות מקרה מתועד
           של עובדת שהתפטרה כי המנהל שלה ציפה לתגובה מיידית בלילות ובסופי שבוע. ויש כבר פסיקה
@@ -335,26 +332,26 @@ export default function WhatsappChatPost() {
           פיטורים. הקבוצה הפרטית, מסתבר, היא מקום ציבורי שרק מרגיש כמו סלון.
         </Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           אז לא, זו לא רשלנות עיצובית. זו לא "חוסר עקביות בהיררכיה ויזואלית" ולא איזה חוב טכני
           שמישהו ישלם בגרסה הבאה. זו מערכת שממטבת בדיוק את מה שהיא נבנתה למטב – זמן מסך, תדירות
           פתיחה, מטא־דאטה (ההצפנה מגנה על התוכן, לא על מי־מתי־כמה־עם־מי) – ומצליחה בזה מעולה.
           השאלה "למה הם לא מתקנים את זה" מניחה שמדובר בבאג.
         </Msg>
 
-        <Msg side="in" big time={t()}>זה לא באג. אתם פשוט לא הלקוח.</Msg>
+        <Msg side="in" big>זה לא באג. אתם פשוט לא הלקוח.</Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           הדבר היחיד שנשאר לנו הוא לשים לב מתי אנחנו מתנהגים לפי כללי המערכת בלי ששאלו אותנו:
           התנצלות על תשובה באיחור של שעתיים, הודעה קולית של שש דקות שנשלחה כי היה קל, לייק על הודעה
           שהצריכה שיחת טלפון.
         </Msg>
 
-        <Msg side="out" time={t()}>
+        <Msg side="out">
           <strong>והנה החלק שכן מצחיק: את הטקסט הזה, ברוב המקרים, תעבירו הלאה בקבוצה.</strong>
         </Msg>
 
-        <Msg side="in" big time={t()}>נו, אז תעבירו 👇</Msg>
+        <Msg side="in" big>נו, אז תעבירו 👇</Msg>
 
         <div className="share-wrap"><ShareRow /></div>
 
@@ -394,7 +391,7 @@ const CSS = `
   background-image:url('/media/blog/whatsapp/wallpaper.jpg');
   background-size:cover; background-position:center top;
 }
-.wa-root .chat, .wa-root .wa-header { position:relative; z-index:1; }
+.wa-root .chat { position:relative; z-index:1; }
 
 /* ---------- header: beefed up, two levels on the beige bar ---------- */
 .wa-header {
@@ -433,6 +430,13 @@ const CSS = `
   border:1.4px solid var(--wa-green); border-radius:999px;
 }
 .hd-alt:hover { background:var(--wa-green); color:#fff; }
+.hd-call {
+  margin-right:auto; display:flex; align-items:center; justify-content:center;
+  width:42px; height:42px; border-radius:50%;
+  color:var(--wa-green);
+  transition:background .3s, color .3s;
+}
+.hd-call:hover { background:var(--wa-green); color:#fff; }
 
 /* ---------- chat column ---------- */
 .chat {
