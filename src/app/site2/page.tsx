@@ -238,10 +238,11 @@ const POSTS = [
     placeholder: false,
   },
   {
-    title: "פוסט נוסף — בקרוב",
-    excerpt: "כאן ייכנס תקציר הפוסט הבא מהבלוג. (פלייסהולדר — יוחלף בתוכן אמיתי)",
-    href: "#",
-    placeholder: true,
+    title: "Mother Load",
+    excerpt:
+      "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת. רייצ'ל מאני עיצבה והדפיסה אותו – פוסטרים, קבלה אחת ארוכה, ומסה שמצחיקה וכועסת באותה נשימה – על החשבון הפתוח של אימהות יוצרות.",
+    href: "/blog/motherload",
+    placeholder: false,
   },
   {
     title: "פוסט שלישי — בקרוב",
@@ -1171,7 +1172,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .blog-rail::-webkit-scrollbar { display:none; }
 /* transparent cards with a hand-drawn ink border on the sketch paper */
 .post-card {
-  flex:0 0 calc((100% - 1.8rem) / 1.3); scroll-snap-align:start;
+  flex:0 0 max(260px, calc((100% - 3.6rem) / 3)); scroll-snap-align:start;
   display:flex; flex-direction:column; align-items:flex-start;
   position:relative; background:transparent; border:none;
   border-radius:20px;

@@ -78,7 +78,7 @@ function BleedTitle({
   return (
     <Tag ref={ref} className={"blt " + className}>
       {lines.map((line, li) => (
-        <span className="fxl" key={li}>
+        <span className="fxl" dir={/[֐-׿]/.test(line) ? "rtl" : "ltr"} key={li}>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (
@@ -228,11 +228,32 @@ function Comments() {
 
 /* ---------- inline floating screenshot ---------- */
 function Shot({ src, alt, cap }: { src: string; alt: string; cap: string }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
   return (
-    <figure className="shot-inline" data-reveal>
-      <img src={src} alt={alt} loading="lazy" />
-      <figcaption>{cap}</figcaption>
-    </figure>
+    <>
+      <figure
+        className="shot-inline shot-zoom"
+        data-reveal
+        role="button"
+        tabIndex={0}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => { if (e.key === "Enter") setOpen(true); }}
+      >
+        <img src={src} alt={alt} loading="lazy" />
+        <figcaption>{cap}</figcaption>
+      </figure>
+      {open && (
+        <div className="lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
+          <img src={src} alt={alt} />
+        </div>
+      )}
+    </>
   );
 }
 
@@ -322,6 +343,12 @@ export default function WhatsappPost() {
 
       {/* ---------- BODY ---------- */}
       <article className="body">
+        <Shot
+          src="/media/blog/motherload/poster-price-tags.jpg"
+          alt="פוסטר Mother Load: פנים של אישה מכוסות בתוויות מחיר"
+          cap="מתוך Mother Load: הפנים כמוצר בסוף עונה - 74 סנט, מוזל, הצעה מיוחדת. לחיצה מגדילה."
+        />
+
         <p className="lede" data-reveal>
           יש מסמך חשבונאי אחד שאף מחלקת כספים לא תדרוש ואף רואה חשבון לא יחתום עליו, והוא נפתח כל
           ערב ב־23:00 בראש של כל אמא יוצרת: כמה שעות עבדתי באמת היום, כמה מהן הופרעו באמצע, כמה
@@ -329,24 +356,12 @@ export default function WhatsappPost() {
           מופיע בשום תלוש.
         </p>
 
-        <Shot
-          src="/media/blog/motherload/poster-price-tags.jpg"
-          alt="פוסטר Mother Load: פנים של אישה מכוסות בתוויות מחיר"
-          cap="מתוך Mother Load: הפנים כמוצר בסוף עונה - 74 סנט, מוזל, הצעה מיוחדת."
-        />
-
         <p data-reveal>
           רייצ'ל מאני, מעצבת מלוס אנג'לס, החליטה לעצב ולהדפיס אותו – פרויקט בשם Mother Load:
           פוסטרים שבהם פנים של אישה מכוסות בתוויות מחיר כמו מוצר בסוף עונה, קבלת סופרמרקט עם שורות
           כמו "מס חופשת לידה" ו"עבודה בלתי נראית" – ולצידם מסה שמצחיקה וכועסת באותה נשימה, וכל
           שורה בה נשענת על מחקר.
         </p>
-
-        <Shot
-          src="/media/blog/motherload/poster-receipt.jpg"
-          alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות"
-          cap='הקבלה: "מס חופשת לידה", "עבודה בלתי נראית", סה"כ - יותר מדי. כל המכירות סופיות.'
-        />
 
         <p className="section-lede" data-reveal>
           המחקרים, למי שעוד צריך אותם: 74.3 סנט לכל דולר שאבות מרוויחים; קנס של 5–7% על כל ילד; ופי
@@ -361,7 +376,7 @@ export default function WhatsappPost() {
           כאן ההקפות נרשמות בדיו בלתי נראית, ומי שמגיעה לשלם בסוף כל חודש היא דווקא זו שרשומה בה.
         </p>
 
-        {/* pull quote — breaks into the right margin */}
+        {/* pull quote — breaks into the right margin, wide rule beneath */}
         <aside className="pull" data-reveal>
           <BleedTitle
             as="blockquote"
@@ -370,17 +385,14 @@ export default function WhatsappPost() {
           />
         </aside>
 
-        <hr className="ink-rule" data-reveal />
+        <figure className="shot-full" data-reveal>
+          <img src="/media/blog/motherload/poster-receipt.jpg" alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות" loading="lazy" />
+          <figcaption>הקבלה: "מס חופשת לידה", "עבודה בלתי נראית", סה"כ - יותר מדי. כל המכירות סופיות.</figcaption>
+        </figure>
 
         <p className="section-lede" data-reveal>
           עכשיו ההקשר, כי בלעדיו זה עוד פרויקט אמנותי יפה:
         </p>
-
-        <Shot
-          src="/media/blog/motherload/poster-portfolio.jpg"
-          alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים"
-          cap='"Portfolio Review" - התיק שמגיע לראיון אחרי שהילדים סיימו איתו.'
-        />
 
         <p data-reveal>
           2025 הייתה שנת קונסולידציה אכזרית – Omnicom פיטרה מעל 4,000 עובדים, WPP איחדה את Ogilvy,
@@ -391,22 +403,14 @@ export default function WhatsappPost() {
           היומי של אימהות. אבל הפילטר שממיין את המועמדים לא בודק כישורים; הוא בודק זמינות.
         </p>
 
-        {/* pull quote 2 */}
-        <aside className="pull pull-left" data-reveal>
-          <BleedTitle as="blockquote" className="pull-title" lines={["הפילטר לא בודק כישורים;", "הוא בודק זמינות."]} />
-        </aside>
-
-        <hr className="ink-rule" data-reveal />
+        <figure className="shot-full" data-reveal>
+          <img src="/media/blog/motherload/poster-portfolio.jpg" alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים" loading="lazy" />
+          <figcaption>"Portfolio Review" - התיק שמגיע לראיון אחרי שהילדים סיימו איתו.</figcaption>
+        </figure>
 
         <p className="section-lede" data-reveal>
           וגילוי נאות, כי אי אפשר בלי:
         </p>
-
-        <Shot
-          src="/media/blog/motherload/poster-out-of-order.jpg"
-          alt="פוסטר Out of Order: ידיים של ילדים מכסות פנים של אמא"
-          cap='"Out of Order" - הידיים הקטנות שמכסות את הפנים הן גם הסיבה וגם ההוכחה.'
-        />
 
         <p data-reveal>
           אני מלמד את הדרישה הסמויה הזאת. סדנאות AI, כלים, טכניקות, אינטגרציות – אני חוליה בשרשרת
@@ -414,12 +418,6 @@ export default function WhatsappPost() {
           שהכלי טוב בדיוק כמו האדם שמחזיק בו – כלומר שהערך נשאר אצל מי שצבר ניסיון וכישרון, ולא אצל
           מי שפשוט זמין יותר שעות מול המסך. יש שיאמרו שזו בדיוק הנחמה שכל ספק נשק מוכר לעצמו…
         </p>
-
-        <Shot
-          src="/media/blog/motherload/poster-torn-face.jpg"
-          alt="פוסטר Mother Load: פנים מכוסות בציור ילדים קרוע"
-          cap="ציור של הילדה על הפנים של אמא. השאר - שרבוטים על שולי הקריירה."
-        />
 
         <p data-reveal>
           כי בסופו של דבר הטיעון של מאני הוא לא "נגד קדמה", וזה מה שעושה אותו קשה לעיכול. קדמה שכל
@@ -429,25 +427,24 @@ export default function WhatsappPost() {
           ממוצע אורך החיים במקצוע הזה; כל מי שיש לו, איך לנסח את זה, חיים שמפריעים באמצע.
         </p>
 
-        <figure className="shot-wide" data-reveal>
-          <img src="/media/blog/motherload/street-mockup.jpg" alt="פוסטרים של Mother Load ו-Out of Order על חזית בניין ברחוב" loading="lazy" />
-          <figcaption>הפוסטרים ברחוב: החשבון תלוי בגובה העיניים.</figcaption>
-        </figure>
-
-        <p data-reveal>
-          המסה המלאה אצלה באתר:
-        </p>
-
-        <div data-reveal>
-          <a className="ink-btn" href="https://rachelmany.com/creativemotherhood" target="_blank" rel="noopener noreferrer">
-            rachelmany.com/creativemotherhood ←
-          </a>
+        <div className="shot-row" data-reveal>
+          <figure className="shot-cell">
+            <img src="/media/blog/motherload/poster-out-of-order.jpg" alt="פוסטר Out of Order: ידיים של ילדים מכסות פנים של אמא" loading="lazy" />
+          </figure>
+          <figure className="shot-cell">
+            <img src="/media/blog/motherload/poster-torn-face.jpg" alt="פוסטר Mother Load: פנים מכוסות בציור ילדים קרוע" loading="lazy" />
+          </figure>
+          <figure className="shot-cell">
+            <img src="/media/blog/motherload/street-mockup.jpg" alt="פוסטרים של Mother Load ו-Out of Order על חזית בניין ברחוב" loading="lazy" />
+          </figure>
         </div>
 
-        <p className="closer" data-reveal style={{ marginTop: "2.2rem" }}>
-          שווה את הזמן. ואת החשבון שייפתח בראש אחר כך.
-          <br />
-          גם בשבילך, גבר.
+        <p className="closer link-line" data-reveal>
+          המסה המלאה אצלה באתר:{" "}
+          <a className="ink-btn btn-inline" href="https://rachelmany.com/creativemotherhood" target="_blank" rel="noopener noreferrer">
+            rachelmany.com/creativemotherhood ←
+          </a>{" "}
+          שווה את הזמן. ואת החשבון שייפתח בראש אחר כך. גם בשבילך, גבר.
         </p>
 
         <div data-reveal>
@@ -761,6 +758,52 @@ const CSS = `
 }
 .shot-wide img { width:100%; height:auto; display:block; border-radius:10px; }
 .shot-wide figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
+
+/* full-column centered figure */
+.shot-full {
+  clear:both; margin:2.6rem 0; width:100%;
+  position:relative; background:#fff; padding:.9rem; border-radius:18px; box-sizing:border-box;
+}
+.shot-full::before {
+  content:''; position:absolute; inset:2px; pointer-events:none;
+  border:1.8px solid var(--navy);
+  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
+  filter:url(#inkline-bp);
+}
+.shot-full img { width:100%; height:auto; display:block; border-radius:10px; }
+.shot-full figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
+
+/* three-up row, breaking out to both margins */
+.shot-row {
+  clear:both; display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem;
+  align-items:start; margin:2.8rem 0;
+  margin-right:calc((100vw - min(680px, 92vw)) / -8);
+  margin-left:calc((100vw - min(680px, 92vw)) / -8);
+}
+.shot-cell {
+  margin:0; position:relative; background:#fff; padding:.7rem; border-radius:16px;
+}
+.shot-cell::before {
+  content:''; position:absolute; inset:2px; pointer-events:none;
+  border:1.7px solid var(--navy);
+  border-radius:12px 18px 11px 19px / 18px 12px 19px 13px;
+  filter:url(#inkline-bp);
+}
+.shot-cell img { width:100%; height:auto; display:block; border-radius:9px; }
+
+/* clickable shots + lightbox */
+.shot-zoom { cursor:zoom-in; }
+.lightbox {
+  position:fixed; inset:0; z-index:120;
+  background:rgba(2,13,44,.82);
+  display:flex; align-items:center; justify-content:center;
+  cursor:zoom-out; padding:4vh 4vw;
+}
+.lightbox img { max-width:92vw; max-height:92vh; width:auto; height:auto; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+
+/* inline link button inside a running line */
+.ink-btn.btn-inline { padding:.25em .9em; font-size:.95em; vertical-align:middle; }
+.link-line { line-height:2.3; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
