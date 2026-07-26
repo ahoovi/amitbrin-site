@@ -1207,6 +1207,30 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   height:74svh; width:auto; max-width:none; z-index:1;
 }
 
+/* ---------- 1b · IDENTITY — horizontal layout ≥800px ----------
+   Above 800px the hero stops stacking. The title stack holds the inline-start
+   (right, in RTL) column and is centred on the viewport's vertical middle; the
+   portrait takes the left column, still glued to the section base, with its
+   width driven by --pw so the flow column and the absolutely-placed image
+   always agree. --pw's 61svh leg caps the portrait at ~80svh tall (839x1100
+   aspect), which keeps the head clear of the blurred nav veil, and its 40vw
+   leg leaves the titles roughly a third of the window at every width — wide
+   enough that the nowrap animated headline never has to shrink. */
+@media (min-width:800px){
+  .identity-inner {
+    --pw: min(40vw, 61svh);
+    flex-direction:row; align-items:center;
+    padding:0 5vw; gap:clamp(1rem, 2.5vw, 3rem);
+  }
+  .identity-text  { flex:1 1 auto; min-width:0; align-items:flex-start; }
+  .identity-photo { flex:0 0 calc(var(--pw) + 2vw); min-height:0; }
+  .identity-photo img {
+    left:auto; right:auto; inset-inline-end:2vw;
+    transform:none; bottom:-3svh;
+    width:var(--pw); height:auto;
+  }
+}
+
 /* ---------- 2 · SAILING ---------- */
 .sec-sailing { min-height:100vh; background:var(--navy-deep); display:flex; }
 .sailing-content {
@@ -1234,17 +1258,17 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 }
 
 /* ---------- 2.5 · WORKS — mini case studies ---------- */
-.sec-works { background:var(--navy-dark); padding:13vh 0 11vh; }
-.works-head { max-width:1200px; margin:0 auto; padding:0 5vw 3rem; }
+.sec-works { background:var(--navy-dark); padding:min(13vh, 140px) 0 11vh; }
+.works-head { max-width:1200px; margin:0 auto; padding:0 5vw 14px; }
 .works-title {
   color:var(--offwhite); font-weight:700;
   font-size:clamp(2rem, 3.3vw, 3.8rem); line-height:1.1;
 }
 .works-label {
-  display:flex; align-items:center; gap:14px; margin-top:1.3rem;
-  font-size:.78rem; letter-spacing:.12em; color:rgba(230,232,239,.45);
+  display:flex; align-items:center; gap:16px; margin-top:40px;
+  font-size:clamp(.95rem, 1.15vw, 1.2rem); font-weight:700; letter-spacing:.06em; color:rgba(230,232,239,.9);
 }
-.works-label::after { content:''; flex:1; height:1px; background:rgba(230,232,239,.14); }
+.works-label::after { content:''; flex:1; height:1px; background:rgba(230,232,239,.24); }
 
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {
@@ -1555,7 +1579,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo { flex:1 1 auto; min-height:26svh; }
   .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
-  .works-head { padding-bottom:2.2rem; }
+  .works-head { padding-bottom:14px; }
   .works-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
   .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
