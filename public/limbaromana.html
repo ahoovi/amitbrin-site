@@ -306,6 +306,30 @@ p.sec-sub{font-size:.92rem}
   .part{font-size:1.34rem}
   h2.sec{font-size:1.12rem}
 }
+
+/* v8.2: navbar arrow + caret affordance */
+.navbar button.nprev,.navbar button.nnext{
+  font-size:.86rem;color:#a9b6d4;direction:ltr;unicode-bidi:isolate;
+  display:flex;align-items:center;justify-content:center;min-width:34px;padding:0 6px;
+}
+.navbar button.nprev:hover,.navbar button.nnext:hover{color:#fff}
+.navbar .loc{flex-direction:row;align-items:center;gap:8px}
+.navbar .loc .txt{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center}
+.navbar .loc .s::after{content:none}
+.navbar .loc .cv{
+  flex:none;font-size:.95rem;line-height:1;color:#e3c565;
+  transition:transform .18s ease;display:inline-block;
+}
+.navbar.menuopen .loc .cv{transform:rotate(180deg)}
+
+/* v8.3: force RTL order in the bar — back on the right, forward on the left */
+.navbar .wrap{direction:rtl}
+.navbar .loc{direction:rtl;text-align:right}
+
+/* v8.4: caret hugs the title instead of floating at the far edge */
+.navbar .loc{justify-content:flex-start}
+.navbar .loc .txt{flex:0 1 auto;min-width:0}
+.navbar .loc .cv{margin-inline-start:2px;opacity:.9}
 </style>
 </head>
 <body>
@@ -3297,9 +3321,9 @@ m.items.filter(function(i){return l1[i.s]}).forEach(function(i){fetch('/limbarom
   if(!items.length)return;
   var bar=document.createElement('div'); bar.className='navbar';
   bar.innerHTML='<div class="wrap">'+
-    '<button type="button" class="nprev" title="הנושא הקודם">\u203A</button>'+
-    '<button type="button" class="loc"><span class="p"></span><span class="s"></span></button>'+
-    '<button type="button" class="nnext" title="הנושא הבא">\u2039</button>'+
+    '<button type="button" class="nprev" title="הנושא הקודם">\u25B6</button>'+
+    '<button type="button" class="loc"><span class="txt"><span class="p"></span><span class="s"></span></span><span class="cv">\u25BE</span></button>'+
+    '<button type="button" class="nnext" title="הנושא הבא">\u25C0</button>'+
     '</div><div class="navmenu"><div class="inner"></div></div>';
   document.body.appendChild(bar);
   var elP=bar.querySelector('.p'), elS=bar.querySelector('.s'),
@@ -3323,18 +3347,18 @@ m.items.filter(function(i){return l1[i.s]}).forEach(function(i){fetch('/limbarom
   }
   function go(i){
     if(i<0||i>=items.length)return;
-    menu.classList.remove('on');
+    menu.classList.remove('on'); bar.classList.remove('menuopen');
     items[i].el.scrollIntoView({behavior:'smooth',block:'start'});
     paint(i);
   }
   bPrev.addEventListener('click',function(){go(active-1);});
   bNext.addEventListener('click',function(){go(active+1);});
   locBtn.addEventListener('click',function(e){
-    e.stopPropagation(); menu.classList.toggle('on');
+    e.stopPropagation(); menu.classList.toggle('on'); bar.classList.toggle('menuopen',menu.classList.contains('on'));
     if(menu.classList.contains('on')){var c=menuIn.querySelector('a.cur'); if(c)c.scrollIntoView({block:'center'});}
   });
-  menuIn.addEventListener('click',function(e){if(e.target.tagName==='A')menu.classList.remove('on');});
-  document.addEventListener('click',function(e){if(!bar.contains(e.target))menu.classList.remove('on');});
+  menuIn.addEventListener('click',function(e){if(e.target.tagName==='A'){menu.classList.remove('on');bar.classList.remove('menuopen');}});
+  document.addEventListener('click',function(e){if(!bar.contains(e.target)){menu.classList.remove('on');bar.classList.remove('menuopen');}});
   var ticking=false;
   function onScroll(){
     if(ticking)return; ticking=true;
@@ -3342,7 +3366,7 @@ m.items.filter(function(i){return l1[i.s]}).forEach(function(i){fetch('/limbarom
       ticking=false;
       var top0=(items[0].anchor||items[0].el).getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop);
       var y=window.pageYOffset||document.documentElement.scrollTop;
-      if(y<top0-140){bar.classList.remove('on');menu.classList.remove('on');return;}
+      if(y<top0-140){bar.classList.remove('on');menu.classList.remove('on');bar.classList.remove('menuopen');return;}
       bar.classList.add('on');
       var i=0;
       for(var k=0;k<items.length;k++){
