@@ -249,6 +249,73 @@ a.xref:hover{color:var(--navy)}
 .qa .ro{font-size:1.05em}
 .qa details.sol{margin:6px 24px 0 0;padding:8px 14px;font-size:.92rem}
 .qa details.sol summary{font-size:.8rem;color:var(--soft);font-weight:500}
+
+/* ============ v8: navigation hierarchy ============ */
+.part{
+  font-size:1.3rem;font-weight:800;letter-spacing:.02em;color:var(--gold);
+  margin:78px 0 30px;padding:0 0 10px;background:none;border:none;
+  border-bottom:3px solid var(--gold);border-radius:0;
+  display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;scroll-margin-top:70px;
+}
+.part .pnum{
+  background:var(--gold);color:#fff;border-radius:8px;font-size:.76rem;
+  padding:3px 10px;font-weight:700;white-space:nowrap;letter-spacing:.04em;
+}
+h2.sec{border-bottom:2px solid var(--line)}
+section{scroll-margin-top:70px}
+
+/* -- TOC accordion (native details) -- */
+details.toc-group{margin:0 0 6px;border:1px solid var(--line);border-radius:10px;background:var(--paper);overflow:hidden}
+details.toc-group > summary{
+  list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:10px;
+  color:var(--gold);font-weight:800;font-size:.98rem;padding:12px 14px;
+}
+details.toc-group > summary::-webkit-details-marker{display:none}
+details.toc-group > summary::after{content:"▾";color:var(--soft);font-size:.85rem;flex:none;transition:transform .15s}
+details.toc-group[open] > summary{background:var(--gold-bg);border-bottom:1px solid var(--line)}
+details.toc-group[open] > summary::after{transform:rotate(180deg)}
+details.toc-group > summary:hover{background:var(--gold-bg)}
+.toc-items{padding:6px 14px 10px;background:var(--card)}
+.toc-items a{display:block;padding:8px;border-bottom:1px dashed var(--line);font-size:.93rem}
+.toc-items a:last-child{border-bottom:none}
+.toc-hint{color:var(--soft);font-size:.8rem;margin:2px 0 10px}
+
+/* -- sticky location bar -- */
+.navbar{position:fixed;top:0;right:0;left:0;z-index:60;display:none;
+  background:rgba(28,43,74,.97);color:#f5efdf;box-shadow:0 2px 12px rgba(0,0,0,.18)}
+.navbar.on{display:block}
+.navbar .wrap{max-width:960px;margin:0 auto;display:flex;align-items:stretch;gap:6px;padding:0 8px}
+.navbar button{font-family:inherit;background:none;border:none;color:#cfd6e6;cursor:pointer;font-size:1.35rem;padding:0 12px;flex:none;line-height:1}
+.navbar button:hover{color:#fff}
+.navbar button[disabled]{opacity:.22;cursor:default}
+.navbar .loc{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;
+  padding:8px 4px;cursor:pointer;text-align:right;background:none;border:none;color:inherit;font-size:1rem}
+.navbar .loc .p{color:#e3c565;font-size:.71rem;font-weight:700;letter-spacing:.03em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navbar .loc .s{color:#fff;font-size:.9rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.navbar .loc .s::after{content:" ▾";color:#8c99b8;font-size:.72rem}
+.navmenu{display:none;background:var(--card);border-bottom:2px solid var(--gold);max-height:66vh;overflow:auto}
+.navmenu.on{display:block}
+.navmenu .inner{max-width:960px;margin:0 auto;padding:8px 14px 14px}
+.navmenu a{display:block;padding:9px 8px;border-bottom:1px dashed var(--line);color:var(--navy);text-decoration:none;font-size:.95rem}
+.navmenu a.pj{color:var(--gold);font-weight:800;border-bottom-color:var(--gold)}
+.navmenu a.sj{padding-right:20px;font-size:.9rem}
+.navmenu a.cur{background:var(--gold-bg);font-weight:700}
+.navmenu a:last-child{border-bottom:none}
+@media (max-width:640px){
+  .part{font-size:1.14rem;margin:56px 0 22px}
+  .navbar .loc .s{font-size:.85rem}
+}
+@media print{.navbar,.navmenu{display:none!important}}
+
+/* v8.1: heading scale — part > section */
+.part{font-size:1.72rem;line-height:1.25}
+h2.sec{font-size:1.28rem}
+h2.sec .num{font-size:.72rem}
+p.sec-sub{font-size:.92rem}
+@media (max-width:640px){
+  .part{font-size:1.34rem}
+  h2.sec{font-size:1.12rem}
+}
 </style>
 </head>
 <body>
@@ -293,42 +360,35 @@ a.xref:hover{color:var(--navy)}
     <button type="button" class="tsw active" data-view="topic">לפי סדר הלימוד</button>
     <button type="button" class="tsw" data-view="lesson">לפי שיעור</button>
   </div>
-  <div class="toc-view" id="toc-topic">
-  <span class="unit">חלק 1 · הגייה וכתיב:</span>
-  <a href="#sounds">צלילים ואותיות <span class="toc-ls">· ש1</span></a>
+  <div class="toc-view" id="toc-topic"><p class="toc-hint">לחצו על שם החלק כדי לפתוח את הנושאים שבו</p>
+<details class="toc-group"><summary class="unit">חלק 1 · הגייה וכתיב</summary><div class="toc-items"><a href="#sounds">צלילים ואותיות <span class="toc-ls">· ש1</span></a>
   <a href="#cg">החוק הגדול של C ו-G <span class="toc-ls">· ש1</span></a>
-  <a href="#plural-soft">ריכוך עיצורים ברבים <span class="toc-ls">· ש1</span></a>
-  <span class="unit">חלק 2 · ברכות, נימוסים והיכרות:</span>
-  <a href="#greet">ברכות לפי שעות היום <span class="toc-ls">· ש1</span></a>
+  <a href="#plural-soft">ריכוך עיצורים ברבים <span class="toc-ls">· ש1</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 2 · ברכות, נימוסים והיכרות</summary><div class="toc-items"><a href="#greet">ברכות לפי שעות היום <span class="toc-ls">· ש1</span></a>
   <a href="#intro">היכרות <span class="toc-ls">· ש1</span></a>
   <a href="#smalltalk">נימוסים ושיחת חולין <span class="toc-ls">· ש1</span></a>
-  <a href="#sanatate6">בריאות וימי הולדת <span class="toc-ls">· ש6</span></a>
-  <span class="unit">חלק 3 · פעלים, כינויים ומבנה המשפט:</span>
-  <a href="#pronouns">כינויי גוף <span class="toc-ls">· ש2</span></a>
+  <a href="#sanatate6">בריאות וימי הולדת <span class="toc-ls">· ש6</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 3 · פעלים, כינויים ומבנה המשפט</summary><div class="toc-items"><a href="#pronouns">כינויי גוף <span class="toc-ls">· ש2</span></a>
   <a href="#afi">הפועל a fi <span class="toc-ls">· ש2</span></a>
   <a href="#prez5">להציג את עצמך · și / iar / dar <span class="toc-ls">· ש5</span></a>
   <a href="#avea">הפועל a avea <span class="toc-ls">· ש4</span></a>
   <a href="#merge6">הפועל a merge + תחבורה <span class="toc-ls">· ש6</span></a>
-  <a href="#verbref">ארבע תבניות ההטיה <span class="toc-ls">· מצטבר</span></a>
-  <span class="unit">חלק 4 · שמות עצם: מין ומספר:</span>
-  <a href="#gender">זכר ונקבה, יחיד ורבים <span class="toc-ls">· ש2</span></a>
+  <a href="#verbref">ארבע תבניות ההטיה <span class="toc-ls">· מצטבר</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 4 · שמות עצם: מין ומספר</summary><div class="toc-items"><a href="#gender">זכר ונקבה, יחיד ורבים <span class="toc-ls">· ש2</span></a>
   <a href="#neutru">המין השלישי · NEUTRU <span class="toc-ls">· ש4</span></a>
   <a href="#plurals">מערכת הרבים המלאה <span class="toc-ls">· ש5</span></a>
-  <a href="#artic">ה' הידיעה - הצצה <span class="toc-ls">· תרגול</span></a>
-  <span class="unit">חלק 5 · מספרים, כמויות ושלילה:</span>
-  <a href="#numbers">מספרים 0-19 <span class="toc-ls">· ש2</span></a>
+  <a href="#artic">ה' הידיעה - הצצה <span class="toc-ls">· תרגול</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 5 · מספרים, כמויות ושלילה</summary><div class="toc-items"><a href="#numbers">מספרים 0-19 <span class="toc-ls">· ש2</span></a>
   <a href="#numref">המספרים - מדריך מלא <span class="toc-ls">· מצטבר</span></a>
   <a href="#quant">כמתים + fiecare <span class="toc-ls">· ש4</span></a>
   <a href="#cati6">câți / câte + nici <span class="toc-ls">· ש6</span></a>
-  <a href="#nimic">nimic / nimeni <span class="toc-ls">· ש4</span></a>
-  <span class="unit">חלק 6 · מילות יחס ושאלות:</span>
-  <a href="#place">מקום וזמן · שאלות עם de <span class="toc-ls">· ש2</span></a>
+  <a href="#nimic">nimic / nimeni <span class="toc-ls">· ש4</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 6 · מילות יחס ושאלות</summary><div class="toc-items"><a href="#place">מקום וזמן · שאלות עם de <span class="toc-ls">· ש2</span></a>
   <a href="#questions">מילות שאלה <span class="toc-ls">· ש2</span></a>
   <a href="#intr">într-un / dintr-o <span class="toc-ls">· ש4</span></a>
   <a href="#dela">DE או LA <span class="toc-ls">· ש3</span></a>
-  <a href="#data7">התאריך + de când / până când <span class="toc-ls">· ש7</span></a>
-  <span class="unit">חלק 7 · עולם, נושאים ואוצר מילים:</span>
-  <a href="#nations">מדינות, לאומים ושפות <span class="toc-ls">· ש3</span></a>
+  <a href="#data7">התאריך + de când / până când <span class="toc-ls">· ש7</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 7 · עולם, נושאים ואוצר מילים</summary><div class="toc-items"><a href="#nations">מדינות, לאומים ושפות <span class="toc-ls">· ש3</span></a>
   <a href="#age">גיל, קנייה ומכירה <span class="toc-ls">· ש3</span></a>
   <a href="#vreme">מזג האוויר · Cum e vremea <span class="toc-ls">· תרגול</span></a>
   <a href="#relief8">פני השטח וחוף הים <span class="toc-ls">· ש8</span></a>
@@ -339,75 +399,61 @@ a.xref:hover{color:var(--navy)}
   <a href="#colref">הצבעים · Culorile <span class="toc-ls">· מצטבר</span></a>
   <a href="#vocab2">אוצר מילים <span class="toc-ls">· ש2</span></a>
   <a href="#vocab4">ציוד הכיתה + מילות זמן <span class="toc-ls">· ש4</span></a>
-  <a href="#vocab5">אוצר מילים - רבים <span class="toc-ls">· ש5</span></a>
-  <span class="unit">חלק 8 · דיאלוגים ותרגול:</span>
-  <a href="#dialog">Cine este ea? <span class="toc-ls">· ש2</span></a>
+  <a href="#vocab5">אוצר מילים - רבים <span class="toc-ls">· ש5</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 8 · דיאלוגים ותרגול</summary><div class="toc-items"><a href="#dialog">Cine este ea? <span class="toc-ls">· ש2</span></a>
   <a href="#dialog4">Într-o sală de curs <span class="toc-ls">· ש4</span></a>
   <a href="#opening">שאלות הפתיחה + תבניות תשובה <span class="toc-ls">· מצטבר</span></a>
-  <a href="#practice">תרגול · גלגל השאלות <span class="toc-ls">· ש3</span></a>
-  <span class="unit">חלק 9 · רפרנס:</span>
-  <a href="#dict">המילון · Dicționar <span class="toc-ls">· א-ת</span></a>
-  </div>
-  <div class="toc-view" id="toc-lesson" hidden>
-  <span class="unit">שיעור 1:</span>
-  <a href="#sounds">צלילים ואותיות</a>
+  <a href="#practice">תרגול · גלגל השאלות <span class="toc-ls">· ש3</span></a></div></details>
+<details class="toc-group"><summary class="unit">חלק 9 · רפרנס</summary><div class="toc-items"><a href="#dict">המילון · Dicționar <span class="toc-ls">· א-ת</span></a></div></details></div>
+  <div class="toc-view" id="toc-lesson" hidden><p class="toc-hint">לחצו על שם החלק כדי לפתוח את הנושאים שבו</p>
+<details class="toc-group"><summary class="unit">שיעור 1</summary><div class="toc-items"><a href="#sounds">צלילים ואותיות</a>
   <a href="#cg">החוק הגדול של C ו-G</a>
   <a href="#plural-soft">ריכוך עיצורים ברבים</a>
   <a href="#greet">ברכות לפי שעות היום</a>
   <a href="#intro">היכרות</a>
-  <a href="#smalltalk">נימוסים ושיחת חולין</a>
-  <span class="unit">שיעור 2:</span>
-  <a href="#pronouns">כינויי גוף</a>
+  <a href="#smalltalk">נימוסים ושיחת חולין</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 2</summary><div class="toc-items"><a href="#pronouns">כינויי גוף</a>
   <a href="#afi">הפועל a fi</a>
   <a href="#place">מקום וזמן</a>
   <a href="#gender">זכר ונקבה, יחיד ורבים</a>
   <a href="#questions">מילות שאלה</a>
   <a href="#numbers">מספרים 0-19</a>
   <a href="#dialog">הדיאלוג המלא</a>
-  <a href="#vocab2">אוצר מילים</a>
-  <span class="unit">שיעור 3:</span>
-  <a href="#nations">מדינות, לאומים ושפות</a>
+  <a href="#vocab2">אוצר מילים</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 3</summary><div class="toc-items"><a href="#nations">מדינות, לאומים ושפות</a>
   <a href="#dela">DE או LA</a>
   <a href="#age">גיל, קנייה ומכירה</a>
-  <a href="#practice">תרגול · גלגל השאלות</a>
-  <span class="unit">שיעור 4:</span>
-  <a href="#avea">הפועל a avea · "יש לי"</a>
+  <a href="#practice">תרגול · גלגל השאלות</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 4</summary><div class="toc-items"><a href="#avea">הפועל a avea · "יש לי"</a>
   <a href="#intr">într-un / dintr-o</a>
   <a href="#neutru">המין השלישי · NEUTRU</a>
   <a href="#quant">כמתים · הרבה, כמה, מעט + fiecare</a>
   <a href="#nimic">nimic / nimeni</a>
   <a href="#dialog4">הדיאלוג המלא · בכיתה</a>
-  <a href="#vocab4">אוצר מילים + מילות זמן</a>
-  <span class="unit">שיעור 5:</span>
-  <a href="#prez5">להציג את עצמך · și / iar / dar</a>
+  <a href="#vocab4">אוצר מילים + מילות זמן</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 5</summary><div class="toc-items"><a href="#prez5">להציג את עצמך · și / iar / dar</a>
   <a href="#plurals">מערכת הרבים המלאה</a>
-  <a href="#vocab5">אוצר מילים</a>
-  <span class="unit">שיעור 6:</span>
-  <a href="#cati6">câți / câte ושלילת nici</a>
+  <a href="#vocab5">אוצר מילים</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 6</summary><div class="toc-items"><a href="#cati6">câți / câte ושלילת nici</a>
   <a href="#merge6">הפועל a merge + תחבורה</a>
-  <a href="#sanatate6">בריאות וימי הולדת</a>
-  <span class="unit">תרגול בית 2:</span>
-  <a href="#vreme">מזג האוויר · Cum e vremea</a>
+  <a href="#sanatate6">בריאות וימי הולדת</a></div></details>
+<details class="toc-group"><summary class="unit">תרגול בית 2</summary><div class="toc-items"><a href="#vreme">מזג האוויר · Cum e vremea</a>
   <a href="#calendar">לוח השנה: ימים, חודשים, עונות</a>
-  <a href="#artic">ה' הידיעה - הצצה</a>
-  <span class="unit">שיעור 7:</span>
-  <a href="#anotimp7">ארבע העונות · טקסטים</a>
+  <a href="#artic">ה' הידיעה - הצצה</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 7</summary><div class="toc-items"><a href="#anotimp7">ארבע העונות · טקסטים</a>
   <a href="#data7">התאריך + de când / până când</a>
-  <a href="#verbref">ארבע תבניות ההטיה</a>
-  <span class="unit">שיעור 8:</span>
-  <a href="#relief8">פני השטח וחוף הים</a>
+  <a href="#verbref">ארבע תבניות ההטיה</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 8</summary><div class="toc-items"><a href="#relief8">פני השטח וחוף הים</a>
   <a href="#meteo8">תחזית מזג האוויר</a>
-  <a href="#iarna8">חורף בפועל: ביגוד ומנהגים</a>
-  <span class="unit">מצטבר:</span>
-  <a href="#opening">שאלות הפתיחה + תבניות תשובה</a>
+  <a href="#iarna8">חורף בפועל: ביגוד ומנהגים</a></div></details>
+<details class="toc-group"><summary class="unit">מצטבר</summary><div class="toc-items"><a href="#opening">שאלות הפתיחה + תבניות תשובה</a>
   <a href="#numref">המספרים · מדריך מלא</a>
   <a href="#colref">הצבעים · Culorile</a>
-  <a href="#dict">המילון · Dicționar</a>
-  </div>
+  <a href="#dict">המילון · Dicționar</a></div></details></div>
 </nav>
 
 
-<div class="part">חלק 1 · הגייה וכתיב</div>
+<div class="part" id="part-1"><span class="pnum">חלק 1</span><span class="ptxt">הגייה וכתיב</span></div>
 
 <section id="sounds" data-topic="phonetics">
   <h2 class="sec"><span class="num">שיעור 1</span> צלילים ואותיות שצריך להכיר מחדש</h2>
@@ -554,7 +600,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 2 · ברכות, נימוסים והיכרות</div>
+<div class="part" id="part-2"><span class="pnum">חלק 2</span><span class="ptxt">ברכות, נימוסים והיכרות</span></div>
 
 <section id="greet" data-topic="polite">
   <h2 class="sec"><span class="num">שיעור 1</span> ברכות לפי שעות היום</h2>
@@ -734,7 +780,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 3 · פעלים, כינויים ומבנה המשפט</div>
+<div class="part" id="part-3"><span class="pnum">חלק 3</span><span class="ptxt">פעלים, כינויים ומבנה המשפט</span></div>
 
 <section id="pronouns" data-topic="verbs">
   <h2 class="sec"><span class="num">שיעור 2</span> כינויי גוף · Pronumele personal</h2>
@@ -1117,7 +1163,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 4 · שמות עצם: מין ומספר</div>
+<div class="part" id="part-4"><span class="pnum">חלק 4</span><span class="ptxt">שמות עצם: מין ומספר</span></div>
 
 <section id="gender" data-topic="nouns">
   <h2 class="sec"><span class="num">שיעור 2</span> שם העצם: זכר ונקבה, יחיד ורבים</h2>
@@ -1380,7 +1426,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 5 · מספרים, כמויות ושלילה</div>
+<div class="part" id="part-5"><span class="pnum">חלק 5</span><span class="ptxt">מספרים, כמויות ושלילה</span></div>
 
 <section id="numbers" data-topic="nouns">
   <h2 class="sec"><span class="num">שיעור 2</span> המספרים 0-19</h2>
@@ -1646,7 +1692,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 6 · מילות יחס ושאלות</div>
+<div class="part" id="part-6"><span class="pnum">חלק 6</span><span class="ptxt">מילות יחס ושאלות</span></div>
 
 <section id="place" data-topic="preps">
   <h2 class="sec"><span class="num">שיעור 2</span> מקום וזמן · שאלות עם "de"</h2>
@@ -1868,7 +1914,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 7 · עולם, נושאים ואוצר מילים</div>
+<div class="part" id="part-7"><span class="pnum">חלק 7</span><span class="ptxt">עולם, נושאים ואוצר מילים</span></div>
 
 <section id="nations" data-topic="vocab">
   <h2 class="sec"><span class="num">שיעור 3</span> מדינות, לאומים ושפות · Țară, naționalitate, limbă</h2>
@@ -2503,7 +2549,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 8 · דיאלוגים ותרגול</div>
+<div class="part" id="part-8"><span class="pnum">חלק 8</span><span class="ptxt">דיאלוגים ותרגול</span></div>
 
 <section id="dialog" data-topic="dialogs">
   <h2 class="sec"><span class="num">שיעור 2</span> הדיאלוג המלא · Cine este ea?</h2>
@@ -2865,7 +2911,7 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 
-<div class="part">חלק 9 · רפרנס</div>
+<div class="part" id="part-9"><span class="pnum">חלק 9</span><span class="ptxt">רפרנס</span></div>
 
 <section id="dict" data-topic="dict">
   <h2 class="sec"><span class="num">מצטבר</span> המילון · Dicționar</h2>
@@ -3235,6 +3281,84 @@ a.xref:hover{color:var(--navy)}
 </section>
 
 </main>
+<script id="navbar">
+(function(){
+  var items=[], order=[].slice.call(document.querySelectorAll('.part, main section')), cp=null;
+  order.forEach(function(el){
+    if(el.classList.contains('part')){cp=el;return;}
+    if(el.id==='legend')return;
+    var h=el.querySelector('h2.sec'); if(!h)return;
+    var badge=h.querySelector('.num'), btxt=badge?badge.textContent.trim():'';
+    var title=h.textContent.replace(/^\s*(שיעור \d+|מצטבר|תרגול \d+)\s*/,'').trim();
+    var firstOfPart = cp && !cp.dataset.used;
+    if(cp) cp.dataset.used='1';
+    items.push({id:el.id, el:el, title:title, anchor: firstOfPart?cp:el,
+      part: cp?cp.querySelector('.ptxt').textContent:btxt,
+      pnum: cp?cp.querySelector('.pnum').textContent:'',
+      pid: cp?cp.id:el.id});
+  });
+  if(!items.length)return;
+  var bar=document.createElement('div'); bar.className='navbar';
+  bar.innerHTML='<div class="wrap">'+
+    '<button type="button" class="nprev" title="הנושא הקודם">\u203A</button>'+
+    '<button type="button" class="loc"><span class="p"></span><span class="s"></span></button>'+
+    '<button type="button" class="nnext" title="הנושא הבא">\u2039</button>'+
+    '</div><div class="navmenu"><div class="inner"></div></div>';
+  document.body.appendChild(bar);
+  var elP=bar.querySelector('.p'), elS=bar.querySelector('.s'),
+      bPrev=bar.querySelector('.nprev'), bNext=bar.querySelector('.nnext'),
+      menu=bar.querySelector('.navmenu'), menuIn=bar.querySelector('.navmenu .inner'),
+      locBtn=bar.querySelector('.loc'), lastPid=null;
+  menuIn.innerHTML=items.map(function(it,i){
+    var out='';
+    if(it.pid!==lastPid && it.part){lastPid=it.pid;
+      out+='<a class="pj" href="#'+it.pid+'">'+(it.pnum?it.pnum+' · ':'')+it.part+'</a>';}
+    return out+'<a class="sj" data-i="'+i+'" href="#'+it.id+'">'+it.title+'</a>';
+  }).join('');
+  var active=-1;
+  function paint(i){
+    if(i===active||!items[i])return; active=i;
+    var it=items[i];
+    elP.textContent=(it.pnum?it.pnum+' · ':'')+it.part;
+    elS.textContent=it.title;
+    bPrev.disabled=(i===0); bNext.disabled=(i===items.length-1);
+    [].forEach.call(menuIn.querySelectorAll('a.sj'),function(a){a.classList.toggle('cur',+a.getAttribute('data-i')===i);});
+  }
+  function go(i){
+    if(i<0||i>=items.length)return;
+    menu.classList.remove('on');
+    items[i].el.scrollIntoView({behavior:'smooth',block:'start'});
+    paint(i);
+  }
+  bPrev.addEventListener('click',function(){go(active-1);});
+  bNext.addEventListener('click',function(){go(active+1);});
+  locBtn.addEventListener('click',function(e){
+    e.stopPropagation(); menu.classList.toggle('on');
+    if(menu.classList.contains('on')){var c=menuIn.querySelector('a.cur'); if(c)c.scrollIntoView({block:'center'});}
+  });
+  menuIn.addEventListener('click',function(e){if(e.target.tagName==='A')menu.classList.remove('on');});
+  document.addEventListener('click',function(e){if(!bar.contains(e.target))menu.classList.remove('on');});
+  var ticking=false;
+  function onScroll(){
+    if(ticking)return; ticking=true;
+    requestAnimationFrame(function(){
+      ticking=false;
+      var top0=(items[0].anchor||items[0].el).getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop);
+      var y=window.pageYOffset||document.documentElement.scrollTop;
+      if(y<top0-140){bar.classList.remove('on');menu.classList.remove('on');return;}
+      bar.classList.add('on');
+      var i=0;
+      for(var k=0;k<items.length;k++){
+        if((items[k].anchor||items[k].el).getBoundingClientRect().top<=96)i=k; else break;
+      }
+      paint(i);
+    });
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  window.addEventListener('resize',onScroll,{passive:true});
+  onScroll();
+})();
+</script>
 <script id="toctoggle">
 (function(){
   var btns=document.querySelectorAll('.tsw');
