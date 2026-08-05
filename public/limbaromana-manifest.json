@@ -1,0 +1,25 @@
+{
+  "name": "Limba Română — עמית",
+  "short_name": "Limba Română",
+  "start_url": "/limbaromana-audio.html",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#faf7f0",
+  "theme_color": "#1c2b4a",
+  "lang": "he",
+  "dir": "rtl",
+  "icons": [
+    {
+      "src": "/limbaromana-icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/limbaromana-icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
