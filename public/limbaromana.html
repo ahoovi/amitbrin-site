@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>רומנית · המדריך המצטבר · שיעורים 1-9</title>
+<title>רומנית · המדריך המצטבר · שיעורים 1-10</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;800&family=Literata:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
@@ -98,6 +98,15 @@ td .ro{font-size:1.05em}
 th.m,td.m{background:var(--masc-bg)!important;border-top:1px solid #d7e4f7}
 th.m{background:var(--masc)!important;color:#fff}
 th.f,td.f{background:var(--fem-bg)!important;border-top:1px solid #f2d5cc}
+th.n,td.n{background:var(--neut-bg)!important;border-top:1px solid #e6dcf7}
+td>details.sol{margin:0}
+td .rox{display:block}
+label.sp{cursor:pointer;display:inline-block}
+label.sp input{position:absolute;width:1px;height:1px;opacity:0}
+label.sp .ans{display:inline-block;filter:blur(5px);opacity:.65;background:var(--gold-bg);border-radius:5px;padding:0 7px;transition:filter .12s,opacity .12s,background .12s}
+label.sp .ans::before{content:"◀";color:var(--soft);font-size:.7em;margin-inline-start:2px;vertical-align:middle;filter:none}
+label.sp input:checked ~ .ans{filter:none;opacity:1;background:transparent;padding:0}
+label.sp input:checked ~ .ans::before{content:""}
 th.f{background:var(--fem)!important;color:#fff}
 .tag-m{color:var(--masc);font-weight:700}
 .tag-f{color:var(--fem);font-weight:700}
@@ -337,8 +346,8 @@ p.sec-sub{font-size:.92rem}
 <header class="top">
   <div class="inner">
     <h1>רומנית מהיסוד · המדריך המצטבר</h1>
-    <span class="ro-title">Limba română · Unitatea 1-9</span>
-    <p>חומרי שיעורים 1-9, ערוכים לפי סדר לימוד מצטבר - מהצלילים אל הדקדוק, מהבסיס אל המתקדם. קוד צבעים קבוע מלווה את כל הקורס עד רמת B1.</p>
+    <span class="ro-title">Limba română · Unitatea 1-10</span>
+    <p>חומרי שיעורים 1-10, ערוכים לפי סדר לימוד מצטבר - מהצלילים אל הדקדוק, מהבסיס אל המתקדם. קוד צבעים קבוע מלווה את כל הקורס עד רמת B1.</p>
     <a class="audio-cta" href="/limbaromana-audio.html">🔊 טען את העמוד עם סאונד לתרגול שמיעה</a>
     <a class="archive-link" href="/limbaromana-lessons.html">לגרסת הארכיון לפי שיעורים ←</a>
   </div>
@@ -394,7 +403,8 @@ p.sec-sub{font-size:.92rem}
   <a href="#neutru">המין השלישי · NEUTRU <span class="toc-ls">· ש4</span></a>
   <a href="#plurals">מערכת הרבים המלאה <span class="toc-ls">· ש5</span></a>
   <a href="#opuse9">תארים והפכים <span class="toc-ls">· ש9</span></a>
-  <a href="#artic">ה' הידיעה - הצצה <span class="toc-ls">· תרגול</span></a></div></details>
+  <a href="#artic">ה' הידיעה - הצצה <span class="toc-ls">· תרגול</span></a>
+  <a href="#artichot">ה' הידיעה המלאה <span class="toc-ls">· ש10</span></a></div></details>
 <details class="toc-group"><summary class="unit">חלק 5 · מספרים, כמויות ושלילה</summary><div class="toc-items"><a href="#numbers">מספרים 0-19 <span class="toc-ls">· ש2</span></a>
   <a href="#numref">המספרים - מדריך מלא <span class="toc-ls">· מצטבר</span></a>
   <a href="#quant">כמתים + fiecare <span class="toc-ls">· ש4</span></a>
@@ -405,7 +415,8 @@ p.sec-sub{font-size:.92rem}
   <a href="#intr">într-un / dintr-o <span class="toc-ls">· ש4</span></a>
   <a href="#dela">DE או LA <span class="toc-ls">· ש3</span></a>
   <a href="#data7">התאריך + de când / până când <span class="toc-ls">· ש7</span></a>
-  <a href="#directii9">כיוונים והוראות דרך <span class="toc-ls">· ש9</span></a></div></details>
+  <a href="#directii9">כיוונים והוראות דרך <span class="toc-ls">· ש9</span></a>
+  <a href="#preps10">מאיפה ועד לאן · de la…până la <span class="toc-ls">· ש10</span></a></div></details>
 <details class="toc-group"><summary class="unit">חלק 7 · עולם, נושאים ואוצר מילים</summary><div class="toc-items"><a href="#nations">מדינות, לאומים ושפות <span class="toc-ls">· ש3</span></a>
   <a href="#age">גיל, קנייה ומכירה <span class="toc-ls">· ש3</span></a>
   <a href="#vreme">מזג האוויר · Cum e vremea <span class="toc-ls">· תרגול</span></a>
@@ -418,12 +429,15 @@ p.sec-sub{font-size:.92rem}
   <a href="#vocab2">אוצר מילים <span class="toc-ls">· ש2</span></a>
   <a href="#vocab4">ציוד הכיתה + מילות זמן <span class="toc-ls">· ש4</span></a>
   <a href="#vocab5">אוצר מילים - רבים <span class="toc-ls">· ש5</span></a>
-  <a href="#formular9">טופס הרשמה <span class="toc-ls">· ש9</span></a></div></details>
+  <a href="#formular9">טופס הרשמה <span class="toc-ls">· ש9</span></a>
+  <a href="#vocab10">העיר והתחבורה <span class="toc-ls">· ש10</span></a></div></details>
 <details class="toc-group"><summary class="unit">חלק 8 · דיאלוגים ותרגול</summary><div class="toc-items"><a href="#dialog">Cine este ea? <span class="toc-ls">· ש2</span></a>
   <a href="#dialog4">Într-o sală de curs <span class="toc-ls">· ש4</span></a>
   <a href="#descriere9">לתאר תמונה <span class="toc-ls">· ש9</span></a>
   <a href="#opening">שאלות הפתיחה + תבניות תשובה <span class="toc-ls">· מצטבר</span></a>
-  <a href="#practice">תרגול · גלגל השאלות <span class="toc-ls">· ש3</span></a></div></details>
+  <a href="#practice">תרגול · גלגל השאלות <span class="toc-ls">· ש3</span></a>
+  <a href="#dialog10">טיול בקונסטנצה <span class="toc-ls">· ש10</span></a>
+  <a href="#practice10">חזרה · Recapitulare <span class="toc-ls">· תרגול</span></a></div></details>
 <details class="toc-group"><summary class="unit">חלק 9 · רפרנס</summary><div class="toc-items"><a href="#dict">המילון · Dicționar <span class="toc-ls">· א-ת</span></a></div></details></div>
   <div class="toc-view" id="toc-lesson" hidden><p class="toc-hint">לחצו על שם החלק כדי לפתוח את הנושאים שבו</p>
 <details class="toc-group"><summary class="unit">שיעור 1</summary><div class="toc-items"><a href="#sounds">צלילים ואותיות</a>
@@ -473,6 +487,11 @@ p.sec-sub{font-size:.92rem}
   <a href="#directii9">כיוונים והוראות דרך</a>
   <a href="#formular9">טופס הרשמה</a>
   <a href="#descriere9">לתאר תמונה</a></div></details>
+<details class="toc-group"><summary class="unit">שיעור 10</summary><div class="toc-items"><a href="#artichot">ה' הידיעה המלאה</a>
+  <a href="#dialog10">טיול בקונסטנצה</a>
+  <a href="#vocab10">העיר והתחבורה</a>
+  <a href="#preps10">מאיפה ועד לאן</a>
+  <a href="#practice10">חזרה · Recapitulare</a></div></details>
 <details class="toc-group"><summary class="unit">מצטבר</summary><div class="toc-items"><a href="#opening">שאלות הפתיחה + תבניות תשובה</a>
   <a href="#numref">המספרים · מדריך מלא</a>
   <a href="#colref">הצבעים · Culorile</a>
@@ -1260,6 +1279,21 @@ p.sec-sub{font-size:.92rem}
     <span class="ro">Prezintă-te, te rog</span> / <span class="ro">Prezentați-vă, vă rog</span>.
     <a class="xref" href="#prezentare9">ראו להציג את עצמך</a>.
   </div>
+  <h3>שני פעלים חדשים משיעור 10 · a putea · a prefera</h3>
+  <table>
+    <tr><th></th><th class="m">a putea · יכול <span class="he">(קבוצה II)</span></th><th class="f">a prefera · מעדיף <span class="he">(קבוצה I)</span></th></tr>
+    <tr><td><span class="ro">(eu)</span></td><td class="m"><span class="ro big">pot</span></td><td class="f"><span class="ro big">prefer</span></td></tr>
+    <tr><td><span class="ro">(tu)</span></td><td class="m"><span class="ro big">poți</span></td><td class="f"><span class="ro big">preferi</span></td></tr>
+    <tr><td><span class="ro">(el/ea)</span></td><td class="m"><span class="ro big">poate</span></td><td class="f"><span class="ro big">preferă</span></td></tr>
+    <tr><td><span class="ro">(noi)</span></td><td class="m"><span class="ro big">putem</span></td><td class="f"><span class="ro big">preferăm</span></td></tr>
+    <tr><td><span class="ro">(voi)</span></td><td class="m"><span class="ro big">puteți</span></td><td class="f"><span class="ro big">preferați</span></td></tr>
+    <tr><td><span class="ro">(ei/ele)</span></td><td class="m"><span class="ro big">pot</span></td><td class="f"><span class="ro big">preferă</span></td></tr>
+  </table>
+  <div class="rule">
+    <div class="ttl">REGULA · a putea + פועל שני</div>
+    אחרי <span class="ro">a putea</span> יש שתי דרכים: עם <span class="ro big">să</span> + הטיה (<span class="ro">Eu pot să vorbesc</span>) או עם צורת המקור בלי ‎a (<span class="ro">Eu pot vorbi · Tu poți citi</span>). המשמעות זהה - "אני יכול לדבר".
+  </div>
+  <div class="note"><span class="ro">a prefera</span> היא קבוצה I אבל <b>בלי</b> ‎-ez (‏prefer, לא preferez). אחריה בא שם עצם מיודע: <span class="ro">Prefer metroul</span>.</div>
   <div class="seealso">↗ קשור: <a href="#afi">a fi המלא</a> · <a href="#avea">a avea המלא</a> · <a href="#merge6">a merge + תחבורה</a> · <a href="#anotimp7">פעלי העונות</a></div>
 
 </section>
@@ -1562,6 +1596,96 @@ p.sec-sub{font-size:.92rem}
   </div>
 </section>
 
+
+<section id="artichot" data-topic="nouns">
+  <h2 class="sec"><span class="num">שיעור 10</span> ה' הידיעה המלאה · Articolul hotărât</h2>
+  <p class="sec-sub">היידוע ברומנית נדבק לסוף שם העצם ומשתנה לפי מין ומספר. לכל מין טבלה אחת בסדר קריאה קבוע: הסיומת (הכלל) ← יחיד ← יחיד מיודע ← רבים מיודע.</p>
+
+  <table>
+    <tr><th style="width:18%">מין</th><th>יחיד מיודע</th><th>רבים מיודע</th></tr>
+    <tr><td class="m"><b>זכר</b></td><td class="m">אחרי עיצור/‏-u: <span class="ro big">+(u)l</span><br>אחרי ‎-e: <span class="ro big">+le</span></td><td class="m"><span class="ro big">+i</span></td></tr>
+    <tr><td class="f"><b>נקבה</b></td><td class="f"><span class="ro big">-a</span><br>עם שינוי התנועה הסופית</td><td class="f"><span class="ro big">+le</span></td></tr>
+    <tr><td class="n"><b>נייטרלי</b></td><td class="n">כמו זכר: <span class="ro big">+(u)l</span></td><td class="n">כמו נקבה: <span class="ro big">+le</span></td></tr>
+  </table>
+
+  <h3 class="tag-m">זכר · Masculin</h3>
+  <table>
+    <tr><th style="width:16%">סיומת</th><th>יחיד</th><th class="m">יחיד מיודע</th><th class="m">רבים מיודע</th></tr>
+    <tr><td>עיצור</td><td><span class="ro">un student</span></td><td class="m"><span class="ro big">studentul</span></td><td class="m"><span class="ro big">studenții</span></td></tr>
+    <tr><td>עיצור</td><td><span class="ro">un profesor</span></td><td class="m"><span class="ro big">profesorul</span></td><td class="m"><span class="ro big">profesorii</span></td></tr>
+    <tr><td><span class="ro">-e</span></td><td><span class="ro">un frate</span></td><td class="m"><span class="ro big">fratele</span></td><td class="m"><span class="ro big">frații</span></td></tr>
+    <tr><td><span class="ro">-e</span></td><td><span class="ro">un munte</span></td><td class="m"><span class="ro big">muntele</span></td><td class="m"><span class="ro big">munții</span></td></tr>
+    <tr><td><span class="ro">-u</span></td><td><span class="ro">un ministru</span></td><td class="m"><span class="ro big">ministrul</span></td><td class="m"><span class="ro big">miniștrii</span></td></tr>
+    <tr><td><span class="ro">-u</span></td><td><span class="ro">un metru</span></td><td class="m"><span class="ro big">metrul</span></td><td class="m"><span class="ro big">metrii</span></td></tr>
+    <tr><td><span class="ro">-i</span></td><td><span class="ro">un pui</span></td><td class="m"><span class="ro big">puiul</span></td><td class="m"><span class="ro big">puii</span></td></tr>
+    <tr><td class="he" colspan="2">חריג</td><td class="m"><span class="ro">un tată → </span><span class="ro big">tatăl</span></td><td class="m"><span class="he">זכר ב-ă, מקבל ‎-l</span></td></tr>
+  </table>
+  <div class="note">הרבים המיודע נכתב עם <b>שני i</b>:<br><span class="ro">studenț<b>ii</b></span> · <span class="ro">ochi<b>i</b></span> - סיומת הרבים ‎-i נפגשת עם ‎-i של היידוע.</div>
+
+  <h3 class="tag-f">נקבה · Feminin</h3>
+  <table>
+    <tr><th style="width:22%">הסיומת</th><th>יחיד</th><th class="f">יחיד מיודע</th><th class="f">רבים מיודע</th></tr>
+    <tr><td><span class="ro">ă → a</span></td><td><span class="ro">o casă</span></td><td class="f"><span class="ro big">casa</span></td><td class="f"><span class="ro big">casele</span></td></tr>
+    <tr><td><span class="ro">ă → a</span></td><td><span class="ro">o mașină</span></td><td class="f"><span class="ro big">mașina</span></td><td class="f"><span class="ro big">mașinile</span></td></tr>
+    <tr><td>עיצור/‏-e <span class="ro">→ +a</span></td><td><span class="ro">o facultate</span></td><td class="f"><span class="ro big">facultatea</span></td><td class="f"><span class="ro big">facultățile</span></td></tr>
+    <tr><td>עיצור/‏-e <span class="ro">→ +a</span></td><td><span class="ro">o carte</span></td><td class="f"><span class="ro big">cartea</span></td><td class="f"><span class="ro big">cărțile</span></td></tr>
+    <tr><td><span class="ro">-ie → ia</span></td><td><span class="ro">o femeie</span></td><td class="f"><span class="ro big">femeia</span></td><td class="f"><span class="ro big">femeile</span></td></tr>
+    <tr><td><span class="ro">-ea → +ua</span></td><td><span class="ro">o cafea</span></td><td class="f"><span class="ro big">cafeaua</span></td><td class="f"><span class="ro big">cafelele</span></td></tr>
+    <tr><td><span class="ro">-a → +ua</span></td><td><span class="ro">o pijama</span></td><td class="f"><span class="ro big">pijamaua</span></td><td class="f"><span class="ro big">pijamalele</span></td></tr>
+  </table>
+
+  <h3>נייטרלי · Neutru</h3>
+  <table>
+    <tr><th style="width:16%">סיומת</th><th>יחיד</th><th class="n">יחיד מיודע</th><th class="n">רבים מיודע</th></tr>
+    <tr><td>עיצור</td><td><span class="ro">un caiet</span></td><td class="n"><span class="ro big">caietul</span></td><td class="n"><span class="ro big">caietele</span></td></tr>
+    <tr><td>עיצור</td><td><span class="ro">un tren</span></td><td class="n"><span class="ro big">trenul</span></td><td class="n"><span class="ro big">trenurile</span></td></tr>
+    <tr><td><span class="ro">-i</span></td><td><span class="ro">un tramvai</span></td><td class="n"><span class="ro big">tramvaiul</span></td><td class="n"><span class="ro big">tramvaiele</span></td></tr>
+    <tr><td><span class="ro">-u</span></td><td><span class="ro">un timbru</span></td><td class="n"><span class="ro big">timbrul</span></td><td class="n"><span class="ro big">timbrele</span></td></tr>
+    <tr><td><span class="ro">-u</span></td><td><span class="ro">un tablou</span></td><td class="n"><span class="ro big">tabloul</span></td><td class="n"><span class="ro big">tablourile</span></td></tr>
+    <tr><td><span class="ro">-iu</span></td><td><span class="ro">un fotoliu</span></td><td class="n"><span class="ro big">fotoliul</span></td><td class="n"><span class="ro big">fotoliile</span></td></tr>
+  </table>
+  <div class="note">ביחיד מתנהג כמו זכר (‎+(u)l).<br>ברבים מתנהג כמו נקבה (‎+le).</div>
+
+  <div class="note"><b>הבלתי מיודע · Articolul nehotărât</b><br>
+    זכר/נייטרלי: <span class="ro">un</span><br>
+    נקבה: <span class="ro">o</span><br>
+    רבים: <span class="ro">niște</span><br>
+    לכמות ולהזכרה ראשונה, ותמיד כשיש תואר: <span class="ro">o cântăreață talentată</span>.</div>
+
+  <h3>תרגול · יַדעו את שמות העצם (נקבה)</h3>
+  <table>
+    <tr><th style="width:55%">שם עצם</th><th>יחיד מיודע</th></tr>
+    <tr><td><span class="ro">valiză</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">valiza</span></span></label></td></tr>
+    <tr><td><span class="ro">pălărie</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">pălăria</span></span></label></td></tr>
+    <tr><td><span class="ro">umbrelă</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">umbrela</span></span></label></td></tr>
+    <tr><td><span class="ro">lumânare</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">lumânarea</span></span></label></td></tr>
+    <tr><td><span class="ro">ceașcă</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">ceașca</span></span></label></td></tr>
+    <tr><td><span class="ro">canapea</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">canapeaua</span></span></label></td></tr>
+    <tr><td><span class="ro">cafenea</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">cafeneaua</span></span></label></td></tr>
+    <tr><td><span class="ro">farfurie</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">farfuria</span></span></label></td></tr>
+    <tr><td><span class="ro">întâmplare</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">întâmplarea</span></span></label></td></tr>
+    <tr><td><span class="ro">grijă</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">grija</span></span></label></td></tr>
+  </table>
+
+  <h3>תרגול · השלימו את המיודע (עם התאמת התואר)</h3>
+  <table>
+    <tr><th style="width:55%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">Eu fac o cafea. ___ este turcească.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Cafeaua este turcească.</span></span></label></td></tr>
+    <tr><td><span class="rox">El merge la cinematograf. ___ este în centru.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Cinematograful este în centru.</span></span></label></td></tr>
+    <tr><td><span class="rox">Maria are o carte. ___ este interesantă.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Cartea este interesantă.</span></span></label></td></tr>
+    <tr><td><span class="rox">Am un frate. ___ este medic.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Fratele este medic.</span></span></label></td></tr>
+    <tr><td><span class="rox">Noi mergem la munte. ___ este înalt.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Muntele este înalt.</span></span></label></td></tr>
+    <tr><td><span class="rox">Ei au o casă. ___ este modernă.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Casa este modernă.</span></span></label></td></tr>
+    <tr><td><span class="rox">Irina face un ceai. ___ este negru.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Ceaiul este negru.</span></span></label></td></tr>
+    <tr><td><span class="rox">În restaurant este un ospătar. ___ este amabil.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Ospătarul este amabil.</span></span></label></td></tr>
+    <tr><td><span class="rox">Pe masă sunt cafele. ___ sunt amare.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Cafelele sunt amare.</span></span></label></td></tr>
+    <tr><td><span class="rox">În cameră sunt copii. ___ sunt bucuroși.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Copiii sunt bucuroși.</span></span></label></td></tr>
+    <tr><td><span class="rox">Acolo sunt munți. ___ sunt înzăpeziți.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Munții sunt înzăpeziți.</span></span></label></td></tr>
+    <tr><td><span class="rox">La anticariat sunt multe cărți. ___ sunt folosite.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">Cărțile sunt folosite.</span></span></label></td></tr>
+  </table>
+
+  <div class="seealso">↗ קשור: <a href="#artic">ה' הידיעה - הצצה ראשונה</a> · <a href="#gender">זכר ונקבה</a> · <a href="#neutru">המין הנייטרלי</a> · <a href="#plurals">מערכת הרבים</a> · <a href="#dict">המילון</a></div>
+</section>
 
 <div class="part" id="part-5"><span class="pnum">חלק 5</span><span class="ptxt">מספרים, כמויות ושלילה</span></div>
 
@@ -2082,6 +2206,27 @@ p.sec-sub{font-size:.92rem}
   </div>
 </section>
 
+
+<section id="preps10" data-topic="preps">
+  <h2 class="sec"><span class="num">שיעור 10</span> מאיפה ועד לאן · De unde? Până unde?</h2>
+  <p class="sec-sub">שיעור הטיול בקונסטנצה הביא חבילה של מילות יחס לתנועה במרחב: לאיזה כיוון הולכים, מאיפה יוצאים, ועד כמה רחוק.</p>
+
+  <table>
+    <tr><th style="width:26%">מבנה</th><th>נבנה עם</th><th>דוגמה</th></tr>
+    <tr><td><span class="ro big">spre / către / la</span></td><td>יעד או כיוון</td><td><span class="ro">Merg spre Piața Ovidiu</span></td></tr>
+    <tr><td><span class="ro big">de la … (până) la</span></td><td>עיר / שם עצם</td><td><span class="ro">De la facultate până la mall</span></td></tr>
+    <tr><td><span class="ro big">din … (până) în</span></td><td>מדינה</td><td><span class="ro">Din România până în Grecia</span></td></tr>
+    <tr><td><span class="ro big">până</span></td><td><span class="ro">aici / acolo / sus / jos</span></td><td><span class="ro">Mergem până acolo</span></td></tr>
+  </table>
+
+  <div class="note"><b>צמדים הפוכים:</b><br>
+    <span class="ro">la ↔ de la</span><br>
+    <span class="ro">în ↔ din</span><br>
+    <span class="ro">pe ↔ sub</span><br>
+    <span class="ro">numai = doar</span> <span class="he">(רק)</span></div>
+
+  <div class="seealso">↗ קשור: <a href="#place">מקום וזמן · שאלות עם de</a> · <a href="#directii9">כיוונים והוראות דרך</a> · <a href="#dela">DE או LA</a> · <a href="#data7">de când / până când</a></div>
+</section>
 
 <div class="part" id="part-7"><span class="pnum">חלק 7</span><span class="ptxt">עולם, נושאים ואוצר מילים</span></div>
 
@@ -2753,6 +2898,67 @@ p.sec-sub{font-size:.92rem}
 </section>
 
 
+<section id="vocab10" data-topic="vocab">
+  <h2 class="sec"><span class="num">שיעור 10</span> העיר והתחבורה · Orașul și transportul</h2>
+  <p class="sec-sub">אוצר המילים של הטיול: מהמדינה ועד לרחוב, אמצעי התחבורה והתחנות שלהם, ותארים להשוואת מקומות.</p>
+
+  <h3>מהמדינה ועד לרחוב</h3>
+  <div class="vocab">
+    <div class="vitem"><span class="ro">o țară - două țări</span><span class="he">מדינה</span></div>
+    <div class="vitem"><span class="ro">un oraș - două orașe</span><span class="he">עיר</span></div>
+    <div class="vitem"><span class="ro">un sector - două sectoare</span><span class="he">רובע עירוני</span></div>
+    <div class="vitem"><span class="ro">un cartier - două cartiere</span><span class="he">שכונה</span></div>
+    <div class="vitem"><span class="ro">un centru - două centre</span><span class="he">מרכז</span></div>
+    <div class="vitem"><span class="ro">un drum - două drumuri</span><span class="he">דרך</span></div>
+    <div class="vitem"><span class="ro">o alee - două alei</span><span class="he">שדרה, משעול</span></div>
+    <div class="vitem"><span class="ro">o stradă - două străzi</span><span class="he">רחוב</span></div>
+    <div class="vitem"><span class="ro">un bulevard - două bulevarde</span><span class="he">שדרה ראשית</span></div>
+    <div class="vitem"><span class="ro">o șosea - două șosele</span><span class="he">כביש בין-עירוני</span></div>
+    <div class="vitem"><span class="ro">o autostradă - două autostrăzi</span><span class="he">כביש מהיר</span></div>
+  </div>
+
+  <h3>תחבורה · Mijloace de transport</h3>
+  <table>
+    <tr><th style="width:34%">אמצעי</th><th>התחנה / היעד</th></tr>
+    <tr><td><span class="ro">autobuz, troleibuz, tramvai, metrou, taxi, maxi-taxi</span></td><td><span class="ro">o stație de…</span></td></tr>
+    <tr><td><span class="ro">tren</span></td><td><span class="ro">gară</span> <span class="he">(תחנת רכבת)</span></td></tr>
+    <tr><td><span class="ro">avion</span></td><td><span class="ro">aeroport</span></td></tr>
+    <tr><td><span class="ro">vapor</span></td><td><span class="ro">port</span></td></tr>
+  </table>
+  <div class="note"><span class="ro">- Cu ce călătorești de obicei? - De obicei călătoresc cu metroul.</span><br><span class="he">- במה אתה נוסע בדרך כלל? - במטרו.</span><br><span class="ro">- Ce mijloc de transport preferi? - Prefer trenul.</span> <span class="he">(prefer + מיודע)</span></div>
+
+  <h3>מקומות בעיר</h3>
+  <div class="vocab">
+    <div class="vitem"><span class="ro">o faleză - două faleze</span><span class="he">טיילת חוף</span></div>
+    <div class="vitem"><span class="ro">un magazin - două magazine</span><span class="he">חנות</span></div>
+    <div class="vitem"><span class="ro">un mall - două mall-uri</span><span class="he">קניון</span></div>
+    <div class="vitem"><span class="ro">un chioșc - două chioșcuri</span><span class="he">דוכן, קיוסק</span></div>
+    <div class="vitem"><span class="ro">un restaurant - două restaurante</span><span class="he">מסעדה</span></div>
+    <div class="vitem"><span class="ro">un bar - două baruri</span><span class="he">בר</span></div>
+    <div class="vitem"><span class="ro">o terasă - două terase</span><span class="he">מרפסת, טרסה</span></div>
+  </div>
+
+  <h3>תארים והפכים · Adjective și contrarii</h3>
+  <table>
+    <tr><th>תואר</th><th style="width:8%"></th><th>ניגוד</th><th style="width:30%">עברית</th></tr>
+    <tr><td><span class="ro">departe</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">aproape</span></td><td class="he">רחוק / קרוב</td></tr>
+    <tr><td><span class="ro">aglomerat</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">gol / liber</span></td><td class="he">צפוף / ריק</td></tr>
+    <tr><td><span class="ro">liniștit</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">gălăgios</span></td><td class="he">שקט / רועש</td></tr>
+    <tr><td><span class="ro">nou</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">vechi</span></td><td class="he">חדש / ישן</td></tr>
+    <tr><td><span class="ro">modern</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">învechit</span></td><td class="he">מודרני / מיושן</td></tr>
+    <tr><td><span class="ro">curat</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">murdar</span></td><td class="he">נקי / מלוכלך</td></tr>
+    <tr><td><span class="ro">înalt</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">scund</span></td><td class="he">גבוה / נמוך</td></tr>
+    <tr><td><span class="ro">îngust</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">lat</span></td><td class="he">צר / רחב</td></tr>
+    <tr><td><span class="ro">larg</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">strâmt</span></td><td class="he">מרווח / צפוף</td></tr>
+    <tr><td><span class="ro">interesant</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">neinteresant</span></td><td class="he">מעניין / לא מעניין</td></tr>
+    <tr><td><span class="ro">elegant</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">neelegant</span></td><td class="he">אלגנטי / לא אלגנטי</td></tr>
+    <tr><td><span class="ro">confortabil</span></td><td><span class="pair"><span class="vs">≠</span></span></td><td><span class="ro">inconfortabil</span></td><td class="he">נוח / לא נוח</td></tr>
+  </table>
+  <div class="note">אפשר לבנות הפך בעזרת תחיליות שלילה:<br><span class="ro">ne-</span> (neinteresant, neelegant)<br><span class="ro">in-/î-</span> (inconfortabil)</div>
+
+  <div class="seealso">↗ קשור: <a href="#opuse9">תארים והפכים · ש9</a> · <a href="#preps10">מאיפה ועד לאן</a> · <a href="#dict">המילון</a></div>
+</section>
+
 <div class="part" id="part-8"><span class="pnum">חלק 8</span><span class="ptxt">דיאלוגים ותרגול</span></div>
 
 <section id="dialog" data-topic="dialogs">
@@ -3161,11 +3367,115 @@ p.sec-sub{font-size:.92rem}
 </section>
 
 
+<section id="dialog10" data-topic="dialogs">
+  <h2 class="sec"><span class="num">שיעור 10</span> טיול בקונסטנצה · La mall, la film, în oraș</h2>
+  <p class="sec-sub">טקסט הקריאה של השיעור: הסטודנטים יוצאים לקניון, לקולנוע ולעיר העתיקה. קִראו, ואז ענו על שאלות ההבנה.</p>
+
+  <div class="card">
+    <div class="ro">Studenții sunt acum în centru, la mall. Mallul este aproape de Poliție și nu este o clădire înaltă, are numai 3 etaje. La etajul 2 este cinematograful. La etajul 1 sunt multe magazine frumoase și moderne, câteva restaurante, baruri, o sală de biliard și una de jocuri mecanice.</div>
+    <span class="he">הסטודנטים עכשיו במרכז, בקניון. הקניון קרוב למשטרה ואינו בניין גבוה - יש בו רק 3 קומות. בקומה 2 נמצא הקולנוע. בקומה 1 יש הרבה חנויות יפות ומודרניות, כמה מסעדות, ברים, אולם ביליארד ואולם משחקים.</span>
+
+    <div class="ro" style="margin-top:10px">Filmul de azi este o comedie românească, iar biletele sunt ieftine. După film, Nevana, Nikos și Angelina fac o plimbare în centru, apoi pe faleză. În dreapta este Cazinoul, iar în stânga Acvariul. Departe, pe mare, sunt niște vapoare.</div>
+    <span class="he">הסרט של היום הוא קומדיה רומנית, והכרטיסים זולים. אחרי הסרט נוונה, ניקוס ואנג'לינה מטיילים במרכז ואז על הטיילת. מימין נמצא הקזינו, ומשמאל האקווריום. הרחק, על הים, יש כמה אוניות.</span>
+
+    <div class="ro" style="margin-top:10px">De acolo studenții merg spre Piața Ovidiu, un loc liniștit cu străzi înguste și curate. Acolo este și Muzeul Național de Istorie. Constanța este un oraș la Marea Neagră, foarte interesant.</div>
+    <span class="he">משם הסטודנטים הולכים לכיוון כיכר אובידיו, מקום שקט עם רחובות צרים ונקיים. שם נמצא גם המוזיאון הלאומי להיסטוריה. קונסטנצה היא עיר על הים השחור, מאוד מעניינת.</span>
+  </div>
+
+  <div class="dialog">
+    <div class="dline b"><span class="who">?</span><div class="txt"><span class="ro">- Și... câte stații sunt până la Mall?</span><span class="he">וכמה תחנות יש עד הקניון?</span></div></div>
+    <div class="dline a"><span class="who">Ghid</span><div class="txt"><span class="ro">- Nu sunt multe. Până acolo, cu autobuzul 100, sunt numai patru stații și toate stațiile sunt scurte. Faceți doar câteva minute.</span><span class="he">לא הרבה. עד שם, באוטובוס 100, יש רק ארבע תחנות וכולן קצרות. זה לוקח רק כמה דקות.</span></div></div>
+    <div class="dline b"><span class="who">?</span><div class="txt"><span class="ro">- De când sunteți în Constanța?</span><span class="he">מתי (מאיזה זמן) אתם בקונסטנצה?</span></div></div>
+    <div class="dline a"><span class="who">Ea</span><div class="txt"><span class="ro">- Aaa, de două săptămâni. Da, ai dreptate, este foarte aproape.</span><span class="he">אה, כבר שבועיים. כן, אתה צודק, זה מאוד קרוב.</span></div></div>
+  </div>
+
+  <div class="note"><b>ביטויים עם a avea:</b> <span class="ro">a avea dreptate</span> <span class="he">לצדוק</span> (‏am dreptate / ai dreptate / are dreptate) · <span class="ro">a avea nevoie (de)</span> <span class="he">להזדקק ל-</span> (‏am nevoie de...). אלה לא פעלים חדשים - זה a avea + שם עצם.</div>
+
+  <h3>שאלות הבנה · Întrebări</h3>
+  <div class="qa"><span class="qn">1</span> <span class="ro">Unde este cinematograful? Câte restaurante sunt? La ce etaj putem găsi un bar?</span>
+    <details class="sol"><summary>תשובות</summary><span class="ro">Cinematograful este la etajul 2. La etajul 1 sunt câteva restaurante și baruri.</span></details>
+  </div>
+  <div class="qa"><span class="qn">2</span> <span class="ro">Biletele sunt scumpe? Ce e în stânga? Pe mare sunt multe vapoare?</span>
+    <details class="sol"><summary>תשובות</summary><span class="ro">Nu, biletele sunt ieftine. În stânga este Acvariul. Nu, pe mare sunt numai niște vapoare.</span></details>
+  </div>
+  <div class="qa"><span class="qn">3</span> <span class="ro">Constanța este un oraș-port? Străzile din Piața Ovidiu nu sunt murdare? Piața Ovidiu e un loc gălăgios?</span>
+    <details class="sol"><summary>תשובות</summary><span class="ro">Da, Constanța este un oraș-port la Marea Neagră. Nu, străzile sunt curate. Nu, este un loc liniștit.</span></details>
+  </div>
+
+  <div class="seealso">↗ קשור: <a href="#vocab10">העיר והתחבורה</a> · <a href="#preps10">מאיפה ועד לאן</a> · <a href="#practice10">תרגול · Recapitulare</a></div>
+</section>
+
+<section id="practice10" data-topic="practice">
+  <h2 class="sec"><span class="num">תרגול בית</span> חזרה · Recapitulare</h2>
+  <p class="sec-sub">דף החזרה שנשלח מהמורה: הפכים, וארבעת הפעלים הבסיסיים. כל שורה עם פתרון צמוד - לחצו לחשוף.</p>
+
+  <h3>1. השלימו את ההפך</h3>
+  <table>
+    <tr><th style="width:60%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">Aici este un loc liber. Acolo este un loc ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">ocupat</span></span></label></td></tr>
+    <tr><td><span class="rox">Camera 102 este curată. Camera 106 este ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">murdară</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu am o soră înaltă. Mihai are o soră ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">scundă</span></span></label></td></tr>
+    <tr><td><span class="rox">România este aproape de Bulgaria, dar este ___ de Brazilia.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">departe</span></span></label></td></tr>
+    <tr><td><span class="rox">Noi avem bilete ieftine. Ei au bilete ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">scumpe</span></span></label></td></tr>
+    <tr><td><span class="rox">Autobuzul 43 este liber. Autobuzul 45 este ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">ocupat</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu am doi frați înalți. El are doi frați ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">scunzi</span></span></label></td></tr>
+    <tr><td><span class="rox">Pereții din sala 034 sunt murdari. Pereții din sala 033 sunt ___ .</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">curați</span></span></label></td></tr>
+  </table>
+
+  <h3>2. A fi</h3>
+  <table>
+    <tr><th style="width:60%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">De unde ___ Mihai?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">este</span></span></label></td></tr>
+    <tr><td><span class="rox">Noi nu ___ ingineri, ___ studenți.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">suntem / suntem</span></span></label></td></tr>
+    <tr><td><span class="rox">Maria și Ioana ___ la facultate.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">sunt</span></span></label></td></tr>
+    <tr><td><span class="rox">Voi ___ din Maroc?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">sunteți</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu ___ Mioara. Tu cine ___ ?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">sunt / ești</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu și George ___ în parc.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">suntem</span></span></label></td></tr>
+  </table>
+
+  <h3>3. A avea</h3>
+  <table>
+    <tr><th style="width:60%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">Eu ___ o bicicletă.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">am</span></span></label></td></tr>
+    <tr><td><span class="rox">Ei nu ___ carte de limba română.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">au</span></span></label></td></tr>
+    <tr><td><span class="rox">Dumneavoastră ___ mașină?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">aveți</span></span></label></td></tr>
+    <tr><td><span class="rox">Noi ___ multe cursuri în fiecare zi.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">avem</span></span></label></td></tr>
+    <tr><td><span class="rox">Ea nu ___ încă telefon mobil.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">are</span></span></label></td></tr>
+    <tr><td><span class="rox">Tu ___ o geantă interesantă.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">ai</span></span></label></td></tr>
+    <tr><td><span class="rox">El ___ un frate înalt. Voi nu ___ laptop.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">are / aveți</span></span></label></td></tr>
+  </table>
+
+  <h3>4. A face</h3>
+  <table>
+    <tr><th style="width:60%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">Noi ___ gimnastică în fiecare zi.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">facem</span></span></label></td></tr>
+    <tr><td><span class="rox">Ce ___ azi, Maria?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">faci</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu ___ temele la română.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">fac</span></span></label></td></tr>
+    <tr><td><span class="rox">El ___ o plimbare în parc.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">face</span></span></label></td></tr>
+    <tr><td><span class="rox">Tu și Ioana ce ___ după-amiază?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">faceți</span></span></label></td></tr>
+    <tr><td><span class="rox">Ei ___ pauză acum.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">fac</span></span></label></td></tr>
+    <tr><td><span class="rox">Ea ___ un ceai negru. Eu și Maria ___ o prăjitură.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">face / facem</span></span></label></td></tr>
+  </table>
+
+  <h3>5. A merge</h3>
+  <table>
+    <tr><th style="width:60%">השלימו</th><th>פתרון</th></tr>
+    <tr><td><span class="rox">Mihai ___ la film.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">merge</span></span></label></td></tr>
+    <tr><td><span class="rox">Voi unde ___ ?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">mergeți</span></span></label></td></tr>
+    <tr><td><span class="rox">Când ___ Ioana la București?</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">merge</span></span></label></td></tr>
+    <tr><td><span class="rox">Eu nu ___ azi la cursuri.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">merg</span></span></label></td></tr>
+    <tr><td><span class="rox">Noi ___ la bibliotecă după cursuri.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">mergem</span></span></label></td></tr>
+    <tr><td><span class="rox">Ei ___ la școală.</span></td><td><label class="sp"><input type="checkbox"><span class="ans"><span class="ro">merg</span></span></label></td></tr>
+  </table>
+
+  <div class="seealso">↗ קשור: <a href="#dialog10">טיול בקונסטנצה</a> · <a href="#opuse9">תארים והפכים</a> · <a href="#verbref">טבלת הפעלים</a> · <a href="#artichot">ה' הידיעה</a></div>
+</section>
+
 <div class="part" id="part-9"><span class="pnum">חלק 9</span><span class="ptxt">רפרנס</span></div>
 
 <section id="dict" data-topic="dict">
   <h2 class="sec"><span class="num">מצטבר</span> המילון · Dicționar</h2>
-  <p class="sec-sub">כל שמות העצם שפגשנו עד כה (שיעורים 1-9), לפי סדר אלפביתי רומני. כל מילה עם המין שלה, צורת יחיד ← רבים, והחריגות שצריך לזכור. שפות, לאומים ותחומי לימוד מרוכזים ב<a class="xref" href="#nations">טבלת המדינות</a>.</p>
+  <p class="sec-sub">כל שמות העצם שפגשנו עד כה (שיעורים 1-10), לפי סדר אלפביתי רומני. כל מילה עם המין שלה, צורת יחיד ← רבים, והחריגות שצריך לזכור. שפות, לאומים ותחומי לימוד מרוכזים ב<a class="xref" href="#nations">טבלת המדינות</a>.</p>
 
   <div class="rule">
     <div class="ttl">איך קוראים את המילון</div>
@@ -3183,6 +3493,9 @@ p.sec-sub{font-size:.92rem}
     <tr><th style="width:32%">יחיד ← רבים</th><th style="width:11%">מין</th><th style="width:22%">תרגום</th><th>הערות</th></tr>
 
     <tr class="letter" id="L-A"><td colspan="4">A</td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un acvariu - două acvarii</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>אקווריום</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un aeroport - două aeroporturi</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>שדה תעופה</td><td class="he"></td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o alee - două alei</span></td><td><span class="gt gt-f">נקבה</span></td><td>שדרה, משעול</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o agendă - două agende</span></td><td><span class="gt gt-f">נקבה</span></td><td>יומן</td><td class="he"></td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un agent - doi agenți</span></td><td><span class="gt gt-m">זכר</span></td><td>סוכן</td><td class="he">agent de vânzări = סוכן מכירות</td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o amiază</span></td><td><span class="gt gt-f">נקבה</span></td><td>צהריים</td><td class="he"></td></tr>
@@ -3198,6 +3511,8 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-n"><td class="w"><span class="ro">un avion - două avioane</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מטוס</td><td class="he"></td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un avocat - doi avocați</span></td><td><span class="gt gt-m">זכר</span></td><td>עורך דין</td><td class="he">t+i=ți ברבים</td></tr>
 <tr class="letter" id="L-B"><td colspan="4">B</td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un bar - două baruri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>בר</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un bulevard - două bulevarde</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>שדרה ראשית</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o bancă - două bănci</span></td><td><span class="gt gt-f">נקבה</span></td><td>ספסל כתיבה</td><td class="he">גם: בנק</td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un băiat - doi băieți</span></td><td><span class="gt gt-m">זכר</span></td><td>ילד, נער</td><td class="he"></td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un bărbat - doi bărbați</span></td><td><span class="gt gt-m">זכר</span></td><td>גבר</td><td class="he"></td></tr>
@@ -3211,6 +3526,12 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-m"><td class="w"><span class="ro">un bunic - doi bunici</span></td><td><span class="gt gt-m">זכר</span></td><td>סבא</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o bunică - două bunici</span></td><td><span class="gt gt-f">נקבה</span></td><td>סבתא</td><td class="he">רבים זהה לסבים</td></tr>
 <tr class="letter" id="L-C"><td colspan="4">C</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o canapea - două canapele</span></td><td><span class="gt gt-f">נקבה</span></td><td>ספה</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un cartier - două cartiere</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>שכונה</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un cazinou - două cazinouri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>קזינו</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un centru - două centre</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מרכז</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un chioșc - două chioșcuri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>דוכן, קיוסק</td><td class="he"></td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o comedie - două comedii</span></td><td><span class="gt gt-f">נקבה</span></td><td>קומדיה</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un cadou - două cadouri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מתנה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o cafea - două cafele</span></td><td><span class="gt gt-f">נקבה</span></td><td>קפה</td><td class="he">רבים חריג: cafele</td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o cafenea - două cafenele</span></td><td><span class="gt gt-f">נקבה</span></td><td>בית קפה</td><td class="he"></td></tr>
@@ -3284,6 +3605,8 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-n"><td class="w"><span class="ro">un exemplu - două exemple</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>דוגמה</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un exercițiu - două exerciții</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>תרגיל</td><td class="he"></td></tr>
 <tr class="letter" id="L-F"><td colspan="4">F</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o faleză - două faleze</span></td><td><span class="gt gt-f">נקבה</span></td><td>טיילת חוף</td><td class="he"></td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o farfurie - două farfurii</span></td><td><span class="gt gt-f">נקבה</span></td><td>צלחת</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o facultate - două facultăți</span></td><td><span class="gt gt-f">נקבה</span></td><td>פקולטה</td><td class="he">Facultatea de Litere</td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o familie - două familii</span></td><td><span class="gt gt-f">נקבה</span></td><td>משפחה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o fată - două fete</span></td><td><span class="gt gt-f">נקבה</span></td><td>ילדה</td><td class="he">a→e ברבים</td></tr>
@@ -3325,6 +3648,7 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-n"><td class="w"><span class="ro">un hol - două holuri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מסדרון</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un hotel - două hoteluri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מלון</td><td class="he"></td></tr>
 <tr class="letter" id="L-I"><td colspan="4">I · Î</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o întâmplare - două întâmplări</span></td><td><span class="gt gt-f">נקבה</span></td><td>מקרה, אירוע</td><td class="he">תחת I·Î</td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un iaht - două iahturi</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>יאכטה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o iarbă - ierburi</span></td><td><span class="gt gt-f">נקבה</span></td><td>עשב, דשא</td><td class="he">נקבה עם רבים -uri</td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o iarnă - două ierni</span></td><td><span class="gt gt-f">נקבה</span></td><td>חורף</td><td class="he"></td></tr>
@@ -3339,6 +3663,7 @@ p.sec-sub{font-size:.92rem}
 <tr class="letter" id="L-K"><td colspan="4">K</td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un kilometru - doi kilometri</span></td><td><span class="gt gt-m">זכר</span></td><td>קילומטר</td><td class="he">30 de kilometri pe oră = קמ"ש</td></tr>
 <tr class="letter" id="L-L"><td colspan="4">L</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o lumânare - două lumânări</span></td><td><span class="gt gt-f">נקבה</span></td><td>נר</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o lampă - două lămpi</span></td><td><span class="gt gt-f">נקבה</span></td><td>מנורה</td><td class="he">a→ă</td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un laptop - două laptopuri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מחשב נייד</td><td class="he"></td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un leu - doi lei</span></td><td><span class="gt gt-m">זכר</span></td><td>אריה</td><td class="he">וגם המטבע הרומני</td></tr>
@@ -3348,6 +3673,9 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-f"><td class="w"><span class="ro">o lumină - două lumini</span></td><td><span class="gt gt-f">נקבה</span></td><td>אור</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o lună - două luni</span></td><td><span class="gt gt-f">נקבה</span></td><td>חודש, ירח</td><td class="he">luni = גם יום שני</td></tr>
 <tr class="letter" id="L-M"><td colspan="4">M</td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un magazin - două magazine</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>חנות</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un mall - două mall-uri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>קניון</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un muzeu - două muzee</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מוזיאון</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un mal - două maluri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>גדה, שפת מים</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un manual - două manuale</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>ספר לימוד</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o mare - două mări</span></td><td><span class="gt gt-f">נקבה</span></td><td>ים</td><td class="he">לא להתבלבל: mare = גם "גדול"</td></tr>
@@ -3384,6 +3712,10 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-f"><td class="w"><span class="ro">o oră - două ore</span></td><td><span class="gt gt-f">נקבה</span></td><td>שעה</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un ou - două ouă</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>ביצה</td><td class="he">הרבים היחיד שנגמר ב-ă!</td></tr>
 <tr class="letter" id="L-P"><td colspan="4">P</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o pălărie - două pălării</span></td><td><span class="gt gt-f">נקבה</span></td><td>כובע</td><td class="he"></td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o piață - două piețe</span></td><td><span class="gt gt-f">נקבה</span></td><td>כיכר, שוק</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un port - două porturi</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>נמל</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un prosop - două prosoape</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>מגבת</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un pachet - două pachete</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>חבילה</td><td class="he">pachet de cărți de joc = חפיסת קלפים</td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o pagină - două pagini</span></td><td><span class="gt gt-f">נקבה</span></td><td>עמוד</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un pahar - două pahare</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>כוס</td><td class="he"></td></tr>
@@ -3434,6 +3766,8 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-f"><td class="w"><span class="ro">o roșie - două roșii</span></td><td><span class="gt gt-f">נקבה</span></td><td>עגבנייה</td><td class="he">וגם: אדומה</td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un rucsac - două rucsacuri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>תיק גב</td><td class="he"></td></tr>
 <tr class="letter" id="L-S"><td colspan="4">S</td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un sector - două sectoare</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>רובע עירוני</td><td class="he"></td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o stație - două stații</span></td><td><span class="gt gt-f">נקבה</span></td><td>תחנה</td><td class="he"></td></tr>
     <tr class="g-m"><td class="w"><span class="ro">un sac - doi saci</span></td><td><span class="gt gt-m">זכר</span></td><td>שק</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un sacou - două sacouri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>ז'קט חליפה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o sală - două săli</span></td><td><span class="gt gt-f">נקבה</span></td><td>אולם</td><td class="he">a→ă ברבים; sală de curs</td></tr>
@@ -3468,6 +3802,8 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-m"><td class="w"><span class="ro">un șofer - doi șoferi</span></td><td><span class="gt gt-m">זכר</span></td><td>נהג</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o șosea - două șosele</span></td><td><span class="gt gt-f">נקבה</span></td><td>כביש</td><td class="he">רבים חריג: șosele</td></tr>
 <tr class="letter" id="L-T"><td colspan="4">T</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o terasă - două terase</span></td><td><span class="gt gt-f">נקבה</span></td><td>מרפסת, טרסה</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un troleibuz - două troleibuze</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>טרוליבוס</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o tabără - două tabere</span></td><td><span class="gt gt-f">נקבה</span></td><td>מחנה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o tablă - două table</span></td><td><span class="gt gt-f">נקבה</span></td><td>לוח כיתה</td><td class="he"></td></tr>
     <tr class="g-n"><td class="w"><span class="ro">un tablou - două tablouri</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>תמונה, ציור קיר</td><td class="he"></td></tr>
@@ -3499,6 +3835,8 @@ p.sec-sub{font-size:.92rem}
     <tr class="g-m"><td class="w"><span class="ro">un urs - doi urși</span></td><td><span class="gt gt-m">זכר</span></td><td>דוב</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o ușă - două uși</span></td><td><span class="gt gt-f">נקבה</span></td><td>דלת</td><td class="he"></td></tr>
 <tr class="letter" id="L-V"><td colspan="4">V</td></tr>
+    <tr class="g-f"><td class="w"><span class="ro">o valiză - două valize</span></td><td><span class="gt gt-f">נקבה</span></td><td>מזוודה</td><td class="he"></td></tr>
+    <tr class="g-n"><td class="w"><span class="ro">un vapor - două vapoare</span></td><td><span class="gt gt-n">נייטרלי</span></td><td>אונייה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o vacanță - două vacanțe</span></td><td><span class="gt gt-f">נקבה</span></td><td>חופשה</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o vale - două văi</span></td><td><span class="gt gt-f">נקבה</span></td><td>גיא, עמק</td><td class="he"></td></tr>
     <tr class="g-f"><td class="w"><span class="ro">o vară - două veri</span></td><td><span class="gt gt-f">נקבה</span></td><td>קיץ</td><td class="he">רבים חריג: veri (= גם בני דודים)</td></tr>
