@@ -231,17 +231,10 @@ const CONTACTS = [
 /* Blog posts — first is real; two placeholders await content */
 const POSTS = [
   {
-    title: "סליחה ששלחתי וואטסאפ",
+    title: "הצ׳טבוט האנושי שלך",
     excerpt:
-      "וואטסאפ היא אפליקציה תקשורת שמשבשת את התקשורת האנושית. לא פחות. היא גם משנה את ההתנהגות האישית שלנו לרעה. ממש ככה. רוב האנשים לא עסוקים בשאלה ״האם היא משרתת אותנו, או שאנחנו משרתים אותה?״, הם גם לא מודעים לכך שהיא כבר מזמן לא משמשת לצרכים שעבורם היא נבנתה – הם כבר שברו את התיקרה שלה והיא מצידה שברה את הגבולות שלהם.",
-    href: "/blog/whatsapp",
-    placeholder: false,
-  },
-  {
-    title: "Mother Load",
-    excerpt:
-      "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת. רייצ'ל מאני עיצבה והדפיסה אותו – פוסטרים, קבלה אחת ארוכה, ומסה שמצחיקה וכועסת באותה נשימה – על החשבון הפתוח של אימהות יוצרות.",
-    href: "/blog/motherload",
+      "בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI. עוד שלט אחד בים השלטים שמנסים למכור לכם עתיד שבו מכונה עונה לכם על הכל. רגיל לגמרי, נכון?",
+    href: "/blog/chattjb",
     placeholder: false,
   },
   {
@@ -252,10 +245,17 @@ const POSTS = [
     placeholder: false,
   },
   {
-    title: "הצ׳טבוט האנושי שלך",
+    title: "Mother Load",
     excerpt:
-      "בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI. עוד שלט אחד בים השלטים שמנסים למכור לכם עתיד שבו מכונה עונה לכם על הכל. רגיל לגמרי, נכון?",
-    href: "/blog/chattjb",
+      "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת. רייצ'ל מאני עיצבה והדפיסה אותו – פוסטרים, קבלה אחת ארוכה, ומסה שמצחיקה וכועסת באותה נשימה – על החשבון הפתוח של אימהות יוצרות.",
+    href: "/blog/motherload",
+    placeholder: false,
+  },
+  {
+    title: "סליחה ששלחתי וואטסאפ",
+    excerpt:
+      "וואטסאפ היא אפליקציה תקשורת שמשבשת את התקשורת האנושית. לא פחות. היא גם משנה את ההתנהגות האישית שלנו לרעה. ממש ככה. רוב האנשים לא עסוקים בשאלה ״האם היא משרתת אותנו, או שאנחנו משרתים אותה?״, הם גם לא מודעים לכך שהיא כבר מזמן לא משמשת לצרכים שעבורם היא נבנתה – הם כבר שברו את התיקרה שלה והיא מצידה שברה את הגבולות שלהם.",
+    href: "/blog/whatsapp",
     placeholder: false,
   },
 ];
@@ -1137,8 +1137,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   padding:16vh 5vw 7vh;
 }
 .sailing-title {
-  color:var(--navy); font-weight:700;
-  font-size:clamp(2rem, 3.3vw, 3.8rem); line-height:1.08;
+  color:var(--navy); font-weight:700; margin-bottom:.4em;
+  font-size:clamp(2rem, 3.2vw, 3.6rem); line-height:1.08;
   text-shadow:3px 3px 33px rgba(252,253,248,.7);
 }
 .sailing-body {
@@ -1173,14 +1173,16 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 /* 1.3 slides visible: one major + a peek of the next */
 .blog-rail {
   display:flex; gap:1.8rem;
+  width:100vw; margin-inline:-5vw;
   overflow-x:auto; scroll-snap-type:x mandatory;
-  padding:.5rem 0 1.8rem;
+  padding:.5rem 5vw 1.8rem;
+  scroll-padding-inline:5vw;
   scrollbar-width:none;
 }
 .blog-rail::-webkit-scrollbar { display:none; }
 /* transparent cards with a hand-drawn ink border on the sketch paper */
 .post-card {
-  flex:0 0 max(260px, calc((100% - 3.6rem) / 3)); scroll-snap-align:start;
+  flex:0 0 max(280px, calc((95vw - 3.6rem) / 2.5)); scroll-snap-align:start;
   display:flex; flex-direction:column; align-items:flex-start;
   position:relative; background:transparent; border:none;
   border-radius:20px;
@@ -1248,7 +1250,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; gap:2.6rem;
   padding:14vh 5vw 12vh;
 }
-.news-title { color:var(--cream); font-weight:600; font-size:clamp(1.6rem, 2.5vw, 2.7rem); line-height:1.15; }
+.news-title { color:var(--cream); font-weight:600; margin-bottom:.4em; font-size:clamp(1.6rem, 2.5vw, 2.7rem); line-height:1.15; }
 .news-body { color:var(--offwhite); margin-top:1.4rem; font-size:clamp(.95rem, 1.05vw, 1.05rem); line-height:1.75; }
 .news-card { padding:2.2rem; }
 .news-card-title { color:var(--cream); font-weight:600; font-size:clamp(1rem, 1.3vw, 1.35rem); line-height:1.4; }
@@ -1264,7 +1266,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; align-items:center; gap:5vh;
   text-align:center;
 }
-.work-title { color:var(--offwhite); font-weight:700; font-size:clamp(2rem, 3.3vw, 3.8rem); }
+.work-title { color:var(--offwhite); font-weight:700; font-size:clamp(2rem, 3.2vw, 3.6rem); }
 .work-sub {
   color:var(--offwhite); max-width:62rem; margin:1.1rem auto 0;
   font-family:'Leon',sans-serif; font-weight:400;

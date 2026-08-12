@@ -164,6 +164,53 @@ function StuckThinking() {
   );
 }
 
+/* fake app sidebar — the desktop-app column, but every item is a real link */
+const RECENTS = [
+  { t: "הצ׳טבוט האנושי שלך", href: "/blog/chattjb", current: true },
+  { t: "פרי עץ הדעת", href: "/blog/pri-etz-hadaat" },
+  { t: "Mother Load", href: "/blog/motherload" },
+  { t: "סליחה ששלחתי וואטסאפ", href: "/blog/whatsapp" },
+];
+const PINNED = [
+  { t: "ראשי", href: "/site#top" },
+  { t: "פרויקטים", href: "/site#works" },
+  { t: "הבלוג", href: "/site#blog" },
+  { t: "סדנאות והרצאות", href: "/site#work" },
+  { t: "דברו איתי", href: "/site#footer" },
+];
+
+function Sidebar() {
+  return (
+    <aside className="gpt-sidebar" aria-label="ניווט צד">
+      <div className="sb-top">
+        <span className="sb-brand">ChatTJB
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M6 9l6 6 6-6"/></svg>
+        </span>
+        <svg className="sb-ic" viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+      </div>
+      <button className="sb-item sb-new" type="button" onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 20h9M16.5 3.5a2.1 2.1 0 013 3L7 19l-4 1 1-4z"/></svg>
+        שיחה חדשה
+      </button>
+      <div className="sb-label">מוצמדים</div>
+      {PINNED.map((l) => (
+        <a key={l.href} className="sb-item" href={l.href}>
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 17v5M9 3h6l1 7 3 2H5l3-2z"/></svg>
+          {l.t}
+        </a>
+      ))}
+      <div className="sb-label">אחרונים</div>
+      {RECENTS.map((l) => (
+        <a key={l.href} className={"sb-item sb-recent" + (l.current ? " sb-current" : "")} href={l.href}>{l.t}</a>
+      ))}
+      <a className="sb-user" href="/site#top">
+        <img src="/media/headshot.png" alt="" />
+        <span>עמית ברין</span>
+      </a>
+    </aside>
+  );
+}
+
 /* ---------- share ---------- */
 const POST_URL = "https://amitbrin.com/blog/chattjb";
 const POST_TITLE = "הצ׳טבוט האנושי שלך - עמית ברין";
@@ -263,6 +310,7 @@ export default function ChattjbPost() {
     <div className="gpt-root" dir="rtl" lang="he">
       <style>{CSS}</style>
 
+      <Sidebar />
       <header className="gpt-header">
         <nav className="gpt-sitenav" aria-label="ניווט ראשי">
           <a href="/site#top" className="sn-logo" aria-label="עמית ברין - ראשי">
@@ -594,6 +642,49 @@ const CSS = `
   display:flex; align-items:center; justify-content:center; flex:none;
 }
 .fc-hidden { opacity:0; transform:translate(-50%, 18px); pointer-events:none; }
+
+/* ---------- app sidebar (desktop only) ---------- */
+.gpt-sidebar { display:none; }
+@media (min-width: 1100px) {
+  .gpt-sidebar {
+    display:flex; flex-direction:column;
+    position:fixed; top:0; bottom:0; left:0; width:260px; z-index:60;
+    background:#f9f9f9; border-left:none; border-right:1px solid var(--line);
+    padding:.9rem .7rem 1rem; overflow-y:auto;
+  }
+  .gpt-header { left:260px; }
+  .gpt-root { padding-left:260px; }
+  .float-composer { left:calc(50% + 130px); }
+}
+.sb-top { display:flex; align-items:center; padding:.3rem .55rem .9rem; }
+.sb-brand { display:flex; align-items:center; gap:.3rem; font-weight:600; font-size:1rem; }
+.sb-brand svg { opacity:.5; }
+.sb-ic { margin-inline-start:auto; opacity:.55; }
+.sb-item {
+  display:flex; align-items:center; gap:.6rem;
+  width:100%; box-sizing:border-box; text-align:start;
+  font-family:inherit; font-size:.92rem; font-weight:500; color:var(--text);
+  background:none; border:none; border-radius:.65rem; padding:.5em .55rem;
+  text-decoration:none; cursor:pointer;
+  transition:background .15s;
+}
+.sb-item:hover { background:#ececec; }
+.sb-item svg { opacity:.6; flex:none; }
+.sb-new { margin-bottom:.4rem; }
+.sb-label {
+  font-size:.76rem; color:var(--muted); font-weight:500;
+  padding:.4rem .55rem .25rem; margin-top:1rem;
+}
+.sb-recent { display:block; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; font-weight:400; }
+.sb-current { background:#ececec; font-weight:600; }
+.sb-user {
+  margin-top:auto; display:flex; align-items:center; gap:.6rem;
+  padding:.55rem .55rem; border-radius:.65rem;
+  font-size:.92rem; font-weight:600; color:var(--text); text-decoration:none;
+  transition:background .15s;
+}
+.sb-user:hover { background:#ececec; }
+.sb-user img { width:28px; height:28px; border-radius:50%; object-fit:cover; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 640px) {
