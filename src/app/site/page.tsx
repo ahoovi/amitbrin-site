@@ -1249,8 +1249,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 }
 .sailing-scroll { flex:1 1 auto; }
 .sailing-title {
-  color:var(--navy); font-weight:700; margin-bottom:.4em;
-  font-size:clamp(2rem, 3.2vw, 3.6rem); line-height:1.08;
+  color:var(--navy); font-weight:700; padding-bottom:.36em;
+  font-size:var(--sec-h2); line-height:1.08;
   text-shadow:3px 3px 33px rgba(252,253,248,.7);
 }
 .sailing-body {
@@ -1268,8 +1268,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .sec-works { background:var(--navy-dark); padding:min(13vh, 140px) 0 11vh; }
 .works-head { max-width:1200px; margin:0 auto; padding:0 5vw 14px; }
 .works-title {
-  color:var(--offwhite); font-weight:700; margin-bottom:.4em;
-  font-size:clamp(2rem, 3.2vw, 3.6rem); line-height:1.1;
+  color:var(--offwhite); font-weight:700; padding-bottom:.36em;
+  font-size:var(--sec-h2); line-height:1.1;
 }
 .works-label {
   display:flex; align-items:center; gap:16px; margin-top:40px;
@@ -1396,7 +1396,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; gap:2.6rem;
   padding:14vh 5vw 12vh;
 }
-.news-title { color:var(--cream); font-weight:600; margin-bottom:.4em; font-size:clamp(1.6rem, 2.5vw, 2.7rem); line-height:1.15; }
+.news-title { color:var(--cream); font-weight:600; padding-bottom:.36em; font-size:var(--sec-h2); line-height:1.15; }
 .news-body { color:var(--offwhite); margin-top:1.4rem; font-size:clamp(.95rem, 1.05vw, 1.05rem); line-height:1.75; }
 .news-card { padding:2.2rem; }
 .news-card-title { color:var(--cream); font-weight:600; font-size:clamp(1rem, 1.3vw, 1.35rem); line-height:1.4; }
@@ -1412,7 +1412,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; align-items:center; gap:5vh;
   text-align:center;
 }
-.work-title { color:var(--offwhite); font-weight:700; font-size:clamp(2rem, 3.2vw, 3.6rem); }
+.work-title { color:var(--offwhite); font-weight:700; font-size:var(--sec-h2); }
 .work-sub {
   color:var(--offwhite); max-width:62rem; margin:1.1rem auto 0;
   font-family:'Leon',sans-serif; font-weight:400;
@@ -1472,7 +1472,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 }
 .sec-close::before { content:none; }
 .close-inner { position:relative; }
-.close-title, .sec-close h2 { font-weight:600; font-size:clamp(1.5rem, 2.4vw, 2.5rem); color:var(--navy); text-shadow:0 1px 0 rgba(255,255,255,.6); }
+.close-title, .sec-close h2 { font-weight:600; font-size:var(--sec-h2); color:var(--navy); text-shadow:0 1px 0 rgba(255,255,255,.6); }
 .sec-close p {
   font-family:'Noto Sans Hebrew',sans-serif; max-width:44rem; margin:1.4rem auto 0;
   font-size:clamp(.95rem, 1.2vw, 1.2rem); line-height:1.7;
@@ -1547,6 +1547,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .c-ico { display:inline-flex; width:19px; height:19px; opacity:.85; }
 .c-ico svg { width:100%; height:100%; }
 
+:root { --sec-h2:clamp(2rem, 3.2vw, 3.6rem); }
 /* --- typographic FX: letter lens + channel-split ghosts --- */
 .fx-skew { will-change:transform; }
 .fxt .fxl { display:block; }
@@ -1554,7 +1555,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fxt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; --bl:0px; will-change:transform; }
 .fxt .fl::before, .fxt .fl::after {
   content:attr(data-ch);
-  position:absolute; inset:0; pointer-events:none;
+  position:absolute; inset:0; z-index:-1; pointer-events:none;
   text-shadow:none; opacity:calc(var(--k) * .85);
 }
 /* RGB split — light-refraction: small offset, blur grows along the motion */
@@ -1571,6 +1572,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 
 /* ---------- Mobile ---------- */
 @media (max-width:768px){
+  :root { --sec-h2:clamp(1.9rem, 7vw, 2.8rem); }
   .op-nav { padding:.9rem 1.2rem; gap:1.4rem; }
   .nav-logo img { height:26px; }
   .nav-links { gap:1.1rem; }
@@ -1589,7 +1591,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
   .works-head { padding-bottom:14px; }
-  .works-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
+  .works-title { font-size:var(--sec-h2); }
   .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; gap:1rem; }
@@ -1603,7 +1605,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   /* sailing on phones: half-step smaller title, tighter leading, column ≤60vw
      so the text stays in the upper-right sky and off the figure */
   .sailing-content { width:auto; padding:80px 5vw 4vh; }
-  .sailing-title { font-size:clamp(1.5rem, 5.4vw, 2.1rem); line-height:1.12; max-width:60vw; }
+  .sailing-title { line-height:1.12; max-width:60vw; }
   .sailing-body { max-width:60vw; margin-top:1rem; font-size:.92rem; line-height:1.6; }
 }
 

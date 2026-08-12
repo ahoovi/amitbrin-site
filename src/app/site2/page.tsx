@@ -1137,8 +1137,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   padding:16vh 5vw 7vh;
 }
 .sailing-title {
-  color:var(--navy); font-weight:700; margin-bottom:.4em;
-  font-size:clamp(2rem, 3.2vw, 3.6rem); line-height:1.08;
+  color:var(--navy); font-weight:700; padding-bottom:.36em;
+  font-size:var(--sec-h2); line-height:1.08;
   text-shadow:3px 3px 33px rgba(252,253,248,.7);
 }
 .sailing-body {
@@ -1250,7 +1250,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; gap:2.6rem;
   padding:14vh 5vw 12vh;
 }
-.news-title { color:var(--cream); font-weight:600; margin-bottom:.4em; font-size:clamp(1.6rem, 2.5vw, 2.7rem); line-height:1.15; }
+.news-title { color:var(--cream); font-weight:600; padding-bottom:.36em; font-size:var(--sec-h2); line-height:1.15; }
 .news-body { color:var(--offwhite); margin-top:1.4rem; font-size:clamp(.95rem, 1.05vw, 1.05rem); line-height:1.75; }
 .news-card { padding:2.2rem; }
 .news-card-title { color:var(--cream); font-weight:600; font-size:clamp(1rem, 1.3vw, 1.35rem); line-height:1.4; }
@@ -1266,7 +1266,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   display:flex; flex-direction:column; align-items:center; gap:5vh;
   text-align:center;
 }
-.work-title { color:var(--offwhite); font-weight:700; font-size:clamp(2rem, 3.2vw, 3.6rem); }
+.work-title { color:var(--offwhite); font-weight:700; font-size:var(--sec-h2); }
 .work-sub {
   color:var(--offwhite); max-width:62rem; margin:1.1rem auto 0;
   font-family:'Leon',sans-serif; font-weight:400;
@@ -1401,6 +1401,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 /* --- water canvas fills the footer --- */
 .sea-canvas { position:absolute; inset:0; width:100%; height:100%; display:block; }
 
+:root { --sec-h2:clamp(2rem, 3.2vw, 3.6rem); }
 /* --- typographic FX: letter ripple + channel-split ghosts --- */
 .fx-skew { will-change:transform; }
 .fxt .fxl { display:block; }
@@ -1408,7 +1409,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fxt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; will-change:transform; }
 .fxt .fl::before, .fxt .fl::after {
   content:attr(data-ch);
-  position:absolute; inset:0; pointer-events:none;
+  position:absolute; inset:0; z-index:-1; pointer-events:none;
   text-shadow:none; opacity:calc(var(--k) * .85);
 }
 /* RGB split — ghosts offset along the local push direction */
@@ -1429,6 +1430,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 
 /* ---------- Mobile ---------- */
 @media (max-width:768px){
+  :root { --sec-h2:clamp(1.9rem, 7vw, 2.8rem); }
   .op-nav { padding:.9rem 1.2rem; gap:1.4rem; }
   .nav-logo img { height:26px; }
   .nav-links { gap:1.1rem; }
@@ -1446,7 +1448,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-photo { position:relative; height:auto; min-height:50vh; width:100%; pointer-events:auto; }  /* mobile keeps the stacked flow */
   .identity-photo img { height:100%; right:0; }
   .sailing-content, .news-content { width:auto; }
-  .sailing-title { font-size:clamp(1.9rem, 7vw, 2.8rem); }
+  .sailing-title { font-size:var(--sec-h2); }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; }
   .op-form.work-form label { flex:0 0 auto; }  /* the 12rem basis turned into 192px-tall labels — the broken form */
