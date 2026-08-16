@@ -132,7 +132,7 @@ function HeroTitleFit() {
         return;
       }
       const w = probe.getBoundingClientRect().width;
-      if (w > 0) box.style.setProperty("--ts", (box.clientWidth / w) * 100 + "px");
+      if (w > 0 && box.clientWidth > 50) box.style.setProperty("--ts", (box.clientWidth / w) * 100 + "px");
     };
     fit();
     const ro = new ResizeObserver(fit);
@@ -1786,7 +1786,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   /* mobile: --ts is measured by HeroTitleFit so "יוצר משמעות" exactly fills
      the column; 12.9vw is the no-JS fallback at the same ratio. All other
      sizes/gaps/widths derive from --ts automatically. */
-  .identity-titles { --ts: 12.9vw; }
+  .identity-titles { --ts: 12.9vw; width:100%; }  /* full column: stable measuring base */
   .identity-photo { flex:1 1 auto; min-height:26svh; }
   .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
