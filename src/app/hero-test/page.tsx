@@ -26,7 +26,7 @@ import KssemacCase from "../../components/KssemacCase";
    Per-char randomness comes in as CSS custom props; the end state is always
    transform:none so every word lands exactly on the Figma-derived grid. */
 const ROTATING_WORDS = ["שינוי", "ניראות", "בידול", "משמעות", "עניין", "ערך"];
-const ROTATE_MS = 2800;
+const ROTATE_MS = 1500;  /* ~1.5s beat per word (Amit, 16.8) */
 const WORD_FX: Record<string, string> = {
   "שינוי": "fx-tumble",
   "ניראות": "fx-depth",

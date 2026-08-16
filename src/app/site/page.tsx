@@ -10,13 +10,67 @@
  * Forms are visual stubs — wiring to email is a separate task.
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import KssemacCase from "../../components/KssemacCase";
 
+/* ---- Word-aware rotating headline ----
+   Each word enters with an animation that embodies its meaning:
+   שינוי  = 3D tumble into a new state              [Codrops OST2 #2]
+   ניראות = flies in from depth into view/focus     [Codrops OST2 #12]
+   בידול  = letters converge, each from its own way  [Codrops OST1 #5]
+   משמעות = crystallises from blur into focus      [PROVISIONAL - awaiting ref]
+   עניין  = quick elastic snap with overshoot       [SpaceType "snap"]
+   ערך    = arc rise from below, elastic settle    [Codrops OST2 #9 "Embrace"]
+   Per-char randomness comes in as CSS custom props; the end state is always
+   transform:none so every word lands exactly on the Figma-derived grid. */
 const ROTATING_WORDS = ["שינוי", "ניראות", "בידול", "משמעות", "עניין", "ערך"];
-const ROTATE_MS = 2600;
+const ROTATE_MS = 1500;  /* ~1.5s beat per word (Amit, 16.8) */
+const WORD_FX: Record<string, string> = {
+  "שינוי": "fx-tumble",
+  "ניראות": "fx-depth",
+  "בידול": "fx-gather",
+  "משמעות": "fx-focus",
+  "עניין": "fx-snap",
+  "ערך": "fx-arc",
+};
+const rnd = (a: number, b: number) => a + Math.random() * (b - a);
 
-/* ---- Playful letter-by-letter rotating headline ---- */
+/* per-char inline vars + stagger, tailored to each effect */
+function charProps(fx: string, i: number, n: number, out: boolean): CSSProperties {
+  const mid = (n - 1) / 2;
+  const arc = Math.abs(i - mid) / Math.max(mid, 1); /* 0 center -> 1 edges */
+  const v: Record<string, string> = {};
+  let d = 0;
+  switch (fx) {
+    case "fx-tumble":
+      v["--rx"] = rnd(-120, 120).toFixed(0) + "deg";
+      v["--tz"] = rnd(-200, 200).toFixed(0) + "px";
+      d = i * 45; break;
+    case "fx-depth":
+      v["--tz"] = rnd(340, 620).toFixed(0) + "px";
+      v["--dx"] = rnd(-90, 90).toFixed(0) + "%";
+      v["--rx"] = rnd(-70, 70).toFixed(0) + "deg";
+      d = rnd(0, 140); break;
+    case "fx-gather":
+      v["--dx"] = rnd(-200, 200).toFixed(0) + "%";
+      v["--dy"] = rnd(-150, 150).toFixed(0) + "%";
+      d = rnd(0, 160); break;
+    case "fx-focus":
+      v["--sc"] = (0.5 + (1 - arc) * 1.0).toFixed(2);
+      v["--dy"] = ((1 - arc) * 0.5).toFixed(2) + "em";
+      v["--rz"] = ((i < mid ? -1 : 1) * (1 - arc) * 4).toFixed(1) + "deg";
+      d = Math.abs(i - mid) * 55; break;
+    case "fx-snap":
+      v["--dy"] = (i % 2 ? -0.4 : 0.45) + "em";
+      d = i * 40; break;
+    case "fx-arc":
+      v["--dy"] = (0.35 + arc * 0.95).toFixed(2) + "em";
+      d = Math.abs(i - mid) * 70; break;
+  }
+  if (out) d = d * 0.4;
+  return { ...v, animationDelay: `${(out ? 0 : 120) + d}ms` } as CSSProperties;
+}
+
 function AnimatedTitle() {
   const [idx, setIdx] = useState(0);
   const [prev, setPrev] = useState<number | null>(null);
@@ -31,22 +85,24 @@ function AnimatedTitle() {
   }, []);
   const word = ROTATING_WORDS[idx];
   const old = prev !== null ? ROTATING_WORDS[prev] : null;
+  const fx = WORD_FX[word];
+  const oldFx = old ? WORD_FX[old] : "";
   return (
     <div className="anim-title" aria-label={"יוצר " + ROTATING_WORDS.join(", ")}>
       <span className="anim-before">יוצר&nbsp;</span>
       <span className="anim-stack" aria-hidden>
         {old && (
-          <span className="aw out" key={"o" + prev}>
+          <span className={"aw out " + oldFx} key={"o" + prev}>
             {[...old].map((ch, i) => (
-              <span className="ch" style={{ animationDelay: `${i * 40}ms` }} key={i}>
+              <span className="ch" style={charProps(oldFx, i, old.length, true)} key={i}>
                 {ch}
               </span>
             ))}
           </span>
         )}
-        <span className="aw in" key={"i" + idx}>
+        <span className={"aw in " + fx} key={"i" + idx}>
           {[...word].map((ch, i) => (
-            <span className="ch" style={{ animationDelay: `${140 + i * 75}ms` }} key={i}>
+            <span className="ch" style={charProps(fx, i, word.length, false)} key={i}>
               {ch}
             </span>
           ))}
@@ -54,6 +110,40 @@ function AnimatedTitle() {
       </span>
     </div>
   );
+}
+
+/* ---- Mobile title fit: sets --ts so the widest pair ("יוצר משמעות")
+   exactly fills the title column; every other size derives from --ts.
+   Measures the real font (after load), so it never guesses. ---- */
+function HeroTitleFit() {
+  useEffect(() => {
+    const box = document.querySelector<HTMLElement>(".identity-titles");
+    if (!box) return;
+    const probe = document.createElement("span");
+    probe.textContent = "יוצר משמעות";
+    probe.style.cssText =
+      "position:fixed;inset-inline-start:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;font:800 100px 'Leon',sans-serif;";
+    document.body.appendChild(probe);
+    const fit = () => {
+      if (!window.matchMedia("(max-width:768px)").matches) {
+        box.style.removeProperty("--ts");
+        return;
+      }
+      const w = probe.getBoundingClientRect().width;
+      if (w > 0 && box.clientWidth > 50) box.style.setProperty("--ts", (box.clientWidth / w) * 100 + "px");
+    };
+    fit();
+    const ro = new ResizeObserver(fit);
+    ro.observe(box);
+    window.addEventListener("resize", fit);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", fit);
+      probe.remove();
+    };
+  }, []);
+  return null;
 }
 
 /* ---- Scroll-reveal (GPU-safe, reduced-motion aware) ---- */
@@ -808,6 +898,7 @@ export default function SitePage() {
               <img src="/media/effie-white.png" alt="Effie Awards Israel" className="logo-effie" />
             </div>
             <div className="identity-titles">
+              <HeroTitleFit />
               <h1 className="identity-name">עמית ברין</h1>
               <p className="identity-roles">אבא, מעצב, מרצה, מנטור, מעורר השראה</p>
               <AnimatedTitle />
@@ -1179,39 +1270,124 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .identity-logos { display:flex; flex-direction:column; align-items:center; gap:1.6rem; flex:0 0 auto; }
 .logo-echo  { width:clamp(64px, 6.5vw, 100px); height:auto; }
 .logo-effie { width:clamp(38px, 3.6vw, 56px); height:auto; }
-.identity-titles { min-width:0; }
+.identity-titles {
+  min-width:0;
+  /* master type scale: every size/width/gap below is a fixed multiple of --ts
+     (ratios lifted from the Figma spec, S = 57.6), so the composition holds
+     its exact proportions at every screen size. */
+  --ts: clamp(3rem, 6vw, 7rem);
+  --tgap: calc(var(--ts) * .18);   /* uniform vertical rhythm (Figma: .33S incl. leading) */
+  --tblock: calc(var(--ts) * 4.664); /* shared width of both small blocks (Figma 268.5/57.6) */
+}
 .identity-name, .anim-title {
   color:var(--gold); font-family:'Leon',sans-serif; font-weight:800;
-  font-size:clamp(3rem, 6vw, 7rem); line-height:1.06;
+  font-size:var(--ts); line-height:1.06;
   text-shadow:8px 4px 12px rgba(0,0,20,.5);
 }
 .identity-roles {
   color:var(--cream); font-family:'Leon',sans-serif; font-weight:200;
-  font-size:clamp(1.05rem, 1.6vw, 1.7rem); line-height:1.06;
-  margin-block:.55em .5em;
+  font-size:calc(var(--ts) * .2605);   /* Figma 15 / 57.6 */
+  line-height:1.27;                    /* Figma 19.1 / 15 */
+  width:var(--tblock); max-width:100%;
+  text-align:justify; text-align-last:justify; /* block-set against .identity-for */
+  margin-block:var(--tgap);
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
+/* --- word-aware letter animation (per-word keyframes; randomness via CSS vars) --- */
 .anim-title { display:flex; white-space:nowrap; }
 .anim-stack { position:relative; display:inline-block; }
-.aw { display:inline-flex; }
+.aw { display:inline-flex; perspective:900px; }
 .aw.out { position:absolute; inset-inline-start:0; top:0; }
-.aw .ch { display:inline-block; }
-.aw.in .ch { animation:chIn .75s cubic-bezier(.18,1.6,.32,1) both; }
-@keyframes chIn {
-  0%   { transform:translateY(.95em) rotate(9deg)  scale(.55); opacity:0; filter:blur(5px); }
-  55%  { transform:translateY(-.09em) rotate(-3deg) scale(1.08); opacity:1; filter:blur(0); }
-  75%  { transform:translateY(.03em)  rotate(1deg)  scale(.985); }
+.aw .ch { display:inline-block; backface-visibility:hidden; }
+
+/* שינוי - 3D tumble into a new state */
+.fx-tumble.in .ch { animation:tumbleIn .8s cubic-bezier(.2,.75,.25,1) both; }
+@keyframes tumbleIn {
+  0%   { transform:rotateX(var(--rx)) translateZ(var(--tz)); opacity:0; }
   100% { transform:none; opacity:1; }
 }
-.aw.out .ch { animation:chOut .5s cubic-bezier(.55,-.35,.75,.4) both; }
-@keyframes chOut {
+.fx-tumble.out .ch { animation:tumbleOut .45s cubic-bezier(.6,-.2,.8,.5) both; }
+@keyframes tumbleOut {
   0%   { transform:none; opacity:1; }
-  100% { transform:translateY(-.85em) rotate(-8deg) scale(.6); opacity:0; filter:blur(4px); }
+  100% { transform:rotateX(calc(var(--rx) * -1)) translateZ(var(--tz)); opacity:0; }
 }
+
+/* ניראות - flies in from depth, lands in focus */
+.fx-depth.in .ch { animation:depthIn .85s cubic-bezier(.16,1,.3,1) both; }
+@keyframes depthIn {
+  0%   { transform:translateZ(var(--tz)) translateX(var(--dx)) rotateX(var(--rx)); opacity:0; filter:blur(6px); }
+  60%  { opacity:1; }
+  100% { transform:none; opacity:1; filter:blur(0); }
+}
+.fx-depth.out .ch { animation:depthOut .45s cubic-bezier(.5,0,.9,.4) both; }
+@keyframes depthOut {
+  0%   { transform:none; opacity:1; filter:blur(0); }
+  100% { transform:translateZ(-320px) rotateX(20deg); opacity:0; filter:blur(4px); }
+}
+
+/* בידול - each letter arrives from its own direction */
+.fx-gather.in .ch { animation:gatherIn .8s cubic-bezier(.45,0,.2,1) both; }
+@keyframes gatherIn {
+  0%   { transform:translate(var(--dx), var(--dy)); opacity:0; }
+  35%  { opacity:1; }
+  100% { transform:none; opacity:1; }
+}
+.fx-gather.out .ch { animation:gatherOut .45s cubic-bezier(.55,-.1,.8,.5) both; }
+@keyframes gatherOut {
+  0%   { transform:none; opacity:1; }
+  100% { transform:translate(calc(var(--dx) * -.6), calc(var(--dy) * -.6)); opacity:0; }
+}
+
+/* משמעות - crystallises from blur into focus (PROVISIONAL) */
+.fx-focus.in .ch { animation:focusIn .9s cubic-bezier(.45,0,.25,1) both; transform-origin:50% 100%; }
+@keyframes focusIn {
+  0%   { transform:translateY(var(--dy)) rotate(var(--rz)) scale(var(--sc)); opacity:0; filter:blur(10px); }
+  55%  { opacity:1; }
+  100% { transform:none; opacity:1; filter:blur(0); }
+}
+.fx-focus.out .ch { animation:focusOut .45s ease-in both; transform-origin:50% 100%; }
+@keyframes focusOut {
+  0%   { transform:none; opacity:1; filter:blur(0); }
+  100% { transform:scale(1.12); opacity:0; filter:blur(8px); }
+}
+
+/* עניין - quick elastic snap with overshoot */
+.fx-snap.in .ch { animation:snapIn .55s cubic-bezier(.2,1.6,.3,1) both; }
+@keyframes snapIn {
+  0%   { transform:translateY(var(--dy)) scale(.55); opacity:0; }
+  45%  { opacity:1; }
+  60%  { transform:translateY(calc(var(--dy) * -.18)) scale(1.09); }
+  80%  { transform:translateY(calc(var(--dy) * .06)) scale(.97); }
+  100% { transform:none; opacity:1; }
+}
+.fx-snap.out .ch { animation:snapOut .35s cubic-bezier(.5,-.3,.8,.4) both; }
+@keyframes snapOut {
+  0%   { transform:none; opacity:1; }
+  100% { transform:translateY(calc(var(--dy) * -1)) scale(.6); opacity:0; }
+}
+
+/* ערך - rises from below on an arc, elastic settle, center-out */
+.fx-arc.in .ch { animation:arcIn .9s cubic-bezier(.2,1.35,.3,1) both; }
+@keyframes arcIn {
+  0%   { transform:translateY(var(--dy)); opacity:0; }
+  30%  { opacity:1; }
+  62%  { transform:translateY(calc(var(--dy) * -.12)); }
+  82%  { transform:translateY(calc(var(--dy) * .04)); }
+  100% { transform:none; opacity:1; }
+}
+.fx-arc.out .ch { animation:arcOut .4s cubic-bezier(.5,0,.75,.4) both; }
+@keyframes arcOut {
+  0%   { transform:none; opacity:1; }
+  100% { transform:translateY(calc(var(--dy) * .8)); opacity:0; }
+}
+
 .identity-for {
-  color:var(--cream); font-family:'Leon',sans-serif; font-weight:400;
-  font-size:clamp(1.1rem, 1.8vw, 1.9rem); line-height:1.35;
-  margin-top:.6em;
+  color:var(--cream); font-family:'Leon',sans-serif; font-weight:700; /* Figma: Leon Bold */
+  font-size:calc(var(--ts) * .2866);   /* Figma 16.5 / 57.6 */
+  line-height:1.152;                   /* Figma 19 / 16.5 */
+  width:var(--tblock); max-width:100%;
+  text-align:justify; text-align-last:justify; /* block-set against .identity-roles */
+  margin-top:var(--tgap);
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
 .identity-photo { flex:1 1 auto; min-height:30svh; }
@@ -1244,6 +1420,19 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
     transform:none; bottom:-3svh;
     width:var(--pw); height:auto;
   }
+}
+
+/* ---------- 1c/2b - very wide screens: the content grid freezes at its
+   1920px state and centres; only the blue background / video keep filling
+   the full viewport width ---------- */
+@media (min-width:1920px){
+  .identity-inner {
+    --pw: min(768px, 61svh);           /* 40vw @1920 */
+    max-width:1920px; margin-inline:auto;
+    padding:0 96px;                    /* 5vw @1920 */
+  }
+  .identity-photo img { inset-inline-end:calc((100vw - 1920px) / 2 + 38.4px); } /* 2vw @1920, anchored to the frozen grid */
+  .sailing-content { margin-inline-start:calc((100vw - 1920px) / 2); }
 }
 
 /* ---------- 2 · SAILING ---------- */
@@ -1592,9 +1781,10 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-text { flex-direction:column; align-items:flex-start; gap:1.6rem; }
   .identity-logos { order:2; flex-direction:row; align-items:flex-end; gap:1.4rem; }
   .identity-titles { order:1; }
-  .identity-name, .anim-title { font-size:clamp(2.6rem, 11vw, 4rem); }
-  .identity-roles { font-size:clamp(1rem, 4vw, 1.3rem); }
-  .identity-for { font-size:clamp(1rem, 4.5vw, 1.4rem); }
+  /* mobile: --ts is measured by HeroTitleFit so "יוצר משמעות" exactly fills
+     the column; 12.9vw is the no-JS fallback at the same ratio. All other
+     sizes/gaps/widths derive from --ts automatically. */
+  .identity-titles { --ts: 12.9vw; width:100%; }  /* full column: stable measuring base */
   .identity-photo { flex:1 1 auto; min-height:26svh; }
   .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
