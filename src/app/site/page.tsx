@@ -126,11 +126,12 @@ function HeroTitleFit() {
     document.body.appendChild(probe);
     const fit = () => {
       if (!window.matchMedia("(max-width:768px)").matches) {
-        box.style.removeProperty("--ts");
+        (box.closest(".identity-text") as HTMLElement | null)?.style.removeProperty("--ts");
         return;
       }
       const w = probe.getBoundingClientRect().width;
-      if (w > 0 && box.clientWidth > 50) box.style.setProperty("--ts", (box.clientWidth / w) * 100 + "px");
+      const scope = box.closest(".identity-text") as HTMLElement | null;
+      if (w > 0 && box.clientWidth > 50 && scope) scope.style.setProperty("--ts", (box.clientWidth / w) * 100 + "px");
     };
     fit();
     const ro = new ResizeObserver(fit);
@@ -1267,30 +1268,30 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   gap:0; padding:12vh 5vw 0;
 }
 .identity-text { flex:0 0 auto; position:relative; z-index:2; display:flex; flex-direction:row; align-items:flex-start; gap:clamp(1.4rem, 3vw, 3rem); }
-.identity-logos { display:flex; flex-direction:column; align-items:center; gap:1.6rem; flex:0 0 auto; }
-.logo-echo  { width:clamp(64px, 6.5vw, 100px); height:auto; }
-.logo-effie { width:clamp(38px, 3.6vw, 56px); height:auto; }
-.identity-titles {
-  min-width:0;
-  /* master type scale: every size/width/gap below is a fixed multiple of --ts
-     (ratios lifted from the Figma spec, S = 57.6), so the composition holds
-     its exact proportions at every screen size. */
+.identity-logos { display:flex; flex-direction:column; align-items:center; gap:calc(var(--ts) * .269); flex:0 0 auto; }
+.logo-echo  { width:calc(var(--ts) * 1.049); height:auto; }
+.logo-effie { width:calc(var(--ts) * .588); height:auto; }
+.identity-text {
+  /* master type scale: every size/width/gap in this block is a fixed multiple
+     of --ts (ratios lifted from the Figma spec + optical pixel measurement),
+     so the composition holds its exact proportions at every screen size. */
   --ts: clamp(3rem, 6vw, 7rem);
-  --tgap: calc(var(--ts) * .18);   /* uniform vertical rhythm (Figma: .33S incl. leading) */
-  --tblock: calc(var(--ts) * 4.664); /* shared width of both small blocks (Figma 268.5/57.6) */
+  --tblock: calc(var(--ts) * 4.664); /* shared width of both small blocks */
 }
+.identity-titles { min-width:0; }
 .identity-name, .anim-title {
   color:var(--gold); font-family:'Leon',sans-serif; font-weight:800;
   font-size:var(--ts); line-height:1.06;
   text-shadow:8px 4px 12px rgba(0,0,20,.5);
 }
-.identity-roles {
+.op-root .identity-roles {
   color:var(--cream); font-family:'Leon',sans-serif; font-weight:200;
-  font-size:calc(var(--ts) * .2605);   /* Figma 15 / 57.6 */
-  line-height:1.27;                    /* Figma 19.1 / 15 */
+  font-size:calc(var(--ts) * .2605);
+  line-height:1.27;
   width:var(--tblock); max-width:100%;
-  text-align:justify; text-align-last:justify; /* block-set against .identity-for */
-  margin-block:var(--tgap);
+  text-align:justify; text-align-last:justify;
+  /* optical rhythm: every ink-to-ink gap equals the tagline pair gap (measured @1920) */
+  margin-block:calc(var(--ts) * .018) calc(var(--ts) * -.295);
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
 /* --- word-aware letter animation (per-word keyframes; randomness via CSS vars) --- */
@@ -1381,13 +1382,14 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   100% { transform:translateY(calc(var(--dy) * .8)); opacity:0; }
 }
 
-.identity-for {
-  color:var(--cream); font-family:'Leon',sans-serif; font-weight:700; /* Figma: Leon Bold */
-  font-size:calc(var(--ts) * .2866);   /* Figma 16.5 / 57.6 */
-  line-height:1.152;                   /* Figma 19 / 16.5 */
+.op-root .identity-for {
+  color:#CCBE8C; /* matches the headline gold (Amit, 16.8) */
+  font-family:'Leon',sans-serif; font-weight:700;
+  font-size:calc(var(--ts) * .2866);
+  line-height:1.152;
   width:var(--tblock); max-width:100%;
-  text-align:justify; text-align-last:justify; /* block-set against .identity-roles */
-  margin-top:var(--tgap);
+  text-align:justify; text-align-last:justify;
+  margin-top:calc(var(--ts) * -.0625); /* optical rhythm, measured @1920 */
   text-shadow:0 2px 4px rgba(3,3,6,.81);
 }
 .identity-photo { flex:1 1 auto; min-height:30svh; }
@@ -1784,7 +1786,8 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   /* mobile: --ts is measured by HeroTitleFit so "יוצר משמעות" exactly fills
      the column; 12.9vw is the no-JS fallback at the same ratio. All other
      sizes/gaps/widths derive from --ts automatically. */
-  .identity-titles { --ts: 12.9vw; width:100%; }  /* full column: stable measuring base */
+  .identity-text { --ts: 12.9vw; }
+  .identity-titles { width:100%; }  /* full column: stable measuring base */
   .identity-photo { flex:1 1 auto; min-height:26svh; }
   .identity-photo img { height:52svh; bottom:-2svh; }
   .news-content { width:auto; }
