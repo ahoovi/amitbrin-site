@@ -124,7 +124,7 @@ function HeroTitleFit() {
     const probe = document.createElement("span");
     probe.textContent = "יוצר משמעות";
     probe.style.cssText =
-      "position:absolute;visibility:hidden;white-space:nowrap;font:800 100px 'Leon',sans-serif;";
+      "position:fixed;inset-inline-start:0;top:0;visibility:hidden;pointer-events:none;white-space:nowrap;font:800 100px 'Leon',sans-serif;";
     document.body.appendChild(probe);
     const fit = () => {
       if (!window.matchMedia("(max-width:768px)").matches) {
