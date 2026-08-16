@@ -290,6 +290,52 @@ function FullShot({ src, alt, cap, bleed = false }: { src: string; alt: string; 
   );
 }
 
+/* ---------- related posts rail ----------
+   Titles and intro sentences are lifted verbatim from the POSTS array on
+   the one-pager (the intro is each excerpt's opening sentence). */
+const MORE = [
+  {
+    href: "/blog/chattjb",
+    cover: "/media/blog/chattjb/billboard-hero.jpg",
+    title: "הצ׳טבוט האנושי שלך",
+    intro:
+      "בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI.",
+  },
+  {
+    href: "/blog/pri-etz-hadaat",
+    cover: "/media/blog/pri-etz-hadaat/snakes-cover.jpg",
+    title: "פרי עץ הדעת",
+    intro:
+      "לפני כמה ימים לקוח סרב לקבל ממני עבודה כי היא יצירה של בינה מלאכותית (כך הוא טען).",
+  },
+  {
+    href: "/blog/motherload",
+    cover: "/media/blog/motherload/cover.jpg",
+    title: "Mother Load",
+    intro:
+      "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת.",
+  },
+];
+
+function MorePosts() {
+  return (
+    <section className="more fig-bleed" data-reveal>
+      <h2 className="more-h">עוד דברים שכתבתי עליהם:</h2>
+      <div className="more-rail">
+        {MORE.map((p) => (
+          <a className="more-card" href={p.href} key={p.href}>
+            <span className="more-cover">
+              <img src={p.cover} alt="" loading="lazy" />
+            </span>
+            <h3 className="card-title">{p.title}</h3>
+            <p>{p.intro}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 /* ---------- story progress bars (Instagram wink) ---------- */
 function StoryBars({ active }: { active: number }) {
   return (
@@ -355,25 +401,26 @@ export default function InstagramPost() {
 
       <ReadProgress />
 
+      {/* dialled in on /paper-lab */}
       <div className="paper-layer" aria-hidden>
-      <PaperTexture
-        colorBack="#f6f3e9"
-        colorFront="#c5ccd3"
-        contrast={0.36}
-        roughness={1}
-        fiber={0.27}
-        fiberSize={0.27}
-        crumples={0.51}
-        crumpleSize={0.25}
-        folds={0.57}
-        foldCount={12}
-        drops={0.13}
-        fade={0}
-        seed={546.8}
-        scale={0.5}
-        fit="cover"
-        style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0, pointerEvents: "none" }}
-      />
+        <PaperTexture
+          colorBack="#f7f5ee"
+          colorFront="#cad0d8"
+          contrast={0.14}
+          roughness={1}
+          fiber={0.42}
+          fiberSize={0.16}
+          crumples={0.63}
+          crumpleSize={0.31}
+          folds={0.98}
+          foldCount={14}
+          fade={0.19}
+          drops={0.26}
+          seed={546.8}
+          scale={0.39}
+          fit="cover"
+          style={{ width: "100%", height: "100%" }}
+        />
       </div>
 
       <div className="nav-veil" aria-hidden>
@@ -878,6 +925,8 @@ export default function InstagramPost() {
         </div>
         <hr className="ink-rule" data-reveal />
 
+        <MorePosts />
+
         <Comments />
 
         <footer className="bp-footer" data-reveal>
@@ -979,7 +1028,7 @@ const CSS = `
    otherwise the filter creates a containing block and the canvas collapses */
 .paper-layer {
   position:fixed; inset:0; z-index:0; pointer-events:none;
-  filter:saturate(.9);
+  filter:saturate(0.88) brightness(1.05) contrast(0.95);
 }
 
 /* double-tap heart easter egg */
@@ -1292,6 +1341,29 @@ const CSS = `
 .appendix .in-link:hover { color:#fff; }
 .apx-close { margin:1.8rem 0 0; line-height:1.85; color:rgba(234,222,183,.92); }
 
+/* ---------- related posts rail ---------- */
+.more { clear:both; margin:4.5rem 0 1rem; }
+.more-h {
+  color:var(--navy); font-size:var(--fs-h2); line-height:1.22;
+  margin:0 0 1.8rem;
+  padding-right:1.1rem;
+  border-right:5px solid var(--gold);
+}
+.more-rail {
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;
+}
+.more-card {
+  display:flex; flex-direction:column;
+  background:var(--card); border:var(--hair); border-radius:var(--radius);
+  overflow:hidden; text-decoration:none; color:inherit;
+  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+}
+.more-card:hover { transform:translateY(-4px); box-shadow:0 16px 32px rgba(2,13,44,.12); }
+.more-cover { display:block; aspect-ratio:16 / 10; overflow:hidden; background:rgba(2,13,44,.06); }
+.more-cover img { width:100%; height:100%; object-fit:cover; display:block; }
+.more-card .card-title { margin:1rem 1rem .45rem; }
+.more-card p { margin:0 1rem 1.2rem; font-size:var(--fs-small); line-height:1.6; color:var(--muted); }
+
 /* ---------- lightbox ---------- */
 .lightbox {
   position:fixed; inset:0; z-index:120;
@@ -1351,10 +1423,12 @@ const CSS = `
 }
 .c-in:focus { box-shadow:0 0 0 3px rgba(8,24,69,.15); }
 .c-area { resize:vertical; min-height:110px; }
-.c-send { align-self:flex-start; }
+/* the send button sits against the left edge of the fields */
+.c-send { align-self:flex-end; }
 .comments-ok { font-weight:700; color:var(--navy); }
 .comments-err { font-size:var(--fs-small); color:#8a1f1f; margin:0; }
-.bp-footer { margin:4rem 0 0; display:flex; justify-content:center; clear:both; }
+/* the back button sits against the right edge of the column */
+.bp-footer { margin:4rem 0 0; display:flex; justify-content:flex-start; clear:both; }
 
 /* ---------- BleedTitle ---------- */
 .blt { filter:url(#print-grain); }
@@ -1400,6 +1474,15 @@ const CSS = `
   .bp-root .sec-h { margin:4.4rem 0 2.2rem; }
   .stat-grid { gap:.7rem; }
   .stat-sq { padding:1.1rem .8rem; }
+  /* the rail turns into a swipeable row on phones */
+  .more-rail {
+    display:flex; gap:.8rem;
+    overflow-x:auto; scroll-snap-type:x mandatory;
+    margin:0 -4vw; padding:0 4vw .6rem;
+    scrollbar-width:none;
+  }
+  .more-rail::-webkit-scrollbar { display:none; }
+  .more-card { flex:0 0 76vw; scroll-snap-align:center; }
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { transition:none; }
