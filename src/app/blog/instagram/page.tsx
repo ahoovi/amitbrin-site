@@ -364,9 +364,9 @@ export default function InstagramPost() {
         fiber={0.27}
         fiberSize={0.27}
         crumples={0.51}
-        crumpleSize={0.165}
+        crumpleSize={0.25}
         folds={0.57}
-        foldCount={16}
+        foldCount={12}
         drops={0.13}
         fade={0}
         seed={546.8}
@@ -975,8 +975,12 @@ const CSS = `
 .ig-cover { background:#1b1030; }
 .ig-cover img { width:100%; height:100%; object-fit:cover; display:block; }
 
-/* the paper shader, 20% less saturated */
-.paper-layer { filter:saturate(.8); }
+/* the paper shader lives here; the wrapper must carry the fixed box itself,
+   otherwise the filter creates a containing block and the canvas collapses */
+.paper-layer {
+  position:fixed; inset:0; z-index:0; pointer-events:none;
+  filter:saturate(.9);
+}
 
 /* double-tap heart easter egg */
 .tap-heart {
