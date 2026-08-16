@@ -312,17 +312,12 @@ function HeroSheet() {
     setTimeout(() => setHearts((h) => h.filter((x) => x.id !== id)), 950);
   };
   return (
-    <figure className="hero-figure ig-sheet" onDoubleClick={pop}>
-      <i className="rule-sheet" aria-hidden />
-      <i className="sheet-margin" aria-hidden />
-      <div className="specimen" aria-hidden>
-        <span className="try try-0">
-          <img src={LOGO_OLD} alt="" />
-          <i className="redmark" />
-        </span>
-        <span className="try try-1"><img src={LOGO_OLD} alt="" /></span>
-        <span className="try try-2"><img src={LOGO_NEW} alt="" /></span>
-      </div>
+    <figure className="hero-figure ig-cover" onDoubleClick={pop}>
+      <img
+        src="/media/blog/instagram/cover.jpg"
+        alt="הלוגו של אינסטגרם בכתב מחובר, בין שתי דמויות בצללית"
+        fetchPriority="high"
+      />
       {hearts.map((h) => (
         <svg key={h.id} className="tap-heart" style={{ left: h.x, top: h.y }} viewBox="0 0 24 24" aria-hidden>
           <path d="M12 21s-7.5-4.8-9.6-9.1C.6 8.3 2.6 4.5 6.2 4.5c2.1 0 3.4 1.1 4.3 2.4h3c.9-1.3 2.2-2.4 4.3-2.4 3.6 0 5.6 3.8 3.8 7.4C19.5 16.2 12 21 12 21z" />
@@ -360,6 +355,7 @@ export default function InstagramPost() {
 
       <ReadProgress />
 
+      <div className="paper-layer" aria-hidden>
       <PaperTexture
         colorBack="#f6f3e9"
         colorFront="#c5ccd3"
@@ -368,9 +364,9 @@ export default function InstagramPost() {
         fiber={0.27}
         fiberSize={0.27}
         crumples={0.51}
-        crumpleSize={0.33}
+        crumpleSize={0.165}
         folds={0.57}
-        foldCount={8}
+        foldCount={16}
         drops={0.13}
         fade={0}
         seed={546.8}
@@ -378,6 +374,7 @@ export default function InstagramPost() {
         fit="cover"
         style={{ position: "fixed", inset: 0, width: "100%", height: "100%", zIndex: 0, pointerEvents: "none" }}
       />
+      </div>
 
       <div className="nav-veil" aria-hidden>
         <i /><i /><i />
@@ -435,9 +432,16 @@ export default function InstagramPost() {
         <figure className="logo-compare fig-bleed" data-reveal>
           <div className="lc-cell">
             <img src={LOGO_OLD} alt="הלוגו הישן של אינסטגרם, בכתב מחובר" loading="lazy" />
+            <figcaption>
+              הלוגו הישן: 2013. עיצוב: מקי סאטרדיי, על בסיס פונט בילאבונג
+            </figcaption>
           </div>
           <div className="lc-cell">
             <img src={LOGO_NEW} alt="הלוגו החדש של אינסטגרם, באותיות נפרדות" loading="lazy" />
+            <figcaption>
+              הלוגו החדש: 2026: עיצוב: ג׳סמין פרובוסט ומאי הרטונו – מנהלות צוותי העיצוב של מטא, על
+              בסיס הפונטים אינסטגרם סאנס, אינסטגרם פן ו- אינסטגרם מונו.
+            </figcaption>
           </div>
         </figure>
 
@@ -968,53 +972,11 @@ const CSS = `
 .hero { position:relative; }
 .hero-figure { margin:0; height:80vh; overflow:hidden; position:relative; }
 
-.ig-sheet {
-  background:#f9f6ec;
-  display:flex; align-items:center; justify-content:center;
-  cursor:default; user-select:none;
-}
-.rule-sheet {
-  position:absolute; inset:0; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='168'%3E%3Cpath d='M0 166.25H40' stroke='%23020D2C' stroke-opacity='0.22' stroke-width='1.5'/%3E%3Cpath d='M0 84.5H40' stroke='%23020D2C' stroke-opacity='0.15' stroke-width='1.2' stroke-dasharray='7 9'/%3E%3C/svg%3E");
-  background-repeat:repeat;
-}
-.sheet-margin {
-  position:absolute; top:0; bottom:0; right:clamp(1.6rem, 7vw, 7rem); width:2px;
-  background:rgba(192,57,43,.34);
-  filter:url(#redpen);
-  pointer-events:none;
-}
-.specimen {
-  position:relative; z-index:2;
-  display:flex; flex-direction:column; align-items:center;
-  gap:clamp(1.4rem, 4vh, 3.4rem);
-  transform:rotate(-1.2deg);
-  padding-bottom:11vh;
-}
-.try { position:relative; display:block; line-height:0; }
-.try img { display:block; width:100%; height:auto; }
-.try-0 { width:min(520px, 62vw); }
-.try-1 { width:min(400px, 48vw); opacity:.34; filter:blur(1.4px); }
-.try-2 { width:min(430px, 52vw); opacity:.9; }
+.ig-cover { background:#1b1030; }
+.ig-cover img { width:100%; height:100%; object-fit:cover; display:block; }
 
-/* teacher's red-pen circle over the 'r' of the cursive wordmark
-   (percentages are measured off the real artwork: r spans 62%-72% x) */
-.redmark {
-  position:absolute;
-  left:66.5%; top:50%;
-  width:15.5%; height:58%;
-  border:3px solid var(--red);
-  border-radius:52% 48% 46% 54% / 48% 52% 48% 52%;
-  opacity:.9;
-  filter:url(#redpen);
-  transform:translate(-50%, -50%) rotate(-8deg);
-  pointer-events:none;
-  animation:markIn 1.1s var(--ease) .55s both;
-}
-@keyframes markIn {
-  from { opacity:0; transform:translate(-50%, -50%) rotate(-19deg) scale(1.35); }
-  to   { opacity:.9; transform:translate(-50%, -50%) rotate(-8deg) scale(1); }
-}
+/* the paper shader, 20% less saturated */
+.paper-layer { filter:saturate(.8); }
 
 /* double-tap heart easter egg */
 .tap-heart {
@@ -1161,7 +1123,7 @@ const CSS = `
 .fig-inline {
   float:left; clear:left;
   width:min(250px, 60vw);
-  margin:.4rem 2.2rem 1.6rem calc(min(250px, 60vw) / -2);
+  margin:.4rem 2.2rem 3.4rem 0;
 }
 .fig-full { clear:both; width:100%; }
 
@@ -1175,6 +1137,10 @@ const CSS = `
 .lc-cell { padding:clamp(1.4rem, 3.5vw, 2.6rem) clamp(1rem, 3vw, 2.2rem); display:grid; place-items:center; }
 .lc-cell + .lc-cell { border-right:var(--hair); }
 .lc-cell img { width:100%; height:auto; display:block; }
+.lc-cell figcaption {
+  margin-top:1.1rem;
+  font-size:.78rem; line-height:1.55; color:var(--muted); text-align:center;
+}
 
 /* ---------- STATS: one outer block titled "3 מיליארד" ---------- */
 .stat-block {
@@ -1226,6 +1192,18 @@ const CSS = `
   direction:ltr;
 }
 .dec-real { position:relative; display:block; width:min(300px, 62%); line-height:0; }
+/* red-pen circle over the r; percentages are measured off the real artwork */
+.dec-real .redmark {
+  position:absolute;
+  left:66.5%; top:50%;
+  width:15.5%; height:58%;
+  border:2.5px solid var(--red);
+  border-radius:52% 48% 46% 54% / 48% 52% 48% 52%;
+  opacity:.9;
+  filter:url(#redpen);
+  transform:translate(-50%, -50%) rotate(-8deg);
+  pointer-events:none;
+}
 .dec-real img { width:100%; height:auto; display:block; }
 .dec-plain { font-size:1.5rem; color:var(--navy); letter-spacing:-.01em; }
 .dec-plain b {
@@ -1397,18 +1375,15 @@ const CSS = `
   .shift-grid, .diptych { grid-template-columns:1fr; }
 }
 @media (max-width: 720px) {
-  .hero-figure { height:66vh; }
-  .hero-card { margin-top:-6rem; padding:3rem 1.3rem 1.7rem 3.4rem; }
-  .tape { width:84px; height:28px; top:calc(66vh - 6rem - 14px); }
+  /* a 4:3 box keeps the whole wordmark inside the crop on phones */
+  .hero-figure { height:auto; aspect-ratio:4 / 3; }
+  .hero-card { margin-top:-2rem; padding:2.6rem 1.3rem 1.7rem 3.4rem; }
+  .tape { width:84px; height:28px; top:calc(75vw - 2rem - 14px); }
+  .body { padding:3rem 0 5rem; }
   .op-nav { padding:.9rem 1.1rem; gap:.9rem; }
   .nav-links { gap:1rem; }
   .nav-links a { font-size:.86rem; }
   .nav-logo img { height:26px; }
-  .ig-sheet { align-items:flex-end; }
-  .specimen { padding-bottom:15vh; gap:1.4rem; }
-  .try-0 { width:74vw; }
-  .try-1 { width:58vw; }
-  .try-2 { width:62vw; }
   .pull, .fig-bleed { margin-right:0; margin-left:0; }
   .fig-bleed { width:100%; }
   .fig-inline { float:none; width:100%; margin:2rem 0; }
@@ -1424,6 +1399,6 @@ const CSS = `
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { transition:none; }
-  .redmark, .tap-heart { animation:none; }
+  .tap-heart { animation:none; }
 }
 `;
