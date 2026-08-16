@@ -179,19 +179,19 @@ function ShareRow({ punchline = false }: { punchline?: boolean }) {
       {punchline && <p className="share-wink">קדימה, אל תתביישו:</p>}
       <div className="share-btns">
         <a className="ink-btn" href={`https://wa.me/?text=${enc(POST_TITLE + " " + POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.wa} להעביר בוואטסאפ
+          <Ol />{Ic.wa} להעביר בוואטסאפ
         </a>
         <a className="ink-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.li} LinkedIn
+          <Ol />{Ic.li} LinkedIn
         </a>
         <a className="ink-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.fb} פייסבוק
+          <Ol />{Ic.fb} פייסבוק
         </a>
         <a className="ink-btn" href={`https://x.com/intent/tweet?text=${enc(POST_TITLE)}&url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.x} X
+          <Ol />{Ic.x} X
         </a>
         <button className="ink-btn" type="button" onClick={copy}>
-          {Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
+          <Ol />{Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
         </button>
       </div>
     </div>
@@ -229,8 +229,8 @@ function Comments() {
             <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
           </div>
           <textarea className="c-in c-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required />
-          <button className="ink-btn scribble c-send" type="submit" disabled={state === "sending"}>
-            <i aria-hidden /><i aria-hidden /><i aria-hidden />
+          <button className="ink-btn c-send" type="submit" disabled={state === "sending"}>
+            <Ol />
             {state === "sending" ? "שולח…" : "שליחת תגובה"}
           </button>
           {state === "err" && <p className="comments-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
@@ -290,6 +290,18 @@ function FullShot({ src, alt, cap, bleed = false }: { src: string; alt: string; 
   );
 }
 
+/* ---------- ink outlines drawn on hover ----------
+   Five hand-drawn frames that appear one after another, as if someone
+   kept re-tracing the imperfect line. They fade out together on leave. */
+function Ol() {
+  return (
+    <>
+      <i className="ol" aria-hidden /><i className="ol" aria-hidden /><i className="ol" aria-hidden />
+      <i className="ol" aria-hidden /><i className="ol" aria-hidden />
+    </>
+  );
+}
+
 /* ---------- related posts rail ----------
    Titles and intro sentences are lifted verbatim from the POSTS array on
    the one-pager (the intro is each excerpt's opening sentence). */
@@ -324,6 +336,7 @@ function MorePosts() {
       <div className="more-rail">
         {MORE.map((p) => (
           <a className="more-card" href={p.href} key={p.href}>
+            <Ol />
             <span className="more-cover">
               <img src={p.cover} alt="" loading="lazy" />
             </span>
@@ -388,6 +401,10 @@ export default function InstagramPost() {
         <filter id="inkline-bp" x="-5%" y="-5%" width="110%" height="110%">
           <feTurbulence type="fractalNoise" baseFrequency="0.02" numOctaves="3" seed="4" result="n" />
           <feDisplacementMap in="SourceGraphic" in2="n" scale="3.5" />
+        </filter>
+        <filter id="inkline-soft" x="-8%" y="-8%" width="116%" height="116%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.016" numOctaves="2" seed="9" result="n" />
+          <feDisplacementMap in="SourceGraphic" in2="n" scale="2" />
         </filter>
         <filter id="print-grain" x="-2%" y="-2%" width="104%" height="104%">
           <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" seed="7" result="g" />
@@ -925,12 +942,12 @@ export default function InstagramPost() {
         </div>
         <hr className="ink-rule" data-reveal />
 
-        <MorePosts />
-
         <Comments />
 
+        <MorePosts />
+
         <footer className="bp-footer" data-reveal>
-          <button type="button" className="ink-btn" onClick={() => history.back()}>→ בחזרה</button>
+          <button type="button" className="ink-btn" onClick={() => history.back()}><Ol />→ בחזרה</button>
         </footer>
       </article>
     </div>
@@ -1350,19 +1367,29 @@ const CSS = `
   border-right:5px solid var(--gold);
 }
 .more-rail {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem;
+  display:grid; grid-template-columns:repeat(3, 1fr); gap:1.1rem;
 }
 .more-card {
+  position:relative; z-index:0;
+  --step:4px;
   display:flex; flex-direction:column;
-  background:var(--card); border:var(--hair); border-radius:var(--radius);
-  overflow:hidden; text-decoration:none; color:inherit;
-  transition:transform .45s var(--ease), box-shadow .45s var(--ease);
+  background:transparent; border:none;
+  padding:.7rem .7rem 1.1rem;
+  text-decoration:none; color:inherit;
+  transition:transform .45s var(--ease);
 }
-.more-card:hover { transform:translateY(-4px); box-shadow:0 16px 32px rgba(2,13,44,.12); }
-.more-cover { display:block; aspect-ratio:16 / 10; overflow:hidden; background:rgba(2,13,44,.06); }
+/* the drawn frame, same language as the figures in the earlier posts */
+.more-card::before {
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  border:1.8px solid var(--navy);
+  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
+  filter:url(#inkline-bp);
+}
+.more-card:hover { transform:translateY(-3px); }
+.more-cover { display:block; aspect-ratio:16 / 10; overflow:hidden; border-radius:9px; background:rgba(2,13,44,.06); }
 .more-cover img { width:100%; height:100%; object-fit:cover; display:block; }
-.more-card .card-title { margin:1rem 1rem .45rem; }
-.more-card p { margin:0 1rem 1.2rem; font-size:var(--fs-small); line-height:1.6; color:var(--muted); }
+.more-card .card-title { margin:1rem .4rem .45rem; }
+.more-card p { margin:0 .4rem; font-size:var(--fs-small); line-height:1.6; color:var(--muted); }
 
 /* ---------- lightbox ---------- */
 .lightbox {
@@ -1373,39 +1400,63 @@ const CSS = `
 }
 .lightbox img { max-width:92vw; max-height:92vh; width:auto; height:auto; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
 
-/* ---------- ink buttons (the only other place the ink filter lives) ---------- */
+/* ---------- ink buttons: hover re-traces the line, it never fills ---------- */
 .ink-btn {
   display:inline-flex; align-items:center; gap:.55em;
   position:relative; z-index:0;
   font-family:'Leon',sans-serif; font-weight:400; font-size:1rem;
   color:var(--navy); background:transparent;
   padding:.6em 1.5em; text-decoration:none; cursor:pointer; border:none;
-  transition:color .35s var(--ease), transform .5s var(--ease);
+  --step:5px;
+  transition:transform .5s var(--ease);
 }
 .ink-btn::before {
   content:''; position:absolute; inset:0; z-index:-1;
   border:1.7px solid var(--navy);
   border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;
   filter:url(#inkline-bp);
-  transition:background .35s var(--ease);
 }
-.ink-btn:hover { color:var(--cream); }
-.ink-btn:hover::before { background:var(--navy); }
 .ink-btn:active { transform:scale(.98); }
 .ink-btn svg { flex:0 0 auto; }
-.ink-btn.scribble i {
-  position:absolute; inset:0; z-index:-1; pointer-events:none;
-  border:1.6px solid var(--navy);
-  filter:url(#inkline-bp);
+
+/* the five extra traces — they grow outward in even steps so each one
+   reads as a separate pass of the pen, not a thicker border */
+.ol {
+  position:absolute; inset:0;
+  z-index:-1; pointer-events:none;
+  border:1.5px solid var(--navy);
+  filter:url(#inkline-soft);
+  opacity:0;
+  transition:opacity .4s var(--ease), inset .4s var(--ease);
+  transition-delay:0s; /* leaving: they all fade together */
 }
-.ink-btn.scribble i:nth-of-type(1) { border-radius:18px 230px 20px 250px / 240px 16px 250px 20px; transform:rotate(.7deg); opacity:.85; }
-.ink-btn.scribble i:nth-of-type(2) { border-radius:240px 22px 250px 16px / 20px 245px 18px 235px; transform:rotate(-.9deg) scale(1.02); opacity:.7; }
-.ink-btn.scribble i:nth-of-type(3) { border-radius:200px 30px 210px 26px / 26px 215px 24px 205px; transform:rotate(1.4deg) scale(1.035); opacity:.5; }
+.ol:nth-of-type(1) { border-radius:250px 20px 230px 16px / 16px 235px 20px 250px; transform:rotate(.4deg); }
+.ol:nth-of-type(2) { border-radius:18px 240px 22px 245px / 240px 18px 250px 20px; transform:rotate(-.7deg); }
+.ol:nth-of-type(3) { border-radius:235px 26px 210px 24px / 22px 220px 18px 240px; transform:rotate(.9deg); }
+.ol:nth-of-type(4) { border-radius:22px 215px 28px 230px / 225px 24px 235px 18px; transform:rotate(-1.2deg); }
+.ol:nth-of-type(5) { border-radius:200px 30px 245px 20px / 26px 250px 22px 210px; transform:rotate(1.5deg); }
+
+.ink-btn:hover .ol, .ink-btn:focus-visible .ol, .more-card:hover .ol { opacity:.75; }
+.ink-btn:hover .ol:nth-of-type(1), .more-card:hover .ol:nth-of-type(1) {
+  inset:calc(var(--step) * -1); transition-delay:.02s; opacity:.8;
+}
+.ink-btn:hover .ol:nth-of-type(2), .more-card:hover .ol:nth-of-type(2) {
+  inset:calc(var(--step) * -2); transition-delay:.11s; opacity:.62;
+}
+.ink-btn:hover .ol:nth-of-type(3), .more-card:hover .ol:nth-of-type(3) {
+  inset:calc(var(--step) * -3); transition-delay:.20s; opacity:.46;
+}
+.ink-btn:hover .ol:nth-of-type(4), .more-card:hover .ol:nth-of-type(4) {
+  inset:calc(var(--step) * -4); transition-delay:.29s; opacity:.32;
+}
+.ink-btn:hover .ol:nth-of-type(5), .more-card:hover .ol:nth-of-type(5) {
+  inset:calc(var(--step) * -5); transition-delay:.38s; opacity:.2;
+}
 
 /* share */
 .share-row { margin:2.6rem 0 0; clear:both; }
 .share-wink { font-weight:700; margin:0 0 1rem; }
-.share-btns { display:flex; flex-wrap:wrap; gap:.8rem; }
+.share-btns { display:flex; flex-wrap:wrap; gap:1.5rem 1.4rem; }
 
 /* ---------- comments ---------- */
 .comments { margin:4rem 0 0; clear:both; }
@@ -1487,5 +1538,6 @@ const CSS = `
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { transition:none; }
   .tap-heart { animation:none; }
+  .ol { transition:opacity .01s; }
 }
 `;
