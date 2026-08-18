@@ -36,7 +36,7 @@ body{
   font-family:'Rubik',Arial,sans-serif; font-size:17px; line-height:1.65;
   direction:rtl; text-align:right;
 }
-main{max-width:960px;margin:0 auto;padding:0 22px 90px}
+main{max-width:1020px;margin:0 auto;padding:0 22px 90px}
 
 /* רומנית - תמיד LTR ומבודדת, פונט סריפי משלה */
 .ro{direction:ltr;unicode-bidi:isolate;font-family:'Literata',Georgia,serif;color:var(--navy);font-weight:600}
@@ -50,7 +50,7 @@ main{max-width:960px;margin:0 auto;padding:0 22px 90px}
 header.top{
   background:var(--navy);color:#f5efdf;padding:52px 22px 44px;margin-bottom:36px;
 }
-header.top .inner{max-width:960px;margin:0 auto}
+header.top .inner{max-width:1020px;margin:0 auto}
 header.top h1{font-size:2.1rem;font-weight:800;margin:0 0 6px;color:#fff}
 header.top .ro-title{font-family:'Literata',serif;color:#e3c565;font-size:1.15rem;direction:ltr;display:inline-block}
 header.top p{max-width:640px;color:#cfd6e6;margin:14px 0 0;font-size:.98rem}
@@ -179,7 +179,7 @@ th.f{background:var(--fem)!important;color:#fff}
 .lg{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:5px 14px;font-size:.88rem}
 .dot{width:12px;height:12px;border-radius:50%;flex:none}
 
-footer{max-width:960px;margin:40px auto 0;padding:20px 22px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line)}
+footer{max-width:1020px;margin:40px auto 0;padding:20px 22px;color:var(--soft);font-size:.85rem;border-top:1px solid var(--line)}
 
 .rox{direction:ltr;unicode-bidi:isolate;font-family:'Literata',Georgia,serif;color:var(--navy);font-weight:600}
 details.sol{margin:10px 0;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 16px}
@@ -312,7 +312,7 @@ details.toc-group > summary:hover{background:var(--gold-bg)}
 .navbar{position:fixed;top:0;right:0;left:0;z-index:60;display:none;
   background:rgba(28,43,74,.97);color:#f5efdf;box-shadow:0 2px 12px rgba(0,0,0,.18)}
 .navbar.on{display:block}
-.navbar .wrap{max-width:960px;margin:0 auto;display:flex;align-items:stretch;gap:6px;padding:0 8px}
+.navbar .wrap{max-width:1020px;margin:0 auto;display:flex;align-items:stretch;gap:6px;padding:0 8px}
 .navbar button{font-family:inherit;background:none;border:none;color:#cfd6e6;cursor:pointer;font-size:1.35rem;padding:0 12px;flex:none;line-height:1}
 .navbar button:hover{color:#fff}
 .navbar button[disabled]{opacity:.22;cursor:default}
@@ -323,7 +323,7 @@ details.toc-group > summary:hover{background:var(--gold-bg)}
 .navbar .loc .s::after{content:" ▾";color:#8c99b8;font-size:.72rem}
 .navmenu{display:none;background:var(--card);border-bottom:2px solid var(--gold);max-height:66vh;overflow:auto}
 .navmenu.on{display:block}
-.navmenu .inner{max-width:960px;margin:0 auto;padding:8px 14px 14px}
+.navmenu .inner{max-width:1020px;margin:0 auto;padding:8px 14px 14px}
 .navmenu a{display:block;padding:9px 8px;border-bottom:1px dashed var(--line);color:var(--navy);text-decoration:none;font-size:.95rem}
 .navmenu a.pj{color:var(--gold);font-weight:800;border-bottom-color:var(--gold)}
 .navmenu a.sj{padding-right:20px;font-size:.9rem}
@@ -440,7 +440,8 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
    that v2 had introduced. restore it - a 7-column verb table needs it. */
 @media (max-width:640px){
   table{display:block;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
-  table.vt th:first-child{background:var(--navy)}
+  /* horizontal pin only - the header row itself is static on mobile */
+  table.vt th:first-child{position:sticky;inset-inline-start:0;top:auto;background:var(--navy);z-index:35}
 }
 
 /* ============ v11: one claim per line inside rule / note boxes ============ */
@@ -449,6 +450,76 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
 .note .rl+.rl{border-top-color:rgba(107,114,128,.16)}
 .rule .rl:first-child,.note .rl:first-child{padding-top:0}
 .rule .rl:last-child,.note .rl:last-child{padding-bottom:0}
+
+/* ============ v12 · רוחב תוכן, אחידות שבירות, חיפוש בעמוד ============ */
+
+/* -- 12.1 אזור התוכן: 960 ◂ 1020. הערכים עצמם הוחלפו במקור, למעלה. -- */
+
+/* -- 12.2 גריד המספרים: אפס חפיפות, ובמצב stack כל התאים בשני שורות -- */
+.numgrid{grid-auto-rows:1fr}
+.numcell{align-content:center;row-gap:1px}
+/* בלי הכיווץ הזה התאים "מתקפלים" והטקסט נדרס במקום לגלוש - ואז אי אפשר בכלל לזהות שאין מקום */
+.numcell>*{flex:0 0 auto;min-width:auto}
+.numgrid.stack .numcell{flex-wrap:wrap}
+.numgrid.stack .numcell::after{content:"";flex-basis:100%;height:0;order:1}
+.numgrid.stack .numcell>.street,
+.numgrid.stack .numcell>.tl,
+.numgrid.stack .numcell>.street~.spk,
+.numgrid.stack .numcell>.tl~.spk{order:2}
+.numgrid.stack .numcell>.street,
+.numgrid.stack .numcell>.tl{margin-inline-start:34px}
+
+/* -- 12.3 טבלאות: השבירה נקבעת לפי המקרה הקשה ביותר, ומוחלת על כל הטבלה -- */
+/* .uni = טבלת רפרנס צפופה: מילה רומנית לא נשברת אף פעם */
+table.uni td .ro,table.uni th .ro{white-space:nowrap}
+table td .spk,table th .spk{vertical-align:middle}
+/* .stack-spk = בטבלה הזאת הרמקול יורד לשורה נפרדת בכל התאים, לא רק בתא שנשבר */
+table.stack-spk td,table.stack-spk th{vertical-align:middle}
+table.stack-spk td .spk,table.stack-spk th .spk{display:flex;margin:3px auto 0}
+table.stack-spk td.nospk:not(:first-child)::after{content:"";display:block;height:26px;margin-top:3px}
+/* דרגות נסיגה, אם גם אחרי ההאחדה הטבלה רחבה מדי */
+table.tight{font-size:.9em}
+table.tight td,table.tight th{padding-inline:7px}
+table.hscroll{display:block;overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch}
+table.hscroll th{position:static}
+
+/* -- 12.4 חיפוש בעמוד -- */
+/* .nsrch לא position:relative בכוונה - במובייל האוברליי צריך להימתח על כל רוחב הבר */
+.nsrch{display:flex;align-items:center;flex:none}
+.nsbtn{display:flex!important;align-items:center;justify-content:center;min-width:38px;padding:0 8px}
+.nsbtn svg{width:19px;height:19px;fill:currentColor;pointer-events:none}
+.nsrch.on .nsbtn{color:#e3c565}
+.nspanel{display:none;align-items:center;gap:4px;direction:rtl;
+  position:absolute;top:100%;inset-inline:10px;margin-top:6px;
+  background:var(--card);border:1px solid var(--line);border-radius:12px;
+  box-shadow:0 10px 26px rgba(0,0,0,.3);padding:7px 10px;z-index:80}
+.nsrch.on .nspanel{display:flex}
+.nsinput{flex:1;min-width:0;font-family:inherit;font-size:.95rem;border:none;outline:none;
+  background:transparent;color:var(--navy);padding:4px 2px;-webkit-appearance:none;appearance:none}
+.nsinput::-webkit-search-cancel-button{display:none}
+.nscount{flex:none;font-size:.76rem;color:var(--soft);font-variant-numeric:tabular-nums;
+  direction:ltr;unicode-bidi:isolate;min-width:46px;text-align:center;white-space:nowrap}
+.nspanel button{font-family:inherit;background:none;border:none;cursor:pointer;
+  font-size:.82rem;line-height:1;color:var(--soft);min-width:24px;padding:4px}
+.nspanel button:hover{color:var(--navy)}
+.nspanel button[disabled]{opacity:.28;cursor:default}
+@media (min-width:900px){
+  .nspanel{position:static;display:flex;width:300px;padding:4px 10px;margin:0 6px 0 0;
+    background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.18);box-shadow:none}
+  .nsbtn{min-width:26px;padding:0 2px;color:#9fadcb}
+  .nsbtn svg{width:16px;height:16px}
+  .nsrch.on .nsbtn{color:#9fadcb}
+  .nsinput{color:#fff}
+  .nsinput::placeholder{color:#9fadcb}
+  .nscount{color:#c3cde4}
+  .nspanel button{color:#c3cde4}
+  .nspanel button:hover{color:#fff}
+}
+mark.lsr{background:#ffe9a8;color:inherit;border-radius:2px;padding:0;box-decoration-break:clone;
+  -webkit-box-decoration-break:clone}
+mark.lsr.cur{background:var(--gold);color:#fff}
+html.nosnap{scroll-snap-type:none!important}
+@media print{.nsrch{display:none!important}mark.lsr{background:none;color:inherit}}
 </style>
 <link rel="manifest" href="/limbaromana-manifest.json"><meta name="theme-color" content="#1c2b4a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="/limbaromana-icon-192.png"></head>
 <body>
@@ -2117,6 +2188,7 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
     <tr><td><span class="ro">liber</span><button class="spk" type="button" data-h="zr6zihozis" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">פנוי</span></td><td><span class="ro">ocupat</span><button class="spk" type="button" data-h="690dsohh5w" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">תפוס</span></td><td><span class="ro">Aici este un loc liber. Acolo este un loc ocupat.</span><button class="spk" type="button" data-h="1hs6b91slgq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
     <tr><td><span class="ro">la dreapta</span><button class="spk" type="button" data-h="172wlg2s03s" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מימין</span></td><td><span class="ro">la stânga</span><button class="spk" type="button" data-h="m91ykcivg5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">משמאל</span></td><td><span class="ro">Facultatea de Litere este la dreapta. Facultatea de Medicină este la stânga.</span><button class="spk" type="button" data-h="2d9ma5ok5mk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
     <tr><td><span class="ro">deschis / deschisă</span><button class="spk" type="button" data-h="1526cet2v5w" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">פתוח; בהיר</span></td><td><span class="ro">închis / închisă</span><button class="spk" type="button" data-h="diukt1zsaf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">סגור; כהה</span></td><td><span class="ro">Fereastra este deschisă. Ușa e închisă.</span><button class="spk" type="button" data-h="1utuf5jgh4f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
+    <tr><td><span class="ro">devreme</span><button class="spk" type="button" data-h="17ik60to1td" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מוקדם</span></td><td><span class="ro">târziu</span><button class="spk" type="button" data-h="137njrx2jae" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מאוחר</span></td><td><span class="ro">Eu vin la cursuri devreme, iar Răzvan vine târziu.</span><button class="spk" type="button" data-h="28ykfvo2wrv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
     <tr><td><span class="ro">tânăr</span><button class="spk" type="button" data-h="26gs5tw55gk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">צעיר</span></td><td><span class="ro">bătrân</span><button class="spk" type="button" data-h="271jk9rclav" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">în vârstă</span><button class="spk" type="button" data-h="1x5okakxadz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">în etate</span><button class="spk" type="button" data-h="5guo4it9wz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="he">שלוש דרכים ל"מבוגר" - שתי האחרונות מנומסות יותר</span></td></tr>
   </table>
 
@@ -2134,7 +2206,7 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
   <p class="rl">יחד עם <span class="ro">mai</span><button class="spk" type="button" data-h="1elu80k5mow" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> = "יותר" <a class="xref" href="#meteo8">שהכרנו בשיעור 8</a>,
     יש לנו כבר את שני כיווני ההשוואה</p>
 </div>
-  <div class="seealso">↗ קשור: <a href="#colref">הצבעים · הסכמת תואר</a> · <a href="#gender">מין ומספר</a> · <a href="#directii9">כיוונים</a></div>
+  <div class="seealso">↗ קשור: <a href="#colref">הצבעים · הסכמת תואר</a> · <a href="#gender">מין ומספר</a> · <a href="#directii9">כיוונים</a> · <a href="#ceas12">devreme / târziu</a></div>
 </section>
 
 <section id="artic" data-topic="nouns" data-lesson="2" data-order-topic="24">
@@ -3123,8 +3195,17 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
       <tr><td>הפועל</td><td><span class="ro">a vinde</span><button class="spk" type="button" data-h="a42ep0rqla" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">a cumpăra</span><button class="spk" type="button" data-h="urwr2avobd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
       <tr><td>הפעולה</td><td><span class="ro">vânzare</span><button class="spk" type="button" data-h="2cu6riq4zs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מכירה</span></td><td><span class="ro">cumpărare</span><button class="spk" type="button" data-h="1lunxdz6q6f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">קנייה</span></td></tr>
       <tr><td>האדם</td><td><span class="ro">vânzător</span><button class="spk" type="button" data-h="1rlejm9zha4" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מוכר</span></td><td><span class="ro">cumpărător</span><button class="spk" type="button" data-h="2rt3gxkz8f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">קונה</span></td></tr>
+      <tr><td>הקבוצה</td><td><span class="ro">III</span><button class="spk" type="button" data-h="dlu2acqk99" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">‏vând · vinzi · vinde</span></td><td><span class="ro">I</span><button class="spk" type="button" data-h="5f1q977u6k" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">‏cumpăr · cumperi · cumpără</span></td></tr>
     </table>
   </div>
+
+  <div class="note">
+  <p class="rl">שני הפעלים לא מאותה קבוצה, ולכן לא מתנהגים אותו דבר: <span class="ro">a vinde</span><button class="spk" type="button" data-h="a42ep0rqla" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> היא <a class="xref" href="#verbref">קבוצה III</a> עם חילוף <span class="ro big">â → i</span><button class="spk" type="button" data-h="ky4lmpur80" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> בגזע, ו-<span class="ro">a cumpăra</span><button class="spk" type="button" data-h="urwr2avobd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> היא קבוצה I עם חילוף <span class="ro big">ă → e</span><button class="spk" type="button" data-h="1alr107mvi2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
+  <p class="rl">ההטיה המלאה של שניהם ב<a class="xref" href="#verbref">אזור הפעלים</a>. גם המילה למכירה - <span class="ro">vânzare</span><button class="spk" type="button" data-h="2cu6riq4zs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> - שומרת על ה-<span class="ro">â</span><button class="spk" type="button" data-h="15cszeo7lrf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> של גוף ראשון</p>
+  <p class="rl">ובשדה הטפסים ליד הקופה: <span class="ro">a bifa</span><button class="spk" type="button" data-h="7l2prssoep" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> לסמן V · <span class="ro">a semna</span><button class="spk" type="button" data-h="5vgujb88al" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> לחתום · <span class="ro">a completa</span><button class="spk" type="button" data-h="y3a0epgbqq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> למלא - <a class="xref" href="#verbe13">כולם קבוצה I עם ‎-ez</a></p>
+</div>
+
+  <div class="seealso">↗ קשור: <a href="#verbref">אזור הפעלים המצטבר</a> · <a href="#numbers">המספרים</a> · <a href="#formular9">מילוי טופס</a></div>
 </section>
 
 <section id="vreme" data-topic="vocab" data-lesson="2" data-order-topic="43">
@@ -3923,7 +4004,21 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
   <p class="rl">הסולם המלא של שעות היום ב<a class="xref" href="#calendar">לוח השנה</a> וב<a class="xref" href="#greet">ברכות לפי שעות היום</a></p>
 </div>
 
-  <div class="seealso">↗ קשור: <a href="#numref">המספרים - מדריך מלא</a> · <a href="#calendar">לוח השנה</a> · <a href="#data7">התאריך</a> · <a href="#vocab12">אוצר מילים שיעור 12</a></div>
+  <h3><span class="ro">devreme</span><button class="spk" type="button" data-h="17ik60to1td" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> ו-<span class="ro">târziu</span><button class="spk" type="button" data-h="137njrx2jae" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · מוקדם ומאוחר</h3>
+  <p class="sec-sub">שני תוארי פועל שחוזרים בכל תרגיל של שעות ולוח זמנים, ולא היה להם עד עכשיו מקום קבוע בעמוד.</p>
+  <table>
+    <tr><th style="width:26%">המילה</th><th style="width:24%">הצורה עם mai</th><th>דוגמה</th></tr>
+    <tr><td><span class="ro big">devreme</span><button class="spk" type="button" data-h="17ik60to1td" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מוקדם</span></td><td><span class="ro">mai devreme</span><button class="spk" type="button" data-h="1wcm5ri1u8b" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מוקדם יותר</span></td><td><span class="ro">Am cursuri dimineața devreme.</span><button class="spk" type="button" data-h="1ywsqcy5ne" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">יש לי שיעורים מוקדם בבוקר.</span></td></tr>
+    <tr><td><span class="ro big">târziu</span><button class="spk" type="button" data-h="137njrx2jae" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מאוחר</span></td><td><span class="ro">mai târziu</span><button class="spk" type="button" data-h="1gi6bx0uj2e" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">מאוחר יותר</span></td><td><span class="ro">Răzvan vine acasă foarte târziu.</span><button class="spk" type="button" data-h="8odpwemvpp" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">רזוואן חוזר הביתה מאוד מאוחר.</span></td></tr>
+  </table>
+  <div class="note">
+  <p class="rl">שניהם <b>תוארי פועל</b> - הם לא משתנים במין ובמספר, בניגוד ל<a class="xref" href="#opuse9">תארים ההפכים</a></p>
+  <p class="rl"><span class="ro">târziu</span><button class="spk" type="button" data-h="137njrx2jae" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> משמש גם כתואר: <span class="ro">o oră târzie</span><button class="spk" type="button" data-h="1crngqo2x6z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">שעה מאוחרת</span> - ואז כן מסכים</p>
+  <p class="rl">ההשוואה נבנית עם <span class="ro big">mai</span><button class="spk" type="button" data-h="1elu80k5mow" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>, בדיוק כמו <span class="ro">mai frumos</span><button class="spk" type="button" data-h="1pssxtmuhh4" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> - <a class="xref" href="#meteo8">אותה מכונה משיעור 8</a></p>
+  <p class="rl">הפועל שהולך איתם הוא <span class="ro">a întârzia</span><button class="spk" type="button" data-h="1uzhmfif66p" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לאחר), ומשם גם <span class="ro">Îmi pare rău că am întârziat</span><button class="spk" type="button" data-h="12dcdsuxfa1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
+</div>
+
+  <div class="seealso">↗ קשור: <a href="#numref">המספרים - מדריך מלא</a> · <a href="#calendar">לוח השנה</a> · <a href="#data7">התאריך</a> · <a href="#vocab12">אוצר מילים שיעור 12</a> · <a href="#opuse9">תארים והפכים</a></div>
 </section>
 
 <section id="vocab12" data-topic="vocab" data-lesson="12" data-order-topic="57">
@@ -5536,6 +5631,285 @@ table.vt td:first-child .ro{font-weight:700;white-space:nowrap}
     at:function(i){ return items[i]; },
     go:go
   };
+})();
+</script>
+<script id="uniformcells">
+/* ============================================================
+   v12 · אחידות שבירה
+   הכלל: בונים כל שורה/תא לפי המקרה הקשה ביותר בתוך אותה טבלה/גריד,
+   ומחילים את אותה שבירה על כל התאים - כדי שהעין תסרוק שורה, לא פאזל.
+   ============================================================ */
+(function(){
+  var main=document.querySelector('main'); if(!main)return;
+
+  /* ---------- גריד המספרים ---------- */
+  function doGrids(){
+    [].forEach.call(document.querySelectorAll('.numgrid'),function(g){
+      g.classList.remove('stack');
+      var cells=g.children,need=false;
+      for(var i=0;i<cells.length;i++){
+        if(cells[i].scrollWidth>cells[i].clientWidth+1){need=true;break;}
+      }
+      if(need)g.classList.add('stack');
+    });
+  }
+
+  /* ---------- טבלאות ---------- */
+  function txt(c){return (c.textContent||'').replace(/\s+/g,' ').trim();}
+
+  /* טבלת רפרנס צפופה = כל התאים (חוץ מטור הפועל) קצרים */
+  function dense(t){
+    if(t.classList.contains('vt'))return true;
+    var rows=t.rows,max=0,n=0;
+    for(var r=0;r<rows.length;r++){
+      var cs=rows[r].cells;
+      for(var i=0;i<cs.length;i++){n++;if(i>0){var L=txt(cs[i]).length;if(L>max)max=L;}}
+    }
+    return n>5 && max<=24;
+  }
+
+  /* האם תוכן התא יושב על יותר משורה אחת */
+  function multiline(c){
+    var k=c.children,t0=null,i,r;
+    if(k.length<2)return false;
+    for(i=0;i<k.length;i++){
+      r=k[i].getBoundingClientRect();
+      if(!r.width&&!r.height)continue;
+      if(t0===null){t0=r.top;continue;}
+      if(Math.abs(r.top-t0)>3)return true;
+    }
+    return false;
+  }
+
+  function tooWide(t){
+    var host=t.parentNode, lim=(host&&host.clientWidth)||main.clientWidth;
+    return t.getBoundingClientRect().width>lim+1 || t.scrollWidth>lim+1;
+  }
+
+  function doTables(){
+    [].forEach.call(main.querySelectorAll('table'),function(t){
+      t.classList.remove('uni','stack-spk','tight','hscroll');
+      if(!dense(t))return;
+      t.classList.add('uni');
+      var cells=t.querySelectorAll('td'),i,c,need=false;
+      for(i=0;i<cells.length;i++){
+        c=cells[i];
+        c.classList.toggle('nospk',!c.querySelector('.spk'));
+      }
+      for(i=0;i<cells.length;i++){
+        c=cells[i];
+        if(c.cellIndex===0)continue;              /* טור הפועל רשאי לרדת שורה - שם יש גם תרגום */
+        if(multiline(c)){need=true;break;}
+      }
+      if(!need&&!tooWide(t))return;
+      t.classList.add('stack-spk');
+      if(window.innerWidth<=640)return;      /* במובייל הגלילה האופקית היא ממילא הדפוס */
+      if(tooWide(t))t.classList.add('tight');
+      if(tooWide(t))t.classList.add('hscroll');
+    });
+  }
+
+  var pending=null;
+  function run(){doGrids();doTables();}
+  function schedule(){
+    if(pending)clearTimeout(pending);
+    pending=setTimeout(function(){pending=null;run();},140);
+  }
+
+  run();
+  if(document.fonts&&document.fonts.ready)document.fonts.ready.then(run).catch(function(){});
+  window.addEventListener('load',run);
+  window.addEventListener('resize',schedule,{passive:true});
+  /* מעבר בין תצוגת נושא לתצוגת שיעור מסדר מחדש את ה-DOM */
+  document.addEventListener('click',function(e){
+    if(e.target.closest&&e.target.closest('.tsw'))setTimeout(run,80);
+  });
+  window.LimbaUniform={run:run};
+})();
+</script>
+<script id="pagesearch">
+/* ============================================================
+   v12 · חיפוש בעמוד
+   ללא רשימת תוצאות: רק ספירת מופעים + ניווט הבא/הקודם, כמו ב-Find של הדפדפן.
+   יושב בבר העליון, ולכן זמין מהרגע שעוברים את תוכן העניינים.
+   ============================================================ */
+(function(){
+  var bar=document.querySelector('.navbar'); if(!bar)return;
+  var wrap=bar.querySelector('.wrap'); if(!wrap)return;
+
+  var box=document.createElement('div');
+  box.className='nsrch';
+  box.innerHTML=
+    '<button type="button" class="nsbtn" aria-label="חיפוש בעמוד" title="חיפוש בעמוד (/)">'+
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>'+
+    '</button>'+
+    '<div class="nspanel">'+
+      '<input type="search" class="nsinput" placeholder="חיפוש בעמוד…" autocomplete="off" autocorrect="off" spellcheck="false" aria-label="חיפוש בעמוד">'+
+      '<span class="nscount" aria-live="polite"></span>'+
+      '<button type="button" class="nsprev" title="המופע הקודם (Shift+Enter)" aria-label="המופע הקודם">▲</button>'+
+      '<button type="button" class="nsnext" title="המופע הבא (Enter)" aria-label="המופע הבא">▼</button>'+
+      '<button type="button" class="nsclose" title="נקה וסגור (Esc)" aria-label="נקה וסגור">✕</button>'+
+    '</div>';
+  wrap.appendChild(box);   /* ה-wrap הוא RTL: הילד האחרון יושב בקצה השמאלי */
+
+  var btn=box.querySelector('.nsbtn'), input=box.querySelector('.nsinput'),
+      count=box.querySelector('.nscount'), bPrev=box.querySelector('.nsprev'),
+      bNext=box.querySelector('.nsnext'), bClose=box.querySelector('.nsclose');
+
+  var marks=[], cur=-1, timer=null;
+
+  /* ה-i של הרומנית: מי שמקליד sapte ימצא גם șapte. מיפוי 1:1 כדי לא לשבש אינדקסים */
+  var FOLD={'ă':'a','â':'a','î':'i','ș':'s','ş':'s','ț':'t','ţ':'t'};
+  function fold(s){
+    s=s.toLowerCase();
+    var o='',i,c;
+    for(i=0;i<s.length;i++){c=s.charAt(i);o+=(FOLD[c]||c);}
+    return o;
+  }
+
+  var SKIP={SCRIPT:1,STYLE:1,NOSCRIPT:1,BUTTON:1,MARK:1,INPUT:1,TEXTAREA:1,SELECT:1,svg:1,SVG:1};
+  function blocked(el){
+    while(el&&el!==document.body){
+      if(SKIP[el.nodeName])return true;
+      if(el.nodeType===1){
+        if(el.hidden)return true;
+        if(el.id==='toc'||el.classList.contains('navbar')||el.classList.contains('navmenu'))return true;
+      }
+      el=el.parentNode;
+    }
+    return false;
+  }
+
+  function clearMarks(){
+    if(!marks.length){cur=-1;return;}
+    var parents=[],i,m,p;
+    for(i=0;i<marks.length;i++){
+      m=marks[i];p=m.parentNode;if(!p)continue;
+      p.replaceChild(document.createTextNode(m.textContent),m);
+      if(parents.indexOf(p)<0)parents.push(p);
+    }
+    for(i=0;i<parents.length;i++)parents[i].normalize();
+    marks=[];cur=-1;
+  }
+
+  function collect(needle){
+    var w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT,null),
+        out=[],n;
+    while((n=w.nextNode())){
+      if(!n.nodeValue)continue;
+      if(fold(n.nodeValue).indexOf(needle)<0)continue;
+      if(blocked(n.parentNode))continue;
+      out.push(n);
+    }
+    return out;
+  }
+
+  var LIMIT=1200;
+  function search(q){
+    clearMarks();
+    q=(q||'').trim();
+    if(q.length<2){paint();return;}
+    var needle=fold(q), nodes=collect(needle), all=[];
+    for(var j=0;j<nodes.length&&all.length<LIMIT;j++){
+      var node=nodes[j], f=fold(node.nodeValue), pos=[], i=0;
+      while((i=f.indexOf(needle,i))!==-1){pos.push(i);i+=needle.length;}
+      var local=[];
+      for(var k=pos.length-1;k>=0;k--){
+        var tail=node.splitText(pos[k]);
+        tail.splitText(needle.length);
+        var m=document.createElement('mark');
+        m.className='lsr';
+        tail.parentNode.replaceChild(m,tail);
+        m.appendChild(tail);
+        local.unshift(m);
+      }
+      all=all.concat(local);
+    }
+    marks=all;
+    if(marks.length)focus(0,true); else paint();
+  }
+
+  function nosnap(){
+    var h=document.documentElement;
+    h.classList.add('nosnap');
+    clearTimeout(nosnap._t);
+    nosnap._t=setTimeout(function(){h.classList.remove('nosnap');},900);
+  }
+
+  function focus(i,quiet){
+    if(!marks.length){paint();return;}
+    cur=(i%marks.length+marks.length)%marks.length;
+    for(var k=0;k<marks.length;k++)marks[k].classList.remove('cur');
+    var m=marks[cur];
+    m.classList.add('cur');
+    var d=m.parentNode;
+    while(d&&d!==document.body){
+      if(d.nodeName==='DETAILS'&&!d.open)d.open=true;
+      d=d.parentNode;
+    }
+    nosnap();
+    if(window.LimbaScroll&&window.LimbaScroll.cancel)window.LimbaScroll.cancel();
+    var y=m.getBoundingClientRect().top+(window.pageYOffset||document.documentElement.scrollTop)
+          -Math.max(120,window.innerHeight*0.3);
+    window.scrollTo({top:Math.max(0,y),behavior:'smooth'});
+    paint();
+  }
+
+  function paint(){
+    var q=input.value.trim();
+    if(q.length<2){count.textContent=q?'…':'';}
+    else if(!marks.length){count.textContent='0 תוצאות';}
+    else{count.textContent=(cur+1)+' / '+marks.length+(marks.length>=LIMIT?'+':'');}
+    bPrev.disabled=bNext.disabled=!marks.length;
+  }
+
+  function open(){
+    box.classList.add('on');
+    bar.classList.add('on');
+    setTimeout(function(){input.focus();input.select();},30);
+  }
+  function close(){
+    box.classList.remove('on');
+    input.value='';
+    clearMarks();
+    paint();
+    input.blur();
+  }
+
+  function inline(){return window.innerWidth>=900;}
+  btn.addEventListener('click',function(e){
+    e.stopPropagation();
+    if(inline()){input.focus();input.select();return;}   /* בדסקטופ השדה כבר פתוח - האייקון רק ממקד */
+    if(box.classList.contains('on'))close(); else open();
+  });
+  box.addEventListener('click',function(e){e.stopPropagation();});
+  input.addEventListener('input',function(){
+    clearTimeout(timer);
+    timer=setTimeout(function(){search(input.value);},190);
+  });
+  input.addEventListener('keydown',function(e){
+    if(e.key==='Enter'){e.preventDefault();
+      if(!marks.length){clearTimeout(timer);search(input.value);return;}
+      focus(cur+(e.shiftKey?-1:1));return;}
+    if(e.key==='Escape'){e.preventDefault();close();}
+  });
+  bPrev.addEventListener('click',function(){focus(cur-1);});
+  bNext.addEventListener('click',function(){focus(cur+1);});
+  bClose.addEventListener('click',function(){close();});
+
+  document.addEventListener('keydown',function(e){
+    var t=document.activeElement,tn=t?(t.tagName||'').toLowerCase():'';
+    var typing=tn==='input'||tn==='textarea'||tn==='select'||(t&&t.isContentEditable);
+    if((e.key==='k'||e.key==='K')&&(e.metaKey||e.ctrlKey)){e.preventDefault();open();return;}
+    if(e.key==='/'&&!typing&&!e.metaKey&&!e.ctrlKey&&!e.altKey){e.preventDefault();open();}
+  });
+  /* החלפת תצוגה (נושא/שיעור) מסדרת את ה-DOM מחדש - מנקים כדי לא להשאיר סימונים יתומים */
+  document.addEventListener('click',function(e){
+    if(e.target.closest&&e.target.closest('.tsw')){clearMarks();paint();}
+  });
+
+  paint();
+  window.LimbaSearch={open:open,close:close,find:function(q){open();input.value=q;search(q);}};
 })();
 </script>
 <script id="toctoggle">
