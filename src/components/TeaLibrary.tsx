@@ -15,7 +15,6 @@
 import { useEffect, useRef } from "react";
 import { TEA_BOOKS, TEA_STORE, type TeaBook } from "./teaLibraryData";
 
-const S = 2.0;   // px per mm — pile and panel share the same scale
 const GAP = 26;
 
 export default function TeaLibrary() {
@@ -34,6 +33,9 @@ export default function TeaLibrary() {
     const metaTitle = root.querySelector<HTMLElement>(".tl-meta h3")!;
     const metaYear = root.querySelector<HTMLElement>(".tl-year")!;
     const metaDesc = root.querySelector<HTMLElement>(".tl-syn")!;
+
+    // px per mm — capped so the widest book (Wandering Thought, 210mm) fits narrow screens
+    const S = Math.min(2.0, (shelf.clientWidth * 0.92) / 210);
 
     type Slot = { el: HTMLElement; box: HTMLElement; y: number; T: number; jr: string };
     const slots: Slot[] = [];
@@ -66,40 +68,40 @@ export default function TeaLibrary() {
     });
     const pileH = y - GAP;
 
-    let scrollPos = 0.5;
+    /* ---- parallax: the PAGE scroll drives the pile position and every
+       book's viewing angle. No internal scroll region — the pile travels
+       with the page (books low on screen are seen from above, books at
+       screen-center are seen edge-on), and the paper texture drifts
+       slightly for depth. ---- */
+    const paper = root.querySelector<HTMLElement>(".tl-paper");
+    let ticking = false;
     function layout() {
-      const vh = shelf.clientHeight;
-      const startY = vh * 0.72, endY = vh * 0.45 - pileH;
-      const colY = startY + (endY - startY) * scrollPos;
+      ticking = false;
+      const rect = shelf.getBoundingClientRect();
+      const winH = window.innerHeight;
+      const sh = rect.height;
+      // 0 → shelf below the viewport, 1 → shelf scrolled past above
+      const p = Math.max(0, Math.min(1, (winH - rect.top) / (winH + sh)));
+      // the pile drifts inside the shelf against the scroll — the parallax
+      const colCenter = sh * 0.55 + (0.5 - p) * sh * 0.4;
+      const colY = colCenter - pileH / 2;
       column.style.top = colY + "px";
-      const centerY = vh * 0.52;
+      const centerY = winH * 0.52;
       slots.forEach((s) => {
-        const by = colY + s.y + s.T / 2;
-        const dc = Math.max(-1, Math.min(1, (by - centerY) / (vh * 0.55)));
+        const by = rect.top + colY + s.y + s.T / 2; // screen-space position
+        const dc = Math.max(-1, Math.min(1, (by - centerY) / (winH * 0.55)));
         const ang = dc > 0 ? -(2 + dc * 24) : -(2 + dc * 6);
         s.el.style.transform = `rotateX(${ang}deg) rotateZ(${s.jr}deg)`;
       });
+      if (paper) paper.style.backgroundPosition = `0 ${(rect.top * 0.12).toFixed(1)}px, 0 ${(rect.top * 0.05).toFixed(1)}px`;
     }
-    const onWheel = (e: WheelEvent) => {
-      e.preventDefault();
-      scrollPos = Math.max(0, Math.min(1, scrollPos + e.deltaY * 0.0012));
-      layout();
+    const onScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(layout);
     };
-    shelf.addEventListener("wheel", onWheel, { passive: false });
-    let shTouchY: number | null = null;
-    const onTS = (e: TouchEvent) => { shTouchY = e.touches[0].clientY; };
-    const onTM = (e: TouchEvent) => {
-      if (shTouchY === null) return;
-      const dy = shTouchY - e.touches[0].clientY;
-      shTouchY = e.touches[0].clientY;
-      scrollPos = Math.max(0, Math.min(1, scrollPos + dy * 0.002));
-      layout();
-    };
-    const onTE = () => { shTouchY = null; };
-    shelf.addEventListener("touchstart", onTS, { passive: true });
-    shelf.addEventListener("touchmove", onTM, { passive: true });
-    shelf.addEventListener("touchend", onTE);
-    window.addEventListener("resize", layout);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
     layout();
 
     /* ---- open / close ---- */
@@ -233,11 +235,8 @@ export default function TeaLibrary() {
     sleeveBtn.addEventListener("click", toggleSleeve);
 
     return () => {
-      shelf.removeEventListener("wheel", onWheel);
-      shelf.removeEventListener("touchstart", onTS);
-      shelf.removeEventListener("touchmove", onTM);
-      shelf.removeEventListener("touchend", onTE);
-      window.removeEventListener("resize", layout);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
       column.innerHTML = "";
     };
   }, []);
@@ -246,7 +245,7 @@ export default function TeaLibrary() {
     <section className="tea-lib" id="tea-library" ref={rootRef}>
       <div className="tl-paper" aria-hidden />
 
-      <div className="tl-intro" data-reveal>
+      <div className="tl-intro">
         <div className="tl-kicker">עיצוב ועימוד לדפוס ולדיגיטל</div>
         <h2>הספרייה של תה</h2>
         <p>לפני שמונה שנים פנה אליי סופר שכותב תחת השם הבדוי &quot;תה&quot;, וביקש עיצוב ועימוד לספר שכתב — &quot;אליוט&quot;. מאז עיצבתי לו תשעה ספרים, חלקם בגרסאות אנגלית לקהל בינלאומי, ואפילו ספר ילדים אחד שגם עזרתי לאייר.</p>
@@ -254,11 +253,6 @@ export default function TeaLibrary() {
         <p className="tl-invite">אתם מוזמנים לעבור על הספרייה ולבחור לעצמכם מסע.</p>
         <a className="tl-ink-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer">לחנות הספרים של תה</a>
       </div>
-
-      <div className="tl-shelf">
-        <div className="tl-column" />
-      </div>
-      <div className="tl-shelf-hint">גלילה משנה זווית · לחיצה שולפת ספר</div>
 
       <div className="tl-panel">
         <div className="tl-stagearea">
@@ -279,6 +273,12 @@ export default function TeaLibrary() {
           <div className="tl-close-hint">גרירה מסובבת את הספר לכל הכיוונים · לחיצה עליו מחזירה לערימה</div>
         </div>
       </div>
+
+      <div className="tl-shelf">
+        <div className="tl-column" />
+      </div>
+      <div className="tl-shelf-hint">הגלילה משנה את הזווית · לחיצה שולפת ספר</div>
+
 
       <style>{`
 .tea-lib{position:relative;height:100vh;overflow:hidden;color:var(--navy,#081845);--tl-muted:#3d4a66;--tl-faint:#7d8299}
@@ -342,13 +342,18 @@ export default function TeaLibrary() {
 .tl-sleeve-btn.on{display:inline-flex}
 .tl-close-hint{margin-top:16px;font-size:11px;color:var(--tl-faint);letter-spacing:.05em;line-height:1.8}
 @media (max-width:1024px){
+  /* mandatory scroll-snap fights sections taller than the viewport (the snap
+     yanks the scroll back past this section) — turn it off on small screens */
+  html{scroll-snap-type:none !important}
+  /* the three zones stack vertically: titles → selected-book placeholder → pile */
   .tea-lib{height:auto;min-height:100vh;padding:10vw 6vw 6vw}
-  .tl-intro{position:static;width:100%;max-width:560px;margin:0 auto 8vw}
+  /* position:relative keeps the z-index alive — static let the paper layer paint OVER the text */
+  .tl-intro{position:relative;top:auto;right:auto;z-index:5;width:100%;max-width:560px;margin:0 auto 8vw}
   .tl-intro h2{white-space:normal}
-  .tl-panel{position:static;width:100%;max-width:460px;margin:0 auto;justify-content:flex-start}
+  .tl-panel{position:relative;left:auto;top:auto;bottom:auto;z-index:4;width:100%;max-width:460px;margin:0 auto;justify-content:flex-start}
   .tl-stagearea{margin-bottom:24px}
-  .tl-shelf{position:relative;left:auto;top:auto;bottom:auto;width:100%;height:78vh;margin-top:4vw;touch-action:none}
-  .tl-shelf-hint{position:static;width:100%;margin-top:6px}
+  .tl-shelf{position:relative;left:auto;top:auto;bottom:auto;width:100%;height:72vh;margin-top:4vw}
+  .tl-shelf-hint{position:relative;z-index:3;width:100%;margin-top:6px}
   .tl-syn{max-height:none}
 }
       `}</style>
