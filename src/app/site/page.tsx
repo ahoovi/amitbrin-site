@@ -12,6 +12,7 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import KssemacCase from "../../components/KssemacCase";
+import TeaLibrary from "../../components/TeaLibrary";
 
 /* ---- Word-aware rotating headline ----
    Each word enters with an animation that embodies its meaning:
@@ -958,6 +959,9 @@ export default function SitePage() {
           </p>
         </div>
       </section>
+
+      {/* ============ 2.4 · WORKS — the Tea library ============ */}
+      <TeaLibrary />
 
       {/* ============ 2.5 · WORKS — mini case studies (01: KsseMac) ============ */}
       <section className="sec-works" id="works">
