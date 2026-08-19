@@ -509,6 +509,32 @@ mark.lsr{background:#ffe9a8;color:inherit;border-radius:2px;padding:0;box-decora
 mark.lsr.cur{background:var(--gold);color:#fff}
 html.nosnap{scroll-snap-type:none!important}
 @media print{.nsrch{display:none!important}mark.lsr{background:none;color:inherit}}
+
+/* ============ v13 · הכלה אופקית + סטיקי כותרת בטבלאות הטיה במובייל ============ */
+
+/* -- 13.1 שום אלמנט לא מזיז את הקנבס ימינה-שמאלה -- */
+/* clip ולא hidden: clip לא יוצר scroll container, ולכן לא הורג אף sticky בעמוד */
+html{overflow-x:clip}
+body{overflow-x:clip}
+
+/* מסילת גריד רחבה מהמסך דוחפת את כל העמוד. min() סוגרת את זה לתמיד. */
+.numgrid{grid-template-columns:repeat(auto-fit,minmax(min(100%,270px),1fr))}
+.vocab{grid-template-columns:repeat(auto-fit,minmax(min(100%,290px),1fr))}
+.sound-grid{grid-template-columns:repeat(auto-fit,minmax(min(100%,280px),1fr))}
+.daytimes{grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr))}
+.numgrid,.vocab,.sound-grid,.daytimes,.pairs,.legend,.dialog{max-width:100%}
+
+/* הבר העליון: כל ילד רשאי להתכווץ, כדי ששדה החיפוש לא ידחוף אותו מחוץ למסך */
+.navbar .wrap>*{min-width:0}
+.navbar .loc{flex:1 1 0;min-width:0}
+
+/* -- 13.2 (בוטל) --
+   ניסיתי להפוך טבלת הטיה גבוהה לחלונית עם גלילה פנימית ושורת גופים נעוצה בראשה.
+   זה עבד טכנית ונפסל בבדיקה: מגירה בתוך עמוד היא דפוס גרוע לקריאה רצופה.
+   האילוץ שמאחורי זה נשאר בתוקף: אלמנט עם overflow-x:auto הוא scroll container
+   בשני הצירים, ולכן position:sticky של צאצא שלו נמדד מולו ולא מול המסך.
+   כלומר גלילה אופקית פנימית ושורת כותרת שנדבקת למסך - לא יכולות לדור יחד.
+   נבחר: גלילה אופקית, בלי כותרת דביקה במובייל. -- */
 </style>
 </head>
 <body>
