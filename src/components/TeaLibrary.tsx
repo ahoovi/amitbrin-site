@@ -34,8 +34,12 @@ export default function TeaLibrary() {
     const metaYear = root.querySelector<HTMLElement>(".tl-year")!;
     const metaDesc = root.querySelector<HTMLElement>(".tl-syn")!;
 
-    // px per mm — capped so the widest book (Wandering Thought, 210mm) fits narrow screens
-    const S = Math.min(2.0, (shelf.clientWidth * 0.92) / 210);
+    // px per mm — capped by width (widest book, 210mm) AND by height (the pile
+    // must fit inside the shelf, never clipped at the top of the section)
+    const pileHeightAt = (s: number) =>
+      TEA_BOOKS.reduce((acc, b) => acc + Math.max(14, b.t * s), 0) + GAP * (TEA_BOOKS.length - 1);
+    let S = Math.min(2.0, (shelf.clientWidth * 0.92) / 210);
+    while (S > 0.9 && pileHeightAt(S) > shelf.clientHeight * 0.78) S -= 0.05;
 
     type Slot = { el: HTMLElement; box: HTMLElement; y: number; T: number; jr: string };
     const slots: Slot[] = [];
@@ -84,7 +88,7 @@ export default function TeaLibrary() {
       const p = Math.max(0, Math.min(1, (winH - rect.top) / (winH + sh)));
       // the pile drifts inside the shelf against the scroll — the parallax
       const colCenter = sh * 0.55 + (0.5 - p) * sh * 0.4;
-      const colY = colCenter - pileH / 2;
+      const colY = Math.max(10, Math.min(sh - pileH - 10, colCenter - pileH / 2));
       column.style.top = colY + "px";
       const centerY = winH * 0.52;
       slots.forEach((s) => {
@@ -122,7 +126,7 @@ export default function TeaLibrary() {
       const dx = ped.left + ped.width / 2 - (src.left + src.width / 2);
       const dy = ped.top + ped.height / 2 - (src.top + src.height / 2);
       s.el.classList.add("tl-extracting");
-      s.box.style.transform = `translateX(${dx}px) translateY(${dy}px) rotateX(-88deg)`;
+      s.box.style.transform = `translateX(${dx}px) translateY(${dy}px) rotateX(-88deg) scale(${(spinScale(b) / S).toFixed(3)})`;
       setTimeout(() => {
         s.el.classList.add("tl-open");
         s.el.classList.remove("tl-extracting");
@@ -150,7 +154,7 @@ export default function TeaLibrary() {
       const dx = ped.left + ped.width / 2 - (src.left + src.width / 2);
       const dy = ped.top + ped.height / 2 - (src.top + src.height / 2);
       s.box.style.transition = "none";
-      s.box.style.transform = `translateX(${dx}px) translateY(${dy}px) rotateX(-88deg)`;
+      s.box.style.transform = `translateX(${dx}px) translateY(${dy}px) rotateX(-88deg) scale(${(spinScale(TEA_BOOKS[i]) / S).toFixed(3)})`;
       s.el.classList.add("tl-extracting");
       requestAnimationFrame(() => { requestAnimationFrame(() => {
         s.box.style.transition = "";
@@ -160,8 +164,12 @@ export default function TeaLibrary() {
     }
 
     /* ---- the standing, rotating book ---- */
+    function spinScale(b: TeaBook) {
+      return Math.min(S, (window.innerHeight * 0.4) / b.h);
+    }
     function buildSpin(b: TeaBook) {
-      const W = b.w * S, H = b.h * S, T = Math.max(12, b.t * S);
+      const SD = spinScale(b);
+      const W = b.w * SD, H = b.h * SD, T = Math.max(12, b.t * SD);
       spinEl.style.width = W + "px";
       spinEl.style.height = H + "px";
       spinShadow.style.top = H + 22 + "px";
@@ -245,6 +253,8 @@ export default function TeaLibrary() {
     <section className="tea-lib" id="tea-library" ref={rootRef}>
       <div className="tl-paper" aria-hidden />
 
+      <div className="tl-frame">
+
       <div className="tl-intro">
         <div className="tl-kicker">עיצוב ועימוד לדפוס ולדיגיטל</div>
         <h2>הספרייה של תה</h2>
@@ -279,6 +289,7 @@ export default function TeaLibrary() {
       </div>
       <div className="tl-shelf-hint">הגלילה משנה את הזווית · לחיצה שולפת ספר</div>
 
+      </div>
 
       <style>{`
 .tea-lib{position:relative;height:100vh;overflow:hidden;color:var(--navy,#081845);--tl-muted:#3d4a66;--tl-faint:#7d8299}
@@ -287,7 +298,8 @@ export default function TeaLibrary() {
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.016' numOctaves='4' seed='547'/><feDiffuseLighting lighting-color='%23fdfaf2' surfaceScale='2.2'><feDistantLight azimuth='235' elevation='58'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>"),
     url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.006' numOctaves='3' seed='47'/><feDiffuseLighting lighting-color='%23dcd6db' surfaceScale='3.4'><feDistantLight azimuth='235' elevation='55'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23f)' opacity='0.5'/></svg>");
   background-size:900px 900px,1400px 1400px;background-blend-mode:multiply;opacity:.9}
-.tl-intro{position:absolute;top:11vh;right:5vw;width:min(330px,24vw);z-index:5}
+.tl-frame{position:absolute;inset:0;max-width:1920px;margin:0 auto}
+.tl-intro{position:absolute;top:11vh;right:5%;width:min(330px,24%);z-index:5}
 .tl-kicker{font-family:'Leon',sans-serif;font-weight:400;color:var(--tl-muted);font-size:12px;letter-spacing:.1em;margin-bottom:12px}
 .tl-intro h2{font-family:'Leon','Noto Sans Hebrew',sans-serif;font-weight:700;color:var(--navy,#081845);font-size:clamp(24px,2.3vw,34px);line-height:1.15;white-space:nowrap;margin:0 0 20px}
 .tl-intro p{color:var(--tl-muted);font-size:13.5px;line-height:1.78;margin:0 0 12px}
@@ -308,7 +320,7 @@ export default function TeaLibrary() {
 .tl-bf-pages{background:linear-gradient(180deg,rgba(2,13,44,.18),rgba(2,13,44,0) 40% 60%,rgba(2,13,44,.22)),repeating-linear-gradient(180deg,#efe9da 0 2px,#d5cebd 2px 3px)}
 .tl-bf-pagesV{background:linear-gradient(180deg,rgba(2,13,44,.22),rgba(2,13,44,.05) 45%,rgba(2,13,44,.3)),repeating-linear-gradient(180deg,#efe9da 0 2px,#d5cebd 2px 3px)}
 .tl-shelf-hint{position:absolute;bottom:16px;left:26%;width:44%;text-align:center;color:var(--tl-faint);font-size:11.5px;letter-spacing:.12em;z-index:3;font-family:'Leon',sans-serif}
-.tl-panel{position:absolute;left:4.5vw;top:0;bottom:0;width:min(350px,25vw);display:flex;flex-direction:column;justify-content:center;z-index:4}
+.tl-panel{position:absolute;left:4.5%;top:0;bottom:0;width:min(350px,25%);display:flex;flex-direction:column;justify-content:center;z-index:4}
 .tl-stagearea{position:relative;display:flex;align-items:flex-end;justify-content:center;margin-bottom:36px;min-height:180px}
 .tl-placeholder{width:200px;aspect-ratio:140/200;position:relative;display:flex;align-items:center;justify-content:center;color:var(--tl-faint);font-size:12.5px;letter-spacing:.08em;text-align:center;line-height:1.9;font-family:'Leon',sans-serif}
 .tl-placeholder::before{content:'';position:absolute;inset:2px;pointer-events:none;border:1.6px dashed #273E58;opacity:.45;border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;filter:url(#inkline)}
@@ -331,7 +343,7 @@ export default function TeaLibrary() {
 .tl-panel.has-book .tl-meta{opacity:1;transform:none}
 .tl-meta h3{font-family:'Leon','Noto Sans Hebrew',sans-serif;font-weight:700;color:var(--navy,#081845);font-size:clamp(20px,2vw,28px);line-height:1.25;margin:0 0 4px}
 .tl-year{font-family:'Leon',sans-serif;font-weight:400;color:var(--tl-muted);font-size:12px;letter-spacing:.12em;margin-bottom:14px}
-.tl-syn{color:var(--tl-muted);font-size:13px;line-height:1.75;margin:0 0 6px;max-height:30vh;overflow:auto}
+.tl-syn{color:var(--tl-muted);font-size:13px;line-height:1.75;margin:0 0 6px;max-height:24vh;overflow:auto}
 .tl-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;justify-content:flex-start}
 .tl-ink-btn{display:inline-flex;align-items:center;gap:.55em;position:relative;z-index:0;font-family:'Leon',sans-serif;font-weight:500;font-size:13.5px;color:var(--navy,#081845);background:transparent;border:none;cursor:pointer;padding:.6em 1.5em;text-decoration:none;transition:color .35s cubic-bezier(.32,.72,0,1),transform .5s cubic-bezier(.32,.72,0,1)}
 .tl-ink-btn::before{content:'';position:absolute;inset:0;z-index:-1;border:1.7px solid var(--navy,#081845);border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;filter:url(#inkline);transition:background .35s cubic-bezier(.32,.72,0,1)}
@@ -347,6 +359,7 @@ export default function TeaLibrary() {
   html{scroll-snap-type:none !important}
   /* the three zones stack vertically: titles → selected-book placeholder → pile */
   .tea-lib{height:auto;min-height:100vh;padding:10vw 6vw 6vw}
+  .tl-frame{display:contents}
   /* position:relative keeps the z-index alive — static let the paper layer paint OVER the text */
   .tl-intro{position:relative;top:auto;right:auto;z-index:5;width:100%;max-width:560px;margin:0 auto 8vw}
   .tl-intro h2{white-space:normal}
