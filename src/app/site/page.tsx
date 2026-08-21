@@ -777,9 +777,13 @@ function FxTitle({
     };
   }, [palette]);
   return (
-    <Tag ref={ref} className={"fxt fxt-" + palette + " " + className}>
+    /* the letters are split into spans for the print-plate effect, which a
+       screen reader would otherwise read out one character at a time. The
+       real text lives on aria-label; the split letters are hidden from the
+       accessibility tree. Not one pixel changes. */
+    <Tag ref={ref} className={"fxt fxt-" + palette + " " + className} aria-label={lines.join(" ")}>
       {lines.map((line, li) => (
-        <span className="fxl" key={li}>
+        <span className="fxl" key={li} aria-hidden>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (
@@ -913,6 +917,8 @@ export default function SitePage() {
       <section className="sec-sailing" id="sailing">
         <video
           className="bg-video"
+          aria-hidden
+          tabIndex={-1}
           autoPlay
           muted
           loop
@@ -1006,6 +1012,8 @@ export default function SitePage() {
       <section className="sec-news" id="news">
         <video
           className="bg-video"
+          aria-hidden
+          tabIndex={-1}
           autoPlay
           muted
           loop

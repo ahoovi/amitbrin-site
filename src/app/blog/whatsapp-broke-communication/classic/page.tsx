@@ -78,9 +78,11 @@ function BleedTitle({
     };
   }, []);
   return (
-    <Tag ref={ref} className={"blt " + className}>
+    /* split letters carry the ink-bleed effect; the real text lives on
+       aria-label so a screen reader does not spell it out. */
+    <Tag ref={ref} className={"blt " + className} aria-label={lines.join(" ")}>
       {lines.map((line, li) => (
-        <span className="fxl" key={li}>
+        <span className="fxl" key={li} aria-hidden>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (

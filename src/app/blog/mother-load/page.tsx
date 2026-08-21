@@ -79,9 +79,13 @@ function BleedTitle({
     };
   }, []);
   return (
-    <Tag ref={ref} className={"blt " + className}>
+    /* the letters are split into spans for the ink-bleed effect, which a
+       screen reader would otherwise read out one character at a time. The
+       real text lives on aria-label; the split letters are hidden from the
+       accessibility tree. Not one pixel changes. */
+    <Tag ref={ref} className={"blt " + className} aria-label={lines.join(" ")}>
       {lines.map((line, li) => (
-        <span className="fxl" dir={/[֐-׿]/.test(line) ? "rtl" : "ltr"} key={li}>
+        <span className="fxl" dir={/[֐-׿]/.test(line) ? "rtl" : "ltr"} key={li} aria-hidden>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (

@@ -252,7 +252,7 @@ function Comments() {
   };
   return (
     <section className="comments" id="comments">
-      <h3>יש לך מה להגיד על זה?</h3>
+      <h2>יש לך מה להגיד על זה?</h2>
       <p className="comments-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
       {state === "ok" ? (
         <p className="comments-ok">תודה! התגובה נשלחה.</p>
@@ -612,7 +612,7 @@ const CSS = `
 
 /* ---------- comments as composer ---------- */
 .comments { margin:3.2rem 0 0; }
-.comments h3 { font-size:1.15rem; margin:0 0 .2rem; }
+.comments h2 { font-size:1.15rem; margin:0 0 .2rem; font-weight:600; }
 .comments-sub { color:var(--muted); font-size:.9rem; margin:0 0 1.1rem; }
 .comments-form { display:flex; flex-direction:column; gap:.7rem; }
 .comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }

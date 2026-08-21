@@ -769,6 +769,8 @@ export default function SitePage() {
       <section className="sec-sailing" id="sailing">
         <video
           className="bg-video"
+          aria-hidden
+          tabIndex={-1}
           autoPlay
           muted
           loop
@@ -836,6 +838,8 @@ export default function SitePage() {
       <section className="sec-news" id="news">
         <video
           className="bg-video"
+          aria-hidden
+          tabIndex={-1}
           autoPlay
           muted
           loop

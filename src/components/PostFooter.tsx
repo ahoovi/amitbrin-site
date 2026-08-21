@@ -104,7 +104,7 @@ export default function PostFooter({
 
       {/* ---- comments ---- */}
       {show("comments") && <section className="pf-comments" data-reveal>
-        <h3 className="pf-h">יש לך מה להגיד על זה?</h3>
+        <h2 className="pf-h">יש לך מה להגיד על זה?</h2>
         <p className="pf-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
         {state === "ok" ? (
           <p className="pf-ok">תודה! התגובה נשלחה.</p>
