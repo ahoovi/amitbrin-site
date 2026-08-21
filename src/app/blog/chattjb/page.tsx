@@ -13,6 +13,7 @@
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostFooter from "../../../components/PostFooter";
 
 /* ---------- header status driven by scroll ---------- */
 function useScrollThinking() {
@@ -215,68 +216,6 @@ function Sidebar() {
 const POST_URL = "https://amitbrin.com/blog/chattjb";
 const POST_TITLE = "הצ׳טבוט האנושי שלך - עמית ברין";
 
-function ShareRow() {
-  const [copied, setCopied] = useState(false);
-  const enc = encodeURIComponent;
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(POST_URL); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
-  };
-  return (
-    <div className="share-btns">
-      <a className="sh-btn" href={`https://wa.me/?text=${enc(POST_TITLE + " " + POST_URL)}`} target="_blank" rel="noopener noreferrer">להעביר בוואטסאפ</a>
-      <a className="sh-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
-      <a className="sh-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">פייסבוק</a>
-      <a className="sh-btn" href={`https://x.com/intent/tweet?text=${enc(POST_TITLE)}&url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">X</a>
-      <button className="sh-btn" type="button" onClick={copy}>{copied ? "הועתק ✓" : "העתקת קישור"}</button>
-    </div>
-  );
-}
-
-/* ---------- comments: the "composer" of this chat ---------- */
-function Comments() {
-  const [state, setState] = useState<"idle" | "sending" | "ok" | "err">("idle");
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setState("sending");
-    try {
-      const res = await fetch("https://formspree.io/f/xpqvaarr", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
-      if (res.ok) { setState("ok"); form.reset(); } else setState("err");
-    } catch { setState("err"); }
-  };
-  return (
-    <section className="comments" id="comments">
-      <h3>יש לך מה להגיד על זה?</h3>
-      <p className="comments-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
-      {state === "ok" ? (
-        <p className="comments-ok">תודה! התגובה נשלחה.</p>
-      ) : (
-        <form className="comments-form" onSubmit={submit}>
-          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג (גרסת הצ׳טבוט): הצ׳טבוט האנושי שלך" />
-          <input type="hidden" name="post" value="chattjb" />
-          <div className="comments-grid">
-            <input className="c-in" type="text" name="name" placeholder="שם" required />
-            <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
-          </div>
-          <div className="composer">
-            <textarea className="c-in c-area" name="comment" placeholder="לשאול בן אדם…" rows={2} required />
-            <button className="send-btn" type="submit" disabled={state === "sending"} aria-label="שליחה">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-            </button>
-          </div>
-          {state === "err" && <p className="comments-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
-        </form>
-      )}
-      <p className="disclaimer">ChatTJB עלול לטעות. הוא בן אדם.</p>
-    </section>
-  );
-}
-
-/* fixed fake composer that leads to the real one */
 function FloatingComposer() {
   const [hide, setHide] = useState(false);
   useEffect(() => {
@@ -440,9 +379,7 @@ export default function ChattjbPost() {
 
         <Bot parts={["עכשיו תשאלו את עצמכם באיזו משתי הקטגוריות נמצאת רוב האינטראקציה שלכם היום. אני כבר יודע מה התשובה שלי, ואני לא בטוח שאני אוהב אותה."]} />
 
-        <div className="share-wrap"><ShareRow /></div>
-
-        <Comments />
+        <div className="pf-band" id="comments"><PostFooter slug="chattjb" title={POST_TITLE} /></div>
       </main>
 
       <FloatingComposer />
@@ -585,43 +522,12 @@ const CSS = `
 /* ---------- divider ---------- */
 .divider { text-align:center; color:var(--muted); letter-spacing:.4em; margin:2.6rem 0; }
 
-/* ---------- share ---------- */
-.share-wrap { margin:3rem 0 0; }
-.share-btns { display:flex; flex-wrap:wrap; gap:.55rem; justify-content:center; }
-.sh-btn {
-  font-family:inherit; font-size:.88rem; font-weight:500; color:var(--text);
-  background:var(--bg); border:1px solid var(--line); border-radius:99px;
-  padding:.45em 1.1em; text-decoration:none; cursor:pointer;
-  transition:background .2s, border-color .2s;
+/* ---------- the shared post footer sits on its own paper band ---------- */
+.pf-band {
+  margin:3.4rem 0 0; padding:2.6rem clamp(1.1rem,4vw,2.4rem) 3rem;
+  background:#FCFBF6; border:1px solid var(--line); border-radius:1.4rem;
 }
-.sh-btn:hover { background:var(--pill); border-color:#d6d6d6; }
-
-/* ---------- comments as composer ---------- */
-.comments { margin:3.2rem 0 0; }
-.comments h3 { font-size:1.15rem; margin:0 0 .2rem; }
-.comments-sub { color:var(--muted); font-size:.9rem; margin:0 0 1.1rem; }
-.comments-form { display:flex; flex-direction:column; gap:.7rem; }
-.comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:.7rem; }
-.c-in {
-  width:100%; box-sizing:border-box;
-  font-family:inherit; font-size:1rem; color:var(--text);
-  background:var(--pill); border:1px solid transparent; border-radius:1rem;
-  padding:.72em 1em; outline:none; transition:border-color .2s, background .2s;
-}
-.c-in:focus { background:#fff; border-color:#c9c9c9; }
-.composer { position:relative; display:flex; align-items:flex-end; }
-.c-area { resize:vertical; min-height:56px; border-radius:1.4rem; flex:1; padding-inline-end:3.4rem; }
-.send-btn {
-  position:absolute; inset-inline-end:.55rem; bottom:.55rem;
-  width:36px; height:36px; border-radius:50%;
-  background:var(--text); color:#fff; border:none; cursor:pointer;
-  display:flex; align-items:center; justify-content:center;
-  transition:transform .2s var(--ease), opacity .2s;
-}
-.send-btn:hover { transform:scale(1.07); }
-.send-btn:disabled { opacity:.5; }
-.comments-ok { font-weight:600; }
-.comments-err { font-size:.9rem; color:#8a1f1f; margin:0; }
+.pf-band .pf-root { max-width:64rem; margin:0 auto; }
 .disclaimer { text-align:center; color:var(--muted); font-size:.78rem; margin:1.6rem 0 0; }
 
 /* ---------- floating composer ---------- */

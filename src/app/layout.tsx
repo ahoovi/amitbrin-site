@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { InkDefs, INK_CSS } from "../components/InkFrame";
 
 export const metadata: Metadata = {
   title: "עמית ברין – עיצוב | מיתוג | שיווק | הדרכה",
@@ -14,6 +15,9 @@ export default function RootLayout({
   return (
     <html lang="he" dir="rtl">
       <body className="antialiased min-h-screen">
+        {/* the ink filters + the frame CSS, mounted once for every route */}
+        <style>{INK_CSS}</style>
+        <InkDefs />
         <main>
           {children}
         </main>

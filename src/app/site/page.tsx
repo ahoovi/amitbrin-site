@@ -13,6 +13,7 @@
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import KssemacCase from "../../components/KssemacCase";
 import TeaLibrary from "../../components/TeaLibrary";
+import InkFrame from "../../components/InkFrame";
 
 /* ---- Word-aware rotating headline ----
    Each word enters with an animation that embodies its meaning:
@@ -999,9 +1000,11 @@ export default function SitePage() {
           <div className="blog-rail" data-reveal>
             {POSTS.map((p, idx) => (
               <article className={"post-card" + (p.placeholder ? " placeholder" : "")} key={idx}>
+                <InkFrame kind="box" seed={idx} />
                 <h3 className="post-title">{p.title}</h3>
                 <p className="post-excerpt">{p.excerpt}</p>
                 <a href={p.href} className="post-btn" onClick={(e) => { if (p.placeholder) e.preventDefault(); }}>
+                  <InkFrame seed={idx + 3} />
                   לפוסט המלא <span aria-hidden>←</span>
                 </a>
               </article>
@@ -1542,6 +1545,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .blog-rail::-webkit-scrollbar { display:none; }
 /* transparent cards with a hand-drawn ink border on the sketch paper */
 .post-card {
+  z-index:0;
   flex:0 0 max(280px, calc((95vw - 3.6rem) / 2.5)); scroll-snap-align:start;
   display:flex; flex-direction:column; align-items:flex-start;
   position:relative; background:transparent; border:none;
@@ -1549,15 +1553,10 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   padding:2.4rem 2.4rem 2.2rem;
   transition:transform .7s var(--ease);
 }
-.post-card::before {
-  content:''; position:absolute; inset:2px; pointer-events:none;
-  border:1.8px solid var(--navy);
-  border-radius:16px 22px 14px 24px / 22px 15px 24px 16px;
-  filter:url(#inkline);
-}
+.post-card .ink-path { stroke:var(--navy); }
 .post-card:hover { transform:translateY(-6px); }
 .post-card.placeholder { opacity:.45; }
-.post-card.placeholder::before { border-style:dashed; }
+.post-card.placeholder .ink-path { stroke-dasharray:7 6; }
 .post-title { color:var(--navy); font-weight:600; font-size:clamp(1.3rem, 2vw, 1.9rem); }
 .post-excerpt { color:#020D2C; margin-top:1rem; flex:1; font-size:clamp(.95rem, 1.05vw, 1.05rem); line-height:1.75; }
 .post-btn {
@@ -1568,15 +1567,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   padding:.6em 1.5em; text-decoration:none;
   transition:color .35s var(--ease), transform .5s var(--ease);
 }
-.post-btn::before {
-  content:''; position:absolute; inset:0; z-index:-1;
-  border:1.7px solid var(--navy);
-  border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;
-  filter:url(#inkline);
-  transition:background .35s var(--ease);
-}
-.post-btn:hover { color:var(--cream); }
-.post-btn:hover::before { background:var(--navy); }
 .post-btn:active { transform:scale(.98); }
 
 /* ---------- LIQUID GLASS (shared) ---------- */

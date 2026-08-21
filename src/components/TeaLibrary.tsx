@@ -14,6 +14,7 @@
 
 import { useEffect, useRef } from "react";
 import { TEA_BOOKS, TEA_STORE, type TeaBook } from "./teaLibraryData";
+import InkFrame from "./InkFrame";
 
 const GAP = 26;
 
@@ -29,6 +30,9 @@ export default function TeaLibrary() {
     const spinEl = root.querySelector<HTMLElement>(".tl-spin")!;
     const spinShadow = root.querySelector<HTMLElement>(".tl-spin-shadow")!;
     const sleeveBtn = root.querySelector<HTMLButtonElement>(".tl-sleeve-btn")!;
+    // the label lives in its own span — writing to the button itself would
+    // wipe the InkFrame svg that draws its line
+    const sleeveLabel = sleeveBtn.querySelector<HTMLElement>(".tl-btn-label")!;
     const siteBtn = root.querySelector<HTMLAnchorElement>(".tl-site-btn")!;
     const metaTitle = root.querySelector<HTMLElement>(".tl-meta h3")!;
     const metaYear = root.querySelector<HTMLElement>(".tl-year")!;
@@ -139,7 +143,7 @@ export default function TeaLibrary() {
         siteBtn.href = b.url || TEA_STORE;
         siteBtn.style.display = b.noStore ? "none" : "inline-flex";
         sleeveBtn.classList.toggle("on", !!b.sleeve);
-        sleeveBtn.textContent = "להציץ מתחת לשרוול";
+        sleeveLabel.textContent = "להציץ מתחת לשרוול";
         showTip();
       }, 600);
     }
@@ -257,7 +261,7 @@ export default function TeaLibrary() {
       if (!sl) return;
       const off = !sl.classList.contains("off");
       sl.classList.toggle("off", off);
-      sleeveBtn.textContent = off ? "להחזיר את השרוול" : "להציץ מתחת לשרוול";
+      sleeveLabel.textContent = off ? "להחזיר את השרוול" : "להציץ מתחת לשרוול";
       const b = TEA_BOOKS[openIndex];
       const face = spinEl.querySelector<HTMLElement>(".tl-spineface");
       if (b && face && b.sleeveSpine) face.style.backgroundImage = `url('${off ? b.spine : b.sleeveSpine}')`;
@@ -284,7 +288,7 @@ export default function TeaLibrary() {
         <p>לפני שמונה שנים פנה אליי סופר שכותב תחת השם הבדוי &quot;תה&quot;, וביקש עיצוב ועימוד לספר שכתב — &quot;אליוט&quot;. מאז עיצבתי לו תשעה ספרים, חלקם בגרסאות אנגלית לקהל בינלאומי, ואפילו ספר ילדים אחד שגם עזרתי לאייר.</p>
         <p>השבוע תה משיק את ספרו העשירי — ספר אוטוביוגרפי, שבו הוא נחשף לראשונה בשמו האמיתי. זה אירוע חגיגי בשבילו (וגם בשבילי!) כי הספר הזה מחבר בין העולמות הבדיוניים, המרגשים והרומנטיים שברא לבין העולם האמיתי שמאחוריהם. אני כבר קראתי כל אחד ואחד מהספרים האלה והתרגשתי, ועכשיו, להיות חלק מהמהלך האישי הזה — זה בכלל מרגש ברמה אחרת.</p>
         <p className="tl-invite">אתם מוזמנים לעבור על הספרייה ולבחור לעצמכם מסע.</p>
-        <a className="tl-ink-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer">לחנות הספרים של תה</a>
+        <a className="tl-ink-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer"><InkFrame seed={1} />לחנות הספרים של תה</a>
       </div>
 
       <div className="tl-panel">
@@ -310,8 +314,8 @@ export default function TeaLibrary() {
           <div className="tl-year" />
           <p className="tl-syn" />
           <div className="tl-row">
-            <a className="tl-ink-btn tl-site-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer">לעמוד הספר באתר של תה</a>
-            <button className="tl-ink-btn tl-sleeve-btn" type="button">להציץ מתחת לשרוול</button>
+            <a className="tl-ink-btn tl-site-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer"><InkFrame seed={2} />לעמוד הספר באתר של תה</a>
+            <button className="tl-ink-btn tl-sleeve-btn" type="button"><InkFrame seed={3} /><span className="tl-btn-label">להציץ מתחת לשרוול</span></button>
           </div>
           <div className="tl-close-hint">לחיצה על הספר מחזירה אותו לערימה</div>
         </div>
@@ -392,10 +396,8 @@ export default function TeaLibrary() {
 .tl-syn{color:var(--tl-muted);font-size:13px;line-height:1.75;margin:0 0 6px;max-height:24vh;overflow:auto}
 .tl-row{display:flex;gap:12px;flex-wrap:wrap;margin-top:16px;justify-content:flex-start}
 .tl-ink-btn{display:inline-flex;align-items:center;gap:.55em;position:relative;z-index:0;font-family:'Leon',sans-serif;font-weight:500;font-size:13.5px;color:var(--navy,#081845);background:transparent;border:none;cursor:pointer;padding:.6em 1.5em;text-decoration:none;transition:color .35s cubic-bezier(.32,.72,0,1),transform .5s cubic-bezier(.32,.72,0,1)}
-.tl-ink-btn::before{content:'';position:absolute;inset:0;z-index:-1;border:1.7px solid var(--navy,#081845);border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;filter:url(#inkline);transition:background .35s cubic-bezier(.32,.72,0,1)}
-.tl-ink-btn:hover{color:var(--cream,#EADEB7)}
-.tl-ink-btn:hover::before{background:var(--navy,#081845)}
 .tl-ink-btn:active{transform:scale(.98)}
+.tl-ink-btn .ink-path{stroke:var(--navy,#081845)}
 .tl-sleeve-btn{display:none}
 .tl-sleeve-btn.on{display:inline-flex}
 .tl-close-hint{margin-top:16px;font-size:11px;color:var(--tl-faint);letter-spacing:.05em;line-height:1.8}

@@ -22,6 +22,8 @@
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostFooter from "../../../components/PostFooter";
+import InkFrame from "../../../components/InkFrame";
 import { PaperTexture } from "@paper-design/shaders-react";
 
 const LOGO_OLD = "/media/blog/instagram/logo-old.png";
@@ -145,106 +147,7 @@ function ReadProgress() {
   return <div className="read-progress" ref={ref} aria-hidden />;
 }
 
-/* ---------- share ---------- */
-const POST_URL = "https://amitbrin.com/blog/instagram";
 const POST_TITLE = "כשהמשתמשים שלך לא יודעים לקרוא את השם שלך - עמית ברין";
-
-const Ic = {
-  wa: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35zM12.05 21.6h-.01a9.55 9.55 0 0 1-4.87-1.33l-.35-.21-3.62.95.97-3.53-.23-.36a9.53 9.53 0 1 1 8.11 4.48zM12.05.9C5.93.9.96 5.87.96 11.99c0 1.95.51 3.86 1.48 5.54L.87 23.1l5.71-1.5a11.05 11.05 0 0 0 5.46 1.44h.01c6.12 0 11.09-4.97 11.09-11.09C23.14 5.87 18.17.9 12.05.9z"/></svg>
-  ),
-  li: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-  ),
-  x: (
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg>
-  ),
-  fb: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05v-2.66c0-3.03 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07z"/></svg>
-  ),
-  link: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-  ),
-};
-
-function ShareRow({ punchline = false }: { punchline?: boolean }) {
-  const [copied, setCopied] = useState(false);
-  const enc = encodeURIComponent;
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(POST_URL); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
-  };
-  return (
-    <div className="share-row">
-      {/* CLAUDE-GEN: share prompt — same wording used in the other posts */}
-      {punchline && <p className="share-wink">קדימה, אל תתביישו:</p>}
-      <div className="share-btns">
-        <a className="ink-btn" href={`https://wa.me/?text=${enc(POST_TITLE + " " + POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          <Ol />{Ic.wa} להעביר בוואטסאפ
-        </a>
-        <a className="ink-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          <Ol />{Ic.li} LinkedIn
-        </a>
-        <a className="ink-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          <Ol />{Ic.fb} פייסבוק
-        </a>
-        <a className="ink-btn" href={`https://x.com/intent/tweet?text=${enc(POST_TITLE)}&url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          <Ol />{Ic.x} X
-        </a>
-        <button className="ink-btn" type="button" onClick={copy}>
-          <Ol />{Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- comments ---------- */
-function Comments() {
-  const [state, setState] = useState<"idle" | "sending" | "ok" | "err">("idle");
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setState("sending");
-    try {
-      const res = await fetch("https://formspree.io/f/xpqvaarr", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
-      if (res.ok) { setState("ok"); form.reset(); } else setState("err");
-    } catch { setState("err"); }
-  };
-  return (
-    <section className="comments" data-reveal>
-      <h3 className="comments-title">יש לך מה להגיד על זה?</h3>
-      <p className="comments-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
-      {state === "ok" ? (
-        <p className="comments-ok">תודה! התגובה נשלחה.</p>
-      ) : (
-        <form className="comments-form" onSubmit={submit}>
-          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג: הלוגו של אינסטגרם" />
-          <input type="hidden" name="post" value="instagram" />
-          <div className="comments-grid">
-            <span className="c-field">
-              <input className="c-in" type="text" name="name" placeholder="שם" required />
-            </span>
-            <span className="c-field">
-              <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
-            </span>
-          </div>
-          <span className="c-field c-field-area">
-            <textarea className="c-in c-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required />
-          </span>
-          <button className="ink-btn c-send" type="submit" disabled={state === "sending"}>
-            <Ol />
-            {state === "sending" ? "שולח…" : "שליחת תגובה"}
-          </button>
-          {state === "err" && <p className="comments-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
-        </form>
-      )}
-    </section>
-  );
-}
 
 /* ---------- figures (one frame language: hairline + soft radius) ---------- */
 function useLightbox() {
@@ -293,65 +196,6 @@ function FullShot({ src, alt, cap, bleed = false }: { src: string; alt: string; 
         </div>
       )}
     </>
-  );
-}
-
-/* ---------- ink outlines drawn on hover ----------
-   Five hand-drawn frames that appear one after another, as if someone
-   kept re-tracing the imperfect line. They fade out together on leave. */
-function Ol() {
-  return (
-    <>
-      <i className="ol" aria-hidden /><i className="ol" aria-hidden /><i className="ol" aria-hidden />
-      <i className="ol" aria-hidden /><i className="ol" aria-hidden />
-    </>
-  );
-}
-
-/* ---------- related posts rail ----------
-   Titles and intro sentences are lifted verbatim from the POSTS array on
-   the one-pager (the intro is each excerpt's opening sentence). */
-const MORE = [
-  {
-    href: "/blog/chattjb",
-    cover: "/media/blog/chattjb/billboard-hero.jpg",
-    title: "הצ׳טבוט האנושי שלך",
-    intro:
-      "בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI.",
-  },
-  {
-    href: "/blog/pri-etz-hadaat",
-    cover: "/media/blog/pri-etz-hadaat/snakes-cover.jpg",
-    title: "פרי עץ הדעת",
-    intro:
-      "לפני כמה ימים לקוח סרב לקבל ממני עבודה כי היא יצירה של בינה מלאכותית (כך הוא טען).",
-  },
-  {
-    href: "/blog/motherload",
-    cover: "/media/blog/motherload/cover.jpg",
-    title: "Mother Load",
-    intro:
-      "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת.",
-  },
-];
-
-function MorePosts() {
-  return (
-    <section className="more fig-bleed" data-reveal>
-      <h2 className="more-h">עוד דברים שכתבתי עליהם:</h2>
-      <div className="more-rail">
-        {MORE.map((p) => (
-          <a className="more-card" href={p.href} key={p.href}>
-            <Ol />
-            <span className="more-cover">
-              <img src={p.cover} alt="" loading="lazy" />
-            </span>
-            <h3 className="card-title">{p.title}</h3>
-            <p>{p.intro}</p>
-          </a>
-        ))}
-      </div>
-    </section>
   );
 }
 
@@ -943,17 +787,11 @@ export default function InstagramPost() {
         </section>
 
         <hr className="ink-rule" data-reveal />
-        <div data-reveal>
-          <ShareRow punchline />
-        </div>
-        <hr className="ink-rule" data-reveal />
 
-        <Comments />
-
-        <MorePosts />
+        <PostFooter slug="instagram" title={POST_TITLE} />
 
         <footer className="bp-footer" data-reveal>
-          <button type="button" className="ink-btn" onClick={() => history.back()}><Ol />→ בחזרה</button>
+          <button type="button" className="ink-btn" onClick={() => history.back()}><InkFrame seed={4} />→ בחזרה</button>
         </footer>
       </article>
     </div>
@@ -1364,39 +1202,6 @@ const CSS = `
 .appendix .in-link:hover { color:#fff; }
 .apx-close { margin:1.8rem 0 0; line-height:1.85; color:rgba(234,222,183,.92); }
 
-/* ---------- related posts rail ---------- */
-.more { clear:both; margin:4.5rem 0 1rem; }
-.more-h {
-  color:var(--navy); font-size:var(--fs-h2); line-height:1.22;
-  margin:0 0 1.8rem;
-  padding-right:1.1rem;
-  border-right:5px solid var(--gold);
-}
-.more-rail {
-  display:grid; grid-template-columns:repeat(3, 1fr); gap:1.1rem;
-}
-.more-card {
-  position:relative; z-index:0;
-  --step:4px;
-  display:flex; flex-direction:column;
-  background:transparent; border:none;
-  padding:.7rem .7rem 1.1rem;
-  text-decoration:none; color:inherit;
-  transition:transform .45s var(--ease);
-}
-/* the drawn frame, same language as the figures in the earlier posts */
-.more-card::before {
-  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
-  border:1.8px solid var(--navy);
-  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
-  filter:url(#inkline-bp);
-}
-.more-card:hover { transform:translateY(-3px); }
-.more-cover { display:block; aspect-ratio:16 / 10; overflow:hidden; border-radius:9px; background:rgba(2,13,44,.06); }
-.more-cover img { width:100%; height:100%; object-fit:cover; display:block; }
-.more-card .card-title { margin:1rem .4rem .45rem; }
-.more-card p { margin:0 .4rem; font-size:var(--fs-small); line-height:1.6; color:var(--muted); }
-
 /* ---------- lightbox ---------- */
 .lightbox {
   position:fixed; inset:0; z-index:120;
@@ -1416,87 +1221,8 @@ const CSS = `
   --step:5px;
   transition:transform .5s var(--ease);
 }
-.ink-btn::before {
-  content:''; position:absolute; inset:0; z-index:-1;
-  border:1.7px solid var(--navy);
-  border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;
-  filter:url(#inkline-bp);
-}
 .ink-btn:active { transform:scale(.98); }
-.ink-btn svg { flex:0 0 auto; }
-
-/* the five extra traces — they grow outward in even steps so each one
-   reads as a separate pass of the pen, not a thicker border */
-.ol {
-  position:absolute; inset:0;
-  z-index:-1; pointer-events:none;
-  border:1.5px solid var(--navy);
-  filter:url(#inkline-soft);
-  opacity:0;
-  transition:opacity .4s var(--ease), inset .4s var(--ease);
-  transition-delay:0s; /* leaving: they all fade together */
-}
-.ol:nth-of-type(1) { border-radius:250px 20px 230px 16px / 16px 235px 20px 250px; transform:rotate(.4deg); }
-.ol:nth-of-type(2) { border-radius:18px 240px 22px 245px / 240px 18px 250px 20px; transform:rotate(-.7deg); }
-.ol:nth-of-type(3) { border-radius:235px 26px 210px 24px / 22px 220px 18px 240px; transform:rotate(.9deg); }
-.ol:nth-of-type(4) { border-radius:22px 215px 28px 230px / 225px 24px 235px 18px; transform:rotate(-1.2deg); }
-.ol:nth-of-type(5) { border-radius:200px 30px 245px 20px / 26px 250px 22px 210px; transform:rotate(1.5deg); }
-
-.ink-btn:hover .ol, .ink-btn:focus-visible .ol, .more-card:hover .ol { opacity:.75; }
-.ink-btn:hover .ol:nth-of-type(1), .more-card:hover .ol:nth-of-type(1) {
-  inset:calc(var(--step) * -1); transition-delay:.02s; opacity:.8;
-}
-.ink-btn:hover .ol:nth-of-type(2), .more-card:hover .ol:nth-of-type(2) {
-  inset:calc(var(--step) * -2); transition-delay:.11s; opacity:.62;
-}
-.ink-btn:hover .ol:nth-of-type(3), .more-card:hover .ol:nth-of-type(3) {
-  inset:calc(var(--step) * -3); transition-delay:.20s; opacity:.46;
-}
-.ink-btn:hover .ol:nth-of-type(4), .more-card:hover .ol:nth-of-type(4) {
-  inset:calc(var(--step) * -4); transition-delay:.29s; opacity:.32;
-}
-.ink-btn:hover .ol:nth-of-type(5), .more-card:hover .ol:nth-of-type(5) {
-  inset:calc(var(--step) * -5); transition-delay:.38s; opacity:.2;
-}
-
-/* share */
-.share-row { margin:2.6rem 0 0; clear:both; }
-.share-wink { font-weight:700; margin:0 0 1rem; }
-.share-btns { display:flex; flex-wrap:wrap; gap:1.5rem 1.4rem; }
-
-/* ---------- comments ---------- */
-.comments { margin:4rem 0 0; clear:both; }
-.bp-root .comments-title { margin:0; color:var(--navy); font-size:var(--fs-h2); }
-.comments-sub { margin:.7rem 0 1.8rem; color:var(--muted); }
-.comments-form { display:flex; flex-direction:column; gap:1rem; }
-.comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-/* the fields wear the same drawn line as every frame on the page: the input
-   itself is bare, and the wrapper carries the roughened border */
-.c-field { position:relative; z-index:0; display:block; }
-.c-field::before {
-  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
-  border:1.7px solid var(--navy);
-  border-radius:245px 20px 225px 18px / 18px 230px 20px 250px;
-  filter:url(#inkline-bp);
-  transition:opacity .3s var(--ease);
-}
-.c-field-area::before { border-radius:18px 230px 20px 240px / 235px 18px 250px 20px; }
-.c-in {
-  width:100%; box-sizing:border-box; display:block;
-  font-family:'Alef','Noto Sans Hebrew',Arial,sans-serif; font-size:1rem;
-  color:var(--navy-deep); background:transparent;
-  border:none; border-radius:12px;
-  padding:.8em 1.15em; outline:none;
-}
-.c-in::placeholder { color:rgba(8,24,69,.45); }
-.c-field:focus-within::before { border-width:2.1px; }
-.c-area { resize:vertical; min-height:110px; }
-/* the send button sits against the left edge of the fields (RTL: flex-end) */
-.c-send { align-self:flex-end; }
-.comments-ok { font-weight:700; color:var(--navy); }
-.comments-err { font-size:var(--fs-small); color:#8a1f1f; margin:0; }
-/* the back button sits against the right edge of the column */
-.bp-footer { margin:4rem 0 0; display:flex; justify-content:flex-start; clear:both; }
+.ink-btn svg:not(.ink-frame) { flex:0 0 auto; }
 
 /* ---------- BleedTitle ---------- */
 .blt { filter:url(#print-grain); }
@@ -1535,7 +1261,6 @@ const CSS = `
   .fig-inline { float:none; width:100%; margin:2rem 0; }
   .logo-compare { grid-template-columns:1fr; }
   .lc-cell + .lc-cell { border-right:none; border-top:var(--hair); }
-  .comments-grid { grid-template-columns:1fr; }
   .ui-row { grid-template-columns:2rem 1fr; }
   .ui-v { grid-column:2; }
   .apx-list li { grid-template-columns:4rem 1fr; gap:.8rem; }
@@ -1543,18 +1268,9 @@ const CSS = `
   .stat-grid { gap:.7rem; }
   .stat-sq { padding:1.1rem .8rem; }
   /* the rail turns into a swipeable row on phones */
-  .more-rail {
-    display:flex; gap:.8rem;
-    overflow-x:auto; scroll-snap-type:x mandatory;
-    margin:0 -4vw; padding:0 4vw .6rem;
-    scrollbar-width:none;
-  }
-  .more-rail::-webkit-scrollbar { display:none; }
-  .more-card { flex:0 0 76vw; scroll-snap-align:center; }
 }
 @media (prefers-reduced-motion: reduce) {
   [data-reveal] { transition:none; }
   .tap-heart { animation:none; }
-  .ol { transition:opacity .01s; }
 }
 `;
