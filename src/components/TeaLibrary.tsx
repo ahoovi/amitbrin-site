@@ -140,10 +140,12 @@ export default function TeaLibrary() {
         siteBtn.style.display = b.noStore ? "none" : "inline-flex";
         sleeveBtn.classList.toggle("on", !!b.sleeve);
         sleeveBtn.textContent = "להציץ מתחת לשרוול";
+        showTip();
       }, 600);
     }
     function closeBook() {
       if (openIndex < 0) return;
+      hideTip();
       const i = openIndex;
       openIndex = -1;
       const s = slots[i];
@@ -161,6 +163,26 @@ export default function TeaLibrary() {
         s.box.style.transform = "";
         setTimeout(() => { s.el.classList.remove("tl-extracting"); layout(); }, 620);
       }); });
+    }
+
+    /* ---- the rotate hint: a tooltip that floats over the standing book,
+       fades in a beat after it lands and fades out by itself (or the moment
+       the visitor starts dragging — the hint has done its job by then) ---- */
+    const tipEl = root.querySelector<HTMLElement>(".tl-tip")!;
+    let tipTimer: ReturnType<typeof setTimeout> | undefined;
+    function showTip() {
+      clearTimeout(tipTimer);
+      tipEl.classList.remove("on");
+      // restart the animation
+      void tipEl.offsetWidth;
+      tipTimer = setTimeout(() => {
+        tipEl.classList.add("on");
+        tipTimer = setTimeout(() => tipEl.classList.remove("on"), 3600);
+      }, 420);
+    }
+    function hideTip() {
+      clearTimeout(tipTimer);
+      tipEl.classList.remove("on");
     }
 
     /* ---- the standing, rotating book ---- */
@@ -210,7 +232,7 @@ export default function TeaLibrary() {
       spinShadow.style.transform = `scaleX(${(0.6 + 0.4 * sc).toFixed(3)})`;
     }
     let dragging = false, dragged = false, lx = 0, ly = 0;
-    const onPD = (e: PointerEvent) => { dragging = true; dragged = false; lx = e.clientX; ly = e.clientY; spinEl.setPointerCapture(e.pointerId); };
+    const onPD = (e: PointerEvent) => { dragging = true; dragged = false; lx = e.clientX; ly = e.clientY; hideTip(); spinEl.setPointerCapture(e.pointerId); };
     const onPM = (e: PointerEvent) => {
       if (!dragging) return;
       const dx = e.clientX - lx, dy = e.clientY - ly;
@@ -243,6 +265,7 @@ export default function TeaLibrary() {
     sleeveBtn.addEventListener("click", toggleSleeve);
 
     return () => {
+      clearTimeout(tipTimer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onScroll);
       column.innerHTML = "";
@@ -268,6 +291,16 @@ export default function TeaLibrary() {
         <div className="tl-stagearea">
           <div className="tl-placeholder">בחרו ספר<br />מהערימה</div>
           <div className="tl-pedestal">
+            <div className="tl-tip" aria-hidden>
+              <svg viewBox="0 0 48 48" width="26" height="26" aria-hidden>
+                {/* two orbits — one horizontal, one vertical: rotation on both axes */}
+                <ellipse cx="24" cy="24" rx="20" ry="8.4" />
+                <ellipse cx="24" cy="24" rx="8.4" ry="20" />
+                <path className="tl-tip-arrow" d="M40.4 19.6 L44.6 24.2 L39.8 27.9" />
+                <path className="tl-tip-arrow" d="M19.6 7.6 L24.2 3.4 L27.9 8.2" />
+              </svg>
+              <span>גרירה מסובבת את הספר לכל הכיוונים</span>
+            </div>
             <div className="tl-spin" />
             <div className="tl-spin-shadow" />
           </div>
@@ -280,7 +313,7 @@ export default function TeaLibrary() {
             <a className="tl-ink-btn tl-site-btn" href={TEA_STORE} target="_blank" rel="noopener noreferrer">לעמוד הספר באתר של תה</a>
             <button className="tl-ink-btn tl-sleeve-btn" type="button">להציץ מתחת לשרוול</button>
           </div>
-          <div className="tl-close-hint">גרירה מסובבת את הספר לכל הכיוונים · לחיצה עליו מחזירה לערימה</div>
+          <div className="tl-close-hint">לחיצה על הספר מחזירה אותו לערימה</div>
         </div>
       </div>
 
@@ -327,6 +360,19 @@ export default function TeaLibrary() {
 .tl-panel.has-book .tl-placeholder{display:none}
 .tl-pedestal{perspective:1300px;position:relative;display:none}
 .tl-panel.has-book .tl-pedestal{display:block}
+.tl-tip{position:absolute;left:50%;top:9%;z-index:6;pointer-events:none;
+  display:flex;align-items:center;gap:9px;white-space:nowrap;
+  padding:8px 14px 8px 12px;border-radius:999px;
+  background:rgba(8,24,69,.86);backdrop-filter:blur(3px);color:#f4efe2;
+  font-family:'Leon',sans-serif;font-size:12px;letter-spacing:.02em;
+  box-shadow:0 10px 26px rgba(2,13,44,.26);
+  opacity:0;transform:translate(-50%,8px) scale(.96);
+  transition:opacity .5s cubic-bezier(.32,.72,0,1),transform .5s cubic-bezier(.32,.72,0,1)}
+.tl-tip.on{opacity:1;transform:translate(-50%,0) scale(1)}
+.tl-tip svg{flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:2.1;stroke-linecap:round;stroke-linejoin:round;opacity:.95}
+.tl-tip.on svg{animation:tlSpinHint 2.6s ease-in-out .35s 2}
+@keyframes tlSpinHint{0%,100%{transform:rotate(0)}35%{transform:rotate(14deg)}70%{transform:rotate(-14deg)}}
+@media (prefers-reduced-motion:reduce){.tl-tip,.tl-tip.on svg{transition:none;animation:none}}
 .tl-spin{position:relative;transform-style:preserve-3d;cursor:grab;z-index:2}
 .tl-spin:active{cursor:grabbing}
 .tl-sf{position:absolute;left:50%;top:50%;background-size:100% 100%}

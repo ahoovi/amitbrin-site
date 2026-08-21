@@ -960,18 +960,23 @@ export default function SitePage() {
         </div>
       </section>
 
-      {/* ============ 2.4 · WORKS — the Tea library ============ */}
-      <TeaLibrary />
-
-      {/* ============ 2.5 · WORKS — mini case studies (01: KsseMac) ============ */}
-      <section className="sec-works" id="works">
+      {/* ============ 2.4 · WORKS — heading, then work 01: the Tea library ============ */}
+      <section className="sec-works sec-works-intro" id="works">
         <div className="works-head" data-reveal>
           <FxTitle
             className="works-title fx-skew"
             palette="rgb"
             lines={["דברים שנהניתי ליצור בזמן האחרון"]}
           />
-          <p className="works-label">עבודה 01 · KSSEMAC · אפליקציית MENU BAR ל-MACOS</p>
+          <p className="works-label">עבודה 01 · הספרייה של תה · עיצוב הספר שחותם ספרייה שלמה</p>
+        </div>
+      </section>
+      <TeaLibrary />
+
+      {/* ============ 2.5 · WORKS — work 02: KsseMac ============ */}
+      <section className="sec-works sec-works-02">
+        <div className="works-head" data-reveal>
+          <p className="works-label">עבודה 02 · KSSEMAC · אפליקציית MENU BAR ל-MACOS</p>
         </div>
         <KssemacCase />
       </section>
@@ -1467,18 +1472,23 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   text-shadow:0 1px 2px rgba(2,13,44,.65), 0 0 16px rgba(2,13,44,.35);
 }
 
-/* ---------- 2.5 · WORKS — mini case studies ---------- */
+/* ---------- 2.4 / 2.5 · WORKS — heading + mini case studies ---------- */
 .sec-works { background:var(--navy-dark); padding:min(13vh, 140px) 0 11vh; }
+/* the heading band that sits above the Tea library: it is a lead-in, not a
+   stop of its own — no snap point, and it ends where the library begins */
+.sec-works-intro { padding:min(13vh, 140px) 0 min(7vh, 76px); scroll-snap-align:none; }
+.sec-works-02 { padding-top:min(9vh, 96px); }
 .works-head { max-width:1200px; margin:0 auto; padding:0 5vw 14px; }
 .works-title {
   color:var(--offwhite); font-weight:700; padding-bottom:.36em;
   font-size:var(--sec-h2); line-height:1.1;
 }
 .works-label {
-  display:flex; align-items:center; gap:16px; margin-top:40px;
+  display:flex; align-items:center; gap:16px; margin-top:clamp(48px, 6vh, 78px);
   font-size:clamp(.95rem, 1.15vw, 1.2rem); font-weight:700; letter-spacing:.06em; color:rgba(230,232,239,.9);
 }
 .works-label::after { content:''; flex:1; height:1px; background:rgba(230,232,239,.24); }
+.sec-works-02 .works-label { margin-top:0; }
 
 /* ---------- 3 · BLOG — sketch paper ---------- */
 .sec-blog {

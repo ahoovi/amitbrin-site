@@ -225,10 +225,16 @@ function Comments() {
           <input type="hidden" name="_subject" value="תגובה חדשה בבלוג: הלוגו של אינסטגרם" />
           <input type="hidden" name="post" value="instagram" />
           <div className="comments-grid">
-            <input className="c-in" type="text" name="name" placeholder="שם" required />
-            <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
+            <span className="c-field">
+              <input className="c-in" type="text" name="name" placeholder="שם" required />
+            </span>
+            <span className="c-field">
+              <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
+            </span>
           </div>
-          <textarea className="c-in c-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required />
+          <span className="c-field c-field-area">
+            <textarea className="c-in c-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required />
+          </span>
           <button className="ink-btn c-send" type="submit" disabled={state === "sending"}>
             <Ol />
             {state === "sending" ? "שולח…" : "שליחת תגובה"}
@@ -1464,17 +1470,28 @@ const CSS = `
 .comments-sub { margin:.7rem 0 1.8rem; color:var(--muted); }
 .comments-form { display:flex; flex-direction:column; gap:1rem; }
 .comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-.c-in {
-  width:100%; box-sizing:border-box;
-  font-family:'Alef','Noto Sans Hebrew',Arial,sans-serif; font-size:1rem;
-  color:var(--navy-deep); background:#fff;
-  border:1.6px solid var(--navy); border-radius:12px;
-  padding:.8em 1em; outline:none;
-  transition:box-shadow .3s var(--ease);
+/* the fields wear the same drawn line as every frame on the page: the input
+   itself is bare, and the wrapper carries the roughened border */
+.c-field { position:relative; z-index:0; display:block; }
+.c-field::before {
+  content:''; position:absolute; inset:0; z-index:-1; pointer-events:none;
+  border:1.7px solid var(--navy);
+  border-radius:245px 20px 225px 18px / 18px 230px 20px 250px;
+  filter:url(#inkline-bp);
+  transition:opacity .3s var(--ease);
 }
-.c-in:focus { box-shadow:0 0 0 3px rgba(8,24,69,.15); }
+.c-field-area::before { border-radius:18px 230px 20px 240px / 235px 18px 250px 20px; }
+.c-in {
+  width:100%; box-sizing:border-box; display:block;
+  font-family:'Alef','Noto Sans Hebrew',Arial,sans-serif; font-size:1rem;
+  color:var(--navy-deep); background:transparent;
+  border:none; border-radius:12px;
+  padding:.8em 1.15em; outline:none;
+}
+.c-in::placeholder { color:rgba(8,24,69,.45); }
+.c-field:focus-within::before { border-width:2.1px; }
 .c-area { resize:vertical; min-height:110px; }
-/* the send button sits against the left edge of the fields */
+/* the send button sits against the left edge of the fields (RTL: flex-end) */
 .c-send { align-self:flex-end; }
 .comments-ok { font-weight:700; color:var(--navy); }
 .comments-err { font-size:var(--fs-small); color:#8a1f1f; margin:0; }
