@@ -604,6 +604,35 @@ body{overflow-x:clip}
   .rmk .inv{font-size:.68rem}
 }
 @media print{.rmscroll{overflow:visible}}
+
+/* v15-batch1 */
+/* #7 · טינט קל לאזורי תרגול (רק כרטיסים עם פתרון/תרגיל, לא כרטיסי דוגמה) */
+.card:has(.sol), .card:has(.rox), .qa{
+  background:rgba(23,114,69,.05);
+  border-inline-start:3px solid rgba(23,114,69,.35);
+}
+/* #9 · מילון: צפיפות + היררכיה */
+table.dict td{padding:6px 10px}
+table.dict td:nth-child(3){font-weight:600}          /* תרגום - משקל גבוה יותר */
+table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערות - נמוך ובהיר */
+/* #10 · ניווט תחתון */
+.botnav{margin:64px 0 0;padding:20px 20px 4px;border-top:2px solid var(--line)}
+.botnav-ttl{font-weight:800;color:var(--navy);font-size:.95rem;margin-bottom:10px}
+.botnav-links{display:flex;flex-wrap:wrap;gap:8px 14px;line-height:1.9}
+.botnav-links a{color:var(--gold);text-decoration:none;font-weight:600;font-size:.95rem}
+.botnav-links a:hover{text-decoration:underline}
+/* #2 · לינק הטיוטור בהדר - ירוק כדי להיבדל מלינק הסאונד */
+.cta-alt{background:var(--sound-bg);color:var(--sound)}
+.cta-alt:hover{background:#dcefe3}
+
+/* v15-batch2 */
+/* #4 · אמוג'י הרמה - לפני המילה, ובמובייל בשורה עצמאית */
+.lvl-e{font-size:1.15em;line-height:1}
+@media (max-width:640px){.lvl-e{display:block;margin-bottom:3px}}
+
+/* v15-batch3 */
+/* #5a · טבלאות צרות במובייל ממלאות את רוחב הפריים (RULEMAP לא מושפע - הוא div) */
+@media (max-width:640px){ table{min-width:100%} }
 </style>
 <link rel="manifest" href="/limbaromana-manifest.json"><meta name="theme-color" content="#1c2b4a"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="/limbaromana-icon-192.png"></head>
 <body>
@@ -613,7 +642,8 @@ body{overflow-x:clip}
     <h1>רומנית מהיסוד · המדריך המצטבר</h1>
     <span class="ro-title">Limba română · Unitatea 1-14</span>
     <p>חומרי שיעורים 1-14, ערוכים לפי סדר לימוד מצטבר - מהצלילים אל הדקדוק, מהבסיס אל המתקדם. קוד צבעים קבוע מלווה את כל הקורס עד רמת B1.</p>
-    <a class="audio-cta" href="/limbaromana.html">↩ לגרסה המהירה, ללא סאונד</a>
+    <a class="audio-cta" href="/limbaromana.html">🔇 לגרסה המהירה, ללא סאונד</a>
+    <a class="audio-cta cta-alt" href="/limbaromana-tutor.html">📋 רשימת כל התרגילים הקוליים · להעתקה ל-ChatGPT</a>
   </div>
 </header>
 
@@ -1150,19 +1180,19 @@ body{overflow-x:clip}
   <table>
     <tr><th style="width:22%">הרמה</th><th>התשובות</th></tr>
     <tr>
-      <td><b>מצוין</b> 🙌</td>
+      <td><span class="lvl-e">🙌</span> <b>מצוין</b></td>
       <td><span class="ro big">formidabil</span><button class="spk" type="button" data-h="1bs2e4dgkyb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">excelent</span><button class="spk" type="button" data-h="1aauetw1jtp" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">extraordinar</span><button class="spk" type="button" data-h="1eozhvo9sgc" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">perfect</span><button class="spk" type="button" data-h="1eq54e8hzl0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">minunat</span><button class="spk" type="button" data-h="2s7jy68rdd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">nemaipomenit</span><button class="spk" type="button" data-h="1pk494qvljr" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(לא-ייאמן)</span></td>
     </tr>
     <tr>
-      <td><b>טוב מאוד</b> 🙂</td>
+      <td><span class="lvl-e">🙂</span> <b>טוב מאוד</b></td>
       <td><span class="ro big">super</span><button class="spk" type="button" data-h="23iyg488563" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro big">foarte bine</span><button class="spk" type="button" data-h="20utxnqr4jn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td>
     </tr>
     <tr>
-      <td><b>בסדר</b> 😐</td>
+      <td><span class="lvl-e">😐</span> <b>בסדר</b></td>
       <td><span class="ro big">bine</span><button class="spk" type="button" data-h="1eabvg021y4" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">ca de obicei</span><button class="spk" type="button" data-h="1htqes8c7sm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(כרגיל)</span> · <span class="ro">așa și așa</span><button class="spk" type="button" data-h="24xez45z7pb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">nici prea bine, nici prea rău</span><button class="spk" type="button" data-h="1sbqr3wub9a" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(לא טוב מדי ולא רע מדי)</span></td>
     </tr>
     <tr>
-      <td><b>לא טוב</b> 😞</td>
+      <td><span class="lvl-e">😞</span> <b>לא טוב</b></td>
       <td><span class="ro big">rău</span><button class="spk" type="button" data-h="1qdzh6xahn5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">foarte rău</span><button class="spk" type="button" data-h="1c85gbt9vv1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">nașpa</span><button class="spk" type="button" data-h="5m4dh7zvpi" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(סלנג: על הפנים)</span> · <span class="ro">groaznic</span><button class="spk" type="button" data-h="dvv1kjzux0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">îngrozitor</span><button class="spk" type="button" data-h="8zr6dxw636" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(נורא, מחריד)</span></td>
     </tr>
   </table>
@@ -1779,6 +1809,39 @@ body{overflow-x:clip}
   <h2 class="sec"><span class="num">שיעור 11</span> הפועל החוזר · Verbe reflexive<button class="gptb" type="button" data-t="04" title="העתק פרומפט לתרגול קולי ב-ChatGPT" aria-label="העתק פרומפט לתרגול קולי ב-ChatGPT"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><span>תרגול קולי</span></button></h2>
   <p class="sec-sub">שיעור יום ההולדת הביא זוג מבלבל: <span class="ro">a uita</span><button class="spk" type="button" data-h="g6lph12zp5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לשכוח) מול <span class="ro">a se uita</span><button class="spk" type="button" data-h="x9pcw35nkt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (להסתכל). ההבדל היחיד הוא כינוי חוזר שנצמד לפועל - וזו הכניסה הראשונה למערכת הרפלקסיבית.</p>
 
+  <div class="rule" id="reflex-two-jobs">
+    <div class="ttl">REGULA · הכלל</div>
+  <p class="rl">ל-<span class="ro big">se</span><button class="spk" type="button" data-h="16ke5zgkv0h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> יש שני תפקידים - וזה כל הסוד:</p>
+  <p class="rl"><b>1 · חזרה אמיתית</b> - "את עצמי". אותה משמעות, רק שהפעולה חוזרת אל הגוף: <span class="ro">a spăla</span><button class="spk" type="button" data-h="t8iru5whv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לרחוץ משהו) ◂ <span class="ro">a se spăla</span><button class="spk" type="button" data-h="236jc3vtrpu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (להתרחץ)</p>
+  <p class="rl"><b>2 · שינוי משמעות</b> - הכינוי נדבק לפועל ויוצר פועל אחר: <span class="ro">a juca</span><button class="spk" type="button" data-h="qw3p7yf124" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לשחק משחק) ◂ <span class="ro">a se juca</span><button class="spk" type="button" data-h="24nj2oseiqm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (להשתעשע) · <span class="ro">a uita</span><button class="spk" type="button" data-h="g6lph12zp5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לשכוח) ◂ <span class="ro">a se uita</span><button class="spk" type="button" data-h="x9pcw35nkt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (להסתכל)</p>
+</div>
+
+  <h3>סוג 1 · חזרה אמיתית - <span class="ro">a spăla</span><button class="spk" type="button" data-h="t8iru5whv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></h3>
+  <p class="rl">אותה מילה בדיוק. השאלה היחידה: על מי הפעולה מופנית - על משהו בחוץ, או עליי.</p>
+  <table class="vt">
+    <tr><th style="width:22%">הפועל</th><th>eu<span class="end">-∅</span></th><th>tu<span class="end">-i</span></th><th>el/ea<span class="end">-ă</span></th><th>noi<span class="end">-ăm</span></th><th>voi<span class="end">-ați</span></th><th>ei/ele<span class="end">-ă</span></th></tr>
+    <tr><td><span class="ro">a spăla</span><button class="spk" type="button" data-h="t8iru5whv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">לרחוץ משהו</span></td><td><span class="ro">spăl</span><button class="spk" type="button" data-h="1ud14dcu526" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">speli</span><button class="spk" type="button" data-h="n42xsrscxa" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">spală</span><button class="spk" type="button" data-h="palhrorn3f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">spălăm</span><button class="spk" type="button" data-h="hg4gcl1xo2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">spălați</span><button class="spk" type="button" data-h="16vjdh56i4r" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">spală</span><button class="spk" type="button" data-h="palhrorn3f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
+    <tr><td><span class="ro">a se spăla</span><button class="spk" type="button" data-h="236jc3vtrpu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">להתרחץ</span></td><td><span class="ro">mă spăl</span><button class="spk" type="button" data-h="sm7d8g2bpn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">te speli</span><button class="spk" type="button" data-h="1g1jy0huiur" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">se spală</span><button class="spk" type="button" data-h="2bmxy9ard9c" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">ne spălăm</span><button class="spk" type="button" data-h="b8qqmpw30h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">vă spălați</span><button class="spk" type="button" data-h="1wb5jt7tq57" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">se spală</span><button class="spk" type="button" data-h="2bmxy9ard9c" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
+  </table>
+  <div class="note">
+  <p class="rl"><b>יש מושא בחוץ, בלי כינוי:</b> <span class="ro">Spăl vasele.</span><button class="spk" type="button" data-h="1rhjy5vo9in" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">אני רוחץ את הכלים.</span></p>
+  <p class="rl"><b>הפעולה חוזרת אליי, עם כינוי:</b> <span class="ro">Mă spăl.</span><button class="spk" type="button" data-h="1rd1slnjucx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">אני מתרחץ.</span></p>
+</div>
+  <div class="note">
+  <p class="rl"><b>חלק גוף? מוסיפים <span class="ro big">pe</span><button class="spk" type="button" data-h="1nz1ubo7a3j" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>:</b> <span class="ro">Mă spăl pe mâini.</span><button class="spk" type="button" data-h="28v01vt72pp" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">אני שוטף ידיים.</span> · <span class="ro">pe dinți</span><button class="spk" type="button" data-h="6f618ixc2y" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">שיניים</span> · <span class="ro">pe față</span><button class="spk" type="button" data-h="c1m3ako8v9" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">פנים</span> · <span class="ro">pe cap</span><button class="spk" type="button" data-h="1rg9ilbm5ur" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">ראש</span></p>
+  <p class="rl">מאותה משפחה: <span class="ro">a se îmbrăca</span><button class="spk" type="button" data-h="1izmqvp5euj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">להתלבש</span> · <span class="ro">a se trezi</span><button class="spk" type="button" data-h="9678hrvqc0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">להתעורר</span> · <span class="ro">a se rade</span><button class="spk" type="button" data-h="22kfqkiakpf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">להתגלח</span></p>
+</div>
+
+  <h3>סוג 2 · שינוי משמעות - <span class="ro">a juca</span><button class="spk" type="button" data-h="qw3p7yf124" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> / <span class="ro">a uita</span><button class="spk" type="button" data-h="g6lph12zp5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></h3>
+  <p class="rl">כאן <span class="ro">se</span><button class="spk" type="button" data-h="16ke5zgkv0h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> הוא <b>לא</b> "את עצמי". הוא הופך את הפועל למילה אחרת - אז אי אפשר לתרגם אותו כ"עצמי".</p>
+  <div class="note">
+  <p class="rl"><span class="ro">a juca</span><button class="spk" type="button" data-h="qw3p7yf124" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">= לשחק משחק/ספורט מובנה, או לגלם תפקיד:</span> <span class="ro">joc fotbal</span><button class="spk" type="button" data-h="1ygmnhsnut5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">joc șah</span><button class="spk" type="button" data-h="luuv45v6nt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">a juca un rol</span><button class="spk" type="button" data-h="njtowp2s5x" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
+  <p class="rl"><span class="ro">a se juca</span><button class="spk" type="button" data-h="24nj2oseiqm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">= להשתעשע, לבלות חופשי, כמו ילדים:</span> <span class="ro">Copiii se joacă.</span><button class="spk" type="button" data-h="1g9emhl29vt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> · <span class="ro">se joacă cu mingea</span><button class="spk" type="button" data-h="2fbptaooss0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
+  <p class="rl">שני אלה במשפט אחד: <span class="ro">Copiii se joacă în parc.</span><button class="spk" type="button" data-h="9s953s7kjg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(משחקים חופשי)</span> מול <span class="ro">Copiii joacă fotbal.</span><button class="spk" type="button" data-h="2a305cse2zz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">(משחק מוגדר)</span></p>
+  <p class="rl">עוד זוגות מהסוג הזה: <span class="ro">a duce</span><button class="spk" type="button" data-h="qwht7ncyn7" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (להוביל) ◂ <span class="ro">a se duce</span><button class="spk" type="button" data-h="sao3sfjr6z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (ללכת) · <span class="ro">a gândi</span><button class="spk" type="button" data-h="28xl8a43ndx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> ◂ <span class="ro">a se gândi (la)</span><button class="spk" type="button" data-h="2fujj7qkft0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לחשוב על)</p>
+</div>
+
+
   <table class="vt">
     <tr><th style="width:22%">הפועל</th><th>eu<span class="end">-∅</span></th><th>tu<span class="end">-i</span></th><th>el/ea<span class="end">-ă</span></th><th>noi<span class="end">-ăm</span></th><th>voi<span class="end">-ați</span></th><th>ei/ele<span class="end">-ă</span></th></tr>
     <tr><td><b>הכינוי החוזר</b></td><td><span class="ro big">mă</span><button class="spk" type="button" data-h="16o2knq8dhf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro big">te</span><button class="spk" type="button" data-h="kgx97ngrt3" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro big">se</span><button class="spk" type="button" data-h="16ke5zgkv0h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro big">ne</span><button class="spk" type="button" data-h="105srxmbq3m" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro big">vă</span><button class="spk" type="button" data-h="2dy5xdu6jzk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro big">se</span><button class="spk" type="button" data-h="16ke5zgkv0h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
@@ -1800,6 +1863,41 @@ body{overflow-x:clip}
   <p class="rl">כינויים חוזרים אחרים שכבר פגשנו: <span class="ro">a se juca</span><button class="spk" type="button" data-h="24nj2oseiqm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לשחק) · <span class="ro">a se plimba</span><button class="spk" type="button" data-h="176j2vp01te" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לטייל) · <span class="ro">a se bucura</span><button class="spk" type="button" data-h="1hil25zdozs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> (לשמוח)</p>
   <p class="rl">התבנית זהה: <span class="ro">mă, te, se, ne, vă, se</span><button class="spk" type="button" data-h="8qrip8uspy" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
 </div>
+
+  
+  <h3>תרגול · Exersăm</h3>
+  <div class="card">
+    <p class="rl"><b>1 · </b><span class="ro">juca</span><button class="spk" type="button" data-h="wmcqvfpiho" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> או <span class="ro">se juca</span><button class="spk" type="button" data-h="1f0t8vh6acj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>? בחרו את הצורה הנכונה.</p>
+    <span class="rox">Copiii ___ în parc. · Noi ___ fotbal duminica. · El ___ un rol în film. · Nu te ___ cu focul!</span>
+    <details class="sol"><summary>הצג פתרון</summary>
+      <span class="ro">Copiii se joacă în parc. · Noi jucăm fotbal duminica. · El joacă un rol în film. · Nu te juca cu focul!</span><button class="spk" type="button" data-h="ke2mq7rjnq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+      <div class="he" style="margin-top:6px">שעשוע חופשי ◂ se joacă · משחק מובנה ◂ jucăm / joacă · "לשחק באש" זה ניב עם se, ובציווי שלילי הכינוי נשאר לפני הפועל: nu te juca</div>
+    </details>
+  </div>
+  <div class="card">
+    <p class="rl"><b>2 · </b><span class="ro">uita</span><button class="spk" type="button" data-h="18qa5egnyxk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> או <span class="ro">se uita</span><button class="spk" type="button" data-h="1x4t17pqwh8" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>?</p>
+    <span class="rox">Eu ___ la televizor. · Nu ___ cheile acasă! · Ea ___ pe fereastră. · Mereu ___ cum te cheamă.</span>
+    <details class="sol"><summary>הצג פתרון</summary>
+      <span class="ro">Eu mă uit la televizor. · Nu uita cheile acasă! · Ea se uită pe fereastră. · Mereu uit cum te cheamă.</span><button class="spk" type="button" data-h="8l1iqmlsrg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+      <div class="he" style="margin-top:6px">להסתכל ◂ mă uit / se uită (תמיד עם la או pe) · לשכוח ◂ uita / uit (בלי כינוי)</div>
+    </details>
+  </div>
+  <div class="card">
+    <p class="rl"><b>3 · </b>השלימו את הכינוי החוזר: <span class="ro big">mă · te · se · ne · vă · se</span><button class="spk" type="button" data-h="m10l36aj0t" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></p>
+    <span class="rox">Eu ___ trezesc la șapte. · Tu ___ speli pe dinți. · Noi ___ plimbăm în parc. · Ei ___ bucură de vacanță.</span>
+    <details class="sol"><summary>הצג פתרון</summary>
+      <span class="ro">Eu mă trezesc la șapte. · Tu te speli pe dinți. · Noi ne plimbăm în parc. · Ei se bucură de vacanță.</span><button class="spk" type="button" data-h="1la2wu102lx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+      <div class="he" style="margin-top:6px">הכינוי נקבע לפי הגוף, לא לפי הפועל</div>
+    </details>
+  </div>
+  <div class="card">
+    <p class="rl"><b>4 · </b>תרגמו לרומנית.</p>
+    <span class="rox">אני שוטף ידיים. · אני רוחץ את הכלים. · הילדים משחקים. · אני מסתכל בסרט.</span>
+    <details class="sol"><summary>הצג פתרון</summary>
+      <span class="ro">Mă spăl pe mâini. · Spăl vasele. · Copiii se joacă. · Mă uit la film.</span><button class="spk" type="button" data-h="19pem19utn7" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+      <div class="he" style="margin-top:6px">חלק גוף ◂ pe · מושא חיצוני ◂ בלי כינוי · שעשוע ◂ se joacă · לצפות ב- ◂ mă uit la</div>
+    </details>
+  </div>
 
   <div class="seealso">↗ קשור: <a href="#verbref">טבלת הפעלים</a> · <a href="#infinitiv11">צורת המקור וארבע הקבוצות</a> · <a href="#practice11">תרגול הפעלים</a></div>
 </section>
@@ -4755,8 +4853,7 @@ body{overflow-x:clip}
   <h2 class="sec"><span class="num">שיעור 9</span> לתאר תמונה · Descrieți imaginea<button class="gptb" type="button" data-t="17" title="העתק פרומפט לתרגול קולי ב-ChatGPT" aria-label="העתק פרומפט לתרגול קולי ב-ChatGPT"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><span>תרגול קולי</span></button></h2>
   <p class="sec-sub">התרגיל המרכזי של השיעור, והראשון שדורש פסקה שלמה: שלד קבוע של פתיחי משפט שממלאים אותם. זה גם התרגיל שמופיע במבחני רמה - שווה לשנן את השלד.</p>
 
-  <div class="card">
-    <table>
+  <table>
       <tr><th style="width:34%">הפתיח</th><th>ההשלמה מהשיעור</th></tr>
       <tr><td><span class="ro big">În imagine vedem...</span><button class="spk" type="button" data-h="qq9ieiondz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">בתמונה אנחנו רואים</span></td><td><span class="ro">un oraș frumos, mare și modern.</span><button class="spk" type="button" data-h="67z1d4bo05" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
       <tr><td><span class="ro big">Este o zi...</span><button class="spk" type="button" data-h="4szovf57jn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">senină. (însorită)</span><button class="spk" type="button" data-h="287qgs247sp" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> <span class="he">בהירה (שמשית)</span></td></tr>
@@ -4770,7 +4867,6 @@ body{overflow-x:clip}
       <tr><td><span class="ro big">Atmosfera este...</span><button class="spk" type="button" data-h="24r0izvenhd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">foarte bună / plăcută.</span><button class="spk" type="button" data-h="1zpki7sgskx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
       <tr><td><span class="ro big">Cred că...</span><button class="spk" type="button" data-h="1ldu388i5fx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td><td><span class="ro">este primăvară, o zi de duminică, pentru că / deoarece / fiindcă copacii sunt verzi / au frunze verzi.</span><button class="spk" type="button" data-h="v3ng1hlizz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></td></tr>
     </table>
-  </div>
 
   <div class="rule">
     <div class="ttl">a crede · לחשוב, להאמין <span class="he">(קבוצה III)</span></div>
@@ -6054,6 +6150,11 @@ a spune · III · eu spui? לא - <span style="color:#c22f2e">eu spun</span>, ו
 <div class="part" data-view="lesson" data-lesson="13" id="lesson-13" hidden><span class="pnum">שיעור 13</span><span class="ptxt">‏-ez בהמשך: ה-h שנכנסת בין הגזע לסיומת · Unitatea 4</span></div>
 <div class="part" data-view="lesson" data-lesson="14" id="lesson-14" hidden><span class="pnum">שיעור 14</span><span class="ptxt">ההווה · מפת ארבע הקבוצות · כינויים רומזים · puțin, mult, tot</span></div>
 <div class="part" data-view="lesson" data-lesson="0" id="lesson-0" hidden><span class="pnum">מצטבר</span><span class="ptxt">אזור הפעלים · המספרים · הצבעים</span></div>
+
+<nav class="botnav" id="botnav" aria-label="ניווט חלקים">
+  <div class="botnav-ttl">ניווט מהיר · חלקי העמוד</div>
+  <div class="botnav-links"><a href="#part-1">הגייה וכתיב</a> · <a href="#part-2">ברכות, נימוסים והיכרות</a> · <a href="#part-3">פעלים, כינויים ומבנה המשפט</a> · <a href="#part-4">שמות עצם: מין ומספר</a> · <a href="#part-5">מספרים, כמויות ושלילה</a> · <a href="#part-6">מילות יחס ושאלות</a> · <a href="#part-7">עולם, נושאים ואוצר מילים</a> · <a href="#part-8">דיאלוגים ותרגול</a> · <a href="#part-9">רפרנס</a></div>
+</nav>
 </main>
 <script id="scrollnav">
 (function(){
