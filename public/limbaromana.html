@@ -622,6 +622,51 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 /* v15-batch3 */
 /* #5a · טבלאות צרות במובייל ממלאות את רוחב הפריים (RULEMAP לא מושפע - הוא div) */
 @media (max-width:640px){ table{min-width:100%} }
+
+/* v15-batch4 · תיקוני מובייל · 21.8.26 */
+
+/* -- 6a/6b · קופסאות ה-rmfull יצאו מ-.rmscroll החוצה. רק הטבלה נגללת. -- */
+.rmout{display:flex;flex-direction:column;gap:8px;padding:0 18px 16px}
+.rmout .rmfull{grid-column:auto;min-width:0}
+@media (max-width:640px){.rmout{padding:0 12px 14px;gap:7px}}
+
+/* -- 6b · תא שהוא רשימת פעלים. היה flex-direction:column, וכל <b> נחשב פריט
+      flex נפרד - ולכן הסיומת המודגשת קפצה לשורה משלה. block מחזיר טקסט לטקסט. -- */
+.rmc.list{display:block;white-space:normal;line-height:1.75;padding:9px 6px;text-align:center}
+
+/* -- 6d · RULEMAP 05 · תא המפתח בעברית. .rmk .p מכתיב Literata ו-ltr,
+      וזה נכון ל-eu/tu/el ושגוי לעברית. בולד כחול, Rubik, rtl. -- */
+.rmk .p.heb{direction:rtl;unicode-bidi:isolate;font-family:'Rubik',Arial,sans-serif;
+  font-weight:700;font-size:.92rem;color:var(--navy);text-align:right}
+
+/* -- 5b · טבלאות הטיה במובייל: כותרת דביקה במקום נעיצת הטור הראשון.
+      האילוץ מ-13.2 עדיין בתוקף - אלמנט עם overflow-x:auto הוא scroll container,
+      ולכן sticky של th נמדד מולו ולא מול המסך. הפתרון: הכותרת יוצאת מהטבלה
+      החוצה, אחות שלה בתוך .vtbox, ומסונכרנת אופקית עם גלילת הטבלה ב-transform.
+      שורת ה-th המקורית נשארת במקומה כדי לקבוע את רוחבי הטורים, אבל מתקפלת. -- */
+@media (max-width:640px){
+  table.vt td:first-child{position:static;box-shadow:none}
+  table.vt th:first-child{position:static}
+  .vtbox{position:relative}
+  .vthd{position:sticky;top:var(--navh);z-index:34;direction:rtl;
+    background:var(--navy);border-radius:8px 8px 0 0;overflow:hidden;
+    box-shadow:0 3px 8px rgba(0,0,0,.20)}
+  .vthd-vp{overflow:hidden}
+  .vthd-row{display:flex;width:max-content;will-change:transform}
+  .vthd-c{flex:0 0 auto;box-sizing:border-box;padding:9px 14px;text-align:right;
+    color:#fff;font-weight:700;font-size:.92rem;line-height:1.25}
+  .vthd-c .end{display:block;margin-top:3px;font-family:'Literata',Georgia,serif;
+    font-weight:500;font-size:.72rem;letter-spacing:.02em;color:#e3c565;
+    direction:ltr;unicode-bidi:isolate;white-space:nowrap;opacity:.95}
+  .vthd-sub{padding:5px 14px 6px;text-align:right;color:#e3c565;
+    font-size:.75rem;font-weight:700;line-height:1.3;
+    border-top:1px solid rgba(227,197,101,.28);
+    white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  table.vt.hashd{margin-top:0;border-top-right-radius:0;border-top-left-radius:0}
+  table.vt.hashd tr:first-child th{visibility:hidden;padding-top:0;padding-bottom:0;
+    line-height:0;box-shadow:none}
+  table.vt.hashd tr:first-child th .end{margin-top:0;line-height:0}
+}
 </style>
 </head>
 <body>
@@ -2200,12 +2245,12 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
         <div class="rmk"><span class="p">ei / ele</span><span class="inv">אף פעם לא צורה חדשה</span></div>
         <div class="rmc dim">= el/ea</div><div class="rmc dim">= el/ea</div><div class="rmc dim">= eu</div><div class="rmc dim">= eu</div><div class="rmc dim">= eu</div><div class="rmc dim">= eu</div><div class="rmc dim">= el/ea</div><div class="rmc dim">= eu</div>
-
-        <div class="rmsep"></div>
-        <div class="rmfull"><b>ארבע השורות האמצעיות כמעט לא מעניינות.</b> ‏<span class="ro">tu</span> תמיד ב-i, ‏<span class="ro">noi</span> תמיד ב-m, ‏<span class="ro">voi</span> תמיד ב-ți, ו-<span class="ro">ei/ele</span> אף פעם לא מייצר צורה חדשה. כל הקושי מרוכז בשורת <span class="ro">eu</span> - ולכן משננים אותה.</div>
-        <div class="rmfull"><b>‏I ו-IV הן הקשות, II ו-III הן הקלות.</b> לקבוצות 2 ו-3 אין תת-קבוצות בכלל - אין ‎-ez, אין ‎-esc. הסיומות שלהן כמעט זהות זו לזו, וזאת הסיבה שהן נלמדות אחרונות.</div>
-        <div class="rmfull"><b>‏-i מול -î זו אותה קבוצה בשני גוונים.</b> איפה שב-<span class="ro">-i</span> יש אות פתוחה, ב-<span class="ro">-î</span> תהיה הסגורה שלה: <span class="ro">-im ◂ -âm</span> · <span class="ro">-iți ◂ -âți</span> · <span class="ro">-esc ◂ -ăsc</span>. אותה מכונה, תנועה אחת אחורה.</div>
       </div>
+    </div>
+    <div class="rmout">
+      <div class="rmfull"><b>ארבע השורות האמצעיות כמעט לא מעניינות.</b> ‏<span class="ro">tu</span> תמיד ב-i, ‏<span class="ro">noi</span> תמיד ב-m, ‏<span class="ro">voi</span> תמיד ב-ți, ו-<span class="ro">ei/ele</span> אף פעם לא מייצר צורה חדשה. כל הקושי מרוכז בשורת <span class="ro">eu</span> - ולכן משננים אותה.</div>
+      <div class="rmfull"><b>‏I ו-IV הן הקשות, II ו-III הן הקלות.</b> לקבוצות 2 ו-3 אין תת-קבוצות בכלל - אין ‎-ez, אין ‎-esc. הסיומות שלהן כמעט זהות זו לזו, וזאת הסיבה שהן נלמדות אחרונות.</div>
+      <div class="rmfull"><b>‏-i מול -î זו אותה קבוצה בשני גוונים.</b> איפה שב-<span class="ro">-i</span> יש אות פתוחה, ב-<span class="ro">-î</span> תהיה הסגורה שלה: <span class="ro">-im ◂ -âm</span> · <span class="ro">-iți ◂ -âți</span> · <span class="ro">-esc ◂ -ăsc</span>. אותה מכונה, תנועה אחת אחורה.</div>
     </div>
   </div>
 
@@ -2236,13 +2281,15 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmh">3<em>-e</em></div>
         <div class="rmh">4<em>-i</em></div>
         <div class="rmh">4<em>-î</em></div>
-        <div class="rmc" style="flex-direction:column;gap:2px;white-space:normal">a plec<b>a</b><br>a urc<b>a</b><br>a intr<b>a</b><br>a lucr<b>a</b><br>a d<b>a</b></div>
-        <div class="rmc" style="flex-direction:column;gap:2px;white-space:normal">a b<b>ea</b><br>a ved<b>ea</b><br>a căd<b>ea</b><br>a tăc<b>ea</b><br>a put<b>ea</b></div>
-        <div class="rmc" style="flex-direction:column;gap:2px;white-space:normal">a merg<b>e</b><br>a fac<b>e</b><br>a trec<b>e</b><br>a începe<br>a deschid<b>e</b></div>
-        <div class="rmc" style="flex-direction:column;gap:2px;white-space:normal">a fug<b>i</b><br>a ven<b>i</b><br>a ieș<b>i</b><br>a cit<b>i</b><br>a iub<b>i</b></div>
-        <div class="rmc" style="flex-direction:column;gap:2px;white-space:normal">a cobor<b>î</b><br>a omor<b>î</b><br>a hotăr<b>î</b><br>a ur<b>î</b><br>a dobor<b>î</b></div>
-        <div class="rmfull">‏<b>2 ו-3 נראות דומות ומתנהגות דומה</b> - ההבדל היחיד הוא הסיומת בשם הפועל: <span class="ro">-ea</span> מול <span class="ro">-e</span>. אין שום דרך לנחש אותה, רק לשנן את שם הפועל.</div>
+        <div class="rmc list">a plec<b>a</b><br>a urc<b>a</b><br>a intr<b>a</b><br>a lucr<b>a</b><br>a d<b>a</b></div>
+        <div class="rmc list">a b<b>ea</b><br>a ved<b>ea</b><br>a căd<b>ea</b><br>a tăc<b>ea</b><br>a put<b>ea</b></div>
+        <div class="rmc list">a merg<b>e</b><br>a fac<b>e</b><br>a trec<b>e</b><br>a începe<br>a deschid<b>e</b></div>
+        <div class="rmc list">a fug<b>i</b><br>a ven<b>i</b><br>a ieș<b>i</b><br>a cit<b>i</b><br>a iub<b>i</b></div>
+        <div class="rmc list">a cobor<b>î</b><br>a omor<b>î</b><br>a hotăr<b>î</b><br>a ur<b>î</b><br>a dobor<b>î</b></div>
       </div>
+    </div>
+    <div class="rmout">
+      <div class="rmfull">‏<b>2 ו-3 נראות דומות ומתנהגות דומה</b> - ההבדל היחיד הוא הסיומת בשם הפועל: <span class="ro">-ea</span> מול <span class="ro">-e</span>. אין שום דרך לנחש אותה, רק לשנן את שם הפועל.</div>
     </div>
   </div>
 
@@ -2370,9 +2417,10 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmc">ți → <b>t</b></div><div class="rmc dim" style="white-space:normal">eu</div><div class="rmc"><span class="ro">a simți</span></div><div class="rmc"><span class="ro">eu simt</span></div>
         <div class="rmc">c → <b>ch</b></div><div class="rmc dim" style="white-space:normal">לפני -ez</div><div class="rmc"><span class="ro">a parca</span></div><div class="rmc"><span class="ro">eu parchez</span></div>
         <div class="rmc">g → <b>gh</b></div><div class="rmc dim" style="white-space:normal">לפני -ez</div><div class="rmc"><span class="ro">a naviga</span></div><div class="rmc"><span class="ro">eu navighez</span></div>
-        <div class="rmsep"></div>
-        <div class="rmfull">‏<b>שתי השורות האחרונות הן הכיוון ההפוך.</b> שם ה-h לא מרככת אלא <b>מגינה</b>: הגזע נגמר בצליל קשה, וה-‎<span class="ro">-ez</span> היה הופך אותו לצ'/ג'. <a class="xref" href="#verbe13">החוק המלא</a> · <a class="xref" href="#cg">ומאיפה זה בא</a></div>
       </div>
+    </div>
+    <div class="rmout">
+      <div class="rmfull">‏<b>שתי השורות האחרונות הן הכיוון ההפוך.</b> שם ה-h לא מרככת אלא <b>מגינה</b>: הגזע נגמר בצליל קשה, וה-‎<span class="ro">-ez</span> היה הופך אותו לצ'/ג'. <a class="xref" href="#verbe13">החוק המלא</a> · <a class="xref" href="#cg">ומאיפה זה בא</a></div>
     </div>
   </div>
 
@@ -2868,26 +2916,26 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmh">masculin<em>sg</em></div><div class="rmh">feminin<em>sg</em></div><div class="rmh q">neutru<em>sg</em></div>
         <div class="rmh">masculin<em>pl</em></div><div class="rmh">feminin<em>pl</em></div><div class="rmh q">neutru<em>pl</em></div>
 
-        <div class="rmk"><span class="p">לפני שם העצם</span><span class="inv">בלי יידוע · הצורה הקצרה</span></div>
+        <div class="rmk"><span class="p heb">לפני שם העצם</span><span class="inv">בלי יידוע · הצורה הקצרה</span></div>
         <div class="rmc key">acest</div><div class="rmc key">această</div><div class="rmc key dim">acest</div>
         <div class="rmc key">acești</div><div class="rmc key">aceste</div><div class="rmc key dim">aceste</div>
 
-        <div class="rmk"><span class="p">אחרי שם העצם</span><span class="inv">עם יידוע · הצורה הארוכה</span></div>
+        <div class="rmk"><span class="p heb">אחרי שם העצם</span><span class="inv">עם יידוע · הצורה הארוכה</span></div>
         <div class="rmc">acesta</div><div class="rmc">aceasta</div><div class="rmc dim">acesta</div>
         <div class="rmc">aceștia</div><div class="rmc">acestea</div><div class="rmc dim">acestea</div>
 
-        <div class="rmk"><span class="p">לבד, ככינוי</span><span class="inv">בדיוק כמו השורה מעליה</span></div>
+        <div class="rmk"><span class="p heb">לבד, ככינוי</span><span class="inv">בדיוק כמו השורה מעליה</span></div>
         <div class="rmc dim">acesta</div><div class="rmc dim">aceasta</div><div class="rmc dim">acesta</div>
         <div class="rmc dim">aceștia</div><div class="rmc dim">acestea</div><div class="rmc dim">acestea</div>
 
         <div class="rmsep"></div>
-        <div class="rmk"><span class="p">בדיבור יומיומי</span><span class="inv">לא רשמי, אבל זה מה שתשמעו</span></div>
+        <div class="rmk"><span class="p heb">בדיבור יומיומי</span><span class="inv">לא רשמי, אבל זה מה שתשמעו</span></div>
         <div class="rmc">ăsta</div><div class="rmc">asta</div><div class="rmc dim">ăsta</div>
         <div class="rmc">ăștia</div><div class="rmc">astea</div><div class="rmc dim">astea</div>
-
-        <div class="rmsep"></div>
-        <div class="rmfull"><b>הטורים הסגולים לא דורשים שינון.</b> ‏<span class="ro">neutru</span> ביחיד זהה לזכר, וברבים זהה לנקבה - בדיוק כמו <a class="xref" href="#neutru">בכל מקום אחר במין השלישי</a>. נשארות <b>ארבע</b> צורות בלבד.</div>
       </div>
+    </div>
+    <div class="rmout">
+      <div class="rmfull"><b>הטורים הסגולים לא דורשים שינון.</b> ‏<span class="ro">neutru</span> ביחיד זהה לזכר, וברבים זהה לנקבה - בדיוק כמו <a class="xref" href="#neutru">בכל מקום אחר במין השלישי</a>. נשארות <b>ארבע</b> צורות בלבד.</div>
     </div>
     <div class="rmmath">
       <span class="ro">a<span class="cut">ce</span>asta</span><span class="op">◂</span><span class="ro">asta</span>
@@ -6800,6 +6848,64 @@ document.addEventListener('click',function(e){
   var d=D[b.dataset.t];if(!d)return;
   e.preventDefault();copy(d.p,b);
 });
+})();</script>
+<script id="vtstickyhead">/* v15-batch4 · כותרת דביקה לטבלאות ההטיה במובייל */
+(function(){
+try{
+  var MQ=window.matchMedia('(max-width:640px)');
+  function label(tb){
+    var n=tb.previousElementSibling,h=null;
+    while(n){ if(/^H[2-4]$/.test(n.tagName)){h=n;break;} n=n.previousElementSibling; }
+    if(!h){ var sec=tb.closest('section'); h=sec?sec.querySelector('h2.sec'):null; }
+    if(!h) return '';
+    var c=h.cloneNode(true),b=c.querySelector('button'); if(b) b.parentNode.removeChild(b);
+    return c.textContent.replace(/\s+/g,' ').trim();
+  }
+  function build(){
+    var tabs=document.querySelectorAll('table.vt:not(.hashd)');
+    for(var t=0;t<tabs.length;t++){
+      (function(tb){
+        var hr=tb.rows[0]; if(!hr||!hr.cells.length) return;
+        var sub=label(tb);
+        var box=document.createElement('div'); box.className='vtbox';
+        tb.parentNode.insertBefore(box,tb); box.appendChild(tb);
+        var hd=document.createElement('div'); hd.className='vthd'; hd.setAttribute('aria-hidden','true');
+        var vp=document.createElement('div'); vp.className='vthd-vp';
+        var row=document.createElement('div'); row.className='vthd-row';
+        for(var i=0;i<hr.cells.length;i++){
+          var c=document.createElement('div'); c.className='vthd-c';
+          c.innerHTML=hr.cells[i].innerHTML; row.appendChild(c);
+        }
+        vp.appendChild(row); hd.appendChild(vp);
+        if(sub){ var sd=document.createElement('div'); sd.className='vthd-sub'; sd.textContent=sub; hd.appendChild(sd); }
+        box.insertBefore(hd,tb);
+        tb.classList.add('hashd');
+        tb._vthdRow=row; tb._vthdHead=hr;
+        tb.addEventListener('scroll',function(){
+          row.style.transform='translateX('+(-tb.scrollLeft)+'px)';
+        },{passive:true});
+      })(tabs[t]);
+    }
+  }
+  function measure(){
+    var tabs=document.querySelectorAll('table.vt.hashd');
+    for(var t=0;t<tabs.length;t++){
+      var tb=tabs[t],row=tb._vthdRow,hr=tb._vthdHead;
+      if(!row||!hr) continue;
+      for(var i=0;i<hr.cells.length&&i<row.children.length;i++){
+        row.children[i].style.width=hr.cells[i].getBoundingClientRect().width+'px';
+      }
+      row.style.transform='translateX('+(-tb.scrollLeft)+'px)';
+    }
+  }
+  var raf=null;
+  function sync(){ if(raf) cancelAnimationFrame(raf); raf=requestAnimationFrame(function(){ if(MQ.matches){ build(); measure(); } }); }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sync); else sync();
+  window.addEventListener('load',sync);
+  window.addEventListener('resize',sync);
+  window.addEventListener('orientationchange',function(){ setTimeout(sync,300); });
+  if(document.fonts&&document.fonts.ready) document.fonts.ready.then(sync);
+}catch(e){}
 })();</script>
 </body>
 </html>
