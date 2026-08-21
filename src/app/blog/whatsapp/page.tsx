@@ -126,6 +126,66 @@ function DateChip({ children }: { children: React.ReactNode }) {
 const POST_URL = "https://amitbrin.com/blog/whatsapp";
 const POST_TITLE = "סליחה ששלחתי וואטסאפ - עמית ברין";
 
+function ShareRow() {
+  const [copied, setCopied] = useState(false);
+  const enc = encodeURIComponent;
+  const copy = async () => {
+    try { await navigator.clipboard.writeText(POST_URL); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
+  };
+  return (
+    <div className="share-btns">
+      <a className="wa-btn" href={`https://wa.me/?text=${enc(POST_TITLE + " " + POST_URL)}`} target="_blank" rel="noopener noreferrer">להעביר בוואטסאפ</a>
+      <a className="wa-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a className="wa-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">פייסבוק</a>
+      <a className="wa-btn" href={`https://x.com/intent/tweet?text=${enc(POST_TITLE)}&url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">X</a>
+      <button className="wa-btn" type="button" onClick={copy}>{copied ? "הועתק ✓" : "העתקת קישור"}</button>
+    </div>
+  );
+}
+
+/* ---------- comments (same Formspree, chat-input styling) ---------- */
+function Comments() {
+  const [state, setState] = useState<"idle" | "sending" | "ok" | "err">("idle");
+  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    setState("sending");
+    try {
+      const res = await fetch("https://formspree.io/f/xpqvaarr", {
+        method: "POST",
+        headers: { Accept: "application/json" },
+        body: new FormData(form),
+      });
+      if (res.ok) { setState("ok"); form.reset(); } else setState("err");
+    } catch { setState("err"); }
+  };
+  return (
+    <section className="comments">
+      <h3>יש לך מה להגיד על זה?</h3>
+      <p className="comments-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
+      {state === "ok" ? (
+        <p className="comments-ok">תודה! התגובה נשלחה.</p>
+      ) : (
+        <form className="comments-form" onSubmit={submit}>
+          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג (גרסת הצ׳אט): סליחה ששלחתי וואטסאפ" />
+          <input type="hidden" name="post" value="whatsapp-chat" />
+          <div className="comments-grid">
+            <input className="c-in" type="text" name="name" placeholder="שם" required />
+            <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
+          </div>
+          <div className="chat-input-row">
+            <textarea className="c-in c-area" name="comment" placeholder="הודעה" rows={2} required />
+            <button className="send-fab" type="submit" disabled={state === "sending"} aria-label="שליחה">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="#fff" style={{ transform: "scaleX(-1)" }} aria-hidden><path d="M2 21l21-9L2 3v7l15 2-15 2v7z"/></svg>
+            </button>
+          </div>
+          {state === "err" && <p className="comments-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
+        </form>
+      )}
+    </section>
+  );
+}
+
 /* =====================================================================
  *  PAGE
  * ===================================================================== */
@@ -294,7 +354,14 @@ export default function WhatsappChatPost() {
 
         <Msg side="in" big>נו, אז תעבירו 👇</Msg>
 
-        <div className="pf-band"><PostFooter slug="whatsapp" title={POST_TITLE} /></div>
+        <div className="share-wrap"><ShareRow /></div>
+
+        <Comments />
+
+        {/* the shared related rail, wearing this page's own look */}
+        <div className="more-wrap">
+          <PostFooter slug="whatsapp" title={POST_TITLE} parts={["related"]} frames={false} />
+        </div>
       </main>
     </div>
   );
@@ -453,14 +520,61 @@ const CSS = `
 .dots i:nth-child(3) { animation-delay:.4s; }
 @keyframes blink { 0%,60%,100% { opacity:.3; transform:translateY(0);} 30% { opacity:1; transform:translateY(-3px);} }
 
-/* ---------- the shared post footer sits on its own paper band ---------- */
-.pf-band {
-  position:relative; z-index:1;
-  margin:2.2rem 0 2.4rem; padding:2.6rem clamp(1.1rem,4vw,2.4rem) 3rem;
-  background:#FCFBF6; border-radius:1.4rem;
-  box-shadow:0 10px 34px rgba(0,0,0,.14);
+/* ---------- share ---------- */
+.share-wrap { margin:.6rem 0 0; display:flex; justify-content:flex-start; }
+.share-btns { display:flex; flex-wrap:wrap; gap:.6rem; max-width:82%; }
+.wa-btn {
+  background:#fff; color:var(--wa-green);
+  border:1.6px solid var(--wa-green); border-radius:999px;
+  font-family:inherit; font-size:.95rem; font-weight:600;
+  padding:.55em 1.3em; text-decoration:none; cursor:pointer;
+  box-shadow:0 1px 1px rgba(17,27,33,.08);
+  transition:background .3s, color .3s;
 }
-.pf-band .pf-root { max-width:64rem; margin:0 auto; }
+.wa-btn:hover { background:var(--wa-green); color:#fff; }
+
+/* ---------- comments ---------- */
+.comments {
+  margin-top:3rem; background:#fff; border-radius:16px;
+  padding:1.6rem 1.4rem; box-shadow:0 1px 2px rgba(17,27,33,.1);
+}
+.comments h3 { margin:0; font-size:1.3rem; font-weight:700; }
+.comments-sub { margin:.5rem 0 1.2rem; color:var(--wa-meta); }
+.comments-form { display:flex; flex-direction:column; gap:.8rem; }
+.comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:.8rem; }
+.c-in {
+  width:100%; box-sizing:border-box;
+  font-family:inherit; font-size:1rem; color:var(--wa-text);
+  background:#F0F2F5; border:none; border-radius:12px;
+  padding:.75em 1em; outline:none;
+}
+.c-in:focus { box-shadow:0 0 0 2px rgba(29,170,97,.35); }
+.chat-input-row { display:flex; gap:.6rem; align-items:flex-end; }
+.c-area { resize:vertical; min-height:52px; border-radius:22px; flex:1; }
+.send-fab {
+  flex:0 0 auto; width:48px; height:48px; border-radius:50%;
+  background:var(--wa-green); border:none; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  box-shadow:0 2px 6px rgba(17,27,33,.2);
+  transition:transform .25s var(--ease);
+}
+.send-fab:hover { transform:scale(1.06); }
+.send-fab:disabled { opacity:.6; }
+.comments-ok { font-weight:600; color:var(--wa-green); }
+.comments-err { font-size:.9rem; color:#8a1f1f; margin:0; }
+
+/* ---------- related rail, in this page's own language ---------- */
+.more-wrap {
+  position:relative; z-index:1; margin:2.4rem 0 2rem;
+  --pf-card-bg:#fff;
+  --pf-card-line:rgba(0,0,0,.08);
+  --pf-card-line-hover:rgba(0,0,0,.18);
+  --pf-card-shadow:0 1px 1px rgba(0,0,0,.13);
+  --pf-card-shadow-hover:0 8px 22px rgba(0,0,0,.18);
+  --pf-card-muted:rgba(0,0,0,.5);
+}
+.more-wrap .pf-more { margin:0; }
+.more-wrap .pf-more-h { color:#111b21; }
 
 /* ---------- mobile ---------- */
 @media (max-width: 640px) {

@@ -33,12 +33,29 @@ const Ic = {
   ),
 };
 
+type Part = "share" | "comments" | "related";
+
 export default function PostFooter({
   slug,
   title,
   formspree = "https://formspree.io/f/xpqvaarr",
   punchline = true,
-}: { slug: string; title: string; formspree?: string; punchline?: boolean }) {
+  parts = ["share", "comments", "related"],
+  frames = true,
+}: {
+  slug: string;
+  title: string;
+  formspree?: string;
+  punchline?: boolean;
+  /** posts designed inside their own world keep their own share/comments and
+   *  take only the related rail — see chattjb and whatsapp */
+  parts?: Part[];
+  /** false drops the drawn frames so the rail inherits the host page's look */
+  frames?: boolean;
+}) {
+  const show = (p: Part) => parts.includes(p);
+  const Frame = ({ kind, seed }: { kind?: "btn" | "box"; seed: number }) =>
+    frames ? <InkFrame kind={kind} seed={seed} /> : null;
   const url = `${SITE}/blog/${slug}`;
   const enc = encodeURIComponent;
   const [copied, setCopied] = useState(false);
@@ -60,33 +77,33 @@ export default function PostFooter({
   };
 
   return (
-    <div className="pf-root">
+    <div className={"pf-root" + (frames ? "" : " pf-bare")}>
       <style>{PF_CSS}</style>
 
       {/* ---- share ---- */}
-      <div className="pf-share" data-reveal>
+      {show("share") && <div className="pf-share" data-reveal>
         {punchline && <p className="pf-wink">קדימה, אל תתביישו:</p>}
         <div className="pf-btns">
           <a className="pf-btn" href={`https://wa.me/?text=${enc(title + " " + url)}`} target="_blank" rel="noopener noreferrer">
-            <InkFrame seed={1} />{Ic.wa} להעביר בוואטסאפ
+            <Frame seed={1} />{Ic.wa} להעביר בוואטסאפ
           </a>
           <a className="pf-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`} target="_blank" rel="noopener noreferrer">
-            <InkFrame seed={2} />{Ic.li} LinkedIn
+            <Frame seed={2} />{Ic.li} LinkedIn
           </a>
           <a className="pf-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`} target="_blank" rel="noopener noreferrer">
-            <InkFrame seed={3} />{Ic.fb} פייסבוק
+            <Frame seed={3} />{Ic.fb} פייסבוק
           </a>
           <a className="pf-btn" href={`https://x.com/intent/tweet?text=${enc(title)}&url=${enc(url)}`} target="_blank" rel="noopener noreferrer">
-            <InkFrame seed={4} />{Ic.x} X
+            <Frame seed={4} />{Ic.x} X
           </a>
           <button className="pf-btn" type="button" onClick={copy}>
-            <InkFrame seed={5} />{Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
+            <Frame seed={5} />{Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
           </button>
         </div>
-      </div>
+      </div>}
 
       {/* ---- comments ---- */}
-      <section className="pf-comments" data-reveal>
+      {show("comments") && <section className="pf-comments" data-reveal>
         <h3 className="pf-h">יש לך מה להגיד על זה?</h3>
         <p className="pf-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
         {state === "ok" ? (
@@ -96,33 +113,33 @@ export default function PostFooter({
             <input type="hidden" name="_subject" value={`תגובה חדשה בבלוג: ${title}`} />
             <input type="hidden" name="post" value={slug} />
             <div className="pf-grid">
-              <span className="pf-field"><InkFrame kind="box" seed={6} /><input className="pf-in" type="text" name="name" placeholder="שם" required /></span>
-              <span className="pf-field"><InkFrame kind="box" seed={7} /><input className="pf-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required /></span>
+              <span className="pf-field"><Frame kind="box" seed={6} /><input className="pf-in" type="text" name="name" placeholder="שם" required /></span>
+              <span className="pf-field"><Frame kind="box" seed={7} /><input className="pf-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required /></span>
             </div>
-            <span className="pf-field"><InkFrame kind="box" seed={8} /><textarea className="pf-in pf-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required /></span>
+            <span className="pf-field"><Frame kind="box" seed={8} /><textarea className="pf-in pf-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required /></span>
             <button className="pf-btn pf-send" type="submit" disabled={state === "sending"}>
-              <InkFrame seed={0} />
+              <Frame seed={0} />
               {state === "sending" ? "שולח…" : "שליחת תגובה"}
             </button>
             {state === "err" && <p className="pf-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
           </form>
         )}
-      </section>
+      </section>}
 
       {/* ---- related ---- */}
-      <section className="pf-more" data-reveal>
+      {show("related") && <section className="pf-more" data-reveal>
         <h2 className="pf-more-h">עוד דברים שכתבתי עליהם:</h2>
         <div className="pf-rail">
           {related.map((p, i) => (
             <a className="pf-card" href={p.href} key={p.href}>
-              <InkFrame kind="box" seed={i} />
+              <Frame kind="box" seed={i} />
               <span className="pf-cover"><img src={p.cover} alt="" loading="lazy" /></span>
               <h3 className="pf-card-t">{p.title}</h3>
               <p className="pf-card-x">{p.intro}</p>
             </a>
           ))}
         </div>
-      </section>
+      </section>}
     </div>
   );
 }
@@ -195,6 +212,27 @@ const PF_CSS = `
   font-size:1.05rem; line-height:1.3; margin:1rem .4rem .45rem; color:var(--pf-ink);
 }
 .pf-card-x{margin:0 .4rem; font-size:.9rem; line-height:1.6; color:var(--pf-muted)}
+
+/* --- bare mode: no drawn frames; the host page's own look carries it --- */
+.pf-bare{font-family:inherit; color:inherit}
+.pf-bare .pf-more-h{
+  font-family:inherit; color:inherit; border-right:none; padding-right:0;
+  font-size:clamp(1.15rem,2.4vw,1.5rem);
+}
+.pf-bare .pf-card{
+  padding:.75rem .75rem 1.05rem; border-radius:1rem;
+  background:var(--pf-card-bg,rgba(255,255,255,.7));
+  border:1px solid var(--pf-card-line,rgba(0,0,0,.1));
+  box-shadow:var(--pf-card-shadow,none);
+  transition:transform .35s ease, border-color .25s ease, box-shadow .25s ease;
+}
+.pf-bare .pf-card:hover{
+  transform:translateY(-3px);
+  border-color:var(--pf-card-line-hover,rgba(0,0,0,.22));
+  box-shadow:var(--pf-card-shadow-hover,0 8px 22px rgba(0,0,0,.09));
+}
+.pf-bare .pf-card-t{font-family:inherit; color:inherit; font-size:1rem}
+.pf-bare .pf-card-x{color:var(--pf-card-muted,rgba(0,0,0,.55)); font-size:.86rem}
 
 @media (max-width:720px){
   .pf-grid{grid-template-columns:1fr}
