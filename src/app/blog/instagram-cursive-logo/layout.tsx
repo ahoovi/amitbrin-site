@@ -8,18 +8,18 @@ export const metadata: Metadata = {
   title: "כשהמשתמשים שלך לא יודעים לקרוא את השם שלך – עמית ברין",
   description:
     "אז השבוע הם שינו את הלוגו שלהם. הלוגו הישן היה עשוי מאותיות בסגנון cursive – והנוער של היום כבר לא יודע לקרוא אותיות כאלה.",
-  alternates: { canonical: "/blog/instagram" },
+  alternates: { canonical: "/blog/instagram-cursive-logo" },
   openGraph: {
     type: "article",
     locale: "he_IL",
-    url: "/blog/instagram",
+    url: "/blog/instagram-cursive-logo",
     siteName: "עמית ברין",
     title: "כשהמשתמשים שלך לא יודעים לקרוא את השם שלך",
     description:
       "אז השבוע הם שינו את הלוגו שלהם. הלוגו הישן היה עשוי מאותיות בסגנון cursive – והנוער של היום כבר לא יודע לקרוא אותיות כאלה.",
     images: [
       {
-        url: "/media/blog/instagram/cover-og.jpg",
+        url: "/media/blog/instagram-cursive-logo/cover-og.jpg",
         width: 1200,
         height: 630,
         alt: "הלוגו של אינסטגרם בכתב מחובר, בין שתי דמויות בצללית",
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
     title: "כשהמשתמשים שלך לא יודעים לקרוא את השם שלך",
     description:
       "אז השבוע הם שינו את הלוגו שלהם. הלוגו הישן היה עשוי מאותיות בסגנון cursive – והנוער של היום כבר לא יודע לקרוא אותיות כאלה.",
-    images: ["/media/blog/instagram/cover-og.jpg"],
+    images: ["/media/blog/instagram-cursive-logo/cover-og.jpg"],
   },
 };
 
@@ -42,7 +42,7 @@ export default function InstagramPostLayout({
 }) {
   return (
     <>
-      <ArticleLd slug="instagram" />
+      <ArticleLd slug="instagram-cursive-logo" />
       {children}
     </>
   );

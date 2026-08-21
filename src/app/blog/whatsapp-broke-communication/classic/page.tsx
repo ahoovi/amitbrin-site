@@ -1,18 +1,18 @@
 "use client";
 
 /* =====================================================================
- *  BLOG POST — "פרי עץ הדעת"  ·  v2 (per Amit's revisions)
+ *  BLOG POST — "סליחה ששלחתי וואטסאפ"  ·  v2 (per Amit's revisions)
  *  · Site nav + blur veil on top; hero corner labels in negative
  *  · 80vh cover, frosted-grain glass title card
  *  · Persistent CMY ink-bleed title effect (front letters static)
  *  · Inline floating screenshots breaking left out of the column
  *  · Facebook + icons in share, sketchy multi-stroke send button
- *  Route: /blog/pri-etz-hadaat · Assets: /public/media/blog/pri-etz-hadaat/
+ *  Route: /blog/whatsapp-broke-communication · Assets: /public/media/blog/whatsapp-broke-communication/
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
-import PostFooter from "../../../components/PostFooter";
-import InkFrame from "../../../components/InkFrame";
+import PostFooter from "../../../../components/PostFooter";
+import InkFrame from "../../../../components/InkFrame";
 import { PaperTexture } from "@paper-design/shaders-react";
 
 /* ---------- BleedTitle: static letters, persistent CMY ink bleed ---------- */
@@ -80,7 +80,7 @@ function BleedTitle({
   return (
     <Tag ref={ref} className={"blt " + className}>
       {lines.map((line, li) => (
-        <span className="fxl" dir={/[֐-׿]/.test(line) ? "rtl" : "ltr"} key={li}>
+        <span className="fxl" key={li}>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (
@@ -134,62 +134,15 @@ function ReadProgress() {
   return <div className="read-progress" ref={ref} aria-hidden />;
 }
 
-const POST_TITLE = "פרי עץ הדעת - עמית ברין";
+const POST_TITLE = "סליחה ששלחתי וואטסאפ - עמית ברין";
 
 /* ---------- inline floating screenshot ---------- */
 function Shot({ src, alt, cap }: { src: string; alt: string; cap: string }) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
   return (
-    <>
-      <figure
-        className="shot-inline shot-zoom"
-        data-reveal
-        role="button"
-        tabIndex={0}
-        onClick={() => setOpen(true)}
-        onKeyDown={(e) => { if (e.key === "Enter") setOpen(true); }}
-      >
-        <img src={src} alt={alt} loading="lazy" />
-        <figcaption>{cap}</figcaption>
-      </figure>
-      {open && (
-        <div className="lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
-          <img src={src} alt={alt} />
-        </div>
-      )}
-    </>
-  );
-}
-
-
-/* ---------- three-up row cell with lightbox ---------- */
-function Cell({ src, alt }: { src: string; alt: string }) {
-  const [open, setOpen] = useState(false);
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open]);
-  return (
-    <>
-      <figure className="shot-cell shot-zoom" role="button" tabIndex={0}
-        onClick={() => setOpen(true)}
-        onKeyDown={(e) => { if (e.key === "Enter") setOpen(true); }}>
-        <img src={src} alt={alt} loading="lazy" />
-      </figure>
-      {open && (
-        <div className="lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
-          <img src={src} alt={alt} />
-        </div>
-      )}
-    </>
+    <figure className="shot-inline" data-reveal>
+      <img src={src} alt={alt} loading="lazy" />
+      <figcaption>{cap}</figcaption>
+    </figure>
   );
 }
 
@@ -251,12 +204,12 @@ export default function WhatsappPost() {
         </div>
       </nav>
 
-      {/* ---------- HERO: 80vh cover, torn spiral-notebook title card ---------- */}
+      {/* ---------- HERO: 80vh cover, corner labels in negative, glass card ---------- */}
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/pri-etz-hadaat/snakes-cover.jpg"
-            alt="מסך אילוסטרייטור: מברשת פאטרן של נחשים מציירת אותיות עבריות"
+            src="/media/blog/whatsapp-broke-communication/cover.jpg"
+            alt="ערימת כדורי סמיילי צהובים - תמונת השער של הפוסט"
             className="hero-img"
             fetchPriority="high"
           />
@@ -264,7 +217,10 @@ export default function WhatsappPost() {
         <div className="hero-card" data-reveal>
           <i className="spiral" aria-hidden />
           <i className="margin-line" aria-hidden />
-          <BleedTitle as="h1" className="hero-title" lines={["פרי עץ הדעת"]} />
+          <BleedTitle as="h1" className="hero-title" lines={["סליחה ששלחתי", "וואטסאפ"]} />
+          <p className="hero-sub">
+            וואטסאפ: לא אפליקציה גרועה. אפליקציה שעובדת מצוין - לא בשבילכם.
+          </p>
           <p className="hero-meta">
             מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 5 דקות קריאה
           </p>
@@ -276,141 +232,135 @@ export default function WhatsappPost() {
       {/* ---------- BODY ---------- */}
       <article className="body">
         <p className="lede" data-reveal>
-          לפני כמה ימים לקוח סרב לקבל ממני עבודה כי היא יצירה של בינה מלאכותית (כך הוא טען).
-          כשהעבודה הזו הוזמנה, לא צוינה במפורש טכניקה שבה צריך להשתמש או אסור להשתמש, לא התבקשו
-          כלים מסוימים, גם לא נאסרו כלים ספציפיים, אבל המראה הסופי של התוצר הדליק כנראה איזו נורה
-          אצל הלקוח וגרם לטריגר בלתי הפיך שממנו והלאה זה כבר לא היה משנה מהי טכניקת העבודה שלי, מה
-          תהליך היצירה, מאיפה אני יודע לצייר כאלה דימויים, אם אני יודע לצייר בכלל, ובאיזה מברשות או
-          ביצועיסטים אני משתמש (ברגעי הסירוב ההם זה הפך להיות הדיון עצמו, כן) כדי להגשים קונספט
-          וחזון קריאייטיבי מטאפורי לכדי דימוי חזותי. כי ברגע שמישהו מסמן לעצמו בראש ״זה לא אמיתי״
-          יהיה קשה עד בלתי אפשרי לשכנע אותו שזה כן. אפילו אם הוא ראה משהו בעיניים או אחז אותו
-          בידיים.
+          יותר מדי אחוזים מהתקשורת האלקטרונית שלי מתנהלת בוואטסאפ, וזה לא מרצוני החופשי. גם לא
+          משלכם, אם כבר. בישראל מדובר בכ־97% אימוץ (אנחנו במקום הראשון בעולם, איזו גאווה) – מה
+          שאומר שאין באמת אופציה לצאת, יש רק אופציה להיעלב מהיציאה של אחרים.
         </p>
 
-        {/* pull quote — breaks into the right margin, wide rule beneath */}
+        <p data-reveal>
+          אז תראו, אני לא חושב שוואטסאפ היא אפליקציה עם עיצוב לקוי. אני חושב שהיא אפליקציה שעיצבה
+          מחדש את הדרך שבה אנשים מדברים זה עם זה, וזה שני דברים שונים לגמרי.
+        </p>
+
+        {/* pull quote — breaks 250px into the right margin, one long rule below */}
         <aside className="pull" data-reveal>
           <BleedTitle
             as="blockquote"
             className="pull-title"
-            lines={["ברגע שמישהו מסמן לעצמו בראש ״זה לא אמיתי״ יהיה קשה עד בלתי אפשרי לשכנע אותו שזה כן."]}
+            lines={["היא לא שירתה צורך קיים - היא ייצרה התנהגות, ואז הפכה אותה לנורמה, ואז הפכה את הנורמה לתנאי סף לחיים חברתיים."]}
           />
         </aside>
 
+        <Shot
+          src="/media/blog/whatsapp-broke-communication/shot-typing-preview.jpg"
+          alt="צילום מסך: תצוגה מקדימה של הודעה בזמן הקלדה"
+          cap="למה שלא נדע כמה זמן אנחנו עוד אמורים לחכות פה? אפילו אם זה ברמה של רמז לאיזה שלב של הסיפור מי שכותב לנו נמצא כרגע."
+        />
+
         <p data-reveal>
-          כמו ללכת למופע של קוסם, כשאתה להוט לראות משהו לא הגיוני או על–טבעי ומוכן לשלם על החווייה
-          הזו במיטב כספך למרות שעוד לפני שרכשת את הכרטיס למופע הסברת לעצמך שוב ושוב שכל מה שהולך
-          להיעשות שם הוא לא אמיתי. וזה כבר לא ישנה אם הקוסם יעלה אותך על הבמה כדי לחפש את התרמית,
-          לבדוק בידיך את חבילת הקלפים או למשש את החרב שחצתה את העוזרת היפה שלו לשניים – אתה רואה
-          שמדובר בקלפים אמיתיים, אתה נחתך מהחרב ולא מוצא שום עדות אחרת לקיומה של המציאות הזו – אבל
-          כבר החלטת (איכשהו זו היתה התודעה שלך כשעלית לבמה כדי לבחון אותו) שמה שקרה שם הוא שפשוט
-          רימו אותך, ואז אתה סוגר לעצמך את הפינה עם איזה חיזוק עצמי ״האמת היא שרימו אותי, כי מה
-          שראיתי בעיני הוא לא באמת אמיתי״.
+          הטריק המרכזי הוא היברידי ומכוער: וואטסאפ היא <strong>מדיום אסינכרוני שמתחפש
+          לסינכרוני</strong>. טכנית מותר לך לא לענות. מעשית, ה"נראה לאחרונה", שני הסימונים הכחולים
+          ושלוש הנקודות המרצדות מייצרים שקיפות חד־כיוונית שמבטלת את הזכות הזו. תקשורת אסינכרונית
+          אמורה להוריד לחץ; כאן היא מייצרת אותו יש מאין.
         </p>
+
+        <Shot
+          src="/media/blog/whatsapp-broke-communication/shot-voice-failed.jpg"
+          alt="צילום מסך: הודעה קולית שלא עברה"
+          cap="למה בעצם אי אפשר לחסום הודעות קוליות?"
+        />
+
+        <p data-reveal>
+          ומי שמנסה לצאת מהמשחק מקבל עונש סימטרי: כיביתם אישורי קריאה? יופי, עכשיו גם אתם לא רואים.
+          זו לא פשרה, זה קנס. מערכת שמתמחרת פרטיות בכך שהיא מחזירה אותך לחוסר הוודאות שהיא עצמה
+          נועדה לפתור.
+        </p>
+
+        <Shot
+          src="/media/blog/whatsapp-broke-communication/shot-chat-list.jpg"
+          alt="צילום מסך: רשימת הצ׳אטים והארכיון"
+          cap="יש דברים שמקומם בארכיון ועדיין הם יותר חשובים מכל שאר ההודעות שם - היררכיה של חשיבות בארכיון לא תזיק."
+        />
+
+        <p data-reveal>
+          הקבוצות הן פרק בפני עצמו. אין מנגנון אישור הצטרפות – כל אחד יכול לצרף אותך לכל דבר, בכל
+          שעה, ואתה תגלה את זה מהתראה. ואם תרצה לצאת, האפליקציה תודיע על כך לכולם בשורה יבשה שנקראת
+          כמו הצהרה פוליטית ("X עזב את הקבוצה"). כלומר: <strong>הכניסה בלי הסכמה, היציאה עם קנס
+          חברתי</strong>. מי שתכנן את זה הבין היטב מה מחזיק אנשים בפנים.
+        </p>
+
+        <hr className="ink-rule" data-reveal />
 
         <p className="section-lede" data-reveal>
-          זה יהיה אנדרסטייטמנט להגיד שהקוסם על הבמה יצר תעתוע חזותי שפער אצלך בור קוגניטיבי, אבל
-          זה גם לא רחוק מהמציאות להגיד שמה שראית באמת קרה, ושבסופו של דבר אפילו מתבקש שתצא מרוצה
-          מזה כי קיבלת בדיוק את מה ששילמת עבורו.
+          מה שמעניין הוא איפה העיצוב נכשל בצורה כל כך יסודית שהוא מתהפך.
         </p>
 
         <p data-reveal>
-          הדיסוננס הקוגניטיבי הזה מאפיין את התקופה הנוכחית, שבה קפיצה טכנולוגית שאף אחד לא מצליח
-          להסביר דורשת מהמוח להסתגל למשהו שהוא היה משוכנע עד לפני כמה שניות שהוא בלתי אפשרי,
-          ולהאמין למראה עיניים – לעשות שימוש באמונה כזו מהסוג שיכול לאשר דברים בלתי אפשריים. אבל
-          בגלל שהמוח שלנו כבר שרוט וחבוט, בלוי מרוב גירויים בלתי אפשריים שכאלה – מעבר לכל מה שהטבע
-          הכין אותנו לעבד, ברגע שהעיניים שולחות קלט חדשני ודיסראפטיבי למוח והעיבוד שלו יוצר את
-          הפלט ״פייק״ זה כבר לא משנה אם הקלפים הם שלנו מהבית או שנגיעה פזיזה מדי בחרב של הקוסם
-          שלחה אותנו בתאונת מופע מצערת לתפרים בחדר המיון.
+          מחקר מאוניברסיטת Loughborough בדק את תוויות ה"הועבר" וה"הועבר פעמים רבות" – אותן תוויות
+          שנועדו לבלום הפצת שקרים – ומצא שחלק מהמשתמשים פירשו אותן כסימן לחשיבות. כלומר העבירו
+          יותר. רק מיעוט הבין שמדובר באזהרה. פיצ'ר שנועד להאט הפצת מידע מוטעה ושימש בפועל כתו תקן.
+          אין הרבה מקרים כאלה, ואני חושב שכדאי ללמד אותם, ובכל מקרה שיהיה לנו בהצלחה במערכת הבחירות
+          הקרובה…
         </p>
 
-        <figure className="video-full" data-reveal>
-          <video
-            src="/media/blog/pri-etz-hadaat/snake-brush.mp4"
-            controls
-            playsInline
-            preload="metadata"
-            poster="/media/blog/pri-etz-hadaat/snakes-cover.jpg"
-          />
-          <figcaption>
-            בסרטון האילוסטרציה: את מברשת הנחש הזה יצרתי בתוכנת אילוסטרייטור. בעבודה ידנית לא פשוטה
-            ובאתגר הגיון טכני שמעולם לא נדרשתי לו. ועכשיו אני כמו מאלף נחשים – אבל בלי לנגן באבוב
-            או לספר מעשיות על היפנוזה של בעלי חיים. רק אל תשאלו אותי איך זה עובד – כי גם מבחינתי זה
-            על טבעי. וזו היצירה שלי.
-          </figcaption>
-        </figure>
+        <Shot
+          src="/media/blog/whatsapp-broke-communication/shot-voice-flood.jpg"
+          alt="צילום מסך: צרור הודעות קוליות"
+          cap="אם כבר שולחים אליכם צרור של הודעות, צריך להיות מסוגלים לעצור אותו מתישהו."
+        />
 
         <p data-reveal>
-          כמה שלא ננסה להשתכנע או להתבדות ולקבל על עצמנו משהו שמעולם לא ראינו, המוח הוא דבר טבעי
-          ואורגני שמחייה ומניע אותנו, ומה שהוא חווה הרגע זה טריגר שהדליק אצלו נורה שמאירה על חוסר
-          אמינות שעלולה להוביל לערעור של תפישת המציאות (כזה שעלול להיות מסוכן לקיומנו), ומכאן והלאה
-          המוח שהתפתח וניזון בלעדית מהאבולוציה ומהטבע יעשה כל מה שהוא יכול כדי לשמור עלינו ולא לתת
-          לנו לבלוע חרבות או ליפול בהונאת קלפים; אנחנו כבר החלטנו מה ראינו או לא ראינו, כי המוח
-          התבוני שלנו אמר לנו: ״למה להסתבך עם אמונות על טבעיות? עד לפני שתי דקות היתה לכם מציאות
-          שלמה והוליסטית ומה שראיתם עכשיו יכול לשנות את כל מה שידעתם אם רק תעיזו לקבל את מה שראיתם
-          כמציאותי, ולכופף לכם את המוח או אפילו לשבור אותו חלילה. אז למה לכם להסתכן? לא חבל על
-          הראש היפה שלכם ועל תמונת המציאות השלמה שעמלתם שנים לגבש לעצמכם?״…
+          ובמקביל, תגובות האימוג'י: מנגנון שהוזלה של תגובה אנושית לכדי לחיצה אחת, בדיוק במקום שבו
+          היה נדרש משפט. משתמשים מדווחים שהם לוחצים על זה בטעות. מבחינת המערכת זו לא תקלה – זו
+          אינטראקציה. ספירת אינטראקציות זו המטריקה, לא איכותן.
         </p>
 
-        <p className="section-lede" data-reveal>
-          אבל בדיוק כמו שקרה כשהתגלתה האש, בדיוק כמו שהיה כשהתגלה החשמל, כמו שקרה כשכרכרות התחילו
-          לנוע בלי סוסים
+        <Shot
+          src="/media/blog/whatsapp-broke-communication/shot-auto-reply.jpg"
+          alt="צילום מסך: מענה אוטומטי בצ׳אט עם אמא"
+          cap="סליחה אמא, אבל לא בכל זמן אני פנוי לכל דבר."
+        />
+
+        <p data-reveal>
+          ה"מחק לכולם" השלים את התמונה: פיצ'ר תיקון שמותיר במקום ההודעה שלט ניאון שאומר "כאן היה
+          משהו שהתחרטתי עליו". הסתרה שהיא בעצם הצבעה.
+        </p>
+
+        <hr className="ink-rule" data-reveal />
+
+        <p data-reveal>
+          ועכשיו החלק שקצת פחות מצחיק. מחקר על עובדי בריאות בסעודיה מצא ש־63% מהם הציגו רמות מתח
+          חריגות, 55.8% חרדה ו־48.6% דיכאון – בקורלציה לשימוש בוואטסאפ בעבודה. יש בספרות מקרה מתועד
+          של עובדת שהתפטרה כי המנהל שלה ציפה לתגובה מיידית בלילות ובסופי שבוע. ויש כבר פסיקה
+          (Case v Tai Tarian) שקבעה שהתנהלות בקבוצת וואטסאפ פרטית מהווה בריונות במקום עבודה ומצדיקה
+          פיטורים. הקבוצה הפרטית, מסתבר, היא מקום ציבורי שרק מרגיש כמו סלון.
         </p>
 
         <p data-reveal>
-          <em>(המילה ״אוטומוביל״ הוטבעה כדי להבהיר במובן אפיסטמולוגי בסיסי שהכרכרה נעה בעצמה)</em>{" "}
-          או בדיוק כמו כשיום אחד תמונות החלו להיווצר ללא ציירים, על ידי איזו קופסה שחורה שאף משתמש
-          לא באמת ידע איך היא עובדת, ואותו המוח היה מוכן – ואפילו די נלהב – לקבל את התוצר החדשני
-          והפנטסטי שלה, גם בתקופה הזו שבה כלי יצירה מגיעים למקום שבו ברור אפילו לאנשים לא יצירתיים
-          שבמקרה שלפניהם לא נעשה שימוש בציירים ושזה לא באמת נוסה על בעלי חיים – זה כבר לא ישנה כי
-          אין דרך חזרה: למרות שהם לא באמת יודעים לייצר חשמל או להניע כרכרות – הם כבר ראו קסם או
-          שניים בחיים שלהם, והם לא יתנו לאף נוכל שרלטן לשכנע אותם שהוא באמת עשה פה משהו, ושמה שהם
-          ראו באמת היה שם. מנגנון ההישרדות שמקיף את המציאות המוכרת דאג לסגור את הדלתות והחלונות
-          מפני הסערה הזו של תופעות חדשות ולא מוסברות.
-        </p>
-
-        <p data-reveal>
-          לפני 45 שנים, כשרק התחלתי ללמוד ציור, אחת התגובות הכי שכיחות שקיבלתי לעבודות שהצגתי היתה
-          ״איך עשית את זה?!?״ (שאלה שהניסוח שלה מרמז על כך שלמרות שידוע שאתה כשרוני ויצירתי, ולמרות
-          שלמדת את הטכניקות הדרושות לביצוע של זה, נראה שאין מנוס מלחשוב שהדיסוננס בין המוכר לחדש
-          נגרם על ידי פקטור לא הגיוני או טבעי) וזו שאלה שלמרות שאני עוסק בהוראה של יצירתיות ושל
-          טכניקה למימוש שלה – כבר כמה שנים שלא שואלים אותי; היא הוחלפה בשאלה פרגמטית יותר לתקופה:
-          ״מה לחש הקסמים שבו השתמשת כדי לגרום לבדיה הזו להידמות למציאות?״. עכשיו תראו, אני לא קוסם.
-          אני גם לא נוכל. ובהגדרה המקצועית שגיבשתי לעצמי אני מספק לאנשים שירות שנסמך על שנים של
-          ידע נצבר, של כשרון שהתגבש מהתנסויות סיזיפיות בטכניקות – ובנסיון לחדש את כל אלה;
-        </p>
-
-        <p data-reveal>
-          כשהתחלתי לצייר השתמשתי בצבעי עפרון ופסטלים, כשהתחלתי ליצור דברים מסחריים השתמשתי
-          בפרגמנטים וניירות העתקה (הטכנולוגיה הזו היתה קיימת אז ועדיין אנשים סירבו להאמין שהתוצר
-          הזה אפשרי), אחר כך עברתי לשכפולי זירוקס ובהמשך גם הוספתי כל מיני טכניקות שדרשו ציוד
-          דיגיטלי שונה ומשונה, כזה שהיה נראה גם לי במבט ראשון כמו מדע בדיוני, כמו דיסוננס מטלטל
-          ששבר את כל מה שידעתי על העולם הגשמי, אבל בשום מקרה הקרדיט לעבודה לא ניתן לכלי עצמו אלא לי
-          – שדמיינתי, חקרתי, גיבשתי תפישה, תכננתי יישום, התאמנתי והתנסיתי אין ספור פעמים (ליטרלי)
-          עד שהתקבלה התוצאה שביקשתי. בדיוק כמו שהפוסטים שלכם נכתבים תחת שמכם ובשום פוסט לא מצויין
-          שהוא ״נכתב על ידי פייסבוק/לינקדאין״… זה כמו שחתימת המייל שלכם היא קרדיט ייחודי ובלעדי
-          עבורכם למסר הכתוב, אפילו שלא השתמשתם בשום ידע טיפוגרפי או שיש לכם מושג איך בכלל נוצרת
-          חתימת מייל או איך נשלח מידע בסיבים אופטיים תת ימיים לשרת בסן פרנסיסקו – אתם אחראים לזה
-          ובלעדיכם זה לא היה קורה. חשבתם, יזמתם ויצרתם אותה במכלול הכלים שהיה מונח לפניכם על השולחן
-          – וזו החתימה שלכם.
-        </p>
-
-        <p data-reveal>
-          אני לא יודע באיזה כלים נשתמש ליצירה בשנה הבאה אבל יש לי כבר כמה רעיונות פנטסטיים ליצירות
-          שהיום אין לי מושג איך לבצע – ואני מתכוון ליצור אותן ברגע שיצטבר אצלי הידע והכלים, ואתנסה
-          מספיק בשימוש ובטכניקה כדי להתקרב אל הנשגב והעל טבעי הזה. אני עדיין לא קוסם ומקפיד לא
-          להיות שרלטן, אבל כן מבטיח להפתיע או אפילו להמם, לחדש בכל פעם, לשבור מסגרות ולנתץ קופסאות
-          קוגניטיביות בכל דרך שאוכל, כדי לגרום לעבודה שלי ליצור שינוי, לפתור בעיה, לענות על צורך
-          ולהעלות את הערך הנתפש של הלקוח. זה הכישרון שלי וזה הערך שלי.
+          אז לא, זו לא רשלנות עיצובית. זו לא "חוסר עקביות בהיררכיה ויזואלית" ולא איזה חוב טכני
+          שמישהו ישלם בגרסה הבאה. זו מערכת שממטבת בדיוק את מה שהיא נבנתה למטב – זמן מסך, תדירות
+          פתיחה, מטא־דאטה (ההצפנה מגנה על התוכן, לא על מי־מתי־כמה־עם־מי) – ומצליחה בזה מעולה.
+          השאלה "למה הם לא מתקנים את זה" מניחה שמדובר בבאג.
         </p>
 
         {/* pull quote 2 */}
         <aside className="pull pull-left" data-reveal>
-          <BleedTitle as="blockquote" className="pull-title" lines={["אני עדיין לא קוסם", "ומקפיד לא להיות שרלטן."]} />
+          <BleedTitle as="blockquote" className="pull-title" lines={["זה לא באג.", "אתם פשוט לא הלקוח."]} />
         </aside>
+
+        <p data-reveal>
+          הדבר היחיד שנשאר לנו הוא לשים לב מתי אנחנו מתנהגים לפי כללי המערכת בלי ששאלו אותנו:
+          התנצלות על תשובה באיחור של שעתיים, הודעה קולית של שש דקות שנשלחה כי היה קל, לייק על הודעה
+          שהצריכה שיחת טלפון.
+        </p>
+
+        <p className="closer" data-reveal>
+          והנה החלק שכן מצחיק: את הטקסט הזה, ברוב המקרים, תעבירו הלאה בקבוצה.
+        </p>
 
         <hr className="ink-rule thick" data-reveal />
 
-        <PostFooter slug="pri-etz-hadaat" title={POST_TITLE} />
+        <PostFooter slug="whatsapp-broke-communication" title={POST_TITLE} />
 
         <footer className="bp-footer" data-reveal>
           <button type="button" className="ink-btn" onClick={() => history.back()}><InkFrame seed={4} />→ בחזרה</button>
@@ -656,90 +606,15 @@ const CSS = `
     calc(var(--cx) * -.6) calc(var(--cy) * .7) calc(2px + var(--k) * 3px) rgba(250,220,0, calc(var(--k) * .45));
 }
 
-/* wide breakout figure */
-.shot-wide {
-  clear:both; margin:3rem 0;
-  margin-right:calc((100vw - min(680px, 92vw)) / -8);
-  margin-left:calc((100vw - min(680px, 92vw)) / -8);
-  position:relative; background:#fff; padding:.9rem; border-radius:18px;
-}
-.shot-wide::before {
-  content:''; position:absolute; inset:2px; pointer-events:none;
-  border:1.8px solid var(--navy);
-  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
-  filter:url(#inkline-bp);
-}
-.shot-wide img { width:100%; height:auto; display:block; border-radius:10px; }
-.shot-wide figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
-
-/* full-column centered figure */
-.shot-full {
-  clear:both; margin:2.6rem 0; width:100%;
-  position:relative; background:#fff; padding:.9rem; border-radius:18px; box-sizing:border-box;
-}
-.shot-full::before {
-  content:''; position:absolute; inset:2px; pointer-events:none;
-  border:1.8px solid var(--navy);
-  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
-  filter:url(#inkline-bp);
-}
-.shot-full img { width:100%; height:auto; display:block; border-radius:10px; }
-.shot-full figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
-
-/* three-up row, breaking out to both margins */
-.shot-row {
-  clear:both; display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem;
-  align-items:start; margin:2.8rem 0;
-  margin-right:calc((100vw - min(680px, 92vw)) / -8);
-  margin-left:calc((100vw - min(680px, 92vw)) / -8);
-}
-.shot-cell {
-  margin:0; position:relative; background:#fff; padding:.7rem; border-radius:16px;
-}
-.shot-cell::before {
-  content:''; position:absolute; inset:2px; pointer-events:none;
-  border:1.7px solid var(--navy);
-  border-radius:12px 18px 11px 19px / 18px 12px 19px 13px;
-  filter:url(#inkline-bp);
-}
-.shot-cell img { width:100%; height:auto; display:block; border-radius:9px; }
-
-/* clickable shots + lightbox */
-.shot-zoom { cursor:zoom-in; }
-.lightbox {
-  position:fixed; inset:0; z-index:120;
-  background:rgba(2,13,44,.82);
-  display:flex; align-items:center; justify-content:center;
-  cursor:zoom-out; padding:4vh 4vw;
-}
-.lightbox img { max-width:92vw; max-height:92vh; width:auto; height:auto; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
-
-/* inline link button inside a running line */
-.ink-btn.btn-inline { padding:.25em .9em; font-size:.95em; vertical-align:middle; }
-.link-line { line-height:2.3; }
-
-/* full-column video block */
-.video-full {
-  clear:both; margin:2.6rem 0; width:100%;
-  position:relative; background:#fff; padding:.9rem; border-radius:18px; box-sizing:border-box;
-}
-.video-full::before {
-  content:''; position:absolute; inset:2px; pointer-events:none; z-index:2;
-  border:1.8px solid var(--navy);
-  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
-  filter:url(#inkline-bp);
-}
-.video-full video { width:100%; height:auto; display:block; border-radius:10px; position:relative; z-index:1; }
-.video-full figcaption { margin-top:.7rem; font-size:.9rem; line-height:1.7; color:rgba(8,24,69,.8); position:relative; z-index:3; }
-
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
   .hero-figure { height:62vh; }
   .hero-card { margin-top:-6rem; padding:3rem 1.3rem 1.7rem 3.4rem; }
   .tape { width:84px; height:28px; top:calc(62vh - 6rem - 14px); }
   .op-nav { padding:.9rem 1.1rem; gap:1.2rem; }
-  .pull, .pull-left, .shot-wide { margin-right:0; margin-left:0; }
+  .pull, .pull-left { margin-right:0; margin-left:0; }
   .shot-inline { float:none; width:100%; margin:2rem 0; }
+  .comments-grid { grid-template-columns:1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

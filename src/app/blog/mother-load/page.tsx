@@ -1,16 +1,19 @@
 "use client";
 
 /* =====================================================================
- *  BLOG POST — "סליחה ששלחתי וואטסאפ"  ·  v2 (per Amit's revisions)
+ *  BLOG POST — "Mother Load" (רייצ׳ל מאני)  ·  v2 (per Amit's revisions)
  *  · Site nav + blur veil on top; hero corner labels in negative
  *  · 80vh cover, frosted-grain glass title card
  *  · Persistent CMY ink-bleed title effect (front letters static)
  *  · Inline floating screenshots breaking left out of the column
  *  · Facebook + icons in share, sketchy multi-stroke send button
- *  Route: /blog/whatsapp · Assets: /public/media/blog/whatsapp/
+ *  Route: /blog/mother-load · Assets: /public/media/blog/mother-load/
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostDate from "../../../components/PostDate";
+import PostFooter from "../../../components/PostFooter";
+import InkFrame from "../../../components/InkFrame";
 import { PaperTexture } from "@paper-design/shaders-react";
 
 /* ---------- BleedTitle: static letters, persistent CMY ink bleed ---------- */
@@ -78,7 +81,7 @@ function BleedTitle({
   return (
     <Tag ref={ref} className={"blt " + className}>
       {lines.map((line, li) => (
-        <span className="fxl" key={li}>
+        <span className="fxl" dir={/[֐-׿]/.test(line) ? "rtl" : "ltr"} key={li}>
           {line.split(" ").map((word, wi) => (
             <span className="fw" key={wi}>
               {[...word].map((ch, ci) => (
@@ -132,107 +135,62 @@ function ReadProgress() {
   return <div className="read-progress" ref={ref} aria-hidden />;
 }
 
-/* ---------- share ---------- */
-const POST_URL = "https://amitbrin.com/blog/whatsapp";
-const POST_TITLE = "סליחה ששלחתי וואטסאפ - עמית ברין";
-
-const Ic = {
-  wa: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M17.5 14.4c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.77-1.66-2.07-.17-.3-.02-.46.13-.61.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.8.37-.27.3-1.04 1.02-1.04 2.5 0 1.47 1.07 2.9 1.22 3.1.15.2 2.1 3.2 5.1 4.49.71.31 1.27.49 1.7.63.72.23 1.37.2 1.88.12.57-.09 1.76-.72 2-1.42.25-.7.25-1.3.18-1.42-.08-.13-.28-.2-.58-.35zM12.05 21.6h-.01a9.55 9.55 0 0 1-4.87-1.33l-.35-.21-3.62.95.97-3.53-.23-.36a9.53 9.53 0 1 1 8.11 4.48zM12.05.9C5.93.9.96 5.87.96 11.99c0 1.95.51 3.86 1.48 5.54L.87 23.1l5.71-1.5a11.05 11.05 0 0 0 5.46 1.44h.01c6.12 0 11.09-4.97 11.09-11.09C23.14 5.87 18.17.9 12.05.9z"/></svg>
-  ),
-  li: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.55C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.73V1.72C24 .77 23.2 0 22.22 0z"/></svg>
-  ),
-  x: (
-    <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor" aria-hidden><path d="M18.24 2.25h3.31l-7.23 8.26 8.5 11.24h-6.66l-5.21-6.82-5.97 6.82H1.66l7.73-8.84L1.25 2.25h6.83l4.71 6.23 5.45-6.23zm-1.16 17.52h1.83L7.08 4.13H5.12l11.96 15.64z"/></svg>
-  ),
-  fb: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor" aria-hidden><path d="M24 12.07C24 5.4 18.63 0 12 0S0 5.4 0 12.07C0 18.1 4.39 23.09 10.13 24v-8.44H7.08v-3.49h3.05v-2.66c0-3.03 1.79-4.7 4.53-4.7 1.31 0 2.68.24 2.68.24v2.97h-1.51c-1.49 0-1.95.93-1.95 1.89v2.26h3.32l-.53 3.49h-2.79V24C19.61 23.09 24 18.1 24 12.07z"/></svg>
-  ),
-  link: (
-    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-  ),
-};
-
-function ShareRow({ punchline = false }: { punchline?: boolean }) {
-  const [copied, setCopied] = useState(false);
-  const enc = encodeURIComponent;
-  const copy = async () => {
-    try { await navigator.clipboard.writeText(POST_URL); setCopied(true); setTimeout(() => setCopied(false), 2200); } catch {}
-  };
-  return (
-    <div className={"share-row" + (punchline ? " share-punch" : "")}>
-      {punchline && <p className="share-wink">קדימה, אל תתביישו:</p>}
-      <div className="share-btns">
-        <a className="ink-btn" href={`https://wa.me/?text=${enc(POST_TITLE + " " + POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.wa} להעביר בוואטסאפ
-        </a>
-        <a className="ink-btn" href={`https://www.linkedin.com/sharing/share-offsite/?url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.li} LinkedIn
-        </a>
-        <a className="ink-btn" href={`https://www.facebook.com/sharer/sharer.php?u=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.fb} פייסבוק
-        </a>
-        <a className="ink-btn" href={`https://x.com/intent/tweet?text=${enc(POST_TITLE)}&url=${enc(POST_URL)}`} target="_blank" rel="noopener noreferrer">
-          {Ic.x} X
-        </a>
-        <button className="ink-btn" type="button" onClick={copy}>
-          {Ic.link} {copied ? "הועתק ✓" : "העתקת קישור"}
-        </button>
-      </div>
-    </div>
-  );
-}
-
-/* ---------- comments ---------- */
-function Comments() {
-  const [state, setState] = useState<"idle" | "sending" | "ok" | "err">("idle");
-  const submit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = e.currentTarget;
-    setState("sending");
-    try {
-      const res = await fetch("https://formspree.io/f/xpqvaarr", {
-        method: "POST",
-        headers: { Accept: "application/json" },
-        body: new FormData(form),
-      });
-      if (res.ok) { setState("ok"); form.reset(); } else setState("err");
-    } catch { setState("err"); }
-  };
-  return (
-    <section className="comments" data-reveal>
-      <h3 className="comments-title">יש לך מה להגיד על זה?</h3>
-      <p className="comments-sub">תגובות מגיעות ישירות אליי. בואו נדבר על זה.</p>
-      {state === "ok" ? (
-        <p className="comments-ok">תודה! התגובה נשלחה.</p>
-      ) : (
-        <form className="comments-form" onSubmit={submit}>
-          <input type="hidden" name="_subject" value="תגובה חדשה בבלוג: סליחה ששלחתי וואטסאפ" />
-          <input type="hidden" name="post" value="whatsapp" />
-          <div className="comments-grid">
-            <input className="c-in" type="text" name="name" placeholder="שם" required />
-            <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
-          </div>
-          <textarea className="c-in c-area" name="comment" placeholder="מה עובר לך בראש?" rows={4} required />
-          <button className="ink-btn scribble c-send" type="submit" disabled={state === "sending"}>
-            <i aria-hidden /><i aria-hidden /><i aria-hidden />
-            {state === "sending" ? "שולח…" : "שליחת תגובה"}
-          </button>
-          {state === "err" && <p className="comments-err">משהו השתבש בשליחה. אפשר לנסות שוב, או פשוט לכתוב לי למייל.</p>}
-        </form>
-      )}
-    </section>
-  );
-}
+const POST_TITLE = "Mother Load - עמית ברין";
 
 /* ---------- inline floating screenshot ---------- */
 function Shot({ src, alt, cap }: { src: string; alt: string; cap: string }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
   return (
-    <figure className="shot-inline" data-reveal>
-      <img src={src} alt={alt} loading="lazy" />
-      <figcaption>{cap}</figcaption>
-    </figure>
+    <>
+      <figure
+        className="shot-inline shot-zoom"
+        data-reveal
+        role="button"
+        tabIndex={0}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => { if (e.key === "Enter") setOpen(true); }}
+      >
+        <img src={src} alt={alt} loading="lazy" />
+        <figcaption>{cap}</figcaption>
+      </figure>
+      {open && (
+        <div className="lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
+          <img src={src} alt={alt} />
+        </div>
+      )}
+    </>
+  );
+}
+
+
+/* ---------- three-up row cell with lightbox ---------- */
+function Cell({ src, alt }: { src: string; alt: string }) {
+  const [open, setOpen] = useState(false);
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+  return (
+    <>
+      <figure className="shot-cell shot-zoom" role="button" tabIndex={0}
+        onClick={() => setOpen(true)}
+        onKeyDown={(e) => { if (e.key === "Enter") setOpen(true); }}>
+        <img src={src} alt={alt} loading="lazy" />
+      </figure>
+      {open && (
+        <div className="lightbox" onClick={() => setOpen(false)} role="dialog" aria-modal="true">
+          <img src={src} alt={alt} />
+        </div>
+      )}
+    </>
   );
 }
 
@@ -294,12 +252,12 @@ export default function WhatsappPost() {
         </div>
       </nav>
 
-      {/* ---------- HERO: 80vh cover, corner labels in negative, glass card ---------- */}
+      {/* ---------- HERO: 80vh cover, torn spiral-notebook title card ---------- */}
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/whatsapp/cover.jpg"
-            alt="ערימת כדורי סמיילי צהובים - תמונת השער של הפוסט"
+            src="/media/blog/mother-load/cover.jpg"
+            alt="פוסטרים של פרויקט Mother Load מודבקים על קיר רחוב"
             className="hero-img"
             fetchPriority="high"
           />
@@ -307,13 +265,14 @@ export default function WhatsappPost() {
         <div className="hero-card" data-reveal>
           <i className="spiral" aria-hidden />
           <i className="margin-line" aria-hidden />
-          <BleedTitle as="h1" className="hero-title" lines={["סליחה ששלחתי", "וואטסאפ"]} />
+          <BleedTitle as="h1" className="hero-title" lines={["Mother Load"]} />
           <p className="hero-sub">
-            וואטסאפ: לא אפליקציה גרועה. אפליקציה שעובדת מצוין - לא בשבילכם.
+            רייצ'ל מאני מדפיסה את הגיליון שאף רואה חשבון לא יחתום עליו - החשבון הפתוח של אימהות
+            יוצרות.
           </p>
           <p className="hero-meta">
-            מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 5 דקות קריאה
-          </p>
+            מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 4 דקות קריאה
+           · <PostDate slug="mother-load" /></p>
         </div>
         <i className="tape tape-a" aria-hidden />
         <i className="tape tape-b" aria-hidden />
@@ -321,145 +280,111 @@ export default function WhatsappPost() {
 
       {/* ---------- BODY ---------- */}
       <article className="body">
+        <Shot
+          src="/media/blog/mother-load/poster-price-tags.jpg"
+          alt="פוסטר Mother Load: פנים של אישה מכוסות בתוויות מחיר"
+          cap="מתוך Mother Load: הפנים כמוצר בסוף עונה - 74 סנט, מוזל, הצעה מיוחדת. לחיצה מגדילה."
+        />
+
         <p className="lede" data-reveal>
-          יותר מדי אחוזים מהתקשורת האלקטרונית שלי מתנהלת בוואטסאפ, וזה לא מרצוני החופשי. גם לא
-          משלכם, אם כבר. בישראל מדובר בכ־97% אימוץ (אנחנו במקום הראשון בעולם, איזו גאווה) – מה
-          שאומר שאין באמת אופציה לצאת, יש רק אופציה להיעלב מהיציאה של אחרים.
+          יש מסמך חשבונאי אחד שאף מחלקת כספים לא תדרוש ואף רואה חשבון לא יחתום עליו, והוא נפתח כל
+          ערב ב־23:00 בראש של כל אמא יוצרת: כמה שעות עבדתי באמת היום, כמה מהן הופרעו באמצע, כמה
+          אחוזי מעבד היו שמורים לאיסוף מבית הספר, לגרב שנעלמה, לאשמה… גיליון שלא מתאזן אף פעם, ולא
+          מופיע בשום תלוש.
         </p>
 
         <p data-reveal>
-          אז תראו, אני לא חושב שוואטסאפ היא אפליקציה עם עיצוב לקוי. אני חושב שהיא אפליקציה שעיצבה
-          מחדש את הדרך שבה אנשים מדברים זה עם זה, וזה שני דברים שונים לגמרי.
+          רייצ'ל מאני, מעצבת מלוס אנג'לס, החליטה לעצב ולהדפיס אותו – פרויקט בשם Mother Load:
+          פוסטרים שבהם פנים של אישה מכוסות בתוויות מחיר כמו מוצר בסוף עונה, קבלת סופרמרקט עם שורות
+          כמו "מס חופשת לידה" ו"עבודה בלתי נראית" – ולצידם מסה שמצחיקה וכועסת באותה נשימה, וכל
+          שורה בה נשענת על מחקר.
         </p>
 
-        {/* pull quote — breaks 250px into the right margin, one long rule below */}
+        <p className="section-lede" data-reveal>
+          המחקרים, למי שעוד צריך אותם: 74.3 סנט לכל דולר שאבות מרוויחים; קנס של 5–7% על כל ילד; ופי
+          שניים שיחות חזרה לנשים בלי ילדים – על קורות חיים זהים – בזמן שאבות באותם נתונים בדיוק
+          מקבלים דווקא תוספת ("בונוס האבהות", ככה זה נקרא בספרות המחקרית, בלי מרכאות אירוניות
+          אפילו).
+        </p>
+
+        <p data-reveal>
+          כל זה הזכיר לי את מחברת ההקפות של המכולת השכונתית – זו שנרשמו בה חובות בעיפרון, מתוך הנחה
+          שביום מן הימים מישהו יבוא לסגור את החשבון. ההבדל היחיד: במכולת לפחות כולם ידעו שיש מחברת.
+          כאן ההקפות נרשמות בדיו בלתי נראית, ומי שמגיעה לשלם בסוף כל חודש היא דווקא זו שרשומה בה.
+        </p>
+
+        {/* pull quote — breaks into the right margin, wide rule beneath */}
         <aside className="pull" data-reveal>
           <BleedTitle
             as="blockquote"
             className="pull-title"
-            lines={["היא לא שירתה צורך קיים - היא ייצרה התנהגות, ואז הפכה אותה לנורמה, ואז הפכה את הנורמה לתנאי סף לחיים חברתיים."]}
+            lines={["במכולת לפחות כולם ידעו שיש מחברת. כאן ההקפות נרשמות בדיו בלתי נראית."]}
           />
         </aside>
 
-        <Shot
-          src="/media/blog/whatsapp/shot-typing-preview.jpg"
-          alt="צילום מסך: תצוגה מקדימה של הודעה בזמן הקלדה"
-          cap="למה שלא נדע כמה זמן אנחנו עוד אמורים לחכות פה? אפילו אם זה ברמה של רמז לאיזה שלב של הסיפור מי שכותב לנו נמצא כרגע."
-        />
-
-        <p data-reveal>
-          הטריק המרכזי הוא היברידי ומכוער: וואטסאפ היא <strong>מדיום אסינכרוני שמתחפש
-          לסינכרוני</strong>. טכנית מותר לך לא לענות. מעשית, ה"נראה לאחרונה", שני הסימונים הכחולים
-          ושלוש הנקודות המרצדות מייצרים שקיפות חד־כיוונית שמבטלת את הזכות הזו. תקשורת אסינכרונית
-          אמורה להוריד לחץ; כאן היא מייצרת אותו יש מאין.
-        </p>
-
-        <Shot
-          src="/media/blog/whatsapp/shot-voice-failed.jpg"
-          alt="צילום מסך: הודעה קולית שלא עברה"
-          cap="למה בעצם אי אפשר לחסום הודעות קוליות?"
-        />
-
-        <p data-reveal>
-          ומי שמנסה לצאת מהמשחק מקבל עונש סימטרי: כיביתם אישורי קריאה? יופי, עכשיו גם אתם לא רואים.
-          זו לא פשרה, זה קנס. מערכת שמתמחרת פרטיות בכך שהיא מחזירה אותך לחוסר הוודאות שהיא עצמה
-          נועדה לפתור.
-        </p>
-
-        <Shot
-          src="/media/blog/whatsapp/shot-chat-list.jpg"
-          alt="צילום מסך: רשימת הצ׳אטים והארכיון"
-          cap="יש דברים שמקומם בארכיון ועדיין הם יותר חשובים מכל שאר ההודעות שם - היררכיה של חשיבות בארכיון לא תזיק."
-        />
-
-        <p data-reveal>
-          הקבוצות הן פרק בפני עצמו. אין מנגנון אישור הצטרפות – כל אחד יכול לצרף אותך לכל דבר, בכל
-          שעה, ואתה תגלה את זה מהתראה. ואם תרצה לצאת, האפליקציה תודיע על כך לכולם בשורה יבשה שנקראת
-          כמו הצהרה פוליטית ("X עזב את הקבוצה"). כלומר: <strong>הכניסה בלי הסכמה, היציאה עם קנס
-          חברתי</strong>. מי שתכנן את זה הבין היטב מה מחזיק אנשים בפנים.
-        </p>
-
-        <hr className="ink-rule" data-reveal />
+        <figure className="shot-full" data-reveal>
+          <img src="/media/blog/mother-load/poster-receipt.jpg" alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות" loading="lazy" />
+          <figcaption>הקבלה: "מס חופשת לידה", "עבודה בלתי נראית", סה"כ - יותר מדי. כל המכירות סופיות.</figcaption>
+        </figure>
 
         <p className="section-lede" data-reveal>
-          מה שמעניין הוא איפה העיצוב נכשל בצורה כל כך יסודית שהוא מתהפך.
+          עכשיו ההקשר, כי בלעדיו זה עוד פרויקט אמנותי יפה:
         </p>
 
         <p data-reveal>
-          מחקר מאוניברסיטת Loughborough בדק את תוויות ה"הועבר" וה"הועבר פעמים רבות" – אותן תוויות
-          שנועדו לבלום הפצת שקרים – ומצא שחלק מהמשתמשים פירשו אותן כסימן לחשיבות. כלומר העבירו
-          יותר. רק מיעוט הבין שמדובר באזהרה. פיצ'ר שנועד להאט הפצת מידע מוטעה ושימש בפועל כתו תקן.
-          אין הרבה מקרים כאלה, ואני חושב שכדאי ללמד אותם, ובכל מקרה שיהיה לנו בהצלחה במערכת הבחירות
-          הקרובה…
+          2025 הייתה שנת קונסולידציה אכזרית – Omnicom פיטרה מעל 4,000 עובדים, WPP איחדה את Ogilvy,
+          VML ו־AKQA, וכ־10,000 משרות נעלמו מהתעשייה. פחות אנשים עושים יותר עבודה, עם דרישה חדשה
+          שאף אחד לא טרח לכתוב במודעת הדרושים: שליטה ב־AI, וזמינות שאין לה שעות סגירה. ובדיוק כאן
+          נמצא המשפט שמאני מניחה על השולחן ושווה לקרוא אותו פעמיים: הכישורים שההנהלות מצהירות שהן
+          מחפשות עכשיו – תיעדוף תחת מחסור, ניהול משאבים מוגבלים, שקט תחת לחץ – הם ליטרלי האימון
+          היומי של אימהות. אבל הפילטר שממיין את המועמדים לא בודק כישורים; הוא בודק זמינות.
         </p>
 
-        <Shot
-          src="/media/blog/whatsapp/shot-voice-flood.jpg"
-          alt="צילום מסך: צרור הודעות קוליות"
-          cap="אם כבר שולחים אליכם צרור של הודעות, צריך להיות מסוגלים לעצור אותו מתישהו."
-        />
+        <figure className="shot-full" data-reveal>
+          <img src="/media/blog/mother-load/poster-portfolio.jpg" alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים" loading="lazy" />
+          <figcaption>"Portfolio Review" - התיק שמגיע לראיון אחרי שהילדים סיימו איתו.</figcaption>
+        </figure>
 
-        <p data-reveal>
-          ובמקביל, תגובות האימוג'י: מנגנון שהוזלה של תגובה אנושית לכדי לחיצה אחת, בדיוק במקום שבו
-          היה נדרש משפט. משתמשים מדווחים שהם לוחצים על זה בטעות. מבחינת המערכת זו לא תקלה – זו
-          אינטראקציה. ספירת אינטראקציות זו המטריקה, לא איכותן.
-        </p>
-
-        <Shot
-          src="/media/blog/whatsapp/shot-auto-reply.jpg"
-          alt="צילום מסך: מענה אוטומטי בצ׳אט עם אמא"
-          cap="סליחה אמא, אבל לא בכל זמן אני פנוי לכל דבר."
-        />
-
-        <p data-reveal>
-          ה"מחק לכולם" השלים את התמונה: פיצ'ר תיקון שמותיר במקום ההודעה שלט ניאון שאומר "כאן היה
-          משהו שהתחרטתי עליו". הסתרה שהיא בעצם הצבעה.
-        </p>
-
-        <hr className="ink-rule" data-reveal />
-
-        <p data-reveal>
-          ועכשיו החלק שקצת פחות מצחיק. מחקר על עובדי בריאות בסעודיה מצא ש־63% מהם הציגו רמות מתח
-          חריגות, 55.8% חרדה ו־48.6% דיכאון – בקורלציה לשימוש בוואטסאפ בעבודה. יש בספרות מקרה מתועד
-          של עובדת שהתפטרה כי המנהל שלה ציפה לתגובה מיידית בלילות ובסופי שבוע. ויש כבר פסיקה
-          (Case v Tai Tarian) שקבעה שהתנהלות בקבוצת וואטסאפ פרטית מהווה בריונות במקום עבודה ומצדיקה
-          פיטורים. הקבוצה הפרטית, מסתבר, היא מקום ציבורי שרק מרגיש כמו סלון.
+        <p className="section-lede" data-reveal>
+          וגילוי נאות, כי אי אפשר בלי:
         </p>
 
         <p data-reveal>
-          אז לא, זו לא רשלנות עיצובית. זו לא "חוסר עקביות בהיררכיה ויזואלית" ולא איזה חוב טכני
-          שמישהו ישלם בגרסה הבאה. זו מערכת שממטבת בדיוק את מה שהיא נבנתה למטב – זמן מסך, תדירות
-          פתיחה, מטא־דאטה (ההצפנה מגנה על התוכן, לא על מי־מתי־כמה־עם־מי) – ומצליחה בזה מעולה.
-          השאלה "למה הם לא מתקנים את זה" מניחה שמדובר בבאג.
+          אני מלמד את הדרישה הסמויה הזאת. סדנאות AI, כלים, טכניקות, אינטגרציות – אני חוליה בשרשרת
+          האספקה של המשוואה שמאני מפרקת. הנחמה שאני מוכר לעצמי היא שאני מתעקש להגיד, בכל סדנה,
+          שהכלי טוב בדיוק כמו האדם שמחזיק בו – כלומר שהערך נשאר אצל מי שצבר ניסיון וכישרון, ולא אצל
+          מי שפשוט זמין יותר שעות מול המסך. יש שיאמרו שזו בדיוק הנחמה שכל ספק נשק מוכר לעצמו…
         </p>
-
-        {/* pull quote 2 */}
-        <aside className="pull pull-left" data-reveal>
-          <BleedTitle as="blockquote" className="pull-title" lines={["זה לא באג.", "אתם פשוט לא הלקוח."]} />
-        </aside>
 
         <p data-reveal>
-          הדבר היחיד שנשאר לנו הוא לשים לב מתי אנחנו מתנהגים לפי כללי המערכת בלי ששאלו אותנו:
-          התנצלות על תשובה באיחור של שעתיים, הודעה קולית של שש דקות שנשלחה כי היה קל, לייק על הודעה
-          שהצריכה שיחת טלפון.
+          כי בסופו של דבר הטיעון של מאני הוא לא "נגד קדמה", וזה מה שעושה אותו קשה לעיכול. קדמה שכל
+          המדדים שלה הם מהירות וזמינות היא פילטר – שקט, יעיל, בלי אף החלטה מפלה אחת שאפשר להצביע
+          עליה בישיבת דירקטוריון – שמסנן החוצה בדיוק את הכישרון המנוסה ביותר. שבמקרה גמור הוא נשי
+          באופן לא פרופורציונלי. ובמקרה קצת פחות גמור – הוא גם כל מי שכבר עבר את תקרת הזכוכית של
+          ממוצע אורך החיים במקצוע הזה; כל מי שיש לו, איך לנסח את זה, חיים שמפריעים באמצע.
         </p>
 
-        <p className="closer" data-reveal>
-          והנה החלק שכן מצחיק: את הטקסט הזה, ברוב המקרים, תעבירו הלאה בקבוצה.
-        </p>
-
-        <hr className="ink-rule thick" data-reveal />
-
-        <div data-reveal>
-          <ShareRow punchline />
+        <div className="shot-row" data-reveal>
+          <Cell src="/media/blog/mother-load/poster-out-of-order.jpg" alt="פוסטר Out of Order: ידיים של ילדים מכסות פנים של אמא" />
+          <Cell src="/media/blog/mother-load/poster-torn-face.jpg" alt="פוסטר Mother Load: פנים מכוסות בציור ילדים קרוע" />
+          <Cell src="/media/blog/mother-load/street-mockup.jpg" alt="פוסטרים של Mother Load ו-Out of Order על חזית בניין ברחוב" />
         </div>
 
+        <p className="closer link-line" data-reveal>
+          המסה המלאה אצלה באתר:{" "}
+          <a className="ink-btn btn-inline" href="https://rachelmany.com/creativemotherhood" target="_blank" rel="noopener noreferrer">
+            <InkFrame seed={6} />
+            rachelmany.com/creativemotherhood ←
+          </a>{" "}
+          שווה את הזמן. ואת החשבון שייפתח בראש אחר כך. גם בשבילך, גבר.
+        </p>
+
         <hr className="ink-rule thick" data-reveal />
 
-        <Comments />
+        <PostFooter slug="mother-load" title={POST_TITLE} />
 
         <footer className="bp-footer" data-reveal>
-          <button type="button" className="ink-btn" onClick={() => history.back()}>→ בחזרה</button>
+          <button type="button" className="ink-btn" onClick={() => history.back()}><InkFrame seed={4} />→ בחזרה</button>
         </footer>
       </article>
     </div>
@@ -600,6 +525,7 @@ const CSS = `
   margin:1.5rem 0 0; font-size:clamp(1.28rem, 1.8vw, 1.55rem);
   font-weight:600; color:var(--navy-deep); line-height:1.55;
 }
+.post-date { font-variant-numeric:tabular-nums; }
 .hero-meta {
   margin:1.3rem 0 0; text-align:center;
   font-size:.9rem; color:rgba(8,24,69,.72);
@@ -680,52 +606,8 @@ const CSS = `
   padding:.6em 1.5em; text-decoration:none; cursor:pointer; border:none;
   transition:color .35s var(--ease), transform .5s var(--ease);
 }
-.ink-btn::before {
-  content:''; position:absolute; inset:0; z-index:-1;
-  border:1.7px solid var(--navy);
-  border-radius:255px 18px 225px 18px / 18px 225px 18px 255px;
-  filter:url(#inkline-bp);
-  transition:background .35s var(--ease);
-}
-.ink-btn:hover { color:var(--cream); }
-.ink-btn:hover::before { background:var(--navy); }
 .ink-btn:active { transform:scale(.98); }
-.ink-btn svg { flex:0 0 auto; }
-
-/* scribbled 3-4x send button: extra hand-drawn strokes stacked */
-.ink-btn.scribble i {
-  position:absolute; inset:0; z-index:-1; pointer-events:none;
-  border:1.6px solid var(--navy);
-  filter:url(#inkline-bp);
-}
-.ink-btn.scribble i:nth-of-type(1) { border-radius:18px 230px 20px 250px / 240px 16px 250px 20px; transform:rotate(.7deg); opacity:.85; }
-.ink-btn.scribble i:nth-of-type(2) { border-radius:240px 22px 250px 16px / 20px 245px 18px 235px; transform:rotate(-.9deg) scale(1.02); opacity:.7; }
-.ink-btn.scribble i:nth-of-type(3) { border-radius:200px 30px 210px 26px / 26px 215px 24px 205px; transform:rotate(1.4deg) scale(1.035); opacity:.5; }
-
-/* share */
-.share-row { margin:2.6rem 0 0; clear:both; }
-.share-wink { font-weight:700; margin:0 0 1rem; }
-.share-btns { display:flex; flex-wrap:wrap; gap:.8rem; }
-
-/* ---------- comments ---------- */
-.comments { margin:4rem 0 0; clear:both; }
-.comments-title { color:var(--navy); font-weight:700; font-size:clamp(1.5rem, 2.6vw, 2.2rem); }
-.comments-sub { margin:.7rem 0 1.8rem; color:rgba(8,24,69,.7); }
-.comments-form { display:flex; flex-direction:column; gap:1rem; }
-.comments-grid { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
-.c-in {
-  width:100%; box-sizing:border-box;
-  font-family:'Alef','Noto Sans Hebrew',Arial,sans-serif; font-size:1rem;
-  color:var(--navy-deep); background:#fff;
-  border:1.6px solid var(--navy); border-radius:12px 16px 11px 17px / 15px 11px 17px 12px;
-  padding:.8em 1em; outline:none;
-  transition:box-shadow .3s var(--ease);
-}
-.c-in:focus { box-shadow:0 0 0 3px rgba(8,24,69,.15); }
-.c-area { resize:vertical; min-height:110px; }
-.c-send { align-self:flex-start; }
-.comments-ok { font-weight:600; color:var(--navy); }
-.comments-err { font-size:.9rem; color:#8a1f1f; margin:0; }
+.ink-btn svg:not(.ink-frame) { flex:0 0 auto; }
 
 .bp-footer { margin:4rem 0 0; display:flex; justify-content:center; clear:both; }
 
@@ -746,15 +628,76 @@ const CSS = `
     calc(var(--cx) * -.6) calc(var(--cy) * .7) calc(2px + var(--k) * 3px) rgba(250,220,0, calc(var(--k) * .45));
 }
 
+/* wide breakout figure */
+.shot-wide {
+  clear:both; margin:3rem 0;
+  margin-right:calc((100vw - min(680px, 92vw)) / -8);
+  margin-left:calc((100vw - min(680px, 92vw)) / -8);
+  position:relative; background:#fff; padding:.9rem; border-radius:18px;
+}
+.shot-wide::before {
+  content:''; position:absolute; inset:2px; pointer-events:none;
+  border:1.8px solid var(--navy);
+  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
+  filter:url(#inkline-bp);
+}
+.shot-wide img { width:100%; height:auto; display:block; border-radius:10px; }
+.shot-wide figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
+
+/* full-column centered figure */
+.shot-full {
+  clear:both; margin:2.6rem 0; width:100%;
+  position:relative; background:#fff; padding:.9rem; border-radius:18px; box-sizing:border-box;
+}
+.shot-full::before {
+  content:''; position:absolute; inset:2px; pointer-events:none;
+  border:1.8px solid var(--navy);
+  border-radius:14px 20px 12px 22px / 20px 13px 22px 14px;
+  filter:url(#inkline-bp);
+}
+.shot-full img { width:100%; height:auto; display:block; border-radius:10px; }
+.shot-full figcaption { margin-top:.7rem; font-size:.85rem; color:rgba(8,24,69,.75); }
+
+/* three-up row, breaking out to both margins */
+.shot-row {
+  clear:both; display:grid; grid-template-columns:repeat(3, 1fr); gap:1.2rem;
+  align-items:start; margin:2.8rem 0;
+  margin-right:calc((100vw - min(680px, 92vw)) / -8);
+  margin-left:calc((100vw - min(680px, 92vw)) / -8);
+}
+.shot-cell {
+  margin:0; position:relative; background:#fff; padding:.7rem; border-radius:16px;
+}
+.shot-cell::before {
+  content:''; position:absolute; inset:2px; pointer-events:none;
+  border:1.7px solid var(--navy);
+  border-radius:12px 18px 11px 19px / 18px 12px 19px 13px;
+  filter:url(#inkline-bp);
+}
+.shot-cell img { width:100%; height:auto; display:block; border-radius:9px; }
+
+/* clickable shots + lightbox */
+.shot-zoom { cursor:zoom-in; }
+.lightbox {
+  position:fixed; inset:0; z-index:120;
+  background:rgba(2,13,44,.82);
+  display:flex; align-items:center; justify-content:center;
+  cursor:zoom-out; padding:4vh 4vw;
+}
+.lightbox img { max-width:92vw; max-height:92vh; width:auto; height:auto; border-radius:8px; box-shadow:0 30px 80px rgba(0,0,0,.5); }
+
+/* inline link button inside a running line */
+.ink-btn.btn-inline { padding:.25em .9em; font-size:.95em; vertical-align:middle; }
+.link-line { line-height:2.3; }
+
 /* ---------- mobile ---------- */
 @media (max-width: 720px) {
   .hero-figure { height:62vh; }
   .hero-card { margin-top:-6rem; padding:3rem 1.3rem 1.7rem 3.4rem; }
   .tape { width:84px; height:28px; top:calc(62vh - 6rem - 14px); }
   .op-nav { padding:.9rem 1.1rem; gap:1.2rem; }
-  .pull, .pull-left { margin-right:0; margin-left:0; }
+  .pull, .pull-left, .shot-wide { margin-right:0; margin-left:0; }
   .shot-inline { float:none; width:100%; margin:2rem 0; }
-  .comments-grid { grid-template-columns:1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

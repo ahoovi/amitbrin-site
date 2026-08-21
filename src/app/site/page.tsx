@@ -12,7 +12,8 @@
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
 import KssemacCase from "../../components/KssemacCase";
-import TeaLibrary from "../../components/TeaLibrary";
+import TeaLibrary, { TEA_PAPER_CSS } from "../../components/TeaLibrary";
+import SiteNav from "../../components/SiteNav";
 import InkFrame from "../../components/InkFrame";
 
 /* ---- Word-aware rotating headline ----
@@ -318,7 +319,7 @@ const POSTS = [
     title: "כשהמשתמשים שלך לא יודעים לקרוא את השם שלך",
     excerpt:
       "אז השבוע הם שינו את הלוגו שלהם. לכאורה עוד ״ריענון למותג״… אבל זה הכיל בתוכו שינוי מהותי: הלוגו הישן היה עשוי מאותיות בסגנון cursive (״כתב מחובר״) והנוער של היום – תאמינו או לא – כבר לא יודע לקרוא אותיות כאלה. אפילו לא מילה אחת כזו.",
-    href: "/blog/instagram",
+    href: "/blog/instagram-cursive-logo",
     placeholder: false,
   },
 
@@ -326,28 +327,28 @@ const POSTS = [
     title: "הצ׳טבוט האנושי שלך",
     excerpt:
       "בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI. עוד שלט אחד בים השלטים שמנסים למכור לכם עתיד שבו מכונה עונה לכם על הכל. רגיל לגמרי, נכון?",
-    href: "/blog/chattjb",
+    href: "/blog/human-chatbot",
     placeholder: false,
   },
   {
     title: "פרי עץ הדעת",
     excerpt:
       "לפני כמה ימים לקוח סרב לקבל ממני עבודה כי היא יצירה של בינה מלאכותית (כך הוא טען). כי ברגע שמישהו מסמן לעצמו בראש ״זה לא אמיתי״ יהיה קשה עד בלתי אפשרי לשכנע אותו שזה כן.",
-    href: "/blog/pri-etz-hadaat",
+    href: "/blog/client-refused-ai-work",
     placeholder: false,
   },
   {
     title: "Mother Load",
     excerpt:
       "יש מסמך חשבונאי אחד שאף רואה חשבון לא יחתום עליו, והוא נפתח כל ערב ב־23:00 בראש של כל אמא יוצרת. רייצ'ל מאני עיצבה והדפיסה אותו – פוסטרים, קבלה אחת ארוכה, ומסה שמצחיקה וכועסת באותה נשימה – על החשבון הפתוח של אימהות יוצרות.",
-    href: "/blog/motherload",
+    href: "/blog/mother-load",
     placeholder: false,
   },
   {
     title: "סליחה ששלחתי וואטסאפ",
     excerpt:
       "וואטסאפ היא אפליקציה תקשורת שמשבשת את התקשורת האנושית. לא פחות. היא גם משנה את ההתנהגות האישית שלנו לרעה. ממש ככה. רוב האנשים לא עסוקים בשאלה ״האם היא משרתת אותנו, או שאנחנו משרתים אותה?״, הם גם לא מודעים לכך שהיא כבר מזמן לא משמשת לצרכים שעבורם היא נבנתה – הם כבר שברו את התיקרה שלה והיא מצידה שברה את הגבולות שלהם.",
-    href: "/blog/whatsapp",
+    href: "/blog/whatsapp-broke-communication",
     placeholder: false,
   },
 ];
@@ -860,6 +861,7 @@ export default function SitePage() {
 
   return (
     <div className="op-root" dir="rtl">
+      <style>{TEA_PAPER_CSS}</style>
       <style>{CSS}</style>
 
       {/* hand-drawn ink-line filter (blog cards & buttons) */}
@@ -870,25 +872,8 @@ export default function SitePage() {
         </filter>
       </svg>
 
-      {/* progressive blur veil behind the nav */}
-      <div className="nav-veil" aria-hidden>
-        <i />
-        <i />
-        <i />
-      </div>
-
-      {/* ============ NAV ============ */}
-      <nav className="op-nav" aria-label="ניווט ראשי">
-        <a href="#top" className="nav-logo" aria-label="עמית ברין — ראשי">
-          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
-        </a>
-        <div className="nav-links">
-          <a href="#top">ראשי</a>
-          <a href="#blog">כתיבה ועשייה</a>
-          <a href="/blog">תרחיב</a>
-          <a href="#footer">דברו איתי</a>
-        </div>
-      </nav>
+      {/* ============ NAV — the one shared across the site ============ */}
+      <SiteNav home current="home" />
 
       <RulerNav />
       <BackToTop />
@@ -963,14 +948,14 @@ export default function SitePage() {
       </section>
 
       {/* ============ 2.4 · WORKS — heading, then work 01: the Tea library ============ */}
-      <section className="sec-works sec-works-intro" id="works">
+      <section className="sec-works sec-works-intro tea-paper" id="works">
         <div className="works-head" data-reveal>
           <FxTitle
             className="works-title fx-skew"
             palette="rgb"
             lines={["דברים שנהניתי ליצור בזמן האחרון"]}
           />
-          <p className="works-label">עבודה 01 · הספרייה של תה · עיצוב הספר שחותם ספרייה שלמה</p>
+          <p className="works-label">01 · הספרייה של תה · עיצוב הספר שחותם ספרייה שלמה</p>
         </div>
       </section>
       <TeaLibrary />
@@ -978,7 +963,7 @@ export default function SitePage() {
       {/* ============ 2.5 · WORKS — work 02: KsseMac ============ */}
       <section className="sec-works sec-works-02">
         <div className="works-head" data-reveal>
-          <p className="works-label">עבודה 02 · KSSEMAC · אפליקציית MENU BAR ל-MACOS</p>
+          <p className="works-label">02 · KSSEMAC · אפליקציית MENU BAR ל-MACOS</p>
         </div>
         <KssemacCase />
       </section>
@@ -1214,27 +1199,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 [data-reveal] { opacity:0; transform:translateY(30px); transition:opacity .9s var(--ease), transform .9s var(--ease); }
 [data-reveal].in { opacity:1; transform:none; }
 @media (prefers-reduced-motion: reduce){ [data-reveal]{ opacity:1; transform:none; transition:none; } }
-
-/* ---------- NAV + progressive blur veil ---------- */
-.nav-veil { position:fixed; top:0; right:0; left:0; height:90px; z-index:40; pointer-events:none; }
-.nav-veil i { position:absolute; inset:0; }
-.nav-veil i:nth-child(1){ backdrop-filter:blur(26px); -webkit-backdrop-filter:blur(26px);
-  -webkit-mask-image:linear-gradient(#000 0 34%, transparent 62%); mask-image:linear-gradient(#000 0 34%, transparent 62%); }
-.nav-veil i:nth-child(2){ backdrop-filter:blur(11px); -webkit-backdrop-filter:blur(11px);
-  -webkit-mask-image:linear-gradient(transparent 22%, #000 40% 52%, transparent 80%); mask-image:linear-gradient(transparent 22%, #000 40% 52%, transparent 80%); }
-.nav-veil i:nth-child(3){ backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
-  -webkit-mask-image:linear-gradient(transparent 45%, #000 62% 74%, transparent 100%); mask-image:linear-gradient(transparent 45%, #000 62% 74%, transparent 100%); }
-
-.op-nav {
-  position:fixed; top:0; right:0; left:0; z-index:50;
-  display:flex; align-items:center; gap:2.4rem;
-  padding:1.1rem 2.2rem;
-  mix-blend-mode:difference;
-}
-.nav-logo img { height:32px; width:auto; display:block; filter:brightness(0) invert(1); }
-.nav-links { display:flex; gap:1.8rem; }
-.nav-links a { color:#fff; text-decoration:none; font-family:'Leon',sans-serif; font-weight:500; font-size:1rem; letter-spacing:.02em; transition:opacity .4s var(--ease); }
-.nav-links a:hover { opacity:.65; }
 
 /* ---------- RULER NAV (left edge) ---------- */
 .ruler {
@@ -1481,9 +1445,13 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 
 /* ---------- 2.4 / 2.5 · WORKS — heading + mini case studies ---------- */
 .sec-works { background:var(--navy-dark); padding:min(13vh, 140px) 0 11vh; }
-/* the heading band that sits above the Tea library: it is a lead-in, not a
-   stop of its own — no snap point, and it ends where the library begins */
-.sec-works-intro { padding:min(13vh, 140px) 0 min(7vh, 76px); scroll-snap-align:none; }
+/* The heading above the Tea library is part of that section, not a band of
+   its own: same paper, no gap, no snap point. It simply makes the library
+   taller by the height of its own title. */
+.sec-works-intro { background:none; padding:min(12vh, 130px) 0 0; scroll-snap-align:none; }
+.sec-works-intro .works-title { color:var(--navy); text-shadow:none; }
+.sec-works-intro .works-label { color:rgba(8,24,69,.82); }
+.sec-works-intro .works-label::after { background:rgba(8,24,69,.2); }
 .sec-works-02 { padding-top:min(9vh, 96px); }
 .works-head { max-width:1200px; margin:0 auto; padding:0 5vw 14px; }
 .works-title {
@@ -1785,7 +1753,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   :root { --sec-h2:clamp(1.9rem, 7vw, 2.8rem); }
   .op-nav { padding:.9rem 1.2rem; gap:1.4rem; }
   .nav-logo img { height:26px; }
-  .nav-links { gap:1.1rem; }
   .nav-veil { height:64px; }
   .ruler { left:.55rem; gap:11px; }
   .ruler .tick { width:12px; }

@@ -18,16 +18,17 @@
  *  ALL BODY TEXT IS VERBATIM FROM AMIT'S NOTION SOURCE.
  *  Claude-generated strings are flagged with a CLAUDE-GEN comment.
  *
- *  Route: /blog/instagram · Assets: /public/media/blog/instagram/
+ *  Route: /blog/instagram-cursive-logo · Assets: /public/media/blog/instagram-cursive-logo/
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostDate from "../../../components/PostDate";
 import PostFooter from "../../../components/PostFooter";
 import InkFrame from "../../../components/InkFrame";
 import { PaperTexture } from "@paper-design/shaders-react";
 
-const LOGO_OLD = "/media/blog/instagram/logo-old.png";
-const LOGO_NEW = "/media/blog/instagram/logo-new.png";
+const LOGO_OLD = "/media/blog/instagram-cursive-logo/logo-old.png";
+const LOGO_NEW = "/media/blog/instagram-cursive-logo/logo-new.png";
 
 /* ---------- BleedTitle: static letters, persistent CMY ink bleed ---------- */
 function BleedTitle({
@@ -223,7 +224,7 @@ function HeroSheet() {
   return (
     <figure className="hero-figure ig-cover" onDoubleClick={pop}>
       <img
-        src="/media/blog/instagram/cover.jpg"
+        src="/media/blog/instagram-cursive-logo/cover.jpg"
         alt="הלוגו של אינסטגרם בכתב מחובר, בין שתי דמויות בצללית"
         fetchPriority="high"
       />
@@ -318,7 +319,7 @@ export default function InstagramPost() {
           {/* CLAUDE-GEN: standing byline line, identical pattern to the other posts */}
           <p className="hero-meta">
             מחשבות על עיצוב ועל חוויית שימוש <span className="meta-slash">/</span> עמית ברין · 7 דקות קריאה
-          </p>
+           · <PostDate slug="instagram-cursive-logo" /></p>
         </div>
         <i className="tape tape-a" aria-hidden />
         <i className="tape tape-b" aria-hidden />
@@ -369,7 +370,7 @@ export default function InstagramPost() {
         </p>
 
         <Shot
-          src="/media/blog/instagram/early-ui.jpg"
+          src="/media/blog/instagram-cursive-logo/early-ui.jpg"
           alt="הממשק של אינסטגרם בשנה הראשונה שלה"
           cap="הממשק בשנה הראשונה של אינסטגרם - כשוינטג׳ מהעולם הישן היה ערך לשימור"
         />
@@ -484,7 +485,7 @@ export default function InstagramPost() {
           </p>
 
           <FullShot
-            src="/media/blog/instagram/cursive-tweet.png"
+            src="/media/blog/instagram-cursive-logo/cursive-tweet.png"
             alt="ציוץ באנגלית: כתב מחובר הופך להיות ארטיפקט תרבותי, כמעט קוד סתרים לדור הצעיר"
           />
         </article>
@@ -577,8 +578,8 @@ export default function InstagramPost() {
 
         <figure className="fig fig-full fig-bleed" data-reveal>
           <video
-            src="/media/blog/instagram/story-3d.mp4"
-            poster="/media/blog/instagram/story-3d-poster.jpg"
+            src="/media/blog/instagram-cursive-logo/story-3d.mp4"
+            poster="/media/blog/instagram-cursive-logo/story-3d-poster.jpg"
             autoPlay
             muted
             loop
@@ -638,7 +639,7 @@ export default function InstagramPost() {
 
         <FullShot
           bleed
-          src="/media/blog/instagram/nng-american-eagle.jpg"
+          src="/media/blog/instagram-cursive-logo/nng-american-eagle.jpg"
           alt="עמוד הבית של אמריקן איגל מתוך המחקר של Nielsen Norman Group"
           cap="דוגמה מהמחקר של Nielsen Norman Group - עמוד הבית של אמריקן איגל במפגן היררכיה מלא אימפקט"
         />
@@ -788,7 +789,7 @@ export default function InstagramPost() {
 
         <hr className="ink-rule" data-reveal />
 
-        <PostFooter slug="instagram" title={POST_TITLE} />
+        <PostFooter slug="instagram-cursive-logo" title={POST_TITLE} />
 
         <footer className="bp-footer" data-reveal>
           <button type="button" className="ink-btn" onClick={() => history.back()}><InkFrame seed={4} />→ בחזרה</button>
@@ -969,6 +970,7 @@ const CSS = `
 .tape-b { left:calc((100% - min(880px, 92vw)) / 2 + min(880px, 92vw) * .1); transform:rotate(4deg); }
 
 .hero-title { color:var(--navy); font-size:var(--fs-h1); line-height:1.05; }
+.post-date { font-variant-numeric:tabular-nums; }
 .hero-meta { margin:1.6rem 0 0; text-align:center; font-size:var(--fs-small); color:var(--muted); }
 .meta-slash { margin:0 .5em; opacity:.5; }
 

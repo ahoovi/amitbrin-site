@@ -421,3 +421,20 @@ export default function TeaLibrary() {
     </section>
   );
 }
+
+/**
+ * The library's paper surface, exported so the works heading above it can sit
+ * on the very same sheet — the title is an extension of this section, not a
+ * band of its own.
+ */
+export const TEA_PAPER_CSS = `
+.tea-paper { position:relative; background-color:#fdfaf2; }
+.tea-paper::before {
+  content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+  filter:saturate(.85); opacity:.9; background-color:#fdfaf2;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='900' height='900'><filter id='p'><feTurbulence type='fractalNoise' baseFrequency='0.012 0.016' numOctaves='4' seed='547'/><feDiffuseLighting lighting-color='%23fdfaf2' surfaceScale='2.2'><feDistantLight azimuth='235' elevation='58'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23p)'/></svg>"),
+    url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='1400' height='1400'><filter id='f'><feTurbulence type='fractalNoise' baseFrequency='0.004 0.006' numOctaves='3' seed='47'/><feDiffuseLighting lighting-color='%23dcd6db' surfaceScale='3.4'><feDistantLight azimuth='235' elevation='55'/></feDiffuseLighting></filter><rect width='100%25' height='100%25' filter='url(%23f)' opacity='0.5'/></svg>");
+  background-size:900px 900px,1400px 1400px; background-blend-mode:multiply;
+}
+.tea-paper > * { position:relative; z-index:1; }
+`;

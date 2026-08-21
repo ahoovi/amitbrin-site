@@ -6,29 +6,29 @@ import ArticleLd from "../../../components/ArticleLd";
 export const metadata: Metadata = {
   title: "פרי עץ הדעת - כשלקוח מסרב לקבל עבודה כי ״זה AI״",
   description: "מה קורה לאמון בין מעצב ללקוח כשההנחה שמשהו נוצר במכונה מספיקה כדי לפסול אותו, בלי לבדוק.",
-  alternates: { canonical: "/blog/pri-etz-hadaat" },
+  alternates: { canonical: "/blog/client-refused-ai-work" },
   openGraph: {
     type: "article",
     locale: "he_IL",
-    url: "/blog/pri-etz-hadaat",
+    url: "/blog/client-refused-ai-work",
     siteName: "עמית ברין",
     title: "פרי עץ הדעת",
     description: "מה קורה לאמון בין מעצב ללקוח כשההנחה שמשהו נוצר במכונה מספיקה כדי לפסול אותו, בלי לבדוק.",
-    images: [{ url: "/media/og/og-pri-etz-hadaat.png", width: 1200, height: 630, alt: "איור נחשים בעבודה על מסך, מתוך הפוסט" }],
+    images: [{ url: "/media/og/og-client-refused-ai-work.png", width: 1200, height: 630, alt: "איור נחשים בעבודה על מסך, מתוך הפוסט" }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@amit_brin",
     title: "פרי עץ הדעת",
     description: "מה קורה לאמון בין מעצב ללקוח כשההנחה שמשהו נוצר במכונה מספיקה כדי לפסול אותו, בלי לבדוק.",
-    images: ["/media/og/og-pri-etz-hadaat.png"],
+    images: ["/media/og/og-client-refused-ai-work.png"],
   },
 };
 
 export default function PostLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <ArticleLd slug="pri-etz-hadaat" />
+      <ArticleLd slug="client-refused-ai-work" />
       {children}
     </>
   );

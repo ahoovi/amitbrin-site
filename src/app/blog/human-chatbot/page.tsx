@@ -9,10 +9,11 @@
  *  · Assistant shows a pulsing "thinking" dot before streaming
  *  · Images = rounded media cards inside assistant turns
  *  · Fixed composer pill scrolls to the real comments form
- *  Route: /blog/chattjb
+ *  Route: /blog/human-chatbot
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostDate from "../../../components/PostDate";
 import PostFooter from "../../../components/PostFooter";
 
 /* ---------- header status driven by scroll ---------- */
@@ -167,10 +168,10 @@ function StuckThinking() {
 
 /* fake app sidebar — the desktop-app column, but every item is a real link */
 const RECENTS = [
-  { t: "הצ׳טבוט האנושי שלך", href: "/blog/chattjb", current: true },
-  { t: "פרי עץ הדעת", href: "/blog/pri-etz-hadaat" },
-  { t: "Mother Load", href: "/blog/motherload" },
-  { t: "סליחה ששלחתי וואטסאפ", href: "/blog/whatsapp" },
+  { t: "הצ׳טבוט האנושי שלך", href: "/blog/human-chatbot", current: true },
+  { t: "פרי עץ הדעת", href: "/blog/client-refused-ai-work" },
+  { t: "Mother Load", href: "/blog/mother-load" },
+  { t: "סליחה ששלחתי וואטסאפ", href: "/blog/whatsapp-broke-communication" },
 ];
 const PINNED = [
   { t: "ראשי", href: "/site#top" },
@@ -213,7 +214,7 @@ function Sidebar() {
 }
 
 /* ---------- share ---------- */
-const POST_URL = "https://amitbrin.com/blog/chattjb";
+const POST_URL = "https://amitbrin.com/blog/human-chatbot";
 const POST_TITLE = "הצ׳טבוט האנושי שלך - עמית ברין";
 
 function ShareRow() {
@@ -258,7 +259,7 @@ function Comments() {
       ) : (
         <form className="comments-form" onSubmit={submit}>
           <input type="hidden" name="_subject" value="תגובה חדשה בבלוג (גרסת הצ׳טבוט): הצ׳טבוט האנושי שלך" />
-          <input type="hidden" name="post" value="chattjb" />
+          <input type="hidden" name="post" value="human-chatbot" />
           <div className="comments-grid">
             <input className="c-in" type="text" name="name" placeholder="שם" required />
             <input className="c-in" type="email" name="email" placeholder="אימייל (לא יפורסם)" required />
@@ -341,13 +342,14 @@ export default function ChattjbPost() {
 
         <Bot big>
           <h1 className="post-title">התברר שהבינה המלאכותית היא בחור אחד עייף (זאת לא מטאפורה אבל זאת בדיוק הנקודה)</h1>
+          <PostDate slug="human-chatbot" />
         </Bot>
 
         <Bot parts={["בפינת הרחובות השישי ופולסום בסן פרנסיסקו יש שלט חוצות בעלות 6,000 דולר שמבטיח לכם את ממשק הצ'אט המוביל, המופעל על ידי AI. עוד שלט אחד בים השלטים שמנסים למכור לכם עתיד שבו מכונה עונה לכם על הכל. רגיל לגמרי, נכון?"]} />
 
         <BotMedia>
           <figure className="media-card">
-            <img src="/media/blog/chattjb/billboard-hero.jpg" alt="שלט החוצות של ChatTJB בפינת הרחובות השישי ופולסום בסן פרנסיסקו" loading="lazy" />
+            <img src="/media/blog/human-chatbot/billboard-hero.jpg" alt="שלט החוצות של ChatTJB בפינת הרחובות השישי ופולסום בסן פרנסיסקו" loading="lazy" />
           </figure>
         </BotMedia>
 
@@ -357,8 +359,8 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-pair">
-            <figure className="media-card"><img src="/media/blog/chattjb/ai-asterisk.jpg" alt="תקריב על הכוכבית והערת השוליים בשלט" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/tucker-bryant.jpg" alt="טאקר בראיינט" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/ai-asterisk.jpg" alt="תקריב על הכוכבית והערת השוליים בשלט" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/tucker-bryant.jpg" alt="טאקר בראיינט" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -371,8 +373,8 @@ export default function ChattjbPost() {
         <BotMedia>
           <figure className="media-card media-video">
             <video
-              src="/media/blog/chattjb/tucker-reel.mp4"
-              poster="/media/blog/chattjb/tucker-reel-poster.jpg"
+              src="/media/blog/human-chatbot/tucker-reel.mp4"
+              poster="/media/blog/human-chatbot/tucker-reel-poster.jpg"
               controls
               muted
               playsInline
@@ -394,8 +396,8 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-pair">
-            <figure className="media-card"><img src="/media/blog/chattjb/billboard-insta.jpg" alt="השלט כפי שפורסם ברשתות" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/billboard-street.jpg" alt="השלט מזווית הרחוב" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-insta.jpg" alt="השלט כפי שפורסם ברשתות" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-street.jpg" alt="השלט מזווית הרחוב" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -419,11 +421,11 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-strip" role="group" aria-label="שלטים סאטיריים בניו יורק">
-            <figure className="media-card"><img src="/media/blog/chattjb/press-1.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/press-2.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/press-3.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/press-4.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/chattjb/press-5.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-1.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-2.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-3.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-4.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-5.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -447,7 +449,7 @@ export default function ChattjbPost() {
 
         {/* the shared related rail, wearing this page's own look */}
         <div className="more-wrap">
-          <PostFooter slug="chattjb" title={POST_TITLE} parts={["related"]} frames={false} />
+          <PostFooter slug="human-chatbot" title={POST_TITLE} parts={["related"]} frames={false} />
         </div>
       </main>
 
@@ -505,6 +507,12 @@ const CSS = `
   content:''; display:inline-block; width:.5em; height:.5em; border-radius:50%;
   background:var(--text); margin-inline-start:.4em; vertical-align:middle;
   animation:pulse 1s infinite var(--ease);
+}
+
+.post-date {
+  display:block; margin:.5rem 0 0;
+  font-size:.82rem; letter-spacing:.06em; color:var(--muted);
+  font-variant-numeric:tabular-nums;
 }
 
 /* ---------- chat column ---------- */

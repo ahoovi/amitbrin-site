@@ -8,10 +8,11 @@
  *  · Headings / pull-quotes = incoming white bubbles from the other side
  *  · Images = image-messages; incoming bubbles "type" before appearing
  *  · Chat header shows "מקליד…" while the reader scrolls
- *  Route: /blog/whatsapp/chat · standalone duplicate, original untouched
+ *  Route: /blog/whatsapp-broke-communication/chat · standalone duplicate, original untouched
  * ===================================================================== */
 
 import { useEffect, useRef, useState } from "react";
+import PostDate from "../../../components/PostDate";
 import PostFooter from "../../../components/PostFooter";
 
 /* ---------- header typing status driven by scroll ---------- */
@@ -123,7 +124,7 @@ function DateChip({ children }: { children: React.ReactNode }) {
 }
 
 /* ---------- share ---------- */
-const POST_URL = "https://amitbrin.com/blog/whatsapp";
+const POST_URL = "https://amitbrin.com/blog/whatsapp-broke-communication";
 const POST_TITLE = "סליחה ששלחתי וואטסאפ - עמית ברין";
 
 function ShareRow() {
@@ -206,7 +207,7 @@ export default function WhatsappChatPost() {
             <a href="/#blog">כתיבה ועשייה</a>
             <a href="/#footer">דברו איתי</a>
           </div>
-          <a className="hd-alt" href="/blog/whatsapp/classic">לגרסת הקריאה</a>
+          <a className="hd-alt" href="/blog/whatsapp-broke-communication-broke-communication/classic">לגרסת הקריאה</a>
         </nav>
         <div className="wa-chatbar">
           <button className="hd-back" type="button" onClick={() => history.back()} aria-label="חזרה">
@@ -229,7 +230,7 @@ export default function WhatsappChatPost() {
         {/* the document's real heading — the chat bar above is a contact name,
             not a title. Visible to search and to screen readers. */}
         <h1 className="wa-h1">סליחה ששלחתי וואטסאפ</h1>
-        <DateChip>היום</DateChip>
+        <DateChip><PostDate slug="whatsapp-broke-communication" /></DateChip>
 
         <Msg side="in" big>סליחה ששלחתי וואטסאפ 🙃</Msg>
         <Msg side="out">
@@ -253,7 +254,7 @@ export default function WhatsappChatPost() {
         </Msg>
 
         <ImgMsg
-          src="/media/blog/whatsapp/shot-typing-preview.jpg"
+          src="/media/blog/whatsapp-broke-communication/shot-typing-preview.jpg"
           alt="צילום מסך: תצוגה מקדימה של הודעה בזמן הקלדה"
           cap="למה שלא נדע כמה זמן אנחנו עוד אמורים לחכות פה? אפילו אם זה ברמה של רמז לאיזה שלב של הסיפור מי שכותב לנו נמצא כרגע."
          
@@ -267,7 +268,7 @@ export default function WhatsappChatPost() {
         </Msg>
 
         <ImgMsg
-          src="/media/blog/whatsapp/shot-voice-failed.jpg"
+          src="/media/blog/whatsapp-broke-communication/shot-voice-failed.jpg"
           alt="צילום מסך: הודעה קולית שלא עברה"
           cap="למה בעצם אי אפשר לחסום הודעות קוליות?"
          
@@ -280,7 +281,7 @@ export default function WhatsappChatPost() {
         </Msg>
 
         <ImgMsg
-          src="/media/blog/whatsapp/shot-chat-list.jpg"
+          src="/media/blog/whatsapp-broke-communication/shot-chat-list.jpg"
           alt="צילום מסך: רשימת הצ׳אטים והארכיון"
           cap="יש דברים שמקומם בארכיון ועדיין הם יותר חשובים מכל שאר ההודעות שם - היררכיה של חשיבות בארכיון לא תזיק."
          
@@ -304,7 +305,7 @@ export default function WhatsappChatPost() {
         </Msg>
 
         <ImgMsg
-          src="/media/blog/whatsapp/shot-voice-flood.jpg"
+          src="/media/blog/whatsapp-broke-communication/shot-voice-flood.jpg"
           alt="צילום מסך: צרור הודעות קוליות"
           cap="אם כבר שולחים אליכם צרור של הודעות, צריך להיות מסוגלים לעצור אותו מתישהו."
          
@@ -317,7 +318,7 @@ export default function WhatsappChatPost() {
         </Msg>
 
         <ImgMsg
-          src="/media/blog/whatsapp/shot-auto-reply.jpg"
+          src="/media/blog/whatsapp-broke-communication/shot-auto-reply.jpg"
           alt="צילום מסך: מענה אוטומטי בצ׳אט עם אמא"
           cap="סליחה אמא, אבל לא בכל זמן אני פנוי לכל דבר."
          
@@ -363,7 +364,7 @@ export default function WhatsappChatPost() {
 
         {/* the shared related rail, wearing this page's own look */}
         <div className="more-wrap">
-          <PostFooter slug="whatsapp" title={POST_TITLE} parts={["related"]} frames={false} />
+          <PostFooter slug="whatsapp-broke-communication" title={POST_TITLE} parts={["related"]} frames={false} />
         </div>
       </main>
     </div>
@@ -397,7 +398,7 @@ const CSS = `
 /* the real WhatsApp-style wallpaper, fixed behind everything */
 .wa-root::before {
   content:''; position:fixed; inset:0; z-index:0; pointer-events:none;
-  background-image:url('/media/blog/whatsapp/wallpaper.jpg');
+  background-image:url('/media/blog/whatsapp-broke-communication/wallpaper.jpg');
   background-size:cover; background-position:center top;
 }
 .wa-root .chat { position:relative; z-index:1; }

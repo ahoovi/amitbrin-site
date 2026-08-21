@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "סליחה ששלחתי וואטסאפ - גרסת הקריאה",
   robots: { index: false, follow: false },
-  alternates: { canonical: "/blog/whatsapp/classic" },
+  alternates: { canonical: "/blog/whatsapp-broke-communication-broke-communication/classic" },
 };
 
 export default function Layout({ children }: { children: React.ReactNode }) {

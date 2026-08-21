@@ -8,6 +8,7 @@
  */
 
 import InkFrame from "../../components/InkFrame";
+import SiteNav from "../../components/SiteNav";
 import { POSTS_INDEX } from "../../components/postsIndex";
 
 function formatHe(iso?: string) {
@@ -21,14 +22,7 @@ export default function BlogIndex() {
     <div className="bi-root" dir="rtl" lang="he">
       <style>{CSS}</style>
 
-      <nav className="bi-nav" aria-label="ניווט ראשי">
-        <a href="/" className="bi-logo">עמית ברין</a>
-        <div className="bi-links">
-          <a href="/">ראשי</a>
-          <a href="/blog" aria-current="page">תרחיב</a>
-          <a href="/#footer">דברו איתי</a>
-        </div>
-      </nav>
+      <SiteNav current="blog" />
 
       <header className="bi-head">
         {/* the same header artwork as the one-pager: the title sits inside its
@@ -97,18 +91,7 @@ const CSS = `
 }
 .bi-root *{box-sizing:border-box}
 
-.bi-nav{
-  display:flex; align-items:center; justify-content:space-between; gap:1.5rem;
-  padding:1.1rem clamp(1.1rem,5vw,3rem); position:sticky; top:0; z-index:10;
-  backdrop-filter:blur(9px); background:rgba(239,241,245,.78);
-  border-bottom:1px solid rgba(8,24,69,.08);
-}
-.bi-logo{font-weight:700; color:var(--navy); text-decoration:none; letter-spacing:.02em}
-.bi-links{display:flex; gap:1.4rem}
-.bi-links a{color:var(--muted); text-decoration:none; font-size:.95rem}
-.bi-links a:hover, .bi-links a[aria-current]{color:var(--navy)}
-
-.bi-head{text-align:center; padding:clamp(1.5rem,4vw,3rem) 0 clamp(1.5rem,4vw,3rem)}
+.bi-head{text-align:center; padding:clamp(4.5rem,9vw,7rem) 0 clamp(1.5rem,4vw,3rem)}
 .bi-mark{position:relative; width:100%; aspect-ratio:1900 / 292}
 .bi-tarhiv{position:absolute; inset:0; width:100%; height:100%; display:block; pointer-events:none}
 .bi-title{
