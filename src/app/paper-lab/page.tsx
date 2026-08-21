@@ -423,7 +423,6 @@ export default function PaperLab() {
 }
 
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;700&display=swap');
 
 .lab {
   --ink:#0d1b3e; --muted:#5b678a; --line:rgba(13,27,62,.16);

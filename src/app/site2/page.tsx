@@ -740,8 +740,8 @@ export default function SitePage() {
         <div className="identity-inner">
           <div className="identity-text">
             <div className="identity-logos">
-              <img src="/media/echo_v_200.png" alt="הד — עמית ברין" className="logo-echo" />
-              <img src="/media/effie-white.png" alt="Effie Awards Israel" className="logo-effie" />
+              <img src="/media/echo_v_200.png" width={133} height={200} alt="הד — עמית ברין" className="logo-echo" />
+              <img src="/media/effie-white.png" width={73} height={100} alt="Effie Awards Israel" className="logo-effie" />
             </div>
             <div className="identity-titles">
               <h1 className="identity-name">עמית ברין</h1>
@@ -990,7 +990,6 @@ export default function SitePage() {
 
 /* ================================================================ */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600&family=Alef:wght@400;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }

@@ -260,7 +260,7 @@ export default function WhatsappPost() {
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/client-refused-ai-work/snakes-cover.jpg"
+            src="/media/blog/client-refused-ai-work/snakes-cover.jpg" width={1600} height={991}
             alt="מסך אילוסטרייטור: מברשת פאטרן של נחשים מציירת אותיות עבריות"
             className="hero-img"
             fetchPriority="high"
@@ -430,7 +430,6 @@ export default function WhatsappPost() {
  *  CSS
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700&family=Alef:wght@400;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }

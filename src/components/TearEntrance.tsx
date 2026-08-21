@@ -719,8 +719,10 @@ export default function TearEntrance() {
           previous page.tsx) */}
       <link rel="prefetch" href="/media/sailing4k2_1_1.mp4" as="video" />
       <link rel="prefetch" href="/media/bot-whisperer.mp4" as="video" />
+      {/* echo_v_200 is the hero portrait of the page beneath — worth having
+          early. headshot.png used to be preloaded here too, but nothing on
+          this route ever displays it: 325KB downloaded and thrown away. */}
       <link rel="preload" href="/media/echo_v_200.png" as="image" />
-      <link rel="preload" href="/media/headshot.png" as="image" />
 
       <div className={`tear-stage${revealed ? " revealed" : ""}`} ref={stageRef}>
 

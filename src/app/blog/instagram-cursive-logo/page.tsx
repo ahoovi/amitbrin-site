@@ -228,7 +228,7 @@ function HeroSheet() {
   return (
     <figure className="hero-figure ig-cover" onDoubleClick={pop}>
       <img
-        src="/media/blog/instagram-cursive-logo/cover.jpg"
+        src="/media/blog/instagram-cursive-logo/cover.jpg" width={1600} height={900}
         alt="הלוגו של אינסטגרם בכתב מחובר, בין שתי דמויות בצללית"
         fetchPriority="high"
       />
@@ -812,7 +812,6 @@ export default function InstagramPost() {
  *  Frames: a single --hair token. The ink filter is for rules + buttons.
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;700&family=Alef:wght@400;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }

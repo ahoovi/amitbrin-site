@@ -213,7 +213,7 @@ export default function WhatsappChatPost() {
           <button className="hd-back" type="button" onClick={() => history.back()} aria-label="חזרה">
             <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: "scaleX(-1)" }} aria-hidden><path d="M15 18l-6-6 6-6"/></svg>
           </button>
-          <img className="hd-avatar" src="/media/headshot.png" alt="" />
+          <img className="hd-avatar" src="/media/headshot.png" width={839} height={1100} alt="" />
           <div className="hd-meta">
             <strong>עמית ברין</strong>
             <span className={"hd-status" + (typing ? " is-typing" : "")}>
@@ -375,7 +375,6 @@ export default function WhatsappChatPost() {
  *  CSS — WhatsApp look
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }
 

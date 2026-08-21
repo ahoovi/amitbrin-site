@@ -206,7 +206,7 @@ function Sidebar() {
         <a key={l.href} className={"sb-item sb-recent" + (l.current ? " sb-current" : "")} href={l.href}>{l.t}</a>
       ))}
       <a className="sb-user" href="/">
-        <img src="/media/headshot.png" alt="" />
+        <img src="/media/headshot.png" width={839} height={1100} alt="" />
         <span>עמית ברין</span>
       </a>
     </aside>
@@ -349,7 +349,7 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <figure className="media-card">
-            <img src="/media/blog/human-chatbot/billboard-hero.jpg" alt="שלט החוצות של ChatTJB בפינת הרחובות השישי ופולסום בסן פרנסיסקו" loading="lazy" />
+            <img src="/media/blog/human-chatbot/billboard-hero.jpg" width={1200} height={676} alt="שלט החוצות של ChatTJB בפינת הרחובות השישי ופולסום בסן פרנסיסקו" loading="lazy" />
           </figure>
         </BotMedia>
 
@@ -359,8 +359,8 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-pair">
-            <figure className="media-card"><img src="/media/blog/human-chatbot/ai-asterisk.jpg" alt="תקריב על הכוכבית והערת השוליים בשלט" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/tucker-bryant.jpg" alt="טאקר בראיינט" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/ai-asterisk.jpg" width={1400} height={1400} alt="תקריב על הכוכבית והערת השוליים בשלט" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/tucker-bryant.jpg" width={776} height={1149} alt="טאקר בראיינט" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -396,8 +396,8 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-pair">
-            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-insta.jpg" alt="השלט כפי שפורסם ברשתות" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-street.jpg" alt="השלט מזווית הרחוב" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-insta.jpg" width={1400} height={1750} alt="השלט כפי שפורסם ברשתות" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/billboard-street.jpg" width={524} height={824} alt="השלט מזווית הרחוב" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -421,11 +421,11 @@ export default function ChattjbPost() {
 
         <BotMedia>
           <div className="media-strip" role="group" aria-label="שלטים סאטיריים בניו יורק">
-            <figure className="media-card"><img src="/media/blog/human-chatbot/press-1.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/press-2.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/press-3.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/press-4.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
-            <figure className="media-card"><img src="/media/blog/human-chatbot/press-5.jpg" alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-1.jpg" width={1080} height={1080} alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-2.jpg" width={1080} height={1080} alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-3.jpg" width={800} height={800} alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-4.jpg" width={600} height={600} alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
+            <figure className="media-card"><img src="/media/blog/human-chatbot/press-5.jpg" width={1080} height={1080} alt="שלט סאטירי בתחנת רכבת תחתית בניו יורק" loading="lazy" /></figure>
           </div>
         </BotMedia>
 
@@ -462,7 +462,6 @@ export default function ChattjbPost() {
  *  CSS — LLM chat look
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap');
 
 .gpt-root {
   --bg:#ffffff;

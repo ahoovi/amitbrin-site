@@ -210,7 +210,7 @@ export default function WhatsappPost() {
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/whatsapp-broke-communication/cover.jpg"
+            src="/media/blog/whatsapp-broke-communication/cover.jpg" width={2000} height={1459}
             alt="ערימת כדורי סמיילי צהובים - תמונת השער של הפוסט"
             className="hero-img"
             fetchPriority="high"
@@ -376,7 +376,6 @@ export default function WhatsappPost() {
  *  CSS
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700&family=Alef:wght@400;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }

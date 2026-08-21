@@ -260,7 +260,7 @@ export default function WhatsappPost() {
       <header className="hero">
         <figure className="hero-figure">
           <img
-            src="/media/blog/mother-load/cover.jpg"
+            src="/media/blog/mother-load/cover.jpg" width={1455} height={818}
             alt="פוסטרים של פרויקט Mother Load מודבקים על קיר רחוב"
             className="hero-img"
             fetchPriority="high"
@@ -327,7 +327,7 @@ export default function WhatsappPost() {
         </aside>
 
         <figure className="shot-full" data-reveal>
-          <img src="/media/blog/mother-load/poster-receipt.jpg" alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות" loading="lazy" />
+          <img src="/media/blog/mother-load/poster-receipt.jpg" width={800} height={1200} alt="פוסטר Mother Load: קבלת סופרמרקט של קנסות האימהות" loading="lazy" />
           <figcaption>הקבלה: "מס חופשת לידה", "עבודה בלתי נראית", סה"כ - יותר מדי. כל המכירות סופיות.</figcaption>
         </figure>
 
@@ -345,7 +345,7 @@ export default function WhatsappPost() {
         </p>
 
         <figure className="shot-full" data-reveal>
-          <img src="/media/blog/mother-load/poster-portfolio.jpg" alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים" loading="lazy" />
+          <img src="/media/blog/mother-load/poster-portfolio.jpg" width={800} height={1200} alt="פוסטר Mother Load: תיקיית פורטפוליו עם ציורי ילדים" loading="lazy" />
           <figcaption>"Portfolio Review" - התיק שמגיע לראיון אחרי שהילדים סיימו איתו.</figcaption>
         </figure>
 
@@ -399,7 +399,6 @@ export default function WhatsappPost() {
  *  CSS
  * ===================================================================== */
 const CSS = `
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Hebrew:wght@400;500;600;700&family=Alef:wght@400;700&display=swap');
 
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
 @font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }
