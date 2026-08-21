@@ -715,10 +715,13 @@ export default function TearEntrance() {
     <>
       <style dangerouslySetInnerHTML={{ __html: PAPER_CSS + STAGE_CSS }} />
 
-      {/* prefetch the one-pager media (carried over from the
-          previous page.tsx) */}
-      <link rel="prefetch" href="/media/sailing4k2_1_1.mp4" as="video" />
-      <link rel="prefetch" href="/media/bot-whisperer.mp4" as="video" />
+      {/* No <link rel="prefetch" as="video"> here any more. Those two tags
+          were a leftover from when this route only linked to the one-pager;
+          today <SitePage/> is mounted live underneath from the first frame
+          and its <video preload="auto"> elements fetch themselves. A media
+          element always requests byte ranges and never reuses what a plain
+          prefetch downloaded, so each mp4 was arriving twice — 4.2MB of the
+          page's weight, downloaded and discarded. Measured, not assumed. */}
       {/* echo_v_200 is the hero portrait of the page beneath — worth having
           early. headshot.png used to be preloaded here too, but nothing on
           this route ever displays it: 325KB downloaded and thrown away. */}
