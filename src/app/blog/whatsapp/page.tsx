@@ -198,13 +198,13 @@ export default function WhatsappChatPost() {
       {/* chat header: site nav on top, chat identity below */}
       <header className="wa-header">
         <nav className="wa-sitenav" aria-label="ניווט ראשי">
-          <a href="/site#top" className="sn-logo" aria-label="עמית ברין - ראשי">
+          <a href="/" className="sn-logo" aria-label="עמית ברין - ראשי">
             <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
           </a>
           <div className="sn-links">
-            <a href="/site#top">ראשי</a>
-            <a href="/site#blog">כתיבה ועשייה</a>
-            <a href="/site#footer">דברו איתי</a>
+            <a href="/">ראשי</a>
+            <a href="/#blog">כתיבה ועשייה</a>
+            <a href="/#footer">דברו איתי</a>
           </div>
           <a className="hd-alt" href="/blog/whatsapp/classic">לגרסת הקריאה</a>
         </nav>
@@ -226,6 +226,9 @@ export default function WhatsappChatPost() {
       </header>
 
       <main className="chat">
+        {/* the document's real heading — the chat bar above is a contact name,
+            not a title. Visible to search and to screen readers. */}
+        <h1 className="wa-h1">סליחה ששלחתי וואטסאפ</h1>
         <DateChip>היום</DateChip>
 
         <Msg side="in" big>סליחה ששלחתי וואטסאפ 🙃</Msg>
@@ -400,6 +403,10 @@ const CSS = `
 .wa-root .chat { position:relative; z-index:1; }
 
 /* ---------- header: beefed up, two levels on the beige bar ---------- */
+.wa-h1 {
+  position:absolute; width:1px; height:1px; margin:-1px; padding:0;
+  overflow:hidden; clip:rect(0 0 0 0); clip-path:inset(50%); white-space:nowrap;
+}
 .wa-header {
   position:fixed; top:0; right:0; left:0; z-index:50;
   display:flex; flex-direction:column;

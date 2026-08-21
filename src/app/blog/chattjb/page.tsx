@@ -204,7 +204,7 @@ function Sidebar() {
       {RECENTS.map((l) => (
         <a key={l.href} className={"sb-item sb-recent" + (l.current ? " sb-current" : "")} href={l.href}>{l.t}</a>
       ))}
-      <a className="sb-user" href="/site#top">
+      <a className="sb-user" href="/">
         <img src="/media/headshot.png" alt="" />
         <span>עמית ברין</span>
       </a>
@@ -314,13 +314,13 @@ export default function ChattjbPost() {
       <Sidebar />
       <header className="gpt-header">
         <nav className="gpt-sitenav" aria-label="ניווט ראשי">
-          <a href="/site#top" className="sn-logo" aria-label="עמית ברין - ראשי">
+          <a href="/" className="sn-logo" aria-label="עמית ברין - ראשי">
             <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
           </a>
           <div className="sn-links">
-            <a href="/site#top">ראשי</a>
-            <a href="/site#blog">כתיבה ועשייה</a>
-            <a href="/site#footer">דברו איתי</a>
+            <a href="/">ראשי</a>
+            <a href="/#blog">כתיבה ועשייה</a>
+            <a href="/#footer">דברו איתי</a>
           </div>
         </nav>
         <div className="gpt-chatbar">

@@ -885,6 +885,7 @@ export default function SitePage() {
         <div className="nav-links">
           <a href="#top">ראשי</a>
           <a href="#blog">כתיבה ועשייה</a>
+          <a href="/blog">תרחיב</a>
           <a href="#footer">דברו איתי</a>
         </div>
       </nav>
@@ -997,6 +998,9 @@ export default function SitePage() {
               lines={["מחשבות על עיצוב", "ועל חוויית שימוש"]}
             />
           </div>
+          <p className="blog-all" data-reveal>
+            <a href="/blog">כל הפוסטים בתרחיב <span aria-hidden>←</span></a>
+          </p>
           <div className="blog-rail" data-reveal>
             {POSTS.map((p, idx) => (
               <article className={"post-card" + (p.placeholder ? " placeholder" : "")} key={idx}>
@@ -1543,6 +1547,9 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   scrollbar-width:none;
 }
 .blog-rail::-webkit-scrollbar { display:none; }
+.blog-all { margin:-3vh 0 0; text-align:center; }
+.blog-all a { color:var(--navy); font-family:'Leon',sans-serif; font-weight:500; text-decoration:none; border-bottom:1.5px solid rgba(8,24,69,.3); padding-bottom:.15em; transition:border-color .35s var(--ease); }
+.blog-all a:hover { border-color:var(--navy); }
 /* transparent cards with a hand-drawn ink border on the sketch paper */
 .post-card {
   z-index:0;

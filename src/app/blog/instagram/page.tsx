@@ -294,13 +294,13 @@ export default function InstagramPost() {
         <i /><i /><i />
       </div>
       <nav className="op-nav" aria-label="ניווט ראשי">
-        <a href="/site#top" className="nav-logo" aria-label="עמית ברין - ראשי">
+        <a href="/" className="nav-logo" aria-label="עמית ברין - ראשי">
           <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
         </a>
         <div className="nav-links">
-          <a href="/site#top">ראשי</a>
-          <a href="/site#blog">כתיבה ועשייה</a>
-          <a href="/site#footer">דברו איתי</a>
+          <a href="/">ראשי</a>
+          <a href="/#blog">כתיבה ועשייה</a>
+          <a href="/#footer">דברו איתי</a>
         </div>
       </nav>
 

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import ArticleLd from "../../../components/ArticleLd";
 
 /* Per-post metadata (the page itself is a client component, so the
    title / description / share image live here). */
@@ -39,5 +40,10 @@ export default function InstagramPostLayout({
 }: {
   children: React.ReactNode;
 }) {
-  return <>{children}</>;
+  return (
+    <>
+      <ArticleLd slug="instagram" />
+      {children}
+    </>
+  );
 }
