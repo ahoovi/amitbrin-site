@@ -682,6 +682,17 @@ function useScrollSkew() {
    palette: 'rgb'  (dark sections) · 'cmyk' (paper sections) ·
             'water' (footer — subtle underwater refraction)
    ===================================================================== */
+/* underwater refraction of the footer title. The three frequencies are the
+   footer shader's own swells (0.55 / 0.42 / 0.31 rad/s), scaled by speed, so
+   the letters ride the same water. Tuned in footer-water-lab, approved by
+   Amit 22.8.2026 - do not re-tune without asking. */
+const UW = {
+  speed: 1.75, wave: 640, phaseY: 1.5,
+  ampX: 2.7, ampY: 2.2, skew: 2.6, squash: 7.6,
+  blur: 0.7, dip: 0.04, chroma: 3.4,
+  dscale: 5.5, freq: "0.034 0.034", drift: 27.5,
+};
+
 function FxTitle({
   lines,
   className = "",
@@ -712,6 +723,20 @@ function FxTitle({
       });
     };
     const SIG2 = 2 * 95 * 95;
+    /* ambient water: positions relative to the title, not the viewport, so the
+       phase does not slide while the page scrolls */
+    const water = palette === "water";
+    const offEl = water ? document.getElementById("uw-off") : null;
+    let ls = letters.map(() => ({ x: 0, y: 0 }));
+    const remeasure = () => {
+      ls = letters.map((l) => ({
+        x: l.offsetLeft + l.offsetWidth / 2,
+        y: l.offsetTop + l.offsetHeight / 2,
+      }));
+    };
+    remeasure();
+    let visible = false;
+    let io: IntersectionObserver | null = null;
     const loop = () => {
       const t = (performance.now() - t0) / 1000;
       let live = 0;
@@ -719,6 +744,23 @@ function FxTitle({
         const dx = cs[i].x - px, dy = cs[i].y - py;
         const d = Math.hypot(dx, dy) || 1;
         const g = hovering ? Math.exp(-(d * d) / SIG2) : 0;
+        let ah = 0, ag = 0, ax = 0, ay = 0, askew = 0, asx = 1, asy = 1, abl = 0, aop = 1;
+        if (water) {
+          const k = (2 * Math.PI) / UW.wave;
+          const u = ls[i].x * k, v = ls[i].y * k * UW.phaseY;
+          const p1 = t * 0.55 * UW.speed, p2 = t * 0.42 * UW.speed, p3 = t * 0.31 * UW.speed;
+          ah = (Math.sin(u + v + p1)
+              + 0.60 * Math.sin(u * 1.76 - v - p2 + 1.3)
+              + 0.35 * Math.sin(u * 3.00 + v + p3 + 2.6)) / 1.95;
+          /* the slope is the refraction direction, and how thick the water
+             reads at that letter */
+          ag = (Math.cos(u + v + p1)
+              + 1.056 * Math.cos(u * 1.76 - v - p2 + 1.3)
+              + 1.050 * Math.cos(u * 3.00 + v + p3 + 2.6)) / 3.05;
+          ax = UW.ampX * ah; ay = UW.ampY * ag; askew = UW.skew * ag;
+          asy = 1 + UW.squash * ah * 0.01; asx = 1 - UW.squash * ah * 0.006;
+          abl = UW.blur * Math.abs(ag); aop = 1 - UW.dip * (0.5 + 0.5 * ah);
+        }
         let tx = 0, ty = 0;
         if (palette === "water") {
           /* pointer creates a ripple distortion over the letters (no glow) */
@@ -733,22 +775,39 @@ function FxTitle({
         curY[i] += (ty - curY[i]) * 0.16;
         kk[i] += (g - kk[i]) * 0.16;
         const still = Math.abs(curX[i]) < 0.05 && Math.abs(curY[i]) < 0.05 && kk[i] < 0.005;
-        if (!still) live++;
+        if (!still || water) live++;
         l.style.setProperty("--k", kk[i].toFixed(3));
         /* aberration splits along the push direction */
         l.style.setProperty("--cx", (curX[i] * 1.1).toFixed(1) + "px");
         l.style.setProperty("--cy", (curY[i] * 1.1).toFixed(1) + "px");
         l.style.setProperty("--bl", Math.min(3.5, (Math.abs(curX[i]) + Math.abs(curY[i])) * 0.9 + kk[i] * 1.2).toFixed(2) + "px");
-        if (palette === "water") {
+        if (water) {
           const w1 = Math.sin(t * 2.6 + cs[i].x * 0.08) * kk[i];
           const w2 = Math.cos(t * 3.1 + cs[i].x * 0.05) * kk[i];
-          l.style.transform = still
-            ? ""
-            : `translate(${curX[i].toFixed(1)}px, ${(curY[i]).toFixed(1)}px) skewX(${(w1 * 6.0).toFixed(2)}deg) scale(${(1 + w2 * 0.05).toFixed(3)}, ${(1 - w2 * 0.06).toFixed(3)})`;
+          l.style.transform =
+            `translate(${(curX[i] + ax).toFixed(2)}px, ${(curY[i] + ay).toFixed(2)}px)` +
+            ` skewX(${(w1 * 6.0 + askew).toFixed(2)}deg)` +
+            ` scale(${(asx * (1 + w2 * 0.05)).toFixed(4)}, ${(asy * (1 - w2 * 0.06)).toFixed(4)})`;
+          l.style.filter = abl > 0.02 ? `blur(${abl.toFixed(2)}px)` : "";
+          l.style.opacity = aop.toFixed(3);
+          if (UW.chroma > 0) {
+            const oa = UW.chroma * ah;
+            l.style.textShadow =
+              `0 2px 22px rgba(2,13,44,.6), ${oa.toFixed(2)}px 0 0 rgba(120,220,255,.35),` +
+              ` ${(-oa).toFixed(2)}px 0 0 rgba(90,150,255,.28)`;
+          }
         } else {
           l.style.transform = still ? "" : `translate(${curX[i].toFixed(1)}px, ${curY[i].toFixed(1)}px)`;
         }
       });
+      if (offEl) {
+        offEl.setAttribute("dx", (Math.sin(t * 0.55 * UW.speed) * UW.drift).toFixed(2));
+        offEl.setAttribute("dy", (Math.cos(t * 0.31 * UW.speed) * UW.drift * 0.4).toFixed(2));
+      }
+      if (water) {
+        if (visible) raf = requestAnimationFrame(loop);
+        return;
+      }
       if (hovering || (settling && live)) raf = requestAnimationFrame(loop);
       else {
         settling = false;
@@ -761,6 +820,19 @@ function FxTitle({
         });
       }
     };
+    if (water) {
+      io = new IntersectionObserver(
+        (es) => {
+          visible = es[0].isIntersecting;
+          cancelAnimationFrame(raf);
+          if (visible) { recompute(); remeasure(); raf = requestAnimationFrame(loop); }
+        },
+        { rootMargin: "120px" }
+      );
+      io.observe(el);
+      window.addEventListener("resize", remeasure);
+    }
+
     const enter = () => { hovering = true; settling = true; recompute(); cancelAnimationFrame(raf); raf = requestAnimationFrame(loop); };
     const move = (e: PointerEvent) => { px = e.clientX; py = e.clientY; };
     const leave = () => { hovering = false; };
@@ -770,6 +842,8 @@ function FxTitle({
     window.addEventListener("resize", recompute);
     return () => {
       cancelAnimationFrame(raf);
+      io?.disconnect();
+      window.removeEventListener("resize", remeasure);
       el.removeEventListener("pointerenter", enter);
       el.removeEventListener("pointermove", move);
       el.removeEventListener("pointerleave", leave);
@@ -1138,6 +1212,13 @@ export default function SitePage() {
 
       {/* ============ 7 · FOOTER — live water simulation ============ */}
       <footer className="sec-footer" id="footer">
+        <svg className="uw-defs" aria-hidden focusable="false">
+          <filter id="uw" x="-12%" y="-12%" width="124%" height="124%" colorInterpolationFilters="sRGB">
+            <feTurbulence type="fractalNoise" baseFrequency={UW.freq} numOctaves={2} seed={4} result="n" />
+            <feOffset id="uw-off" in="n" dx="0" dy="0" result="no" />
+            <feDisplacementMap in="SourceGraphic" in2="no" scale={UW.dscale} xChannelSelector="R" yChannelSelector="G" />
+          </filter>
+        </svg>
         <div className="sea" aria-hidden>
           <FooterWater />
         </div>
@@ -1751,7 +1832,10 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fxt-cmyk .fl::before { color:#00C4DB; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
 .fxt-cmyk .fl::after  { color:#E5289E; mix-blend-mode:multiply; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
 .fxt-cmyk .fl { text-shadow:calc(var(--cx) * -.6) calc(var(--cy) * .6) 0 rgba(250,220,0,calc(var(--k) * .9)); }
-/* underwater refraction — footer title (ripple distortion only, no glow) */
+/* underwater refraction — footer title: the letters ride an ambient wave
+   (FxTitle, const UW) and the glyphs themselves warp through #uw */
+.uw-defs { position:absolute; width:0; height:0; overflow:hidden; }
+.fxt-water { filter:url(#uw); }
 .fxt-water .fl::before, .fxt-water .fl::after { content:none; }
 .fxt-water .fl { text-shadow:0 2px 22px rgba(2,13,44,.6); }
 
