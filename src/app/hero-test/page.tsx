@@ -914,10 +914,10 @@ export default function SitePage() {
           </div>
           <div className="identity-photo">
             <img
-              src="/media/amit-brin-headshot3-839x1100.png"
+              src="/media/amit-brin-portrait.webp"
               alt="עמית ברין"
-              width={839}
-              height={1100}
+              width={1220}
+              height={1600}
             />
           </div>
         </div>
@@ -936,7 +936,7 @@ export default function SitePage() {
           preload="auto"
           poster="/media/portrait.jpg"
         >
-          <source src="/media/sailing4k2_1_1.mp4" type="video/mp4" />
+          <source src="/media/sailing-1080p.mp4" type="video/mp4" />
         </video>
         <div className="sailing-content">
           <div data-reveal className="sailing-scroll">
