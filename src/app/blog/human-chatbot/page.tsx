@@ -316,7 +316,7 @@ export default function ChattjbPost() {
       <header className="gpt-header">
         <nav className="gpt-sitenav" aria-label="ניווט ראשי">
           <a href="/" className="sn-logo" aria-label="עמית ברין - ראשי">
-            <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
+            <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width={209} height={96} />
           </a>
           <div className="sn-links">
             <a href="/">ראשי</a>

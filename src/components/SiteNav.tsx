@@ -19,7 +19,7 @@ export default function SiteNav({ home = false, current }: { home?: boolean; cur
       </div>
       <nav className="op-nav" aria-label="ניווט ראשי">
         <a href={to("#top")} className="nav-logo" aria-label="עמית ברין — ראשי">
-          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
+          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width={209} height={96} />
         </a>
         <div className="nav-links">
           <a href={to("#top")} aria-current={current === "home" ? "page" : undefined}>ראשי</a>

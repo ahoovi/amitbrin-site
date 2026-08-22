@@ -42,20 +42,17 @@ export default function RootLayout({
     <html lang="he" dir="rtl">
       <head>
         {/*
-          The webfonts used to be pulled in by an @import inside each page's
-          inline <style>. An @import is invisible to the browser's preload
-          scanner: it is only discovered after the stylesheet is parsed, which
-          puts a whole new connection to fonts.googleapis.com on the critical
-          path. On slow mobile that cost about 1.8 seconds. As real link tags
-          in the head they are found in the first bytes of the document and
-          fetched in parallel with everything else. Same fonts, same weights.
+          The two Google families are self-hosted now: the @font-face rules live
+          in globals.css, which ships inside the stylesheet the browser already
+          blocks on. No fonts.googleapis.com, no fonts.gstatic.com, no third
+          party on the critical path at all.
+
+          What stays here is a preload for the two Hebrew subsets that every
+          page paints with immediately. They are same-origin and immutable, so
+          this is the last round trip that matters for text.
         */}
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Alef:wght@400;700&family=Noto+Sans+Hebrew:wght@400;500;600;700&display=swap"
-        />
+        <link rel="preload" as="font" type="font/woff2" href="/fonts/alef-400-hebrew.woff2" crossOrigin="anonymous" />
+        <link rel="preload" as="font" type="font/woff2" href="/fonts/noto-sans-hebrew-hebrew.woff2" crossOrigin="anonymous" />
       </head>
       <body className="antialiased min-h-screen">
         {/* the ink filters + the frame CSS, mounted once for every route */}

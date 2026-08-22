@@ -247,7 +247,7 @@ export default function WhatsappPost() {
       </div>
       <nav className="op-nav" aria-label="ניווט ראשי">
         <a href="/" className="nav-logo" aria-label="עמית ברין - ראשי">
-          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
+          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width={209} height={96} />
         </a>
         <div className="nav-links">
           <a href="/">ראשי</a>

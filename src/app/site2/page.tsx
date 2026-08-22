@@ -723,7 +723,7 @@ export default function SitePage() {
       {/* ============ NAV ============ */}
       <nav className="op-nav" aria-label="ניווט ראשי">
         <a href="#top" className="nav-logo" aria-label="עמית ברין — ראשי">
-          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" />
+          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width={209} height={96} />
         </a>
         <div className="nav-links">
           <a href="#top">ראשי</a>
