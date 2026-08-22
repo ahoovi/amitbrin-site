@@ -201,15 +201,13 @@ const PF_CSS = `
   position:relative; z-index:0; display:flex; flex-direction:column;
   background:transparent; border:none; padding:.7rem .7rem 1.1rem;
   text-decoration:none; color:inherit;
-  transition:transform .45s var(--pf-ease);
 }
-.pf-card:hover{transform:translateY(-3px)}
 .pf-card:focus-visible{outline:2px solid var(--pf-gold); outline-offset:4px}
 .pf-cover{display:block; aspect-ratio:16/10; overflow:hidden; border-radius:9px; background:rgba(2,13,44,.06)}
 .pf-cover img{width:100%; height:100%; object-fit:cover; display:block}
 .pf-card-t{
   font-family:'Leon','Alef',sans-serif; font-weight:700;
-  font-size:1.05rem; line-height:1.3; margin:1rem .4rem .45rem; color:var(--pf-ink);
+  font-size:1.05rem; line-height:1.3; margin:1.5rem .4rem .75rem; color:var(--pf-ink);
 }
 .pf-card-x{margin:0 .4rem; font-size:.9rem; line-height:1.6; color:var(--pf-muted)}
 
@@ -224,14 +222,13 @@ const PF_CSS = `
   background:var(--pf-card-bg,rgba(255,255,255,.7));
   border:1px solid var(--pf-card-line,rgba(0,0,0,.1));
   box-shadow:var(--pf-card-shadow,none);
-  transition:transform .35s ease, border-color .25s ease, box-shadow .25s ease;
+  transition:border-color .25s ease, box-shadow .25s ease;
 }
 .pf-bare .pf-card:hover{
-  transform:translateY(-3px);
   border-color:var(--pf-card-line-hover,rgba(0,0,0,.22));
   box-shadow:var(--pf-card-shadow-hover,0 8px 22px rgba(0,0,0,.09));
 }
-.pf-bare .pf-card-t{font-family:inherit; color:inherit; font-size:1rem}
+.pf-bare .pf-card-t{font-family:inherit; color:inherit; font-size:1rem; margin:1rem .4rem .45rem}
 .pf-bare .pf-card-x{color:var(--pf-card-muted,rgba(0,0,0,.55)); font-size:.86rem}
 
 @media (max-width:720px){

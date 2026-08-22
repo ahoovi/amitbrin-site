@@ -54,3 +54,14 @@ body {
 @font-face { font-family:'Noto Sans Hebrew'; font-style:normal; font-weight:400 700; font-stretch:100%; font-display:swap;
   src:url(/fonts/noto-sans-hebrew-latin.woff2) format('woff2');
   unicode-range:U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+
+/* ---------------------------------------------------------------------------
+   Leon - the display face. It used to be declared inside the one-pager's own
+   <style> string, which mounts only on / and /site. Every other route asked
+   for 'Leon' and silently got the Alef fallback: the nav, the blog header,
+   the post titles. Declared here it reaches every route.
+   --------------------------------------------------------------------------- */
+@font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
+@font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }
+@font-face { font-family:'Leon'; src:url('/fonts/Leon-Bold.woff2') format('woff2');    font-weight:600 700; font-display:swap; }
+@font-face { font-family:'Leon'; src:url('/fonts/Leon-Heavy.woff2') format('woff2');   font-weight:800 900; font-display:swap; }

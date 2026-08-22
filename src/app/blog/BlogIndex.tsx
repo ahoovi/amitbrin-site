@@ -32,7 +32,7 @@ export default function BlogIndex() {
           <h1 className="bi-title">כתיבה על עיצוב<br />וחוויית שימוש</h1>
         </div>
         <p className="bi-sub">
-          מחשבות על עיצוב, מוצר, טיפוגרפיה ובינה מלאכותית. נכתב מתוך עשייה, לא מתוך סיכום.
+          מחשבות על עיצוב, מוצר, טיפוגרפיה ובינה מלאכותית – מה אנשים עושים עם זה ומה זה גורם לאנשים לעשות. נכתב מתוך עשייה ועם הרבה ביקורתיות, כי זאת העבודה שלי.
         </p>
       </header>
 
@@ -110,9 +110,7 @@ const CSS = `
   position:relative; z-index:0;
   display:grid; grid-template-columns:minmax(0,17rem) 1fr; gap:clamp(1rem,2.5vw,2rem);
   padding:1.1rem 1.1rem 1.4rem;
-  transition:transform .5s var(--ease);
 }
-.bi-card:hover{transform:translateY(-3px)}
 .bi-card .ink-path{stroke:var(--navy)}
 .bi-cover{display:block; aspect-ratio:16/10; overflow:hidden; border-radius:9px; background:rgba(2,13,44,.06)}
 .bi-cover img{width:100%; height:100%; object-fit:cover; display:block}

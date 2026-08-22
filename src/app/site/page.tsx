@@ -1256,11 +1256,10 @@ export default function SitePage() {
 /* ================================================================ */
 const CSS = `
 
-@font-face { font-family:'Leon'; src:url('/fonts/Leon-Thin.woff2') format('woff2');    font-weight:100 300; font-display:swap; }
-@font-face { font-family:'Leon'; src:url('/fonts/Leon-Regular.woff2') format('woff2'); font-weight:400 500; font-display:swap; }
-@font-face { font-family:'Leon'; src:url('/fonts/Leon-Bold.woff2') format('woff2');    font-weight:600 700; font-display:swap; }
-@font-face { font-family:'Leon'; src:url('/fonts/Leon-Heavy.woff2') format('woff2');   font-weight:800 900; font-display:swap; }
 
+/* Leon is declared in globals.css now. This stylesheet only mounts on the
+   one-pager, so declaring the face here left /blog and every post asking for
+   a family that was never defined, and silently getting the Alef fallback. */
 /* --- scroll lock while the tear entrance covers the page --- */
 .tear-under[aria-hidden="true"] { position:fixed; inset:0; overflow:hidden; }
 
@@ -1617,7 +1616,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   transition:transform .7s var(--ease);
 }
 .post-card .ink-path { stroke:var(--navy); }
-.post-card:hover { transform:translateY(-6px); }
 .post-card.placeholder { opacity:.45; }
 .post-card.placeholder .ink-path { stroke-dasharray:7 6; }
 .post-title { color:var(--navy); font-weight:600; font-size:clamp(1.3rem, 2vw, 1.9rem); }

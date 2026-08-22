@@ -5,7 +5,8 @@
  * reads correctly on the navy hero and on the blog's drafting paper.
  *
  * `home` switches the in-page anchors on the one-pager for absolute paths
- * everywhere else.
+ * everywhere else. The blog link is always absolute: it goes to /blog, not to
+ * the blog section of the one-pager.
  */
 export default function SiteNav({ home = false, current }: { home?: boolean; current?: string }) {
   const to = (hash: string) => (home ? hash : "/" + hash);
@@ -23,8 +24,7 @@ export default function SiteNav({ home = false, current }: { home?: boolean; cur
         </a>
         <div className="nav-links">
           <a href={to("#top")} aria-current={current === "home" ? "page" : undefined}>ראשי</a>
-          <a href={to("#blog")}>כתיבה ועשייה</a>
-          <a href="/blog" aria-current={current === "blog" ? "page" : undefined}>תרחיב</a>
+          <a href="/blog" aria-current={current === "blog" ? "page" : undefined}>בלוג</a>
           <a href={to("#footer")}>דברו איתי</a>
         </div>
       </nav>
