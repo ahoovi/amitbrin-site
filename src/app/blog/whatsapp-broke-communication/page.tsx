@@ -199,12 +199,12 @@ export default function WhatsappChatPost() {
       {/* chat header: site nav on top, chat identity below */}
       <header className="wa-header">
         <nav className="wa-sitenav" aria-label="ניווט ראשי">
-          <a href="/" className="sn-logo" aria-label="עמית ברין - ראשי">
+          <a href="/#top" className="sn-logo" aria-label="עמית ברין - ראשי">
             <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width={209} height={96} />
           </a>
           <div className="sn-links">
-            <a href="/">ראשי</a>
-            <a href="/#blog">כתיבה ועשייה</a>
+            <a href="/#top">ראשי</a>
+            <a href="/blog">בלוג</a>
             <a href="/#footer">דברו איתי</a>
           </div>
           <a className="hd-alt" href="/blog/whatsapp-broke-communication-broke-communication/classic">לגרסת הקריאה</a>

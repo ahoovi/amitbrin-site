@@ -452,6 +452,21 @@ export default function TearEntrance() {
     const contentEl = contentRef.current, under = underRef.current;
     if (!stage || !paper || !contentEl || !under) return;
 
+    /* Arriving from somewhere else in the site - /#top from the blog nav,
+       /#blog, /#footer - means the visitor already came in through the front
+       door once. The entrance is an easter egg, not a toll gate, so a hash
+       lands straight on the one-pager and the tear engine never boots. */
+    if (window.location.hash) {
+      const id = decodeURIComponent(window.location.hash.slice(1));
+      setRevealed(true);
+      requestAnimationFrame(() => {
+        const target = document.getElementById(id);
+        if (target) target.scrollIntoView({ block: "start" });
+        else window.scrollTo({ top: 0 });
+      });
+      return;
+    }
+
     under.toggleAttribute("inert", true);   // covered page: no tabbing into it
 
     let snapshotImg: HTMLImageElement | null = null;

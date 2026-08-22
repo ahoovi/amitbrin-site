@@ -66,7 +66,7 @@ export default function BlogIndex() {
       <footer className="bi-foot">
         <a href="/blog/rss.xml">RSS</a>
         <span aria-hidden>·</span>
-        <a href="/">חזרה לאתר</a>
+        <a href="/#top">חזרה לאתר</a>
       </footer>
     </div>
   );
