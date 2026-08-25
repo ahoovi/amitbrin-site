@@ -27,7 +27,8 @@ export const PERSON_LD = {
   ],
   knowsLanguage: ["he", "en"],
   sameAs: [
-    "https://www.linkedin.com/in/amit-brin",
+    "https://www.linkedin.com/in/amit-brin/",
+    "https://pro.6bstudio.co.il/teacher/%D7%A2%D7%9E%D7%99%D7%AA-%D7%91%D7%A8%D7%99%D7%9F/",
     "https://www.behance.net/amitbrin",
     "https://x.com/amit_brin",
     "https://www.facebook.com/amitbdesign",
