@@ -525,7 +525,7 @@ function FooterWater() {
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
     gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
     const sandImg = new Image();
-    sandImg.src = "/media/seabed-sand.jpg";
+    sandImg.src = "/media/seabed-sand.webp";
     sandImg.onload = () => {
       gl.bindTexture(gl.TEXTURE_2D, sandTex);
       gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA8, gl.RGBA, gl.UNSIGNED_BYTE, sandImg);
@@ -1016,7 +1016,7 @@ export default function SitePage() {
           loop
           playsInline
           preload="metadata"
-          poster="/media/boxing-coach-fallback.jpg"
+          poster="/media/boxing-coach-fallback.webp"
         >
           <source src="/media/bot-whisperer.mp4" type="video/mp4" />
         </video>
@@ -1607,7 +1607,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .news-form label { color:var(--offwhite); }
 
 /* ---------- 5 · WORKSHOPS ---------- */
-.sec-work { min-height:100vh; display:flex; background:url('/media/keynote-section-back.jpg') center/cover; }
+.sec-work { min-height:100vh; display:flex; background:url('/media/keynote-section-back.webp') center/cover; }
 @media (min-width:1024px){ .sec-work { background-attachment:fixed; } }
 .work-overlay { position:absolute; inset:0; z-index:1; background:radial-gradient(circle, rgba(27,37,47,0) 40%, rgba(0,0,0,.62) 70%); }
 .work-content {
