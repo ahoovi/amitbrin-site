@@ -16,6 +16,22 @@ const SLUG_301: Array<[string, string]> = [
   ["motherload", "mother-load"],
 ];
 
+/**
+ * WordPress leftovers. Search Console reported 30 legacy URLs from the old
+ * amitbrin.com WordPress install returning 404 (21.8.2026). Most are tag and
+ * category archives with no successor — those stay 404, which is the correct
+ * answer for deleted content. Only the handful with a real destination on the
+ * new site get a permanent redirect.
+ */
+const LEGACY_301: Array<[string, string]> = [
+  ["/about", "/"],
+  ["/main", "/"],
+  ["/branding", "/"],
+  ["/הבלוג", "/blog"],
+  ["/feed", "/blog/rss.xml"],
+  ["/סליחה-ששלחתי-וואטסאפ", "/blog/whatsapp-broke-communication"],
+];
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
@@ -34,6 +50,11 @@ const nextConfig: NextConfig = {
         destination: `/blog/${to}`,
         statusCode: 301,
       })),
+      // WordPress leftovers — both with and without the trailing slash
+      ...LEGACY_301.flatMap(([from, to]) => [
+        { source: from, destination: to, statusCode: 301 as const },
+        { source: `${from}/`, destination: to, statusCode: 301 as const },
+      ]),
     ];
   },
   async rewrites() {

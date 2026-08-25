@@ -43,7 +43,7 @@ export default function BlogIndex() {
             <article className="bi-card" key={p.slug}>
               <InkFrame kind="box" seed={i} />
               <a className="bi-cover" href={p.href} tabIndex={-1} aria-hidden>
-                <img src={p.cover} alt="" loading="lazy" />
+                <img src={p.cover} alt={p.title} loading="lazy" />
               </a>
               <div className="bi-body">
                 <h2 className="bi-h2">
