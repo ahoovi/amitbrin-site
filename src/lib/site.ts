@@ -31,8 +31,26 @@ export const PERSON_LD = {
     "https://www.behance.net/amitbrin",
     "https://x.com/amit_brin",
     "https://www.facebook.com/amitbdesign",
+    "https://www.xplace.com/il/u/AmitBrin",
+    "https://www.taasiya.co.il/friends/19138/recommand_me",
     "https://kssemac.com",
   ],
-  // worksFor / alumniOf / award / email are deliberately absent until Amit
-  // supplies exact wording. A missing field beats a wrong one.
+  email: "ahoovi@gmail.com",
+  worksFor: {
+    "@type": "CollegeOrUniversity",
+    name: "אוניברסיטת רייכמן",
+    alternateName: "Reichman University",
+    url: "https://www.runi.ac.il",
+  },
+  alumniOf: [
+    {
+      "@type": "EducationalOrganization",
+      name: "אסכולה — בית ספר לעיצוב, תל אביב",
+    },
+    {
+      "@type": "EducationalOrganization",
+      name: "6b studio",
+      url: "https://www.6bstudio.co.il",
+    },
+  ],
 };
