@@ -20,6 +20,7 @@ export type TeaBook = {
   eng?: boolean;    // english binding — spine on the left
   url?: string;     // product page (store) — TODO: per-book links from Amit
   noStore?: boolean;
+  ill?: string;     // cover illustrator, credited under the synopsis
 };
 
 const A = "/tea-library";
@@ -28,7 +29,7 @@ export const TEA_STORE = "https://www.wanderingtea.com/"; // TODO: replace with 
 
 export const TEA_BOOKS: TeaBook[] = [
   {
-    id: "korim", title: "קוראים לי תה", w: 140.7, h: 200, t: 30.5, year: "אוגוסט 2026",
+    id: "korim", title: "קוראים לי תה", w: 140.7, h: 200, t: 30.5, year: "אוגוסט 2026", ill: "טלי גנשפט",
     syn: "זהו ספרו השמיני של הסופר 'תה', הסופר האנונימי המוכר ביותר בישראל. 'קוראים לי תה' הוא רומן אוטוביוגרפי של דמות בדיונית: בבסיסו נמצא סיפורו האמתי לחלוטין של סופר ישראלי שכתב במשך 15 שנה תחת שם עט — אך הוא מכיל מידה שווה של מציאות ובדיון. בין שיחות עם סופרים מתים, עסקה כלכלית עם אישה שרוכשת את 'תה' למשך שנה שלמה ומחלת סרטן הלובשת צורה, הקורא יוכל רק לנחש אילו חלקים התרחשו באמת ואילו הם פרי הדמיון הצרוף. שמו האמתי של 'תה' נמצא בין דפי ספר זה.",
     front: `${A}/korim-front.webp`, back: `${A}/korim-back.webp`,
     spine: `${A}/korim-spine.webp`, spineH: `${A}/korim-spineH.webp`,
@@ -42,13 +43,13 @@ export const TEA_BOOKS: TeaBook[] = [
     spine: `${A}/tower-spine.webp`, spineH: `${A}/tower-spineH.webp`,
   },
   {
-    id: "veshuv", title: "ושוב הזמן", w: 140, h: 200, t: 20.1, year: "ינואר 2019",
+    id: "veshuv", title: "ושוב הזמן", w: 140, h: 200, t: 20.1, year: "ינואר 2019", ill: "מרוה צאלח",
     syn: "\"ושוב הזמן\" נועד להיות רגע של השתהות בלב היומיום. אסופת סיפורים וקטעים קצרים שנעה בין זיכרון לדמיון, בין התקווה שהעבר יישמר לרצון לשנותו, בין העיסוק באהבה לניסיון להתגבר על האובדן. ואולי הרגע הזה יילכד בזיכרונו של אחד מכם, שיחשוב עליו, באחד הימים, בחיוך של עצב. ספרו הרביעי של תה.",
     front: `${A}/veshuv-front.webp`, back: `${A}/veshuv-back.webp`,
     spine: `${A}/veshuv-spine.webp`, spineH: `${A}/veshuv-spineH.webp`,
   },
   {
-    id: "eliot", title: "אליוט", w: 135, h: 210, t: 18, year: "ינואר 2018",
+    id: "eliot", title: "אליוט", w: 135, h: 210, t: 18, year: "ינואר 2018", ill: "טלי גנשפט",
     syn: "אליוט חי בשלושה עולמות. בראשון הוא גר לבדו עם אמו ונמנע ממגע עם אנשים אחרים. בשני הוא גנרל מהולל מאחורי מסך המחשב, מנהיג שעליו סומכים בעיניים עצומות. ובשלישי, זה שאיש אינו מכיר, אליוט פוגש את השבעה — דמויות שנמצאות במאבק תמידי מאחורי קלעי המציאות. כשאליוט מחליט להשתתף בתחרות בינלאומית של משחק המחשב האהוב עליו כדי לזכות בפרס כספי שיעזור לאמו, העולמות השונים מתחילים לחלחל זה לתוך זה — ובסופו של דבר יהיה עליו לבחור היכן באמת ברצונו לחיות. ספרו השלישי של תה.",
     front: `${A}/eliot-front.webp`, back: `${A}/eliot-back.webp`,
     spine: `${A}/eliot-spine.webp`, spineH: `${A}/eliot-spineH.webp`,
@@ -60,7 +61,7 @@ export const TEA_BOOKS: TeaBook[] = [
     spine: `${A}/meahav-spine.webp`, spineH: `${A}/meahav-spineH.webp`,
   },
   {
-    id: "masa", title: "מסע קצר כדי לחזור", w: 129.8, h: 212.6, t: 7.2, year: "אפריל 2021",
+    id: "masa", title: "מסע קצר כדי לחזור", w: 129.8, h: 212.6, t: 7.2, year: "אפריל 2021", ill: "מרוה צאלח",
     syn: "זהו ספרון משונה: אוגדן קטעים שנכתבו לאורך דרך שהייתה בו-זמנית ארוכה וקצרה מדי. יומן מסע המערב בין הפנטסטי ובין האמתי — בין מפגשים עם אלים ועצים מדברים ובין רגשות כנים של חרטה ואשמה. לא פסיפס ולא תצרף, אלא נתיב מרוצף הלוקח את הקורא למסע אל החדווה האבודה — נתיב שבו אפשר לפסוע לאחור בכל עת, כדי להיזכר ולשוב לשורש הימים.",
     front: `${A}/masa-front.webp`, back: `${A}/masa-back.webp`,
     spine: `${A}/masa-spine.webp`, spineH: `${A}/masa-spineH.webp`,
@@ -84,7 +85,7 @@ export const TEA_BOOKS: TeaBook[] = [
     spine: `${A}/onlove-spine.webp`, spineH: `${A}/onlove-spineH.webp`,
   },
   {
-    id: "wander", title: "Wandering Thought", w: 210, h: 297, t: 14.2, year: "Graphic Novel", eng: true,
+    id: "wander", title: "Wandering Thought", w: 210, h: 297, t: 14.2, year: "Graphic Novel", eng: true, ill: "טלי גנשפט",
     syn: "Night. A man lies on the border of sleep and wakefulness, and his thoughts wander. As with all people, there is a world in his mind — a cosmos of its own rules and order, foreign to ours. Into this world, a thought is born, one that should not be. This is the story of her journey through the Head. \"Wandering Thought\" is the second book by Tea, a graphic novel illustrated by Tali Genshaft, which weaves words and art into a singular piece of storytelling.",
     front: `${A}/wander-front.webp`, back: `${A}/wander-back.webp`,
     spine: `${A}/wander-spine.webp`, spineH: `${A}/wander-spineH.webp`,
