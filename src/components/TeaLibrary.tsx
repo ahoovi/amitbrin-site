@@ -561,27 +561,32 @@ export default function TeaLibrary() {
 }
 
 /* ---- desktop: intro right, book left, shelf across the bottom ---- */
-/* ---- desktop: the section stays one viewport tall because the page snaps
-        section by section. Intro on the right, the chosen book on the left,
-        and the shelf takes whatever height is left over. ---- */
+/* ---- desktop: one centred column. The section stays a single viewport tall
+        because the page snaps section by section, so the shelf takes whatever
+        height the intro and the book panel leave it. ---- */
 @media (min-width:1025px){
-  .tea-lib{height:100vh;overflow:hidden;padding:0;display:grid;
-    grid-template-columns:1fr 1fr;grid-template-rows:auto minmax(0,1fr);
-    column-gap:5%;--tl-stage:100%}
-  .tl-intro{grid-column:1;grid-row:1;max-width:min(430px,92%);margin:6vh 0 0 auto;padding-inline-end:5%}
-  .tl-meta{grid-column:2;grid-row:1;max-width:min(410px,92%);margin:6vh auto 0 0;
-    padding:2px 27px 0 0;min-height:0}
-  .tl-meta .tl-syn{max-height:24vh;overflow:auto}
-  .tl-stage{grid-column:1/-1;grid-row:2;margin:0;min-height:0}
-  .tl-slot{padding-bottom:52px}
-  .tl-ground{bottom:38px;height:96px}
+  .tea-lib{height:100vh;overflow:hidden;padding:0;display:flex;flex-direction:column}
+  /* same column as .km-core: 1200 outer, 760 for the running text */
+  .tl-intro{flex:0 0 auto;max-width:1200px;width:100%;margin:5vh auto 0;padding:0 16px;text-align:center}
+  .tl-intro p{max-width:760px;margin-inline:auto}
+  .tl-intro h2{font-size:clamp(26px,2.4vw,36px);margin-bottom:18px}
+  .tl-stage{flex:1 1 auto;min-height:0;margin:16px 0 0}
+  .tl-rail{height:100%}
+  .tl-slot{padding-bottom:44px}
+  .tl-ground{bottom:34px;height:92px}
+  /* the book sits under the one that is open, centred on it */
+  .tl-meta{flex:0 0 auto;max-width:640px;margin:16px auto 3vh;padding:0;border:0;
+    min-height:0;text-align:center}
+  .tl-meta .tl-syn{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .tl-row{justify-content:center}
 }
-@media (min-width:1025px) and (max-height:880px){
-  .tl-intro{margin-top:4vh}
-  .tl-intro p{font-size:12.6px;line-height:1.68;margin-bottom:9px}
-  .tl-intro h2{margin-bottom:14px}
-  .tl-meta{margin-top:4vh}
-  .tl-meta .tl-syn{max-height:19vh}
+@media (min-width:1025px) and (max-height:900px){
+  .tl-intro{margin-top:3vh}
+  .tl-intro p{font-size:12.6px;line-height:1.68;margin-bottom:8px}
+  .tl-intro p.tl-invite{font-size:14px;margin:12px 0 10px}
+  .tl-intro h2{margin-bottom:12px}
+  .tl-meta{margin-bottom:2vh}
+  .tl-meta .tl-syn{-webkit-line-clamp:2}
 }
       `}</style>
     </section>

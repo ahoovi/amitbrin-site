@@ -477,8 +477,14 @@ const KM_CSS = `
 @keyframes km-shk1 { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-5px)} 40%{transform:translateX(4px)} 60%{transform:translateX(-3px)} 80%{transform:translateX(2px)} }
 @keyframes km-shk2 { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-9px)} 40%{transform:translateX(8px)} 60%{transform:translateX(-6px)} 80%{transform:translateX(4px)} }
 @keyframes km-shk3 { 0%,100%{transform:translateX(0)} 20%{transform:translateX(-14px)} 40%{transform:translateX(12px)} 60%{transform:translateX(-9px)} 80%{transform:translateX(6px)} }
+/* The caption swaps between a small line and the .boom headline, and a
+   min-height in em grows with the font — so every boom pushed the rest of the
+   page down and back up. The box is a fixed height in rem, tall enough for
+   both states, and the line is centred inside it. */
 .km-democap {
-  text-align:center; margin-top:1.35rem; min-height:2.6em; font-size:1.08rem;
+  text-align:center; margin-top:1.35rem; font-size:1.08rem;
+  min-height:clamp(5.2rem, 7vw, 6.2rem);
+  display:flex; align-items:center; justify-content:center;
   color:#52A5FF; font-weight:600;
   font-family:var(--km-font);
   transition:opacity .35s var(--km-ease), font-size .55s var(--km-ease);

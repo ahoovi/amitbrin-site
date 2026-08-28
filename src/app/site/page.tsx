@@ -766,8 +766,8 @@ function FxTitle({
           /* pointer creates a ripple distortion over the letters (no glow) */
           ty = Math.sin(t * 3.0 + cs[i].x * 0.06) * 3.2 * g;
         } else {
-          /* misregistered print plates: gentler radial push, refraction-like */
-          const push = 2.4 * g;
+          /* the plates separate; the glyph itself stays where it is */
+          const push = 5.8 * g;
           tx = (dx / d) * push;
           ty = (dy / d) * push;
         }
@@ -778,9 +778,11 @@ function FxTitle({
         if (!still || water) live++;
         l.style.setProperty("--k", kk[i].toFixed(3));
         /* aberration splits along the push direction */
-        l.style.setProperty("--cx", (curX[i] * 1.1).toFixed(1) + "px");
-        l.style.setProperty("--cy", (curY[i] * 1.1).toFixed(1) + "px");
-        l.style.setProperty("--bl", Math.min(3.5, (Math.abs(curX[i]) + Math.abs(curY[i])) * 0.9 + kk[i] * 1.2).toFixed(2) + "px");
+        l.style.setProperty("--cx", curX[i].toFixed(2) + "px");
+        l.style.setProperty("--cy", curY[i].toFixed(2) + "px");
+        /* the spread is driven by how deep the letter is inside the lens, not
+           by how far it travelled — the letter no longer travels */
+        l.style.setProperty("--bl", (0.9 + kk[i] * 4.6).toFixed(2) + "px");
         if (water) {
           const w1 = Math.sin(t * 2.6 + cs[i].x * 0.08) * kk[i];
           const w2 = Math.cos(t * 3.1 + cs[i].x * 0.05) * kk[i];
@@ -797,7 +799,9 @@ function FxTitle({
               ` ${(-oa).toFixed(2)}px 0 0 rgba(90,150,255,.28)`;
           }
         } else {
-          l.style.transform = still ? "" : `translate(${curX[i].toFixed(1)}px, ${curY[i].toFixed(1)}px)`;
+          /* a tenth of the plate offset: enough to feel alive, not enough to
+             read as the letters dancing */
+          l.style.transform = still ? "" : `translate(${(curX[i] * 0.1).toFixed(2)}px, ${(curY[i] * 0.1).toFixed(2)}px)`;
         }
       });
       if (offEl) {
@@ -1536,7 +1540,13 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
    its own: same paper, no gap, no snap point. It simply makes the library
    taller by the height of its own title. */
 .sec-works-intro { background:none; padding:min(12vh, 130px) 0 0; scroll-snap-align:none; }
-.sec-works-intro .works-title { color:var(--navy); text-shadow:none; }
+.sec-works-intro .works-title {
+  color:var(--navy); text-shadow:none;
+  /* an intro to the case collection, not a headline in its own right: sized
+     from the viewport so the single line never breaks, and given room under it */
+  font-size:min(2.15rem, 4.9vw); line-height:1.3; padding-bottom:0;
+  margin-bottom:clamp(20px, 3.2vh, 44px);
+}
 .sec-works-intro .works-label { color:rgba(8,24,69,.82); }
 .sec-works-intro .works-label::after { background:rgba(8,24,69,.2); }
 .sec-works-02 { padding-top:min(9vh, 96px); }
@@ -1583,14 +1593,19 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
     0 0, 0 0;
 }
 .blog-content { position:relative; z-index:2; width:100%; padding:13vh 5vw min(11vh, 200px); display:flex; flex-direction:column; gap:6vh; }
-.blog-head { width:100vw; margin-inline:calc(-5vw); text-align:center; position:relative; aspect-ratio:1900 / 292; }
+/* the drawing used to stretch to the full window while the title was capped,
+   so the red box drifted further and further out of proportion with it. Both
+   are sized from the same box now, and the type scales in container units. */
+.blog-head { width:min(100%, 1240px); margin-inline:auto; text-align:center; position:relative;
+  aspect-ratio:1900 / 292; container-type:inline-size; }
 .blog-tarhiv { position:absolute; inset:0; width:100%; height:100%; display:block; }
 .blog-title {
   color:var(--navy); font-weight:700;
-  font-size:clamp(1.4rem, 3vw, 3.4rem); line-height:1.1;
+  font-size:clamp(.72rem, 3.8cqw, 2.6rem); line-height:1.14;
   position:absolute; z-index:2;
-  left:50%; top:50%; transform:translate(-50%,-50%);
-  width:min(52%, 640px);
+  /* the red box in the drawing sits low and spans ~57% of the canvas */
+  left:50%; top:62%; transform:translate(-50%,-50%);
+  width:50%;
 }
 .blog-title .fxl { text-align:center; }
 .blog-rail {
@@ -1817,19 +1832,27 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .fxt .fxl { display:block; }
 .fxt .fw { display:inline-block; white-space:pre; }
 .fxt .fl { display:inline-block; position:relative; --k:0; --cx:0px; --cy:0px; --bl:0px; will-change:transform; }
+/* The glyph in front barely moves. Everything that happens, happens behind
+   it: the plates separate, blur outwards and are absorbed by the ground.
+   Because the front glyph is opaque and painted over them, none of the colour
+   that bled out ever washes back across the letterform. */
 .fxt .fl::before, .fxt .fl::after {
   content:attr(data-ch);
   position:absolute; inset:0; z-index:-1; pointer-events:none;
-  text-shadow:none; opacity:calc(var(--k) * .85);
+  text-shadow:none; opacity:calc(var(--k) * .72);
+  filter:blur(var(--bl, 0px));
 }
-/* RGB split — light-refraction: small offset, blur grows along the motion */
-.fxt-rgb .fl::before { color:#FF2A2A; transform:translate(var(--cx), var(--cy)); filter:blur(var(--bl, 0px)); }
-.fxt-rgb .fl::after  { color:#2A6BFF; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); filter:blur(var(--bl, 0px)); }
-.fxt-rgb .fl { text-shadow:calc(var(--cx) * -.6) calc(var(--cy) * .6) 0 rgba(0,230,80,calc(var(--k) * .8)); }
-/* CMYK split — print inks on the paper sections */
-.fxt-cmyk .fl::before { color:#00C4DB; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
-.fxt-cmyk .fl::after  { color:#E5289E; mix-blend-mode:multiply; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
-.fxt-cmyk .fl { text-shadow:calc(var(--cx) * -.6) calc(var(--cy) * .6) 0 rgba(250,220,0,calc(var(--k) * .9)); }
+/* dark sections — the light through a bright letter refracts into RGB and
+   glows around it (screen: additive, so it reads as light, not as ink) */
+.fxt-rgb .fl::before, .fxt-rgb .fl::after { opacity:calc(var(--k) * .95); }
+.fxt-rgb .fl::before { color:#FF3B30; mix-blend-mode:screen; transform:translate(var(--cx), var(--cy)); }
+.fxt-rgb .fl::after  { color:#2E7BFF; mix-blend-mode:screen; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
+.fxt-rgb .fl { text-shadow:calc(var(--cy) * .5) calc(var(--cx) * -.5) calc(var(--bl) * 1.5) rgba(20,235,110,calc(var(--k) * .7)); }
+/* paper sections — a dark title separates into its CMY plates, which spread
+   into the sheet around the letters (multiply: ink, subtractive) */
+.fxt-cmyk .fl::before { color:#00A9C7; mix-blend-mode:multiply; transform:translate(var(--cx), var(--cy)); }
+.fxt-cmyk .fl::after  { color:#D6218F; mix-blend-mode:multiply; transform:translate(calc(var(--cx) * -1), calc(var(--cy) * -1)); }
+.fxt-cmyk .fl { text-shadow:calc(var(--cy) * .5) calc(var(--cx) * -.5) calc(var(--bl) * 1.6) rgba(240,205,0,calc(var(--k) * .82)); }
 /* underwater refraction — footer title: the letters ride an ambient wave
    (FxTitle, const UW) and the glyphs themselves warp through #uw */
 .uw-defs { position:absolute; width:0; height:0; overflow:hidden; }
@@ -1860,7 +1883,7 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .news-content { width:auto; }
   .works-head { padding-bottom:14px; }
   .works-title { font-size:var(--sec-h2); }
-  .blog-title { width:62%; font-size:clamp(.9rem,3.4vw,1.6rem); }
+  .blog-title { width:54%; }
   .post-card { flex-basis:calc((100% - 1rem) / 1.15); }
   .op-form.work-form { flex-direction:column; align-items:stretch; gap:1rem; }
   .op-form.work-form label { flex:0 0 auto; }
