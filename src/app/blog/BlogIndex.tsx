@@ -117,7 +117,6 @@ const CSS = `
 .bi-body{display:flex; flex-direction:column; align-items:flex-start; min-width:0}
 .bi-h2{margin:.2rem 0 .5rem; font-family:'Leon','Alef',sans-serif; font-weight:700; font-size:clamp(1.15rem,2.2vw,1.6rem); line-height:1.25}
 .bi-h2 a{color:var(--navy); text-decoration:none}
-.bi-h2 a:hover{text-decoration:underline; text-underline-offset:.22em}
 .bi-date{display:block; font-size:.82rem; letter-spacing:.08em; color:var(--muted); margin-bottom:.7rem; font-variant-numeric:tabular-nums}
 .bi-x{margin:0 0 1.3rem; color:var(--muted); line-height:1.7; max-width:62ch}
 .bi-btn{
