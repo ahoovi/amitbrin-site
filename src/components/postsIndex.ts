@@ -33,6 +33,18 @@ export type PostRef = {
 
 const POSTS_RAW: PostRef[] = [
   {
+    slug: "taste",
+    href: "/blog/taste",
+    cover: "/media/blog/taste/cover.jpg",
+    ogImage: "/media/og/og-taste.png",
+    title: "מה הטעם לעצב בלי טעם?",
+    description:
+      "״טעם״ הפך למונח החם של השנה כשכולם רוויים בסלופ. פוסט שמייצר לעצמו עיצוב חדש בלחיצה — וכל פעם יוצא ״עיצוב״ שלא קרא את הטקסט.",
+    intro:
+      "בשנת 2,000 סטיב ג'ובס הציג את Aqua ואמר שהכפתורים ״כל כך טובים שמתחשק לך ללקק אותם״ — הרגע שבו ממשק הפך לדבר שקורה לך.",
+    published: "2026-08-29",
+  },
+  {
     slug: "instagram-cursive-logo",
     href: "/blog/instagram-cursive-logo",
     cover: "/media/blog/instagram-cursive-logo/cover.jpg",
