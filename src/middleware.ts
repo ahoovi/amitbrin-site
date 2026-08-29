@@ -31,6 +31,8 @@ const GATED = [
   '/limbaromana-audio.html',
   '/limbaromana-lessons.html',
   '/limbaromana-tutor.html',
+  '/limbaromana-examen15-a1.html',
+  '/limbaromana-neta.html',
 ];
 
 const COOKIE = 'limba_key';
@@ -182,5 +184,7 @@ export const config = {
     '/limbaromana-audio.html',
     '/limbaromana-lessons.html',
     '/limbaromana-tutor.html',
+    '/limbaromana-examen15-a1.html',
+    '/limbaromana-neta.html',
   ],
 };
