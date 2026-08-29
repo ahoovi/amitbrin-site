@@ -14,6 +14,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import PostDate from "../../../components/PostDate";
+import SiteNav from "../../../components/SiteNav";
 import { relatedTo } from "../../../components/postsIndex";
 
 const SLUG = "taste";
@@ -380,6 +381,9 @@ const CSS = `@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Heb
 }
 @media (prefers-reduced-motion:reduce){.tp *{animation:none!important;transition:none!important}}
 
+/* site nav: dissolve in after 100px of scroll; transparent and inert over the cover's menubar */
+.tp .op-nav,.tp .nav-veil{transition:opacity .55s cubic-bezier(.32,.72,0,1)}
+.tp.nav-off .op-nav,.tp.nav-off .nav-veil{opacity:0;pointer-events:none}
 /* real media */
 .tp .vid{position:relative;border-radius:var(--img-radius);overflow:hidden;background:#000;filter:var(--img-filter)}
 .tp .vid video{width:100%;display:block;aspect-ratio:16/9}
@@ -401,6 +405,14 @@ export default function TastePost() {
   const [busy, setBusy] = useState(false);
   const [gen, setGen] = useState<{ n: number; choice: Choice | null; secs: string }>({ n: 0, choice: null, secs: "" });
   const [hidden, setHidden] = useState(false);
+  /* the site nav dissolves in only after 100px of scroll — the top 100px are
+     the cover's own menubar (with the live clock), and the nav must not sit on it */
+  const [navOn, setNavOn] = useState(false);
+  useEffect(() => {
+    const on = () => setNavOn(window.scrollY > 100);
+    on(); window.addEventListener("scroll", on, { passive: true });
+    return () => window.removeEventListener("scroll", on);
+  }, []);
   const last = useRef<Partial<Choice>>({});
   const related = relatedTo(SLUG);
 
@@ -426,8 +438,9 @@ export default function TastePost() {
   const copyLink = async () => { try { await navigator.clipboard.writeText(URL); setCopiedLink(true); setTimeout(() => setCopiedLink(false), 1600); } catch {} };
 
   return (
-    <div ref={root} className={"tp" + (gen.choice ? " gen" : "") + (busy ? " thinking" : "")} {...dataAttrs}>
+    <div ref={root} className={"tp" + (gen.choice ? " gen" : "") + (busy ? " thinking" : "") + (navOn ? "" : " nav-off")} {...dataAttrs}>
       <style>{CSS}</style>
+      <SiteNav current="blog" />
 
       <figure className="cover">
         <img src={`${M}/cover.jpg`} alt="דיאלוג במערכת Mac OS X Aqua: מה הטעם לעצב בלי טעם? You cannot undo this action. OK / Cancel" width={1400} height={706} />
