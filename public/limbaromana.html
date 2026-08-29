@@ -667,6 +667,18 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     line-height:0;box-shadow:none}
   table.vt.hashd tr:first-child th .end{margin-top:0;line-height:0}
 }
+
+  .anstoggle{position:sticky;top:var(--navh);z-index:34;display:flex;align-items:center;gap:10px;
+    background:var(--navy);color:#fff;padding:8px 14px;border-radius:8px;margin:10px 0 18px;
+    box-shadow:0 3px 8px rgba(0,0,0,.20);direction:rtl}
+  .at-lbl{font-size:.85rem;opacity:.85}
+  .at-btn{font:inherit;font-size:.88rem;font-weight:700;padding:5px 16px;border-radius:99px;
+    border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
+  .at-btn[aria-pressed="true"]{background:var(--gold);color:#1a1200;border-color:var(--gold)}
+  #examen15 .ans-amit{display:inline}
+  #examen15 .ans-neta{display:none}
+  #examen15[data-answers="neta"] .ans-amit{display:none}
+  #examen15[data-answers="neta"] .ans-neta{display:inline}
 </style>
 </head>
 <body>
@@ -7485,170 +7497,176 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
   <p class="rl">תבניות התשובה כאן הן שלד, לא נוסח לשינון - להחליף בפרטים אמיתיים</p>
   <p class="rl">שמונת הבלוקים חופפים לשמונת הנושאים של הבחינה. אם בלוק מרגיש חלק, לדלג עליו ולחזור לקשה</p>
 </div>
+  <div class="anstoggle" id="anstoggle15" role="group" aria-label="בחירת תשובות להצגה">
+    <span class="at-lbl">מציג תשובות של:</span>
+    <button type="button" class="at-btn" data-ans="amit" aria-pressed="true">עמית</button>
+    <button type="button" class="at-btn" data-ans="neta" aria-pressed="false">נטע</button>
+  </div>
+
 
   <h3>1 · <span class="ro">Date personale și cunoștință</span> <span class="he">פרטים אישיים והיכרות</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Cum te cheamă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לך?</span><br><span class="ro">Mă cheamă Amit.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לך?</span><br><span class="ro ans-amit">Mă cheamă Amit.</span><span class="ro ans-neta">Mă cheamă Neta.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Care este numele tău de familie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה שם המשפחה שלך?</span><br><span class="ro">Numele meu de familie este Brin.</span> <span class="he">‏nume = שם משפחה, prenume = שם פרטי</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה שם המשפחה שלך?</span><br><span class="ro ans-amit">Numele meu de familie este Brin.</span> <span class="he">‏nume = שם משפחה, prenume = שם פרטי</span><span class="ro ans-neta">Numele meu de familie este Brin.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Câți ani ai?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">בן כמה אתה?</span><br><span class="ro">Am cincizeci și unu de ani.</span> <span class="he">מ-20 ומעלה חייבים de</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">בן כמה אתה?</span><br><span class="ro ans-amit">Am cincizeci și unu de ani.</span> <span class="he">מ-20 ומעלה חייבים de</span><span class="ro ans-neta">Am patruzeci și opt de ani.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">De unde ești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מאיפה אתה?</span><br><span class="ro">Sunt din Rishon LeZion, Israel.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מאיפה אתה?</span><br><span class="ro ans-amit">Sunt din Rishon LeZion, Israel.</span><span class="ro ans-neta">Sunt din Israel.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Unde locuiești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה גר?</span><br><span class="ro">Locuiesc în Israel.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה גר?</span><br><span class="ro ans-amit">Locuiesc în Israel.</span><span class="ro ans-neta">Locuiesc în orașul Rishon LeZion.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">În ce oraș locuiești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו עיר אתה גר?</span><br><span class="ro">Locuiesc în orașul Tel Aviv.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו עיר אתה גר?</span><br><span class="ro ans-amit">Locuiesc în orașul Tel Aviv.</span><span class="ro ans-neta">Locuiesc în Rishon LeZion.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Care este adresa ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה הכתובת שלך?</span><br><span class="ro">Adresa mea este strada Ravina, numărul cincisprezece, în Ramat Aviv.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה הכתובת שלך?</span><br><span class="ro ans-amit">Adresa mea este strada Ravina, numărul cincisprezece, în Ramat Aviv.</span><span class="ro ans-neta">Adresa mea este strada Meonot Bracha, numărul trei.</span></details></div>
   <div class="qa"><span class="qn">8</span> <span class="ro">Ce naționalitate ai?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה הלאום שלך?</span><br><span class="ro">Naționalitatea mea este israeliană.</span> <span class="he">הלאום הוא תואר, לא שם המדינה</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה הלאום שלך?</span><br><span class="ro ans-amit">Naționalitatea mea este israeliană.</span> <span class="he">הלאום הוא תואר, לא שם המדינה</span><span class="ro ans-neta">Sunt israeliană.</span></details></div>
   <div class="qa"><span class="qn">9</span> <span class="ro">Ce limbi vorbești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו שפות אתה מדבר?</span><br><span class="ro">Vorbesc ebraică, engleză și română.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו שפות אתה מדבר?</span><br><span class="ro ans-amit">Vorbesc ebraică, engleză și română.</span><span class="ro ans-neta">Vorbesc ebraică, engleză și română.</span></details></div>
   <div class="qa"><span class="qn">10</span> <span class="ro">Vorbești românește?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה מדבר רומנית?</span><br><span class="ro">Da, vorbesc puțin românește.</span> <span class="he">‏românește = תואר פועל, limba română = שם השפה</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה מדבר רומנית?</span><br><span class="ro ans-amit">Da, vorbesc puțin românește.</span> <span class="he">‏românește = תואר פועל, limba română = שם השפה</span><span class="ro ans-neta">Învăț limba română.</span></details></div>
   <div class="qa"><span class="qn">11</span> <span class="ro">Cu cine locuiești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">עם מי אתה גר?</span><br><span class="ro">Locuiesc cu partenera mea și cu fiica mea cea mică.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">עם מי אתה גר?</span><br><span class="ro ans-amit">Locuiesc cu partenera mea și cu fiica mea cea mică.</span><span class="ro ans-neta">Locuiesc cu cei doi fii ai mei.</span></details></div>
   <div class="qa"><span class="qn">12</span> <span class="ro">Ești căsătorit / căsătorită?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה נשוי / את נשואה?</span><br><span class="ro">Nu sunt căsătorit.</span> <span class="he">התואר מסכים עם המין של הדובר</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה נשוי / את נשואה?</span><br><span class="ro ans-amit">Nu sunt căsătorit.</span> <span class="he">התואר מסכים עם המין של הדובר</span><span class="ro ans-neta">Nu, sunt divorțată.</span></details></div>
 
   <h3>2 · <span class="ro">Familie</span> <span class="he">משפחה</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Ai frați sau surori?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך אחים או אחיות?</span><br><span class="ro">Am o soră mai mică.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך אחים או אחיות?</span><br><span class="ro ans-amit">Am o soră mai mică.</span><span class="ro ans-neta">Am un frate.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Câți frați ai?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה אחים יש לך?</span><br><span class="ro">Am o soră.</span> <span class="he">‏câți לזכר, câte לנקבה</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה אחים יש לך?</span><br><span class="ro ans-amit">Am o soră.</span> <span class="he">‏câți לזכר, câte לנקבה</span><span class="ro ans-neta">Am un frate.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Cum îl cheamă pe tatăl tău?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לאבא שלך?</span><br><span class="ro">Numele tatălui meu este Șlomo.</span> <span class="he">‏îl … pe לזכר. הצצה ליחסה - ראו <a class="xref" href="#interog14">Pe cine</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לאבא שלך?</span><br><span class="ro ans-amit">Numele tatălui meu este Șlomo.</span> <span class="he">‏îl … pe לזכר. הצצה ליחסה - ראו <a class="xref" href="#interog14">Pe cine</a></span><span class="ro ans-neta">Numele tatălui meu este Șlomo.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">Cum o cheamă pe mama ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לאמא שלך?</span><br><span class="ro">Numele mamei mele este Esti.</span> <span class="he">‏o … pe לנקבה. זו ההבחנה היחידה בין שתי השאלות</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך קוראים לאמא שלך?</span><br><span class="ro ans-amit">Numele mamei mele este Esti.</span> <span class="he">‏o … pe לנקבה. זו ההבחנה היחידה בין שתי השאלות</span><span class="ro ans-neta">Numele mamei mele este Esti.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Unde locuiesc părinții tăi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה גרים ההורים שלך?</span><br><span class="ro">Părinții mei locuiesc în Rishon LeZion.</span> <span class="he">הפועל ברבים: locuiesc</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה גרים ההורים שלך?</span><br><span class="ro ans-amit">Părinții mei locuiesc în Rishon LeZion.</span> <span class="he">הפועל ברבים: locuiesc</span><span class="ro ans-neta">Părinții mei locuiesc în Rishon LeZion.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">Câți ani are mama ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">בת כמה אמא שלך?</span><br><span class="ro">Mama mea are șaptezeci și șase de ani.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">בת כמה אמא שלך?</span><br><span class="ro ans-amit">Mama mea are șaptezeci și șase de ani.</span><span class="ro ans-neta">Mama mea are șaptezeci și cinci de ani.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Ce profesie are tatăl tău?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה המקצוע של אבא שלך?</span><br><span class="ro">Tatăl meu nu lucrează.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה המקצוע של אבא שלך?</span><br><span class="ro ans-amit">Tatăl meu nu lucrează.</span><span class="ro ans-neta">Tatăl meu este electrician.</span></details></div>
   <div class="qa"><span class="qn">8</span> <span class="ro">Ai bunici?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך סבא וסבתא?</span><br><span class="ro">Nu am bunici.</span> <span class="he">‏bunic / bunică / bunici</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך סבא וסבתא?</span><br><span class="ro ans-amit">Nu am bunici.</span> <span class="he">‏bunic / bunică / bunici</span><span class="ro ans-neta">Nu, nu am bunici.</span></details></div>
   <div class="qa"><span class="qn">9</span> <span class="ro">Ai nepoți?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך נכדים / אחיינים?</span><br><span class="ro">Nu am nepoți.</span> <span class="he">‏nepot משמש גם לנכד וגם לאחיין</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך נכדים / אחיינים?</span><br><span class="ro ans-amit">Nu am nepoți.</span> <span class="he">‏nepot משמש גם לנכד וגם לאחיין</span><span class="ro ans-neta">Am trei nepoți.</span></details></div>
   <div class="qa"><span class="qn">10</span> <span class="ro">Cine este cea mai tânără persoană din familia ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מי האדם הצעיר ביותר במשפחה שלך?</span><br><span class="ro">Cel mai tânăr din familie este nepotul meu - are unsprezece ani.</span> <span class="he">‏cea mai = הפלגה בנקבה - ראו <a class="xref" href="#compar15">דרגות ההשוואה</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מי האדם הצעיר ביותר במשפחה שלך?</span><br><span class="ro ans-amit">Cel mai tânăr din familie este nepotul meu - are unsprezece ani.</span> <span class="he">‏cea mai = הפלגה בנקבה - ראו <a class="xref" href="#compar15">דרגות ההשוואה</a></span><span class="ro ans-neta">Cel mai tânăr din familie este fiul meu Sahar.</span></details></div>
   <div class="qa"><span class="qn">11</span> <span class="ro">Cine este cea mai în vârstă persoană din familia ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מי האדם המבוגר ביותר במשפחה שלך?</span><br><span class="ro">Cel mai în vârstă din familie este tatăl meu - are șaptezeci și nouă de ani.</span> <span class="he">‏în vârstă = מבוגר, מנומס יותר מ-bătrân</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מי האדם המבוגר ביותר במשפחה שלך?</span><br><span class="ro ans-amit">Cel mai în vârstă din familie este tatăl meu - are șaptezeci și nouă de ani.</span> <span class="he">‏în vârstă = מבוגר, מנומס יותר מ-bătrân</span><span class="ro ans-neta">Cel mai în vârstă din familie este tatăl meu.</span></details></div>
   <div class="qa"><span class="qn">12</span> <span class="ro">Ce faceți împreună în familie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתם עושים ביחד במשפחה?</span><br><span class="ro">Nu facem multe lucruri împreună.</span> <span class="he">‏faceți = גוף שני רבים, ולכן גם התשובה ברבים</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתם עושים ביחד במשפחה?</span><br><span class="ro ans-amit">Nu facem multe lucruri împreună.</span> <span class="he">‏faceți = גוף שני רבים, ולכן גם התשובה ברבים</span><span class="ro ans-neta">Facem mese împreună și sărbătorim sărbători și zile de naștere.</span></details></div>
 
   <h3>3 · <span class="ro">Descrierea noastră și a unei persoane</span> <span class="he">תיאור אדם</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Cum arăți?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך אתה נראה?</span><br><span class="ro">Sunt înalt și slab, sunt chel și am barbă neagră și grizonată.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך אתה נראה?</span><br><span class="ro ans-amit">Sunt înalt și slab, sunt chel și am barbă neagră și grizonată.</span><span class="ro ans-neta">Sunt scundă și slabă.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Ești înalt / înaltă sau scund / scundă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה גבוה או נמוך?</span><br><span class="ro">Sunt înalt.</span> <span class="he">גובה ממוצע</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אתה גבוה או נמוך?</span><br><span class="ro ans-amit">Sunt înalt.</span> <span class="he">גובה ממוצע</span><span class="ro ans-neta">Sunt scundă.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Ce culoare au ochii tăi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה צבע העיניים שלך?</span><br><span class="ro">Culoarea ochilor mei este maro.</span> <span class="he">תמיד ברבים - ראו <a class="xref" href="#aspect15">עיניים ושיער</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה צבע העיניים שלך?</span><br><span class="ro ans-amit">Culoarea ochilor mei este maro.</span> <span class="he">תמיד ברבים - ראו <a class="xref" href="#aspect15">עיניים ושיער</a></span><span class="ro ans-neta">Culoarea ochilor mei este gri-verde.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">Ce culoare are părul tău?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה צבע השיער שלך?</span><br><span class="ro">Culoarea părului meu este negru grizonat.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה צבע השיער שלך?</span><br><span class="ro ans-amit">Culoarea părului meu este negru grizonat.</span><span class="ro ans-neta">Culoarea părului meu este blond.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Ai părul lung sau scurt?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך שיער ארוך או קצר?</span><br><span class="ro">Am puțin păr, foarte scurt.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך שיער ארוך או קצר?</span><br><span class="ro ans-amit">Am puțin păr, foarte scurt.</span><span class="ro ans-neta">Am părul lung.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">Cum este cel mai bun prieten al tău?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך החבר הכי טוב שלך?</span><br><span class="ro">Cel mai bun prieten al meu este inteligent și amuzant.</span> <span class="he">בנקבה: cea mai bună prietenă a mea</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך החבר הכי טוב שלך?</span><br><span class="ro ans-amit">Cel mai bun prieten al meu este inteligent și amuzant.</span> <span class="he">בנקבה: cea mai bună prietenă a mea</span><span class="ro ans-neta">Cea mai bună prietenă a mea este scundă, cu părul creț și maro.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Este o persoană veselă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">הוא אדם עליז?</span><br><span class="ro">Da, este o persoană veselă.</span> <span class="he">‏persoană היא נקבה תמיד, גם על גבר</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">הוא אדם עליז?</span><br><span class="ro ans-amit">Da, este o persoană veselă.</span> <span class="he">‏persoană היא נקבה תמיד, גם על גבר</span><span class="ro ans-neta">Da, este veselă.</span></details></div>
 
   <h3>4 · <span class="ro">Zile, ore și date</span> <span class="he">ימים, שעות ותאריכים</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Ce zi este astăzi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום היום?</span><br><span class="ro">Astăzi este miercuri.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום היום?</span><br><span class="ro ans-amit">Astăzi este miercuri.</span><span class="ro ans-neta">Astăzi este sâmbătă.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Ce zi este mâine?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום מחר?</span><br><span class="ro">Mâine este joi.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום מחר?</span><br><span class="ro ans-amit">Mâine este joi.</span><span class="ro ans-neta">Mâine este duminică.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Ce zi a fost ieri?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום היה אתמול?</span><br><span class="ro">Ieri a fost marți.</span> <span class="he">‏a fost = היה. הצצה לזמן עבר</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איזה יום היה אתמול?</span><br><span class="ro ans-amit">Ieri a fost marți.</span> <span class="he">‏a fost = היה. הצצה לזמן עבר</span><span class="ro ans-neta">Ieri a fost vineri.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">În ce lună suntem?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזה חודש אנחנו?</span><br><span class="ro">Suntem în luna august.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזה חודש אנחנו?</span><br><span class="ro ans-amit">Suntem în luna august.</span><span class="ro ans-neta">Suntem în luna august.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Care este data de astăzi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה התאריך היום?</span><br><span class="ro">Data de astăzi este douăzeci și șase august.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה התאריך היום?</span><br><span class="ro ans-amit">Data de astăzi este douăzeci și șase august.</span><span class="ro ans-neta">Data de astăzi este douăzeci și nouă august.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">Când este ziua ta de naștere?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מתי יום ההולדת שלך?</span><br><span class="ro">Ziua mea de naștere este în februarie.</span> <span class="he">ראו <a class="xref" href="#naster11">יום הולדת</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מתי יום ההולדת שלך?</span><br><span class="ro ans-amit">Ziua mea de naștere este în februarie.</span> <span class="he">ראו <a class="xref" href="#naster11">יום הולדת</a></span><span class="ro ans-neta">Ziua mea de naștere este pe douăzeci și șapte februarie.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Care este luna ta preferată?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה החודש המועדף עליך?</span><br><span class="ro">Nu am o lună preferată.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה החודש המועדף עליך?</span><br><span class="ro ans-amit">Nu am o lună preferată.</span><span class="ro ans-neta">Luna mea preferată este februarie.</span></details></div>
   <div class="qa"><span class="qn">8</span> <span class="ro">La ce oră începe lecția?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו שעה מתחיל השיעור?</span><br><span class="ro">Lecția începe la ora opt.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו שעה מתחיל השיעור?</span><br><span class="ro ans-amit">Lecția începe la ora opt.</span><span class="ro ans-neta">Lecția începe la ora cinci și jumătate după-amiaza.</span></details></div>
   <div class="qa"><span class="qn">9</span> <span class="ro">Cât este ceasul?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה השעה?</span><br><span class="ro">Este ora 8 și jumătate.</span> <span class="he">ראו <a class="xref" href="#ceas12">השעון</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה השעה?</span><br><span class="ro ans-amit">Este ora 8 și jumătate.</span> <span class="he">ראו <a class="xref" href="#ceas12">השעון</a></span><span class="ro ans-neta">Este ora două după-amiaza.</span></details></div>
   <div class="qa"><span class="qn">10</span> <span class="ro">Ce faci luni?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה ביום שני?</span><br><span class="ro">Luni fac același lucru ca în restul săptămânii.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה ביום שני?</span><br><span class="ro ans-amit">Luni fac același lucru ca în restul săptămânii.</span><span class="ro ans-neta">Luni merg la muncă.</span></details></div>
   <div class="qa"><span class="qn">11</span> <span class="ro">Ce faci în weekend?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה בסוף השבוע?</span><br><span class="ro">În weekend încerc să mă odihnesc.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה בסוף השבוע?</span><br><span class="ro ans-amit">În weekend încerc să mă odihnesc.</span><span class="ro ans-neta">În weekend curăț și fac ordine în casă.</span></details></div>
   <div class="qa"><span class="qn">12</span> <span class="ro">În ce zile lucrezi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באילו ימים אתה עובד?</span><br><span class="ro">Lucrez de duminică până vineri.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באילו ימים אתה עובד?</span><br><span class="ro ans-amit">Lucrez de duminică până vineri.</span><span class="ro ans-neta">Lucrez de duminică până joi.</span></details></div>
   <div class="qa"><span class="qn">13</span> <span class="ro">Câte zile are o săptămână?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה ימים יש בשבוע?</span><br><span class="ro">O săptămână are șapte zile.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה ימים יש בשבוע?</span><br><span class="ro ans-amit">O săptămână are șapte zile.</span><span class="ro ans-neta">O săptămână are șapte zile.</span></details></div>
   <div class="qa"><span class="qn">14</span> <span class="ro">Care sunt lunile de vară?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מהם חודשי הקיץ?</span><br><span class="ro">Lunile de vară sunt iunie, iulie, august și septembrie.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מהם חודשי הקיץ?</span><br><span class="ro ans-amit">Lunile de vară sunt iunie, iulie, august și septembrie.</span><span class="ro ans-neta">Lunile de vară sunt iunie, iulie și august.</span></details></div>
   <div class="qa"><span class="qn">15</span> <span class="ro">În ce anotimp este luna decembrie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו עונה נמצא חודש דצמבר?</span><br><span class="ro">Decembrie este iarna.</span> <span class="he">ראו <a class="xref" href="#anotimp7">העונות</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">באיזו עונה נמצא חודש דצמבר?</span><br><span class="ro ans-amit">Decembrie este iarna.</span> <span class="he">ראו <a class="xref" href="#anotimp7">העונות</a></span><span class="ro ans-neta">Decembrie este iarna.</span></details></div>
 
   <h3>5 · <span class="ro">Casa mea</span> <span class="he">הבית</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Unde locuiești: la casă sau la bloc?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה גר: בבית פרטי או בבניין?</span><br><span class="ro">Locuiesc la bloc.</span> <span class="he">‏bloc = בניין דירות</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה גר: בבית פרטי או בבניין?</span><br><span class="ro ans-amit">Locuiesc la bloc.</span> <span class="he">‏bloc = בניין דירות</span><span class="ro ans-neta">Locuiesc la bloc.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Câte camere are locuința ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה חדרים יש בדירה שלך?</span><br><span class="ro">Locuința mea are patru camere și jumătate.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">כמה חדרים יש בדירה שלך?</span><br><span class="ro ans-amit">Locuința mea are patru camere și jumătate.</span><span class="ro ans-neta">Locuința mea are patru camere.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Ce camere sunt în casa ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו חדרים יש בבית שלך?</span><br><span class="ro">Am o bucătărie, o sufragerie, două dormitoare și o baie.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו חדרים יש בבית שלך?</span><br><span class="ro ans-amit">Am o bucătărie, o sufragerie, două dormitoare și o baie.</span><span class="ro ans-neta">Am o sufragerie, o bucătărie și trei dormitoare.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">Ce este în sufragerie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש בסלון?</span><br><span class="ro">În sufragerie este o canapea mare, un televizor, un sistem stereo, chitare și ukulele, și multe plante.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש בסלון?</span><br><span class="ro ans-amit">În sufragerie este o canapea mare, un televizor, un sistem stereo, chitare și ukulele, și multe plante.</span><span class="ro ans-neta">În sufragerie sunt două canapele, o comodă, un televizor și o masă.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Ce este în bucătărie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש במטבח?</span><br><span class="ro">În bucătărie este un cuptor, un cuptor cu microunde, cuțite, tigăi și oale.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש במטבח?</span><br><span class="ro ans-amit">În bucătărie este un cuptor, un cuptor cu microunde, cuțite, tigăi și oale.</span><span class="ro ans-neta">În bucătărie este un robinet cu chiuvetă, un cuptor, un frigider și un blat de lucru.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">Unde este televizorul?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה הטלוויזיה?</span><br><span class="ro">Televizorul este în sufragerie.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה הטלוויזיה?</span><br><span class="ro ans-amit">Televizorul este în sufragerie.</span><span class="ro ans-neta">Televizorul este în sufragerie.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Unde este masa?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה השולחן?</span><br><span class="ro">Masa este în zona de luat masa.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה השולחן?</span><br><span class="ro ans-amit">Masa este în zona de luat masa.</span><span class="ro ans-neta">Masa este în sufragerie și în bucătărie.</span></details></div>
   <div class="qa"><span class="qn">8</span> <span class="ro">Ce se află lângă pat?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה נמצא ליד המיטה?</span><br><span class="ro">Lângă pat se află o noptieră și o lampă.</span> <span class="he">‏a se afla = להימצא. שווה ל-este / există</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה נמצא ליד המיטה?</span><br><span class="ro ans-amit">Lângă pat se află o noptieră și o lampă.</span> <span class="he">‏a se afla = להימצא. שווה ל-este / există</span><span class="ro ans-neta">Lângă pat sunt două noptiere.</span></details></div>
   <div class="qa"><span class="qn">9</span> <span class="ro">Ce se află între masă și fereastră?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה נמצא בין השולחן לחלון?</span><br><span class="ro">Între masă și fereastră se află un scaun.</span> <span class="he">‏între … și … - ראו <a class="xref" href="#preploc14">מילות יחס של מקום</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה נמצא בין השולחן לחלון?</span><br><span class="ro ans-amit">Între masă și fereastră se află un scaun.</span> <span class="he">‏între … și … - ראו <a class="xref" href="#preploc14">מילות יחס של מקום</a></span><span class="ro ans-neta">Între masă și fereastră sunt o comodă și un televizor.</span></details></div>
   <div class="qa"><span class="qn">10</span> <span class="ro">Ai balcon? Ai grădină?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך מרפסת? יש לך גינה?</span><br><span class="ro">Da, am un balcon mare, dar nu am grădină.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש לך מרפסת? יש לך גינה?</span><br><span class="ro ans-amit">Da, am un balcon mare, dar nu am grădină.</span><span class="ro ans-neta">Da, am balcon, dar nu am grădină.</span></details></div>
   <div class="qa"><span class="qn">11</span> <span class="ro">Care este camera ta preferată? Ce cameră preferi?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה החדר המועדף עליך?</span><br><span class="ro">Camera mea preferată este studioul - camera de lucru.</span> <span class="he">שתי השאלות זהות במשמעות - care על זהות, ce על סוג</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה החדר המועדף עליך?</span><br><span class="ro ans-amit">Camera mea preferată este studioul - camera de lucru.</span> <span class="he">שתי השאלות זהות במשמעות - care על זהות, ce על סוג</span><span class="ro ans-neta">Camera mea preferată este dormitorul meu.</span></details></div>
   <div class="qa"><span class="qn">12</span> <span class="ro">Ce faci în bucătărie? În dormitor? În sufragerie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה במטבח? בחדר השינה? בסלון?</span><br><span class="ro">În bucătărie gătesc, în dormitor dorm, iar în sufragerie mă uit la televizor.</span> <span class="he">‏sufragerie = camera de zi = living</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה במטבח? בחדר השינה? בסלון?</span><br><span class="ro ans-amit">În bucătărie gătesc, în dormitor dorm, iar în sufragerie mă uit la televizor.</span> <span class="he">‏sufragerie = camera de zi = living</span><span class="ro ans-neta">În bucătărie gătesc, în dormitor dorm, iar în sufragerie mă odihnesc și mă uit la televizor.</span></details></div>
   <div class="qa"><span class="qn">13</span> <span class="ro">Ce faci pe balcon?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה במרפסת?</span><br><span class="ro">Nu am balcon, așa că nu fac nimic acolo.</span> <span class="he">‏pe balcon, לא în balcon</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה אתה עושה במרפסת?</span><br><span class="ro ans-amit">Nu am balcon, așa că nu fac nimic acolo.</span> <span class="he">‏pe balcon, לא în balcon</span><span class="ro ans-neta">Pe balcon beau cafea.</span></details></div>
   <div class="qa"><span class="qn">14</span> <span class="ro">Unde dormi? Unde gătești?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה ישן? איפה אתה מבשל?</span><br><span class="ro">Dorm în dormitor și gătesc în bucătărie.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה אתה ישן? איפה אתה מבשל?</span><br><span class="ro ans-amit">Dorm în dormitor și gătesc în bucătărie.</span><span class="ro ans-neta">Dorm în dormitorul meu și gătesc în bucătărie.</span></details></div>
 
   <h3>6 · <span class="ro">Locație și prepoziții de loc</span> <span class="he">מיקום ומילות יחס</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Unde este cartea? / Unde ai o carte?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה הספר? / איפה יש לך ספר?</span><br><span class="ro">Cartea este pe masă. / Am o carte în bibliotecă.</span> <span class="he">שימו לב ליידוע: cartea = הספר המסוים, o carte = ספר כלשהו</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה הספר? / איפה יש לך ספר?</span><br><span class="ro ans-amit">Cartea este pe masă. / Am o carte în bibliotecă.</span> <span class="he">שימו לב ליידוע: cartea = הספר המסוים, o carte = ספר כלשהו</span><span class="ro ans-neta">Cartea este pe comodă, în dormitor.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Ce este pe masă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש על השולחן?</span><br><span class="ro">Pe masă este o vază galbenă cu flori roz și o carte albastră.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש על השולחן?</span><br><span class="ro ans-amit">Pe masă este o vază galbenă cu flori roz și o carte albastră.</span><span class="ro ans-neta">Pe masă este o vază cu flori.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Ce este sub scaun?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש מתחת לכיסא?</span><br><span class="ro">Sub scaun este o pisică.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה יש מתחת לכיסא?</span><br><span class="ro ans-amit">Sub scaun este o pisică.</span><span class="ro ans-neta">Sub scaun nu este nimic.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">Unde este pisica? Unde este câinele?</span>
     <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה החתול? איפה הכלב?</span><br><span class="ro">Pisica este sub masă, iar câinele este în grădină, lângă băiat.</span></details></div>
 
   <h3>7 · <span class="ro">Orașul și locurile din oraș</span> <span class="he">העיר והמקומות</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Ce locuri sunt în orașul tău?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו מקומות יש בעיר שלך?</span><br><span class="ro">În orașul meu sunt magazine, un mall, terenuri de sport și parcări.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">אילו מקומות יש בעיר שלך?</span><br><span class="ro ans-amit">În orașul meu sunt magazine, un mall, terenuri de sport și parcări.</span><span class="ro ans-neta">În orașul meu sunt grădini, restaurante și o plajă.</span></details></div>
   <div class="qa"><span class="qn">2</span> <span class="ro">Unde este farmacia? Unde este supermarketul?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה בית המרקחת? איפה הסופרמרקט?</span><br><span class="ro">Farmacia este lângă gară, iar supermarketul este în fața parcului.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה בית המרקחת? איפה הסופרמרקט?</span><br><span class="ro ans-amit">Farmacia este lângă gară, iar supermarketul este în fața parcului.</span><span class="ro ans-neta">Farmacia este pe strada principală, iar supermarketul este în cartierul meu.</span></details></div>
   <div class="qa"><span class="qn">3</span> <span class="ro">Există o bancă aproape de casa ta?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש בנק קרוב לבית שלך?</span><br><span class="ro">Da, este o bancă aproape de casa mea.</span> <span class="he">‏bancă = גם בנק וגם ספסל</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">יש בנק קרוב לבית שלך?</span><br><span class="ro ans-amit">Da, este o bancă aproape de casa mea.</span> <span class="he">‏bancă = גם בנק וגם ספסל</span><span class="ro ans-neta">Da, este o bancă aproape de casa mea.</span></details></div>
   <div class="qa"><span class="qn">4</span> <span class="ro">Cum ajungi la gară?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך מגיעים לתחנת הרכבת?</span><br><span class="ro">La gară ajung cu autobuzul.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איך מגיעים לתחנת הרכבת?</span><br><span class="ro ans-amit">La gară ajung cu autobuzul.</span><span class="ro ans-neta">La gară ajung cu autobuzul, un drum scurt.</span></details></div>
   <div class="qa"><span class="qn">5</span> <span class="ro">Unde este stația de autobuz?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה תחנת האוטובוס?</span><br><span class="ro">Stația de autobuz este lângă parc.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">איפה תחנת האוטובוס?</span><br><span class="ro ans-amit">Stația de autobuz este lângă parc.</span><span class="ro ans-neta">Stația de autobuz este pe strada de lângă casa mea.</span></details></div>
   <div class="qa"><span class="qn">6</span> <span class="ro">Este departe centrul orașului?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מרכז העיר רחוק?</span><br><span class="ro">Centrul orașului este departe.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מרכז העיר רחוק?</span><br><span class="ro ans-amit">Centrul orașului este departe.</span><span class="ro ans-neta">Nu, centrul orașului nu este departe.</span></details></div>
   <div class="qa"><span class="qn">7</span> <span class="ro">Ce faci la poștă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה עושים בדואר?</span><br><span class="ro">Nu este poștă, pentru că au închis-o.</span> <span class="he">מכתבים וחבילות</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה עושים בדואר?</span><br><span class="ro ans-amit">Nu este poștă, pentru că au închis-o.</span> <span class="he">מכתבים וחבילות</span><span class="ro ans-neta">La poștă trimit și primesc scrisori și colete.</span></details></div>
   <div class="qa"><span class="qn">8</span> <span class="ro">Ce cumperi de la farmacie?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה קונים בבית המרקחת?</span><br><span class="ro">De la farmacie cumpăr medicamente.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה קונים בבית המרקחת?</span><br><span class="ro ans-amit">De la farmacie cumpăr medicamente.</span><span class="ro ans-neta">De la farmacie cumpăr medicamente și produse de igienă.</span></details></div>
   <div class="qa"><span class="qn">9</span> <span class="ro">Ce faci la bancă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה עושים בבנק?</span><br><span class="ro">La bancă mă ocup de bani.</span> <span class="he">מושך כסף, משלם חשבונות</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">מה עושים בבנק?</span><br><span class="ro ans-amit">La bancă mă ocup de bani.</span> <span class="he">מושך כסף, משלם חשבונות</span><span class="ro ans-neta">La bancă mă ocup de banii mei și de economii.</span></details></div>
   <div class="qa"><span class="qn">10</span> <span class="ro">Unde mergi când vrei să cumperi pâine?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">לאן הולכים כשרוצים לקנות לחם?</span><br><span class="ro">Când vreau să cumpăr pâine, merg la brutărie sau la supermarket.</span> <span class="he">שימו לב ל-<a class="xref" href="#conjunctiv15">să cumperi</a></span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">לאן הולכים כשרוצים לקנות לחם?</span><br><span class="ro ans-amit">Când vreau să cumpăr pâine, merg la brutărie sau la supermarket.</span> <span class="he">שימו לב ל-<a class="xref" href="#conjunctiv15">să cumperi</a></span><span class="ro ans-neta">Când vreau să cumpăr pâine, merg la brutărie sau la supermarket.</span></details></div>
   <div class="qa"><span class="qn">11</span> <span class="ro">Unde mergi când ești bolnav / bolnavă?</span>
-    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">לאן הולכים כשחולים?</span><br><span class="ro">Când sunt bolnav, mă duc în pat.</span></details></div>
+    <details class="sol"><summary>תרגום + תבנית תשובה</summary><span class="he">לאן הולכים כשחולים?</span><br><span class="ro ans-amit">Când sunt bolnav, mă duc în pat.</span><span class="ro ans-neta">Când sunt bolnavă, merg la doctor.</span></details></div>
 
   <h3>8 · <span class="ro">Indicații de orientare</span> <span class="he">הוראות התמצאות</span></h3>
   <div class="rule">
@@ -9422,5 +9440,26 @@ try{
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(sync);
 }catch(e){}
 })();</script>
+<script id="anstoggle15script">
+(function(){
+  var KEY='limba_ans15';
+  var sec=document.getElementById('examen15');
+  var bar=document.getElementById('anstoggle15');
+  if(!sec||!bar) return;
+  function apply(mode){
+    sec.dataset.answers=mode;
+    [].slice.call(bar.querySelectorAll('.at-btn')).forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.ans===mode ? 'true':'false');
+    });
+    try{ localStorage.setItem(KEY, mode); }catch(e){}
+  }
+  var saved='amit';
+  try{ saved=localStorage.getItem(KEY)||'amit'; }catch(e){}
+  apply(saved);
+  [].slice.call(bar.querySelectorAll('.at-btn')).forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.ans); });
+  });
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>הכנה לראיון A1 · עמית ונטע</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;600;800&family=Literata:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#1c2b4a; --ink:#2b3550; --paper:#faf7f0; --card:#ffffff; --line:#e6e0d2;
+  --gold:#b8860b; --gold-bg:#fdf6e3; --sound:#177245; --sound-bg:#edf7f0; --soft:#6b7280;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:'Rubik',Arial,sans-serif;
+  font-size:17px;line-height:1.65;direction:rtl;text-align:right}
+main{max-width:760px;margin:0 auto;padding:0 20px 90px}
+.ro{direction:ltr;unicode-bidi:isolate;font-family:'Literata',Georgia,serif;color:var(--navy);font-weight:600}
+.tl{color:var(--sound);font-weight:500;font-size:.92em;unicode-bidi:isolate}
+.he{color:var(--soft);font-size:.95em}
+header.top{background:var(--navy);color:#f5efdf;padding:44px 20px 34px;margin-bottom:28px}
+header.top .inner{max-width:760px;margin:0 auto}
+header.top h1{font-size:1.7rem;font-weight:800;margin:0 0 6px;color:#fff}
+header.top .ro-title{font-family:'Literata',serif;color:#e3c565;font-size:1.02rem;direction:ltr;display:inline-block}
+header.top p{max-width:640px;color:#cfd6e6;margin:14px 0 0;font-size:.95rem}
+h3{font-size:1.15rem;font-weight:800;color:var(--navy);border-bottom:2px solid var(--gold);
+  padding-bottom:6px;margin:34px 0 10px}
+h3 .he{font-size:.85rem;font-weight:600;margin-inline-start:8px}
+.qa{padding:9px 4px;border-bottom:1px dashed var(--line)}
+.qa:last-child{border-bottom:none}
+.qn{display:inline-block;min-width:24px;text-align:center;background:var(--gold-bg);color:var(--gold);
+  border-radius:6px;font-weight:700;font-size:.82rem;margin-left:6px}
+.qa .ro{font-size:1.0em}
+details.sol{margin:6px 24px 0 0;padding:8px 14px;font-size:.92rem;background:var(--card);
+  border:1px solid var(--line);border-radius:10px}
+details.sol summary{cursor:pointer;font-weight:600;color:var(--gold);font-size:.85rem}
+details.sol[open] summary{margin-bottom:8px}
+.spk{all:unset;box-sizing:border-box;cursor:pointer;display:inline-flex;align-items:center;
+  justify-content:center;width:24px;height:24px;border-radius:50%;background:var(--sound-bg);
+  color:var(--sound);margin:0 4px;vertical-align:middle;flex:none}
+.spk:hover{background:var(--sound);color:#fff}
+.spk.playing{background:var(--sound);color:#fff;box-shadow:0 0 0 3px rgba(23,114,69,.28)}
+.spk svg{width:13px;height:13px;fill:currentColor;pointer-events:none}
+.anstoggle{position:sticky;top:0;z-index:34;display:flex;align-items:center;gap:10px;
+  background:var(--navy);color:#fff;padding:10px 16px;border-radius:8px;margin:0 0 18px;
+  box-shadow:0 3px 8px rgba(0,0,0,.20);direction:rtl}
+.at-lbl{font-size:.85rem;opacity:.85}
+.at-btn{font:inherit;font-size:.88rem;font-weight:700;padding:5px 16px;border-radius:99px;
+  border:1px solid rgba(255,255,255,.35);background:transparent;color:#fff;cursor:pointer}
+.at-btn[aria-pressed="true"]{background:var(--gold);color:#1a1200;border-color:var(--gold)}
+.ans-amit{display:inline}
+.ans-neta{display:none}
+[data-answers="neta"] .ans-amit{display:none}
+[data-answers="neta"] .ans-neta{display:inline}
+.progress{font-size:.85rem;color:var(--soft);margin:0 0 6px}
+footer.foot{max-width:760px;margin:40px auto 0;padding:0 20px;color:var(--soft);font-size:.85rem}
+footer.foot a{color:var(--gold)}
+</style>
+</head>
+<body>
+<header class="top"><div class="inner">
+  <h1>הכנה לראיון A1</h1>
+  <span class="ro-title">Întrebări de examen · pregătire pentru interviu</span>
+  <p>כל שאלות התרגול המסכמות לרמה A1 (שיעור 15, סעיפים 1-7) - בלי שאר העמוד המצטבר. תשובות עמית ותשובות נטע באותו מקום, עם כפתור מעבר. לכל שאלה ותשובה יש כפתור השמעה.</p>
+</div></header>
+<main>
+  <div class="anstoggle" id="anstoggleA1" role="group" aria-label="בחירת תשובות להצגה">
+    <span class="at-lbl">מציג תשובות של:</span>
+    <button type="button" class="at-btn" data-ans="amit" aria-pressed="true">עמית</button>
+    <button type="button" class="at-btn" data-ans="neta" aria-pressed="false">נטע</button>
+  </div>
+  <div id="examenA1" data-answers="amit">
+    <h3><span class="ro">Date personale și cunoștință</span><span class="he">פרטים אישיים והיכרות</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Cum te cheamă?</span><button class="spk" type="button" data-h="172vlfcyvod" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך קוראים לך?</span><br>
+    <span class="ro ans-amit">Mă cheamă Amit.</span><button class="spk" type="button" data-h="26byuf6dech" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Mă cheamă Neta.</span><button class="spk" type="button" data-h="18npd1bv02h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Care este numele tău de familie?</span><button class="spk" type="button" data-h="1npu5xdtixz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה שם המשפחה שלך?</span><br>
+    <span class="ro ans-amit">Numele meu de familie este Brin.</span><button class="spk" type="button" data-h="1sljnmx91dn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Numele meu de familie este Brin.</span><button class="spk" type="button" data-h="1sljnmx91dn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Câți ani ai?</span><button class="spk" type="button" data-h="9phvsauzur" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">בן כמה אתה?</span><br>
+    <span class="ro ans-amit">Am cincizeci și unu de ani.</span><button class="spk" type="button" data-h="du0jp9djhi" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am patruzeci și opt de ani.</span><button class="spk" type="button" data-h="81ycu2j0tz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">De unde ești?</span><button class="spk" type="button" data-h="ia1mdmfkxk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מאיפה אתה?</span><br>
+    <span class="ro ans-amit">Sunt din Rishon LeZion, Israel.</span><button class="spk" type="button" data-h="eyo9col9ea" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Sunt din Israel.</span><button class="spk" type="button" data-h="23ahfhyolhh" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Unde locuiești?</span><button class="spk" type="button" data-h="bcvxs70uvt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה אתה גר?</span><br>
+    <span class="ro ans-amit">Locuiesc în Israel.</span><button class="spk" type="button" data-h="w3w0p8nfia" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Locuiesc în orașul Rishon LeZion.</span><button class="spk" type="button" data-h="17tbykd4sbm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">În ce oraș locuiești?</span><button class="spk" type="button" data-h="1h98e5ueebx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">באיזו עיר אתה גר?</span><br>
+    <span class="ro ans-amit">Locuiesc în orașul Tel Aviv.</span><button class="spk" type="button" data-h="qo9mhjvyjv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Locuiesc în Rishon LeZion.</span><button class="spk" type="button" data-h="2cy9zagv0de" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Care este adresa ta?</span><button class="spk" type="button" data-h="10v42na4rmr" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה הכתובת שלך?</span><br>
+    <span class="ro ans-amit">Adresa mea este strada Ravina, numărul cincisprezece, în Ramat Aviv.</span><button class="spk" type="button" data-h="1ga22u4i0m3" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Adresa mea este strada Meonot Bracha, numărul trei.</span><button class="spk" type="button" data-h="25ewq1qb6wu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">8</span> <span class="ro">Ce naționalitate ai?</span><button class="spk" type="button" data-h="7q902ak6ju" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה הלאום שלך?</span><br>
+    <span class="ro ans-amit">Naționalitatea mea este israeliană.</span><button class="spk" type="button" data-h="e37452pkqb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Sunt israeliană.</span><button class="spk" type="button" data-h="1tfdj4dnv0g" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">9</span> <span class="ro">Ce limbi vorbești?</span><button class="spk" type="button" data-h="4fwkx95qg2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אילו שפות אתה מדבר?</span><br>
+    <span class="ro ans-amit">Vorbesc ebraică, engleză și română.</span><button class="spk" type="button" data-h="2bd4daoclyu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Vorbesc ebraică, engleză și română.</span><button class="spk" type="button" data-h="2bd4daoclyu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">10</span> <span class="ro">Vorbești românește?</span><button class="spk" type="button" data-h="9wfwxxeh4y" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אתה מדבר רומנית?</span><br>
+    <span class="ro ans-amit">Da, vorbesc puțin românește.</span><button class="spk" type="button" data-h="o7ak5tfm6e" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Învăț limba română.</span><button class="spk" type="button" data-h="1yy7gtsalny" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">11</span> <span class="ro">Cu cine locuiești?</span><button class="spk" type="button" data-h="11n4598il9x" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">עם מי אתה גר?</span><br>
+    <span class="ro ans-amit">Locuiesc cu partenera mea și cu fiica mea cea mică.</span><button class="spk" type="button" data-h="1o0cktihtt0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Locuiesc cu cei doi fii ai mei.</span><button class="spk" type="button" data-h="7g8xem63cd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">12</span> <span class="ro">Ești căsătorit / căsătorită?</span><button class="spk" type="button" data-h="3a2opftz81" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אתה נשוי / את נשואה?</span><br>
+    <span class="ro ans-amit">Nu sunt căsătorit.</span><button class="spk" type="button" data-h="2emgq3l6wzr" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Nu, sunt divorțată.</span><button class="spk" type="button" data-h="6kjn4fupar" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Familie</span><span class="he">משפחה</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Ai frați sau surori?</span><button class="spk" type="button" data-h="2eznyp0jo8m" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש לך אחים או אחיות?</span><br>
+    <span class="ro ans-amit">Am o soră mai mică.</span><button class="spk" type="button" data-h="1c1gxgdrh2m" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am un frate.</span><button class="spk" type="button" data-h="qerdwx66t" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Câți frați ai?</span><button class="spk" type="button" data-h="x2vea1nvz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">כמה אחים יש לך?</span><br>
+    <span class="ro ans-amit">Am o soră.</span><button class="spk" type="button" data-h="20mpf1igdo" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am un frate.</span><button class="spk" type="button" data-h="qerdwx66t" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Cum îl cheamă pe tatăl tău?</span><button class="spk" type="button" data-h="e8oc8l13ix" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך קוראים לאבא שלך?</span><br>
+    <span class="ro ans-amit">Numele tatălui meu este Șlomo.</span><button class="spk" type="button" data-h="1ldf466mng9" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Numele tatălui meu este Șlomo.</span><button class="spk" type="button" data-h="1ldf466mng9" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">Cum o cheamă pe mama ta?</span><button class="spk" type="button" data-h="1mvg0etz47m" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך קוראים לאמא שלך?</span><br>
+    <span class="ro ans-amit">Numele mamei mele este Esti.</span><button class="spk" type="button" data-h="nyjl7kcz4e" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Numele mamei mele este Esti.</span><button class="spk" type="button" data-h="nyjl7kcz4e" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Unde locuiesc părinții tăi?</span><button class="spk" type="button" data-h="1omkmnn2fn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה גרים ההורים שלך?</span><br>
+    <span class="ro ans-amit">Părinții mei locuiesc în Rishon LeZion.</span><button class="spk" type="button" data-h="1ycmikofn5p" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Părinții mei locuiesc în Rishon LeZion.</span><button class="spk" type="button" data-h="1ycmikofn5p" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">Câți ani are mama ta?</span><button class="spk" type="button" data-h="1lrqznn14ju" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">בת כמה אמא שלך?</span><br>
+    <span class="ro ans-amit">Mama mea are șaptezeci și șase de ani.</span><button class="spk" type="button" data-h="2dlowhzetbs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Mama mea are șaptezeci și cinci de ani.</span><button class="spk" type="button" data-h="1ry46sntsrg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Ce profesie are tatăl tău?</span><button class="spk" type="button" data-h="20oovoixcb1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה המקצוע של אבא שלך?</span><br>
+    <span class="ro ans-amit">Tatăl meu nu lucrează.</span><button class="spk" type="button" data-h="uca9m0kkgm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Tatăl meu este electrician.</span><button class="spk" type="button" data-h="x4ilrg181p" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">8</span> <span class="ro">Ai bunici?</span><button class="spk" type="button" data-h="2czwj0f202b" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש לך סבא וסבתא?</span><br>
+    <span class="ro ans-amit">Nu am bunici.</span><button class="spk" type="button" data-h="zr5c3k3o9r" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Nu, nu am bunici.</span><button class="spk" type="button" data-h="t7ezwl47j7" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">9</span> <span class="ro">Ai nepoți?</span><button class="spk" type="button" data-h="bcq746ip2b" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש לך נכדים / אחיינים?</span><br>
+    <span class="ro ans-amit">Nu am nepoți.</span><button class="spk" type="button" data-h="1f2b0hdpc6d" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am trei nepoți.</span><button class="spk" type="button" data-h="24c6s9zikl8" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">10</span> <span class="ro">Cine este cea mai tânără persoană din familia ta?</span><button class="spk" type="button" data-h="xookp2oj4z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מי האדם הצעיר ביותר במשפחה שלך?</span><br>
+    <span class="ro ans-amit">Cel mai tânăr din familie este nepotul meu - are unsprezece ani.</span><button class="spk" type="button" data-h="sr8ytl8eu4" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Cel mai tânăr din familie este fiul meu Sahar.</span><button class="spk" type="button" data-h="ddc2dakkg8" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">11</span> <span class="ro">Cine este cea mai în vârstă persoană din familia ta?</span><button class="spk" type="button" data-h="jv2oniuym1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מי האדם המבוגר ביותר במשפחה שלך?</span><br>
+    <span class="ro ans-amit">Cel mai în vârstă din familie este tatăl meu - are șaptezeci și nouă de ani.</span><button class="spk" type="button" data-h="kn95eoh5mx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Cel mai în vârstă din familie este tatăl meu.</span><button class="spk" type="button" data-h="a8ss69u5du" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">12</span> <span class="ro">Ce faceți împreună în familie?</span><button class="spk" type="button" data-h="k6wzkhd9p9" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה אתם עושים ביחד במשפחה?</span><br>
+    <span class="ro ans-amit">Nu facem multe lucruri împreună.</span><button class="spk" type="button" data-h="25jx1hrzvbn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Facem mese împreună și sărbătorim sărbători și zile de naștere.</span><button class="spk" type="button" data-h="1dsis83cl92" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Descrierea noastră și a unei persoane</span><span class="he">תיאור אדם</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Cum arăți?</span><button class="spk" type="button" data-h="xkm56undkf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך אתה נראה?</span><br>
+    <span class="ro ans-amit">Sunt înalt și slab, sunt chel și am barbă neagră și grizonată.</span><button class="spk" type="button" data-h="1dnvuwcwqua" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Sunt scundă și slabă.</span><button class="spk" type="button" data-h="2321ws54dl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Ești înalt / înaltă sau scund / scundă?</span><button class="spk" type="button" data-h="1oaiqjwqy82" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אתה גבוה או נמוך?</span><br>
+    <span class="ro ans-amit">Sunt înalt.</span><button class="spk" type="button" data-h="26zq8mba6ti" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Sunt scundă.</span><button class="spk" type="button" data-h="1abw9noso0u" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Ce culoare au ochii tăi?</span><button class="spk" type="button" data-h="1k9nivp1chl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה צבע העיניים שלך?</span><br>
+    <span class="ro ans-amit">Culoarea ochilor mei este maro.</span><button class="spk" type="button" data-h="1ksojz9p1ow" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Culoarea ochilor mei este gri-verde.</span><button class="spk" type="button" data-h="py42xyogzm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">Ce culoare are părul tău?</span><button class="spk" type="button" data-h="1tvtv6402fu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה צבע השיער שלך?</span><br>
+    <span class="ro ans-amit">Culoarea părului meu este negru grizonat.</span><button class="spk" type="button" data-h="57zs59ubqu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Culoarea părului meu este blond.</span><button class="spk" type="button" data-h="1r3jog45cqt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Ai părul lung sau scurt?</span><button class="spk" type="button" data-h="50k6gwcbuz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש לך שיער ארוך או קצר?</span><br>
+    <span class="ro ans-amit">Am puțin păr, foarte scurt.</span><button class="spk" type="button" data-h="qyaooumlj0" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am părul lung.</span><button class="spk" type="button" data-h="18p6kb17u8z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">Cum este cel mai bun prieten al tău?</span><button class="spk" type="button" data-h="25enq4702wx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך החבר הכי טוב שלך?</span><br>
+    <span class="ro ans-amit">Cel mai bun prieten al meu este inteligent și amuzant.</span><button class="spk" type="button" data-h="mx02qbrc6g" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Cea mai bună prietenă a mea este scundă, cu părul creț și maro.</span><button class="spk" type="button" data-h="2culoj26cye" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Este o persoană veselă?</span><button class="spk" type="button" data-h="qope3rbi0r" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">הוא אדם עליז?</span><br>
+    <span class="ro ans-amit">Da, este o persoană veselă.</span><button class="spk" type="button" data-h="xo6eajpv90" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Da, este veselă.</span><button class="spk" type="button" data-h="1rxdn1mkux2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Zile, ore și date</span><span class="he">ימים, שעות ותאריכים</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Ce zi este astăzi?</span><button class="spk" type="button" data-h="nabmswuhdn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איזה יום היום?</span><br>
+    <span class="ro ans-amit">Astăzi este miercuri.</span><button class="spk" type="button" data-h="238bnzm4z32" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Astăzi este sâmbătă.</span><button class="spk" type="button" data-h="2ap51josrcb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Ce zi este mâine?</span><button class="spk" type="button" data-h="66gs650hu4" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איזה יום מחר?</span><br>
+    <span class="ro ans-amit">Mâine este joi.</span><button class="spk" type="button" data-h="15r7fn3epc8" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Mâine este duminică.</span><button class="spk" type="button" data-h="1w2id6zc5vj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Ce zi a fost ieri?</span><button class="spk" type="button" data-h="t2l38rebyf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איזה יום היה אתמול?</span><br>
+    <span class="ro ans-amit">Ieri a fost marți.</span><button class="spk" type="button" data-h="1shfhgeu4wd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Ieri a fost vineri.</span><button class="spk" type="button" data-h="t23sx94tdq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">În ce lună suntem?</span><button class="spk" type="button" data-h="1g43bdq69tq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">באיזה חודש אנחנו?</span><br>
+    <span class="ro ans-amit">Suntem în luna august.</span><button class="spk" type="button" data-h="14lym8ibod2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Suntem în luna august.</span><button class="spk" type="button" data-h="14lym8ibod2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Care este data de astăzi?</span><button class="spk" type="button" data-h="143qm55phtu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה התאריך היום?</span><br>
+    <span class="ro ans-amit">Data de astăzi este douăzeci și șase august.</span><button class="spk" type="button" data-h="1bvsi4ma6w2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Data de astăzi este douăzeci și nouă august.</span><button class="spk" type="button" data-h="239kglz22hn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">Când este ziua ta de naștere?</span><button class="spk" type="button" data-h="2g05o1sye1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מתי יום ההולדת שלך?</span><br>
+    <span class="ro ans-amit">Ziua mea de naștere este în februarie.</span><button class="spk" type="button" data-h="3o7dg4zkqq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Ziua mea de naștere este pe douăzeci și șapte februarie.</span><button class="spk" type="button" data-h="18glk4d75q5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Care este luna ta preferată?</span><button class="spk" type="button" data-h="7d441rzyvs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה החודש המועדף עליך?</span><br>
+    <span class="ro ans-amit">Nu am o lună preferată.</span><button class="spk" type="button" data-h="yyt6yzurd2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Luna mea preferată este februarie.</span><button class="spk" type="button" data-h="6z464c5wfq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">8</span> <span class="ro">La ce oră începe lecția?</span><button class="spk" type="button" data-h="20117jobeu2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">באיזו שעה מתחיל השיעור?</span><br>
+    <span class="ro ans-amit">Lecția începe la ora opt.</span><button class="spk" type="button" data-h="1qvnj1r0svo" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Lecția începe la ora cinci și jumătate după-amiaza.</span><button class="spk" type="button" data-h="i95b8o57dz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">9</span> <span class="ro">Cât este ceasul?</span><button class="spk" type="button" data-h="19ae6ha8f23" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה השעה?</span><br>
+    <span class="ro ans-amit">Este ora 8 și jumătate.</span><button class="spk" type="button" data-h="1mny61iupdq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Este ora două după-amiaza.</span><button class="spk" type="button" data-h="qvhadkb766" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">10</span> <span class="ro">Ce faci luni?</span><button class="spk" type="button" data-h="1k5ilxg2kpm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה אתה עושה ביום שני?</span><br>
+    <span class="ro ans-amit">Luni fac același lucru ca în restul săptămânii.</span><button class="spk" type="button" data-h="21wda8frhqn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Luni merg la muncă.</span><button class="spk" type="button" data-h="x3rcylwb03" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">11</span> <span class="ro">Ce faci în weekend?</span><button class="spk" type="button" data-h="dtnjfitldg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה אתה עושה בסוף השבוע?</span><br>
+    <span class="ro ans-amit">În weekend încerc să mă odihnesc.</span><button class="spk" type="button" data-h="1z3ddpfl7u5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">În weekend curăț și fac ordine în casă.</span><button class="spk" type="button" data-h="5qn9xy76wb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">12</span> <span class="ro">În ce zile lucrezi?</span><button class="spk" type="button" data-h="1x6ub0mb34k" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">באילו ימים אתה עובד?</span><br>
+    <span class="ro ans-amit">Lucrez de duminică până vineri.</span><button class="spk" type="button" data-h="2afrcyfdldd" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Lucrez de duminică până joi.</span><button class="spk" type="button" data-h="19idotb6xtr" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">13</span> <span class="ro">Câte zile are o săptămână?</span><button class="spk" type="button" data-h="1nual6tx47l" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">כמה ימים יש בשבוע?</span><br>
+    <span class="ro ans-amit">O săptămână are șapte zile.</span><button class="spk" type="button" data-h="20ijkxo9c3h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">O săptămână are șapte zile.</span><button class="spk" type="button" data-h="20ijkxo9c3h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">14</span> <span class="ro">Care sunt lunile de vară?</span><button class="spk" type="button" data-h="26azskkcgvk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מהם חודשי הקיץ?</span><br>
+    <span class="ro ans-amit">Lunile de vară sunt iunie, iulie, august și septembrie.</span><button class="spk" type="button" data-h="1dc9oiavwks" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Lunile de vară sunt iunie, iulie și august.</span><button class="spk" type="button" data-h="18jgy93x5dj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">15</span> <span class="ro">În ce anotimp este luna decembrie?</span><button class="spk" type="button" data-h="2fy2s5d50hl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">באיזו עונה נמצא חודש דצמבר?</span><br>
+    <span class="ro ans-amit">Decembrie este iarna.</span><button class="spk" type="button" data-h="z2qfpp7eyt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Decembrie este iarna.</span><button class="spk" type="button" data-h="z2qfpp7eyt" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Casa mea</span><span class="he">הבית</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Unde locuiești: la casă sau la bloc?</span><button class="spk" type="button" data-h="2co31wr6g4n" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה אתה גר: בבית פרטי או בבניין?</span><br>
+    <span class="ro ans-amit">Locuiesc la bloc.</span><button class="spk" type="button" data-h="1d2eql18qwl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Locuiesc la bloc.</span><button class="spk" type="button" data-h="1d2eql18qwl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Câte camere are locuința ta?</span><button class="spk" type="button" data-h="j8m4op8vvu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">כמה חדרים יש בדירה שלך?</span><br>
+    <span class="ro ans-amit">Locuința mea are patru camere și jumătate.</span><button class="spk" type="button" data-h="hjm6dxp4kh" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Locuința mea are patru camere.</span><button class="spk" type="button" data-h="j11imir678" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Ce camere sunt în casa ta?</span><button class="spk" type="button" data-h="1makfu71h4p" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אילו חדרים יש בבית שלך?</span><br>
+    <span class="ro ans-amit">Am o bucătărie, o sufragerie, două dormitoare și o baie.</span><button class="spk" type="button" data-h="2dqj3uhpgvk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Am o sufragerie, o bucătărie și trei dormitoare.</span><button class="spk" type="button" data-h="21hgui3z1xw" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">Ce este în sufragerie?</span><button class="spk" type="button" data-h="1snzzst53gh" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה יש בסלון?</span><br>
+    <span class="ro ans-amit">În sufragerie este o canapea mare, un televizor, un sistem stereo, chitare și ukulele, și multe plante.</span><button class="spk" type="button" data-h="2801jwmug9k" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">În sufragerie sunt două canapele, o comodă, un televizor și o masă.</span><button class="spk" type="button" data-h="1k7k6jb74cm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Ce este în bucătărie?</span><button class="spk" type="button" data-h="270rueymjsy" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה יש במטבח?</span><br>
+    <span class="ro ans-amit">În bucătărie este un cuptor, un cuptor cu microunde, cuțite, tigăi și oale.</span><button class="spk" type="button" data-h="1rchpt2fv9g" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">În bucătărie este un robinet cu chiuvetă, un cuptor, un frigider și un blat de lucru.</span><button class="spk" type="button" data-h="1vo0erpvbqm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">Unde este televizorul?</span><button class="spk" type="button" data-h="tmxd78cs66" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה הטלוויזיה?</span><br>
+    <span class="ro ans-amit">Televizorul este în sufragerie.</span><button class="spk" type="button" data-h="1mzaf0oiula" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Televizorul este în sufragerie.</span><button class="spk" type="button" data-h="1mzaf0oiula" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Unde este masa?</span><button class="spk" type="button" data-h="145s8r8wk38" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה השולחן?</span><br>
+    <span class="ro ans-amit">Masa este în zona de luat masa.</span><button class="spk" type="button" data-h="1swrmfzz4yw" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Masa este în sufragerie și în bucătărie.</span><button class="spk" type="button" data-h="12dyji96mv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">8</span> <span class="ro">Ce se află lângă pat?</span><button class="spk" type="button" data-h="26euckh3qe" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה נמצא ליד המיטה?</span><br>
+    <span class="ro ans-amit">Lângă pat se află o noptieră și o lampă.</span><button class="spk" type="button" data-h="vzrf1hrx78" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Lângă pat sunt două noptiere.</span><button class="spk" type="button" data-h="1625oy4rvqv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">9</span> <span class="ro">Ce se află între masă și fereastră?</span><button class="spk" type="button" data-h="1dp3ze6aywo" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה נמצא בין השולחן לחלון?</span><br>
+    <span class="ro ans-amit">Între masă și fereastră se află un scaun.</span><button class="spk" type="button" data-h="227jc506icm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Între masă și fereastră sunt o comodă și un televizor.</span><button class="spk" type="button" data-h="2blltagyvvv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">10</span> <span class="ro">Ai balcon? Ai grădină?</span><button class="spk" type="button" data-h="14e5r0qwxgj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש לך מרפסת? יש לך גינה?</span><br>
+    <span class="ro ans-amit">Da, am un balcon mare, dar nu am grădină.</span><button class="spk" type="button" data-h="tznztb01fx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Da, am balcon, dar nu am grădină.</span><button class="spk" type="button" data-h="1ad55sz2fs3" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">11</span> <span class="ro">Care este camera ta preferată? Ce cameră preferi?</span><button class="spk" type="button" data-h="15y9hiffg0h" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה החדר המועדף עליך?</span><br>
+    <span class="ro ans-amit">Camera mea preferată este studioul - camera de lucru.</span><button class="spk" type="button" data-h="1t57c8az505" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Camera mea preferată este dormitorul meu.</span><button class="spk" type="button" data-h="1jfgpfknj24" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">12</span> <span class="ro">Ce faci în bucătărie? În dormitor? În sufragerie?</span><button class="spk" type="button" data-h="2z6xfe8zu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה אתה עושה במטבח? בחדר השינה? בסלון?</span><br>
+    <span class="ro ans-amit">În bucătărie gătesc, în dormitor dorm, iar în sufragerie mă uit la televizor.</span><button class="spk" type="button" data-h="2dl4jpujwep" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">În bucătărie gătesc, în dormitor dorm, iar în sufragerie mă odihnesc și mă uit la televizor.</span><button class="spk" type="button" data-h="1ynmabkl8sc" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">13</span> <span class="ro">Ce faci pe balcon?</span><button class="spk" type="button" data-h="15j04503ldb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה אתה עושה במרפסת?</span><br>
+    <span class="ro ans-amit">Nu am balcon, așa că nu fac nimic acolo.</span><button class="spk" type="button" data-h="1qconj5ptpf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Pe balcon beau cafea.</span><button class="spk" type="button" data-h="e63mw40j6x" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">14</span> <span class="ro">Unde dormi? Unde gătești?</span><button class="spk" type="button" data-h="1ir0k5h6hzn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה אתה ישן? איפה אתה מבשל?</span><br>
+    <span class="ro ans-amit">Dorm în dormitor și gătesc în bucătărie.</span><button class="spk" type="button" data-h="200q4v669ey" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Dorm în dormitorul meu și gătesc în bucătărie.</span><button class="spk" type="button" data-h="22kiduexz79" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Locație și prepoziții de loc</span><span class="he">מיקום ומילות יחס</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Unde este cartea? / Unde ai o carte?</span><button class="spk" type="button" data-h="8a95ifuh2v" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה הספר? / איפה יש לך ספר?</span><br>
+    <span class="ro ans-amit">Cartea este pe masă. / Am o carte în bibliotecă.</span><button class="spk" type="button" data-h="xudk464ovb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Cartea este pe comodă, în dormitor.</span><button class="spk" type="button" data-h="1jwzs0nhlwa" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Ce este pe masă?</span><button class="spk" type="button" data-h="10b8y1m0s36" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה יש על השולחן?</span><br>
+    <span class="ro ans-amit">Pe masă este o vază galbenă cu flori roz și o carte albastră.</span><button class="spk" type="button" data-h="3qo2990not" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Pe masă este o vază cu flori.</span><button class="spk" type="button" data-h="1ze04pqf481" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Ce este sub scaun?</span><button class="spk" type="button" data-h="1c1tx85h3h5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה יש מתחת לכיסא?</span><br>
+    <span class="ro ans-amit">Sub scaun este o pisică.</span><button class="spk" type="button" data-h="7639yyk001" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Sub scaun nu este nimic.</span><button class="spk" type="button" data-h="j2b7x5oijz" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">Unde este pisica? Unde este câinele?</span><button class="spk" type="button" data-h="24synzl2yrh" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה החתול? איפה הכלב?</span><br>
+    <span class="ro">Pisica este sub masă, iar câinele este în grădină, lângă băiat.</span><button class="spk" type="button" data-h="z1cux0mcpr" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<h3><span class="ro">Orașul și locurile din oraș</span><span class="he">העיר והמקומות</span></h3>
+<div class="qa"><span class="qn">1</span> <span class="ro">Ce locuri sunt în orașul tău?</span><button class="spk" type="button" data-h="1s66710kebs" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">אילו מקומות יש בעיר שלך?</span><br>
+    <span class="ro ans-amit">În orașul meu sunt magazine, un mall, terenuri de sport și parcări.</span><button class="spk" type="button" data-h="842aptiuw5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">În orașul meu sunt grădini, restaurante și o plajă.</span><button class="spk" type="button" data-h="14tvhrpxzfu" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">2</span> <span class="ro">Unde este farmacia? Unde este supermarketul?</span><button class="spk" type="button" data-h="16r86ftvmz7" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה בית המרקחת? איפה הסופרמרקט?</span><br>
+    <span class="ro ans-amit">Farmacia este lângă gară, iar supermarketul este în fața parcului.</span><button class="spk" type="button" data-h="iby2t6pdkl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Farmacia este pe strada principală, iar supermarketul este în cartierul meu.</span><button class="spk" type="button" data-h="2ej0otjbfyf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">3</span> <span class="ro">Există o bancă aproape de casa ta?</span><button class="spk" type="button" data-h="1zhgup5z2xn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">יש בנק קרוב לבית שלך?</span><br>
+    <span class="ro ans-amit">Da, este o bancă aproape de casa mea.</span><button class="spk" type="button" data-h="ut5wsi3pxg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Da, este o bancă aproape de casa mea.</span><button class="spk" type="button" data-h="ut5wsi3pxg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">4</span> <span class="ro">Cum ajungi la gară?</span><button class="spk" type="button" data-h="up3zda73ia" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איך מגיעים לתחנת הרכבת?</span><br>
+    <span class="ro ans-amit">La gară ajung cu autobuzul.</span><button class="spk" type="button" data-h="1rf7h57we3q" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">La gară ajung cu autobuzul, un drum scurt.</span><button class="spk" type="button" data-h="66bo9sbuob" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">5</span> <span class="ro">Unde este stația de autobuz?</span><button class="spk" type="button" data-h="14ihglqofoa" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">איפה תחנת האוטובוס?</span><br>
+    <span class="ro ans-amit">Stația de autobuz este lângă parc.</span><button class="spk" type="button" data-h="i4s2wokn6j" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Stația de autobuz este pe strada de lângă casa mea.</span><button class="spk" type="button" data-h="2c19tt5mv5e" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">6</span> <span class="ro">Este departe centrul orașului?</span><button class="spk" type="button" data-h="1e48f6dfqbi" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מרכז העיר רחוק?</span><br>
+    <span class="ro ans-amit">Centrul orașului este departe.</span><button class="spk" type="button" data-h="t3vxukcpgb" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Nu, centrul orașului nu este departe.</span><button class="spk" type="button" data-h="k982pgu8z8" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">7</span> <span class="ro">Ce faci la poștă?</span><button class="spk" type="button" data-h="zi9ml4okvg" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה עושים בדואר?</span><br>
+    <span class="ro ans-amit">Nu este poștă, pentru că au închis-o.</span><button class="spk" type="button" data-h="2cnx05tsw60" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">La poștă trimit și primesc scrisori și colete.</span><button class="spk" type="button" data-h="22o90yvvt0b" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">8</span> <span class="ro">Ce cumperi de la farmacie?</span><button class="spk" type="button" data-h="1nz2z95jm6f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה קונים בבית המרקחת?</span><br>
+    <span class="ro ans-amit">De la farmacie cumpăr medicamente.</span><button class="spk" type="button" data-h="19t1bgsjc5x" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">De la farmacie cumpăr medicamente și produse de igienă.</span><button class="spk" type="button" data-h="6yivpc4kp9" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">9</span> <span class="ro">Ce faci la bancă?</span><button class="spk" type="button" data-h="235fmp4a7yo" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">מה עושים בבנק?</span><br>
+    <span class="ro ans-amit">La bancă mă ocup de bani.</span><button class="spk" type="button" data-h="zmed1layyi" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">La bancă mă ocup de banii mei și de economii.</span><button class="spk" type="button" data-h="p2d8hky1hk" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">10</span> <span class="ro">Unde mergi când vrei să cumperi pâine?</span><button class="spk" type="button" data-h="sv58z5jvqv" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">לאן הולכים כשרוצים לקנות לחם?</span><br>
+    <span class="ro ans-amit">Când vreau să cumpăr pâine, merg la brutărie sau la supermarket.</span><button class="spk" type="button" data-h="14gb8lkj0hf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Când vreau să cumpăr pâine, merg la brutărie sau la supermarket.</span><button class="spk" type="button" data-h="14gb8lkj0hf" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+<div class="qa"><span class="qn">11</span> <span class="ro">Unde mergi când ești bolnav / bolnavă?</span><button class="spk" type="button" data-h="2egbt03y8q7" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <details class="sol"><summary>תרגום + תשובה</summary><span class="he">לאן הולכים כשחולים?</span><br>
+    <span class="ro ans-amit">Când sunt bolnav, mă duc în pat.</span><button class="spk" type="button" data-h="1gpj0p0s7pn" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>
+    <span class="ro ans-neta">Când sunt bolnavă, merg la doctor.</span><button class="spk" type="button" data-h="1vxd0ac5rnj" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></details></div>
+  </div>
+</main>
+<footer class="foot">חלק מ<a href="/limbaromana.html">המדריך המצטבר ללימוד רומנית</a>.</footer>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg"><symbol id="spk-i" viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3a4.5 4.5 0 0 0-2.5-4v8a4.5 4.5 0 0 0 2.5-4zM14 3.2v2.1a7 7 0 0 1 0 13.4v2.1a9 9 0 0 0 0-17.6z"/></symbol></svg>
+<script>
+(function(){
+  var BASE='/limbaromana-audio/';
+  var cur=null, curBtn=null;
+  function play(b,h){
+    if(cur){cur.pause(); if(curBtn) curBtn.classList.remove('playing');}
+    curBtn=b; b.classList.add('playing');
+    cur=new Audio(BASE+h+'.mp3');
+    cur.onended=cur.onerror=function(){ b.classList.remove('playing'); };
+    cur.play().catch(function(){ b.classList.remove('playing'); });
+  }
+  document.addEventListener('click', function(e){
+    var b=e.target.closest('.spk'); if(!b) return;
+    play(b, b.dataset.h);
+  });
+})();
+</script>
+<script>
+(function(){
+  var KEY='limba_ans_a1';
+  var sec=document.getElementById('examenA1');
+  var bar=document.getElementById('anstoggleA1');
+  function apply(mode){
+    sec.dataset.answers=mode;
+    [].slice.call(bar.querySelectorAll('.at-btn')).forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.ans===mode ? 'true':'false');
+    });
+    try{ localStorage.setItem(KEY, mode); }catch(e){}
+  }
+  var saved='amit';
+  try{ saved=localStorage.getItem(KEY)||'amit'; }catch(e){}
+  apply(saved);
+  [].slice.call(bar.querySelectorAll('.at-btn')).forEach(function(b){
+    b.addEventListener('click', function(){ apply(b.dataset.ans); });
+  });
+})();
+</script>
+</body>
+</html>
