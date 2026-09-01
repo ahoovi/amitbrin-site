@@ -1,7 +1,7 @@
 {
   "name": "Limba Română — עמית",
   "short_name": "Limba Română",
-  "start_url": "/limbaromana-audio.html",
+  "start_url": "/limbaromana.html",
   "scope": "/",
   "display": "standalone",
   "background_color": "#faf7f0",

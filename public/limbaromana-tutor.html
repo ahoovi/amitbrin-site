@@ -4,6 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="/limbaromana-manifest.json">
+<meta name="theme-color" content="#1c2b4a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>רומנית · תרגול קולי לפי נושא</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -407,5 +411,28 @@ document.addEventListener('click',function(e){
 });
 })();</script>
 
+<script id="swpersist">
+/* ============================================================
+   מטמון האודיו — הישרדות
+   ה-SW נרשם מכל עמוד (לא רק מעמוד האודיו), ומבקש אחסון מתמיד.
+   ‏WebKit מוחק אחסון של מקורות שלא היו בשימוש זמן מה, אבל פוטר
+   מקורות במצב persistent — וזה מה שעומד בין 96MB אודיו למחיקה שקטה.
+   ============================================================ */
+(function(){
+  try{
+    if('serviceWorker' in navigator){
+      addEventListener('load',function(){
+        navigator.serviceWorker.register('/sw.js').catch(function(){});
+      });
+    }
+    if(navigator.storage && navigator.storage.persist && navigator.storage.persisted){
+      navigator.storage.persisted().then(function(already){
+        if(already) return;
+        return navigator.storage.persist();
+      }).catch(function(){});
+    }
+  }catch(e){}
+})();
+</script>
 </body>
 </html>
