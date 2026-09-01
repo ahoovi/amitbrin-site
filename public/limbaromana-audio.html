@@ -644,6 +644,10 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 /* -- 6b · תא שהוא רשימת פעלים. היה flex-direction:column, וכל <b> נחשב פריט
       flex נפרד - ולכן הסיומת המודגשת קפצה לשורה משלה. block מחזיר טקסט לטקסט. -- */
 .rmc.list{display:block;white-space:normal;line-height:1.75;padding:9px 6px;text-align:center}
+/* רשת ביטחון: תא שלא נכנס למסלול שלו ישבור שורה במקום לדרוס את השכן.
+   ‏overflow-wrap מטפל במילה בודדת ארוכה מדי, ו-overflow:hidden חוסם דליפה. */
+.rmc{overflow:hidden;overflow-wrap:anywhere}
+.rmc:not(.list){text-overflow:clip}
 
 /* -- 6d · RULEMAP 05 · תא המפתח בעברית. .rmk .p מכתיב Literata ו-ltr,
       וזה נכון ל-eu/tu/el ושגוי לעברית. בולד כחול, Rubik, rtl. -- */
@@ -697,8 +701,8 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 <header class="top">
   <div class="inner">
     <h1>רומנית מהיסוד · המדריך המצטבר</h1>
-    <span class="ro-title">Limba română · Unitatea 1-16</span>
-    <p>חומרי שיעורים 1-16, ערוכים לפי סדר לימוד מצטבר - מהצלילים אל הדקדוק, מהבסיס אל המתקדם. קוד צבעים קבוע מלווה את כל הקורס עד רמת B1.</p>
+    <span class="ro-title">Limba română · Unitatea 1-17</span>
+    <p>חומרי שיעורים 1-17, ערוכים לפי סדר לימוד מצטבר - מהצלילים אל הדקדוק, מהבסיס אל המתקדם. קוד צבעים קבוע מלווה את כל הקורס עד רמת B1.</p>
     <a class="audio-cta" href="/limbaromana.html">🔇 לגרסה המהירה, ללא סאונד</a>
     <a class="audio-cta cta-alt" href="/limbaromana-tutor.html">📋 רשימת כל התרגילים הקוליים · להעתקה ל-ChatGPT</a>
   </div>
@@ -2922,38 +2926,42 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <div class="rmttl"><b>RULEMAP · 10</b><span>סיומת שם הפועל קובעת את סיומת ה-participiu</span></div>
     <p class="rmsub">הטורים מסודרים <b>לפי כמה סומכים על הכלל</b>, לא לפי מספר הקבוצה: קודם שתי קבוצות העוגן (I ו-IV), אחר כך קבוצה II שבה הסיומת בטוחה אבל השורש זז, ובסוף קבוצה III - היחידה שבה באמת צריך לשנן פועל-פועל.</p>
     <div class="rmscroll">
-      <div class="rmgrid" style="grid-template-columns:max-content repeat(4,minmax(120px,1fr))">
+      <div class="rmgrid" style="grid-template-columns:max-content repeat(4,minmax(132px,1fr))">
         <div></div>
         <div class="rmh">קבוצה I<em>‏שם פועל ב-a</em></div>
         <div class="rmh">קבוצה IV<em>‏שם פועל ב-i / î</em></div>
         <div class="rmh">קבוצה II<em>‏שם פועל ב-ea</em></div>
         <div class="rmh q">קבוצה III<em>‏שם פועל ב-e</em></div>
 
-        <div class="rmk"><span class="p">הסיומת</span><span class="inv">מה מדביקים במקום סיומת שם הפועל</span></div>
+        <div class="rmk"><span class="p heb">הסיומת</span><span class="inv">מה מדביקים במקום סיומת שם הפועל</span></div>
         <div class="rmc"><b>‎-at</b></div>
         <div class="rmc"><b>‎-it</b> / <b>‎-ât</b></div>
         <div class="rmc"><b>‎-ut</b></div>
         <div class="rmc key"><b>‎-ut</b> או <b>‎-s</b></div>
 
-        <div class="rmk"><span class="p">מה עושים</span></div>
-        <div class="rmc dim">מדביקים <b>t</b> לשם הפועל</div>
-        <div class="rmc dim">מדביקים <b>t</b>; ‏<b>î</b> נכתבת <b>â</b> בתוך המילה</div>
-        <div class="rmc">‏<b>‎-ea</b> נופלת כולה, ובמקומה <b>‎-ut</b></div>
-        <div class="rmc key">אין כלל שמכריע בין השתיים - משננים</div>
+        <div class="rmk"><span class="p heb">מה עושים</span></div>
+        <div class="rmc list dim">מדביקים <b>t</b></div>
+        <div class="rmc list dim">מדביקים <b>t</b></div>
+        <div class="rmc list">‏<b>‎-ea</b> נופלת, ובמקומה <b>‎-ut</b></div>
+        <div class="rmc list key">אין כלל - משננים</div>
 
-        <div class="rmk"><span class="p">דוגמאות</span></div>
-        <div class="rmc"><span class="ro">a pleca → plecat</span><button class="spk" type="button" data-h="1ha7g6vb6x1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc"><span class="ro">a fugi → fugit</span><button class="spk" type="button" data-h="1jbil3yxsqq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a coborî → coborât</span><button class="spk" type="button" data-h="x7lg3jjjj2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc"><span class="ro">a vedea → văzut</span><button class="spk" type="button" data-h="huqybqe77z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a bea → băut</span><button class="spk" type="button" data-h="8jwj5d1spl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc key"><span class="ro">a face → făcut</span><button class="spk" type="button" data-h="1hwwqlfe5ha" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a merge → mers</span><button class="spk" type="button" data-h="1rf764qsprx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmk"><span class="p heb">דוגמאות</span></div>
+        <div class="rmc list"><span class="ro">a pleca → plecat</span><button class="spk" type="button" data-h="1ha7g6vb6x1" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a intra → intrat</span><button class="spk" type="button" data-h="duixw1xcu5" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list"><span class="ro">a fugi → fugit</span><button class="spk" type="button" data-h="1jbil3yxsqq" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a coborî → coborât</span><button class="spk" type="button" data-h="x7lg3jjjj2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list"><span class="ro">a vedea → văzut</span><button class="spk" type="button" data-h="huqybqe77z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a bea → băut</span><button class="spk" type="button" data-h="8jwj5d1spl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list key"><span class="ro">a face → făcut</span><button class="spk" type="button" data-h="1hwwqlfe5ha" aria-label="השמע"><svg><use href="#spk-i"/></svg></button><br><span class="ro">a merge → mers</span><button class="spk" type="button" data-h="1rf764qsprx" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
 
-        <div class="rmk"><span class="p">כמה סומכים</span><span class="inv">על הכלל</span></div>
-        <div class="rmc">גוזרים לבד, לא משננים</div>
-        <div class="rmc">גוזרים לבד<br><small>חריגים: ‏<span class="ro">a fi → fost</span><button class="spk" type="button" data-h="rzoa2yfwe" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>, ‏<span class="ro">a ști → știut</span><button class="spk" type="button" data-h="24th9wgf23u" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></small></div>
-        <div class="rmc">הסיומת בטוחה, אבל השורש זז: ‏<b>d</b> הופכת ל-<b>z</b> - ‏<span class="ro">văzut</span><button class="spk" type="button" data-h="28zknb8lq6f" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc key">לומדים פועל-פועל, כמו רשימת הפעלים החריגים באנגלית</div>
+        <div class="rmk"><span class="p heb">כמה סומכים</span><span class="inv">על הכלל</span></div>
+        <div class="rmc list">גוזרים לבד</div>
+        <div class="rmc list">גוזרים לבד</div>
+        <div class="rmc list">השורש זז</div>
+        <div class="rmc list key">משננים פועל-פועל</div>
 
-        <div class="rmfull"><b>כל participiu בשפה נגמר ב-t או ב-s - אין אפשרות שלישית.</b> קבוצות I ו-IV הן העוגן: מדביקים t וגומרים. קבוצה II דורשת לזכור רק את תזוזת השורש. קבוצה III היא ההגרלה - על כל פועל חדש ב-e שואלים מיד: ‏-ut או ‏-s?</div>
+        <div class="rmfull"><b>כל participiu בשפה נגמר ב-t או ב-s - אין אפשרות שלישית.</b> קבוצות I ו-IV הן העוגן: מדביקים t לשם הפועל וגומרים. בקבוצה IV ה-<b>î</b> נכתבת <b>â</b> כשהיא נכנסת לתוך המילה: ‏<span class="ro">a coborî → coborât</span><button class="spk" type="button" data-h="x7lg3jjjj2" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>.</div>
+
+        <div class="rmfull">בקבוצה II הסיומת תמיד <b>‎-ut</b>, אבל <b>השורש זז</b>: ‏<b>d</b> הופכת ל-<b>z</b> - ‏<span class="ro">a vedea → văzut</span><button class="spk" type="button" data-h="huqybqe77z" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>, <span class="ro">a cădea → căzut</span><button class="spk" type="button" data-h="5uwf19030k" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>. זה כל מה שצריך לזכור שם.</div>
+
+        <div class="rmfull"><b>קבוצה III היא ההגרלה.</b> על כל פועל חדש ב-<b>‎-e</b> שואלים מיד: ‏<b>‎-ut</b> או <b>‎-s</b>? אין כלל שמכריע - לומדים אותם פועל-פועל, כמו רשימת הפעלים החריגים באנגלית. שני החריגים היחידים מחוץ לקבוצה הזאת: ‏<span class="ro">a fi → fost</span><button class="spk" type="button" data-h="rzoa2yfwe" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> ו-<span class="ro">a ști → știut</span><button class="spk" type="button" data-h="24th9wgf23u" aria-label="השמע"><svg><use href="#spk-i"/></svg></button>.</div>
       </div>
     </div>
   </div>
@@ -4293,17 +4301,17 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmc">רק</div><div class="rmc">כבר לא</div><div class="rmc">אלא רק</div>
 
         <div class="rmk"><span class="p">הפועל</span></div>
-        <div class="rmc">חיובי</div><div class="rmc">שלילי (ה-nu הוא חלק ממנה)</div><div class="rmc">חייב שלילי</div>
+        <div class="rmc list">חיובי</div><div class="rmc list">שלילי<br><small>ה-nu הוא חלק ממנה</small></div><div class="rmc list">חייב שלילי</div>
 
         <div class="rmk"><span class="p">דוגמה</span></div>
-        <div class="rmc"><span class="ro">Vreau numai apă.</span><button class="spk" type="button" data-h="2cysupm07rl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc"><span class="ro">Nu mai vreau apă.</span><button class="spk" type="button" data-h="22o69g218av" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
-        <div class="rmc"><span class="ro">Nu vreau decât apă.</span><button class="spk" type="button" data-h="3wdockoogc" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list"><span class="ro">Vreau numai apă.</span><button class="spk" type="button" data-h="2cysupm07rl" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list"><span class="ro">Nu mai vreau apă.</span><button class="spk" type="button" data-h="22o69g218av" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
+        <div class="rmc list"><span class="ro">Nu vreau decât apă.</span><button class="spk" type="button" data-h="3wdockoogc" aria-label="השמע"><svg><use href="#spk-i"/></svg></button></div>
 
         <div class="rmk"><span class="p">בעברית</span></div>
-        <div class="rmc dim">אני רוצה רק מים</div>
-        <div class="rmc dim">אני כבר לא רוצה מים</div>
-        <div class="rmc dim">אני לא רוצה אלא מים</div>
+        <div class="rmc list dim">אני רוצה רק מים</div>
+        <div class="rmc list dim">אני כבר לא רוצה מים</div>
+        <div class="rmc list dim">אני לא רוצה אלא מים</div>
 
         <div class="rmfull"><b>הטור הראשון והשלישי אומרים את אותו הדבר.</b> ‏<span class="ro">Vreau numai apă</span><button class="spk" type="button" data-h="y6foag20mo" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> ו-<span class="ro">Nu vreau decât apă</span><button class="spk" type="button" data-h="s83hpu6ndm" aria-label="השמע"><svg><use href="#spk-i"/></svg></button> הן אותה הודעה בשתי אריזות - חיובית ושלילית. ההבדל היחיד הוא שהשנייה נשמעת מדויקת וכתובה יותר.</div>
 
@@ -9327,9 +9335,14 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
 
   var pending=null;
   function run(){doGrids();doTables();}
+  /* ב-iOS כל קיפול של סרגל הכתובת יורה resize. המדידה כאן עולה פריסה מלאה
+     של המסמך כולו, ולכן מגיבים רק לשינוי ברוחב - הגובה לבדו לא מעניין. */
+  var lastW=window.innerWidth;
   function schedule(){
+    if(window.innerWidth===lastW)return;
+    lastW=window.innerWidth;
     if(pending)clearTimeout(pending);
-    pending=setTimeout(function(){pending=null;run();},140);
+    pending=setTimeout(function(){pending=null;run();},220);
   }
 
   run();
@@ -9398,11 +9411,13 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
 
   function clearMarks(){
     if(!marks.length){cur=-1;return;}
-    var parents=[],i,m,p;
+    /* היה parents.indexOf בתוך לולאה - O(n²) על אלף סימונים. Set במקום. */
+    var parents=[],seen=(typeof Set==='function')?new Set():null,i,m,p;
     for(i=0;i<marks.length;i++){
       m=marks[i];p=m.parentNode;if(!p)continue;
       p.replaceChild(document.createTextNode(m.textContent),m);
-      if(parents.indexOf(p)<0)parents.push(p);
+      if(seen){if(!seen.has(p)){seen.add(p);parents.push(p);}}
+      else if(parents.indexOf(p)<0)parents.push(p);
     }
     for(i=0;i<parents.length;i++)parents[i].normalize();
     marks=[];cur=-1;
@@ -9420,7 +9435,9 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
     return out;
   }
 
-  var LIMIT=1200;
+  /* התקרה הישנה, 1200 סימונים, הכריחה פריסה מחדש של מסמך בן ~390 אלף פיקסלים
+     על כל הקלדה. בנייד זה שניות, והדפדפן הרג את הלשונית. */
+  var LIMIT=(innerWidth<=900)?150:400;
   function search(q){
     clearMarks();
     q=(q||'').trim();
@@ -9476,6 +9493,7 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
     if(q.length<2){count.textContent=q?'…':'';}
     else if(!marks.length){count.textContent='0 תוצאות';}
     else{count.textContent=(cur+1)+' / '+marks.length+(marks.length>=LIMIT?'+':'');}
+    /* הכותרת אומרת "150+" כשנעצרנו בתקרה - כדי שברור שיש עוד */
     bPrev.disabled=bNext.disabled=!marks.length;
   }
 
@@ -9499,13 +9517,18 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
     if(box.classList.contains('on'))close(); else open();
   });
   box.addEventListener('click',function(e){e.stopPropagation();});
+  var DEBOUNCE=(innerWidth<=900)?280:190;
+  function runSearch(v){
+    /* אם משהו נופל באמצע הסימון, מנקים - כדי לא להשאיר מסמך חצי-מסומן */
+    try{search(v);}catch(err){try{clearMarks();paint();}catch(e2){}}
+  }
   input.addEventListener('input',function(){
     clearTimeout(timer);
-    timer=setTimeout(function(){search(input.value);},190);
+    timer=setTimeout(function(){runSearch(input.value);},DEBOUNCE);
   });
   input.addEventListener('keydown',function(e){
     if(e.key==='Enter'){e.preventDefault();
-      if(!marks.length){clearTimeout(timer);search(input.value);return;}
+      if(!marks.length){clearTimeout(timer);runSearch(input.value);return;}
       focus(cur+(e.shiftKey?-1:1));return;}
     if(e.key==='Escape'){e.preventDefault();close();}
   });
@@ -9525,7 +9548,7 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
   });
 
   paint();
-  window.LimbaSearch={open:open,close:close,find:function(q){open();input.value=q;search(q);}};
+  window.LimbaSearch={open:open,close:close,find:function(q){open();input.value=q;runSearch(q);}};
 })();
 </script>
 <script id="toctoggle">
@@ -9762,9 +9785,12 @@ try{
   }
   var raf=null;
   function sync(){ if(raf) cancelAnimationFrame(raf); raf=requestAnimationFrame(function(){ if(MQ.matches){ build(); measure(); } }); }
+  /* אותו סיפור: רק רוחב. measure() מודדת מאות תאים, וזו פריסה מלאה בכל פעם. */
+  var lastW=window.innerWidth;
+  function onResize(){ if(window.innerWidth===lastW) return; lastW=window.innerWidth; sync(); }
   if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',sync); else sync();
   window.addEventListener('load',sync);
-  window.addEventListener('resize',sync);
+  window.addEventListener('resize',onResize,{passive:true});
   window.addEventListener('orientationchange',function(){ setTimeout(sync,300); });
   if(document.fonts&&document.fonts.ready) document.fonts.ready.then(sync);
 }catch(e){}
