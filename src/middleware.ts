@@ -176,6 +176,7 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  // תבנית רחבה; הסינון המדויק (רק .html) נעשה בראש ה-middleware
-  matcher: ['/limbaromana:path*'],
+  // תבנית רחבה (regex בסוגריים - ':path*' בלי '/' לפניו נכשל בקומפילציה ו-Next השתיק את השער!);
+  // הסינון המדויק (רק .html) נעשה בראש ה-middleware
+  matcher: ['/(limbaromana.*)'],
 };
