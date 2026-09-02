@@ -330,10 +330,6 @@ th.m .end,th.f .end,th.n .end{color:#fff;opacity:.8}
 /* ============ v11: scroll rhythm — snap to the next topic on a slow scroll ============ */
 /* pointer:fine keeps it off iOS, where snap fights momentum scrolling.
    to enable it on touch too, delete the @media wrapper on the next line. */
-@media (pointer:fine){
-  html{scroll-snap-type:y proximity}
-  main section[id]:not(#legend){scroll-snap-align:start}
-}
 html{scroll-padding-top:calc(var(--navh,44px) + 26px)}
 main section[id],.part{scroll-margin-top:calc(var(--navh,44px) + 26px)}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto;scroll-snap-type:none}}

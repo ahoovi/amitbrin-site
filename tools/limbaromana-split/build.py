@@ -318,6 +318,9 @@ css_out = css_out.replace('.navbar .wrap>*{min-width:0}\n.navbar .loc{flex:1 1 0
 css_out = css_out.replace('@media print{.navbar,.navmenu{display:none!important}}\n', '')
 css_out = css_out.replace('@media print{.nsrch{display:none!important}mark.lsr{background:none;color:inherit}}', '@media print{mark.lsr{background:none;color:inherit}}')
 css_out = css_out.replace(':root{--navh:44px;--abch:52px}', ':root{--navh:0px;--abch:52px}')
+# scroll-snap (v11) בוטל: בעמודים הקצרים הוא "קופץ" לסעיף הראשון כבר בטעינה (נמדד: scrollY=202 בבית
+# בדסקטופ), ונלחם בגלילות של Find/עוגנים. הניווט החדש (מסילה, חצים, מפה) מכסה את הצורך.
+css_out = re.sub(r'@media \(pointer:fine\)\{\s*html\{scroll-snap-type:y proximity\}\s*main section\[id\]:not\(#legend\)\{scroll-snap-align:start\}\s*\}\n?', '', css_out)
 full_css = css_out + '\n\n' + nav_css
 css_ver = hashlib.md5(full_css.encode('utf-8')).hexdigest()[:8]
 full_js = app_js.replace('/*__SITE__*/', 'var SITE=' + json.dumps(SITE, ensure_ascii=False, separators=(',', ':')) + ';')
