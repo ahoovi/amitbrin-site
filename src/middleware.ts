@@ -11,7 +11,7 @@ import type { NextRequest } from 'next/server';
  *                התווית היא רק לצורך ניתוק סלקטיבי ולוגים - היא לא סוד.
  *                התפוגה אופציונלית, בפורמט YYYY-MM-DD, ומתפוגגת מעצמה בלי שתעשה כלום.
  *
- *   LIMBA_GATE - "off" מוריד את השאלטר: כל ארבעת העמודים מחזירים 404, גם עם מפתח תקין.
+ *   LIMBA_GATE - "off" מוריד את השאלטר: כל עמודי ה-HTML מחזירים 404, גם עם מפתח תקין.
  *
  *   LIMBA_PASS - נתיב תאימות לאחור. אם LIMBA_KEYS לא מוגדר, משתמשים בו כמפתח יחיד.
  *
@@ -26,14 +26,11 @@ import type { NextRequest } from 'next/server';
  * שאר האנשים לא מרגישים כלום. כל שינוי נכנס לתוקף אחרי Redeploy.
  */
 
-const GATED = [
-  '/limbaromana.html',
-  '/limbaromana-audio.html',
-  '/limbaromana-lessons.html',
-  '/limbaromana-tutor.html',
-  '/limbaromana-examen15-a1.html',
-  '/limbaromana-neta.html',
-];
+/** כל עמוד HTML של הרומנית - כולל העמודים המפוצלים (p1..p9, ref-*, exam) - נמצא מאחורי השער.
+ *  הנכסים שלצידם (mp3, manifest, css, js, index.json, אייקונים) נשארים פתוחים: ה-SW והמטמון
+ *  צריכים אותם בלי עוגייה, ואין בהם מידע אישי. */
+const isGated = (pathname: string) =>
+  pathname.startsWith('/limbaromana') && pathname.endsWith('.html');
 
 const COOKIE = 'limba_key';
 const MAX_AGE = 60 * 60 * 24 * 400; // 400 יום - התקרה שדפדפנים מכבדים. מתחדש בכל ביקור.
@@ -138,7 +135,7 @@ const deny = (path: string, wrong: boolean) =>
 
 export async function middleware(req: NextRequest) {
   const { pathname, searchParams } = req.nextUrl;
-  if (!GATED.includes(pathname)) return NextResponse.next();
+  if (!isGated(pathname)) return NextResponse.next();
 
   if ((process.env.LIMBA_GATE || '').toLowerCase() === 'off') {
     return new NextResponse('Not Found', { status: 404 });
@@ -179,12 +176,6 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-  matcher: [
-    '/limbaromana.html',
-    '/limbaromana-audio.html',
-    '/limbaromana-lessons.html',
-    '/limbaromana-tutor.html',
-    '/limbaromana-examen15-a1.html',
-    '/limbaromana-neta.html',
-  ],
+  // תבנית רחבה; הסינון המדויק (רק .html) נעשה בראש ה-middleware
+  matcher: ['/limbaromana:path*'],
 };

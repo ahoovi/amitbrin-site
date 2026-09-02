@@ -40,3 +40,4 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 _to_delete/
+limbaromana-src/_audio-preview.html
