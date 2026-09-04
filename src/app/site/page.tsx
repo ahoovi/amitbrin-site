@@ -15,6 +15,7 @@ import KssemacCase from "../../components/KssemacCase";
 import TeaLibrary, { TEA_PAPER_CSS } from "../../components/TeaLibrary";
 import SiteNav from "../../components/SiteNav";
 import InkFrame from "../../components/InkFrame";
+import SeaLife, { SEA_LIFE_CSS } from "../../components/SeaLife";
 
 /* ---- Word-aware rotating headline ----
    Each word enters with an animation that embodies its meaning:
@@ -179,7 +180,6 @@ const SECTIONS = [
   { id: "sailing", label: "המסע" },
   { id: "works", label: "עבודות" },
   { id: "blog", label: "תרחיב — הבלוג" },
-  { id: "news", label: "ניוזלטר" },
   { id: "work", label: "הרצאות וסדנאות" },
   { id: "close", label: "סיכום" },
   { id: "footer", label: "יצירת קשר" },
@@ -951,6 +951,7 @@ export default function SitePage() {
   return (
     <div className="op-root" dir="rtl">
       <style>{TEA_PAPER_CSS}</style>
+      <style>{SEA_LIFE_CSS}</style>
       <style>{CSS}</style>
 
       {/* hand-drawn ink-line filter (blog cards & buttons) */}
@@ -1093,59 +1094,6 @@ export default function SitePage() {
         </div>
       </section>
 
-      {/* ============ 4 · NEWSLETTER — right column, glass form ============ */}
-      <section className="sec-news" id="news">
-        <video
-          className="bg-video"
-          aria-hidden
-          tabIndex={-1}
-          autoPlay
-          muted
-          loop
-          playsInline
-          preload="metadata"
-          poster="/media/boxing-coach-fallback.webp"
-        >
-          <source src="/media/bot-whisperer.mp4" type="video/mp4" />
-        </video>
-        <div className="news-overlay" />
-        <div className="news-content">
-          <div data-reveal>
-            <FxTitle className="news-title fx-skew" palette="rgb" lines={["רוצים לדעת מהיכן הפרומפטים שלי?"]} />
-            <p className="news-body">
-              כדי לדעת מה ללחוש לבוטים, במיוחד ברגעים מאתגרים ומכריעים, אני מקפיד
-              להתעדכן על בסיס יומי בהשקות ועדכונים של כלים, בלימודי טכניקות או פרומפטים
-              מורכבים – כדי שאתם לא תצטרכו לעבור את תהליך ההסתגלות הסיזיפי הזה ותוכלו
-              ליהנות ישר מהתובנות שריכזתי, בצורה הכי מתומצתת ויעילה.
-            </p>
-          </div>
-          <div className="news-card glass" data-reveal>
-            <h3 className="news-card-title">
-              לשלוח גם לך עדכונים, מדריכים וטיפים ברגע שאני מסכם אותם?
-            </h3>
-            <ContactForm
-              endpoint="https://formspree.io/f/xpqvaarr"
-              source="נשלח מטופס פרומפטים"
-              subject="פנייה חדשה מטופס פרומפטים — amitbrin.com"
-              className="op-form news-form"
-              submitLabel="תרשום אותי לעדכונים חינם!"
-            >
-              <label>
-                איך לקרוא לך?
-                <input type="text" name="name" autoComplete="name" required />
-              </label>
-              <label>
-                לאיזה מייל לשלוח?
-                <input type="email" name="email" autoComplete="email" required />
-              </label>
-              <label className="check">
-                <input type="checkbox" name="consent" /> אשמח לקבל עדכונים למייל
-              </label>
-            </ContactForm>
-          </div>
-        </div>
-      </section>
-
       {/* ============ 5 · WORKSHOPS — centered, horizontal glass form ============ */}
       <section className="sec-work" id="work">
         <div className="work-overlay" />
@@ -1233,6 +1181,7 @@ export default function SitePage() {
         <div className="sea" aria-hidden>
           <FooterWater />
         </div>
+        <SeaLife />
         <div className="footer-content">
           <FxTitle
             className="footer-title"
@@ -1673,21 +1622,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   pointer-events:none;
 }
 
-/* ---------- 4 · NEWSLETTER — right column like sailing ---------- */
-.sec-news { min-height:100vh; background:var(--navy-deep); display:flex; }
-.news-overlay { position:absolute; inset:0; z-index:1; background:linear-gradient(211deg, var(--navy) 20%, rgba(8,24,69,.02) 45%); }
-.news-content {
-  position:relative; z-index:2;
-  width:min(44rem, 50vw);
-  display:flex; flex-direction:column; gap:2.6rem;
-  padding:14vh 5vw 12vh;
-}
-.news-title { color:var(--cream); font-weight:600; padding-bottom:.36em; font-size:var(--sec-h2); line-height:1.15; }
-.news-body { color:var(--offwhite); margin-top:1.4rem; font-size:clamp(.95rem, 1.05vw, 1.05rem); line-height:1.75; }
-.news-card { padding:2.2rem; }
-.news-card-title { color:var(--cream); font-weight:600; font-size:clamp(1rem, 1.3vw, 1.35rem); line-height:1.4; }
-.news-form label { color:var(--offwhite); }
-
 /* ---------- 5 · WORKSHOPS ---------- */
 .sec-work { min-height:100vh; display:flex; background:url('/media/keynote-section-back.webp') center/cover; }
 @media (min-width:1024px){ .sec-work { background-attachment:fixed; } }
@@ -1734,8 +1668,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   transition:background .5s var(--ease), transform .5s var(--ease);
 }
 .op-form button:active { transform:scale(.98); }
-.news-form button { background:var(--gold); color:var(--navy); }
-.news-form button:hover { background:var(--cream); }
 .work-form button { background:var(--gold); color:var(--navy); }
 .work-form button:hover { background:var(--cream); }
 .form-thanks { text-align:center; padding:1rem .5rem; }
@@ -1744,9 +1676,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 .form-thanks h4:last-child { margin-bottom:0; color:var(--cream); }
 .form-error { margin-top:.9rem; font-size:.9rem; color:#ffd9d0; line-height:1.5; }
 .op-form button:disabled { opacity:.6; cursor:default; }
-.news-card .form-thanks h4 { color:var(--navy); }
-.news-card .form-thanks h4:last-child { color:var(--navy); }
-.news-card .form-thanks h3 { color:var(--navy); }
 
 /* ---------- 6 · CLOSING — crumpled paper ---------- */
 .sec-close {
@@ -1887,7 +1816,6 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
   .identity-titles { width:100%; }  /* full column: stable measuring base */
   .identity-photo { flex:1 1 auto; min-height:26svh; }
   .identity-photo img { height:52svh; bottom:-2svh; }
-  .news-content { width:auto; }
   .works-head { padding-bottom:14px; }
   .works-title { font-size:var(--sec-h2); }
   .blog-title { width:54%; }
