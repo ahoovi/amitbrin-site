@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     siteName: "עמית ברין",
     title: "Mother Load",
     description: "רייצ׳ל מאני הדפיסה את החשבון הפתוח של אימהות יוצרות — פוסטרים, קבלה אחת ארוכה, ומסה. על עיצוב ככלי טיעון.",
-    images: [{ url: "/media/og/og-mother-load.png", width: 1200, height: 630, alt: "הפוסטרים של Mother Load תלויים ברחוב" }],
+    images: [{ url: "/media/og/og-mother-load.jpg", width: 1200, height: 630, alt: "הפוסטרים של Mother Load תלויים ברחוב" }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@amit_brin",
     title: "Mother Load",
     description: "רייצ׳ל מאני הדפיסה את החשבון הפתוח של אימהות יוצרות — פוסטרים, קבלה אחת ארוכה, ומסה. על עיצוב ככלי טיעון.",
-    images: ["/media/og/og-mother-load.png"],
+    images: ["/media/og/og-mother-load.jpg"],
   },
 };
 

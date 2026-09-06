@@ -32,6 +32,20 @@ const LEGACY_301: Array<[string, string]> = [
   ["/סליחה-ששלחתי-וואטסאפ", "/blog/whatsapp-broke-communication"],
 ];
 
+/**
+ * The blog og:image files were converted from PNG to JPEG on 6.9.2026 to cut
+ * deployment weight (2.6MB -> 320KB). Links already shared on WhatsApp,
+ * LinkedIn and X still point at the .png paths, so a re-scrape would 404
+ * without these. og-default.png was deliberately left as PNG and is not here.
+ */
+const OG_JPEG_301 = [
+  "taste",
+  "human-chatbot",
+  "client-refused-ai-work",
+  "mother-load",
+  "whatsapp-broke-communication",
+];
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
@@ -55,6 +69,12 @@ const nextConfig: NextConfig = {
         { source: from, destination: to, statusCode: 301 as const },
         { source: `${from}/`, destination: to, statusCode: 301 as const },
       ]),
+      // og:image PNG -> JPEG conversion, 6.9.2026
+      ...OG_JPEG_301.map((name) => ({
+        source: `/media/og/og-${name}.png`,
+        destination: `/media/og/og-${name}.jpg`,
+        statusCode: 301 as const,
+      })),
     ];
   },
   async rewrites() {

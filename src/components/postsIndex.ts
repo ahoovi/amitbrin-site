@@ -36,7 +36,7 @@ const POSTS_RAW: PostRef[] = [
     slug: "taste",
     href: "/blog/taste",
     cover: "/media/blog/taste/cover.jpg",
-    ogImage: "/media/og/og-taste.png",
+    ogImage: "/media/og/og-taste.jpg",
     title: "מה הטעם לעצב בלי טעם?",
     description:
       "״טעם״ הפך למונח החם של השנה כשכולם רוויים בסלופ. פוסט שמייצר לעצמו עיצוב חדש בלחיצה — וכל פעם יוצא ״עיצוב״ שלא קרא את הטקסט.",
@@ -61,7 +61,7 @@ const POSTS_RAW: PostRef[] = [
     slug: "human-chatbot",
     href: "/blog/human-chatbot",
     cover: "/media/blog/human-chatbot/billboard-hero.jpg",
-    ogImage: "/media/og/og-human-chatbot.png",
+    ogImage: "/media/og/og-human-chatbot.jpg",
     cardTitle: "הצ׳טבוט האנושי שלך",
     title: "הצ׳טבוט האנושי שלך",
     description:
@@ -75,7 +75,7 @@ const POSTS_RAW: PostRef[] = [
     slug: "client-refused-ai-work",
     href: "/blog/client-refused-ai-work",
     cover: "/media/blog/client-refused-ai-work/snakes-cover.jpg",
-    ogImage: "/media/og/og-client-refused-ai-work.png",
+    ogImage: "/media/og/og-client-refused-ai-work.jpg",
     title: "פרי עץ הדעת",
     description:
       "מה קורה לאמון בין מעצב ללקוח כשההנחה שמשהו נוצר במכונה מספיקה כדי לפסול אותו, בלי לבדוק.",
@@ -88,7 +88,7 @@ const POSTS_RAW: PostRef[] = [
     slug: "mother-load",
     href: "/blog/mother-load",
     cover: "/media/blog/mother-load/cover.jpg",
-    ogImage: "/media/og/og-mother-load.png",
+    ogImage: "/media/og/og-mother-load.jpg",
     title: "Mother Load",
     description:
       "רייצ׳ל מאני הדפיסה את החשבון הפתוח של אימהות יוצרות — פוסטרים, קבלה אחת ארוכה, ומסה. על עיצוב ככלי טיעון.",
@@ -101,7 +101,7 @@ const POSTS_RAW: PostRef[] = [
     slug: "whatsapp-broke-communication",
     href: "/blog/whatsapp-broke-communication",
     cover: "/media/blog/whatsapp-broke-communication/cover.jpg",
-    ogImage: "/media/og/og-whatsapp-broke-communication.png",
+    ogImage: "/media/og/og-whatsapp-broke-communication.jpg",
     title: "סליחה ששלחתי וואטסאפ",
     description:
       "ווטסאפ היא אפליקציית תקשורת שמשבשת תקשורת אנושית. ניתוח של מוצר שהמשתמשים שברו את התקרה שלו, והוא שבר את הגבולות שלהם.",

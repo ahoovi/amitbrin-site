@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     siteName: "עמית ברין",
     title: "סליחה ששלחתי וואטסאפ",
     description: "ווטסאפ היא אפליקציית תקשורת שמשבשת תקשורת אנושית. ניתוח של מוצר שהמשתמשים שברו את התקרה שלו, והוא שבר את הגבולות שלהם.",
-    images: [{ url: "/media/og/og-whatsapp-broke-communication.png", width: 1200, height: 630, alt: "שיחת וואטסאפ פתוחה על רקע הטפט המוכר" }],
+    images: [{ url: "/media/og/og-whatsapp-broke-communication.jpg", width: 1200, height: 630, alt: "שיחת וואטסאפ פתוחה על רקע הטפט המוכר" }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@amit_brin",
     title: "סליחה ששלחתי וואטסאפ",
     description: "ווטסאפ היא אפליקציית תקשורת שמשבשת תקשורת אנושית. ניתוח של מוצר שהמשתמשים שברו את התקרה שלו, והוא שבר את הגבולות שלהם.",
-    images: ["/media/og/og-whatsapp-broke-communication.png"],
+    images: ["/media/og/og-whatsapp-broke-communication.jpg"],
   },
 };
 

@@ -18,14 +18,14 @@ export const metadata: Metadata = {
     siteName: "עמית ברין",
     title: "מה הטעם לעצב בלי טעם?",
     description: DESC,
-    images: [{ url: "/media/og/og-taste.png", width: 1200, height: 630, alt: "דיאלוג Mac OS X Aqua: מה הטעם לעצב בלי טעם? You cannot undo this action." }],
+    images: [{ url: "/media/og/og-taste.jpg", width: 1200, height: 630, alt: "דיאלוג Mac OS X Aqua: מה הטעם לעצב בלי טעם? You cannot undo this action." }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@amit_brin",
     title: "מה הטעם לעצב בלי טעם?",
     description: DESC,
-    images: ["/media/og/og-taste.png"],
+    images: ["/media/og/og-taste.jpg"],
   },
 };
 

@@ -589,7 +589,7 @@ function LoginScreen({ users, onSelectUser, onRestoreProgress }: {
     <div style={bgStyle}>
       <div style={{ textAlign: 'center' }}>
         {/* Logo */}
-        <img src="/avatar/salutari_bunicii-logo@3x.png" alt="Salutări bunicii!" width={200} style={{ display: 'block', margin: '0 auto 20px' }} />
+        <img src="/avatar/salutari_bunicii-logo@3x.webp" alt="Salutări bunicii!" width={200} style={{ display: 'block', margin: '0 auto 20px' }} />
         <p style={{ color: '#a0aec0', fontSize: 15, margin: 0, direction: 'rtl' }}>מי לומד היום?</p>
       </div>
 
@@ -783,17 +783,17 @@ type AvatarMood = 'greeting' | 'approve' | 'cheer' | 'coaching' | 'listening' |
                   'asking' | 'thinking' | 'neutral' | 'showing' | 'proud' | 'learning';
 
 const AVATAR_SRC: Record<AvatarMood, string> = {
-  greeting: '/avatar/tutor/avatar-tutor-greeting.png',
-  approve:  '/avatar/tutor/avatar-tutor-approve.png',
-  cheer:    '/avatar/tutor/avatar-tutor-cheering1.png',
-  coaching: '/avatar/tutor/avatar-tutor-coaching.png',
-  listening:'/avatar/tutor/avatar-tutor-listening.png',
-  asking:   '/avatar/tutor/avatar-tutor-asking.png',
-  thinking: '/avatar/tutor/avatar-tutor-thinking.png',
-  neutral:  '/avatar/tutor/avatar-tutor-neutral.png',
-  showing:  '/avatar/tutor/avatar-tutor-showing.png',
-  proud:    '/avatar/tutor/avatar-tutor-proud.png',
-  learning: '/avatar/tutor/avatar-tutor-learning.png',
+  greeting: '/avatar/tutor/avatar-tutor-greeting.webp',
+  approve:  '/avatar/tutor/avatar-tutor-approve.webp',
+  cheer:    '/avatar/tutor/avatar-tutor-cheering1.webp',
+  coaching: '/avatar/tutor/avatar-tutor-coaching.webp',
+  listening:'/avatar/tutor/avatar-tutor-listening.webp',
+  asking:   '/avatar/tutor/avatar-tutor-asking.webp',
+  thinking: '/avatar/tutor/avatar-tutor-thinking.webp',
+  neutral:  '/avatar/tutor/avatar-tutor-neutral.webp',
+  showing:  '/avatar/tutor/avatar-tutor-showing.webp',
+  proud:    '/avatar/tutor/avatar-tutor-proud.webp',
+  learning: '/avatar/tutor/avatar-tutor-learning.webp',
 };
 
 function TutorAvatar({ mood, size = 100, style }: {

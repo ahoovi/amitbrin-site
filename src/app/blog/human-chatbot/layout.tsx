@@ -14,14 +14,14 @@ export const metadata: Metadata = {
     siteName: "עמית ברין",
     title: "הצ׳טבוט האנושי שלך",
     description: "מה שלט חוצות ב-6,000 דולר בפינת השישי ופולסום בסן פרנסיסקו מגלה על מה שאנחנו באמת מוכנים למסור למכונה.",
-    images: [{ url: "/media/og/og-human-chatbot.png", width: 1200, height: 630, alt: "שלט חוצות של ChatTJB.org בפינת רחוב בסן פרנסיסקו" }],
+    images: [{ url: "/media/og/og-human-chatbot.jpg", width: 1200, height: 630, alt: "שלט חוצות של ChatTJB.org בפינת רחוב בסן פרנסיסקו" }],
   },
   twitter: {
     card: "summary_large_image",
     creator: "@amit_brin",
     title: "הצ׳טבוט האנושי שלך",
     description: "מה שלט חוצות ב-6,000 דולר בפינת השישי ופולסום בסן פרנסיסקו מגלה על מה שאנחנו באמת מוכנים למסור למכונה.",
-    images: ["/media/og/og-human-chatbot.png"],
+    images: ["/media/og/og-human-chatbot.jpg"],
   },
 };
 
