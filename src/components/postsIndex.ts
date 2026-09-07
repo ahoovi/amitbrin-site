@@ -33,6 +33,17 @@ export type PostRef = {
 
 const POSTS_RAW: PostRef[] = [
   {
+    slug: "map-as-a-lie",
+    href: "/blog/map-as-a-lie",
+    cover: "/media/blog/map-as-a-lie/cover-og.png",
+    ogImage: "/media/blog/map-as-a-lie/cover-og.png",
+    title: "מפה כשקר",
+    cardTitle: "גדלנו על מפה שתמיד משקרת – וזה מה שאנחנו יודעים על העולם",
+    description: "מה שבאמת קורה כשעיצוב בוחר בשבילכם איך העולם נראה — ולמה המחיר של הבחירה הזו משתלם כבר בכיתה ד׳.",
+    intro: "אין מיפוי ניטרלי ואין מפה שאומרת את האמת. כל מפת עולם היא בחירה על איזה שקר נצטרך לחיות.",
+    published: "2026-09-07",
+  },
+  {
     slug: "taste",
     href: "/blog/taste",
     cover: "/media/blog/taste/cover.jpg",
