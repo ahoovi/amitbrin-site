@@ -48,6 +48,13 @@ const TUNING = {
   FLATNESS: 0.08,
   LIGHTING: 0.2,
   DROP_AT: 0.65,
+  /* nobody stays on the letter for long once they touched it: the sheet
+     falls at the first of — 65% torn, 5s after the first cut, 1s after the
+     fourth stroke, or 10s after reaching the bottom of the page untouched */
+  DROP_AFTER_MS: 5000,
+  DROP_STROKES: 4,
+  DROP_STROKES_MS: 1000,
+  IDLE_BOTTOM_MS: 10000,
   RIP_SPEED: 2.2,     /* auto-completing rip speed (lab-approved) */
   RIP_MIN_SPAN: 0.22, /* stroke span that arms an auto-rip */
 };
@@ -75,6 +82,13 @@ const STAGE_CSS = `
 .tear-stage { position:relative; min-height:100vh; }
 .tear-under { position:absolute; inset:0; overflow:hidden; z-index:1;
   background:#fff; filter:brightness(0.88); }
+/* While covered the one-pager must stay viewport-aligned (the holes open onto
+   it as if it were behind the sheet), but NOT position:fixed: on iOS/macOS the
+   rubber-band overscroll moves the document and leaves a fixed layer in place,
+   so scrolling past the end of the letter exposed the navy hero beneath it.
+   Sticky keeps it glued to the viewport inside the stage and bounces with it. */
+.tear-stage:not(.revealed) .tear-under { position:sticky; top:0; height:100vh; height:100dvh;
+  margin-bottom:-100vh; margin-bottom:-100dvh; }
 .tear-stage.revealed .tear-under { position:static; overflow:visible; filter:none; }
 .tear-paper-root { position:relative; z-index:2; min-height:100vh; padding-bottom:110px; }
 .tear-stage.tearing .tear-paper-root { visibility:hidden; }
@@ -471,7 +485,7 @@ export default function TearEntrance() {
 
     let snapshotImg: HTMLImageElement | null = null;
     let snapScale = 1;
-    let clothActive = false, revealTriggered = false, done = false, tearT0 = 0;
+    let clothActive = false, revealTriggered = false, done = false, tearT0 = 0, strokesT0 = 0;
     const IS_COARSE = typeof window !== "undefined" && matchMedia("(pointer:coarse)").matches;
     let worker: Worker | null = null;
     let canvas: HTMLCanvasElement | null = null;
@@ -598,8 +612,14 @@ export default function TearEntrance() {
       render();
       worker.postMessage({ type: "buffers", pos: m.pos, nor: m.nor, idx: m.idx, dam: m.dam },
                          [m.pos, m.nor, m.idx, m.dam]);
-      const autoDue = IS_COARSE && (m.strokes || 0) >= 2 && tearT0 > 0 &&
-        performance.now() - tearT0 >= 5000;  /* mobile safety net: 5s + two real cuts */
+      const now = performance.now();
+      const strokes = m.strokes || 0;
+      if (strokes >= TUNING.DROP_STROKES && strokesT0 === 0) strokesT0 = now;
+      /* safety net on every device: the first tear starts a 5s clock, the
+         fourth stroke a 1s one — whichever ends first drops the sheet */
+      const autoDue = tearT0 > 0 && (
+        now - tearT0 >= TUNING.DROP_AFTER_MS ||
+        (strokesT0 > 0 && now - strokesT0 >= TUNING.DROP_STROKES_MS));
       if (!revealTriggered && (m.tearPercent >= TUNING.DROP_AT || autoDue)) {
         revealTriggered = true;
         worker.postMessage({ type: "drop" });
@@ -633,9 +653,12 @@ export default function TearEntrance() {
     const onVis = () =>
       worker && worker.postMessage({ type: document.hidden ? "pause" : "resume" });
 
-    function activateTear(startX: number, startY: number) {
-      if (clothActive || !snapshotImg || typeof Worker === "undefined") return;
-      if (!initGL()) return;
+    function activateTear(startX: number, startY: number, auto = false) {
+      if (clothActive || done) return;
+      if (!snapshotImg || typeof Worker === "undefined" || !initGL()) {
+        if (auto) finishReveal();   /* no engine: the idle net still lets them through */
+        return;
+      }
       clothActive = true;
       stage!.classList.add("tearing");
       /* the videos in <SitePage/> beneath are already autoplaying —
@@ -664,6 +687,13 @@ export default function TearEntrance() {
       window.addEventListener("pointermove", onMove);
       window.addEventListener("pointerup", onUp);
       document.addEventListener("visibilitychange", onVis);
+      if (auto) {
+        /* untouched for 10s at the bottom: the whole sheet lets go and falls */
+        revealTriggered = true;
+        worker.postMessage({ type: "drop" });
+        setTimeout(finishReveal, 1900);
+        return;
+      }
       const c0 = canvas!.getBoundingClientRect();
       worker.postMessage({ type: "grab", x: startX - c0.left, y: startY - c0.top });
       worker.postMessage({ type: "starter", x: startX - c0.left, y: startY - c0.top });
@@ -700,6 +730,25 @@ export default function TearEntrance() {
     const onDocTouchMove = (e: TouchEvent) => { if (clothActive && !done) e.preventDefault(); };
     document.addEventListener("touchmove", onDocTouchMove, { passive: false });
 
+    /* Reaching the bottom of the letter starts a 10s clock: if no tear has
+       started by then, the sheet drops on its own. Nobody gets stuck on the
+       text page. The clock is armed once and cancelled by any real tear. */
+    let idleT: ReturnType<typeof setTimeout> | null = null;
+    const onScrollIdle = () => {
+      if (idleT || clothActive || done) return;
+      const doc = document.documentElement;
+      const atBottom = window.innerHeight + window.scrollY >= doc.scrollHeight - 4;
+      if (!atBottom) return;
+      idleT = setTimeout(() => {
+        idleT = null;
+        if (clothActive || done) return;
+        if (document.hidden) { onScrollIdle(); return; }   /* count the 10s while they can see it */
+        activateTear(0, 0, true);
+      }, TUNING.IDLE_BOTTOM_MS);
+    };
+    window.addEventListener("scroll", onScrollIdle, { passive: true });
+    onScrollIdle();
+
     const skip = stage.querySelector<HTMLAnchorElement>(".tear-skip");
     const onSkip = (e: Event) => { e.preventDefault(); finishReveal(); };
     skip?.addEventListener("click", onSkip);
@@ -720,6 +769,8 @@ export default function TearEntrance() {
       skip?.removeEventListener("click", onSkip);
       window.removeEventListener("load", onLoadSnap);
       window.removeEventListener("resize", onResize);
+      window.removeEventListener("scroll", onScrollIdle);
+      if (idleT) clearTimeout(idleT);
       window.removeEventListener("pointermove", onMove);
       window.removeEventListener("pointerup", onUp);
       document.removeEventListener("visibilitychange", onVis);

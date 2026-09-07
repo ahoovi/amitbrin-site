@@ -1,6 +1,8 @@
 import { BlogPaper } from './paper';
 import PostFooter from '../../../components/PostFooter';
 import PostDate from '../../../components/PostDate';
+import SiteNav from '../../../components/SiteNav';
+import BackToTop from '../../../components/BackToTop';
 import {
   Cover,
   ProjectionWidget,
@@ -17,17 +19,9 @@ export default function Page() {
       <a className="skip-link" href="#article">
         דלגו לתוכן
       </a>
-      <nav className="site-nav" aria-label="ניווט ראשי">
-        <a href="https://www.amitbrin.com/" aria-label="עמית ברין — ראשי">
-          <img src="/media/amit-brin-logo.svg" alt="עמית ברין" width="112" height="52" />
-        </a>
-        <div>
-          <a href="https://www.amitbrin.com/">ראשי</a>
-          <a href="https://www.amitbrin.com/blog">בלוג</a>
-          <a href="https://www.amitbrin.com/#footer">דברו איתי</a>
-        </div>
-      </nav>
-      <header className="article-hero">
+      <SiteNav current="blog" />
+      <BackToTop watch="top-anchor" />
+      <header className="article-hero" id="top-anchor">
         <Cover />
         <div className="paper-wrap">
           <i className="tape tape-a" aria-hidden="true" />

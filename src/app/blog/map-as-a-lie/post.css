@@ -64,30 +64,7 @@
 .map-post img {
   max-width: 100%;
 }
-.map-post .site-nav {
-  position: relative;
-  z-index: 20;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  max-width: 1440px;
-  margin: auto;
-  padding: 20px 5%;
-  gap: 20px;
-}
-.map-post .site-nav div {
-  display: flex;
-  gap: 30px;
-  font-size: 16px;
-}
-.map-post .site-nav a {
-  text-decoration: none;
-}
-.map-post .site-nav img {
-  display: block;
-  width: 112px;
-  height: auto;
-}
+/* the top nav is the site-wide <SiteNav/> (blurred veil, difference blend) */
 .map-post .article-hero {
   position: relative;
 }
@@ -233,16 +210,6 @@
   margin-top: 0;
 }
 @media (max-width: 600px) {
-  .map-post .site-nav {
-    padding: 18px 24px;
-  }
-  .map-post .site-nav img {
-    width: 86px;
-  }
-  .map-post .site-nav div {
-    gap: 17px;
-    font-size: 14px;
-  }
   .map-post .paper-wrap {
     margin-top: -22px;
   }

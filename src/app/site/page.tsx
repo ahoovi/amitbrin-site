@@ -316,6 +316,13 @@ const CONTACTS = [
 /* Blog posts — first is real; two placeholders await content */
 const POSTS = [
   {
+    title: "מפה כשקר",
+    excerpt:
+      "לפני שבוע העצרת הכללית של האו\"ם הצביעה 164 מול 1 (ו-6 נמנעות) על החלטה בשם \"Correct the Map\": זאת יוזמה שהובילה טוגו בשם הקבוצה האפריקאית, ושמעודדת ממשלות, בתי ספר וחברות טכנולוגיה לזנוח מפות עולם שעושות שימוש בהיטל מרקטור לטובת מפה בעיצוב שנקרא Equal Earth.",
+    href: "/blog/map-as-a-lie",
+    placeholder: false,
+  },
+  {
     title: "מה הטעם לעצב בלי טעם?",
     excerpt:
       "בשנת 2,000 סטיב ג'ובס עלה על הבמה והציג את Aqua – הוא לא דיבר על רדיוסים של פינות ולא על מרווחים, הוא אמר שהכפתורים ״כל כך טובים שמתחשק לך ללקק אותם״. עשרים ושש שנה אחרי, ״טעם״ הוא המונח החם של השנה: כולם מזהים אותו, אף אחד לא יודע איך מלמדים אותו, והכלים כבר יודעים לחקות את הצורה שלו בלי לשאת בסיכון שבו.",
@@ -1221,7 +1228,7 @@ const CSS = `
    one-pager, so declaring the face here left /blog and every post asking for
    a family that was never defined, and silently getting the Alef fallback. */
 /* --- scroll lock while the tear entrance covers the page --- */
-.tear-under[aria-hidden="true"] { position:fixed; inset:0; overflow:hidden; }
+.tear-under[aria-hidden="true"] { position:sticky; top:0; height:100vh; height:100dvh; margin-bottom:-100vh; margin-bottom:-100dvh; overflow:hidden; }
 
 /* --- section snap: only when the page is NOT covered by the tear --- */
 html:has(.op-root) { scroll-behavior:smooth; }
@@ -1749,17 +1756,27 @@ html:has(.op-root):not(:has(.tear-under[aria-hidden="true"])) { scroll-snap-type
 }
 .footer-title { color:#fff; font-weight:800; font-size:clamp(3.2rem, 9vw, 10rem); line-height:.72; text-shadow:0 2px 22px rgba(2,13,44,.6); }
 .footer-title .fxl { display:block; }
+/* a very soft dark pool behind the contact block — not a card, not a
+   visible shape; just enough for the white type to hold its contrast over
+   the moving water. The two shadows below carry the rest. */
+.footer-contact { position:relative; z-index:0; }
+.footer-contact::before {
+  content:''; position:absolute; z-index:-1; pointer-events:none;
+  inset:-2.4rem -3.2rem -2.8rem -3.6rem;
+  background:radial-gradient(ellipse at 55% 58%, rgba(2,13,44,.46) 0%, rgba(2,13,44,.26) 42%, rgba(2,13,44,0) 72%);
+  filter:blur(16px);
+}
 .footer-contact h3 { color:var(--gold); font-weight:600; font-size:clamp(1.05rem, 1.6vw, 1.5rem); margin-bottom:1.2rem; text-shadow:0 1px 8px rgba(2,13,44,.7); }
 .footer-contact ul { list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:.7rem; }
 .footer-contact a {
   display:inline-flex; align-items:center; gap:.65em;
   color:#fff; text-decoration:none;
   font-family:'Noto Sans Hebrew',sans-serif; font-size:1.05rem; font-weight:600;
-  text-shadow:0 1px 8px rgba(2,13,44,.75), 0 0 2px rgba(2,13,44,.6);
+  text-shadow:0 1px 10px rgba(2,13,44,.92), 0 0 3px rgba(2,13,44,.75), 0 0 18px rgba(2,13,44,.45);
   transition:color .4s var(--ease);
 }
 .footer-contact a:hover { color:var(--cream); }
-.c-ico { display:inline-flex; width:19px; height:19px; opacity:.85; }
+.c-ico { display:inline-flex; width:19px; height:19px; opacity:.92; filter:drop-shadow(0 1px 4px rgba(2,13,44,.8)); }
 .c-ico svg { width:100%; height:100%; }
 
 :root { --sec-h2:clamp(2rem, 3.2vw, 3.6rem); }
