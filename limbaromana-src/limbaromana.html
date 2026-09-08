@@ -731,9 +731,10 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 /* -- v19.1: verb tables - the verb column is always two lines: infinitive / gloss -- */
 .vt td:first-child{white-space:normal}
 .vt td:first-child>.ro,.vt td:first-child>b{display:block}
-.vt td:first-child .he{display:block;font-size:.82rem;line-height:1.35;min-height:1.35em;white-space:normal}
+.vt td:first-child .he{display:inline;font-size:.82rem;line-height:1.35;white-space:normal}
+.vt td:first-child>.ro+.he,.vt td:first-child>b+.he{display:inline}
 .vt td:first-child .core,.vt td:first-child .vsrc{display:inline-block;margin-inline-start:0;margin-inline-end:6px;vertical-align:baseline}
-.vt td:first-child .he+.core,.vt td:first-child .he+.vsrc,.vt td:first-child .core+.vsrc{margin-top:2px}
+.vt td:first-child .vsrc,.vt td:first-child .core{vertical-align:.1em}
 /* a table that had to become a horizontal scroller must not keep a half-sticky first header cell */
 table.hscroll.vt th:first-child,table.hscroll.vt td:first-child{position:static;box-shadow:none}
 @media (min-width:641px){.vt th,.vt td{padding:8px 10px}.vt td.pp{padding-inline:8px}}
