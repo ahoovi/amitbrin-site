@@ -223,6 +223,9 @@ def id_rows(html, sid, prefix, kind):
             he = re.sub(r'<[^>]+>', '', cells[2])
         elif kind == 'verb':
             hm = re.search(r'<span class="he">([\s\S]*?)</span>', cells[0]); he = re.sub(r'<[^>]+>', '', hm.group(1)) if hm else ''
+            # v19: the participiu column joins the search string (a merge · mers)
+            pm = re.search(r'<td class="pp"><span class="ro">([\s\S]*?)</span>', inner)
+            if pm: word = word + ' · ' + re.sub(r'<[^>]+>', '', pm.group(1)).strip()
         elif kind == 'adj':
             he = re.sub(r'<[^>]+>', '', cells[-1])
             # כל צורות התואר נכנסות למחרוזת החיפוש

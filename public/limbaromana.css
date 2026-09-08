@@ -574,6 +574,40 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   #examen15[data-answers="neta"] .ans-amit{display:none}
   #examen15[data-answers="neta"] .ans-neta{display:inline}
 
+/* -- v19: participiu column in #verbref -- */
+.vt th.pp{background:#3a4a70}
+.vt td.pp{background:var(--gold-bg);text-align:center;border-inline-start:2px solid rgba(184,134,11,.35);border-inline-end:2px solid rgba(184,134,11,.2)}
+.vt td.pp .ro{font-weight:700}
+.vt tr:nth-child(even) td.pp{background:#f8efd6}
+
+/* -- v19: RULEMAP flow (vertical stations) -- */
+.flow{display:flex;flex-direction:column;padding:14px 18px 18px;gap:0}
+.flow .fstep{background:rgba(255,255,255,.72);border:1px solid rgba(184,134,11,.35);border-radius:12px;padding:12px 14px 13px}
+.flow .fstep.last{background:#fffaf0;border-color:var(--gold);box-shadow:inset 0 0 0 1px rgba(184,134,11,.25)}
+.flow .fhead{display:flex;align-items:center;gap:10px}
+.flow .fn{flex:none;width:28px;height:28px;border-radius:50%;background:var(--gold);color:#fff;font-weight:800;font-size:.9rem;display:flex;align-items:center;justify-content:center}
+.flow .fq{font-weight:700;color:var(--navy);font-size:1.02rem}
+.flow .fq b{color:var(--gold)}
+.flow .fsub{margin:7px 0 0 38px;font-size:.88rem;color:var(--ink);line-height:1.55}
+.flow .farrow{text-align:center;color:var(--gold);font-size:1.05rem;line-height:1;padding:5px 0;opacity:.85}
+.flow .fopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr));gap:6px;margin:10px 0 0 0}
+.flow .fopt{background:var(--card);border:1px solid var(--line);border-radius:8px;padding:8px 9px;display:flex;flex-direction:column;gap:3px;align-items:center;text-align:center;min-width:0}
+.flow .fopt>b{color:var(--gold);font-family:'Literata',Georgia,serif;font-size:1rem;direction:ltr;unicode-bidi:isolate}
+.flow .fopt .fhe{font-size:.76rem;color:var(--soft);line-height:1.35}
+.flow .fopt .ro{font-size:.92rem}
+.flow .fopt .aux{font-family:'Literata',Georgia,serif;font-size:1.25rem;color:var(--navy);font-weight:800;direction:ltr;unicode-bidi:isolate}
+.flow .fopt{overflow:hidden;overflow-wrap:anywhere}
+@media (min-width:760px){.flow .fopts.six{grid-template-columns:repeat(6,minmax(0,1fr))}.flow .fopts.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.flow .fopt.key{background:#fffaf0;border-color:var(--gold);box-shadow:inset 0 0 0 1px rgba(184,134,11,.25)}
+.flow .fopt.dim{opacity:.75}
+.flow .formula{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:6px;margin:10px 0 4px;direction:ltr}
+.flow .fslot{border-radius:8px;padding:6px 10px;font-family:'Literata',Georgia,serif;font-weight:700;font-size:.95rem;color:var(--navy);background:var(--card);border:1px solid var(--line);white-space:nowrap}
+.flow .fslot.key{background:var(--navy);color:#fff;border-color:var(--navy)}
+.flow .fslot.opt{border-style:dashed;color:var(--soft);font-weight:600}
+.flow .fslot.opt:last-child{font-family:'Rubik',Arial,sans-serif;direction:rtl}
+.flow .fplus{color:var(--gold);font-weight:800}
+@media (max-width:640px){.flow{padding:10px 10px 12px}.flow .fsub{margin-left:0}.flow .fopts{grid-template-columns:repeat(2,minmax(0,1fr))}.flow .fopts.six{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
 
 /* ============================================================
    v16 · הפיצול: ניווט חדש, שמע על המילה, עמודים קלים
