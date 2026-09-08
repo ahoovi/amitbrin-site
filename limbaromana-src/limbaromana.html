@@ -721,6 +721,22 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 .flow .fslot.opt:last-child{font-family:'Rubik',Arial,sans-serif;direction:rtl}
 .flow .fplus{color:var(--gold);font-weight:800}
 @media (max-width:640px){.flow{padding:10px 10px 12px}.flow .fsub{margin-left:0}.flow .fopts{grid-template-columns:repeat(2,minmax(0,1fr))}.flow .fopts.six{grid-template-columns:repeat(3,minmax(0,1fr))}}
+
+/* -- v19.1: chips for runs of examples (valid inside p / td) -- */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;direction:rtl}
+.chip{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 10px;max-width:100%;min-width:0;direction:ltr;text-align:left}
+.chip>.ro{font-weight:600}
+.chip>.he{font-size:.78rem;color:var(--soft);direction:rtl;text-align:right;align-self:flex-end;line-height:1.3}
+.rule .chips,.note .chips{margin-top:8px}
+/* -- v19.1: verb tables - the verb column is always two lines: infinitive / gloss -- */
+.vt td:first-child{white-space:normal}
+.vt td:first-child>.ro,.vt td:first-child>b{display:block}
+.vt td:first-child .he{display:block;font-size:.82rem;line-height:1.35;min-height:1.35em;white-space:normal}
+.vt td:first-child .core,.vt td:first-child .vsrc{display:inline-block;margin-inline-start:0;margin-inline-end:6px;vertical-align:baseline}
+.vt td:first-child .he+.core,.vt td:first-child .he+.vsrc,.vt td:first-child .core+.vsrc{margin-top:2px}
+/* a table that had to become a horizontal scroller must not keep a half-sticky first header cell */
+table.hscroll.vt th:first-child,table.hscroll.vt td:first-child{position:static;box-shadow:none}
+@media (min-width:641px){.vt th,.vt td{padding:8px 10px}.vt td.pp{padding-inline:8px}}
 </style>
 </head>
 <body>
@@ -1177,7 +1193,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <div class="rule">
     <div class="ttl">REGULA · לפני b ולפני p כותבים m. תמיד.</div>
   <p class="rl">באוזן אי אפשר להבחין אם נאמר <b>m</b> או <b>n</b> לפני <b>b</b> / <b>p</b> - ההגה נבלע. לכן לא שואלים מה שמענו: <b>אם ההתלבטות היא בין m ל-n לפני b או p, זו m</b></p>
-  <p class="rl"><span class="ro">bomboană</span> · <span class="ro">bombonieră</span> · <span class="ro">împodobit</span> · <span class="ro">îmbrăcăminte</span> · <span class="ro">împreună</span> · <span class="ro">umbrelă</span> · <span class="ro">a cumpăra</span> · <span class="ro">timp</span> · <span class="ro">a împlini</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">bomboană</span></span><span class="chip"><span class="ro">bombonieră</span></span><span class="chip"><span class="ro">împodobit</span></span><span class="chip"><span class="ro">îmbrăcăminte</span></span><span class="chip"><span class="ro">împreună</span></span><span class="chip"><span class="ro">umbrelă</span></span><span class="chip"><span class="ro">a cumpăra</span></span><span class="chip"><span class="ro">timp</span></span><span class="chip"><span class="ro">a împlini</span></span></span></p>
   <p class="rl">המורה: "סוף סוף משהו ללא יוצא דופן". גם כשההגייה שלכם לא מדויקת - הכתיב חייב להיות</p>
 </div>
 
@@ -1263,10 +1279,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="card">
     <b>ארבע דרכים לענות</b> - כולן נכונות:<br>
-    <span class="ro">Sunt ...</span> <span class="he">(אני...)</span> ·
-    <span class="ro">Numele meu este ...</span> <span class="he">(שמי הוא...)</span> ·
-    <span class="ro">Mă numesc ...</span> <span class="he">(אני נקרא/ת...)</span> ·
-    <span class="ro">Mă cheamă ...</span> <span class="he">(קוראים לי...)</span>
+    <span class="chips"><span class="chip"><span class="ro">Sunt ...</span><span class="he">(אני...)</span></span><span class="chip"><span class="ro">Numele meu este ...</span><span class="he">(שמי הוא...)</span></span><span class="chip"><span class="ro">Mă numesc ...</span><span class="he">(אני נקרא/ת...)</span></span><span class="chip"><span class="ro">Mă cheamă ...</span><span class="he">(קוראים לי...)</span></span></span>
   </div>
 
   <div class="dialog">
@@ -1378,7 +1391,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <tr><th style="width:22%">הרמה</th><th>התשובות</th></tr>
     <tr>
       <td><span class="lvl-e">🙌</span> <b>מצוין</b></td>
-      <td><span class="ro big">formidabil</span> · <span class="ro">excelent</span> · <span class="ro">extraordinar</span> · <span class="ro">perfect</span> · <span class="ro">minunat</span> · <span class="ro">nemaipomenit</span> <span class="he">(לא-ייאמן)</span></td>
+      <td><span class="chips"><span class="chip"><span class="ro">formidabil</span></span><span class="chip"><span class="ro">excelent</span></span><span class="chip"><span class="ro">extraordinar</span></span><span class="chip"><span class="ro">perfect</span></span><span class="chip"><span class="ro">minunat</span></span><span class="chip"><span class="ro">nemaipomenit</span><span class="he">(לא-ייאמן)</span></span></span></td>
     </tr>
     <tr>
       <td><span class="lvl-e">🙂</span> <b>טוב מאוד</b></td>
@@ -1386,11 +1399,11 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     </tr>
     <tr>
       <td><span class="lvl-e">😐</span> <b>בסדר</b></td>
-      <td><span class="ro big">bine</span> · <span class="ro">ca de obicei</span> <span class="he">(כרגיל)</span> · <span class="ro">așa și așa</span> · <span class="ro">nici prea bine, nici prea rău</span> <span class="he">(לא טוב מדי ולא רע מדי)</span></td>
+      <td><span class="chips"><span class="chip"><span class="ro">bine</span></span><span class="chip"><span class="ro">ca de obicei</span><span class="he">(כרגיל)</span></span><span class="chip"><span class="ro">așa și așa</span></span><span class="chip"><span class="ro">nici prea bine, nici prea rău</span><span class="he">(לא טוב מדי ולא רע מדי)</span></span></span></td>
     </tr>
     <tr>
       <td><span class="lvl-e">😞</span> <b>לא טוב</b></td>
-      <td><span class="ro big">rău</span> · <span class="ro">foarte rău</span> · <span class="ro">nașpa</span> <span class="he">(סלנג: על הפנים)</span> · <span class="ro">groaznic</span> · <span class="ro">îngrozitor</span> <span class="he">(נורא, מחריד)</span></td>
+      <td><span class="chips"><span class="chip"><span class="ro">rău</span></span><span class="chip"><span class="ro">foarte rău</span></span><span class="chip"><span class="ro">nașpa</span><span class="he">(סלנג: על הפנים)</span></span><span class="chip"><span class="ro">groaznic</span></span><span class="chip"><span class="ro">îngrozitor</span><span class="he">(נורא, מחריד)</span></span></span></td>
     </tr>
   </table>
 
@@ -1606,12 +1619,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">DE של הזמן - כמה זמן כבר?</div>
-  <p class="rl"><span class="ro">de un an</span> <span class="he">כבר שנה</span> ·
-    <span class="ro">de o oră</span> <span class="he">כבר שעה</span> ·
-    <span class="ro">de 3 zile</span> <span class="he">כבר שלושה ימים</span> ·
-    <span class="ro">de 5 minute</span> <span class="he">כבר חמש דקות</span> ·
-    <span class="ro">de luni</span> <span class="he">מאז יום שני</span> ·
-    <span class="ro">din ianuarie</span> <span class="he">מאז ינואר</span> -
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">de un an</span><span class="he">כבר שנה</span></span><span class="chip"><span class="ro">de o oră</span><span class="he">כבר שעה</span></span><span class="chip"><span class="ro">de 3 zile</span><span class="he">כבר שלושה ימים</span></span><span class="chip"><span class="ro">de 5 minute</span><span class="he">כבר חמש דקות</span></span><span class="chip"><span class="ro">de luni</span><span class="he">מאז יום שני</span></span><span class="chip"><span class="ro">din ianuarie</span><span class="he">מאז ינואר</span></span></span> -
     שימו לב: לפני שם חודש עוברים ל-<b>din</b></p>
 </div>
 
@@ -1715,11 +1723,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <div class="rule">
     <div class="ttl">התבנית: MERG PE ... CU ...</div>
   <p class="rl">הולכים/נוסעים <b>על</b> משטח <b>עם</b> כלי:
-    <span class="ro">Eu merg pe stradă cu mașina.</span> ·
-    <span class="ro">Tu mergi pe apă cu iahtul.</span> ·
-    <span class="ro">Noi mergem pe șine cu trenul.</span> ·
-    <span class="ro">Voi mergeți în aer cu avionul / elicopterul.</span>
-    <span class="he">- ברחוב במכונית, במים ביאכטה, על פסים ברכבת, באוויר במטוס/מסוק.</span></p>
+    <span class="chips"><span class="chip"><span class="ro">Eu merg pe stradă cu mașina.</span></span><span class="chip"><span class="ro">Tu mergi pe apă cu iahtul.</span></span><span class="chip"><span class="ro">Noi mergem pe șine cu trenul.</span></span><span class="chip"><span class="ro">Voi mergeți în aer cu avionul / elicopterul.</span><span class="he">- ברחוב במכונית, במים ביאכטה, על פסים ברכבת, באוויר במטוס/מסוק.</span></span></span></p>
 </div>
 
   <h3>אוצר מילים · הדרך והתחבורה</h3>
@@ -2131,7 +2135,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <tr><td><span class="ro">a se usca</span> <span class="he">להתייבש</span></td><td class="pp"><span class="ro">uscat</span></td><td><span class="ro">mă usuc</span></td><td><span class="ro">te usuci</span></td><td><span class="ro">se usucă</span></td><td><span class="ro">ne uscăm</span></td><td><span class="ro">vă uscați</span></td><td><span class="ro">se usucă</span></td></tr>
   </table>
 
-  <div class="note"><b>העבר של פועל חוזר</b> - עדיין לא נלמד בכיתה, מושלם כאן כי הטור החדש מבקש אותו: הכינוי החוזר נדבק לפועל העזר במקף, וה-participiu נשאר קפוא. <span class="ro">m-am bucurat</span> · <span class="ro">te-ai bucurat</span> · <span class="ro">s-a bucurat</span> · <span class="ro">ne-am bucurat</span> · <span class="ro">v-ați bucurat</span> · <span class="ro">s-au bucurat</span>. הצורה שכבר הופיעה בשיעור 18: <span class="ro">M-am uitat la film.</span></div>
+  <div class="note"><b>העבר של פועל חוזר</b> - עדיין לא נלמד בכיתה, מושלם כאן כי הטור החדש מבקש אותו: הכינוי החוזר נדבק לפועל העזר במקף, וה-participiu נשאר קפוא. <span class="chips"><span class="chip"><span class="ro">m-am bucurat</span></span><span class="chip"><span class="ro">te-ai bucurat</span></span><span class="chip"><span class="ro">s-a bucurat</span></span><span class="chip"><span class="ro">ne-am bucurat</span></span><span class="chip"><span class="ro">v-ați bucurat</span></span><span class="chip"><span class="ro">s-au bucurat</span></span></span>. הצורה שכבר הופיעה בשיעור 18: <span class="ro">M-am uitat la film.</span></div>
   <div class="note">
   <p class="rl">התבנית קבועה: <span class="ro big">mă · te · se · ne · vă · se</span> לפני הפועל</p>
   <p class="rl">ההסבר המלא ב<a class="xref" href="#reflex11">הפועל החוזר</a>, כולל הזוג <span class="ro">a uita</span> (לשכוח) מול <span class="ro">a se uita</span> (להסתכל)</p>
@@ -2171,7 +2175,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <p class="rl"><b>הפעולה חוזרת אליי, עם כינוי:</b> <span class="ro">Mă spăl.</span> <span class="he">אני מתרחץ.</span></p>
 </div>
   <div class="note">
-  <p class="rl"><b>חלק גוף? מוסיפים <span class="ro big">pe</span>:</b> <span class="ro">Mă spăl pe mâini.</span> <span class="he">אני שוטף ידיים.</span> · <span class="ro">pe dinți</span> <span class="he">שיניים</span> · <span class="ro">pe față</span> <span class="he">פנים</span> · <span class="ro">pe cap</span> <span class="he">ראש</span></p>
+  <p class="rl"><b>חלק גוף? מוסיפים <span class="ro big">pe</span>:</b> <span class="chips"><span class="chip"><span class="ro">Mă spăl pe mâini.</span><span class="he">אני שוטף ידיים.</span></span><span class="chip"><span class="ro">pe dinți</span><span class="he">שיניים</span></span><span class="chip"><span class="ro">pe față</span><span class="he">פנים</span></span><span class="chip"><span class="ro">pe cap</span><span class="he">ראש</span></span></span></p>
   <p class="rl">מאותה משפחה: <span class="ro">a se îmbrăca</span> <span class="he">להתלבש</span> · <span class="ro">a se trezi</span> <span class="he">להתעורר</span> · <span class="ro">a se rade</span> <span class="he">להתגלח</span></p>
 </div>
 
@@ -2370,7 +2374,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <h3>מה שהפועל גורר אחריו</h3>
   <table>
     <tr><th style="width:26%">הפועל</th><th>מה בא אחריו</th></tr>
-    <tr><td><span class="ro big">a spăla</span></td><td><span class="ro">spăl vase</span> <span class="he">שוטף כלים</span> · <span class="ro">spăl rufe</span> <span class="he">מכבס - אין ברומנית פועל נפרד לכביסה</span> · <span class="ro">spăl mașina</span> · <span class="ro">spăl curtea</span></td></tr>
+    <tr><td><span class="ro big">a spăla</span></td><td><span class="chips"><span class="chip"><span class="ro">spăl vase</span><span class="he">שוטף כלים</span></span><span class="chip"><span class="ro">spăl rufe</span><span class="he">מכבס - אין ברומנית פועל נפרד לכביסה</span></span><span class="chip"><span class="ro">spăl mașina</span></span><span class="chip"><span class="ro">spăl curtea</span></span></span></td></tr>
     <tr><td><span class="ro big">a cânta</span></td><td>גם לשיר וגם לנגן. כלי נגינה תמיד עם <span class="ro">la</span>: <span class="ro">cânt la pian · la vioară · la chitară · la fluier</span></td></tr>
     <tr><td><span class="ro big">a juca</span></td><td>ספורט ומשחקים בלי מילת יחס: <span class="ro">joc fotbal · baschet · volei · tenis · șah</span></td></tr>
     <tr><td><span class="ro big">a practica</span></td><td><span class="ro">Ce sport practici?</span> <span class="he">באיזה ספורט אתה עוסק?</span> - <span class="ro">Practic volei.</span></td></tr>
@@ -2519,7 +2523,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <p class="rl">כלומר: <b>שם הפועל קובע הכל</b> - את הקבוצה, את הגזע, ומשם את כל שש הסיומות</p>
   <p class="rl">‏<b>אבל</b> שם הפועל לבדו לא מספיק, כי הוא לא מגלה אם הפועל לוקח ‎-ez / ‎-esc / ‎-ăsc</p>
   <p class="rl">לכן השיטה של המורה: משננים <b>זוג</b> - <span class="ro big">שם הפועל + גוף ראשון יחיד</span></p>
-  <p class="rl">‏<span class="ro">a termina → eu termin</span> · <span class="ro">a pleca → eu plec</span> · <span class="ro">a vizita → eu vizitez</span> · <span class="ro">a locui → eu locuiesc</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">a termina → eu termin</span></span><span class="chip"><span class="ro">a pleca → eu plec</span></span><span class="chip"><span class="ro">a vizita → eu vizitez</span></span><span class="chip"><span class="ro">a locui → eu locuiesc</span></span></span></p>
   <p class="rl">שני פריטים במקום שישה. כל השאר נגזר מהמפה שלמטה</p>
 </div>
 
@@ -2567,7 +2571,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <div class="rule">
     <div class="ttl">REGULA · פועל בן הברה אחת מקבל ‎-u</div>
   <p class="rl">זה <b>לא</b> קבוצה - זה חוצה את כל הקבוצות. בכל מקום שבו הגזע הוא הברה אחת, גוף ראשון יחיד וגוף שלישי רבים מקבלים <span class="ro big">-u</span></p>
-  <p class="rl"><span class="ro">a da → eu dau, ei dau</span> · <span class="ro">a sta → eu stau</span> · <span class="ro">a vrea → eu vreau</span> · <span class="ro">a bea → eu beau</span> · <span class="ro">a ști → eu știu</span> · <span class="ro">a scrie → eu scriu</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">a da → eu dau, ei dau</span></span><span class="chip"><span class="ro">a sta → eu stau</span></span><span class="chip"><span class="ro">a vrea → eu vreau</span></span><span class="chip"><span class="ro">a bea → eu beau</span></span><span class="chip"><span class="ro">a ști → eu știu</span></span><span class="chip"><span class="ro">a scrie → eu scriu</span></span></span></p>
   <p class="rl">יותם שאל בשיעור אם זו קבוצה נפרדת. התשובה: לא. בכל אחת מארבע הקבוצות יש פעלים בני הברה אחת, וכולם מתנהגים ככה</p>
 </div>
 
@@ -2825,7 +2829,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   </div>
 
   <h3>הפעלים מהדף · מי ב-esc ומי לא</h3>
-  <div class="note">רוב פעלי ‎-i החדשים מהתרגילים שייכים לתת-קבוצת <a class="xref" href="#verbi13">‎-esc</a>: ‏<span class="ro">a construi</span> ◂ <span class="ro">construiesc</span>. איך יודעים? לא יודעים - רק מניסיון (המורה, במפורש). מה שכן: ב-‎<b>-esc</b> ההטעמה נופלת על הסיומת - <span class="ro">trăiește</span>, <span class="ro">construiesc</span>. הפעלים שנגמרים ב-<b>‎-ui</b> ו-<b>‎-ăi</b> (<span class="ro">a construi</span>, <span class="ro">a cheltui</span>, <span class="ro">a dărui</span>, <span class="ro">a alcătui</span>, <span class="ro">a trăi</span>) מקבלים ‎<b>-iesc</b>. כל ההטיות המלאות ב<a class="xref" href="#verbref">מאגר הפעלים</a>.</div>
+  <div class="note">רוב פעלי ‎-i החדשים מהתרגילים שייכים לתת-קבוצת <a class="xref" href="#verbi13">‎-esc</a>: ‏<span class="ro">a construi</span> ◂ <span class="ro">construiesc</span>. איך יודעים? לא יודעים - רק מניסיון (המורה, במפורש). מה שכן: ב-‎<b>-esc</b> ההטעמה נופלת על הסיומת - <span class="ro">trăiește</span>, <span class="ro">construiesc</span>. הפעלים שנגמרים ב-<b>‎-ui</b> ו-<b>‎-ăi</b> (<span class="chips"><span class="chip"><span class="ro">a construi</span></span><span class="chip"><span class="ro">a cheltui</span></span><span class="chip"><span class="ro">a dărui</span></span><span class="chip"><span class="ro">a alcătui</span></span><span class="chip"><span class="ro">a trăi</span></span></span>) מקבלים ‎<b>-iesc</b>. כל ההטיות המלאות ב<a class="xref" href="#verbref">מאגר הפעלים</a>.</div>
   <div class="vocab">
     <div class="vitem"><span class="ro">a trăi - trăiesc</span><span class="he">לחיות · Lupul trăiește</span></div>
     <div class="vitem"><span class="ro">a construi - construiesc</span><span class="he">לבנות</span></div>
@@ -2846,7 +2850,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <div class="vitem"><span class="ro">a opri - opresc</span><span class="he">לעצור</span></div>
     <div class="vitem"><span class="ro">a clipi - clipesc</span><span class="he">למצמץ · o clipă = רגע</span></div>
   </div>
-  <div class="note"><b>ובלי ‎-esc</b> - הסיומת הקצרה, כמו <span class="ro">a dormi</span>: <span class="ro">a auzi - aud</span> · <span class="ro">a mirosi - miros</span> · <span class="ro">a înghiți - înghit</span> · <span class="ro">a sări - sar</span> · <span class="ro">a ști - știu</span> · <span class="ro">a coborî - cobor</span>. <b>מלכודת מהדף:</b> ‏<span class="ro">a înghiți</span> (לבלוע) מול <span class="ro">a îngheța</span> (לקפוא) - המורה כתבה את השני בכחול ליד הראשון בדיוק כדי שלא יתבלבלו. הראשון קבוצה IV, השני קבוצה I: <span class="ro">îngheț, îngheți, îngheață</span>.</div>
+  <div class="note"><b>ובלי ‎-esc</b> - הסיומת הקצרה, כמו <span class="ro">a dormi</span>: <span class="chips"><span class="chip"><span class="ro">a auzi - aud</span></span><span class="chip"><span class="ro">a mirosi - miros</span></span><span class="chip"><span class="ro">a înghiți - înghit</span></span><span class="chip"><span class="ro">a sări - sar</span></span><span class="chip"><span class="ro">a ști - știu</span></span><span class="chip"><span class="ro">a coborî - cobor</span></span></span>. <b>מלכודת מהדף:</b> ‏<span class="ro">a înghiți</span> (לבלוע) מול <span class="ro">a îngheța</span> (לקפוא) - המורה כתבה את השני בכחול ליד הראשון בדיוק כדי שלא יתבלבלו. הראשון קבוצה IV, השני קבוצה I: <span class="ro">îngheț, îngheți, îngheață</span>.</div>
 
   <div class="seealso">↗ קשור: <a href="#verbi13">הפעלים ב-i</a> · <a href="#exceptii14">חריגי ההווה</a> · <a href="#grupe14">ארבע הקבוצות</a> · <a href="#verbref">מאגר הפעלים</a> · <a href="#practice18">התרגילים</a></div>
 </section>
@@ -3239,7 +3243,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · שתי התבניות</div>
-  <p class="rl">‏<span class="ro big">trecut / trecută</span> אחרי שם עצם מיודע: <span class="ro">anul trecut</span> · <span class="ro">luna trecută</span> · <span class="ro">săptămâna trecută</span> · <span class="ro">vara trecută</span>. זה ה-participiu של <span class="ro">a trece</span> כתואר - ומתאים במין: ‏<span class="ro">an</span> זכר ◂ <span class="ro">trecut</span>, ‏<span class="ro">lună</span> נקבה ◂ <span class="ro">trecută</span></p>
+  <p class="rl">‏<span class="ro big">trecut / trecută</span> אחרי שם עצם מיודע: <span class="chips"><span class="chip"><span class="ro">anul trecut</span></span><span class="chip"><span class="ro">luna trecută</span></span><span class="chip"><span class="ro">săptămâna trecută</span></span><span class="chip"><span class="ro">vara trecută</span></span></span>. זה ה-participiu של <span class="ro">a trece</span> כתואר - ומתאים במין: ‏<span class="ro">an</span> זכר ◂ <span class="ro">trecut</span>, ‏<span class="ro">lună</span> נקבה ◂ <span class="ro">trecută</span></p>
   <p class="rl">‏<span class="ro big">acum</span> + כמות = לפני: <span class="ro">acum o săptămână</span> (לפני שבוע) · <span class="ro">acum două luni</span> · <span class="ro">acum un an</span> · <span class="ro">acum trei ani</span>. אותה <span class="ro">acum</span> של "עכשיו" - עם כמות אחריה היא הופכת ל"לפני"</p>
   <p class="rl">ל"אמש" ולעונות יש גם צורה אחת מקוצרת עם <b>astă-</b>: ‏<span class="ro">aseară</span> = <span class="ro">ieri seară</span> · <span class="ro">astă-noapte</span> = <span class="ro">noaptea trecută</span> · <span class="ro">astă-vară</span> = <span class="ro">vara trecută</span></p>
 </div>
@@ -3341,7 +3345,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · הקיצור: nu + פועל העזר</div>
-  <p class="rl">‏<span class="ro">nu am → n-am</span> · <span class="ro">nu ai → n-ai</span> · <span class="ro">nu a → n-a</span> · <span class="ro">nu am → n-am</span> · <span class="ro">nu ați → n-ați</span> · <span class="ro">nu au → n-au</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">nu am → n-am</span></span><span class="chip"><span class="ro">nu ai → n-ai</span></span><span class="chip"><span class="ro">nu a → n-a</span></span><span class="chip"><span class="ro">nu am → n-am</span></span><span class="chip"><span class="ro">nu ați → n-ați</span></span><span class="chip"><span class="ro">nu au → n-au</span></span></span></p>
   <p class="rl">שתי הצורות נכונות; הקצרה היא מה ששומעים. <span class="ro">Nu, eu n-am răspuns la telefon, colegul meu a răspuns.</span> · <span class="ro">Noi n-am rupt scrisorile.</span> · <span class="ro">Ele n-au cerut un autograf.</span> המורה: "הקיצור פשוט מאוד - אם זה nu am, אז זה במילה אחת"</p>
 </div>
 
@@ -3390,14 +3394,14 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <tr><td><span class="ro">a șterge</span> <span class="he">למחוק · לנגב</span></td><td>III</td><td><span class="ro">șters</span></td><td class="he">‏<span class="ro">Iulia a șters tabla?</span> ‏<span class="ro">tablă</span> = לוח. ‏ge ◂ s, כמו <span class="ro">merge → mers</span></td></tr>
     <tr><td><span class="ro">a aprinde</span> <span class="he">להדליק</span></td><td>III</td><td><span class="ro">aprins</span></td><td class="he">‏<span class="ro">Ai aprins lumina? Nu, bunica a aprins lumina.</span> ההפך: <span class="ro">a stinge → stins</span> (לכבות)</td></tr>
     <tr><td><span class="ro">a răspunde</span> <span class="he">לענות</span></td><td>III</td><td><span class="ro">răspuns</span></td><td class="he">‏<span class="ro">Tu ai răspuns la telefon? Nu, eu n-am răspuns, colegul meu a răspuns.</span> ‏<span class="ro">răspuns</span> הוא גם "תשובה": <span class="ro">răspunsul la întrebare</span></td></tr>
-    <tr><td><span class="ro">a sparge · a fierbe · a rupe · a coace</span></td><td>III</td><td><span class="ro">spart · fiert · rupt · copt</span></td><td class="he">ארבעת ה"פיזיים" מ<a class="xref" href="#participiu17">משפחת ה-t הקצרה</a>, כולם בתרגיל 2c: ‏<span class="ro">Fratele meu a spart paharul.</span> · <span class="ro">Ea a fiert cartofii pentru salată.</span> · <span class="ro">Ele au rupt scrisorile vechi.</span> · <span class="ro">Mama ei a copt pâinea.</span> ‏<span class="ro">a rupe</span> = לקרוע, לא לקרוא</td></tr>
+    <tr><td><span class="ro">a sparge · a fierbe · a rupe · a coace</span></td><td>III</td><td><span class="ro">spart · fiert · rupt · copt</span></td><td class="he">ארבעת ה"פיזיים" מ<a class="xref" href="#participiu17">משפחת ה-t הקצרה</a>, כולם בתרגיל 2c: <span class="chips"><span class="chip"><span class="ro">Fratele meu a spart paharul.</span></span><span class="chip"><span class="ro">Ea a fiert cartofii pentru salată.</span></span><span class="chip"><span class="ro">Ele au rupt scrisorile vechi.</span></span><span class="chip"><span class="ro">Mama ei a copt pâinea.</span></span></span> ‏<span class="ro">a rupe</span> = לקרוע, לא לקרוא</td></tr>
     <tr><td><span class="ro">a culege · a întoarce · a plânge · a încerca</span></td><td>III · III · III · I</td><td><span class="ro">cules · întors · plâns · încercat</span></td><td class="he">ארבעת הפעלים החדשים מהמסגרת של תרגיל 7: לקטוף · להחזיר, להפוך · לבכות · לנסות. שלושת ה-III כולם ב-s</td></tr>
     <tr><td><span class="ro">a călători · a coborî</span></td><td>IV ‎-esc · IV</td><td><span class="ro">călătorit · coborât</span></td><td class="he">מתרגיל 1: ‏<span class="ro">Până la Paris am călătorit cu avionul.</span> · <span class="ro">Am coborât repede scările.</span> ‏î ◂ â בתוך המילה</td></tr>
   </table>
 
   <div class="note"><b>שלוש רכבות.</b> ‏<span class="ro">Rapidul de București</span> אינו "הנהגים של בוקרשט": ברומניה יש שלושה סוגי רכבות, והמילה היא תואר שהפך לשם - <span class="ro">personal</span> (עוצרת בכל תחנה, איטית) · <span class="ro">accelerat</span> (פחות תחנות) · <span class="ro">rapid</span> (המהירה, ישירה). לכן <span class="ro">personalul de București</span>, <span class="ro">acceleratul de Brașov</span>, <span class="ro">rapidul de Timișoara</span> - עם יידוע, כמו "המאסף" ו"הישיר". ‏<span class="ro">a întârzia → întârziere</span> = איחור: <span class="ro">sosește cu întârziere</span>.</div>
 
-  <div class="note"><b>אות גדולה.</b> תזכורת של המורה: כל משפט מתחיל באות גדולה, לא משנה באיזו מילה - וגם כל שם: <span class="ro">Casa Pogor</span>, <span class="ro">Muzeul Unirii</span>, <span class="ro">Copou</span>, <span class="ro">Bucovina</span>. מאות גדולה באמצע משפט מסיקים שזה שם של מקום.</div>
+  <div class="note"><b>אות גדולה.</b> תזכורת של המורה: כל משפט מתחיל באות גדולה, לא משנה באיזו מילה - וגם כל שם: <span class="chips"><span class="chip"><span class="ro">Casa Pogor</span></span><span class="chip"><span class="ro">Muzeul Unirii</span></span><span class="chip"><span class="ro">Copou</span></span><span class="chip"><span class="ro">Bucovina</span></span></span>. מאות גדולה באמצע משפט מסיקים שזה שם של מקום.</div>
 
   <div class="seealso">↗ קשור: <a href="#trecutflux19">תרשים הזרימה של העבר</a> · <a href="#participiu17">משפחות ה-participiu</a> · <a href="#dindela19">de la או din</a> · <a href="#verbref">אזור הפעלים</a> · <a href="#practice19">התרגילים</a></div>
 </section>
@@ -3658,15 +3662,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="note">
   <p class="rl">מילים חדשות שהגיעו דרך התרגיל:
-    <span class="ro">pâine</span> <span class="he">לחם</span> ·
-    <span class="ro">femeie</span> <span class="he">אישה</span> ·
-    <span class="ro">bibliotecă</span> <span class="he">ספרייה</span> ·
-    <span class="ro">cafea</span> <span class="he">קפה</span> ·
-    <span class="ro">perdea</span> <span class="he">וילון</span> ·
-    <span class="ro">pijama</span> <span class="he">פיג'מה</span> ·
-    <span class="ro">timbru</span> <span class="he">בול</span> ·
-    <span class="ro">pașaport</span> <span class="he">דרכון</span> ·
-    <span class="ro">munte</span> <span class="he">הר</span> - כולן במילון</p>
+    <span class="chips"><span class="chip"><span class="ro">pâine</span><span class="he">לחם</span></span><span class="chip"><span class="ro">femeie</span><span class="he">אישה</span></span><span class="chip"><span class="ro">bibliotecă</span><span class="he">ספרייה</span></span><span class="chip"><span class="ro">cafea</span><span class="he">קפה</span></span><span class="chip"><span class="ro">perdea</span><span class="he">וילון</span></span><span class="chip"><span class="ro">pijama</span><span class="he">פיג'מה</span></span><span class="chip"><span class="ro">timbru</span><span class="he">בול</span></span><span class="chip"><span class="ro">pașaport</span><span class="he">דרכון</span></span><span class="chip"><span class="ro">munte</span><span class="he">הר</span></span></span> - כולן במילון</p>
 </div>
 </section>
 
@@ -3821,7 +3817,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmc dim">לא</div>
         <div class="rmc list"><span class="ro">Noi mergem în parc.</span><br><span class="ro">Florile sunt pe masă.</span></div>
 
-        <div class="rmfull"><b>הטריגר האחרון הוא זה שמכשיל דוברי עברית.</b> "בפארק", "על השולחן" - בעברית מיודע, ברומנית לא: <span class="ro">în parc</span>, <span class="ro">pe masă</span>, <span class="ro">la facultate</span>, <span class="ro">la serviciu</span>, <span class="ro">la birou</span>. מילת היחס מבטלת את היידוע.</div>
+        <div class="rmfull"><b>הטריגר האחרון הוא זה שמכשיל דוברי עברית.</b> "בפארק", "על השולחן" - בעברית מיודע, ברומנית לא: <span class="chips"><span class="chip"><span class="ro">în parc</span></span><span class="chip"><span class="ro">pe masă</span></span><span class="chip"><span class="ro">la facultate</span></span><span class="chip"><span class="ro">la serviciu</span></span><span class="chip"><span class="ro">la birou</span></span></span>. מילת היחס מבטלת את היידוע.</div>
         <div class="rmfull"><b>אלא אם יש משלים.</b> ברגע שאומרים איזה בדיוק - היידוע חוזר גם אחרי מילת יחס: <span class="ro">la facultate</span> ◂ <span class="ro">la Facultatea de Istorie</span> · <span class="ro">pe scaun</span> ◂ <span class="ro">pe scaunul alb</span> · <span class="ro">în parc</span> ◂ <span class="ro">în parcul din cartier</span>. שני הטריגרים האחרונים הם אותו כלל משני הצדדים.</div>
         <div class="rmfull"><b>‏cu הוא היוצא מן הכלל בין מילות היחס:</b> אחרי <span class="ro">cu</span> עם כלי או תחבורה כן מיידעים (<span class="ro">cu autobuzul</span>, <span class="ro">cu mașina mea</span>), ואחרי <span class="ro">cu</span> עם חומר לא (<span class="ro">cafea cu zahăr</span>). הפירוט: <a class="xref" href="#prep18t">מילות היחס מדף שיעורי הבית</a>.</div>
       </div>
@@ -4005,7 +4001,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <h3>צורה אחת · <span class="ro">Adjective invariabile</span></h3>
   <div class="rule">
     <div class="ttl">REGULA · לא זזים לעולם</div>
-  <p class="rl"><span class="ro big">bej</span> · <span class="ro big">bleu</span> · <span class="ro big">bleumarin</span> · <span class="ro big">gri</span> · <span class="ro big">maro</span> · <span class="ro big">roz</span> · <span class="ro big">kaki</span> · <span class="ro big">mov</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">bej</span></span><span class="chip"><span class="ro">bleu</span></span><span class="chip"><span class="ro">bleumarin</span></span><span class="chip"><span class="ro">gri</span></span><span class="chip"><span class="ro">maro</span></span><span class="chip"><span class="ro">roz</span></span><span class="chip"><span class="ro">kaki</span></span><span class="chip"><span class="ro">mov</span></span></span></p>
   <p class="rl">כולם צבעים, וכולם מילים שאולות. אותה מילה בדיוק בכל ארבעת התאים: <span class="ro">un tricou roz - două tricouri roz</span> · <span class="ro">o geantă maro - două genți maro</span></p>
   <p class="rl">זה לא חוסר, זו מתנה: אלה שמונת התארים היחידים בשיעור שאי אפשר לטעות בהם</p>
 </div>
@@ -4087,7 +4083,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <div class="note">
   <p class="rl">‏<b>‏<span class="ro">greu</span> היא שתי מילים בעברית.</b> ‏<span class="ro">Televizorul este greu.</span> <span class="he">הטלוויזיה כבדה</span> - משקל. ‏<span class="ro">Limba română este grea.</span> <span class="he">רומנית קשה</span> - קושי. וברבים: <span class="ro">Pepenii sunt grei.</span> <span class="he">האבטיחים כבדים</span> · <span class="ro">Limbile străine sunt grele.</span> <span class="he">שפות זרות קשות</span></p>
   <p class="rl">וההפך של <span class="ro">greu</span> הוא <span class="ro">ușor</span> - בשתי המשמעויות גם יחד</p>
-  <p class="rl">‏<span class="ro">Copil rău</span> · <span class="ro">fată rea</span> · <span class="ro">copii răi</span> · <span class="ro">fete rele</span> - ההדגמה המלאה מהשיעור</p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">Copil rău</span></span><span class="chip"><span class="ro">fată rea</span></span><span class="chip"><span class="ro">copii răi</span></span><span class="chip"><span class="ro">fete rele</span></span></span> - ההדגמה המלאה מהשיעור</p>
 </div>
 
   <div class="seealso">↗ קשור: <a href="#adjectiv15">ארבע משפחות התואר</a> · <a href="#adjref">מאגר התארים לפי משפחה</a> · <a href="#plural-soft">ריכוך העיצור ברבים</a> · <a href="#transform14">מה קורה בתוך גזע הפועל</a> · <a href="#acord15">ההסכמה בפועל</a></div>
@@ -4430,7 +4426,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
         <div class="rmc key">גם cel וגם התואר</div>
         <div class="rmc dim">רק התואר</div>
 
-        <div class="rmfull"><b>בסופרלטיב היחסי יש שתי הסכמות במקום אחת.</b> ‏<span class="ro">cel / cea / cei / cele</span> מסתכלת על <b>שם העצם</b> - לא על התואר ולא על מי שמדבר: <span class="ro">cel mai frumos băiat</span> · <span class="ro">cea mai frumoasă fată</span> · <span class="ro">cei mai inteligenți profesori</span> · <span class="ro">cele mai bune eleve</span>. הרמז: ‏<b>l</b> בסוף = זכר (כמו ‎-ul), ‏<b>a</b> בסוף = נקבה, ‏<b>i</b> = זכר רבים, ‏<b>le</b> = נקבה רבים.</div>
+        <div class="rmfull"><b>בסופרלטיב היחסי יש שתי הסכמות במקום אחת.</b> ‏<span class="ro">cel / cea / cei / cele</span> מסתכלת על <b>שם העצם</b> - לא על התואר ולא על מי שמדבר: <span class="chips"><span class="chip"><span class="ro">cel mai frumos băiat</span></span><span class="chip"><span class="ro">cea mai frumoasă fată</span></span><span class="chip"><span class="ro">cei mai inteligenți profesori</span></span><span class="chip"><span class="ro">cele mai bune eleve</span></span></span>. הרמז: ‏<b>l</b> בסוף = זכר (כמו ‎-ul), ‏<b>a</b> בסוף = נקבה, ‏<b>i</b> = זכר רבים, ‏<b>le</b> = נקבה רבים.</div>
         <div class="rmfull"><b>המוחלט לא משווה, ולכן אין לו "אחרי".</b> ‏<span class="ro">foarte</span> הוא הרגיל; <span class="ro">extraordinar de</span>, <span class="ro">nemaipomenit de</span>, <span class="ro">grozav de</span> - נרדפים מוגברים; והתחיליות <b dir="ltr">arhi- / super- / ultra-</b> מודבקות ישירות למילה: <span class="ro">arhiplin</span>, <span class="ro">superinteligent</span>, <span class="ro">ultrarapid</span>. כשרואים אחת מהן - זה "מאוד מאוד".</div>
       </div>
     </div>
@@ -4954,7 +4950,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <div class="ttl">REGULA · nu mai = כבר לא</div>
   <p class="rl">שתי מילים נפרדות: ה-<span class="ro">nu</span> ששוללת את הפועל, ואחריה <span class="ro">mai</span>. יחד הן אומרות שמשהו <b>הפסיק</b>:</p>
   <p class="rl"><span class="ro">Nu mai vreau apă.</span> <span class="he">אני כבר לא רוצה מים.</span> · <span class="ro">Nu mai vorbesc.</span> <span class="he">אני כבר לא מדבר.</span> · <span class="ro">Nu mai tac.</span> <span class="he">אני כבר לא שותק.</span></p>
-  <p class="rl">והיא נוטה בכל הגופים, כי מה שנוטה זה הפועל: <span class="ro">Tu nu mai citești română?</span> · <span class="ro">Nu mai învăț matematică.</span> · <span class="ro">Nu mai mănânc pâine.</span> · <span class="ro">Noi nu mai vorbim.</span> · <span class="ro">Tu nu mai ești acolo?</span></p>
+  <p class="rl">והיא נוטה בכל הגופים, כי מה שנוטה זה הפועל: <span class="chips"><span class="chip"><span class="ro">Tu nu mai citești română?</span></span><span class="chip"><span class="ro">Nu mai învăț matematică.</span></span><span class="chip"><span class="ro">Nu mai mănânc pâine.</span></span><span class="chip"><span class="ro">Noi nu mai vorbim.</span></span><span class="chip"><span class="ro">Tu nu mai ești acolo?</span></span></span></p>
 </div>
 
   <div class="note">
@@ -5102,7 +5098,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     </tr>
     <tr>
       <td><span class="ro big">Cameră DE</span><br><span class="he">חדר / לשכת-</span></td>
-      <td><span class="ro">comerț</span> <span class="he">(לשכת מסחר)</span> · <span class="ro">zi</span> <span class="he">(חדר יום)</span> · <span class="ro">hotel</span> · <span class="ro">cămin</span> <span class="he">(מעונות)</span></td>
+      <td><span class="chips"><span class="chip"><span class="ro">comerț</span><span class="he">(לשכת מסחר)</span></span><span class="chip"><span class="ro">zi</span><span class="he">(חדר יום)</span></span><span class="chip"><span class="ro">hotel</span></span><span class="chip"><span class="ro">cămin</span><span class="he">(מעונות)</span></span></span></td>
     </tr>
     <tr>
       <td><span class="ro big">Poliție DE</span></td>
@@ -5116,18 +5112,12 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">DE של סיבה ורגש - מההערות הירוקות</div>
-  <p class="rl"><span class="ro">Plânge de fericire.</span> <span class="he">בוכה מאושר.</span> ·
-    <span class="ro">A plecat de supărare.</span> <span class="he">עזב מרוב כעס.</span> ·
-    <span class="ro">A plecat de tot.</span> <span class="he">עזב לגמרי / לתמיד.</span> ·
-    <span class="ro">În loc de mama, vine tata.</span> <span class="he">במקום אמא, בא אבא.</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">Plânge de fericire.</span><span class="he">בוכה מאושר.</span></span><span class="chip"><span class="ro">A plecat de supărare.</span><span class="he">עזב מרוב כעס.</span></span><span class="chip"><span class="ro">A plecat de tot.</span><span class="he">עזב לגמרי / לתמיד.</span></span><span class="chip"><span class="ro">În loc de mama, vine tata.</span><span class="he">במקום אמא, בא אבא.</span></span></span></p>
 </div>
 
   <div class="card">
     <b>פעלים שצצו אגב הדיון:</b>
-    <span class="ro">a pleca</span> <span class="he">לעזוב, לצאת</span> ·
-    <span class="ro">a merge</span> <span class="he">ללכת</span> ·
-    <span class="ro">a se duce</span> <span class="he">ללכת (אל)</span> ·
-    <span class="ro">a plăcea</span> <span class="he">למצוא חן</span>
+    <span class="chips"><span class="chip"><span class="ro">a pleca</span><span class="he">לעזוב, לצאת</span></span><span class="chip"><span class="ro">a merge</span><span class="he">ללכת</span></span><span class="chip"><span class="ro">a se duce</span><span class="he">ללכת (אל)</span></span><span class="chip"><span class="ro">a plăcea</span><span class="he">למצוא חן</span></span></span>
   </div>
   <div class="seealso">↗ קשור: <a href="#data7">de של הזמן</a> · <a href="#nations">תחומי הלימוד בפעולה</a></div>
 </section>
@@ -5138,9 +5128,25 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · de la = מנקודה · din = מתוך</div>
-  <p class="rl">‏<span class="ro big">de la</span> - בא <b>מ</b>מקום, מנקודה לנקודה: <span class="ro">A venit de la birou.</span> · <span class="ro">de la serviciu</span> · <span class="ro">de la magazin</span> · <span class="ro">de la piață</span> · <span class="ro">de la mare, de la munte</span> · <span class="ro">de la București</span> · <span class="ro">de la mama</span></p>
-  <p class="rl">‏<span class="ro big">din</span> - יוצא <b>מתוך</b>, מבפנים החוצה: <span class="ro">A ieșit din birou.</span> · <span class="ro">a coborât din avion</span> · <span class="ro">scoate cartea din geantă</span> · וגם מוצא: <span class="ro">Sunt din Israel.</span></p>
-  <p class="rl">אין <span class="ro">din la</span>. "הוא בא מהמשרד" הוא <span class="ro">de la birou</span>; "הוא יצא מהמשרד" הוא <span class="ro">din birou</span>. הפועל מכריע: <span class="ro">a veni</span> ◂ <span class="ro">de la</span>, ‏<span class="ro">a ieși</span> ◂ <span class="ro">din</span></p>
+  <p class="rl"><span class="ro big">de la</span> - בא <b>מ</b>מקום, מנקודה לנקודה. הפועל שמזמין אותה: <span class="ro">a veni</span>
+  <span class="chips">
+    <span class="chip"><span class="ro">A venit de la birou.</span><span class="he">הוא בא מהמשרד</span></span>
+    <span class="chip"><span class="ro">de la serviciu</span><span class="he">מהעבודה</span></span>
+    <span class="chip"><span class="ro">de la magazin</span><span class="he">מהחנות</span></span>
+    <span class="chip"><span class="ro">de la piață</span><span class="he">מהשוק</span></span>
+    <span class="chip"><span class="ro">de la mare</span><span class="he">מהים</span></span>
+    <span class="chip"><span class="ro">de la munte</span><span class="he">מההר</span></span>
+    <span class="chip"><span class="ro">de la București</span><span class="he">מבוקרשט</span></span>
+    <span class="chip"><span class="ro">de la mama</span><span class="he">מאמא</span></span>
+  </span></p>
+  <p class="rl"><span class="ro big">din</span> - יוצא <b>מתוך</b>, מבפנים החוצה - וגם מוצא. הפועל שמזמין אותה: <span class="ro">a ieși</span>
+  <span class="chips">
+    <span class="chip"><span class="ro">A ieșit din birou.</span><span class="he">הוא יצא מהמשרד</span></span>
+    <span class="chip"><span class="ro">a coborât din avion</span><span class="he">ירד מהמטוס</span></span>
+    <span class="chip"><span class="ro">scoate cartea din geantă</span><span class="he">מוציא את הספר מהתיק</span></span>
+    <span class="chip"><span class="ro">Sunt din Israel.</span><span class="he">אני מישראל (מוצא)</span></span>
+  </span></p>
+  <p class="rl">אין <span class="ro">din la</span>. "הוא בא מהמשרד" הוא <span class="ro">de la birou</span>; "הוא יצא מהמשרד" הוא <span class="ro">din birou</span>. הפועל מכריע</p>
 </div>
 
   <table>
@@ -5305,14 +5311,14 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · cu עם יידוע או בלי - תלוי מה זה</div>
-  <p class="rl"><b>כלי, תחבורה, חברה</b> - <b>עם</b> יידוע (או un/o): <span class="ro">Scriu cu pixul.</span> · <span class="ro">Tai pâinea cu cuțitul.</span> · <span class="ro">Mergem la facultate cu tramvaiul.</span> · <span class="ro">Plec la mare cu prietenii.</span> · <span class="ro">Vorbește la telefon cu bunicii.</span></p>
-  <p class="rl"><b>חומר, מרכיב</b> - <b>בלי</b> יידוע: <span class="ro">două pahare cu vin</span> · <span class="ro">o prăjitură cu frișcă</span> · <span class="ro">Bea cafeaua cu zahăr.</span> · <span class="ro">Spală hainele cu detergent.</span> · <span class="ro">un sandviș cu brânză</span></p>
+  <p class="rl"><b>כלי, תחבורה, חברה</b> - <b>עם</b> יידוע (או un/o): <span class="chips"><span class="chip"><span class="ro">Scriu cu pixul.</span></span><span class="chip"><span class="ro">Tai pâinea cu cuțitul.</span></span><span class="chip"><span class="ro">Mergem la facultate cu tramvaiul.</span></span><span class="chip"><span class="ro">Plec la mare cu prietenii.</span></span><span class="chip"><span class="ro">Vorbește la telefon cu bunicii.</span></span></span></p>
+  <p class="rl"><b>חומר, מרכיב</b> - <b>בלי</b> יידוע: <span class="chips"><span class="chip"><span class="ro">două pahare cu vin</span></span><span class="chip"><span class="ro">o prăjitură cu frișcă</span></span><span class="chip"><span class="ro">Bea cafeaua cu zahăr.</span></span><span class="chip"><span class="ro">Spală hainele cu detergent.</span></span><span class="chip"><span class="ro">un sandviș cu brânză</span></span></span></p>
   <p class="rl">המבחן: "עם מה" שאפשר לספור - מיודע; "ממה עשוי" - לא. ‏<span class="ro">cu mașina mea</span> (התחבורה) לעומת <span class="ro">cafea cu lapte</span> (המרכיב)</p>
 </div>
 
   <table>
     <tr><th style="width:14%">המילה</th><th style="width:16%">עברית</th><th>דוגמאות</th></tr>
-    <tr><td><span class="ro big">fără</span></td><td>בלי</td><td><span class="ro">Nu plec fără el.</span> · <span class="ro">Această cafea este fără zahăr.</span> · <span class="ro">A venit la școală fără manuale.</span> · <span class="ro">E ora nouă fără un sfert.</span> <span class="he">(תשע פחות רבע - ההפך של <span class="ro">și un sfert</span>)</span></td></tr>
+    <tr><td><span class="ro big">fără</span></td><td>בלי</td><td><span class="chips"><span class="chip"><span class="ro">Nu plec fără el.</span></span><span class="chip"><span class="ro">Această cafea este fără zahăr.</span></span><span class="chip"><span class="ro">A venit la școală fără manuale.</span></span><span class="chip"><span class="ro">E ora nouă fără un sfert.</span><span class="he">(תשע פחות רבע - ההפך של <span class="ro">și un sfert</span></span></span>)</span></td></tr>
     <tr><td><span class="ro big">despre</span></td><td>על, אודות</td><td><span class="ro">Vorbim despre examen.</span> · <span class="ro">Această carte este despre România.</span> · <span class="ro">Nu mai știu nimic despre foștii colegi de liceu.</span> <span class="he">(<span class="ro">foștii</span> = לשעבר, מה-participiu של <span class="ro">a fi</span>!)</span></td></tr>
     <tr><td><span class="ro big">după</span></td><td>אחרי · מאחורי · בשביל</td><td><b>מקום:</b> <span class="ro">După colț este o librărie.</span> · <span class="ro">Umbrela este după ușă.</span> <b>זמן:</b> <span class="ro">După cursuri rămânem la bibliotecă.</span> · <span class="ro">Sosim după ora șase.</span> <b>מטרה:</b> <span class="ro">Pleacă după cumpărături.</span> <span class="he">(יוצא לקניות)</span></td></tr>
     <tr><td><span class="ro big">peste</span></td><td>מעל · מעבר ל- · בעוד</td><td><b>מקום:</b> <span class="ro">Peste râu este un pod.</span> · <span class="ro">Avionul zboară peste munți.</span> <b>זמן:</b> <span class="ro">Plecăm peste două zile.</span> <span class="he">(בעוד יומיים - ההפך של <span class="ro">acum două zile</span>)</span></td></tr>
@@ -5407,9 +5413,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · מילת השאלה פותחת, הפועל בא מיד אחריה</div>
-  <p class="rl"><span class="ro big">De când aștepți?</span> · <span class="ro big">Când pleci?</span> · <span class="ro big">Cu cine joci?</span> ·
-    <span class="ro big">Ce cumperi?</span> · <span class="ro big">Cine intră?</span> · <span class="ro big">Despre ce discutați?</span> ·
-    <span class="ro big">Unde cânți?</span> · <span class="ro big">De unde cobori?</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">De când aștepți?</span></span><span class="chip"><span class="ro">Când pleci?</span></span><span class="chip"><span class="ro">Cu cine joci?</span></span><span class="chip"><span class="ro">Ce cumperi?</span></span><span class="chip"><span class="ro">Cine intră?</span></span><span class="chip"><span class="ro">Despre ce discutați?</span></span><span class="chip"><span class="ro">Unde cânți?</span></span><span class="chip"><span class="ro">De unde cobori?</span></span></span></p>
   <p class="rl">כשמילת השאלה באה עם מילת יחס (<span class="ro">cu cine · despre ce · de unde · de când</span>) - השתיים נוסעות יחד, כגוף אחד, ורק אחריהן הפועל</p>
 </div>
 
@@ -5569,13 +5573,13 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <span class="pair"><span class="ro">între</span><span class="vs">·</span><span class="he">בין</span></span>
   </div>
   <div class="card">
-  <p class="rl"><span class="ro">Pisica este pe cutie.</span> <span class="he">החתול על הקופסה.</span> · <span class="ro">Pisica este în cutie.</span> <span class="he">בתוך הקופסה.</span> · <span class="ro">Pisica este sub cutie.</span> <span class="he">מתחת לקופסה.</span> · <span class="ro">Pisica este lângă cutie.</span> <span class="he">ליד הקופסה.</span> · <span class="ro">Pisica este între cutii.</span> <span class="he">בין הקופסאות - וזה מסביר למה pe ↔ sub הופיעו כ<a class="xref" href="#preps10">צמד הפוך</a>.</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">Pisica este pe cutie.</span><span class="he">החתול על הקופסה.</span></span><span class="chip"><span class="ro">Pisica este în cutie.</span><span class="he">בתוך הקופסה.</span></span><span class="chip"><span class="ro">Pisica este sub cutie.</span><span class="he">מתחת לקופסה.</span></span><span class="chip"><span class="ro">Pisica este lângă cutie.</span><span class="he">ליד הקופסה.</span></span><span class="chip"><span class="ro">Pisica este între cutii.</span><span class="he">בין הקופסאות - וזה מסביר למה pe ↔ sub הופיעו כ<a class="xref" href="#preps10">צמד הפוך</a>.</span></span></span></p>
 </div>
 
   <h3>חמש מילות יחס שהטקסטים מלאים בהן</h3>
   <table>
     <tr><th style="width:14%">המילה</th><th>בפעולה</th></tr>
-    <tr><td><span class="ro big">de</span></td><td><span class="ro">profesor de istorie</span> · <span class="ro">carte de biologie</span> · <span class="ro">coș de fructe</span> <span class="he">שיוך ותוכן - <a class="xref" href="#dela">DE או LA</a></span> · <span class="ro">Ea are 25 de ani.</span> <span class="he">ומעל 19 - תמיד de לפני שם העצם</span></td></tr>
+    <tr><td><span class="ro big">de</span></td><td><span class="chips"><span class="chip"><span class="ro">profesor de istorie</span></span><span class="chip"><span class="ro">carte de biologie</span></span><span class="chip"><span class="ro">coș de fructe</span><span class="he">שיוך ותוכן - <a class="xref" href="#dela">DE או LA</a></span></span><span class="chip"><span class="ro">Ea are 25 de ani.</span><span class="he">ומעל 19 - תמיד de לפני שם העצם</span></span></span></td></tr>
     <tr><td><span class="ro big">cu</span></td><td><span class="ro">cafea cu lapte</span> <span class="he">קפה עם חלב</span> · <span class="ro">Eu scriu cu pixul negru.</span> <span class="he">האמצעי</span> · <span class="ro">El vorbește cu Victor.</span> <span class="he">השותף</span></td></tr>
     <tr><td><span class="ro big">despre</span></td><td><span class="ro">Lecția este despre adjectiv.</span> · <span class="ro">Noi vorbim despre examen.</span> <span class="he">על, אודות - הנושא שמדברים עליו</span></td></tr>
     <tr><td><span class="ro big">din</span></td><td><span class="ro">El este din Siria.</span> <span class="he">מוצא - וזה בעצם de + în, תכף נראה</span></td></tr>
@@ -5734,8 +5738,8 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">REGULA · הסיומת של שם המדינה קובעת את המין</div>
-  <p class="rl">נגמר ב<b>עיצור</b> ◂ זכר, ומקבל ‎<b>-ul</b> כשהוא נושא מיודע: <span class="ro">Israelul</span> · <span class="ro">Ciprul</span> · <span class="ro">Uruguayul</span> · <span class="ro">Iranul</span> · <span class="ro">Egiptul</span></p>
-  <p class="rl">נגמר ב-<b>a</b> ◂ נקבה, וה-a כבר מיודעת: <span class="ro">România</span> · <span class="ro">Ungaria</span> · <span class="ro">Bulgaria</span> · <span class="ro">Italia</span> · <span class="ro">Franța</span> · <span class="ro">Germania</span> - רוב המדינות</p>
+  <p class="rl">נגמר ב<b>עיצור</b> ◂ זכר, ומקבל ‎<b>-ul</b> כשהוא נושא מיודע: <span class="chips"><span class="chip"><span class="ro">Israelul</span></span><span class="chip"><span class="ro">Ciprul</span></span><span class="chip"><span class="ro">Uruguayul</span></span><span class="chip"><span class="ro">Iranul</span></span><span class="chip"><span class="ro">Egiptul</span></span></span></p>
+  <p class="rl">נגמר ב-<b>a</b> ◂ נקבה, וה-a כבר מיודעת: <span class="chips"><span class="chip"><span class="ro">România</span></span><span class="chip"><span class="ro">Ungaria</span></span><span class="chip"><span class="ro">Bulgaria</span></span><span class="chip"><span class="ro">Italia</span></span><span class="chip"><span class="ro">Franța</span></span><span class="chip"><span class="ro">Germania</span></span></span> - רוב המדינות</p>
   <p class="rl">התואר מסכים עם המין: <span class="ro">Ungaria este frumoasă.</span> · <span class="ro">Israelul este mic.</span> · <span class="ro">Ciprul este mai puțin frumos ca România.</span></p>
 </div>
 
@@ -5824,10 +5828,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="note">
   <p class="rl"><b>גיאוגרפיה על הדרך:</b>
-    <span class="ro">munte</span> <span class="he">הר</span> ·
-    <span class="ro">deal</span> <span class="he">גבעה</span> ·
-    <span class="ro">câmpie</span> <span class="he">מישור</span> ·
-    <span class="ro">depresiune</span> <span class="he">עמק</span></p>
+    <span class="chips"><span class="chip"><span class="ro">munte</span><span class="he">הר</span></span><span class="chip"><span class="ro">deal</span><span class="he">גבעה</span></span><span class="chip"><span class="ro">câmpie</span><span class="he">מישור</span></span><span class="chip"><span class="ro">depresiune</span><span class="he">עמק</span></span></span></p>
 </div>
   <div class="note">
   <p class="rl"><b>תוספות משיעור 7:</b>
@@ -5941,10 +5942,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="note">
   <p class="rl"><b>מילות תפקוד קטנות שהופיעו בתרגול:</b>
-    <span class="ro">dacă</span> <span class="he">אם</span> ·
-    <span class="ro">deci</span> <span class="he">אז, כלומר</span> ·
-    <span class="ro">peste</span> <span class="he">מעל, מעבר; בעוד (peste o săptămână = בעוד שבוע)</span> ·
-    <span class="ro">a fost</span> <span class="he">היה</span> ·
+    <span class="chips"><span class="chip"><span class="ro">dacă</span><span class="he">אם</span></span><span class="chip"><span class="ro">deci</span><span class="he">אז, כלומר</span></span><span class="chip"><span class="ro">peste</span><span class="he">מעל, מעבר; בעוד (peste o săptămână = בעוד שבוע)</span></span><span class="chip"><span class="ro">a fost</span><span class="he">היה</span></span></span> ·
     וההרכבות המוכרות: <span class="ro">într-o / dintr-o · până · niște</span> -
     <a class="xref" href="#intr">ראו într-un/dintr-o</a></p>
 </div>
@@ -6172,14 +6170,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 
   <div class="rule">
     <div class="ttl">הצבעים שלא משתנים אף פעם</div>
-  <p class="rl"><span class="ro big">roz</span> <span class="he">ורוד</span> ·
-    <span class="ro big">gri</span> <span class="he">אפור</span> ·
-    <span class="ro big">maro</span> <span class="he">חום</span> ·
-    <span class="ro big">bej</span> <span class="he">בז'</span> ·
-    <span class="ro big">mov</span> <span class="he">סגול</span> ·
-    <span class="ro big">bleu</span> <span class="he">תכלת</span> ·
-    <span class="ro big">bleumarin</span> <span class="he">כחול כהה</span> ·
-    <span class="ro big">kaki</span> <span class="he">חאקי</span> -
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">roz</span><span class="he">ורוד</span></span><span class="chip"><span class="ro">gri</span><span class="he">אפור</span></span><span class="chip"><span class="ro">maro</span><span class="he">חום</span></span><span class="chip"><span class="ro">bej</span><span class="he">בז'</span></span><span class="chip"><span class="ro">mov</span><span class="he">סגול</span></span><span class="chip"><span class="ro">bleu</span><span class="he">תכלת</span></span><span class="chip"><span class="ro">bleumarin</span><span class="he">כחול כהה</span></span><span class="chip"><span class="ro">kaki</span><span class="he">חאקי</span></span></span> -
     צורה אחת לכל המינים והמספרים: <span class="ro">un tricou roz, două genți gri, pantofi maro</span></p>
   <p class="rl">שמונה במספר, וכולם מילים שאולות. זו <a class="xref" href="#adjectiv15">משפחת התואר הרביעית</a> - זו שאין בה מה ללמוד</p>
 </div>
@@ -6194,14 +6185,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <div class="note">
   <p class="rl"><b>מלכודת חמודה משיעור 6:</b> <span class="ro">roșie</span> היא גם "אדומה" וגם "עגבנייה" - ולכן אפשר לומר
     <span class="ro">o roșie roșie - două roșii roșii</span> <span class="he">(עגבנייה אדומה - שתי עגבניות אדומות)</span></p>
-  <p class="rl">ועוד מהשיעור: <span class="ro">o umbrelă roșie</span> <span class="he">מטרייה</span> ·
-    <span class="ro">o banană galbenă</span> ·
-    <span class="ro">o șapcă albastră</span> <span class="he">כובע מצחייה</span> ·
-    <span class="ro">un rucsac albastru</span> <span class="he">תיק גב</span> ·
-    <span class="ro">o cravată neagră</span> <span class="he">עניבה</span> ·
-    <span class="ro">o țelină verde</span> <span class="he">סלרי</span> ·
-    <span class="ro">o conopidă albă</span> <span class="he">כרובית</span> ·
-    <span class="ro">un păstârnac alb</span> <span class="he">גזר לבן</span></p>
+  <p class="rl">ועוד מהשיעור: <span class="chips"><span class="chip"><span class="ro">o umbrelă roșie</span><span class="he">מטרייה</span></span><span class="chip"><span class="ro">o banană galbenă</span></span><span class="chip"><span class="ro">o șapcă albastră</span><span class="he">כובע מצחייה</span></span><span class="chip"><span class="ro">un rucsac albastru</span><span class="he">תיק גב</span></span><span class="chip"><span class="ro">o cravată neagră</span><span class="he">עניבה</span></span><span class="chip"><span class="ro">o țelină verde</span><span class="he">סלרי</span></span><span class="chip"><span class="ro">o conopidă albă</span><span class="he">כרובית</span></span><span class="chip"><span class="ro">un păstârnac alb</span><span class="he">גזר לבן</span></span></span></p>
 </div>
 
   <div class="seealso">↗ קשור: <a href="#culori15">שתי הדרכים להגיד צבע</a> · <a href="#aspect15">עיניים, שיער ומראה</a> · <a href="#alimente15">צבעי המאכלים</a> · <a href="#adjectiv15">שם התואר</a></div>
@@ -6216,7 +6200,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
   <p class="rl">‏<span class="ro big">X are culoarea …</span> - התואר מסכים עם <span class="ro">culoarea</span>, שהיא <b>תמיד נקבה יחיד</b>. לכן הצורה קפואה:</p>
   <p class="rl"><span class="ro">Peretele are culoarea galben<b>ă</b>.</span> <span class="he">הקיר בצבע צהוב.</span> · <span class="ro">Ușa are culoarea galben<b>ă</b>.</span> <span class="he">הדלת בצבע צהוב.</span> - אותה מילה, למרות ששם העצם שונה במין</p>
   <p class="rl">‏<span class="ro big">X este …</span> - התואר מסכים עם <b>שם העצם עצמו</b>, ולכן זז:</p>
-  <p class="rl"><span class="ro">Peretele este galben.</span> · <span class="ro">Pereții sunt galbeni.</span> · <span class="ro">Ușa este galbenă.</span> · <span class="ro">Ușile sunt galbene.</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">Peretele este galben.</span></span><span class="chip"><span class="ro">Pereții sunt galbeni.</span></span><span class="chip"><span class="ro">Ușa este galbenă.</span></span><span class="chip"><span class="ro">Ușile sunt galbene.</span></span></span></p>
 </div>
 
   <div class="note">
@@ -7300,14 +7284,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <span class="ro big">în prim plan</span> <span class="he">בחזית, בקדמת התמונה</span> ·
     <span class="ro">afară</span> <span class="he">בחוץ</span></p>
   <p class="rl"><b>ואוצר מילים חדש:</b>
-    <span class="ro">clădire</span> <span class="he">בניין</span> ·
-    <span class="ro">magazin iluminat</span> <span class="he">חנות מוארת</span> ·
-    <span class="ro">cafenea</span> <span class="he">בית קפה</span> ·
-    <span class="ro">fustă</span> <span class="he">חצאית</span> ·
-    <span class="ro">sacou</span> <span class="he">ז'קט חליפה</span> ·
-    <span class="ro">costum</span> <span class="he">חליפה</span> ·
-    <span class="ro">umbrelă de soare</span> <span class="he">שמשייה</span> ·
-    <span class="ro">a se plimba</span> <span class="he">לטייל, לשוטט</span></p>
+    <span class="chips"><span class="chip"><span class="ro">clădire</span><span class="he">בניין</span></span><span class="chip"><span class="ro">magazin iluminat</span><span class="he">חנות מוארת</span></span><span class="chip"><span class="ro">cafenea</span><span class="he">בית קפה</span></span><span class="chip"><span class="ro">fustă</span><span class="he">חצאית</span></span><span class="chip"><span class="ro">sacou</span><span class="he">ז'קט חליפה</span></span><span class="chip"><span class="ro">costum</span><span class="he">חליפה</span></span><span class="chip"><span class="ro">umbrelă de soare</span><span class="he">שמשייה</span></span><span class="chip"><span class="ro">a se plimba</span><span class="he">לטייל, לשוטט</span></span></span></p>
 </div>
   <div class="seealso">↗ קשור: <a href="#colref">צבעים</a> · <a href="#iarna8">ביגוד</a> · <a href="#relief8">נוף ועיר</a> · <a href="#anotimp7">עונות</a></div>
 </section>
@@ -7557,13 +7534,7 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
     <div class="qgroup"><span class="qt">ברכות מהגלגל:</span> <span class="ro">Bună ziua! · Bună dimineața! · Bună seara! · Noapte bună! · Somn ușor! · Vise plăcute! · Bună! · Salut! · Noroc! · O zi bună! · O seară bună! · Pe curând! · Pe mâine! · Pe deseară!</span></div>
   </div>
   <div class="note">
-  <p class="rl">מילים חדשות שהתגנבו דרך הגלגל: <span class="ro">a locui</span> <span class="he">לגור</span> ·
-    <span class="ro">acasă</span> <span class="he">בבית</span> ·
-    <span class="ro">serviciu</span> <span class="he">עבודה</span> ·
-    <span class="ro">pahar</span> <span class="he">כוס</span> ·
-    <span class="ro">sticlă</span> <span class="he">בקבוק</span> ·
-    <span class="ro">suc</span> <span class="he">מיץ</span> ·
-    <span class="ro">apă</span> <span class="he">מים</span> ·
+  <p class="rl">מילים חדשות שהתגנבו דרך הגלגל: <span class="chips"><span class="chip"><span class="ro">a locui</span><span class="he">לגור</span></span><span class="chip"><span class="ro">acasă</span><span class="he">בבית</span></span><span class="chip"><span class="ro">serviciu</span><span class="he">עבודה</span></span><span class="chip"><span class="ro">pahar</span><span class="he">כוס</span></span><span class="chip"><span class="ro">sticlă</span><span class="he">בקבוק</span></span><span class="chip"><span class="ro">suc</span><span class="he">מיץ</span></span><span class="chip"><span class="ro">apă</span><span class="he">מים</span></span></span> ·
     וגם <span class="ro">câtă / cât</span> - "כמה" לכמויות לא ספירות (מים, מיץ), בנקבה ובזכר</p>
 </div>
 
@@ -8395,7 +8366,7 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
   <h3>מילות הקישור של הרצף</h3>
   <div class="rule">
     <div class="ttl">REGULA · ארבע דרכים לומר "אחר כך"</div>
-  <p class="rl"><span class="ro big">după aceea</span> · <span class="ro big">apoi</span> · <span class="ro big">pe urmă</span> · <span class="ro big">după care</span> - כולן אותו דבר בדיוק</p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">după aceea</span></span><span class="chip"><span class="ro">apoi</span></span><span class="chip"><span class="ro">pe urmă</span></span><span class="chip"><span class="ro">după care</span></span></span> - כולן אותו דבר בדיוק</p>
   <p class="rl">‏<span class="ro">după aceea</span> מילולית "אחרי ההיא" - וזו הצורה הנפוצה ביותר</p>
   <p class="rl">ולחזרה: <span class="ro big">din nou</span> <span class="he">מחדש</span> · <span class="ro big">iar</span> <span class="he">שוב</span>. ‏<span class="ro">După cină lucrez din nou.</span> = <span class="ro">Lucrez iar.</span></p>
 </div>
@@ -8405,7 +8376,7 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
     <tr><th style="width:24%">הפועל</th><th style="width:18%">גוף ראשון</th><th>ההערה מהשיעור</th></tr>
     <tr><td><span class="ro">a se trezi</span> <span class="he">להתעורר</span></td><td><span class="ro">mă trezesc</span></td><td>פועל חוזר - ראו <a class="xref" href="#reflex11">הפועל החוזר</a></td></tr>
     <tr><td><span class="ro">a mânca</span> <span class="he">לאכול</span></td><td><span class="ro">mănânc</span></td><td>תקין לגמרי, אבל ברומנית יומיומית מעדיפים את <span class="ro">a lua</span></td></tr>
-    <tr><td><span class="ro">a lua</span> <span class="he">לקחת</span></td><td><span class="ro">iau</span></td><td><span class="ro">iau masa</span> · <span class="ro">iau micul dejun</span> · <span class="ro">iau prânzul</span> · <span class="ro">iau cina</span> - "לוקח ארוחה". נכתב <span class="ro">i-a-u</span></td></tr>
+    <tr><td><span class="ro">a lua</span> <span class="he">לקחת</span></td><td><span class="ro">iau</span></td><td><span class="chips"><span class="chip"><span class="ro">iau masa</span></span><span class="chip"><span class="ro">iau micul dejun</span></span><span class="chip"><span class="ro">iau prânzul</span></span><span class="chip"><span class="ro">iau cina</span></span></span> - "לוקח ארוחה". נכתב <span class="ro">i-a-u</span></td></tr>
     <tr><td><span class="ro">a lucra</span> <span class="he">לעבוד</span></td><td><span class="ro">lucrez</span></td><td>קבוצה I עם <a class="xref" href="#verbeez12">‎-ez</a></td></tr>
     <tr><td><span class="ro">a munci</span> <span class="he">לעבוד</span></td><td><span class="ro">muncesc</span></td><td>קבוצה IV עם <b>-esc</b>. אותה משמעות בדיוק - שתיהן קיימות רק כדי לגוון</td></tr>
     <tr><td><span class="ro">a începe</span> <span class="he">להתחיל</span></td><td><span class="ro">încep</span></td><td><span class="ro">Încep să lucrez</span> - עם <a class="xref" href="#conjunctiv15">să</a></td></tr>
@@ -8673,7 +8644,7 @@ a hotărî → hotărăsc, hotărăști, hotărăște, hotărâm, hotărâți, h
   <div class="rule">
     <div class="ttl">שמונה מילות הכיוון מהשקף</div>
   <p class="rl"><span class="ro big">înainte</span> <span class="he">ישר</span> ◂ <span class="ro">mergi drept</span> · <span class="ro big">la stânga</span> <span class="he">שמאלה</span> ◂ <span class="ro">ia-o la stânga</span> · <span class="ro big">la dreapta</span> <span class="he">ימינה</span> ◂ <span class="ro">ia-o la dreapta</span></p>
-  <p class="rl"><span class="ro big">lângă</span> <span class="he">ליד</span> · <span class="ro big">în fața</span> <span class="he">מול, לפני</span> · <span class="ro big">între</span> <span class="he">בין</span> · <span class="ro big">aproape</span> <span class="he">קרוב</span> · <span class="ro big">departe</span> <span class="he">רחוק</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">lângă</span><span class="he">ליד</span></span><span class="chip"><span class="ro">în fața</span><span class="he">מול, לפני</span></span><span class="chip"><span class="ro">între</span><span class="he">בין</span></span><span class="chip"><span class="ro">aproape</span><span class="he">קרוב</span></span><span class="chip"><span class="ro">departe</span><span class="he">רחוק</span></span></span></p>
   <p class="rl">‏<span class="ro">ia-o la stânga</span> הוא <a class="xref" href="#prezentare9">ציווי</a> - "קח אותה שמאלה". הצורה הזאת קפואה ואין מה לנתח בה</p>
 </div>
   <div class="qa"><span class="qn">1</span> <span class="ro">Sunt la … . Cum ajung la gară?</span>
@@ -8920,7 +8891,17 @@ b) Tu (a reveni) în fiecare vară la Sinaia? (ele) · Tu (a deveni) medic? (Rad
   <h2 class="sec"><span class="num">שיעור 19</span> סבב הריאיון · Ce faci dimineața? Ce înălțime ai?<button class="gptb" type="button" data-t="45" title="העתק פרומפט לתרגול קולי ב-ChatGPT" aria-label="העתק פרומפט לתרגול קולי ב-ChatGPT"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22.2819 9.8211a5.9847 5.9847 0 0 0-.5157-4.9108 6.0462 6.0462 0 0 0-6.5098-2.9A6.0651 6.0651 0 0 0 4.9807 4.1818a5.9847 5.9847 0 0 0-3.9977 2.9 6.0462 6.0462 0 0 0 .7427 7.0966 5.98 5.98 0 0 0 .511 4.9107 6.051 6.051 0 0 0 6.5146 2.9001A5.9847 5.9847 0 0 0 13.2599 24a6.0557 6.0557 0 0 0 5.7718-4.2058 5.9894 5.9894 0 0 0 3.9977-2.9001 6.0557 6.0557 0 0 0-.7475-7.0729zm-9.022 12.6081a4.4755 4.4755 0 0 1-2.8764-1.0408l.1419-.0804 4.7783-2.7582a.7948.7948 0 0 0 .3927-.6813v-6.7369l2.02 1.1686a.071.071 0 0 1 .038.052v5.5826a4.504 4.504 0 0 1-4.4945 4.4944zm-9.6607-4.1254a4.4708 4.4708 0 0 1-.5346-3.0137l.142.0852 4.783 2.7582a.7712.7712 0 0 0 .7806 0l5.8428-3.3685v2.3324a.0804.0804 0 0 1-.0332.0615L9.74 19.9502a4.4992 4.4992 0 0 1-6.1408-1.6464zM2.3408 7.8956a4.485 4.485 0 0 1 2.3655-1.9728V11.6a.7664.7664 0 0 0 .3879.6765l5.8144 3.3543-2.0201 1.1685a.0757.0757 0 0 1-.071 0l-4.8303-2.7865A4.504 4.504 0 0 1 2.3408 7.872zm16.5963 3.8558L13.1038 8.364 15.1192 7.2a.0757.0757 0 0 1 .071 0l4.8303 2.7913a4.4944 4.4944 0 0 1-.6765 8.1042v-5.6772a.79.79 0 0 0-.407-.667zm2.0107-3.0231l-.142-.0852-4.7735-2.7818a.7759.7759 0 0 0-.7854 0L9.409 9.2297V6.8974a.0662.0662 0 0 1 .0284-.0615l4.8303-2.7866a4.4992 4.4992 0 0 1 6.6802 4.66zM8.3065 12.863l-2.02-1.1638a.0804.0804 0 0 1-.038-.0567V6.0742a4.4992 4.4992 0 0 1 7.3757-3.4537l-.142.0805L8.704 5.459a.7948.7948 0 0 0-.3927.6813zm1.0976-2.3654l2.602-1.4998 2.6069 1.4998v2.9994l-2.5974 1.4997-2.6067-1.4997Z"/></svg><span>תרגול קולי</span></button></h2>
   <p class="sec-sub">השעה הראשונה של השיעור הייתה סבב שאלות מהשאלון - בזוגות, ואז מול המורה. כאן השאלות כפי שנשאלו באמת, תבנית תשובה, והתיקון שנאמר בזמן אמת על כל אחת. משלים את <a class="xref" href="#examen15">בנק השאלות של שיעור 15</a>; התשובות האישיות של עמית נמצאות שם. שני הלקחים של הערב: לחזור על מילות השאלה בתשובה, ולעצור ולשאול <span class="ro">Puteți repeta?</span> כשלא מבינים.</p>
 
-  <div class="note"><b>שלושה משפטי חירום לבחינה:</b> ‏<span class="ro">Puteți repeta, vă rog?</span> (אפשר לחזור?) · <span class="ro">Încă o dată, mai încet.</span> (עוד פעם, לאט יותר) · <span class="ro">Nu știu cuvântul.</span> (אני לא יודע/ת את המילה). ואחד לפני שמתחילים: <span class="ro">Sunt puțin emoționat / emoționată.</span></div>
+  <div class="note"><b>גלגלי ההצלה של הריאיון</b> - משפטים שמותר, ורצוי, לשלוף ברגע שנתקעים:
+  <span class="chips">
+    <span class="chip"><span class="ro">Puteți repeta, vă rog?</span><span class="he">אפשר לחזור, בבקשה?</span></span>
+    <span class="chip"><span class="ro">Încă o dată, mai încet.</span><span class="he">עוד פעם, לאט יותר</span></span>
+    <span class="chip"><span class="ro">Nu am înțeles.</span><span class="he">לא הבנתי</span></span>
+    <span class="chip"><span class="ro">Nu știu cuvântul.</span><span class="he">אני לא יודע/ת את המילה</span></span>
+    <span class="chip"><span class="ro">Cum se spune … în română?</span><span class="he">איך אומרים … ברומנית?</span></span>
+    <span class="chip"><span class="ro">O clipă, vă rog.</span><span class="he">רגע אחד, בבקשה</span></span>
+    <span class="chip"><span class="ro">Sunt puțin emoționat.</span><span class="he">אני קצת נרגש (לפני שמתחילים)</span></span>
+    <span class="chip"><span class="ro">Sunt puțin emoționată.</span><span class="he">אני קצת נרגשת</span></span>
+  </span></div>
 
   <h3>עבודה ומשפחה</h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Cu ce te ocupi? Ce profesie ai?</span>
@@ -9183,7 +9164,7 @@ c) (a sparge) paharul? (tu / fratele meu) · (a rupe) scrisorile vechi? (voi / e
       <span class="ro">Părinții tăi au luat taxiul până la gară? Nu, părinții mei n-au luat taxiul până la gară.</span><br>
       <span class="ro">Studentul a știut răspunsul la întrebare? Nu, studentul n-a știut răspunsul.</span><br>
       <span class="ro">Mircea și Radu au vrut locuri mai în față? Nu, Mircea și Radu n-au vrut locuri mai în față.</span></p>
-      <div class="he" style="margin-top:6px">כמה שורות באמצע התרגיל נחתכו בצילום. הפעלים כאן הם דווקא הפראיים: ‏<span class="ro">a fi → fost</span>, <span class="ro">a ști → știut</span>, <span class="ro">a avea → avut</span>, <span class="ro">a bea → băut</span>, <span class="ro">a vrea → vrut</span>, <span class="ro">a sta → stat</span>, <span class="ro">a lua → luat</span>. ‏<span class="ro">cămin</span> = מעונות; <span class="ro">locuri mai în față</span> = מקומות יותר קדימה. וברשימת הזמנים: <a class="xref" href="#timptrecut18t">săptămâna trecută, astă-vară, anul trecut</a>.</div>
+      <div class="he" style="margin-top:6px">כמה שורות באמצע התרגיל נחתכו בצילום. הפעלים כאן הם דווקא הפראיים: <span class="chips"><span class="chip"><span class="ro">a fi → fost</span></span><span class="chip"><span class="ro">a ști → știut</span></span><span class="chip"><span class="ro">a avea → avut</span></span><span class="chip"><span class="ro">a bea → băut</span></span><span class="chip"><span class="ro">a vrea → vrut</span></span><span class="chip"><span class="ro">a sta → stat</span></span><span class="chip"><span class="ro">a lua → luat</span></span></span>. ‏<span class="ro">cămin</span> = מעונות; <span class="ro">locuri mai în față</span> = מקומות יותר קדימה. וברשימת הזמנים: <a class="xref" href="#timptrecut18t">săptămâna trecută, astă-vară, anul trecut</a>.</div>
     </details>
   </div>
 
@@ -9234,7 +9215,7 @@ c) (a sparge) paharul? (tu / fratele meu) · (a rupe) scrisorile vechi? (voi / e
   <div class="card">
     <span class="rox">a culege, a întoarce, a șterge, a încerca, a rupe, a plânge</span>
     <details class="sol"><summary>ה-participiu של השישה</summary>
-      <p><span class="ro">a culege → cules</span> <span class="he">לקטוף</span> · <span class="ro">a întoarce → întors</span> <span class="he">להחזיר, להפוך</span> · <span class="ro">a șterge → șters</span> <span class="he">למחוק, לנגב</span> · <span class="ro">a încerca → încercat</span> <span class="he">לנסות</span> · <span class="ro">a rupe → rupt</span> <span class="he">לקרוע</span> · <span class="ro">a plânge → plâns</span> <span class="he">לבכות</span></p>
+      <p><span class="chips"><span class="chip"><span class="ro">a culege → cules</span><span class="he">לקטוף</span></span><span class="chip"><span class="ro">a întoarce → întors</span><span class="he">להחזיר, להפוך</span></span><span class="chip"><span class="ro">a șterge → șters</span><span class="he">למחוק, לנגב</span></span><span class="chip"><span class="ro">a încerca → încercat</span><span class="he">לנסות</span></span><span class="chip"><span class="ro">a rupe → rupt</span><span class="he">לקרוע</span></span><span class="chip"><span class="ro">a plânge → plâns</span><span class="he">לבכות</span></span></span></p>
       <div class="he" style="margin-top:6px">משפטי התרגיל עצמם לא נכנסו לצילום - רק המסגרת. חמישה מהשישה קבוצה III, וארבעה מהם ב-s. ההטיה המלאה <a class="xref" href="#verbref">באזור הפעלים</a>.</div>
     </details>
   </div>
@@ -10161,7 +10142,7 @@ c) (a sparge) paharul? (tu / fratele meu) · (a rupe) scrisorile vechi? (voi / e
   <h3 id="cp-interog">13 · <span class="ro">Întrebări cu cuvinte interogative</span> <span class="he">שאלות עם מילות שאלה</span></h3>
   <div class="note">
   <p class="rl">כל אלה כבר הופיעו בהקשרים קודמים בעמוד - כאן רק תמצית לחימום מהיר. למפה המלאה של מילות השאלה: <a class="xref" href="#interog14">מילות השאלה · המפה המלאה</a></p>
-  <p class="rl"><span class="ro big">Cine</span> <span class="he">מי</span> · <span class="ro big">Ce</span> <span class="he">מה</span> · <span class="ro big">Unde</span> <span class="he">איפה</span> · <span class="ro big">De unde</span> <span class="he">מאיפה</span> · <span class="ro big">Când</span> <span class="he">מתי</span> · <span class="ro big">Cum</span> <span class="he">איך</span> · <span class="ro big">De ce</span> <span class="he">למה</span> · <span class="ro big">Cu cine</span> <span class="he">עם מי</span> · <span class="ro big">Pentru cine</span> <span class="he">בשביל מי</span> · <span class="ro big">Cât</span> <span class="he">כמה (יחיד)</span> · <span class="ro big">Câți / Câte</span> <span class="he">כמה (רבים)</span> · <span class="ro big">Care</span> <span class="he">איזה / מי מהם</span></p>
+  <p class="rl"><span class="chips"><span class="chip"><span class="ro">Cine</span><span class="he">מי</span></span><span class="chip"><span class="ro">Ce</span><span class="he">מה</span></span><span class="chip"><span class="ro">Unde</span><span class="he">איפה</span></span><span class="chip"><span class="ro">De unde</span><span class="he">מאיפה</span></span><span class="chip"><span class="ro">Când</span><span class="he">מתי</span></span><span class="chip"><span class="ro">Cum</span><span class="he">איך</span></span><span class="chip"><span class="ro">De ce</span><span class="he">למה</span></span><span class="chip"><span class="ro">Cu cine</span><span class="he">עם מי</span></span><span class="chip"><span class="ro">Pentru cine</span><span class="he">בשביל מי</span></span><span class="chip"><span class="ro">Cât</span><span class="he">כמה (יחיד)</span></span><span class="chip"><span class="ro">Câți / Câte</span><span class="he">כמה (רבים)</span></span><span class="chip"><span class="ro">Care</span><span class="he">איזה / מי מהם</span></span></span></p>
 </div>
   <h3 id="cp-numar">14 · <span class="ro">Singular / plural</span> <span class="he">יחיד ורבים - תרגיל ספירה כללי</span></h3>
   <div class="qa"><span class="qn">1</span> <span class="ro">Ce este aceasta?</span>

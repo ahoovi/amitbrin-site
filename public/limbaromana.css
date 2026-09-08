@@ -608,6 +608,22 @@ table.dict td.he{font-size:.9em;color:var(--soft);font-weight:400}  /* הערו�
 .flow .fplus{color:var(--gold);font-weight:800}
 @media (max-width:640px){.flow{padding:10px 10px 12px}.flow .fsub{margin-left:0}.flow .fopts{grid-template-columns:repeat(2,minmax(0,1fr))}.flow .fopts.six{grid-template-columns:repeat(3,minmax(0,1fr))}}
 
+/* -- v19.1: chips for runs of examples (valid inside p / td) -- */
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;direction:rtl}
+.chip{display:inline-flex;flex-direction:column;align-items:flex-start;gap:1px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:5px 10px;max-width:100%;min-width:0;direction:ltr;text-align:left}
+.chip>.ro{font-weight:600}
+.chip>.he{font-size:.78rem;color:var(--soft);direction:rtl;text-align:right;align-self:flex-end;line-height:1.3}
+.rule .chips,.note .chips{margin-top:8px}
+/* -- v19.1: verb tables - the verb column is always two lines: infinitive / gloss -- */
+.vt td:first-child{white-space:normal}
+.vt td:first-child>.ro,.vt td:first-child>b{display:block}
+.vt td:first-child .he{display:block;font-size:.82rem;line-height:1.35;min-height:1.35em;white-space:normal}
+.vt td:first-child .core,.vt td:first-child .vsrc{display:inline-block;margin-inline-start:0;margin-inline-end:6px;vertical-align:baseline}
+.vt td:first-child .he+.core,.vt td:first-child .he+.vsrc,.vt td:first-child .core+.vsrc{margin-top:2px}
+/* a table that had to become a horizontal scroller must not keep a half-sticky first header cell */
+table.hscroll.vt th:first-child,table.hscroll.vt td:first-child{position:static;box-shadow:none}
+@media (min-width:641px){.vt th,.vt td{padding:8px 10px}.vt td.pp{padding-inline:8px}}
+
 
 /* ============================================================
    v16 · הפיצול: ניווט חדש, שמע על המילה, עמודים קלים
