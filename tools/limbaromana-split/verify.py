@@ -116,7 +116,7 @@ for k in ps:
     if 'data-t="%s"' % k not in t: err.append('no tcard for ' + k)
 
 # title consistency
-for pat in ['שיעורים 1-19</title>', 'Unitatea 1-19', 'חומרי שיעורים 1-19']:
+for pat in ['שיעורים 1-20</title>', 'Unitatea 1-20', 'חומרי שיעורים 1-20']:
     if pat not in s: err.append('title not updated: ' + pat)
 
 print('sections:', len(secs), '| dict rows:', len(re.findall(r'<tr class="g-', s[d0:d1])), '| prompts:', len(ps))
