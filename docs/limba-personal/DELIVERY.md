@@ -1,5 +1,7 @@
 # מסירת הפיילוט · 12 בספטמבר 2026
 
+עדכון פרסום קבוע: המשתמש אישר כעת production בכתובת https://www.amitbrin.com/limba. ראו PRODUCTION.md למצב הפרסום, הגיבוי והסנכרון; פרטי preview בהמשך הם היסטוריית המסירה.
+
 ענף: codex/limba-personal-preview במאגר ahoovi/amitbrin-site. בסיס: ef54d8811eb896ac36e302765b0b8666a12b9e35.
 
 הדגמה: http://localhost:3147/limba. החשבונות הקיימים עודכנו לסיסמאות שהמשתמש ביקש; פרטי הגישה מוחרגים מ-Git.

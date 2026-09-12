@@ -1,0 +1,13 @@
+# Permanent publication · 2026-09-12
+
+The user explicitly requested permanent publication. The personal application URL is https://www.amitbrin.com/limba. Production follows main; merge the personal branch only after the production build passes. The existing book URL and its anchors remain unchanged (do not enable LIMBA_PERSONAL_HOME globally).
+
+Production now has LIMBA_STORAGE, LIMBA_DATABASE_URL, LIMBA_SESSION_SECRET and LIMBA_USERS_JSON with the existing two identities and the same Neon database. OPENAI_API_KEY already existed in production; verify model access after deploy. Secrets remain server-side. Preview protection remains enabled; custom production domains use the personal login without an expiring Vercel sharing token.
+
+Before publication, a repeatable-read snapshot of all four Limba tables was saved and read back successfully to the ignored private local file `.limba-data/backups/before-production-2026-09-12.json` in the Codex checkout. Row counts: 4 progress events, 3 voice sessions, 1 voice quota, 2 rate limit buckets. This is a one-time local backup, not an automated off-site backup service. No learner records were reset.
+
+Recovery: roll back the Vercel deployment for a code-only failure; do not restore or reset the database for a code rollback. For lost progress, load the private snapshot into an isolated Neon branch/database first, using the additive schemas in scripts/limba/migrations. Insert the snapshot limba_events rows with their original user_id/id/event/recorded_at using ON CONFLICT (user_id,id) DO NOTHING. Compare the restored IDs and payloads against the snapshot before any reconciliation into the live database. Never replace current records with the entire old snapshot or restore expired rate limits. Keep the backup private and out of Git.
+
+Verification: LIMBA_PRODUCTION_URL=https://www.amitbrin.com node scripts/limba/check-cloud-preview.mjs checks both users, secure cookies, OpenAI model access, a uniquely identified synthetic diagnostic write, readback across logins, and account isolation. The script removes only its own synthetic UUID in finally. It never opens a paid voice session.
+
+Claude: fetch origin/main into a clean checkout or carefully reconcile your existing local changes. Do not force-push an older main or overwrite the personal app. Continue editing the book source and running its builder, which also extracts personal practice materials. The learning database is independent of Git deployments.
