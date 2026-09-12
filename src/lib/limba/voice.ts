@@ -6,7 +6,7 @@ import { readEvents, storageMode } from './store';
 import type { UserId } from './session';
 export const voiceReady=()=>storageMode()==='cloud' && Boolean(process.env.OPENAI_API_KEY) && process.env.LIMBA_VOICE_ENABLED!=='0';
 export const voiceDB=()=>neon(process.env.LIMBA_DATABASE_URL||process.env.DATABASE_URL!);
-export const voiceClient=()=>new OpenAI({apiKey:process.env.OPENAI_API_KEY,maxRetries:0,timeout:25_000});
+export const voiceClient=()=>new OpenAI({apiKey:process.env.OPENAI_API_KEY?.trim(),maxRetries:0,timeout:25_000});
 export const voiceTopics:Record<string,{name:string;sections:string[]}>= {
  intro1:{name:'Greetings and introductions, lesson 1',sections:['greet','intro']},
  afi2:{name:'a fi present tense, lesson 2',sections:['pronouns','afi']},
@@ -17,7 +17,7 @@ export const voiceTopics:Record<string,{name:string;sections:string[]}>= {
 };
 export async function voiceConfig(uid:UserId,topic:string,minutes:number){
  const material=JSON.parse(await readFile(path.join(process.cwd(),'public/limba-personal/materials.json'),'utf8'));
- const source=voiceTopics[topic].sections.map(id=>material.units[id].html.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')).join('\n').slice(0,18000);
+ const source=voiceTopics[topic].sections.map(id=>material.units[id].html.replace(/<[^>]*>/g,' ').replace(/\s+/g,' ')).join('\n').slice(0,9000);
  const history=(await readEvents(uid)).filter(e=>e.topic===topic).slice(-6).map(e=>({kind:e.kind,rating:e.rating,assistance:e.assistance||'none'}));
  const instructions=`You are the Romanian practice companion for a Hebrew-speaking adult preparing for B1 in March 2027. Today's topic: ${voiceTopics[topic].name}. Planned session: ${minutes} minutes.
 Use Romanian for practice, slowly and clearly, and concise Hebrew for explanations when helpful. Ask one short question and leave room for the learner to attempt it. Do not reveal the answer before an attempt unless asked. Adapt to the learner's actual responses. Praise specific successes warmly without exaggerating. Keep examples within the selected topic. If unsure what you heard, ask for repetition rather than grading it. Distinguish pronunciation from a transcript. You cannot certify B1 or save scores; the application saves the learner's own reflection at the end.

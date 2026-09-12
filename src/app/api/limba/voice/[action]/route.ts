@@ -1,5 +1,6 @@
 import {NextRequest,NextResponse} from 'next/server';
 import {readSession,SESSION_COOKIE} from '@/lib/limba/session';
+import {loginAllowed} from '@/lib/limba/store';
 import {voiceReady,voiceDB,voiceClient,voiceConfig,voiceTopics} from '@/lib/limba/voice';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
@@ -15,6 +16,12 @@ export async function POST(req:NextRequest){
  if(typeof body.id!=='string'||!/^[a-f0-9]{8}-[a-f0-9]{4}-4[a-f0-9]{3}-[89ab][a-f0-9]{3}-[a-f0-9]{12}$/.test(body.id))return json({error:'מזהה שיחה לא תקין.'},400);
  const sql=voiceDB(),action=req.nextUrl.pathname.split('/').at(-1);
  try{
+  if(action==='check'){
+   if(Object.keys(body).some(k=>k!=='id'))return json({error:'בקשה לא תקינה.'},400);
+   if(!await loginAllowed('voice-check:'+user.id,6))return json({error:'אפשר לבדוק שוב בעוד רבע שעה.'},429);
+   await voiceClient().models.retrieve('gpt-live-1');
+   return json({ok:true,model:'gpt-live-1'});
+  }
   if(action==='finish'){
    if(Object.keys(body).some(k=>!['id','seconds','finalized'].includes(k))||typeof body.finalized!=='boolean'||typeof body.seconds!=='number'||!Number.isFinite(body.seconds)||body.seconds<0||body.seconds>14400)return json({error:'סיכום לא תקין.'},400);
    const rows=await sql`SELECT provider_id,ended_at FROM limba_voice_sessions WHERE id=${body.id} AND user_id=${user.id}`;
@@ -34,5 +41,11 @@ export async function POST(req:NextRequest){
   const result=await voiceClient().live.create({session,transport:{type:'webrtc',sdp:body.sdp}});
   try{await sql`UPDATE limba_voice_sessions SET provider_id=${result.session.id} WHERE id=${body.id} AND user_id=${user.id}`;}catch(error){await voiceClient().live.sessions.hangup(result.session.id).catch(()=>{});throw error;}
   return json({id:body.id,session:result.session,transport:result.transport,maxSeconds:Number(body.minutes)*60},201);
- }catch(error){console.error('Limba voice request failed',{status:(error as {status?:number}).status||503});return json({error:'לא הצלחנו להשלים את החיבור הקולי. בדקו שהמפתח מאפשר GPT Live ושיש יתרת API.'},503);}
+ }catch(error){
+  const status=(error as {status?:number}).status||503;
+  const code=(error as {code?:string}).code;
+  console.error('Limba voice request failed',{status,code:typeof code==='string'?code.slice(0,80):undefined});
+  const message=status===401?'OpenAI לא קיבל את מפתח ה־API. יש לעדכן את המפתח בשרת לפני תחילת שיחה.':status===403||status===404?'למפתח הזה אין כרגע גישה ל־GPT Live. יש לבדוק הרשאות בפרויקט OpenAI.':status===429?'OpenAI הגביל את השימוש כרגע. בדקו יתרה ומגבלות API או נסו מאוחר יותר.':'לא הצלחנו להשלים את החיבור הקולי. אפשר לנסות שוב בעוד רגע.';
+  return json({error:message},503);
+ }
 }
