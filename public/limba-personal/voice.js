@@ -14,7 +14,7 @@ export class VoicePractice {
  }
  render(){if(!this.host?.isConnected)return;const labels={idle:this.available?'מוכן לשיחה':'הקול ממתין להפעלה',connecting:'מתחברים למלווה…',live:'השיחה פעילה · המיקרופון פתוח',paused:'המיקרופון והשמע מושתקים',closing:'מסיימים את השיחה…',ended:'השיחה הסתיימה',error:'השיחה אינה פעילה'};this.host.querySelector('.voice-state').textContent=labels[this.state];this.host.querySelector('[data-voice-start]').hidden=this.active;this.host.querySelector('[data-voice-start]').disabled=!this.available||!!this.starting;this.host.querySelector('[data-voice-stop]').hidden=!this.active;this.host.querySelector('[data-voice-stop]').disabled=this.state==='closing';this.onStatus(this.state);}
  error(message){if(this.host?.isConnected)this.host.querySelector('.voice-error').textContent=message;}
- send(type,extra={}){if(!this.ready||this.channel?.readyState!=='open')return;this.channel.send(JSON.stringify({type,event_id:crypto.randomUUID(),...extra}));}
+ send(type,extra={}){if(!this.ready||this.channel?.readyState!=='open')return;const event_id=crypto.randomUUID();this.channel.send(JSON.stringify({type,event_id,...extra}));return event_id;}
  setContext(context){this.context=context.slice(0,1200);if(this.ready)this.send('session.thinking.append',{delegation_id:null,content:'Current exercise on screen: '+this.context});}
  async start(){
   if(this.active||!this.available||this.starting)return;
@@ -47,14 +47,16 @@ export class VoicePractice {
   if(event.type==='session.started'){
    if(this.state==='closing'||this.state==='ended')return;
    this.ready=true;clearTimeout(this.startTimer);this.state='live';this.render();
-   this.send('session.instructions.append',{delegation_id:null,content:'Begin now: briefly greet the learner in Romanian and ask them to attempt the exercise on the screen. Do not give its answer. Screen: '+this.context});
+   this.greetingEvent=this.send('session.instructions.append',{delegation_id:null,content:'Begin now: briefly greet the learner in Romanian and ask them to attempt the exercise on the screen. Do not give its answer. Screen: '+this.context});
+  }else if(event.type==='session.instructions.appended'&&event.client_event_id===this.greetingEvent){
+   this.greetingEvent=null;this.send('session.commentary.append',{delegation_id:null,content:'Begin the conversation now, following the instructions provided.'});
   }else if(event.type==='session.input_transcript.delta'||event.type==='session.output_transcript.delta'){
    const role=event.type.includes('input_')?'user':'assistant';const last=this.rows.at(-1);
    if(last&&last.role===role&&event.start_ms>=last.end&&event.start_ms-last.end<1800){last.text=(last.text+event.delta).slice(-12000);last.end=event.end_ms;}else this.rows.push({role,text:event.delta,start:event.start_ms,end:event.end_ms});
    if(this.rows.length>120)this.rows.shift();this.renderTranscript();
   }else if(event.type==='session.usage.updated'){this.seconds=Math.max(this.seconds,Number(event.usage?.seconds)||0);
   }else if(event.type==='session.closed'){this.finalized=true;this.seconds=Number(event.usage?.seconds)||this.seconds;this.resolveClose?.();if(this.state!=='closing')void this.stop();
-  }else if(event.type==='error'){this.error('המלווה דיווח על שגיאה. אפשר לסיים ולנסות שוב.');}
+  }else if(event.type==='error'){const code=String(event.error?.code||'unknown').replace(/[^a-zA-Z0-9_.-]/g,'').slice(0,100);this.error('המלווה דיווח על שגיאה ('+code+'). אפשר לסיים ולנסות שוב.');}
  }
  renderTranscript(){const box=this.host?.querySelector('.voice-transcript');if(!box)return;const nearBottom=box.scrollHeight-box.scrollTop-box.clientHeight<50;box.replaceChildren();for(const row of this.rows){const p=document.createElement('p');p.dir='auto';const name=document.createElement('strong');name.textContent=row.role==='user'?'את/ה: ':'המלווה: ';p.append(name,document.createTextNode(row.text));box.append(p);}if(nearBottom)box.scrollTop=box.scrollHeight;}
  pause(paused){
