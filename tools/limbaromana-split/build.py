@@ -588,3 +588,7 @@ json.dump(report, open(os.path.join(HERE, 'last-build.json'), 'w', encoding='utf
 for name, n in written.items():
     print('%-32s %8.1f KB' % (name, n / 1024))
 print('clips %d · index %d · manifest_equal=%s' % (len(clips), report['index'], report.get('manifest_equal')))
+
+# Personal practice reads the same canonical material. No second hand-edited copy.
+import runpy
+runpy.run_path(os.path.join(REPO, 'tools', 'limbaromana-personal', 'build.py'), run_name='__main__')

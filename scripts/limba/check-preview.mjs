@@ -1,7 +1,10 @@
-// Integration checks only against the explicitly enabled local pilot.
+// Integration checks against the local server, using its configured cloud or local backend.
 import assert from 'node:assert/strict';
 import { readFileSync, unlinkSync, existsSync } from 'node:fs';
 import { randomUUID } from 'node:crypto';
+import { neon } from '@neondatabase/serverless';
+import nextEnv from '@next/env';
+nextEnv.loadEnvConfig(process.cwd());
 const base = 'http://localhost:3147';
 const access = readFileSync('limba-local-access.txt', 'utf8');
 const password = id => access.match(new RegExp(`שם משתמש: ${id}\\nסיסמה: (.+)`))[1];
@@ -53,10 +56,25 @@ try {
   check(page.headers.get('cache-control').includes('no-store'),'private page not cached');
   check(page.headers.get('content-security-policy').includes("frame-ancestors 'none'"),'page embedding blocked');
   check((await call('events',{id:randomUUID(),topic:'../neta',rating:'help'},amit)).status===400,'unregistered topic denied');
+  const catalog=await (await call('diagnostic',undefined,amit)).json();
+  check(catalog.items.length===12 && !catalog.items.some(i=>'answers' in i||'explanation' in i),'diagnostic sends no answer key');
+  const diagnosticId=randomUUID();created.push(diagnosticId);
+  const attempt={id:diagnosticId,item:'afi-1',answer:'SUNT',assistance:'hint',skipped:false};
+  const checked=await (await call('diagnostic',attempt,amit)).json();
+  check(checked.result.correct===true && checked.result.rating==='help','server grades assisted answers separately');
+  const second=await (await call('diagnostic',attempt,amit)).json();
+  check(second.events.filter(e=>e.id===diagnosticId).length===1,'diagnostic retry is idempotent');
+  check((await call('diagnostic',{...attempt,rating:'independent'},amit)).status===400,'client cannot assert a diagnostic score');
+  const a3=await (await call('me',undefined,again)).json();
+  check(a3.events.some(e=>e.id===diagnosticId),'diagnostic resumes from another login');
+  const n2=await (await call('me',undefined,neta)).json();
+  check(!n2.events.some(e=>e.id===diagnosticId),'diagnostic remains private to its learner');
+  check(a3.events.filter(e=>e.id===diagnosticId)[0].diagnostic.correct===true,'saved assessment retains evidence');
   console.log(`PASS: ${checks} checks covering authentication, account isolation, persistence, idempotence and request protection.`);
 } finally {
   // Remove only the exact synthetic event IDs created by this test in the local preview.
   for (const id of created) {
+    if(process.env.LIMBA_STORAGE==='neon'){const sql=neon(process.env.LIMBA_DATABASE_URL||process.env.DATABASE_URL);await sql`DELETE FROM limba_events WHERE user_id=${'amit'} AND id=${id}`;}
     const filename = `.limba-data/amit/${id}.json`;
     if (existsSync(filename)) unlinkSync(filename);
   }
