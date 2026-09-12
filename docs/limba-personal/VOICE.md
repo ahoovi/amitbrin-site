@@ -22,7 +22,7 @@ No global Vercel deployment protection was disabled. Preview share links expire;
 
 Full Next build and focused TypeScript/ESLint passed; course JSON present in the traced server artifact. Voice lifecycle checks cover startup gating, microphone/playback pause, cumulative usage, overlapping captions and cleanup. Existing 33 cloud progress regressions passed with scoped cleanup.
 
-The first external real WebRTC creation attempt reached the Vercel voice route but OpenAI returned HTTP 401. No successful live session has been established yet. The user was asked to replace the API key in Vercel. After replacement, redeploy the preview, run authenticated POST `/api/limba/voice/check` with a fresh UUID (read-only model-access check), then verify a short real WebRTC session, pause/resume and final close. Do not claim speech quality or live success before observing it.
+The first external real WebRTC creation attempt reached the Vercel voice route but OpenAI returned HTTP 401. After redeploying commit 07c0f6b with whitespace trimming, the authenticated read-only models.retrieve probe also returned OpenAI 401 on deployment amitbrin-site-ne6h6nzp3-ahoovis-projects.vercel.app. This is an unresolved API-key authentication failure, not a confirmed billing or model-availability diagnosis. No successful live session has been established yet. The user was asked to replace the API key in Vercel. After replacement, redeploy the preview, run authenticated POST `/api/limba/voice/check` with a fresh UUID (read-only model-access check), then verify a short real WebRTC session, pause/resume and final close. Do not claim speech quality or live success before observing it.
 
 ## Official references checked
 
@@ -31,3 +31,5 @@ The first external real WebRTC creation attempt reached the Vercel voice route b
 - https://developers.openai.com/api/docs/guides/live-prompting
 
 Preserve GPT Live's event contract; do not substitute legacy Realtime `response.create` or multipart session creation. Backend tools would require a separate reviewed implementation; no progress-writing tools are currently exposed to the model.
+
+Read-only probe: set LIMBA_PREVIEW_SHARE_URL to a current deployment sharing link and run `node scripts/limba/check-live-access.mjs`. A branch alias share may require a new token after redeployment; obtain a valid link for the exact deployment before interpreting a Vercel protection response as an application error.
