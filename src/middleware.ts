@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
+import { readSession, SESSION_COOKIE } from './lib/limba/session';
 
 /**
  * שער גישה לעמודי הרומנית · v2 · מפתחות פר-אדם
@@ -140,6 +141,12 @@ export async function middleware(req: NextRequest) {
   if ((process.env.LIMBA_GATE || '').toLowerCase() === 'off') {
     return new NextResponse('Not Found', { status: 404 });
   }
+
+  // Opt-in entry point; the book builder and the legacy gate remain independent.
+  if (process.env.LIMBA_PERSONAL_HOME === '1' && pathname === '/limbaromana.html' && searchParams.get('library') !== '1') {
+    return NextResponse.redirect(new URL('/limba', req.url));
+  }
+  if (await readSession(req.cookies.get(SESSION_COOKIE)?.value)) return NextResponse.next();
 
   const now = Date.now();
   const keys = parseKeys().filter((k) => live(k, now));

@@ -1,0 +1,2 @@
+# Personal learning companion
+Existing book is the visual anchor. Light cream page, dark navy typography, gold details and pale green success feedback. Quiet border-separated rows, one spacious recommended-session surface, no nested card grids. Self-hosted Noto Sans Hebrew and Georgia for Romanian. Desktop two-column study/review layout; one-column mobile. Explicit empty, demo, error, connection and saved states.

@@ -41,3 +41,7 @@ yarn-error.log*
 next-env.d.ts
 _to_delete/
 limbaromana-src/_audio-preview.html
+
+# Local personal-learning pilot: never publish learner records or credentials
+/.limba-data/
+/limba-local-access.txt

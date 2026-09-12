@@ -1,0 +1,6 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": { "incremental": false },
+  "include": ["../../src/lib/limba/**/*.ts", "../../src/app/api/limba/**/*.ts", "../../src/app/limba/**/*.ts", "../../src/middleware.ts"],
+  "exclude": ["../../node_modules"]
+}
