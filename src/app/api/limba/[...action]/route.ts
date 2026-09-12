@@ -1,3 +1,4 @@
+import { voiceReady } from '@/lib/limba/voice';
 import { NextRequest, NextResponse } from 'next/server';
 import { scrypt, timingSafeEqual } from 'node:crypto';
 import { promisify } from 'node:util';
@@ -17,7 +18,7 @@ export async function GET(req: NextRequest) {
   if (req.nextUrl.pathname === '/api/limba/diagnostic') return json({ version: DIAGNOSTIC_VERSION, items: publicDiagnosticItems() });
   if (req.nextUrl.pathname !== '/api/limba/me') return json({ error: 'לא נמצא' }, 404);
   try {
-    return json({ user: { id: user.id, name: user.name }, events: await readEvents(user.id), storage: storageMode(), voice: false });
+    return json({ user: { id: user.id, name: user.name }, events: await readEvents(user.id), storage: storageMode(), voice: voiceReady() });
   } catch { return json({ error: 'לא הצלחנו לקרוא את ההתקדמות. אפשר לנסות שוב.' }, 503); }
 }
 export async function POST(req: NextRequest) {

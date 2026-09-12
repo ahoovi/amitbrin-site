@@ -33,6 +33,9 @@ const LEGACY_301: Array<[string, string]> = [
 ];
 
 const nextConfig: NextConfig = {
+  outputFileTracingIncludes: {
+    "/api/limba/voice/*": ["./public/limba-personal/materials.json"],
+  },
   async redirects() {
     return [
       // the nested reading version first — a bare /blog/whatsapp rule would

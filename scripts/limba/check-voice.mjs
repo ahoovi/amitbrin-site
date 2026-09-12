@@ -1,0 +1,16 @@
+import assert from 'node:assert/strict';
+import {VoicePractice} from '../../public/limba-personal/voice.js';
+globalThis.Audio=class{setAttribute(){} play(){return Promise.resolve();}};
+globalThis.document={body:{append(){}}};
+globalThis.window={addEventListener(){}};
+let messages=[],stopped=0;
+const v=new VoicePractice({request:async()=>({ok:true})});v.channel={readyState:'open',send:s=>messages.push(JSON.parse(s)),close(){}};
+v.setContext('Current exercise');assert.equal(messages.length,0,'no commands before session.started');
+v.state='connecting';v.receive({type:'session.started'});assert.equal(v.state,'live');assert.equal(messages[0].type,'session.instructions.append');
+v.mic={getAudioTracks:()=>[track],getTracks:()=>[{stop(){stopped++;}}]};const track={enabled:true};
+v.pause(true);assert.equal(track.enabled,false);assert.equal(v.audio.muted,true);assert.ok(messages.some(e=>e.type==='session.input_audio.mute'));
+v.pause(false);assert.equal(track.enabled,true);assert.equal(v.audio.muted,false);
+v.receive({type:'session.usage.updated',usage:{seconds:10}});v.receive({type:'session.usage.updated',usage:{seconds:12}});assert.equal(v.seconds,12,'cumulative usage is not summed');
+v.receive({type:'session.input_transcript.delta',delta:'Bună ',start_ms:0,end_ms:100});v.receive({type:'session.output_transcript.delta',delta:'Salut',start_ms:20,end_ms:120});v.receive({type:'session.input_transcript.delta',delta:'ziua',start_ms:100,end_ms:160});assert.equal(v.rows.length,3,'overlapping speakers remain separate');
+v.finalized=true;await v.stop();assert.equal(stopped,1);assert.equal(v.state,'ended');assert.equal(v.audio.srcObject,null);
+console.log('PASS: startup gating, microphone/playback pause, cumulative usage, overlapping captions and resource cleanup.');
